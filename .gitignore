@@ -1,0 +1,5 @@
+# MkDocs
+site/
+
+# Python virtual environment
+.venv/
