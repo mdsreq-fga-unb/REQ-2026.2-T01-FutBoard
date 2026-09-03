@@ -1,0 +1,19 @@
+site_name: FutBoard
+
+theme:
+  name: mkdocs
+  features:
+    - navigation.tabs
+
+nav:
+  - Início: index.md
+  - Visão do Produto e Projeto:
+      - Introdução: visao-produto.md
+      - 1. Cenário Atual do Cliente e do Negócio: visao-produto/cenario-atual.md
+      - 2. Solução Proposta: visao-produto/solucao-proposta.md
+      - 3. Intervenção Social: visao-produto/intervencao-social.md
+      - 4. Estratégias de Engenharia de Software: visao-produto/estrategias-esw.md
+      - 5. Engenharia de Requisitos: visao-produto/engenharia-requisitos.md
+      - 6. Cronogramas e Entregas: visao-produto/cronogramas-entregas.md
+      - 7. Interação entre Equipe e Cliente: visao-produto/interacao-equipe-cliente.md
+  - Lições Aprendidas: licoes-aprendidas.md
