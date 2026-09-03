@@ -2,6 +2,13 @@ site_name: FutBoard
 
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+  font:
+    text: Inter
+    code: Fira Code
   features:
     - navigation.tabs
     - navigation.sections
@@ -9,9 +16,16 @@ theme:
     - navigation.indexes
     - navigation.top
     - toc.integrate
-  palette:
-    - scheme: default
-      primary: indigo
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - def_list
+
+extra_css:
+  - stylesheets/extra.css
 
 nav:
   - Início: index.md
@@ -25,3 +39,4 @@ nav:
       - Cronograma e Entregas: visao-produto/cronogramas-entregas.md
       - Interação com Cliente: visao-produto/interacao-equipe-cliente.md
   - Lições Aprendidas: licoes-aprendidas.md
+
