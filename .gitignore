@@ -3,3 +3,5 @@ site/
 
 # Python virtual environment
 .venv/
+
+path/
