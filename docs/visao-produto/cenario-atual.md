@@ -15,6 +15,7 @@ Atualmente, o técnico representado pelo cliente Marcus Vinicius Rodrigues regis
 
 ##1.3 Rich Picture
 
+[RICH PICTURE]
 
 ##1.4 Identificação da Oportunidade ou Problema
 

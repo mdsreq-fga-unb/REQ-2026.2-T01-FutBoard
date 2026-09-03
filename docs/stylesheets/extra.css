@@ -1,0 +1,37 @@
+/* Paleta  — tons de azul + fundo cinza claro
+      #14396b (azul escuro)
+      #2C7DA0 (azul médio)
+      #0D1B2A (azul quase-preto)
+      #5FA8D3 (azul claro)
+      #F1F3F5 (cinza claro)         */
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        #14396b;
+  --md-primary-fg-color--light: #2C7DA0;
+  --md-primary-fg-color--dark:  #0D1B2A;
+
+  --md-accent-fg-color:         #5FA8D3;
+
+  --md-default-bg-color:        #F1F3F5;
+}
+
+/* Fonte  para os títulos*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+
+
+.md-nav__link--active {
+  background-color: rgba(20, 57, 107, 0.08);
+  border-radius: 6px;
+}
+
+/*Campo de busca mais arredondado */
+.md-search__form {
+  border-radius: 999px;
+}
