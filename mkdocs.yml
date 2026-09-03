@@ -30,8 +30,7 @@ extra_css:
 nav:
   - Início: index.md
   - Visão do Produto e Projeto:
-      - visao-produto/index.md
-      - Cliente e Negócio: visao-produto/cenario-atual.md
+      - Cenário Atual do Cliente e Negócio: visao-produto/cenario-atual.md
       - Solução Proposta: visao-produto/solucao-proposta.md
       - Intervenção Social: visao-produto/intervencao-social.md
       - Estratégias de Software: visao-produto/estrategias-esw.md
