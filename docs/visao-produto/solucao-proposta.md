@@ -17,7 +17,7 @@ Apoiar a tomada de decisões técnicas do corpo técnico do Canaã Esporte Clube
 | OE principal | Contribuição secundária | ID | Característica | Descrição resumida | Valor de negócio principal |
 | --- | --- | --- | --- | --- | --- |
 | OE1 | OE4 | CP01 | Registro Rápido e Categorizado de Sessões | Interface otimizada e intuitiva que permite ao técnico registrar os dados das sessões de treino de forma fácil, concluindo o cadastro em menos de três minutos. | Diminuir o tempo de cadastros das sessões de treinos, e diminuir a sobrecarga de trabalho do treinador. |
-| OE2 | OE2 | CP02 | Estruturador de Periodização Esportiva | Ferramenta para estruturar nativamente o planejamento do calendário em macrociclos, mesociclos e microciclos. | Padronização metodológica científica relacionada a rotina do clube, substituindo métodos sem padronização. |
+| OE2 | OE5 | CP02 | Estruturador de Periodização Esportiva | Ferramenta para estruturar nativamente o planejamento do calendário em macrociclos, mesociclos e microciclos. | Padronização metodológica científica relacionada a rotina do clube, substituindo métodos sem padronização. |
 | OE3 | OE1 | CP03 | Dashboard em Tempo Real | Painel visual com gráficos interativos com o objetivo de monitorar o os treinos passados para a equipe. | Substitui dashboards estáticos e atrasados por métricas visuais instantâneas. |
 | OE5 | OE4 | CP04 | Geração Automática de Relatórios | Sistema que processa os dados do banco centralizado em nuvem para criar relatórios comparativos entre ciclos. | Fundamenta e apoia a tomada de decisões técnicas com base em estatísticas consolidadas. |
 
@@ -36,3 +36,10 @@ Para viabilizar economicamente a aplicação e garantir que ela seja financeiram
 - **Custos Operacionais Estimados:** O investimento financeiro para manter a plataforma ativa será restrito à aquisição de um domínio próprio de aproximadamente R$ 40,00 anuais, e à mensalidade do servidor virtual, cujos planos de entrada variam entre US$ 5,00 e US$ 7,00 mensais (cerca de R$ 25,00 a R$ 40,00/mês).
 
 Onde os concorrentes de grande porte são excessivamente caros e complexos, e ferramentas anteriormente testadas pelo cliente (como Gesklub, CoachId e Planejador de treino) limitam-se ao cadastro básico sem oferecer qualquer processamento analítico, o FutBoard se posiciona como uma solução acessível, estável, com métricas em tempo real e perfeitamente ajustada à realidade da categoria Sub-17.
+
+## 2.6 Viabilidade da Proposta
+
+A proposta é viável para o contexto da disciplina, considerando o acesso ao cliente, o escopo bem definido pelo cliente com a entrega de um MVP funcional ao final do semestre. Embora a equipe de desenvolvimento seja composta por estudantes, possua recursos limitados e um prazo ligeiramente curto, por volta de 3 meses, o projeto está sendo estruturando considerando todas essas variáveis, com priorização rigorosa das funcionalidades essenciais e validações frequentes com o cliente.
+
+O principal desafio em vista é o limite de tempo e recursos, porém esse risco é mitigado pela escopo bem definido para a entrega do MVP (produto mínimo viável) onde garantiremos a entrega das características essenciais que o cliente demonstrou como o valor central do sistema.
+

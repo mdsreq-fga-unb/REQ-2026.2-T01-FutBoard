@@ -37,4 +37,4 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
 | Data       | Versão | Descrição | Autor(es)         |
 |:-----------| :--- | :--- |:------------------|
 | 03/09/2026 | 1.0 | Abertura do documento e estruturação inicial | Guilherme Tegnoué |
-
+| 05/09/2026 | 1.1 | Adição do Mapa de Stakeholders, Viabilidade da Proposta e Processo de Validação | Gustavo Rodrigues |
