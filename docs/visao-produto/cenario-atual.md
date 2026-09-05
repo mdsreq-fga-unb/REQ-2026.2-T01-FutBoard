@@ -14,14 +14,18 @@ O Canaã Esporte Clube atua na formação de atletas de futebol, com foco na cat
 Atualmente, o técnico representado pelo cliente Marcus Vinicius Rodrigues registra seus treinos em planilhas do Excel de forma manual, densa e pouco intuitiva, coletando dados no campo e digitando-os um a um após as sessões. Após o preenchimento, ele utiliza filtros que relacionam as tabelas para alimentar dashboards estáticos usados na análise de cada treino. Todo esse processo gera uma sobrecarga no cadastramento dos dados devido ao calendário apertado do clube e à demanda por resultados, já que esse volume de inserção diária consome horas do seu tempo extracampo. 
 
 ##1.3 Rich Picture
-
-[RICH PICTURE]
-
+<figure>
+  <img src="../../assets/RichPicture.png" alt="Rich Picture do FutBoard" width="50%">
+  <figcaption>Figura 1: Rich Picture do sistema FutBoard</figcaption>
+</figure>
 ##1.4 Identificação da Oportunidade ou Problema
 
 O projeto surge da necessidade de solucionar a dificuldade do controle dos planejamentos dos treinamentos da equipe. Esse problema é potencializado por um ambiente esportivo desafiador, marcado por um calendário estrito e por uma constante demanda por resultados. Atualmente o acompanhamento da equipe é realizado por meio de planilhas fragmentadas e dashboards estáticos. Esse registro manual dos treinos junto à falta de padronização e a ausência de um método de análise bem definido causam sobrecarga do técnico, que esbarra na falta de tempo para análise e registro dos treinos. Com falta de métricas para as análises e a dificuldade de visualização global dos treinamentos dificultam a avaliação da efetividade e da distribuição das cargas de treino ao longo da temporada, prejudicando decisões técnicas que deveriam ser fundamentadas em dados. O nosso projeto atua como uma ferramenta estruturada para mitigar essas dores operacionais do cliente.
 
-[DIAGRAMA DE ISHIKAWA]
+<figure>
+  <img src="../../assets/DiagramaIshikawa.png" alt="Diagrama de Ishikawa" width="65%">
+  <figcaption>Figura 2: Diagrama de Ishikawa</figcaption>
+</figure>
 
 ##1.5 Desafios do Projeto
 - Estruturar os conceitos de periodização esportiva (macrociclos, mesociclos, microciclos).
@@ -57,6 +61,11 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 
 **Nível de Influência:** Baixa influência sobre o desenvolvimento ou decisão de uso da ferramenta. No entanto, são o grupo que será diretamente impactado pelas tomadas de decisões técnicas que o treinador fará com base nas análises geradas pelo produto.
 
+<figure>
+  <img src="../../assets/MapaStakeHolders.png" alt="Mapa dos Stakeholders" width="65%">
+  <figcaption>Figura 3: Mapa dos Stakeholders</figcaption>
+</figure>
+
 ##1.7 Segmentação de Clientes
 
 **Técnico / Comissão técnica:** Independente da faixa etária, este grupo é composto por pessoas que são técnicos de clubes, ou da comissão técnica que se interessam por fazerem análises dos seus treinos por meio de dashboards, gráficos e relatórios. 
@@ -64,4 +73,6 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 **Técnico:** O nível de familiaridade tecnológica é intermediário: embora não possuam formação na área de tecnologia.
 
 **Comissão Técnica:** Possuem menor familiaridade tecnológica em comparação ao técnico.
+
+
 
