@@ -14,12 +14,14 @@ Apoiar a tomada de decisões técnicas do corpo técnico do Canaã Esporte Clube
 
 ## 2.3 Características do Produto
 
-| OE principal | Contribuição secundária | ID | Característica | Descrição resumida | Valor de negócio principal |
+| ID | OE principal | Contribuição secundária | Característica | Descrição resumida | Valor de negócio principal |
 | --- | --- | --- | --- | --- | --- |
-| OE1 | OE4 | CP01 | Registro Rápido e Categorizado de Sessões | Interface otimizada e intuitiva que permite ao técnico registrar os dados das sessões de treino de forma fácil, concluindo o cadastro em menos de três minutos. | Diminuir o tempo de cadastros das sessões de treinos, e diminuir a sobrecarga de trabalho do treinador. |
-| OE2 | OE5 | CP02 | Estruturador de Periodização Esportiva | Ferramenta para estruturar nativamente o planejamento do calendário em macrociclos, mesociclos e microciclos. | Padronização metodológica científica relacionada a rotina do clube, substituindo métodos sem padronização. |
-| OE3 | OE1 | CP03 | Dashboard em Tempo Real | Painel visual com gráficos interativos com o objetivo de monitorar o os treinos passados para a equipe. | Substitui dashboards estáticos e atrasados por métricas visuais instantâneas. |
-| OE5 | OE4 | CP04 | Geração Automática de Relatórios | Sistema que processa os dados do banco centralizado em nuvem para criar relatórios comparativos entre ciclos. | Fundamenta e apoia a tomada de decisões técnicas com base em estatísticas consolidadas. |
+| CP01 | OE1 | OE4 | Registro Rápido e Categorizado de Sessões | Interface que permite ao técnico registrar os dados das sessões de treino de forma fácil, concluindo o cadastro em menos de três minutos. | Diminuir o tempo de cadastros das sessões de treinos diminuindo a sobrecarga de trabalho do treinador. |
+| CP02 | OE2 | OE5 | Estruturador de Periodização Esportiva | Ferramenta para estruturar nativamente o planejamento do calendário em macrociclos, mesociclos e microciclos. | Padronização metodológica científica relacionada a rotina do clube, substituindo métodos sem padronização. |
+| CP03 | OE3 | OE1 | Dashboard em Tempo Real | Painel visual com gráficos interativos com o objetivo de monitorar o os treinos passados para a equipe. | Substitui dashboards estáticos e atrasados por métricas visuais instantâneas. |
+| CP04 | OE5 | OE4 | Geração Automática de Relatórios | Sistema que processa os dados do banco centralizado em nuvem para criar relatórios comparativos entre ciclos. | Fundamenta e apoia a tomada de decisões técnicas com base em estatísticas consolidadas. |
+| CP05 | OE5 | OE3 | Filtros Dinâmicos de Cenários no Dashboard | Ferramenta no painel que permite cruzar e isolar métricas específicas, criando visualizações personalizadas do desempenho. | Transforma os dados brutos em decisões táticas aplicáveis, permitindo que o técnico identifique comportamentos pontuais de rendimento ao longo da periodização esportiva.
+| CP06 | OE1 | OE3 | Controle de Perfis de Acesso | Separação de permissões no sistema: um perfil de Edição/Planejamento para o técnico e um perfil de visualização para a comissão técnica. | Protege os dados contra alterações indevidas, adaptando a interface ao letramento digital de cada tipo de usuário. 
 
 ## 2.5 Pesquisa de Mercado e Análise Competitiva
 

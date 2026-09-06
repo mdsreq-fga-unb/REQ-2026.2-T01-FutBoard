@@ -21,9 +21,22 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
 
     [Acessar Documentação](visao-produto/cenario-atual.md)
 
+
+-   __Atas e Reuniões__
+
+    ---
+
+
+    Atas e reuniões gravadas para o desenvolvimento do projeto.
+
+
+    [Acessar Atas e Reuniões](atas-reunioes.md)
+
+
 -   __Lições Aprendidas__
 
     ---
+
 
     Acompanhe as reflexões, desafios técnicos superados, aprendizados da equipe e retrospectivas ao longo do desenvolvimento do projeto.
 
