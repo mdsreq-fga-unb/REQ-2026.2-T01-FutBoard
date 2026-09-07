@@ -46,7 +46,7 @@
         - Elicitar requisitos
         - Brainstorming de casos de uso
 
-<iframe width="560" height="315" src="https://youtu.be/SzRty4GPg_k" title="Reunião com Ciente" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SzRty4GPg_k" title="Reunião com Ciente" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 acesse diretamente pelo link: [ https://youtu.be/SzRty4GPg_k]( https://youtu.be/SzRty4GPg_k)
 
 ---
@@ -70,6 +70,6 @@ acesse diretamente pelo link: [ https://youtu.be/SzRty4GPg_k]( https://youtu.be/
         - Brainstorming sobre as tecnologias a serem utilizadas
         - Configuração do Gitpages
 
-<iframe width="560" height="315" src="https://youtu.be/dmpsZyy7fM0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dmpsZyy7fM0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 acesse diretamente pelo link: [https://www.youtube.com/watch?v=dmpsZyy7fM0](https://www.youtube.com/watch?v=dmpsZyy7fM0)
               
