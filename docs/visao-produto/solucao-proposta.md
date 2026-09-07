@@ -71,3 +71,5 @@ O principal desafio em vista é o limite de tempo e recursos, porém esse risco 
 ## 2.7 Benefícios Esperados
 
 - Para o **Cliente:**   agilizar e facilitar o processo de preenchimento das informações dos treinos realizados, melhorar a vizualiacao dos dados gerados a partir dos treinos realizados.
+
+- Para os **Usuários(comissão técnica):** Permitir o acess
