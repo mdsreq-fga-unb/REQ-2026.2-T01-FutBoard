@@ -1,3 +1,40 @@
+## 7.1 Composição da Equipe
+
+#### Composição da equipe
+
+| Papel | Descrição | Responsável | Participantes |
+|---|---|---|---|
+| Gerente do Projeto | Coordena o projeto, garante a comunicação entre cliente e equipe, controla prazos e entregas, e acompanha o progresso das atividades no quadro do projeto. | Gustavo Rodrigues de Noronha | Todos |
+| Analista de Requisitos | Conduz as sessões de elicitação de requisitos junto ao cliente, redige os requisitos funcionais (RF) e não funcionais (RNF), realiza a validação dos critérios de aceitação, a inspeção dos requisitos levantados e mantém a rastreabilidade entre requisitos, histórias de usuário e o backlog do projeto. | Todos | Todos |
+| Desenvolvedor Frontend | Responsável pela interface do usuário, prototipação de telas e implementação das funcionalidades do lado do cliente. | Gustavo Rodrigues de Noronha e Giovana Martins de Brito | — |
+| Desenvolvedor Backend | Implementa a lógica de negócios do sistema, a integração com o banco de dados e o desenvolvimento das APIs. | Rafael Silva Wasconcelos e Leonardo Lopes Cruz | — |
+| Analista QA | Garante a qualidade do produto por meio da execução de testes de funcionalidades, performance e usabilidade antes de cada entrega. | Leonardo Lopes Cruz | — |
+
+## 7.2 Comunicação
+
+As ferramentas de comunicação são essenciais para que a equipe de desenvolvimento possa se comunicar entre si e, principalmente, para garantir uma interação efetiva com o cliente do projeto, assegurando um bom entendimento mútuo ao longo de todo o desenvolvimento. Tendo isso em mente, as ferramentas selecionadas foram as seguintes:
+
+### Comunicação com o cliente
+
+**Ferramenta principal:** As reuniões de acompanhamento, revisão e alinhamento com o cliente serão realizadas por videoconferência, utilizando o Microsoft Teams. Essas reuniões permitirão a validação das entregas, a elicitação e o refinamento de requisitos, a coleta de feedback e a discussão das próximas atividades do projeto.
+
+**Frequência e Método:** As reuniões com o cliente ocorrerão semanalmente às quintas-feiras, garantindo o envolvimento constante do cliente nas etapas de elicitação, validação de entregas e ajuste de requisitos. Novas demandas ou alterações de escopo identificadas durante essas reuniões são registradas pela equipe e incorporadas ao backlog do projeto para posterior priorização.
+
+**Ferramenta secundária:** O WhatsApp será utilizado como meio de comunicação rápida e informal com o cliente, para esclarecimento de dúvidas pontuais e alinhamentos que não demandam uma reunião formal entre as reuniões semanais.
+
+### Comunicação entre os membros da equipe
+
+**Ferramentas principais:** Entre os membros da equipe, serão utilizadas duas ferramentas principais:
+
+- **Microsoft Teams:** utilizado para reuniões de planejamento, acompanhamento do progresso e alinhamento com o cliente.
+- **WhatsApp:** utilizado para alinhamentos rápidos e comunicação diária entre os integrantes da equipe.
+
+**Frequência e Método:**
+
+- **Reuniões internas da equipe:** encontros curtos, realizados conforme a necessidade, para sincronizar atividades, discutir impedimentos e planejar os próximos passos do desenvolvimento.
+- **Reunião de revisão geral:** ao final de cada ciclo de desenvolvimento, a equipe revisa as entregas realizadas, analisa os aprendizados obtidos e define melhorias a serem aplicadas nos próximos ciclos.
+
+
 ##7.3 Processo de Validação
 Com base na metodologia RAD, o processo de validação pelo cliente será executada em ciclos rápidos de prototipação e feedback, com a participação constante da evolução do produto. A abordagem iterativa garante que erros sejam identificados e corrigidos o quanto antes, aumentando o alinhamento entre a solução e as expectativas do cliente ao longo de todo o projeto, a abordagem incremental adotada no projeto garante que a cada ciclo seja entregue uma parte funcional do produto.
 
