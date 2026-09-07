@@ -23,6 +23,29 @@ Apoiar a tomada de decisões técnicas do corpo técnico do Canaã Esporte Clube
 | CP05 | OE5 | OE3 | Filtros Dinâmicos de Cenários no Dashboard | Ferramenta no painel que permite cruzar e isolar métricas específicas, criando visualizações personalizadas do desempenho. | Transforma os dados brutos em decisões táticas aplicáveis, permitindo que o técnico identifique comportamentos pontuais de rendimento ao longo da periodização esportiva.
 | CP06 | OE1 | OE3 | Controle de Perfis de Acesso | Separação de permissões no sistema: um perfil de Edição/Planejamento para o técnico e um perfil de visualização para a comissão técnica. | Protege os dados contra alterações indevidas, adaptando a interface ao letramento digital de cada tipo de usuário. 
 
+## 2.4 Tecnologias a Serem Utilizadas
+
+A stack tecnológica e as ferramentas de gestão do **FutBoard** foram definidas a partir de um levantamento estruturado via Microsoft Forms, respondido por todos os integrantes da equipe. Isso garantiu que as escolhas refletissem o conhecimento técnico consolidado pelo grupo, equilibrando eficiência operacional e colaboração fluida. A estrutura se divide nos seguintes pilares:
+
+1. **Front-end & Interface:** Construído em **React** com estilização modular (CSS/Sass) e apoio pontual do Tailwind, garantindo interfaces responsivas, limpas e de rápida construção.
+2. **Back-end & API:** Desenvolvido em **Python** utilizando o **Django** e o **Django REST Framework (DRF)** para expor uma API RESTful, aproveitando a maturidade do framework para acelerar entregas.
+3. **Persistência de Dados:** Utiliza o **PostgreSQL**, ideal para modelar de forma estruturada e relacional o domínio esportivo (atletas, sessões e ciclos de treinamento).
+4. **Infraestrutura:** No desenvolvimento, o sistema utiliza **Vercel** (frontend) e **Render** (API), migrando para uma **VPS na AWS Lightsail** em produção.
+5. **Gestão, Design & Colaboração:** O fluxo de trabalho é apoiado por ferramentas integradas: **Figma** para prototipagem de telas, **Miro** para fluxogramas e arquitetura, **GitHub Projects** para controle de tarefas e sprints, além de **Microsoft Teams** (reuniões) e **WhatsApp** (comunicação ágil do dia a dia).
+
+### Resumo Estratégico
+
+| Categoria / Componente | Tecnologia / Ferramenta | Benefício Estratégico / Justificativa |
+| :--- | :--- | :--- |
+| **Frontend & Interface** | React + Tailwind (pontual) + Sass | **Agilidade e Padronização:** Componentização madura e unânime na equipe, unindo velocidade de estilização a um design limpo. |
+| **Linguagem & Backend** | Python + Django + DRF | **Produtividade e Segurança:** Aproveita o domínio da equipe em Python e entrega autenticação e ORM prontos de fábrica. |
+| **Persistência de Dados** | PostgreSQL | **Integridade Relacional:** Perfeito para estruturar dados hierárquicos e relacionais de treinos (atletas, ciclos e sessões). |
+| **Infraestrutura (Dev & Prod)** | Vercel, Render / AWS Lightsail (VPS) | **Custo-Benefício e Controle:** Ambiente de teste ágil e sem custos iniciais, evoluindo para uma VPS dedicada em produção. |
+| **Prototipagem & Design** | Figma | **Validação Visual:** Criação rápida de telas e fluxos de experiência do usuário antes da codificação. |
+| **Modelagem & Arquitetura** | Miro | **Colaboração e Alinhamento:** Facilidade para construção conjunta de fluxogramas e diagramas de sistema pela equipe. |
+| **Gestão de Projetos** | GitHub Projects | **Rastreabilidade e Controle:** Centralização de tarefas, acompanhamento de sprints e alinhamento direto com o código-fonte. |
+| **Comunicação & Reuniões** | WhatsApp & Microsoft Teams | **Fluidez Operacional:** WhatsApp para alinhamentos rápidos cotidianos e Teams para reuniões síncronas formais. |
+
 ## 2.5 Pesquisa de Mercado e Análise Competitiva
 
 O mercado de tecnologia para o futebol de base é polarizado: de um lado, plataformas corporativas caras e complexas; de outro, métodos manuais como planilhas, sem integridade de dados. Não há uma alternativa intermediária voltada a clubes formadores brasileiros — e é essa lacuna que a solução do técnico busca preencher.
