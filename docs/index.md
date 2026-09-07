@@ -17,7 +17,7 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
 
     ---
 
-    Explore a visão geral, objetivos específicos, arquitetura documental, cronogramas de sprints e engenharia de requisitos.
+    Explore a visão geral, objetivos específicos, arquitetura documental, cronogramas de reuniões e engenharia de requisitos.
 
     [Acessar Documentação](visao-produto/cenario-atual.md)
 
@@ -30,7 +30,7 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
     Atas e reuniões gravadas para o desenvolvimento do projeto.
 
 
-    [Acessar Atas e Reuniões](atas-reunioes.md)
+    [Acessar Atas e Reuniões](atas-reunioes/reunioes.md)
 
 
 -   __Lições Aprendidas__
