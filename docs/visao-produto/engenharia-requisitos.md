@@ -1,83 +1,84 @@
 # Engenharia de Requisitos
 
-
+As atividades e técnicas de Engenharia de Requisitos (ER) no FutBoard foram organizadas ao longo das quatro fases do *Rapid Application Development* (RAD) — **Planejamento de Requisitos**, **Design do Usuário**, **Construção** e **Cutover**. Essa estruturação assegura que as cinco atividades fundamentais da ER (**Elicitação e Descoberta**, **Análise e Consenso**, **Declaração**, **Verificação e Validação** e **Organização e Atualização**) estejam presentes de forma contínua e iterativa, tendo a prototipação rápida e a validação constante junto ao técnico Marcus Vinicius como núcleo do processo.
 
 ---
 
 ## 5.1 Atividades e Técnicas de ER
 
-Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos adotadas pela equipe, categorizadas por fases do projeto.
+Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos adotadas pela equipe, categorizadas pelas quatro fases do processo RAD.
 
 ---
 
-### Fase de Concepção
-
+### Planejamento de Requisitos
 
 
 #### Elicitação e Descoberta
-- **Entrevista com Stakeholder:** Entrevista aberta e semiestruturada com o técnico Marcus Vinicius para compreender o fluxo do negócio, a rotina dos treinos e levantar as dores e oportunidades de melhoria.
-- **Brainstorming:** Reuniões com a equipe de desenvolvimento para idealizar hipóteses de solução, alinhar expectativas e nortear a metodologia e as tecnologias da aplicação.
-- **Análise Documental:** Avaliação minuciosa dos artefatos em uso pelo técnico (planilhas de treino no Microsoft Excel e relatórios/dashboards construídos no Power BI).
+- **Entrevista com o Stakeholder:** Entrevista aberta e semiestruturada com o técnico Marcus Vinicius para compreender o funcionamento do negócio, a rotina dos treinos e levantar as dores e oportunidades de melhoria.
+- **Brainstorming:** Reuniões internas com a equipe de desenvolvimento para idealizar hipóteses de solução, alinhar expectativas e nortear a metodologia e as tecnologias da aplicação.
+- **Análise Documental:** Avaliação minuciosa dos artefatos em uso pelo técnico (planilhas de controle de treino no Microsoft Excel e consolidação de dados em painéis do Power BI).
 
 #### Análise e Consenso
-- **Matriz Valor x Esforço :** Avaliação conjunta do valor de negócio gerado para o técnico Marcus Vinicius em relação ao esforço técnico de implementação, evitando decisões de priorização arbitrárias.
-- **MoSCoW:** Técnica de priorização qualitativa aplicada em conjunto com a Matriz Valor x Esforço para categorizar os requisitos em *Must have*, *Should have*, *Could have* e *Won't have*, definindo a linha de corte do MVP.
+- **Matriz Valor x Esforço e Análise de Custo-Benefício:** Avaliação conjunta do valor de negócio gerado para o técnico Marcus Vinicius em relação ao esforço técnico de implementação, identificando as funcionalidades mais valiosas e viáveis.
+- **Priorização MoSCoW:** Técnica de priorização qualitativa aplicada em conjunto com a Matriz Valor x Esforço para classificar as necessidades em *Must have*, *Should have*, *Could have* e *Won't have*, delimitando o escopo inicial do MVP.
 
 #### Declaração de Requisitos
-- **Documento de Visão:** Formalização dos Objetivos Específicos (OEs)
+- **Documento de Visão:** Registro formal dos Objetivos Específicos, restrições de negócio, requisitos macro e características gerais do produto FutBoard.
 
 #### Verificação e Validação
-- **Revisão em Pares:** Inspeção documental interna realizada pela equipe para identificar inconsistências, ambiguidades e lacunas no Documento de Visão.
-- **Validação de Visão com Stakeholder:** Apresentação e leitura guiada dos objetivos do projeto junto ao técnico Marcus Vinicius para confirmação de alinhamento de expectativas.
+- **Validação do Escopo com o Cliente:** Apresentação e leitura guiada dos objetivos e do escopo de alto nível junto ao técnico Marcus Vinicius para confirmação de alinhamento antes do avanço para a fase de design.
+- **Revisão em Pares:** Inspeção documental interna realizada pela equipe para identificar ambiguidades, redundâncias ou inconsistências no Documento de Visão.
 
 #### Organização e Atualização
-- **Estruturação do Backlog Inicial:** Agrupamento preliminar dos requisitos e preenchimento do github Projects da equipe
+- **Construção da Lista Inicial de Requisitos:** Consolidação do escopo inicial de forma versionada e rastreável, realizando o preenchimento da estrutura inicial de itens no GitHub Projects da equipe.
 
 ---
 
-### Planejamento da Sprint
-
+### Design do Usuário
 
 #### Elicitação e Descoberta
-- **Entrevistas com o Stackholder**: Encontros semanais com o técnico para detalhar funcionalidades em evolução e descobrir novas regras ou exceções de negócio na rotina do time, cadastro e análise de treinos.
+- **Entrevista com o Stakeholder:** Encontros frequentes (via Teams e WhatsApp) com o técnico Marcus Vinicius para co-criar telas, definir fluxos operacionais e descobrir exceções e regras de negócio à medida que a interface toma forma.
+
+#### Declaração e Representação
+- **Prototipação(Figma):** Concepção e evolução das telas e componentes interativos no Figma, fornecendo representações visuais ricas que auxiliam na especificação detalhada da interface e da experiência do usuário.
+- **Histórias de Usuário e Critérios de Aceitação:** Especificação formal do comportamento do sistema através de histórias de usuário decompostas, acompanhadas de critérios de aceitação objetivos e verificáveis (*Dado/Quando/Então*).
 
 #### Análise e Consenso
-- **Discussões em Equipe e Estimativa de Viabilidade:** Reuniões técnicas para estimar o esforço de cada funcionalidade e negociar o escopo da sprint com base na capacidade da equipe.
-
-#### Declaração de Requisitos
-- **Temas, Épicos e Histórias de Usuário (User Stories):** Decomposição estruturada dos requisitos em blocos hierárquicos de granularidade decrescente, garantindo rastreabilidade do objetivo macro à tarefa técnica.
-- **Critérios de Aceitação:** Especificação detalhada das regras de negócio de cada história (utilizando formatos estruturados e verificáveis como *Dado/Quando/Então*), delimitando o comportamento esperado.
+- **Repriorização MoSCoW:** Ajuste dinâmico das prioridades do escopo conforme o feedback visual do cliente nas sessões de design, aproveitando a flexibilidade do RAD onde o escopo atua como variável de ajuste.
 
 #### Verificação e Validação
-- **Verificação via Definition of Ready:** Aplicação do DoR como portão de entrada para verificar se as histórias de usuário possuem critérios de aceite completos, estimativas e independência antes de serem admitidas no Sprint Backlog.
+- **Validação dos Protótipos com o Cliente:** Homologação visual iterativa com o treinador. No RAD, os protótipos validados servem simultaneamente como especificação e instrumento formal de validação de requisitos.
 
 #### Organização e Atualização
-- **Refinamento do Backlog:** Atualização contínua das prioridades do Product Backlog.
+- **Refinamento Contínuo da Lista de Requisitos:** Atualização constante do backlog e das tarefas no GitHub Projects, mantendo a rastreabilidade entre as telas validadas no Figma e os requisitos a serem construídos.
 
 ---
 
-### Execução da Sprint
+### Construção
 
 
 #### Representação
-- **Prototipagem:** Criação de protótipos utilizando FIGMA , para criar e manter fidelidade das interfaces para apoiar a equipe na arquitetura das telas e apoiar a comunicação com o cliente.
+- **Evolução dos Protótipos Validados:** Os protótipos e especificações aprovados na fase de design evoluem em código e incrementos funcionais até se consolidarem no sistema final.
 
-#### Verificação e Validação 
-- **Testes de Aceitação e Checklists de Qualidade:** Verificação formal da conformidade do código desenvolvido frente aos critérios de aceitação declarados para cada história de usuário.
-- **Revisão de Código e Requisitos entre Pares:** Inspeção cruzada entre desenvolvedores para validar se a entrega atende fielmente às regras de negócio estipuladas.
+#### Verificação e Validação
+- **Verificação Interna (Checklists e Testes):** Inspeção técnica conduzida pela equipe de desenvolvimento através de checklists de qualidade de código, revisão por pares e testes funcionais frente aos critérios de aceitação declarados.
+- **Validação com o Cliente (Demonstração do Incremento):** Demonstrações periódicas dos incrementos funcionais para o técnico Marcus Vinicius, validando na prática se o comportamento da aplicação atende à rotina real de treinos.
 
 #### Organização e Atualização
-- **Gestão Visual do Github Projects:** Acompanhamento diário da movimentação das histórias e tarefas técnicas, permitindo rastrear o status e mitigar bloqueios de fluxo.
+- **Gestão Visual e Repriorização no GitHub Projects:** Acompanhamento dinâmico do fluxo de desenvolvimento no quadro do GitHub Projects, mitigando impedimentos técnicos e repriorizando atividades com base no feedback das validações.
 
 ---
 
-### Revisão da Sprint
+### Cutover
 
-#### Verificação e Validação 
-- **Demonstração e Revisao:** Validação direta com o cliente acerca do incremento desenvolvido.
+
+
+#### Verificação e Validação
+- **Homologação Final com o Cliente e Testes de Aceitação:** Utilização do sistema em ambiente real de produção pelo técnico Marcus Vinicius no Canaã Esporte Clube, atestando a aderência plena da solução às atividades da comissão técnica.
+
+#### Declaração de Requisitos
+- **Notas de Versão e Manual do Usuário:** Elaboração de documentação técnica de entrega (*release notes*) e guia prático do usuário para apoiar o treinador e a comissão na operação do FutBoard.
 
 #### Organização e Atualização
-- **Atualização do Github Projects:** Reorganização do backlog do produto a partir do feedback obtido na Sprint Review, reordenando histórias pendentes ou criando novos itens para as próximas iterações.
-
----
+- **Encerramento da Lista de Requisitos:** Fechamento e consolidação do escopo final implementado no GitHub Projects, formalizando a linha de base entregue e registrando demandas futuras para novas versões do produto.
 
