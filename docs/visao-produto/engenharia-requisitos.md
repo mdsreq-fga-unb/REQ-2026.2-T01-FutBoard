@@ -1,63 +1,83 @@
 # Engenharia de Requisitos
 
-A Engenharia de Requisitos (ER) no FutBoard é estruturada de forma integrada ao ciclo de vida iterativo e incremental do projeto (baseado no processo híbrido RAD/Scrum). As atividades e técnicas de ER são distribuídas ao longo das fases de concepção e das iterações (sprints), garantindo a contínua descoberta, detalhamento, validação e organização das necessidades do cliente e do negócio.
+
+
+---
 
 ## 5.1 Atividades e Técnicas de ER
 
-Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos adotadas pela equipe, categorizadas por fase do projeto:
+Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos adotadas pela equipe, categorizadas por fases do projeto.
+
+---
 
 ### Fase de Concepção
 
-A fase de concepção tem como objetivo estabelecer o escopo inicial, entender o domínio do problema e identificar as principais dores e necessidades do negócio.
+
 
 #### Elicitação e Descoberta
-- **Entrevista com Stakeholder:** Foi realizada uma entrevista para compreender o funcionamento do negócio, a rotina do técnico Marcus Vinicius e entender as dificuldades e possíveis pontos de melhoria no fluxo atual de trabalho.
-- **Brainstorming:** Reuniões internas com a equipe de desenvolvimento para idealizar e nortear a metodologia e as tecnologias escolhidas para o desenvolvimento da solução.
-- **Análise Documental:** Realizou-se a avaliação do fluxo de trabalho atualmente conduzido pelo técnico Marcus Vinicius, analisando a integração entre as planilhas existentes (Excel) e a consolidação dos dados no Power BI.
-
-#### Declaração de Requisitos
-- **Documento de Visão:** Documentação inicial dos Objetivos Específicos (OEs), direcionando o escopo do produto e alinhando as expectativas entre a equipe e o cliente.
+- **Entrevista com Stakeholder:** Entrevista aberta e semiestruturada com o técnico Marcus Vinicius para compreender o fluxo do negócio, a rotina dos treinos e levantar as dores e oportunidades de melhoria.
+- **Brainstorming:** Reuniões com a equipe de desenvolvimento para idealizar hipóteses de solução, alinhar expectativas e nortear a metodologia e as tecnologias da aplicação.
+- **Análise Documental:** Avaliação minuciosa dos artefatos em uso pelo técnico (planilhas de treino no Microsoft Excel e relatórios/dashboards construídos no Power BI).
 
 #### Análise e Consenso
-- **Análise de Benefício:** Permite avaliar como cada funcionalidade beneficia o técnico Marcus Vinicius durante sua rotina de preenchimento e análise de treinos.
-- **MoSCoW:** O uso desta técnica permite identificar quais funcionalidades serão mais críticas e estritamente necessárias ou não para o pleno funcionamento das análises e preenchimento dos dados.
+- **Matriz Valor x Esforço :** Avaliação conjunta do valor de negócio gerado para o técnico Marcus Vinicius em relação ao esforço técnico de implementação, evitando decisões de priorização arbitrárias.
+- **MoSCoW:** Técnica de priorização qualitativa aplicada em conjunto com a Matriz Valor x Esforço para categorizar os requisitos em *Must have*, *Should have*, *Could have* e *Won't have*, definindo a linha de corte do MVP.
+
+#### Declaração de Requisitos
+- **Documento de Visão:** Formalização dos Objetivos Específicos (OEs)
+
+#### Verificação e Validação
+- **Revisão em Pares:** Inspeção documental interna realizada pela equipe para identificar inconsistências, ambiguidades e lacunas no Documento de Visão.
+- **Validação de Visão com Stakeholder:** Apresentação e leitura guiada dos objetivos do projeto junto ao técnico Marcus Vinicius para confirmação de alinhamento de expectativas.
+
+#### Organização e Atualização
+- **Estruturação do Backlog Inicial:** Agrupamento preliminar dos requisitos e preenchimento do github Projects da equipe
 
 ---
 
 ### Planejamento da Sprint
 
-No planejamento de cada iteração, os requisitos são refinados, detalhados e negociados com o cliente para compor o escopo do ciclo de desenvolvimento.
 
 #### Elicitação e Descoberta
-- **Entrevistas com Stakeholder:** Realização de reuniões semanais com o cliente, visando refinar os detalhes dos requisitos e sugerir/descobrir novas funcionalidades que possam acrescentar valor ao produto.
+- **Entrevistas com o Stackholder**: Encontros semanais com o técnico para detalhar funcionalidades em evolução e descobrir novas regras ou exceções de negócio na rotina do time, cadastro e análise de treinos.
 
 #### Análise e Consenso
-- **Discussões em Equipe:** A equipe se reúne semanalmente duas vezes, sendo uma delas com o cliente, tendo como principal objetivo analisar e decidir a viabilidade técnica e operacional de cada funcionalidade.
+- **Discussões em Equipe e Estimativa de Viabilidade:** Reuniões técnicas para estimar o esforço de cada funcionalidade e negociar o escopo da sprint com base na capacidade da equipe.
 
 #### Declaração de Requisitos
-- **Temas, Épicos e User Stories:** Os requisitos são organizados em blocos hierárquicos de diferentes granularidades. Essa estrutura garante maior clareza nos níveis de detalhamento e facilita a visualização do progresso das funcionalidades, desde as que estão no backlog até as que se encontram em desenvolvimento ou já foram concluídas.
+- **Temas, Épicos e Histórias de Usuário (User Stories):** Decomposição estruturada dos requisitos em blocos hierárquicos de granularidade decrescente, garantindo rastreabilidade do objetivo macro à tarefa técnica.
+- **Critérios de Aceitação:** Especificação detalhada das regras de negócio de cada história (utilizando formatos estruturados e verificáveis como *Dado/Quando/Então*), delimitando o comportamento esperado.
+
+#### Verificação e Validação
+- **Verificação via Definition of Ready:** Aplicação do DoR como portão de entrada para verificar se as histórias de usuário possuem critérios de aceite completos, estimativas e independência antes de serem admitidas no Sprint Backlog.
+
+#### Organização e Atualização
+- **Refinamento do Backlog:** Atualização contínua das prioridades do Product Backlog.
 
 ---
 
 ### Execução da Sprint
 
-Durante o desenvolvimento do incremento, os requisitos ganham representação visual e são validados continuamente para assegurar a conformidade com as regras de negócio.
 
 #### Representação
-- **Protótipos:** Criação de protótipos de interface utilizando o Figma, auxiliando a equipe a se orientar e visualizar como as funcionalidades serão implementadas, além de manter o stakeholder atualizado quanto ao andamento do projeto.
+- **Prototipagem:** Criação de protótipos utilizando FIGMA , para criar e manter fidelidade das interfaces para apoiar a equipe na arquitetura das telas e apoiar a comunicação com o cliente.
 
-#### Verificação e Validação
-- **Checklists e Revisão de Critérios de Aceitação:** Utilização de checklists para revisar cada funcionalidade e assegurar que todos os critérios de aceitação foram cumpridos antes da entrega final do incremento.
+#### Verificação e Validação 
+- **Testes de Aceitação e Checklists de Qualidade:** Verificação formal da conformidade do código desenvolvido frente aos critérios de aceitação declarados para cada história de usuário.
+- **Revisão de Código e Requisitos entre Pares:** Inspeção cruzada entre desenvolvedores para validar se a entrega atende fielmente às regras de negócio estipuladas.
+
+#### Organização e Atualização
+- **Gestão Visual do Github Projects:** Acompanhamento diário da movimentação das histórias e tarefas técnicas, permitindo rastrear o status e mitigar bloqueios de fluxo.
 
 ---
 
 ### Revisão da Sprint
 
-Ao final do ciclo de desenvolvimento, o incremento produzido é demonstrado ao cliente para avaliação do valor entregue e reorientação do trabalho futuro.
+#### Verificação e Validação 
+- **Demonstração e Revisao:** Validação direta com o cliente acerca do incremento desenvolvido.
 
-#### Análise e Organização
-- **Revisão da Sprint e Repriorização do Backlog:** Análise e organização contínua dos requisitos a partir do feedback coletado junto ao técnico Marcus Vinicius durante a demonstração das entregas, viabilizando o ajuste do status dos itens concluídos e a repriorização do backlog para os próximos ciclos.
+#### Organização e Atualização
+- **Atualização do Github Projects:** Reorganização do backlog do produto a partir do feedback obtido na Sprint Review, reordenando histórias pendentes ou criando novos itens para as próximas iterações.
 
 ---
-
 
