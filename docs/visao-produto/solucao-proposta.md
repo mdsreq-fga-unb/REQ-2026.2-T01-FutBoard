@@ -72,4 +72,4 @@ O principal desafio em vista é o limite de tempo e recursos, porém esse risco 
 
 - Para o **Cliente:**   agilizar e facilitar o processo de preenchimento das informações dos treinos realizados, melhorar a vizualiacao dos dados gerados a partir dos treinos realizados.
 
-- Para os **Usuários(comissão técnica):** Permitir o acess
+- Para a **Comissão Técnica:** Permitir o acesso e visualização dos dados gerados a partir dos treinos realizados, sem a necessidade de compartilhar links ou planilhas.
