@@ -45,3 +45,6 @@ A proposta é viável para o contexto da disciplina, considerando o acesso ao cl
 
 O principal desafio em vista é o limite de tempo e recursos, porém esse risco é mitigado pela escopo bem definido para a entrega do MVP (produto mínimo viável) onde garantiremos a entrega das características essenciais que o cliente demonstrou como o valor central do sistema.
 
+## 2.7 Benefícios Esperados
+
+- Para o **Cliente:**   agilizar e facilitar o processo de preenchimento das informações dos treinos realizados, melhorar a vizualiacao dos dados gerados a partir dos treinos realizados.
