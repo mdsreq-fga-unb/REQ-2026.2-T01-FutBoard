@@ -82,3 +82,29 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 #### Organização e Atualização
 - **Encerramento da Lista de Requisitos:** Fechamento e consolidação do escopo final implementado no GitHub Projects, formalizando a linha de base entregue e registrando demandas futuras para novas versões do produto.
 
+
+
+## 5.2 Mapeamento ER x Processo
+
+O quadro a seguir relaciona cada fase do processo RAD adotado (Planejamento de Requisitos, Design do Usuário, Construção e Cutover) à atividade de Engenharia de Requisitos correspondente, à técnica aplicada e ao resultado esperado, em coerência com o detalhamento do item 5.1. O mapeamento diferencia explicitamente a **verificação interna** (feita pela equipe contra os critérios de aceitação) da **validação com o cliente** (homologação de protótipos e incrementos junto ao técnico Marcus Vinicius).
+
+| Fase do Processo (RAD) | Atividade de ER | Técnica | Resultado Esperado |
+|---|---|---|---|
+| Planejamento de Requisitos | Elicitação e Descoberta | Entrevista com o stakeholder, Brainstorming e Análise Documental | Negócio, rotina do técnico e fluxo atual (Excel/Power BI) compreendidos; dores e oportunidades levantadas |
+| Planejamento de Requisitos | Análise e Consenso | Matriz Valor x Esforço, Análise de Custo-Benefício e Priorização MoSCoW | Escopo inicial do MVP delimitado e funcionalidades de maior valor priorizadas |
+| Planejamento de Requisitos | Declaração de Requisitos | Documento de Visão | OEs, restrições e requisitos macro formalizados |
+| Planejamento de Requisitos | Verificação e Validação | Validação do escopo com o cliente e Revisão em Pares | Escopo de alto nível validado com o técnico e Documento de Visão sem ambiguidades |
+| Planejamento de Requisitos | Organização e Atualização | Construção da lista inicial de requisitos (apoio: GitHub Projects) | Escopo inicial versionado e rastreável |
+| Design do Usuário | Elicitação e Descoberta | Entrevista com o stakeholder (encontros frequentes via Teams e WhatsApp) | Telas co-criadas e regras de negócio descobertas conforme a interface toma forma |
+| Design do Usuário | Declaração e Representação | Prototipação (apoio: Figma) e Histórias de Usuário com Critérios de Aceitação (Dado/Quando/Então) | Interface especificada e comportamento declarado com critérios verificáveis |
+| Design do Usuário | Análise e Consenso | Repriorização MoSCoW | Escopo ajustado conforme o feedback visual (escopo como variável no RAD) |
+| Design do Usuário | Verificação e Validação | Validação dos protótipos com o cliente | Protótipos validados que servem como especificação e validação |
+| Design do Usuário | Organização e Atualização | Refinamento contínuo da lista de requisitos (apoio: GitHub Projects) | Rastreabilidade entre telas do Figma e requisitos mantida |
+| Construção | Representação | Evolução dos protótipos validados em incrementos | Funcionalidades construídas a partir do protótipo aprovado |
+| Construção | Verificação e Validação | Verificação interna: checklists de qualidade, revisão por pares e testes funcionais | Incrementos verificados internamente contra os critérios de aceitação |
+| Construção | Verificação e Validação | Validação com o cliente: demonstração do incremento | Incrementos validados pelo técnico frente à rotina real de treinos |
+| Construção | Organização e Atualização | Gestão visual e repriorização do backlog (apoio: GitHub Projects) | Impedimentos mitigados e escopo repriorizado conforme as validações |
+| Cutover | Verificação e Validação | Homologação final com o cliente e testes de aceitação | MVP homologado em uso real no Canaã Esporte Clube |
+| Cutover | Declaração de Requisitos | Notas de versão e manual do usuário | Documentação de entrega (release notes e guia) consolidada |
+| Cutover | Organização e Atualização | Encerramento da lista de requisitos (apoio: GitHub Projects) | Linha de base entregue formalizada e demandas futuras registradas |
+
