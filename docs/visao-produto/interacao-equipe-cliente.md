@@ -2,13 +2,13 @@
 
 #### Composição da equipe
 
-| Papel | Descrição | Responsável | Participantes |
-|---|---|---|---|
-| Gerente do Projeto | Coordena o projeto, garante a comunicação entre cliente e equipe, controla prazos e entregas, e acompanha o progresso das atividades no quadro do projeto. | Gustavo Rodrigues de Noronha |  |
-| Analista de Requisitos | Conduz as sessões de elicitação de requisitos junto ao cliente, redige os requisitos funcionais (RF) e não funcionais (RNF), realiza a validação dos critérios de aceitação, a inspeção dos requisitos levantados e mantém a rastreabilidade entre requisitos, histórias de usuário e o backlog do projeto. | Todos | Todos |
-| Desenvolvedor Frontend | Responsável pela interface do usuário, prototipação de telas e implementação das funcionalidades do lado do cliente. | Gustavo Rodrigues de Noronha, Guilherme Lorenzi Ventura e Giovana Martins de Brito | — |
-| Desenvolvedor Backend | Implementa a lógica de negócios do sistema, a integração com o banco de dados e o desenvolvimento das APIs. | Rafael Silva Wasconcelos, Guilherme Nascimento Tegnoue e Leonardo Lopes Cruz | — |
-| Analista QA | Garante a qualidade do produto por meio da execução de testes de funcionalidades, performance e usabilidade antes de cada entrega. | Leonardo Lopes Cruz | — |
+| Papel | Descrição | Responsável |
+|---|---|---|
+| Gerente do Projeto | Coordena o projeto, garante a comunicação entre cliente e equipe, controla prazos e entregas, e acompanha o progresso das atividades no quadro do projeto. | Gustavo Rodrigues de Noronha |
+| Analista de Requisitos | Conduz as sessões de elicitação de requisitos junto ao cliente, redige os requisitos funcionais (RF) e não funcionais (RNF), realiza a validação dos critérios de aceitação, a inspeção dos requisitos levantados e mantém a rastreabilidade entre requisitos, histórias de usuário e o backlog do projeto. | Todos |
+| Desenvolvedor Frontend | Responsável pela interface do usuário, prototipação de telas e implementação das funcionalidades do lado do cliente. | Gustavo Rodrigues de Noronha, Guilherme Lorenzi Ventura e Giovana Martins de Brito |
+| Desenvolvedor Backend | Implementa a lógica de negócios do sistema, a integração com o banco de dados e o desenvolvimento das APIs. | Rafael Silva Wasconcelos, Guilherme Nascimento Tegnoue e Leonardo Lopes Cruz |
+| Analista QA | Garante a qualidade do produto por meio da execução de testes de funcionalidades, performance e usabilidade antes de cada entrega. | Leonardo Lopes Cruz |
 
 ## 7.2 Comunicação
 

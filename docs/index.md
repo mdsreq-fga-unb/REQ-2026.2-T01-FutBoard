@@ -75,7 +75,7 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
   <div class="team-card-compact">
     <img src="https://avatars.githubusercontent.com/u/153397139?v=4" alt="Foto de Rafael">
     <h3>Rafael Silva Wasconcelos</h3>
-    <p>Matrícula: </p>
+    <p>Matrícula: 232030364 </p>
   </div>
 </div>
 
