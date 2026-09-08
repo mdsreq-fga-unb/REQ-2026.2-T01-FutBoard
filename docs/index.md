@@ -42,6 +42,15 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
 
     [Acessar Lições](licoes-aprendidas.md)
 
+
+  -   __Entregas da Unidade__
+
+    ---
+
+    Consulte os vídeos e os registros das entregas realizadas pela equipe ao longo do projeto.
+
+    [Acessar Entregas](entregas-unidade/entregas-unidade.md)
+
 </div>
 
 ---
