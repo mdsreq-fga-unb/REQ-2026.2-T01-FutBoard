@@ -2,8 +2,6 @@
 
 #### Composição da equipe
 
-#### Composição da equipe
-
 | Papel | Descrição | Responsável | Participantes |
 |---|---|---|---|
 | Gerente do Projeto | Coordena o projeto, garante a comunicação entre cliente e equipe, controla prazos e entregas, e acompanha o progresso das atividades no quadro do projeto. | Gustavo Rodrigues de Noronha |  |
@@ -49,4 +47,4 @@ O cliente participará ativamente na revisão de artefatos concretos em diferent
 
 - **Histórias de Usuário:** São validadas por meio de conversas diretas com o cliente, onde a equipe apresenta sua compreensão da necessidade mapeada e o cliente valida, ou corrige se o entendimento está correto. Diminuindo o risco de erros por diferença de pensamentos.
 
-- **Critérios de Aceitação:** São elaborados pela equipe para tornar cada história de usuário objetivamente testável. O cliente os valida a cada ciclo do RAD os protótipos validando se as o desenvolvimento está andado de acordo com suas expectativas. 
+- **Critérios de Aceitação:** São elaborados pela equipe para tornar cada história de usuário objetivamente testável. O cliente os valida a cada ciclo do RAD, validando se as o desenvolvimento está andado de acordo com suas expectativas. 

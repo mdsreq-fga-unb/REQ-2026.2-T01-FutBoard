@@ -73,7 +73,7 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
     <p>Matrícula: 242032460</p>
   </div>
   <div class="team-card-compact">
-    <img src="" alt="https://avatars.githubusercontent.com/u/153397139?v=4">
+    <img src="https://avatars.githubusercontent.com/u/153397139?v=4" alt="Foto de Rafael">
     <h3>Rafael Silva Wasconcelos</h3>
     <p>Matrícula: </p>
   </div>
