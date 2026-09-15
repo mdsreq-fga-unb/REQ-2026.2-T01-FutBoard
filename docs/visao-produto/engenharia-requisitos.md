@@ -1,6 +1,6 @@
 # Engenharia de Requisitos
 
-As atividades e técnicas de Engenharia de Requisitos (ER) no FutBoard foram organizadas ao longo das quatro fases do *Rapid Application Development* (RAD) — **Planejamento de Requisitos**, **Design do Usuário**, **Construção** e **Cutover**. Essa estruturação assegura que as cinco atividades fundamentais da ER (**Elicitação e Descoberta**, **Análise e Consenso**, **Declaração**, **Verificação e Validação** e **Organização e Atualização**) estejam presentes de forma contínua e iterativa, tendo a prototipação rápida e a validação constante junto ao técnico Marcus Vinicius como núcleo do processo.
+As atividades e técnicas de Engenharia de Requisitos (ER) no FutBoard foram organizadas ao longo das quatro fases do *Rapid Application Development* (RAD) — **Planejamento de Requisitos**, **Design do Usuário**, **Construção** e **Cutover**. Essa estruturação assegura que as seis atividades fundamentais da ER (**Elicitação e Descoberta**, **Análise e Consenso**, **Declaração**, **Verificação e Validação**, **Representação de Requisitos** e **Organização e Atualização**) estejam presentes de forma contínua e iterativa, tendo a prototipação rápida e a validação constante junto ao técnico Marcus Vinicius como núcleo do processo.
 
 ---
 
@@ -17,6 +17,8 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 - **Entrevista com o Stakeholder:** Entrevista aberta e semiestruturada com o técnico Marcus Vinicius para compreender o funcionamento do negócio, a rotina dos treinos e levantar as dores e oportunidades de melhoria.
 - **Brainstorming:** Reuniões internas com a equipe de desenvolvimento para idealizar hipóteses de solução, alinhar expectativas e nortear a metodologia e as tecnologias da aplicação.
 - **Análise Documental:** Avaliação minuciosa dos artefatos em uso pelo técnico (planilhas de controle de treino no Microsoft Excel e consolidação de dados em painéis do Power BI).
+  
+
 
 #### Análise e Consenso
 - **Matriz Valor x Esforço e Análise de Custo-Benefício:** Avaliação conjunta do valor de negócio gerado para o técnico Marcus Vinicius em relação ao esforço técnico de implementação, identificando as funcionalidades mais valiosas e viáveis.
