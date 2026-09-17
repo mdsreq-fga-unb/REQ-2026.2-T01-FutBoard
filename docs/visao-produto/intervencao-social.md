@@ -4,9 +4,7 @@ A solução FutBoard tende a produzir uma intervenção social voltada à profis
 
 ### Impactos Pretendidos
 
-- Elevar as chances de progressão na carreira dos jovens atletas da categoria de base, por meio de um acompanhamento de carga e desempenho mais preciso e contínuo;
 - Fortalecer a metodologia de trabalho do técnico e da comissão técnica, aproximando o clube de práticas de periodização esportiva usadas em contextos profissionais;
-- Elevar o status institucional do Canaã Esporte Clube perante outros clubes formadores, ao adotar uma ferramenta de gestão orientada por dados;
 - Reduzir a sobrecarga administrativa do técnico, liberando tempo para o planejamento técnico e o acompanhamento direto dos atletas;
 - Diminuir a dependência de registros informais e dispersos, aumentando a confiabilidade histórica dos dados de treino da equipe.
 
