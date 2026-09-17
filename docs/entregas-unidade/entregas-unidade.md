@@ -8,7 +8,7 @@ Esta página reúne as entregas produzidas pela equipe do projeto **FutBoard** n
 
 Vídeo da primeira entrega do projeto:
 
-<iframe width="560" height="315" src="https://drive.google.com/file/d/1ZQo_SHHx0bIItGfUFPIoLwWPpyu9fmNl/preview" title="Vídeo da Entrega 01" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://drive.google.com/file/d/1jePeR_mmmef9NAKHtCqxWA_iTpe0pqf1/preview" title="Vídeo da Entrega 01" frameborder="0" allow="autoplay" allowfullscreen></iframe>
 
 Acesse diretamente pelo link: [Vídeo da Entrega 01](https://drive.google.com/file/d/1jePeR_mmmef9NAKHtCqxWA_iTpe0pqf1/view?usp=sharing)
 
