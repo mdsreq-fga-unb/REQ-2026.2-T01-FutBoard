@@ -1,4 +1,4 @@
-# Atas e Reuniões
+# Reuniões
 
 
 
@@ -16,7 +16,7 @@
 
     
 
-    [Acessar Atas e Reuniões](reunioes.md)
+    [Acessar Reuniões](reunioes.md)
 
 
 
