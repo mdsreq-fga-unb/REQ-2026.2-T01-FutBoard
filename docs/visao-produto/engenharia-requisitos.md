@@ -10,7 +10,7 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 
 ---
 
-### Planejamento de Requisitos
+
 
 
 #### Elicitação e Descoberta
@@ -36,7 +36,7 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 
 ---
 
-### Design do Usuário
+
 
 #### Elicitação e Descoberta
 - **Entrevista com o Stakeholder:** Encontros frequentes (via Teams e WhatsApp) com o técnico Marcus Vinicius para co-criar telas, definir fluxos operacionais e descobrir exceções e regras de negócio à medida que a interface toma forma.
@@ -56,7 +56,7 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 
 ---
 
-### Construção
+
 
 
 #### Representação
@@ -71,7 +71,7 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 
 ---
 
-### Cutover
+
 
 
 
@@ -81,7 +81,7 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 #### Declaração de Requisitos
 - **Notas de Versão e Manual do Usuário:** Elaboração de documentação técnica de entrega (*release notes*) e guia prático do usuário para apoiar o treinador e a comissão na operação do FutBoard.
 
-#### Organização e Atualização
+ #### Organização e Atualização
 - **Encerramento da Lista de Requisitos:** Fechamento e consolidação do escopo final implementado no GitHub Projects, formalizando a linha de base entregue e registrando demandas futuras para novas versões do produto.
 
 
