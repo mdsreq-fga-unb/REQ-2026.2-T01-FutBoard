@@ -15,10 +15,10 @@ Apoiar a tomada de decisões técnicas do corpo técnico do Canaã Esporte Clube
 
 | ID | OE principal | Contribuição secundária | Característica | Descrição resumida | Valor de negócio principal |
 | --- | --- | --- | --- | --- | --- |
-| CP01 | OE1 | OE4 | Registro Rápido e Categorizado de Sessões | Interface que permite ao técnico a inserção estruturada dos dados de treino. | Diminuir o tempo de cadastros das sessões de treinos diminuindo a sobrecarga de trabalho do treinador. |
+| CP01 | OE1 | OE4 | Registro Categorizado de Treinos | Interface que permite ao técnico a inserção estruturada dos dados de treino. | Diminuir o tempo de cadastros das sessões de treinos diminuindo a sobrecarga de trabalho do treinador. |
 | CP02 | OE2 | OE3 | Estruturador de Periodização Esportiva | Ferramenta para estruturar nativamente o planejamento do calendário em macrociclos, mesociclos e microciclos. | Padronização metodológica científica relacionada a rotina do clube, substituindo métodos sem padronização. |
 | CP03 | OE3 | OE4 | Dashboard Analitico | Painel visual com gráficos interativos com métricas atualizadas imediatamente após o registro dos dados | Substitui dashboards estáticos e atrasados por métricas visuais instantâneas. |
-| CP04 | OE4 | OE3 | Geração Automática de Relatórios | Sistema que processa os dados do banco centralizado em nuvem para criar relatórios comparativos entre ciclos. | Fundamenta e apoia a tomada de decisões técnicas com base em estatísticas consolidadas. |
+| CP04 | OE4 | OE3 | Geração Automática de Relatórios | Sistema que processa os dados para criar relatórios comparativos entre ciclos. | Fundamenta e apoia a tomada de decisões técnicas com base em estatísticas consolidadas. |
 | CP05 | OE1 | OE4 | Controle de Perfis de Acesso | Sistema de cadastro e login para o técnico e seu auxiliar | Protege os dados contra alterações indevidas. 
 
 ## 2.4 Tecnologias a Serem Utilizadas
