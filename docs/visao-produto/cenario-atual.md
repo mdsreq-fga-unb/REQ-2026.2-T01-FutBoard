@@ -45,13 +45,13 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 
 **Nível de Influência:** Figura principal, é o grande decisor do projeto. Ele autoriza e valida as entregas.
 
-**2. Comissão Técnica do Canaã Esporte Clube:** São os profissionais que auxiliam o técnico e compõem o corpo técnico.
+**2. Auxilar do técnico:** O profissional que auxilia o técnico em seus treinos.
 
-**Relação:** Público secundário da aplicação, usuários diretos. Eles vão apenas visualizar e ler os dados.
+**Relação:** Público secundário da aplicação, usuário direto. Ele poderá visualizar e cadastrar dados de treino.
 
 **Interesse e Expectativa:** Têm interesse em realizar análises estatísticas por meio de relatórios e gráficos interativos. Por possuírem menor familiaridade tecnológica que o técnico, sua principal expectativa é que o sistema garanta usabilidade simples para usuários não técnicos. 
 
-**Nível de Influência:** Participam do uso, mas não participam das validações.
+**Nível de Influência:** Participa do uso da aplicação, mas não participa das validações.
 
 **3. Jogadores (Atletas do sub-17):** Os jovens atletas em formação no clube pertecem a faixa etária de 16-17 anos.
 
