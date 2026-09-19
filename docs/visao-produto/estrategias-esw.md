@@ -10,7 +10,7 @@
 
 A hibridização acontece dentro das próprias fases do RAD, combinando elementos dirigidos por plano com elementos ágeis:
 
-- **Elemento dirigido por plano:** a fase de Planejamento de Requisitos, em que objetivos de negócio, escopo e restrições do FutBoard foram planejados de forma abrangente antes do início da prototipagem. (MARSICANO, 2026, p. 36)
+- **Elemento dirigido por plano:** Na fase de Planejamento de Requisitos, em que objetivos de negócio, escopo e restrições do FutBoard foram planejados de forma abrangente antes do início da prototipagem. (MARSICANO, 2026, p. 36)
 - **Elementos ágeis:** O planejamento é adaptativo, com planos evoluindo ao longo do projeto com base no feedback dos usuários e nas necessidades emergentes. Por exemplo nas fases: Workshop de Design do Usuário, a Prototipagem Evolutiva e o Feedback Contínuo, em que os requisitos emergem e evoluem em ciclos curtos, validados diretamente com o técnico a cada versão funcional (MARSICANO, 2026, p. 36).
 
 ## 4.2 Quadro Comparativo
@@ -29,7 +29,7 @@ A hibridização acontece dentro das próprias fases do RAD, combinando elemento
 
 ## 4.3 Justificativa
 
-O RAD foi escolhido por equilibrar dois aspectos centrais do FutBoard: a necessidade de entregar, dentro de um único semestre, um produto fortemente dependente de validação visual (dashboards e relatórios), e o acesso facilitado ao técnico Marcus Vinicius, principal ponto de contato do projeto. Essa acessibilidade viabiliza o ritmo de validação que o RAD exige, mas não é, por si só, a justificativa completa da estratégia: o corpo técnico do Canaã Esporte Clube também utiliza as informações geradas pelo sistema no dia a dia, e os atletas da equipe Sub-17 são diretamente afetados pelas decisões de treino tomadas a partir dessas métricas.
+O RAD foi escolhido por equilibrar dois aspectos centrais do FutBoard: a necessidade de entregar, dentro de um único semestre, um produto fortemente dependente de validação visual (dashboards e relatórios), e o acesso facilitado ao técnico Marcus Vinicius, principal ponto de contato do projeto. Essa acessibilidade viabiliza o ritmo de validação que o RAD exige, mas não é, por si só, a justificativa completa da estratégia.
 
 Destaca-se alguns motivos:
 

@@ -5,3 +5,7 @@ site/
 .venv/
 
 path/
+
+venv/
+
+.idea/
