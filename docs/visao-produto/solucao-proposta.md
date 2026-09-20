@@ -68,6 +68,6 @@ O principal desafio em vista é o limite de tempo e recursos, porém esse risco 
 
 ## 2.7 Benefícios Esperados
 
-- Para o **Cliente:**   agilizar e facilitar o processo de preenchimento das informações dos treinos realizados, melhorar a vizualiacao dos dados gerados a partir dos treinos realizados.
+- Para o **Cliente(Técnico):**   Agilizar e facilitar o processo de preenchimento das informações dos treinos realizados, melhorar a vizualiacao dos dados gerados a partir dos treinos realizados.
 
-- Para a **Comissão Técnica:** Permitir o acesso e visualização dos dados gerados a partir dos treinos realizados, sem a necessidade de compartilhar links ou planilhas.
+- Para o **Auxiliar técnico:** Permitir o acesso e visualização dos dados gerados a partir dos treinos realizados, sem a necessidade de compartilhar links ou planilhas. Permitir o cadastro dos dados de treino

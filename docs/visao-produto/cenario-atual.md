@@ -15,7 +15,7 @@ Atualmente, o técnico representado pelo cliente Marcus Vinicius Rodrigues regis
 
 ##1.3 Rich Picture
 <figure>
-  <img src="../../assets/RichPicture.jpg" alt="Rich Picture do FutBoard" width="50%">
+  <img src="../../assets/RichPicture.jpg" alt="Rich Picture do FutBoard" width="75%">
   <figcaption>Figura 1: Rich Picture do sistema FutBoard</figcaption>
 </figure>
 ##1.4 Identificação da Oportunidade ou Problema
@@ -23,7 +23,7 @@ Atualmente, o técnico representado pelo cliente Marcus Vinicius Rodrigues regis
 O projeto surge da necessidade de solucionar a dificuldade do controle dos planejamentos dos treinamentos da equipe. Esse problema é potencializado por um ambiente esportivo desafiador, marcado por um calendário estrito e por uma constante demanda por resultados. Atualmente o acompanhamento da equipe é realizado por meio de planilhas fragmentadas e dashboards estáticos. Esse registro manual dos treinos junto à falta de padronização e a ausência de um método de análise bem definido causam sobrecarga do técnico, que esbarra na falta de tempo para análise e registro dos treinos. Com falta de métricas para as análises e a dificuldade de visualização global dos treinamentos dificultam a avaliação da efetividade e da distribuição das cargas de treino ao longo da temporada, prejudicando decisões técnicas que deveriam ser fundamentadas em dados. O nosso projeto atua como uma ferramenta estruturada para mitigar essas dores operacionais do cliente.
 
 <figure>
-  <img src="../../assets/DiagramaIshikawa.png" alt="Diagrama de Ishikawa" width="65%">
+  <img src="../../assets/DiagramaIshikawa.png" alt="Diagrama de Ishikawa" width="75%">
   <figcaption>Figura 2: Diagrama de Ishikawa</figcaption>
 </figure>
 
@@ -45,11 +45,11 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 
 **Nível de Influência:** Figura principal, é o grande decisor do projeto. Ele autoriza e valida as entregas.
 
-**2. Auxilar do técnico:** O profissional que auxilia o técnico em seus treinos.
+**2. Auxilar técnico:** O profissional que auxilia o técnico em seus treinos.
 
 **Relação:** Público secundário da aplicação, usuário direto. Ele poderá visualizar e cadastrar dados de treino.
 
-**Interesse e Expectativa:** Têm interesse em realizar análises estatísticas por meio de relatórios e gráficos interativos. Por possuírem menor familiaridade tecnológica que o técnico, sua principal expectativa é que o sistema garanta usabilidade simples para usuários não técnicos. 
+**Interesse e Expectativa:** Têm interesse em realizar análises estatísticas por meio de relatórios e gráficos interativos.  
 
 **Nível de Influência:** Participa do uso da aplicação, mas não participa das validações.
 
@@ -62,17 +62,17 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 **Nível de Influência:** Baixa influência sobre o desenvolvimento ou decisão de uso da ferramenta. No entanto, são o grupo que será diretamente impactado pelas tomadas de decisões técnicas que o treinador fará com base nas análises geradas pelo produto.
 
 <figure>
-  <img src="../../assets/MapaStakeHolders.png" alt="Mapa dos Stakeholders" width="65%">
+  <img src="../../assets/MapaStakeHolders.png" alt="Mapa dos Stakeholders" width="75%">
   <figcaption>Figura 3: Mapa dos Stakeholders</figcaption>
 </figure>
 
 ##1.7 Segmentação de Clientes
 
-**Técnico / Comissão técnica:** Independente da faixa etária, este grupo é composto por pessoas que são técnicos de clubes, ou da comissão técnica que se interessam por fazerem análises dos seus treinos por meio de dashboards, gráficos e relatórios. 
+**Técnico / Auxiliar técnico:** Independente da faixa etária, este grupo é composto por pessoas que são técnicos de clubes, ou da comissão técnica que se interessam por fazerem análises dos seus treinos por meio de dashboards, gráficos e relatórios. 
 
-**Técnico:** O nível de familiaridade tecnológica é intermediário: embora não possuam formação na área de tecnologia.
+**Técnico:** O nível de familiaridade tecnológica é intermediário. Com base na utilização de planilhas no Excel e uso do PowerBi.
 
-**Comissão Técnica:** Possuem menor familiaridade tecnológica em comparação ao técnico.
+**Auxiliar técnico:** Possui uma familiaridade tecnológica intermediária em comparação ao técnico, visto que também utiliza as planilhas no Excel.
 
 
 
