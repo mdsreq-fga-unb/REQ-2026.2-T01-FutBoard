@@ -33,7 +33,7 @@ O RAD foi escolhido por equilibrar dois aspectos centrais do FutBoard: a necessi
 
 Destaca-se alguns motivos:
 
-- **Contato direto e colaboração intensa:** o prazo exige validação constante com o técnico Marcus Vinicius, mas o corpo técnico como um todo também deve ser considerado durante a elicitação, já que utiliza o produto na rotina do clube. A fase de design do usuário do RAD viabiliza essa colaboração direta e informal (WhatsApp/Teams).
+- **Contato direto e colaboração intensa:** o prazo exige validação constante com o técnico Marcus Vinicius, mas o conjunto de stakeholders como um todo também deve ser considerado durante a elicitação, já que utiliza o produto na rotina do clube. A fase de design do usuário do RAD viabiliza essa colaboração direta e informal (WhatsApp/Teams).
 
 - **Prototipagem como núcleo de validação:** o FutBoard depende fortemente de dashboards e relatórios que precisam ser lidos rapidamente por um usuário não-técnico durante a rotina do treino. O papel central da prototipagem no RAD permite que essas telas evoluam iterativamente até se tornarem o próprio sistema final, servindo simultaneamente como especificação e validação junto ao cliente.
 
@@ -41,4 +41,4 @@ Destaca-se alguns motivos:
 
 - **Adaptação à equipe:** o RAD é indicado para equipes pequenas e projetos de escopo modularizável, como é o caso do nosso time. A ausência de papéis de governança formalizados evita sobrecarga de processo desproporcional ao tamanho da equipe, do cliente e do projeto.
 
-- **Foco na entrega de valor dentro do prazo:** ciclos curtos de construção e validação permitem que o técnico e o corpo técnico avaliem funcionalidades como registro de sessões e estruturação da periodização rapidamente, reduzindo retrabalho e aumentando a chance de que o MVP entregue ao final reflita a rotina real de trabalho do clube.
+- **Foco na entrega de valor dentro do prazo:** ciclos curtos de construção e validação permitem que os stakeholders avaliem funcionalidades como registro de sessões e estruturação da periodização rapidamente, reduzindo retrabalho e aumentando a chance de que o MVP entregue ao final reflita a rotina real de trabalho.
