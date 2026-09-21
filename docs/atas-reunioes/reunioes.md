@@ -51,7 +51,7 @@ acesse diretamente pelo link: [ https://youtu.be/SzRty4GPg_k]( https://youtu.be/
 
 ---
 
-## Reunião 3 - 03/08/2026 - 20h
+## Reunião 3 - 03/09/2026 - 20h
 
 
 | Participante | Reunião |
