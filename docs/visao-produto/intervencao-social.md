@@ -4,7 +4,7 @@ A solução FutBoard tende a produzir uma intervenção social voltada à profis
 
 ### Impactos Pretendidos
 
-- Fortalecer a metodologia de trabalho do técnico e da comissão técnica, aproximando o clube de práticas de periodização esportiva usadas em contextos profissionais;
+- Fortalecer a metodologia de trabalho do técnico e seu auxiliar técnico, aproximando o clube de práticas de periodização esportiva usadas em contextos profissionais;
 - Reduzir a sobrecarga administrativa do técnico, liberando tempo para o planejamento técnico e o acompanhamento direto dos atletas;
 - Diminuir a dependência de registros informais e dispersos, aumentando a confiabilidade histórica dos dados de treino da equipe.
 
@@ -14,4 +14,4 @@ Efeitos não totalmente previstos que precisam ser observados:
 
 - Possível dependência excessiva de métricas automatizadas em detrimento da percepção empírica e da experiência prática do treinador;
 
-Desse modo, a intervenção social do projeto FutBoard se dará por meio da alteração da dinâmica de trabalho entre técnico, comissão técnica e atletas, da transformação da relação entre o clube e o processo de tomada de decisão técnica, e da introdução de uma cultura de dados no contexto do futebol de base, sendo necessário levar esses pontos em consideração durante a definição dos requisitos, a implementação da solução e o seu uso real.
+Desse modo, a intervenção social do projeto FutBoard se dará por meio da alteração da dinâmica de trabalho entre o técnico, seu auxiliar técnico e os atletas, da transformação da relação entre o clube e o processo de tomada de decisão técnica, e da introdução de uma cultura de dados no contexto do futebol de base, sendo necessário levar esses pontos em consideração durante a definição dos requisitos, a implementação da solução e o seu uso real.

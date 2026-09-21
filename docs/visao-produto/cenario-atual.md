@@ -68,7 +68,7 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 
 ##1.7 Segmentação de Clientes
 
-**Técnico / Auxiliar técnico:** Independente da faixa etária, este grupo é composto por pessoas que são técnicos de clubes, ou da comissão técnica que se interessam por fazerem análises dos seus treinos por meio de dashboards, gráficos e relatórios. 
+**Técnico / Auxiliar técnico:** Independente da faixa etária, este grupo é composto pelo técnico e seu auxiliar técnico, que se interessam por fazer análises dos treinos por meio de dashboards, gráficos e relatórios. 
 
 **Técnico:** O nível de familiaridade tecnológica é intermediário. Com base na utilização de planilhas no Excel e uso do PowerBi.
 
