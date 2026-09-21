@@ -15,7 +15,7 @@ Atualmente, o técnico representado pelo cliente Marcus Vinicius Rodrigues regis
 
 ##1.3 Rich Picture
 <figure>
-  <img src="../../assets/RichPicture.jpg" alt="Rich Picture do FutBoard" width="75%">
+  <img src="../../assets/RichPicture.jpg" alt="Rich Picture do FutBoard" width="70%">
   <figcaption>Figura 1: Rich Picture do sistema FutBoard</figcaption>
 </figure>
 ##1.4 Identificação da Oportunidade ou Problema
