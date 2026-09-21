@@ -33,7 +33,8 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 - Garantir usabilidade para um usuário não necessariamente técnico em tecnologia (o treinador)
 - Desafio técnicos acerca das tecnologias que o time de desenvolvimento utilizará para criar as análises e gráficos.
 - Migrar, importar os dados já existentes das planilhas de Excel atuais do treinador para o novo sistema, assegurando que os dados não sejam perdidos durante a transição.
-
+- Privacidade e proteção de dados tendo em vista que serão armazenado dados relacionados a jogadores menores de idade. 
+- Observar as exigências aplicáveis da LGPD
 
 ##1.6 Mapa de Stakeholders
 
