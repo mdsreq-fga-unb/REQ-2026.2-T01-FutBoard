@@ -48,3 +48,5 @@ O cliente participará ativamente na revisão de artefatos concretos em diferent
 - **Histórias de Usuário:** São validadas por meio de conversas diretas com o cliente, onde a equipe apresenta sua compreensão da necessidade mapeada e o cliente valida, ou corrige se o entendimento está correto. Diminuindo o risco de erros por diferença de pensamentos.
 
 - **Critérios de Aceitação:** São elaborados pela equipe para tornar cada história de usuário objetivamente testável. O cliente os valida a cada ciclo do RAD, validando se as o desenvolvimento está andado de acordo com suas expectativas. 
+
+
