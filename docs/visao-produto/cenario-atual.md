@@ -87,7 +87,7 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 - **Nível de Influência:** Não acessa a aplicação e não atua em suas validações da aplicação, porém pode ter suas decisões influênciadas diretamente/indiretamente com base nos relatórios gerados por ela.
 
 <figure>
-  <img src="../../assets/MapaStakeholders.png" alt="Mapa dos Stakeholders" width="90%">
+  <img src="../../assets/MapaStakeHolders.png" alt="Mapa dos Stakeholders" width="90%">
   <figcaption>Figura 3: Mapa dos Stakeholders</figcaption>
 </figure>
 
