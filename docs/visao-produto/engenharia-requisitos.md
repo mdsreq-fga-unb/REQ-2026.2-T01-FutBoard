@@ -81,7 +81,7 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 - **Prática de Validação com o Cliente e Testes de Aceitação:** Utilização do sistema em ambiente real de produção pelo técnico Marcus Vinicius no Canaã Esporte Clube, atestando a aderência plena da solução às atividades do técnico e seu auxiliar técnico.
 
 #### Declaração de Requisitos
-- **Notas de Versão e Documento de apoio ao uso:** Elaboração de documentação técnica de entrega (*release notes*) e guia prático do usuário para apoiar o treinador e a comissão na operação do FutBoard.
+- **Notas de Versão e Documento de apoio ao uso:** Elaboração de documentação técnica de entrega (*release notes*) e guia prático do usuário para apoiar o treinador e seu auxiliar técnico na operação do FutBoard.
 
 #### Organização e Atualização
 - **Fechamento da Linha de Base:** Fechamento e consolidação do escopo final implementado na ferramenta GitHub Projects, formalizando a linha de base de requisitos entregue e registrando demandas futuras para novas versões do produto.
