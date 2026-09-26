@@ -23,13 +23,13 @@ Além dos requisitos rastreados diretamente a uma CP, alguns requisitos identifi
 | **RF07** | **Cadastrar Microciclo:** o sistema deve permitir o cadastro de um novo microciclo (correspondente a uma semana de treino) vinculado a um mesociclo existente. | CP02 |
 | **RF08** | **Editar Microciclo:** o sistema deve permitir a edição dos dados de um microciclo já cadastrado. | CP02 |
 | **RF09** | **Excluir Microciclo:** o sistema deve permitir a exclusão de um microciclo cadastrado. | CP02 |
-| **RF10** | **Cadastrar comportamento:** o sistema deve permitir o cadastro de um comportamento tático (ex: comportamento ofensivo, defensivo), a ser associado posteriormente a uma atividade dentro de uma sessão de treino. | CP01 |
-| **RF11** | **Editar comportamento:** o sistema deve permitir a edição de um comportamento tático já cadastrado, sem alterar os dados fixos da atividade à qual ele está associado. | CP01 |
-| **RF12** | **Excluir comportamento:** o sistema deve permitir a exclusão de um comportamento tático cadastrado. | CP01 |
-| **RF13** | **Cadastrar Atividade:** o sistema deve permitir o cadastro de uma nova atividade (exercício) informando seus dados fixos e invariáveis — tipologia e tipo de SSP —, que não se alteram entre diferentes repetições da mesma atividade. | CP01 |
-| **RF14** | **Editar Atividade:** o sistema deve permitir a edição dos dados de uma atividade já cadastrada. | CP01 |
-| **RF15** | **Excluir Atividade:** o sistema deve permitir a exclusão de uma atividade cadastrada. | CP01 |
-| **RF16** | **Cadastrar Sessão:** o sistema deve permitir o cadastro de uma nova sessão de treino, vinculada a um macrociclo, mesociclo e microciclo, contendo a data e o número sequencial da sessão. | CP01 |
+| **RF10** | **Cadastrar comportamento:** o sistema deve permitir que o treinador cadastre comportamentos táticos (ex.: comportamento ofensivo, defensivo), a serem associados posteriormente a uma atividade dentro de uma sessão de treino. | CP01 |
+| **RF11** | **Editar comportamento:** o sistema deve permitir que o treinador edite um comportamento tático já cadastrado, sem alterar os dados fixos da atividade à qual ele está associado. | CP01 |
+| **RF12** | **Excluir comportamento:** o ssistema deve permitir que o treinador exclua um comportamento tático cadastrado. | CP01 |
+| **RF13** | **Cadastrar Atividade:** o istema deve permitir que o treinador cadastre uma nova atividade (exercício), informando seus dados fixos e invariáveis — tipologia e tipo de SSP —, que não se alteram entre diferentes repetições da mesma atividade. | CP01 |
+| **RF14** | **Editar Atividade:** o sistema deve permitir que o treinador edite os dados de uma atividade já cadastrada. | CP01 |
+| **RF15** | **Excluir Atividade:** o sistema deve permitir que o treinador exclua uma atividade cadastrada. | CP01 |
+| **RF16** | **Cadastrar Sessão:** o sistema deve permitir que o treinador cadastre uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão. | CP01 |
 | **RF17** | **Editar Sessão:** o sistema deve permitir a edição dos dados de uma sessão de treino já cadastrada. | CP01 |
 | **RF18** | **Excluir Sessão:** o sistema deve permitir a exclusão de uma sessão de treino cadastrada. | CP01 |
 | **RF19** | **Cadastrar atividade na biblioteca:** o sistema deve permitir o cadastro de uma atividade diretamente na biblioteca de treinos, independentemente do cadastro de uma sessão específica, para que ela fique disponível para reutilização futura. | CP01 |
