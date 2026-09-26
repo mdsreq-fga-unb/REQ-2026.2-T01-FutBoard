@@ -14,15 +14,14 @@ Além dos requisitos rastreados diretamente a uma CP, alguns requisitos identifi
 
 | Identificador | Descrição | CP/EE de origem |
 | :--- | :--- | :---: |
-| **RF01** | **Cadastrar macrociclo:** o sistema deve permitir o cadastro de um novo macrociclo (período mais amplo do planejamento, ex: a temporada 2026) para organizar a periodização dos treinos. | CP02 |
-| **RF02** | **Editar macrociclo:** o sistema deve permitir a edição dos dados de um macrociclo já cadastrado. | CP02 |
+| **RF01** | **Cadastrar macrociclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo macrociclo (período mais amplo do planejamento, ex: a temporada 2026), informando campos como nome e data de início para organizar a periodização dos treinos. | CP02 |
+| **RF02** | **Editar macrociclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um macrociclo já cadastrado alterando nome e data de início. | CP02 |
 | **RF03** | **Excluir macrociclo:** o sistema deve permitir a exclusão de um macrociclo cadastrado, removendo-o da estrutura de periodização. | CP02 |
-| **RF04** | **Cadastrar Mesociclo:** o sistema deve permitir o cadastro de um novo mesociclo vinculado a um macrociclo existente, incluindo a possibilidade de iniciar um novo mesociclo diretamente durante o cadastro de uma sessão de treino. | CP02 |
-| **RF05** | **Editar Mesociclo:** o sistema deve permitir a edição dos dados de um mesociclo já cadastrado. | CP02 |
+| **RF04** | **Cadastrar Mesociclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo mesociclo (bloco de semanas de treino com um objetivo específico) vinculado a um macrociclo existente, informando o nome do mesociclo | CP02 |
+| **RF05** | **Editar Mesociclo:**  o sistema deve permitir que o treinador e o auxiliar editem os dados de um mesociclo já cadastrado alterando o nome. | CP02 |
 | **RF06** | **Excluir Mesociclo:** o sistema deve permitir a exclusão de um mesociclo cadastrado. | CP02 |
-| **RF07** | **Cadastrar Microciclo:** o sistema deve permitir o cadastro de um novo microciclo (correspondente a uma semana de treino) vinculado a um mesociclo existente. | CP02 |
-| **RF08** | **Editar Microciclo:** o sistema deve permitir a edição dos dados de um microciclo já cadastrado. | CP02 |
-| **RF09** | **Excluir Microciclo:** o sistema deve permitir a exclusão de um microciclo cadastrado. | CP02 |
+| **RF08** | **Editar Microciclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um microciclo já cadastrado aletrando o nome do microciclo. | CP02 |
+| **RF09** | **Excluir Microciclo:** o sistema deve permitir que o treinador e o auxiliar excluam um microciclo cadastrado. | CP02 |
 | **RF10** | **Cadastrar comportamento:** o sistema deve permitir que o treinador cadastre comportamentos táticos (ex.: comportamento ofensivo, defensivo), a serem associados posteriormente a uma atividade dentro de uma sessão de treino. | CP01 |
 | **RF11** | **Editar comportamento:** o sistema deve permitir que o treinador edite um comportamento tático já cadastrado, sem alterar os dados fixos da atividade à qual ele está associado. | CP01 |
 | **RF12** | **Excluir comportamento:** o sistema deve permitir que o treinador exclua um comportamento tático cadastrado. | CP01 |
