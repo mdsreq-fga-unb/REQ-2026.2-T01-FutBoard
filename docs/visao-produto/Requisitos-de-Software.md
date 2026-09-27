@@ -29,11 +29,11 @@ Além dos requisitos rastreados diretamente a uma CP, alguns requisitos identifi
 | **RF14** | **Editar Atividade:** o sistema deve permitir que o treinador edite os dados de uma atividade já cadastrada. | CP01 |
 | **RF15** | **Excluir Atividade:** o sistema deve permitir que o treinador exclua uma atividade cadastrada. | CP01 |
 | **RF16** | **Cadastrar Sessão:** o sistema deve permitir que o treinador cadastre uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão. | CP01 |
-| **RF17** | **Editar Sessão:** o sistema deve permitir a edição dos dados de uma sessão de treino já cadastrada. | CP01 |
-| **RF18** | **Excluir Sessão:** o sistema deve permitir a exclusão de uma sessão de treino cadastrada. | CP01 |
-| **RF19** | **Cadastrar atividade na biblioteca:** o sistema deve permitir o cadastro de uma atividade diretamente na biblioteca de treinos, independentemente do cadastro de uma sessão específica, para que ela fique disponível para reutilização futura. | CP01 |
-| **RF20** | **Editar atividade na biblioteca:** o sistema deve permitir a edição de uma atividade cadastrada na biblioteca de treinos. | CP01 |
-| **RF21** | **Excluir atividade na biblioteca:** o sistema deve permitir a exclusão de uma atividade cadastrada na biblioteca de treinos. | CP01 |
+| **RF17** | **Editar Sessão:** o sistema deve permitir que o treinador e o auxiliar a editem os dados de uma sessão de treino já cadastrada. | CP01 |
+| **RF18** | **Excluir Sessão:** o sistema deve permitir que o treinador e o auxiliar excluam uma uma sessão de treino cadastrada. | CP01 |
+| **RF19** | **Cadastrar atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma atividade diretamente na biblioteca de treinos, independentemente do cadastro de uma sessão específica, para que ela fique disponível para reutilização futura. | CP01 |
+| **RF20** | **Editar atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar editem uma atividade cadastrada na biblioteca de treinos. | CP01 |
+| **RF21** | **Excluir atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada na biblioteca de treinos. | CP01 |
 | **RF22** | **Exibir painel de indicadores na tela inicial:** o sistema deve exibir, na tela inicial, um painel com os principais indicadores — número de sessões, minutos totais de treino, variabilidade de exercícios e número de execuções — para consulta rápida ao entrar na aplicação. | CP03 |
 | **RF23** | **Exibir dashboard com gráficos:** o sistema deve exibir os gráficos de análise (tipologia de atividade, atividades mais repetidas, entre outros) concentrados na menor quantidade possível de telas, evitando a necessidade de trocar de página constantemente para consultar diferentes informações. | CP03 |
 | **RF24** | **Reutilizar atividades cadastradas:** o sistema deve permitir buscar e selecionar uma atividade já cadastrada na biblioteca ao montar uma sessão de treino, preenchendo automaticamente as informações inerentes a ela. | CP03 |
