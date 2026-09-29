@@ -186,3 +186,27 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=dmpsZyy7fM0](http
         - Combinado de manter Miro, GitPages e planilha sincronizados e atualizados
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/ZDTSmL4VHm0" title="Reunião 8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+## Reunião 9 - 28/09/2026 - 20h
+
+| Participante | Reunião |
+| :--- | :---: |
+| Giovana Martins De Brito | ✅ |
+| Guilherme Lorenzi Ventura | ✅ |
+| Guilherme Nascimento Tegnoué | ✅ |
+| Gustavo Rodrigues de Noronha | ✅ |
+| Leonardo Lopes Cruz | ✅ |
+| Rafael Silva Wasconcelos | ✅ |
+
+- **Pontos principais:**
+    - Reunião com o monitor (Eduardo Lobo Moreira):
+        - Revisão detalhada da descrição de cada requisito funcional, corrigindo casos de requisitos que misturavam mais de uma funcionalidade ou careciam de clareza
+        - Esclarecimento sobre o correto uso do campo de validação/verificação nos requisitos, corrigindo entendimento equivocado apontado pela banca na entrega anterior
+        - Derivação dos requisitos a partir das histórias de usuário already mapeadas no Miro, vinculando cada história ao seu respectivo requisito (RF)
+        - Construção da matriz de valor x esforço com votação em grupo (esforço, complexidade e conhecimento da equipe), tirando a média dos votos por requisito
+        - Definição da lista de requisitos funcionais e não funcionais que farão parte do MVP versus entregas futuras
+        - Organização de onde registrar o processo de validação/verificação no GitPages (nova aba/seção dedicada, dentro da planilha markdown)
+        - Divisão das tarefas finais entre os integrantes para publicação no GitPages até o prazo do dia seguinte
+
+    <iframe width="560" height="315" src="https://drive.google.com/file/d/1yjjD6hBJTESL04eO-pisr8J24I02WSFy/preview" title="Reunião 9" frameborder="0" allow="autoplay" allowfullscreen></iframe>
