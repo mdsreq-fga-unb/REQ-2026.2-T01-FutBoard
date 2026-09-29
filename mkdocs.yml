@@ -38,6 +38,8 @@ nav:
       - Cronograma e Entregas: visao-produto/cronogramas-entregas.md
       - Interação com Cliente: visao-produto/interacao-equipe-cliente.md
       - Requisitos de Software: visao-produto/Requisitos-de-Software.md
+  - Ajuste e Validação de Requisitos:
+      - Ajuste e Validação de Requisitos: visao-produto/ajuste-e-validacao-de-requisitos.md    
   - Reuniões:
       - Reuniões: atas-reunioes/reunioes.md
   - Lições Aprendidas: licoes-aprendidas.md
