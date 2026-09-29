@@ -6,13 +6,13 @@ Esta seção descreve o backlog de produto (preliminar ou completo, dependendo d
 
 Em produção
 
-# 10.2 Priorização do Backlog Geral e MVP
+## 10.2 Priorização do Backlog Geral e MVP
 
 Para priorizar o backlog do FutBoard, cada requisito funcional (RF) recebeu quatro notas: **valor de negócio**, **esforço**, **complexidade** e **conhecimento da equipe**. As três últimas foram combinadas em uma única medida, o **esforço técnico**, que foi cruzada com o valor de negócio para posicionar cada RF em um quadrante da matriz Valor x Esforço.
 
-## 1. Critérios e legendas
+### 1. Critérios e legendas
 
-### 1.1 Valor de negócio
+#### 1.1 Valor de negócio
 
 O valor de negócio foi definido a partir da justificativa dada pelo cliente para cada funcionalidade.
 
@@ -23,7 +23,7 @@ O valor de negócio foi definido a partir da justificativa dada pelo cliente par
 | 2 | Desejável | Seria interessante ter, mas o sistema funciona perfeitamente sem. |
 | 1 | A definir | Nota ainda não utilizada no backlog atual. |
 
-### 1.2 Esforço
+#### 1.2 Esforço
 
 | Pontuação | Interpretação | Descrição |
 |:---:|---|---|
@@ -32,7 +32,7 @@ O valor de negócio foi definido a partir da justificativa dada pelo cliente par
 | 3 | Esforço alto | Entre 6 e 12 horas |
 | 4 | Esforço muito alto | Mais de 12 horas |
 
-### 1.3 Complexidade
+#### 1.3 Complexidade
 
 | Pontuação | Interpretação |
 |:---:|---|
@@ -41,7 +41,7 @@ O valor de negócio foi definido a partir da justificativa dada pelo cliente par
 | 3 | Lógica de negócio analítica, processamento em tempo de execução, cálculos derivados e reatividade/interdependência entre múltiplos componentes visuais. |
 | 4 | Requisitos com alta incerteza técnica, algoritmos pesados de inferência/estatística ou dependência crítica de serviços/APIs externas de terceiros. |
 
-### 1.4 Conhecimento da equipe
+#### 1.4 Conhecimento da equipe
 
 | Pontuação | Interpretação |
 |:---:|---|
@@ -50,7 +50,7 @@ O valor de negócio foi definido a partir da justificativa dada pelo cliente par
 | 3 | A equipe precisa desenvolver conhecimentos relevantes. |
 | 4 | A equipe ainda não possui os conhecimentos ou recursos necessários. |
 
-## 2. Como as notas foram definidas: votação e média
+### 2. Como as notas foram definidas: votação e média
 
 As notas de esforço, complexidade e conhecimento da equipe não foram decididas por uma pessoa só. Para cada critério de cada requisito, todos os seis membros da equipe votaram individualmente, usando as legendas acima, e a nota final foi a **média dos votos**, arredondada para o inteiro mais próximo (valores com 0,5 sobem para o inteiro seguinte).
 
@@ -68,7 +68,7 @@ Exemplo de votação para um critério de um requisito:
 
 Cálculo: (3 + 3 + 2 + 2 + 3 + 2) / 6 = 2,5, arredondado para **3**.
 
-## 3. Esforço técnico
+### 3. Esforço técnico
 
 O esforço técnico resume o custo de desenvolvimento de um RF em um único número, entre 1 e 4, calculado como a média simples das três notas finais:
 
@@ -78,7 +78,7 @@ Esforço técnico = (Esforço + Complexidade + Conhecimento da equipe) / 3
 
 Exemplo com o RF34 (Gerar análises textuais dos dados cadastrados, com IA): (3 + 4 + 4) / 3 = 3,67.
 
-## 4. Matriz Valor x Esforço e quadrantes
+### 4. Matriz Valor x Esforço e quadrantes
 
 Cada RF é posicionado em um quadrante comparando o **valor de negócio** com o **esforço técnico**, tendo 2 como ponto de corte nos dois eixos.
 
@@ -103,7 +103,7 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 ))
 ```
 
-## 5. Consolidação dos requisitos
+### 5. Consolidação dos requisitos
 
 | Código | Requisito | Valor | Esforço | Complex. | Conhec. | Esforço técnico | Quadrante |
 |:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
