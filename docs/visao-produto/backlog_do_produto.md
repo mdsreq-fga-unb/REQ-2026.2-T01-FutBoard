@@ -156,6 +156,13 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 ))
 ```
 
+![Matriz Valor x Esforço](https://plain-enam-prod-public.komododecks.com/202609/29/nKh3v2j6INbnUhwjkAgy/image.jpg)
+
+[Acessar a matriz no Miro](https://miro.com/welcomeonboard/YmN1NWlzM0VXeDkyTkhySndlQ3V3UTlqdmJlVDdDdnF1dmdjREpGVTdkb3RJeVptV20xYzlyTVJzd3hZNFpWdHFsVmNtMDQ5eGZIRm0rYzNCSnNybGhSYmFuVXJ3ZGdQZEkxSDRhZ3hjQ2RNK3A4TTZzNmVtUXdEVElpTjkyNFVyVmtkMG5hNDA3dVlncnBvRVB2ZXBnPT0hdjE=?share_link_id=122393869978)
+
+> **Observação sobre as cores dos requisitos:** as cores dos cards não são aleatórias; elas são consequência da matriz MoSCoW preenchida pelo cliente durante a [Reunião 04](../atas-reunioes/reunioes.md#reuniao-4---10092026---20h), no intervalo de **54:23 a 1:11:26**. Na matriz, **azul** representa requisitos *Must Have*, **laranja** representa requisitos *Should Have* e **rosa** representa requisitos *Could Have*. Embora a matriz MoSCoW e a matriz Valor x Esforço sejam instrumentos diferentes, há uma relação importante entre elas: os requisitos dos quadrantes Q1 (**alto valor e alto esforço**) e Q2 (**alto valor e baixo esforço**) correspondem às prioridades de maior valor para o produto. Por isso, a grande maioria dos requisitos classificados nesses dois quadrantes está entre os *Must Have* definidos pelo cliente na Reunião 04.
+
+
 ### 5. Consolidação dos requisitos
 
 | Código | Requisito | Valor | Esforço | Complex. | Conhec. | Esforço técnico | Quadrante |
@@ -206,3 +213,62 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 | RF44 | Apresentar contexto dos indicadores | 2 | 3 | 3 | 3 | 3,00 | Q4 Baixo valor / Alta carga técnica |
 | RF45 | Apresentar limitações dos indicadores | 2 | 3 | 3 | 3 | 3,00 | Q4 Baixo valor / Alta carga técnica |
 | RF46 | Calcular percentual dos gráficos com base no tempo total da sessão | 4 | 2 | 3 | 3 | 2,67 | Q1 Alto valor / Alta carga técnica |
+
+### 6. Requisitos do MVP
+
+#### Requisitos Funcionais (RFs)
+
+A definição dos Requisitos Funcionais que compõem o MVP foi realizada previamente com base na matriz de valor x esforço. Foram selecionados tanto os requisitos de **alto valor e baixo esforço** quanto os requisitos de **alto valor e alto esforço**, que juntos compõem o escopo funcional do MVP. Em contrapartida, ficaram fora do MVP os requisitos categorizados como de **baixo valor e baixo esforço** ou de **baixo valor e alto esforço**.
+
+| Código | Requisito | Classificação |
+|:---:|---|---|
+| RF01 | Cadastrar macrociclo | Q2 - Alto valor / Baixo esforço |
+| RF02 | Editar macrociclo | Q2 - Alto valor / Baixo esforço |
+| RF03 | Excluir macrociclo | Q2 - Alto valor / Baixo esforço |
+| RF04 | Cadastrar mesociclo | Q2 - Alto valor / Baixo esforço |
+| RF05 | Editar mesociclo | Q2 - Alto valor / Baixo esforço |
+| RF06 | Excluir mesociclo | Q2 - Alto valor / Baixo esforço |
+| RF07 | Cadastrar microciclo | Q2 - Alto valor / Baixo esforço |
+| RF08 | Editar microciclo | Q2 - Alto valor / Baixo esforço |
+| RF09 | Excluir microciclo | Q2 - Alto valor / Baixo esforço |
+| RF10 | Cadastrar comportamentos | Q2 - Alto valor / Baixo esforço |
+| RF11 | Editar comportamentos | Q2 - Alto valor / Baixo esforço |
+| RF12 | Excluir comportamentos | Q2 - Alto valor / Baixo esforço |
+| RF13 | Cadastrar atividade | Q2 - Alto valor / Baixo esforço |
+| RF14 | Editar atividade | Q2 - Alto valor / Baixo esforço |
+| RF15 | Excluir atividade | Q2 - Alto valor / Baixo esforço |
+| RF16 | Cadastrar sessão | Q2 - Alto valor / Baixo esforço |
+| RF17 | Editar sessão | Q2 - Alto valor / Baixo esforço |
+| RF18 | Excluir sessão | Q2 - Alto valor / Baixo esforço |
+| RF24 | Reutilizar atividades cadastradas | Q2 - Alto valor / Baixo esforço |
+| RF25 | Incluir atividades cadastradas nas análises | Q2 - Alto valor / Baixo esforço |
+| RF31 | Anexar imagens dos tipos de treino | Q2 - Alto valor / Baixo esforço |
+| RF35 | Cadastrar momento do jogo | Q2 - Alto valor / Baixo esforço |
+| RF36 | Editar momento do jogo | Q2 - Alto valor / Baixo esforço |
+| RF37 | Deletar momento do jogo | Q2 - Alto valor / Baixo esforço |
+| RF38 | Cadastrar fase do jogo | Q2 - Alto valor / Baixo esforço |
+| RF39 | Editar fase do jogo | Q2 - Alto valor / Baixo esforço |
+| RF40 | Deletar fase do jogo | Q2 - Alto valor / Baixo esforço |
+| RF41 | Cadastrar atributo técnico | Q2 - Alto valor / Baixo esforço |
+| RF42 | Editar atributo técnico | Q2 - Alto valor / Baixo esforço |
+| RF43 | Deletar atributo técnico | Q2 - Alto valor / Baixo esforço |
+| RF19 | Cadastrar atividades na biblioteca | Q1 - Alto valor / Alto esforço |
+| RF20 | Editar atividades na biblioteca | Q1 - Alto valor / Alto esforço |
+| RF21 | Excluir atividades na biblioteca | Q1 - Alto valor / Alto esforço |
+| RF22 | Exibir painel de indicadores na tela inicial | Q1 - Alto valor / Alto esforço |
+| RF23 | Exibir dashboard com gráficos | Q1 - Alto valor / Alto esforço |
+| RF26 | Filtrar informações dos gráficos | Q1 - Alto valor / Alto esforço |
+| RF27 | Gerar relatórios comparativos entre periodizações esportivas | Q1 - Alto valor / Alto esforço |
+| RF28 | Interagir com os dados dos gráficos | Q1 - Alto valor / Alto esforço |
+| RF34 | Gerar análises textuais dos dados cadastrados (com IA) | Q1 - Alto valor / Alto esforço |
+| RF46 | Calcular percentual dos gráficos com base no tempo total da sessão | Q1 - Alto valor / Alto esforço |
+
+#### Requisitos Não Funcionais (RNFs)
+
+Os Requisitos Não Funcionais não entram diretamente na matriz de esforço/valor padrão, pois são aplicáveis de forma transversal ao produto e não representam funcionalidades isoladas. Entretanto, os requisitos compreendidos entre o RNF02 e o RNF04, especificamente o **RNF02**, o **RNF03** e o **RNF04**.
+
+| Código | Requisito |
+|:---:|---|
+| RNF02 | Interface Responsiva e Adaptável |
+| RNF03 | Eficiência no Cadastro de Treinos |
+| RNF04 | Atualização em Tempo Real do Dashboard |
