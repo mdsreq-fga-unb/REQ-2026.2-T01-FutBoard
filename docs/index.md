@@ -51,6 +51,15 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
 
     [Acessar Entregas](entregas-unidade/entregas-unidade.md)
 
+
+  -   __Avaliação de Negócio__
+
+    ---
+
+    Consulte a avaliação de negócio feita pelo cliente.
+
+    [Acessar Avaliação](visao-produto/avaliacao-de-negocio.md)
+
 </div>
 
 ---
