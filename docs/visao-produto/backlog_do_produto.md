@@ -218,7 +218,7 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 
 #### Requisitos Funcionais (RFs)
 
-A definição dos Requisitos Funcionais que compõem o MVP foi realizada previamente com base na matriz de valor x esforço. Foram selecionados tanto os requisitos de **alto valor e baixo esforço** quanto os requisitos de **alto valor e alto esforço**, que juntos compõem o escopo funcional do MVP. Em contrapartida, ficaram fora do MVP os requisitos categorizados como de **baixo valor e baixo esforço** ou de **baixo valor e alto esforço**.
+A definição dos Requisitos Funcionais que compõem o MVP foi realizada previamente com base na matriz de valor x esforço e posteriormente validada diretamente com o cliente via WhatsApp (conforme detalhado na [Seção 10.3](#103-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente)). Foram selecionados tanto os requisitos de **alto valor e baixo esforço** quanto os requisitos de **alto valor e alto esforço**, que juntos compõem o escopo funcional do MVP. Em contrapartida, ficaram fora do MVP os requisitos categorizados como de **baixo valor e baixo esforço** ou de **baixo valor e alto esforço**.
 
 | Código | Requisito | Classificação |
 |:---:|---|---|
@@ -265,10 +265,28 @@ A definição dos Requisitos Funcionais que compõem o MVP foi realizada previam
 
 #### Requisitos Não Funcionais (RNFs)
 
-Os Requisitos Não Funcionais não entram diretamente na matriz de esforço/valor padrão, pois são aplicáveis de forma transversal ao produto e não representam funcionalidades isoladas. Entretanto, os requisitos compreendidos entre o RNF02 e o RNF04, especificamente o **RNF02**, o **RNF03** e o **RNF04**.
+Os Requisitos Não Funcionais não entram diretamente na matriz de esforço/valor padrão, pois são aplicáveis de forma transversal ao produto e não representam funcionalidades isoladas. Entretanto, os requisitos compreendidos entre o RNF02 e o RNF04, especificamente o **RNF02**, o **RNF03** e o **RNF04**, foram incorporados ao escopo do MVP por serem essenciais para a usabilidade, eficiência no registro de treinos e atualização dos dados em tempo real.
 
 | Código | Requisito |
 |:---:|---|
 | RNF02 | Interface Responsiva e Adaptável |
 | RNF03 | Eficiência no Cadastro de Treinos |
 | RNF04 | Atualização em Tempo Real do Dashboard |
+
+## 10.3 Validação do Backlog e Escopo do MVP com o Cliente
+
+Após a priorização preliminar do backlog por meio da matriz Valor x Esforço e a consolidação dos requisitos nos quadrantes, a equipe realizou a **validação do backlog e da delimitação do MVP diretamente com o cliente** (o técnico Marcus Vinicius).
+
+Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`evidenciaValidacaoMVP`** (armazenada na pasta `assets` e ilustrada a seguir), contendo a organização visual dos cartões de requisitos levantados para o MVP.
+
+<figure markdown="span" style="text-align: center; margin: 1.5em 0;">
+  ![Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp](../assets/evidenciaValidacaoMVP.jpeg){ width="85%" style="border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" }
+  <figcaption>Figura: Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp (artefato <code>evidenciaValidacaoMVP</code>)</figcaption>
+</figure>
+
+A imagem reflete a disposição dos requisitos funcionais priorizados, organizada em dois grandes grupos separados pela linha vertical:
+
+- **Lado esquerdo (Quadrante Q2 — Alto Valor / Baixo Esforço):** reúne os cartões azuis com as funcionalidades cadastrais e operacionais estruturantes, como o gerenciamento dos ciclos de periodização (macrociclo, mesociclo e microciclo — RF01 a RF09), definição de comportamentos táticos (RF10 a RF12), fluxo de atividades e sessões de treino (RF13 a RF18), reutilização e customização de atividades (RF24 e RF25), categorização por momentos de jogo, fases de jogo e atributos técnicos (RF35 a RF43) e a inclusão de imagens nos tipos de treino (RF31, em cartão laranja de destaque).
+- **Lado direito (Quadrante Q1 — Alto Valor / Alto Esforço):** engloba as funcionalidades de biblioteca e visualização analítica, incluindo a biblioteca de atividades (RF19 a RF21), o painel de indicadores da tela inicial (RF22), o dashboard com gráficos analíticos (RF23), as capacidades de filtragem, relatórios comparativos e interatividade (RF26 a RF28), além do cálculo percentual proporcional ao tempo total da sessão (RF46, também em cartão laranja de destaque).
+
+Durante a validação via WhatsApp, o treinador Marcus Vinicius avaliou o quadro apresentado na imagem e confirmou que o conjunto de requisitos selecionado contempla com fidelidade as necessidades prioritárias para o MVP do FutBoard.
