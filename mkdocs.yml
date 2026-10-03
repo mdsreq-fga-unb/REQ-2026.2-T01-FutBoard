@@ -2,6 +2,7 @@ site_name: FutBoard
 
 theme:
   name: material
+  language: pt-BR
   palette:
     - scheme: default
       primary: custom
@@ -15,7 +16,6 @@ theme:
     - navigation.expand
     - navigation.indexes
     - navigation.top
-    - toc.integrate
     - search.suggest
     - search.highlight
 
