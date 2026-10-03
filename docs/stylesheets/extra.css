@@ -109,6 +109,13 @@
   text-align: center;
 }
 
+.reuniao-data {
+  margin-top: -0.65rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 @media (max-width: 800px) {
   .team-card-compact {
     flex: 1 1 calc(33.33% - 12px);
