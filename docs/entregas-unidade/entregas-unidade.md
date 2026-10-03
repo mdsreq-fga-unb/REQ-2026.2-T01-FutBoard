@@ -2,15 +2,13 @@
 
 Esta página reúne as entregas produzidas pela equipe do projeto **FutBoard** na disciplina de Requisitos de Software, turma 01, semestre 2026.2.
 
-## Entregas
-
-### Entrega 01
+## Unidade 01
 
 Vídeo da primeira entrega do projeto:
 
-<iframe width="560" height="315" src="https://drive.google.com/file/d/1jePeR_mmmef9NAKHtCqxWA_iTpe0pqf1/preview" title="Vídeo da Entrega 01" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sGVy99lSdjE" title="Vídeo da Entrega 01" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Acesse diretamente pelo link: [Vídeo da Entrega 01](https://drive.google.com/file/d/1jePeR_mmmef9NAKHtCqxWA_iTpe0pqf1/view?usp=sharing)
+Acesse diretamente pelo link: [Vídeo da Entrega da Unidade 01](https://youtu.be/sGVy99lSdjE)
 
 
 | Data | Versão | Descrição | Autor(es) |
