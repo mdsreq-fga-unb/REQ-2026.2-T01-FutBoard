@@ -56,6 +56,19 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 | **RF42** | **Consultar informação de atributo técnico do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a informação de atributo técnico, atualizando automaticamente as informações exibidas. | CP03 |
 | **RF43** | **Consultar análise comparativa por periodização:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a análise comparativa por periodização (mesociclo, microciclo e mês), atualizando automaticamente as informações exibidas. | CP03 |
 
+### 8.1.1 Regras de Negócio para Consultas com Resultado Vazio (Empty States)
+
+Conforme o feedback recebido, o retorno de uma consulta sem registros correspondentes não constitui erro de sistema; trata-se de uma regra de negócio válida da aplicação. Em cada cenário de consulta vazia, o sistema deve manter a integridade visual da interface, preservando filtros ativos, e renderizar um estado vazio (*empty state*) com mensagem orientadora, conforme a tabela abaixo:
+
+| Requisito | Tipo de Consulta | Condição de Resultado Vazio | Comportamento do Sistema (Regra de Negócio) | Mensagem e Ação Sugerida ao Usuário |
+| :---: | :--- | :--- | :--- | :--- |
+| **RF22** | Indicadores na tela inicial | Nenhum treino cadastrado no período selecionado. | Os indicadores quantitativos são exibidos com valor neutro (`0 sessões`, `0 min`, `0 execuções`). Não ocorrem erros de renderização. | *"Nenhum treino registrado neste período."* O sistema exibe atalho para cadastrar nova sessão. |
+| **RF25** | Informações de atividades do treino | Filtro aplicado para o qual não existem atividades cadastradas. | A lista de atividades é substituída por um componente visual de estado vazio. | *"Nenhuma atividade encontrada para os filtros aplicados."* O sistema disponibiliza botão para limpar filtros. |
+| **RF26** | Geração de relatório em PDF | Exportação de relatório para um período sem sessões registradas. | O sistema emite notificação informativa na interface, evitando gerar arquivos vazios ou erros. | *"Não há registros de treinos no período selecionado para compor o relatório."* |
+| **RF32** | Desempenho do atleta (scout) | Consulta de atleta que não possui scouts registrados no ciclo filtrado. | A área analítica exibe layout neutro estruturado, permitindo continuar a navegação. | *"Nenhum dado de scout registrado para este atleta no período selecionado."* |
+| **RF37** a **RF42** | Informações de dimensões do treino (espaço, orientação, momento, fase, comportamento, atributo) | Período filtrado não possui treinos com a dimensão selecionada. | O gráfico é renderizado com visual neutro (`0 min` e `0%`), sem disparar exceções (ex.: evitar divisão por zero). | *"Sem atividades com [esta dimensão] no período."* Mantém os filtros ativos para nova consulta. |
+| **RF43** | Análise comparativa por periodização | Um ou ambos os ciclos selecionados não possuem treinos. | O sistema renderiza a coluna do ciclo sem dados com indicativo neutro, alertando a impossibilidade de cálculo comparativo. | *"O ciclo selecionado não possui treinos registrados para permitir o comparativo."* |
+
 ## 8.2 Requisitos Não Funcionais - RNFs
 
 Lista de requisitos não funcionais, contendo: Numeração do Requisito; Nome; Descrição; Classificação URPS+; Critério de Verificação.
