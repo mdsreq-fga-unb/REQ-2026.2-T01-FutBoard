@@ -43,7 +43,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 | **RF29** | **Fazer login:** o sistema deve permitir que o treinador e o auxiliar se autentiquem na aplicação a partir de um login e senha de acesso. | CP05 |
 | **RF30** | **Anexar imagem à atividade:** o sistema deve permitir que o treinador e o auxiliar anexem uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade na biblioteca e nas sessões de treino em que ela for incluída. | CP01 |
 | **RF31** | **Registrar pontuação da atividade:** o sistema deve permitir que o treinador e o auxiliar registrem, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição. | CP03 |
-| <a id="rf32"></a>**RF32** | **Consultar desempenho do atleta:** o sistema deve permitir que o treinador e o auxiliar consultem os dados quantitativos de desempenho do atleta (ex: scout de jogo). | CP03 |
+| **RF32** | **Consultar desempenho do atleta:** o sistema deve permitir que o treinador e o auxiliar consultem os dados quantitativos de desempenho do atleta (ex: scout de jogo). | CP03 |
 | **RF33** | **Gerar análise textual do treino:** o sistema deve permitir que o treinador e o auxiliar gerem, com inteligência artificial, uma análise textual (insight) sobre as informações do treino. | CP03 |
 | **RF34** | **Registrar atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar registrem, de forma opcional, o atributo técnico trabalhado em uma atividade (ex: domínio orientado, cabeceira defensiva). | CP01 |
 | **RF35** | **Editar atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar editem um atributo técnico registrado em uma atividade. | CP01 |
@@ -56,16 +56,15 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 | <a id="rf42"></a>**RF42** | **Consultar informação de atributo técnico do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a informação de atributo técnico, atualizando automaticamente as informações exibidas. | CP03 |
 | <a id="rf43"></a>**RF43** | **Consultar análise comparativa por periodização:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a análise comparativa por periodização (mesociclo, microciclo e mês), atualizando automaticamente as informações exibidas. | CP03 |
 
-### 8.1.1 Regras de Negócio para Consultas com Resultado Vazio (Empty States)
+### 8.1.1 Regras de Negócio para Consultas com Resultado Vazio
 
-Conforme o feedback recebido, o retorno de uma consulta sem registros correspondentes não constitui erro de sistema; trata-se de uma regra de negócio válida da aplicação. Em cada cenário de consulta vazia, o sistema deve manter a integridade visual da interface, preservando filtros ativos, e renderizar um estado vazio (*empty state*) com mensagem orientadora, conforme a tabela abaixo:
+Esta subseção detalha o comportamento esperado do sistema nos cenários em que as consultas e filtros não retornam dados. Nessas situações de resultado vazio, o sistema não deve apontar erros, mas sim manter a estabilidade da interface, preservar os filtros aplicados e exibir uma mensagem orientadora ao usuário, conforme descrito na tabela a seguir:
 
 | Requisito | Tipo de Consulta | Condição de Resultado Vazio | Comportamento do Sistema (Regra de Negócio) | Mensagem e Ação Sugerida ao Usuário |
 | :---: | :--- | :--- | :--- | :--- |
 | [**RF22**](#rf22) | Indicadores na tela inicial | Nenhum treino cadastrado no período selecionado. | Os indicadores quantitativos são exibidos com valor neutro (`0 sessões`, `0 min`, `0 execuções`). Não ocorrem erros de renderização. | *"Nenhum treino registrado neste período."* O sistema exibe atalho para cadastrar nova sessão. |
 | [**RF25**](#rf25) | Informações de atividades do treino | Filtro aplicado para o qual não existem atividades cadastradas. | A lista de atividades é substituída por um componente visual de estado vazio. | *"Nenhuma atividade encontrada para os filtros aplicados."* O sistema disponibiliza botão para limpar filtros. |
 | [**RF26**](#rf26) | Geração de relatório em PDF | Exportação de relatório para um período sem sessões registradas. | O sistema emite notificação informativa na interface, evitando gerar arquivos vazios ou erros. | *"Não há registros de treinos no período selecionado para compor o relatório."* |
-| [**RF32**](#rf32) | Desempenho do atleta (scout) | Consulta de atleta que não possui scouts registrados no ciclo filtrado. | A área analítica exibe layout neutro estruturado, permitindo continuar a navegação. | *"Nenhum dado de scout registrado para este atleta no período selecionado."* |
 | [**RF37**](#rf37) a [**RF42**](#rf42) | Informações de dimensões do treino (espaço, orientação, momento, fase, comportamento, atributo) | Período filtrado não possui treinos com a dimensão selecionada. | O gráfico é renderizado com visual neutro (`0 min` e `0%`), sem disparar exceções (ex.: evitar divisão por zero). | *"Sem atividades com [esta dimensão] no período."* Mantém os filtros ativos para nova consulta. |
 | [**RF43**](#rf43) | Análise comparativa por periodização | Um ou ambos os ciclos selecionados não possuem treinos. | O sistema renderiza a coluna do ciclo sem dados com indicativo neutro, alertando a impossibilidade de cálculo comparativo. | *"O ciclo selecionado não possui treinos registrados para permitir o comparativo."* |
 
