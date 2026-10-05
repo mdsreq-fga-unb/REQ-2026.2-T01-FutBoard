@@ -62,7 +62,7 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=dmpsZyy7fM0](http
 acesse diretamente pelo link: [https://youtu.be/sGVy99lSdjE](https://youtu.be/sGVy99lSdjE)
 
 - **Pontos principais:**
-    - **[(0:00–20:37)](https://youtu.be/sGVy99lSdjE?t=0)** Apresentação do projeto para a turma, Unidade 1 da disciplina: cenário atual do cliente (Canaã Esporte Clube e Marcos Vinícius), mapa de stakeholders, objetivos e características do produto, tecnologias escolhidas, intervenção social, justificativa da metodologia RAD, plano de engenharia de requisitos e cronograma de entregas
+    - **[(0:00–14:47)](https://youtu.be/sGVy99lSdjE?t=0)** Apresentação do projeto para a turma, Unidade 1 da disciplina: cenário atual do cliente (Canaã Esporte Clube e Marcos Vinícius), mapa de stakeholders, objetivos e características do produto, tecnologias escolhidas, intervenção social, justificativa da metodologia RAD, plano de engenharia de requisitos e cronograma de entregas
 
 | Participante | Reunião | Função |
 | :--- | :---: | :--- |
