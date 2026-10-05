@@ -27,6 +27,9 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/youtube-timestamps.js
+
 nav:
   - Início: index.md
   - Visão do Produto e Projeto:
