@@ -62,8 +62,7 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=dmpsZyy7fM0](http
 acesse diretamente pelo link: [https://youtu.be/sGVy99lSdjE](https://youtu.be/sGVy99lSdjE)
 
 - **Pontos principais:**
-    - Reunião:
-        - **[(0:00–20:37)](https://youtu.be/sGVy99lSdjE?t=0)** Apresentação do projeto para a turma, Unidade 1 da disciplina: cenário atual do cliente (Canaã Esporte Clube e Marcos Vinícius), mapa de stakeholders, objetivos e características do produto, tecnologias escolhidas, intervenção social, justificativa da metodologia RAD, plano de engenharia de requisitos e cronograma de entregas
+    - **[(0:00–20:37)](https://youtu.be/sGVy99lSdjE?t=0)** Apresentação do projeto para a turma, Unidade 1 da disciplina: cenário atual do cliente (Canaã Esporte Clube e Marcos Vinícius), mapa de stakeholders, objetivos e características do produto, tecnologias escolhidas, intervenção social, justificativa da metodologia RAD, plano de engenharia de requisitos e cronograma de entregas
 
 | Participante | Reunião | Função |
 | :--- | :---: | :--- |
@@ -88,12 +87,11 @@ acesse diretamente pelo link: [https://youtu.be/sGVy99lSdjE](https://youtu.be/sG
 acesse diretamente pelo link: [https://www.youtube.com/watch?v=eY2iFLayj3U](https://www.youtube.com/watch?v=eY2iFLayj3U)
 
 - **Pontos principais:**
-    - Reunião:
-        - **[(0:00–4:22)](https://youtu.be/eY2iFLayj3U?t=0)** Transformação da transcrição da reunião com o cliente em requisitos e histórias de usuário, e revisão inicial da matriz MoSCoW já esboçada
-        - **[(4:22–10:09)](https://youtu.be/eY2iFLayj3U?t=262)** Divisão das issues do GitHub entre os integrantes e organização do quadro no GitHub Projects
-        - **[(12:20–23:51)](https://youtu.be/eY2iFLayj3U?t=740)** Revisão de issues apontadas pelo professor George, como a ausência de validação pela comissão técnica nas análises
-        - **[(26:57–42:40)](https://youtu.be/eY2iFLayj3U?t=1617)** Planejamento da entrega de um protótipo de baixa/média fidelidade: construção do fluxo de interface a partir dos RFs
-        - **[(51:19–1:03:45)](https://youtu.be/eY2iFLayj3U?t=3079)** Revisão do cronograma da disciplina e organização de documentos para as próximas entregas
+    - **[(0:00–4:22)](https://youtu.be/eY2iFLayj3U?t=0)** Transformação da transcrição da reunião com o cliente em requisitos e histórias de usuário, e revisão inicial da matriz MoSCoW já esboçada
+    - **[(4:22–10:09)](https://youtu.be/eY2iFLayj3U?t=262)** Divisão das issues do GitHub entre os integrantes e organização do quadro no GitHub Projects
+    - **[(12:20–23:51)](https://youtu.be/eY2iFLayj3U?t=740)** Revisão de issues apontadas pelo professor George, como a ausência de validação pela comissão técnica nas análises
+    - **[(26:57–42:40)](https://youtu.be/eY2iFLayj3U?t=1617)** Planejamento da entrega de um protótipo de baixa/média fidelidade: construção do fluxo de interface a partir dos RFs
+    - **[(51:19–1:03:45)](https://youtu.be/eY2iFLayj3U?t=3079)** Revisão do cronograma da disciplina e organização de documentos para as próximas entregas
 
 | Participante | Reunião | Função |
 | :--- | :---: | :--- |
@@ -143,11 +141,10 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=mShVbh8Q08E](http
 acesse diretamente pelo link: [https://www.youtube.com/watch?v=ZDTSmL4VHm0](https://www.youtube.com/watch?v=ZDTSmL4VHm0)
 
 - **Pontos principais:**
-    - Reunião:
-        - **Atividade 2 Semana Universitária — Verificação em pares:**
-            - **[(0:00–4:21)](https://youtu.be/ZDTSmL4VHm0?t=0)** Definição da rotina de ajuste dos requisitos apontados pelo grupo Requisitados durante a atividade da Semana Universitária, por meio de uma planilha de registro e justificativa.
-            - Organização do processo de revisão e correção dos requisitos com foco na validação em dupla.
-        - **[(4:34–8:45)](https://youtu.be/ZDTSmL4VHm0?t=274)** Combinado de manter Miro, GitPages e planilha sincronizados, definição do processo de verificação por todos os integrantes e do prazo até domingo à noite 27/08
+    - **Atividade 2 Semana Universitária — Verificação em pares:**
+        - **[(0:00–4:21)](https://youtu.be/ZDTSmL4VHm0?t=0)** Definição da rotina de ajuste dos requisitos apontados pelo grupo Requisitados durante a atividade da Semana Universitária, por meio de uma planilha de registro e justificativa.
+        - Organização do processo de revisão e correção dos requisitos com foco na validação em dupla.
+    - **[(4:34–8:45)](https://youtu.be/ZDTSmL4VHm0?t=274)** Combinado de manter Miro, GitPages e planilha sincronizados, definição do processo de verificação por todos os integrantes e do prazo até domingo à noite 27/08
 
 | Participante | Reunião | Função |
 | :--- | :---: | :--- |
