@@ -49,12 +49,11 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=LYDLdFKbS0Q](http
 
 - **Pontos principais:**
     - Reunião com o cliente (Marcus Vinicius):
-        - Brainstorming detalhado sobre a visão do cliente para a aplicação
-        - Definição do layout do dashboard: visualização concentrada em uma única página, com filtro único para sessão, microciclo, mesociclo e macrociclo (substituindo a navegação por abas do Power BI atual)
-        - Levantamento do fluxo de cadastro de sessões de treino: dados básicos da sessão, biblioteca de atividades, comportamento tático (momento e fase do jogo, atributo técnico)
-        - Elicitação de requisitos sobre edição e exclusão de registros (sessões e atividades)
-        - Definição do que não deve existir no sistema (ex: divisão de perfis de acesso foi descartada)
-        - Levantamento da necessidade de gráficos com tempo bruto (minutos) e tempo relativo (percentual)
+        - **(0:00–23:11)** Brainstorming detalhado sobre a visão do cliente para a aplicação e levantamento do fluxo atual de registro em papel e tablet
+        - **(42:34–50:55)** Levantamento do fluxo de cadastro de sessões de treino: macrociclo, mesociclo, microciclo e sessão, comportamento tático não vinculado à atividade, e cadastro de atividades direto na biblioteca
+        - **(57:53–1:02:52)** Priorização MoSCoW ao vivo com o cliente, classificando os itens entre essencial, deveria ter e poderia ter
+        - **(1:02:52–1:03:56)** Definição do que não deve existir no sistema: divisão de perfis de acesso descartada, mantendo apenas login e senha geral
+        - **(1:10:00–1:10:41)** Levantamento da necessidade de gráficos com tempo bruto (minutos) e tempo relativo (percentual)
 
 ---
 
@@ -78,10 +77,11 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=kc0_jxT9aeY](http
 
 - **Pontos principais:**
     - Reunião com o cliente (Marcus Vinicius):
-        - Definição formal dos perfis de acesso: técnico e auxiliar com permissões completas de edição; demais stakeholders (diretoria, preparador físico, preparador de goleiros) com acesso apenas indireto, via relatórios compartilhados
-        - Validação de que o auxiliar técnico não participa das validações formais do projeto
-        - Identificação de lacuna nos requisitos de cadastro (momento do jogo, fase do jogo, atributo técnico) e correção no Miro
+        - **(0:00–26:55)** Demonstração ao vivo do cliente cadastrando atividades no Excel atual, usada como benchmark de tempo e cliques para comparação com o novo sistema
+        - **(22:19–24:27)** Esclarecimento de que o preenchimento de momento do jogo, fase do jogo, comportamento e atributo técnico é opcional por atividade, não obrigatório para todos
+        - **(56:27–1:06:40)** Definição formal do perfil de acesso: técnico e auxiliar com permissões completas de edição; demais stakeholders com acesso apenas indireto, via relatório compartilhável, sem poder de validação
+        - **(1:08:54–1:11:53)** Identificação de lacuna nos requisitos de cadastro (momento do jogo, fase do jogo, atributo técnico) e correção no Miro
     - Reunião interna:
-        - Divisão de tarefas para organização dos requisitos funcionais e não funcionais no Miro
-        - Medição do tempo de uso do Power BI atual do cliente, como benchmark de desempenho para a nova aplicação guiando RNFs
-
+        - **(1:11:12–1:22:55)** Atividade 1 Semana Universitária (para 22/09) — Disponibilização dos requisitos:
+            - Análise do tempo cronometrado de uso do Power BI atual do cliente, como benchmark de desempenho para a nova aplicação.
+            - Divisão de tarefas para organização dos RFs e RNFs no Miro.
