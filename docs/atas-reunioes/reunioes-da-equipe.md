@@ -148,8 +148,8 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=ZDTSmL4VHm0](http
 
 - **Pontos principais:**
     - Reunião:
-        - **(0:00–4:21)** Atividade 2 Semana Universitária — Verificação em pares:
-            - Definição da rotina de ajuste dos requisitos apontados pelo grupo Requisitados durante a atividade da Semana Universitária, por meio de uma planilha de registro e justificativa.
+        - **Atividade 2 Semana Universitária — Verificação em pares:**
+            - **(0:00–4:21)** Definição da rotina de ajuste dos requisitos apontados pelo grupo Requisitados durante a atividade da Semana Universitária, por meio de uma planilha de registro e justificativa.
             - Organização do processo de revisão e correção dos requisitos com foco na validação em dupla.
         - **(4:34–8:45)** Combinado de manter Miro, GitPages e planilha sincronizados, definição do processo de verificação por todos os integrantes e do prazo até domingo à noite 27/08
 
@@ -174,10 +174,10 @@ acesse diretamente pelo link: [https://youtu.be/53fCq08OHPc](https://youtu.be/53
 
 - **Pontos principais:**
     - Reunião com o monitor (Eduardo Lobo Moreira):
-        - **(0:00–14:31)** Atividade 3 Semana Universitária — Ajuste e validação dos requisitos:
-            - Os ajustes dos requisitos listados pela equipe Requisitados já haviam sido feitos antes da reunião; nessa etapa, o grupo validou e consolidou o consenso sobre as dúvidas restantes com base no feedback recebido.
+        - **Atividade 3 Semana Universitária — Ajuste e validação dos requisitos:**
+            - **(0:00–14:31)** Os ajustes dos requisitos listados pela equipe Requisitados já haviam sido feitos antes da reunião; nessa etapa, o grupo validou e consolidou o consenso sobre as dúvidas restantes com base no feedback recebido.
             - Foram refinados o requisito de filtro, separada a busca/reutilização de atividade da biblioteca e padronizado o agente "treinador e auxiliar técnico" em todos os RFs.
-        - **(16:15–2:21:38)** Atividade 4 Semana Universitária — Priorização dos requisitos e definição do MVP:
+        - **Atividade 4 Semana Universitária — Priorização dos requisitos e definição do MVP:**
             - **(16:15–21:35)** Definição de como estruturar a entrega final no GitPages: nova aba de validação/verificação na planilha markdown e padronização do vínculo história de usuário ↔ requisito funcional (1 para 1)
             - **(21:35–1:44:25)** Construção da matriz de valor x esforço com votação em grupo (esforço, complexidade e conhecimento da equipe) para cada requisito
             - **(1:44:25–2:10:52)** Definição da lista de requisitos que compõem o MVP e elaboração das justificativas da composição

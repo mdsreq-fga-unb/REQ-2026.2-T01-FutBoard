@@ -82,6 +82,6 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=kc0_jxT9aeY](http
         - **(56:27–1:06:40)** Definição formal do perfil de acesso: técnico e auxiliar com permissões completas de edição; demais stakeholders com acesso apenas indireto, via relatório compartilhável, sem poder de validação
         - **(1:08:54–1:11:53)** Identificação de lacuna nos requisitos de cadastro (momento do jogo, fase do jogo, atributo técnico) e correção no Miro
     - Reunião interna:
-        - **(1:11:12–1:22:55)** Atividade 1 Semana Universitária (para 22/09) — Disponibilização dos requisitos:
-            - Análise do tempo cronometrado de uso do Power BI atual do cliente, como benchmark de desempenho para a nova aplicação.
+        - **Atividade 1 Semana Universitária (para 22/09) — Disponibilização dos requisitos:**
+            - **(1:11:12–1:22:55)** Análise do tempo cronometrado de uso do Power BI atual do cliente, como benchmark de desempenho para a nova aplicação.
             - Divisão de tarefas para organização dos RFs e RNFs no Miro.
