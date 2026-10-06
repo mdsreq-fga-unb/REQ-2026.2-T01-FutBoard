@@ -212,3 +212,28 @@ acesse diretamente pelo link: [https://youtu.be/VPm3w_qQYpE](https://youtu.be/VP
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ✅ | Monitor da equipe |
+
+### Reunião da equipe 9
+
+<p class="reuniao-data">segunda-feira, 05/10/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5m2SovFLxrs" title="Reunião da equipe 9" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+acesse diretamente pelo link: [https://youtu.be/5m2SovFLxrs](https://youtu.be/5m2SovFLxrs)
+
+- **Pontos principais:**
+    - **[(0:00–4:42)](https://youtu.be/5m2SovFLxrs?t=0)** Aplicação do feedback do professor George: decisão de retirar o requisito de scout para não gerar RFs adicionais, e ajuste do requisito de filtro para que fique na descrição como regra de negócio, não no nome do requisito
+    - **[(17:12–23:58)](https://youtu.be/5m2SovFLxrs?t=1032)** Ajuste dos requisitos na planilha de correções, unificando regras de negócio e critérios de aceitação por requisito, e simplificação das histórias de usuário para não enviesar o valor de negócio do cliente
+    - **[(27:50–31:47)](https://youtu.be/5m2SovFLxrs?t=1670)** Organização de pendências: transcrições das reuniões adicionadas ao Miro, requisitos de efeito emergente convertidos em regra de negócio, e ajustes visuais no GitPages
+    - **[(40:27–51:51)](https://youtu.be/5m2SovFLxrs?t=2427)** Divisão das tarefas finais entre os integrantes: ajuste do MVP, lições aprendidas, organização do Miro e validação com o monitor na quarta-feira
+    - **[(52:57–53:46)](https://youtu.be/5m2SovFLxrs?t=3177)** Identificação de que a reunião com o cliente de 24/08 concentra a maior parte dos termos técnicos para o catálogo/glossário, e confirmação da remoção do requisito de scout da atividade
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
