@@ -62,16 +62,27 @@ Para priorizar o backlog do FutBoard, cada requisito funcional (RF) recebeu quat
 
 #### 1.1 Valor de negócio
 
-O valor de negócio foi definido a partir da justificativa dada pelo cliente para cada funcionalidade.
+O valor de negócio foi definido a partir da justificativa dada pelo cliente para cada funcionalidade
 
-| Pontuação | Interpretação | Justificativa do cliente |
+| Nota | Nível de valor | Descrição |
 |:---:|---|---|
-| 4 | Essencial | O sistema necessita dessa funcionalidade. |
-| 3 | Muito valioso | Agrega muito valor ao produto e deve ser priorizado. |
-| 2 | Desejável | Seria interessante ter, mas o sistema funciona perfeitamente sem. |
-| 1 | A definir | Nota ainda não utilizada no backlog atual. |
+| 4 | Muito Alto | O sistema necessita dessa funcionalidade. |
+| 3 | Alto | Agrega muito valor ao produto e deve ser priorizado. |
+| 2 | Moderado | Seria interessante ter, mas o sistema funciona perfeitamente sem.. |
+| 1 | Baixo |Não faz sentido para o projeto neste momento |
 
-#### 1.2 Esforço
+#### 1.2 Frequencia de Uso
+A frequencia de uso foi definida de acordo com a opinião do cliente levando em consideracao o quao frequente será utilizado cada requisito.
+
+| Pontuação | Interpretação | Descrição |
+|:---:|---|---|
+| 1 | Nunca | Em nenhum momento |
+| 2 | Rara | Em situacoes especificas |
+| 3 | Ocasionalmente | Mensalmente |
+| 4 | Frequente | semanalmente |
+| 5 | Muito frequente | Diariamente |
+
+#### 1.3 Esforço
 
 | Pontuação | Interpretação | Descrição |
 |:---:|---|---|
@@ -80,7 +91,7 @@ O valor de negócio foi definido a partir da justificativa dada pelo cliente par
 | 3 | Esforço alto | Entre 6 e 12 horas |
 | 4 | Esforço muito alto | Mais de 12 horas |
 
-#### 1.3 Complexidade
+#### 1.4 Complexidade
 
 | Pontuação | Interpretação |
 |:---:|---|
@@ -89,7 +100,7 @@ O valor de negócio foi definido a partir da justificativa dada pelo cliente par
 | 3 | Lógica de negócio analítica, processamento em tempo de execução, cálculos derivados e reatividade/interdependência entre múltiplos componentes visuais. |
 | 4 | Requisitos com alta incerteza técnica, algoritmos pesados de inferência/estatística ou dependência crítica de serviços/APIs externas de terceiros. |
 
-#### 1.4 Conhecimento da equipe
+#### 1.5 Conhecimento da equipe
 
 | Pontuação | Interpretação |
 |:---:|---|
@@ -151,7 +162,7 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 ))
 ```
 
-![Matriz Valor x Esforço](https://plain-enam-prod-public.komododecks.com/202609/29/nKh3v2j6INbnUhwjkAgy/image.jpg)
+![Matriz Valor x Esforço](https://miro.com/app/board/uXjVHolWByQ=/?moveToWidget=3458764685315725204&cot=14)
 
 [Acessar a matriz no Miro](https://miro.com/welcomeonboard/YmN1NWlzM0VXeDkyTkhySndlQ3V3UTlqdmJlVDdDdnF1dmdjREpGVTdkb3RJeVptV20xYzlyTVJzd3hZNFpWdHFsVmNtMDQ5eGZIRm0rYzNCSnNybGhSYmFuVXJ3ZGdQZEkxSDRhZ3hjQ2RNK3A4TTZzNmVtUXdEVElpTjkyNFVyVmtkMG5hNDA3dVlncnBvRVB2ZXBnPT0hdjE=?share_link_id=122393869978)
 
