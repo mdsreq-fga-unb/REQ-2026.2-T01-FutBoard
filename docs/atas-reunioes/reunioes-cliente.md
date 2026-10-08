@@ -16,10 +16,11 @@ Esta aba reúne as atas das reuniões realizadas com o cliente Marcus Vinicius.
 acesse diretamente pelo link: [ https://youtu.be/SzRty4GPg_k]( https://youtu.be/SzRty4GPg_k)
 
 - **Pontos principais:**
-    - Brainstorming do projeto com o stakeholder
-    - Identificação dos objetivos específicos
-    - Elicitar requisitos
-    - Brainstorming de casos de uso
+    - **[(0:00–3:59)](https://youtu.be/SzRty4GPg_k?t=0)** Apresentação do cliente Marcus Vinicius: treinador da categoria sub-17 do Canaã, uso atual de planilha e Power BI, e objetivo de migrar para uma aplicação web
+    - **[(4:14–25:22)](https://youtu.be/SzRty4GPg_k?t=254)** Demonstração ao vivo do Power BI atual, explicando a estrutura de sessões, execuções e atividades, e a diferença entre atividade, exercitação e sessão
+    - **[(25:42–37:36)](https://youtu.be/SzRty4GPg_k?t=1542)** Esclarecimento sobre sessões com múltiplos exercícios simultâneos e levantamento dos gráficos e dados mais relevantes para o cliente
+    - **[(37:57–45:31)](https://youtu.be/SzRty4GPg_k?t=2277)** Identificação da página/visual mais importante para o cliente, ligada ao objetivo de negociar jogadores com clubes maiores, e esclarecimento dos conceitos de aplicação, aquisição e tipos de espaço
+    - **[(45:31–52:26)](https://youtu.be/SzRty4GPg_k?t=2731)** Explicação do conceito de SSP (tipo de atividade) e levantamento da ideia de uma biblioteca de treinos reutilizável, com preferência por um layout visual e intuitivo
 
 | Participante | Reunião | Função |
 | :--- | :---: | :--- |

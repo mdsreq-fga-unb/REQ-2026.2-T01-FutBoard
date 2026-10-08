@@ -237,3 +237,29 @@ acesse diretamente pelo link: [https://youtu.be/5m2SovFLxrs](https://youtu.be/5m
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+
+### Reunião da equipe 10
+
+<p class="reuniao-data">quarta-feira, 07/10/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9oXDj33x4vs" title="Reunião da equipe 10" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+acesse diretamente pelo link: [https://youtu.be/9oXDj33x4vs](https://youtu.be/9oXDj33x4vs)
+
+- **Pontos principais:**
+    - **[(0:00–21:58)](https://youtu.be/9oXDj33x4vs?t=0)** Votação em grupo de esforço, complexidade e conhecimento da equipe para os requisitos de consulta derivados do dashboard (atividade de treino, espaço, momento do jogo, fase do jogo e comportamento)
+    - **[(21:58–37:58)](https://youtu.be/9oXDj33x4vs?t=1318)** Conferência da matriz de valor x esforço e da numeração dos RFs após remoções e renomeações
+    - **[(37:58–47:02)](https://youtu.be/9oXDj33x4vs?t=2278)** Definição do critério de corte do MVP com base em valor de negócio alto e frequência de uso alta, e decisão de incluir "cadastrar macrociclo" no MVP, mesmo com frequência 2, por ser a base de todo o cadastro
+    - **[(47:02–1:04:58)](https://youtu.be/9oXDj33x4vs?t=2822)** Definição de como apresentar no GitPages: matriz de valor x esforço apenas com as duas variáveis, lista consolidada do MVP e parágrafo explicando o uso da frequência de uso como critério adicional
+    - **[(1:04:58–1:18:45)](https://youtu.be/9oXDj33x4vs?t=3898)** Fechamento do MVP com 27 dos 41 requisitos funcionais (cerca de 65%), atualização da planilha de priorização e encaminhamento para validação com o cliente antes da publicação no GitPages
+    - **[(1:21:00–1:43:35)](https://youtu.be/9oXDj33x4vs?t=4860)** Atividade do professor sobre os tipos de declaração de requisitos (justificativa do uso de histórias de usuário na descoberta inicial, pelo perfil leigo do cliente) e divisão das tarefas finais de atualização do Miro e do GitPages
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ✅ | Monitor da equipe |
