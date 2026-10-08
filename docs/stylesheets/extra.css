@@ -30,6 +30,88 @@
   color: #5FA8D3;
 }
 
+/* Tabela HTML do item 05, sem o wrapper de rolagem criado para tabelas Markdown. */
+.tabela-consolidacao-html {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  overflow: hidden;
+  color: var(--md-default-fg-color);
+  font-size: 0.64rem;
+}
+
+.tabela-consolidacao-html th,
+.tabela-consolidacao-html td {
+  padding: 0.45rem 0;
+  border-bottom: 0.05rem solid var(--md-default-fg-color--lightest);
+  line-height: 1.25;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.tabela-consolidacao-html th {
+  font-weight: 700;
+  vertical-align: bottom;
+  color: var(--md-default-fg-color);
+  overflow-wrap: anywhere;
+}
+
+.tabela-consolidacao-html th:nth-child(1),
+.tabela-consolidacao-html td:nth-child(1) {
+  width: 9%;
+}
+
+.tabela-consolidacao-html th:nth-child(2),
+.tabela-consolidacao-html td:nth-child(2) {
+  width: 10%;
+}
+
+.tabela-consolidacao-html th:nth-child(3),
+.tabela-consolidacao-html td:nth-child(3),
+.tabela-consolidacao-html th:nth-child(5),
+.tabela-consolidacao-html td:nth-child(5) {
+  width: 8%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(3),
+.tabela-consolidacao-html td:nth-child(3) {
+  width: 7%;
+}
+
+.tabela-consolidacao-html th:nth-child(4),
+.tabela-consolidacao-html td:nth-child(4) {
+  width: 11%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(6),
+.tabela-consolidacao-html td:nth-child(6) {
+  width: 13%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(7),
+.tabela-consolidacao-html td:nth-child(7) {
+  width: 13%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(8),
+.tabela-consolidacao-html td:nth-child(8) {
+  width: 10%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(9),
+.tabela-consolidacao-html td:nth-child(9) {
+  width: 10%;
+}
+
 /* Fonte  para os títulos*/
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
 
@@ -126,11 +208,6 @@
   .team-card-compact {
     flex: 1 1 100%;
   }
-}
-/* ===== Índice lateral direito (compacto) ===== */
-
-.md-sidebar--secondary .md-nav--secondary {
-  border-left: 2px solid var(--md-default-fg-color--lightest);
 }
 
 /* título do índice */
