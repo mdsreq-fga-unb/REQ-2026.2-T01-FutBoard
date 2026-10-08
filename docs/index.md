@@ -61,7 +61,7 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
     [Acessar Avaliação](visao-produto/avaliacao-de-negocio.md)
 
 
-    -   __Catálogo de Termos__
+  -   __Catálogo de Termos__
 
     ---
 
