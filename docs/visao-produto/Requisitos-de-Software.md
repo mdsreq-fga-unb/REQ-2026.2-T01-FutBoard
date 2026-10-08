@@ -76,3 +76,15 @@ Lista de requisitos não funcionais, contendo: Numeração do Requisito; Nome; D
 | **RNF02** | Interface Responsiva e Adaptável | A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela. | Usabilidade | Ao redimensionar a janela do navegador ou abrir a aplicacao em janelas com larguras de 360px (mobile), 768px (tablet) e 1366px (desktop). O teste é considerado aprovado se nenhum gráfico ficar cortado, sobreposto ou exigir barra de rolagem horizonal na página. |
 | **RNF03** | Eficiência no Cadastro de Treinos | O sistema deve possuir fluxos de tela com tempo máximo de prenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos. | Usabilidade | O teste inicia no momento em que o treinador clica no botão para criar um novo treino e termina no momento em que a mensagem de "Treino cadastrado com sucesso" é exibida. O critério será considerado atendido se, para um cenário de complexidade média (cadastrar um treino utilizando atividades previamente cadastradas na biblioteca), o tempo total for estritamente inferior a 2 minutos. |
 | **RNF04** | Atualização em Tempo Real do Dashboard | Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino. | Performance | Durante os testes de sistema, o treinador cadastra um novo treino enquanto visualiza o dashboard. O tempo entre a confirmação do salvamento e a completa re-renderização do gráfico com os novos dados deve ser cronometrado. O critério é atendido se o tempo de atualização for estritamente menor ou igual a 5 segundos. |
+
+
+## 8.3 Matriz Síntese de Rastreabilidade
+
+
+| Contribuição principal | Contribuição secundária | CP | RFs relacionados | RNFs relacionados |
+| :---: | :---: | :---: | :---: | :---: |
+| OE1 | OE4 | CP1 | RF10, RF11, RF12, RF13, RF14, RF15, RF16, RF17, RF18, RF19, RF20, RF21, RF23, RF29, RF32, RF33, RF34 | RNF02, RNF03, RNF04 |
+| OE2 | OE3 | CP2 | RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF08, RF09 | RNF02, RNF03, RNF04 |
+| OE3 | OE4 | CP3 | RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40, RF41 | RNF02, RNF03, RNF04 |
+| OE4 | OE3 | CP4 | RF25 | RNF02, RNF04 |
+| OE1 | OE4 | CP5 | RF27, RF28 | RNF01, RNF02 |
