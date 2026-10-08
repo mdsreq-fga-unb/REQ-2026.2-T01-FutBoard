@@ -1,6 +1,6 @@
 #FutBoard
 
-Disciplina de Requisitos de Software - Turma 01 - 2026.2 | Universidade de Brasília (UnB/FGA)
+Disciplina de Requisitos de Software - Turma 01 - 2026.2 | Universidade de Brasília (UnB/FCTE)
 
 Este é o site oficial da documentação do software FutBoard.
 
@@ -60,6 +60,15 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
 
     [Acessar Avaliação](visao-produto/avaliacao-de-negocio.md)
 
+
+    -   __Catálogo de Termos__
+
+    ---
+
+    Consulte o Catálogo com os principais termos usados no projeto.
+
+    [Acessar Catálogo](catalogos-termos/catalogos-termos.md)
+
 </div>
 
 ---
@@ -103,3 +112,4 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
 |:-----------| :--- | :--- |:------------------|
 | 03/09/2026 | 1.0 | Abertura do documento e estruturação inicial | Guilherme Tegnoué |
 | 05/09/2026 | 1.1 | Adição do Mapa de Stakeholders, Viabilidade da Proposta e Processo de Validação | Gustavo Rodrigues |
+| 07/10/2026 | 1.2 | Adição do Catálogo | Giovana Martins |
