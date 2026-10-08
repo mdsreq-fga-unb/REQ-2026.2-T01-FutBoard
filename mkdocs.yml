@@ -42,8 +42,8 @@ nav:
       - Interação com Cliente: visao-produto/interacao-equipe-cliente.md
       - Requisitos de Software: visao-produto/Requisitos-de-Software.md
       - Backlog do Produto: visao-produto/backlog_do_produto.md
-  - Ajuste e Validação de Requisitos:
-      - Ajuste e Validação de Requisitos: ajuste-de-requisitos/ajuste-e-validacao-de-requisitos.md    
+  - Catálogo de termos do Futboard:
+      - Catálogo de termos do Futboard: catalogos-termos/catalogos-termos.md    
   - Reuniões:
       - Reuniões da equipe: atas-reunioes/reunioes-da-equipe.md
       - Reuniões com o cliente: atas-reunioes/reunioes-cliente.md
