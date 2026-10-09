@@ -10,42 +10,42 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
   - **CP04** — Geração Automática de Relatórios
   - **CP05** — Controle de Perfis de Acesso
 
-| Identificador | Descrição | CP de origem |
-| :--- | :--- | :---: |
-| **RF01** | **Cadastrar macrociclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos. | CP02 |
-| **RF02** | **Editar macrociclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um macrociclo anteriormente cadastrado. | CP02 |
-| **RF03** | **Excluir macrociclo:** o sistema deve permitir que o treinador e o auxiliar excluam um macrociclo cadastrado, removendo-o da estrutura de periodização. | CP02 |
-| **RF04** | **Cadastrar mesociclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo mesociclo vinculado a um macrociclo existente, informando o nome do mesociclo. | CP02 |
-| **RF05** | **Editar mesociclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um mesociclo anteriormente cadastrado. | CP02 |
-| **RF06** | **Excluir mesociclo:** o sistema deve permitir que o treinador e o auxiliar excluam um mesociclo cadastrado. | CP02 |
-| **RF07** | **Cadastrar microciclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo. | CP02 |
-| **RF08** | **Editar microciclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um microciclo anteriormente cadastrado. | CP02 |
-| **RF09** | **Excluir microciclo:** o sistema deve permitir que o treinador e o auxiliar excluam um microciclo cadastrado. | CP02 |
-| **RF10** | **Cadastrar comportamento:** o sistema deve permitir que o treinador e o auxiliar cadastrem um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades. | CP01 |
-| **RF11** | **Editar comportamento:** o sistema deve permitir que o treinador e o auxiliar editem um comportamento tático já cadastrado. | CP01 |
-| **RF12** | **Excluir comportamento:** o sistema deve permitir que o treinador e o auxiliar excluam um comportamento tático cadastrado. | CP01 |
-| **RF13** | **Cadastrar atividade:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova atividade, informando seus dados invariáveis: tipologia e tipo de SSP. | CP01 |
-| **RF14** | **Editar atividade:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma atividade já cadastrada. | CP01 |
-| **RF15** | **Excluir atividade:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada. | CP01 |
-| **RF16** | **Cadastrar sessão:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão. | CP01 |
-| **RF17** | **Editar sessão:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma sessão de treino já cadastrada. | CP01 |
-| **RF18** | **Excluir sessão:** o sistema deve permitir que o treinador e o auxiliar excluam uma sessão de treino cadastrada. | CP01 |
-| **RF19** | **Cadastrar atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma atividade diretamente na biblioteca de treinos, independentemente do cadastro de uma sessão específica, para que ela fique disponível para reutilização futura. | CP01 |
-| **RF20** | **Editar atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar editem uma atividade cadastrada na biblioteca de treinos.  | CP01 |
-| **RF21** | **Excluir atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada na biblioteca de treinos. | CP01 |
+| Identificador             | Descrição | CP de origem |
+|:--------------------------| :--- | :---: |
+| **RF01**                  | **Cadastrar macrociclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos. | CP02 |
+| **RF02**                  | **Editar macrociclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um macrociclo anteriormente cadastrado. | CP02 |
+| **RF03**                  | **Excluir macrociclo:** o sistema deve permitir que o treinador e o auxiliar excluam um macrociclo cadastrado, removendo-o da estrutura de periodização. | CP02 |
+| **RF04**                  | **Cadastrar mesociclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo mesociclo vinculado a um macrociclo existente, informando o nome do mesociclo. | CP02 |
+| **RF05**                  | **Editar mesociclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um mesociclo anteriormente cadastrado. | CP02 |
+| **RF06**                  | **Excluir mesociclo:** o sistema deve permitir que o treinador e o auxiliar excluam um mesociclo cadastrado. | CP02 |
+| **RF07**                  | **Cadastrar microciclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo. | CP02 |
+| **RF08**                  | **Editar microciclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um microciclo anteriormente cadastrado. | CP02 |
+| **RF09**                  | **Excluir microciclo:** o sistema deve permitir que o treinador e o auxiliar excluam um microciclo cadastrado. | CP02 |
+| **RF10**                  | **Cadastrar comportamento:** o sistema deve permitir que o treinador e o auxiliar cadastrem um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades. | CP01 |
+| **RF11**                  | **Editar comportamento:** o sistema deve permitir que o treinador e o auxiliar editem um comportamento tático já cadastrado. | CP01 |
+| **RF12**                  | **Excluir comportamento:** o sistema deve permitir que o treinador e o auxiliar excluam um comportamento tático cadastrado. | CP01 |
+| **RF13**                  | **Cadastrar atividade:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova atividade, informando seus dados invariáveis: tipologia e tipo de SSP. | CP01 |
+| **RF14**                  | **Editar atividade:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma atividade já cadastrada. | CP01 |
+| **RF15**                  | **Excluir atividade:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada. | CP01 |
+| **RF16**                  | **Cadastrar sessão:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão. | CP01 |
+| **RF17**                  | **Editar sessão:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma sessão de treino já cadastrada. | CP01 |
+| **RF18**                  | **Excluir sessão:** o sistema deve permitir que o treinador e o auxiliar excluam uma sessão de treino cadastrada. | CP01 |
+| **RF19**                  | **Cadastrar atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma atividade diretamente na biblioteca de treinos, independentemente do cadastro de uma sessão específica, para que ela fique disponível para reutilização futura. | CP01 |
+| **RF20**                  | **Editar atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar editem uma atividade cadastrada na biblioteca de treinos.  | CP01 |
+| **RF21**                  | **Excluir atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada na biblioteca de treinos. | CP01 |
 | <a id="rf22"></a>**RF22** | **Exibir indicador de treino:** o sistema deve exibir, para o treinador e o auxiliar, indicadores como número de sessões, minutos totais de treino, variabilidade de exercícios e número de execuções. | CP03 |
-| **RF23** | **Reutilizar atividade cadastrada:** o sistema deve permitir que o treinador e o auxiliar adicionem a uma sessão de treino uma atividade já cadastrada na biblioteca, preenchendo automaticamente, no momento da seleção, os campos inerentes à atividade. | CP01 |
-| <a id="rf25"></a>**RF24** | **Consultar informação de atividade do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a informação de atividade, atualizando automaticamente as informações exibidas. | CP03 |
-| <a id="rf26"></a>**RF25** | **Gerar relatório de treino:** o sistema deve permitir que o treinador e o auxiliar gerem um relatório do treino em formato PDF. | CP04 |
-| **RF26** | **Alternar unidade de tempo:** o sistema deve permitir que o treinador e o auxiliar alternem a visualização do tempo das atividades entre tempo absoluto (em minutos) e tempo relativo (em porcentagem do tempo total da sessão). | CP03 |
-| **RF27** | **Criar conta:** o sistema deve permitir que o treinador e o auxiliar criem uma conta de acesso à aplicação. | CP05 |
-| **RF28** | **Fazer login:** o sistema deve permitir que o treinador e o auxiliar se autentiquem na aplicação a partir de um login e senha de acesso. | CP05 |
-| **RF29** | **Anexar imagem à atividade:** o sistema deve permitir que o treinador e o auxiliar anexem uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade na biblioteca e nas sessões de treino em que ela for incluída. | CP01 |
-| **RF30** | **Registrar pontuação da atividade:** o sistema deve permitir que o treinador e o auxiliar registrem, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição. | CP03 |
-| **RF31** | **Gerar análise textual do treino:** o sistema deve permitir que o treinador e o auxiliar gerem, com inteligência artificial, uma análise textual (insight) sobre as informações do treino. | CP03 |
-| **RF32** | **Registrar atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar registrem, de forma opcional, o atributo técnico trabalhado em uma atividade (ex: domínio orientado, cabeceira defensiva). | CP01 |
-| **RF33** | **Editar atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar editem um atributo técnico registrado em uma atividade. | CP01 |
-| **RF34** | **Excluir atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar excluam um atributo técnico registrado em uma atividade. | CP01 |
+| **RF23**                  | **Reutilizar atividade cadastrada:** o sistema deve permitir que o treinador e o auxiliar adicionem a uma sessão de treino uma atividade já cadastrada na biblioteca, preenchendo automaticamente, no momento da seleção, os campos inerentes à atividade. | CP01 |
+| <a id="rf24"></a>**RF24** | **Consultar informação de atividade do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a informação de atividade, atualizando automaticamente as informações exibidas. | CP03 |
+| <a id="rf25"></a>**RF25** | **Gerar relatório de treino:** o sistema deve permitir que o treinador e o auxiliar gerem um relatório do treino em formato PDF. | CP04 |
+| **RF26**                  | **Alternar unidade de tempo:** o sistema deve permitir que o treinador e o auxiliar alternem a visualização do tempo das atividades entre tempo absoluto (em minutos) e tempo relativo (em porcentagem do tempo total da sessão). | CP03 |
+| **RF27**                  | **Criar conta:** o sistema deve permitir que o treinador e o auxiliar criem uma conta de acesso à aplicação. | CP05 |
+| **RF28**                  | **Fazer login:** o sistema deve permitir que o treinador e o auxiliar se autentiquem na aplicação a partir de um login e senha de acesso. | CP05 |
+| **RF29**                  | **Anexar imagem à atividade:** o sistema deve permitir que o treinador e o auxiliar anexem uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade na biblioteca e nas sessões de treino em que ela for incluída. | CP01 |
+| **RF30**                  | **Registrar pontuação da atividade:** o sistema deve permitir que o treinador e o auxiliar registrem, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição. | CP03 |
+| **RF31**                  | **Gerar análise textual do treino:** o sistema deve permitir que o treinador e o auxiliar gerem, com inteligência artificial, uma análise textual (insight) sobre as informações do treino. | CP03 |
+| **RF32**                  | **Registrar atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar registrem, de forma opcional, o atributo técnico trabalhado em uma atividade (ex: domínio orientado, cabeceira defensiva). | CP01 |
+| **RF33**                  | **Editar atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar editem um atributo técnico registrado em uma atividade. | CP01 |
+| **RF34**                  | **Excluir atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar excluam um atributo técnico registrado em uma atividade. | CP01 |
 | <a id="rf37"></a>**RF35** | **Consultar informação de espaço do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a informação de espaço do treino, atualizando automaticamente as informações exibidas. | CP03 |
 | <a id="rf38"></a>**RF36** | **Consultar informação de orientação do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a informação de orientação do treino, atualizando automaticamente as informações exibidas. | CP03 |
 | <a id="rf39"></a>**RF37** | **Consultar informação de momento do jogo do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, por meio de filtro, a informação de momento do jogo do treino, atualizando automaticamente as informações exibidas. | CP03 |
