@@ -116,6 +116,147 @@
   font-weight: 600;
 }
 
+/* Tabela HTML alternativa da seção 5
+ * O contêiner ocupa toda a largura disponível e esconde qualquer sobra
+ * horizontal para manter as nove colunas visíveis na página.
+ */
+.tabela-consolidacao-html {
+  margin: 1rem 0 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  box-shadow: var(--md-shadow-z1);
+}
+
+/* Mantém o cálculo das colunas previsível: as larguras definidas pelos
+ * seletores nth-child abaixo são respeitadas pelo navegador.
+ */
+.tabela-consolidacao-html table {
+  display: table;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+
+/* O Material for MkDocs pode aplicar estilos próprios às tabelas.
+ * Esta classe reforça o comportamento da tabela HTML e evita largura
+ * mínima automática ou a criação de uma barra de rolagem lateral.
+ */
+.tabela-consolidacao-html-table {
+  display: table !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* Estilo comum das células: espaçamento compacto, bordas discretas e
+ * quebra de palavras para impedir que textos longos aumentem a tabela.
+ */
+.tabela-consolidacao-html th,
+.tabela-consolidacao-html td {
+  padding: 0.35rem 0.3rem;
+  border-bottom: 0.05rem solid var(--md-default-fg-color--lightest);
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+/* Cabeçalho compacto para preservar espaço nas colunas. Os títulos não
+ * quebram por padrão; "Esforço técnico" é a exceção definida abaixo.
+ */
+.tabela-consolidacao-html th {
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-size: 0.58rem;
+  font-weight: 700;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Permite a quebra do título "Esforço técnico", que é mais extenso. */
+.tabela-consolidacao-html th:nth-child(8) {
+  white-space: normal;
+}
+
+/* Remove a borda da última linha para fechar o visual do contêiner. */
+.tabela-consolidacao-html tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Larguras das colunas, na mesma ordem do HTML:
+ * 1. Código
+ * 2. Requisito
+ * 3. Valor
+ * 4. Frequência
+ * 5. Esforço
+ * 6. Complexidade
+ * 7. Conhecimento
+ * 8. Esforço técnico
+ * 9. Quadrante
+ *
+ * Para ajustar o layout, altere apenas os valores width de cada bloco.
+ * As colunas numéricas ficam centralizadas; Requisito e Quadrante
+ * permanecem alinhadas à esquerda para facilitar a leitura.
+ */
+.tabela-consolidacao-html th:nth-child(1),
+.tabela-consolidacao-html td:nth-child(1) {
+  width: 8%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(2),
+.tabela-consolidacao-html td:nth-child(2) {
+  width: 15%;
+}
+
+.tabela-consolidacao-html th:nth-child(3),
+.tabela-consolidacao-html td:nth-child(3) {
+  width: 7%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(4),
+.tabela-consolidacao-html td:nth-child(4) {
+  width: 10%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(5),
+.tabela-consolidacao-html td:nth-child(5) {
+  width: 7%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(6),
+.tabela-consolidacao-html td:nth-child(6) {
+  width: 12%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(7),
+.tabela-consolidacao-html td:nth-child(7) {
+  width: 12%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(8),
+.tabela-consolidacao-html td:nth-child(8) {
+  width: 10%;
+  text-align: center;
+}
+
+.tabela-consolidacao-html th:nth-child(9),
+.tabela-consolidacao-html td:nth-child(9) {
+  width: 9%;
+}
+
 @media (max-width: 800px) {
   .team-card-compact {
     flex: 1 1 calc(33.33% - 12px);
