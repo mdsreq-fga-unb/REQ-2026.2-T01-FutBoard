@@ -489,3 +489,62 @@
   border-top: none;
   box-shadow: 0 2px 8px rgba(13, 27, 42, 0.25);
 }
+/* Tabela HTML de Cronograma */
+.tabela-cronograma-html {
+  margin: 1rem 0 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  box-shadow: var(--md-shadow-z1);
+}
+
+.tabela-cronograma-html table {
+  display: table;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+
+.tabela-cronograma-html-table {
+  display: table !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.tabela-cronograma-html th,
+.tabela-cronograma-html td {
+  padding: 0.35rem 0.3rem;
+  border-bottom: 0.05rem solid var(--md-default-fg-color--lightest);
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+.tabela-cronograma-html th {
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-size: 0.58rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.tabela-cronograma-html tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Larguras das colunas para a tabela de cronograma (total 7) */
+.tabela-cronograma-html th:nth-child(1), .tabela-cronograma-html td:nth-child(1) { width: 16%; }
+.tabela-cronograma-html th:nth-child(2), .tabela-cronograma-html td:nth-child(2) { width: 12%; text-align: center; }
+.tabela-cronograma-html th:nth-child(3), .tabela-cronograma-html td:nth-child(3) { width: 9%; text-align: center; }
+.tabela-cronograma-html th:nth-child(4), .tabela-cronograma-html td:nth-child(4) { width: 12%; }
+.tabela-cronograma-html th:nth-child(5), .tabela-cronograma-html td:nth-child(5) { width: 17%; }
+.tabela-cronograma-html th:nth-child(6), .tabela-cronograma-html td:nth-child(6) { width: 17%; }
+.tabela-cronograma-html th:nth-child(7), .tabela-cronograma-html td:nth-child(7) { width: 21%; }
