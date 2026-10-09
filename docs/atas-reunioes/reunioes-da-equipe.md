@@ -263,3 +263,28 @@ acesse diretamente pelo link: [https://youtu.be/9oXDj33x4vs](https://youtu.be/9o
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ✅ | Monitor da equipe |
+
+### Reunião da equipe 11
+
+<p class="reuniao-data">quinta-feira, 08/10/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TpDQ9dD7g3k" title="Reunião da equipe 11" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+acesse diretamente pelo link: [https://youtu.be/TpDQ9dD7g3k](https://youtu.be/TpDQ9dD7g3k)
+
+- **Pontos principais:**
+    - **[(0:04–5:15)](https://youtu.be/TpDQ9dD7g3k?t=4)** Revisão dos requisitos "criar conta" e "fazer login", que estavam no quarto quadrante da matriz de valor x esforço mas entraram como candidatos ao MVP pelo critério de frequência de uso. Decisão de retirá los do MVP, tendo em vista que a matriz valor x esforço é nosso primeiro critério.
+    - **[(5:15–16:03)](https://youtu.be/TpDQ9dD7g3k?t=315)** Discussão inicial para definição dos critérios de DOR e DOD a partir do exemplo de outro grupo (requisito documentado, associado à história de usuário, avaliado por planning poker, testado e aprovado pelo cliente), com discussão de critérios próprios como testes unitários, testes de integração, aprovação em 100% dos testes e pipeline de deploy. Combinado de cada integrante enviar suas ideias de DOR e DOD até sexta, para consenso entre o grupo.
+    - **[(16:03–18:44)](https://youtu.be/TpDQ9dD7g3k?t=963)** Pendências do GitPages: página de regras de negócio, com o Leonardo consultando o monitor, e conferência da lista de entregas exigidas (visão do produto, lista de RFs e RNFs, escopo priorizado, MVP, DOR e DOD e evidências de execução)
+    - **[(18:44–23:03)](https://youtu.be/TpDQ9dD7g3k?t=1124)** Atualização do cronograma pelo Leonardo conforme a etapa atual do projeto, retirando o que não entra no MVP (perfis de acesso)
+    - **[(23:03–25:09)](https://youtu.be/TpDQ9dD7g3k?t=1383)** Ajuste visual do GitPages para evitar barra de rolagem (mover o índice lateral e ampliar a área central) e orientações para a seção de lições aprendidas, mencionando as atividades da Semana Universitária e a reavaliação realizada do MVP
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ❌ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ❌ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
