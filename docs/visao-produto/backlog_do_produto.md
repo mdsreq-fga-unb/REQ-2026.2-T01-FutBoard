@@ -167,51 +167,56 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 [Acessar a matriz no Miro](https://miro.com/welcomeonboard/YmN1NWlzM0VXeDkyTkhySndlQ3V3UTlqdmJlVDdDdnF1dmdjREpGVTdkb3RJeVptV20xYzlyTVJzd3hZNFpWdHFsVmNtMDQ5eGZIRm0rYzNCSnNybGhSYmFuVXJ3ZGdQZEkxSDRhZ3hjQ2RNK3A4TTZzNmVtUXdEVElpTjkyNFVyVmtkMG5hNDA3dVlncnBvRVB2ZXBnPT0hdjE=?share_link_id=122393869978)
 
 
-### 5. Consolidação dos requisitos
+### 5. Consolidação dos requisitos 
+<div class="tabela-consolidacao-html">
+<table class="tabela-consolidacao-html-table">
+<thead><tr><th>Código</th><th>Requisito</th><th>Valor</th><th>Frequência</th><th>Esforço</th><th>Complexidade</th><th>Conhecimento</th><th>Esforço técnico</th><th>Quadrante</th></tr></thead>
+<tbody>
+<tr><td>RF01</td><td>Cadastrar macrociclo</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF02</td><td>Editar macrociclo</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF03</td><td>Excluir macrociclo</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF04</td><td>Cadastrar mesociclo</td><td>4,00</td><td>3,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>3,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF05</td><td>Editar mesociclo</td><td>4,00</td><td>3,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>3,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF06</td><td>Excluir mesociclo</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF07</td><td>Cadastrar microciclo</td><td>4,00</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>4,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF08</td><td>Editar microciclo</td><td>4,00</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>4,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF09</td><td>Excluir microciclo</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF10</td><td>Cadastrar comportamento</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF11</td><td>Editar comportamento</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF12</td><td>Excluir comportamento</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF13</td><td>Cadastrar atividade</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF14</td><td>Editar atividade</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF15</td><td>Excluir atividade</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF16</td><td>Cadastrar sessão</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF17</td><td>Editar sessão</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF18</td><td>Excluir sessão</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF19</td><td>Cadastrar atividade na biblioteca</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF20</td><td>Editar atividade na biblioteca</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF21</td><td>Excluir atividade na biblioteca</td><td>4,00</td><td>2,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>2,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF22</td><td>Exibir indicador de treino</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF23</td><td>Reutilizar atividade cadastrada</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF24</td><td>Consultar informação de atividade do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF25</td><td>Gerar relatório de treino</td><td>4,00</td><td>5,00</td><td>4,00</td><td>4,00</td><td>4,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF26</td><td>Alternar unidade de tempo</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF27</td><td>Criar conta</td><td>3,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>5,00</td><td>Q4 Baixo valor / Alta carga técnica</td></tr>
+<tr><td>RF28</td><td>Fazer login</td><td>3,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>5,00</td><td>Q4 Baixo valor / Alta carga técnica</td></tr>
+<tr><td>RF29</td><td>Anexar imagem à atividade</td><td>3,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF30</td><td>Registrar pontuação da atividade</td><td>2,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q3 Baixo valor / Baixa carga técnica</td></tr>
+<tr><td>RF31</td><td>Gerar análise textual do treino</td><td>2,00</td><td>5,00</td><td>3,00</td><td>4,00</td><td>4,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF32</td><td>Registrar atributo técnico da atividade</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>5,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF33</td><td>Editar atributo técnico da atividade</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF34</td><td>Excluir atributo técnico da atividade</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
+<tr><td>RF35</td><td>Consultar informação de espaço do treino</td><td>4,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF36</td><td>Consultar informação de orientação do treino</td><td>4,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF37</td><td>Consultar informação de momento do jogo do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF38</td><td>Consultar informação de fase do jogo do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF39</td><td>Consultar informação de comportamento do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF40</td><td>Consultar informação de atributo técnico do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF41</td><td>Consultar análise comparativa por periodização</td><td>4,00</td><td>5,00</td><td>4,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+</tbody>
+</table>
+</div>
 
-| Código | Requisito | Valor | Frequência | Esforço | Complexidade | Conhecimento | Esforço técnico | Quadrante |
-|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| RF01 | Cadastrar macrociclo | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF02 | Editar macrociclo | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF03 | Excluir macrociclo | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF04 | Cadastrar mesociclo | 4,00 | 3,00 | 2,00 | 2,00 | 2,00 | 3,00 | Q2 Alto valor / Baixa carga técnica |
-| RF05 | Editar mesociclo | 4,00 | 3,00 | 2,00 | 2,00 | 2,00 | 3,00 | Q2 Alto valor / Baixa carga técnica |
-| RF06 | Excluir mesociclo | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF07 | Cadastrar microciclo | 4,00 | 4,00 | 2,00 | 2,00 | 2,00 | 4,00 | Q2 Alto valor / Baixa carga técnica |
-| RF08 | Editar microciclo | 4,00 | 4,00 | 2,00 | 2,00 | 2,00 | 4,00 | Q2 Alto valor / Baixa carga técnica |
-| RF09 | Excluir microciclo | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF10 | Cadastrar comportamento | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF11 | Editar comportamento | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF12 | Excluir comportamento | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF13 | Cadastrar atividade | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF14 | Editar atividade | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF15 | Excluir atividade | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF16 | Cadastrar sessão | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF17 | Editar sessão | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF18 | Excluir sessão | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF19 | Cadastrar atividade na biblioteca | 4,00 | 5,00 | 3,00 | 3,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF20 | Editar atividade na biblioteca | 4,00 | 5,00 | 3,00 | 3,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF21 | Excluir atividade na biblioteca | 4,00 | 2,00 | 3,00 | 3,00 | 3,00 | 2,00 | Q1 Alto valor / Alta carga técnica |
-| RF22 | Exibir indicador de treino | 4,00 | 5,00 | 2,00 | 2,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF23 | Reutilizar atividade cadastrada | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF24 | Consultar informação de atividade do treino | 4,00 | 5,00 | 3,00 | 3,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF25 | Gerar relatório de treino | 4,00 | 5,00 | 4,00 | 4,00 | 4,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF26 | Alternar unidade de tempo | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF27 | Criar conta | 3,00 | 5,00 | 2,00 | 3,00 | 2,00 | 5,00 | Q4 Baixo valor / Alta carga técnica |
-| RF28 | Fazer login | 3,00 | 5,00 | 2,00 | 3,00 | 2,00 | 5,00 | Q4 Baixo valor / Alta carga técnica |
-| RF29 | Anexar imagem à atividade | 3,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF30 | Registrar pontuação da atividade | 2,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q3 Baixo valor / Baixa carga técnica |
-| RF31 | Gerar análise textual do treino | 2,00 | 5,00 | 3,00 | 4,00 | 4,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF32 | Registrar atributo técnico da atividade | 4,00 | 5,00 | 2,00 | 2,00 | 2,00 | 5,00 | Q2 Alto valor / Baixa carga técnica |
-| RF33 | Editar atributo técnico da atividade | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF34 | Excluir atributo técnico da atividade | 4,00 | 2,00 | 2,00 | 2,00 | 2,00 | 2,00 | Q2 Alto valor / Baixa carga técnica |
-| RF35 | Consultar informação de espaço do treino | 4,00 | 5,00 | 2,00 | 3,00 | 2,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF36 | Consultar informação de orientação do treino | 4,00 | 5,00 | 2,00 | 3,00 | 2,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF37 | Consultar informação de momento do jogo do treino | 4,00 | 5,00 | 3,00 | 3,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF38 | Consultar informação de fase do jogo do treino | 4,00 | 5,00 | 3,00 | 3,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF39 | Consultar informação de comportamento do treino | 4,00 | 5,00 | 3,00 | 3,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF40 | Consultar informação de atributo técnico do treino | 4,00 | 5,00 | 3,00 | 3,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
-| RF41 | Consultar análise comparativa por periodização | 4,00 | 5,00 | 4,00 | 3,00 | 3,00 | 5,00 | Q1 Alto valor / Alta carga técnica |
 
 ### 6. Requisitos do MVP
 
