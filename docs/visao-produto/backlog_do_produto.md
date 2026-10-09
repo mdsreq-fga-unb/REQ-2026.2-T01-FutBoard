@@ -222,50 +222,37 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 
 #### Requisitos Funcionais (RFs)
 
-A definição dos Requisitos Funcionais que compõem o MVP foi realizada previamente com base na matriz de valor x esforço e posteriormente validada diretamente com o cliente via WhatsApp (conforme detalhado na [Seção 10.3](#103-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente)). Foram selecionados tanto os requisitos de **alto valor e baixo esforço** quanto os requisitos de **alto valor e alto esforço**, que juntos compõem o escopo funcional do MVP. Em contrapartida, ficaram fora do MVP os requisitos categorizados como de **baixo valor e baixo esforço** ou de **baixo valor e alto esforço**.
+A definição dos Requisitos Funcionais que compõem o MVP foi realizada previamente com base na matriz de valor x esforço e posteriormente validada diretamente com o cliente via WhatsApp (conforme detalhado na [Seção 10.3](#103-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente)). O MVP é composto por 27 requisitos funcionais, todos de alto valor (valor > 2), distribuídos em dois quadrantes da matriz: 15 em Q2 (esforço ≤ 2) e 12 em Q1 (esforço > 2).
 
 | Código | Requisito | Classificação |
 |:---:|---|---|
 | RF01 | Cadastrar macrociclo | Q2 - Alto valor / Baixo esforço |
 | RF02 | Editar macrociclo | Q2 - Alto valor / Baixo esforço |
-| RF03 | Excluir macrociclo | Q2 - Alto valor / Baixo esforço |
 | RF04 | Cadastrar mesociclo | Q2 - Alto valor / Baixo esforço |
 | RF05 | Editar mesociclo | Q2 - Alto valor / Baixo esforço |
-| RF06 | Excluir mesociclo | Q2 - Alto valor / Baixo esforço |
 | RF07 | Cadastrar microciclo | Q2 - Alto valor / Baixo esforço |
 | RF08 | Editar microciclo | Q2 - Alto valor / Baixo esforço |
-| RF09 | Excluir microciclo | Q2 - Alto valor / Baixo esforço |
-| RF10 | Cadastrar comportamentos | Q2 - Alto valor / Baixo esforço |
-| RF11 | Editar comportamentos | Q2 - Alto valor / Baixo esforço |
-| RF12 | Excluir comportamentos | Q2 - Alto valor / Baixo esforço |
+| RF10 | Cadastrar comportamento | Q2 - Alto valor / Baixo esforço |
+| RF11 | Editar comportamento | Q2 - Alto valor / Baixo esforço |
 | RF13 | Cadastrar atividade | Q2 - Alto valor / Baixo esforço |
 | RF14 | Editar atividade | Q2 - Alto valor / Baixo esforço |
-| RF15 | Excluir atividade | Q2 - Alto valor / Baixo esforço |
 | RF16 | Cadastrar sessão | Q2 - Alto valor / Baixo esforço |
 | RF17 | Editar sessão | Q2 - Alto valor / Baixo esforço |
-| RF18 | Excluir sessão | Q2 - Alto valor / Baixo esforço |
-| RF24 | Reutilizar atividades cadastradas | Q2 - Alto valor / Baixo esforço |
-| RF25 | Incluir atividades cadastradas nas análises | Q2 - Alto valor / Baixo esforço |
-| RF31 | Anexar imagens dos tipos de treino | Q2 - Alto valor / Baixo esforço |
-| RF35 | Cadastrar momento do jogo | Q2 - Alto valor / Baixo esforço |
-| RF36 | Editar momento do jogo | Q2 - Alto valor / Baixo esforço |
-| RF37 | Deletar momento do jogo | Q2 - Alto valor / Baixo esforço |
-| RF38 | Cadastrar fase do jogo | Q2 - Alto valor / Baixo esforço |
-| RF39 | Editar fase do jogo | Q2 - Alto valor / Baixo esforço |
-| RF40 | Deletar fase do jogo | Q2 - Alto valor / Baixo esforço |
-| RF41 | Cadastrar atributo técnico | Q2 - Alto valor / Baixo esforço |
-| RF42 | Editar atributo técnico | Q2 - Alto valor / Baixo esforço |
-| RF43 | Deletar atributo técnico | Q2 - Alto valor / Baixo esforço |
-| RF19 | Cadastrar atividades na biblioteca | Q1 - Alto valor / Alto esforço |
-| RF20 | Editar atividades na biblioteca | Q1 - Alto valor / Alto esforço |
-| RF21 | Excluir atividades na biblioteca | Q1 - Alto valor / Alto esforço |
-| RF22 | Exibir painel de indicadores na tela inicial | Q1 - Alto valor / Alto esforço |
-| RF23 | Exibir dashboard com gráficos | Q1 - Alto valor / Alto esforço |
-| RF26 | Filtrar informações dos gráficos | Q1 - Alto valor / Alto esforço |
-| RF27 | Gerar relatórios comparativos entre periodizações esportivas | Q1 - Alto valor / Alto esforço |
-| RF28 | Interagir com os dados dos gráficos | Q1 - Alto valor / Alto esforço |
-| RF34 | Gerar análises textuais dos dados cadastrados (com IA) | Q1 - Alto valor / Alto esforço |
-| RF46 | Calcular percentual dos gráficos com base no tempo total da sessão | Q1 - Alto valor / Alto esforço |
+| RF19 | Cadastrar atividade na biblioteca | Q1 - Alto valor / Alto esforço |
+| RF20 | Editar atividade na biblioteca | Q1 - Alto valor / Alto esforço |
+| RF22 | Exibir indicador de treino | Q1 - Alto valor / Alto esforço |
+| RF23 | Reutilizar atividade cadastrada | Q2 - Alto valor / Baixo esforço |
+| RF24 | Consultar informação de atividade do treino | Q1 - Alto valor / Alto esforço |
+| RF25 | Gerar relatório de treino | Q1 - Alto valor / Alto esforço |
+| RF26 | Alternar unidade de tempo | Q2 - Alto valor / Baixo esforço |
+| RF32 | Registrar atributo técnico da atividade | Q2 - Alto valor / Baixo esforço |
+| RF35 | Consultar informação de espaço do treino | Q1 - Alto valor / Alto esforço |
+| RF36 | Consultar informação de orientação do treino | Q1 - Alto valor / Alto esforço |
+| RF37 | Consultar informação de momento do jogo do treino | Q1 - Alto valor / Alto esforço |
+| RF38 | Consultar informação de fase do jogo do treino | Q1 - Alto valor / Alto esforço |
+| RF39 | Consultar informação de comportamento do treino | Q1 - Alto valor / Alto esforço |
+| RF40 | Consultar informação de atributo técnico do treino | Q1 - Alto valor / Alto esforço |
+| RF41 | Consultar análise comparativa por periodização | Q1 - Alto valor / Alto esforço |
 
 #### Requisitos Não Funcionais (RNFs)
 
