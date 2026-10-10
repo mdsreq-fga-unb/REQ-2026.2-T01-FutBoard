@@ -160,14 +160,17 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
     (esf>2)*(val<=2);  "Quadrante 4"
   ))
 ))
-```
+``` 
 
 ![Matriz Valor x Esforço](../assets/MatrizValorxEsforço.jpg)
+<details>
+  <summary><strong>Explorar o Frame interativo da Matriz Valor x Esforço</strong></summary>
 <div style="position: relative; width: 100%; padding-top: 2.25%;">
   <iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHolWByQ=/?focusWidget=3458764685315725204&embedMode=view_only_without_ui&embedId=559495672138" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 </div>
+</details>
 
-[Acessar a matriz no Miro](https://miro.com/welcomeonboard/YmN1NWlzM0VXeDkyTkhySndlQ3V3UTlqdmJlVDdDdnF1dmdjREpGVTdkb3RJeVptV20xYzlyTVJzd3hZNFpWdHFsVmNtMDQ5eGZIRm0rYzNCSnNybGhSYmFuVXJ3ZGdQZEkxSDRhZ3hjQ2RNK3A4TTZzNmVtUXdEVElpTjkyNFVyVmtkMG5hNDA3dVlncnBvRVB2ZXBnPT0hdjE=?share_link_id=122393869978)
+[Ou acesse a matriz no Miro](https://miro.com/welcomeonboard/YmN1NWlzM0VXeDkyTkhySndlQ3V3UTlqdmJlVDdDdnF1dmdjREpGVTdkb3RJeVptV20xYzlyTVJzd3hZNFpWdHFsVmNtMDQ5eGZIRm0rYzNCSnNybGhSYmFuVXJ3ZGdQZEkxSDRhZ3hjQ2RNK3A4TTZzNmVtUXdEVElpTjkyNFVyVmtkMG5hNDA3dVlncnBvRVB2ZXBnPT0hdjE=?share_link_id=122393869978)
 
 
 ### 5. Consolidação dos requisitos 
