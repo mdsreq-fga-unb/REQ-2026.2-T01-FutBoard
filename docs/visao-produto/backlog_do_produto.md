@@ -277,9 +277,15 @@ Após a priorização preliminar do backlog por meio da matriz Valor x Esforço 
 Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`MVPvalidado`** (armazenada na pasta `assets` e ilustrada a seguir), contendo a organização visual dos cartões de requisitos levantados para o MVP.
 
 <figure markdown="span" style="text-align: center; margin: 1.5em 0;">
-  ![Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp](../assets/MVPvalidado.jpeg){ width="85%" style="border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" }
+  ![Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp](../assets/MVPValidado.jpg){ width="85%" style="border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" }
   <figcaption>Figura: Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp (artefato <code>MVPvalidado</code>)</figcaption>
 </figure>
+<details>
+  <summary><strong>Explorar o Frame interativo do MVP validado</strong></summary>
+<div style="position: relative; width: 100%; padding-top: 2.25%;">
+  <iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHolWByQ=/?focusWidget=3458764686717981053&embedMode=view_only_without_ui&embedId=274616413572" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+</div>
+</details>
 
 A imagem reflete a disposição dos requisitos funcionais priorizados, organizada em dois grandes grupos separados pela linha vertical:
 
