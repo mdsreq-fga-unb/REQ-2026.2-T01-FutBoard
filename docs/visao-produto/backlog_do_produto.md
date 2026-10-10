@@ -287,9 +287,4 @@ Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`MVPvalidado`
 </div>
 </details>
 
-A imagem reflete a disposição dos requisitos funcionais priorizados, organizada em dois grandes grupos separados pela linha vertical:
-
-- **Lado esquerdo (Quadrante Q2 — Alto Valor / Baixo Esforço):** reúne os cartões azuis com as funcionalidades cadastrais e operacionais estruturantes, como o gerenciamento dos ciclos de periodização (macrociclo, mesociclo e microciclo — RF01 a RF09), definição de comportamentos táticos (RF10 a RF12), fluxo de atividades e sessões de treino (RF13 a RF18), reutilização e customização de atividades (RF24 e RF25), categorização por momentos de jogo, fases de jogo e atributos técnicos (RF35 a RF43) e a inclusão de imagens nos tipos de treino (RF31, em cartão laranja de destaque).
-- **Lado direito (Quadrante Q1 — Alto Valor / Alto Esforço):** engloba as funcionalidades de biblioteca e visualização analítica, incluindo a biblioteca de atividades (RF19 a RF21), o painel de indicadores da tela inicial (RF22), o dashboard com gráficos analíticos (RF23), as capacidades de filtragem, relatórios comparativos e interatividade (RF26 a RF28), além do cálculo percentual proporcional ao tempo total da sessão (RF46, também em cartão laranja de destaque).
-
 Durante a validação via WhatsApp, o treinador Marcus Vinicius avaliou o quadro apresentado na imagem e confirmou que o conjunto de requisitos selecionado contempla com fidelidade as necessidades prioritárias para o MVP do FutBoard.
