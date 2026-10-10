@@ -579,3 +579,14 @@
 .tabela-cronograma-html td:nth-child(7) {
   width: 21%;
 }
+
+.md-typeset iframe {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(13, 27, 42, 0.08);
+}
+
+.md-typeset details > summary {
+  cursor: pointer;
+  color: #14396b;
+}
