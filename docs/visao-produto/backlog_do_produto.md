@@ -162,7 +162,10 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 ))
 ```
 
-![Matriz Valor x Esforço](../assets/Matriz%20Valor%20x%20Esforço.jpg)
+![Matriz Valor x Esforço](../assets/MatrizValorxEsforço.jpg)
+<div style="position: relative; width: 100%; padding-top: 2.25%;">
+  <iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHolWByQ=/?focusWidget=3458764685315725204&embedMode=view_only_without_ui&embedId=559495672138" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+</div>
 
 [Acessar a matriz no Miro](https://miro.com/welcomeonboard/YmN1NWlzM0VXeDkyTkhySndlQ3V3UTlqdmJlVDdDdnF1dmdjREpGVTdkb3RJeVptV20xYzlyTVJzd3hZNFpWdHFsVmNtMDQ5eGZIRm0rYzNCSnNybGhSYmFuVXJ3ZGdQZEkxSDRhZ3hjQ2RNK3A4TTZzNmVtUXdEVElpTjkyNFVyVmtkMG5hNDA3dVlncnBvRVB2ZXBnPT0hdjE=?share_link_id=122393869978)
 
