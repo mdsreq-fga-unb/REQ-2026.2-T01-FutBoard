@@ -268,11 +268,11 @@ Os Requisitos Não Funcionais não entram diretamente na matriz de esforço/valo
 
 Após a priorização preliminar do backlog por meio da matriz Valor x Esforço e a consolidação dos requisitos nos quadrantes, a equipe realizou a **validação do backlog e da delimitação do MVP diretamente com o cliente** (o técnico Marcus Vinicius).
 
-Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`evidenciaValidacaoMVP`** (armazenada na pasta `assets` e ilustrada a seguir), contendo a organização visual dos cartões de requisitos levantados para o MVP.
+Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`MVPvalidado`** (armazenada na pasta `assets` e ilustrada a seguir), contendo a organização visual dos cartões de requisitos levantados para o MVP.
 
 <figure markdown="span" style="text-align: center; margin: 1.5em 0;">
-  ![Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp](../assets/evidenciaValidacaoMVP.jpeg){ width="85%" style="border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" }
-  <figcaption>Figura: Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp (artefato <code>evidenciaValidacaoMVP</code>)</figcaption>
+  ![Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp](../assets/MVPvalidado.jpeg){ width="85%" style="border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" }
+  <figcaption>Figura: Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp (artefato <code>MVPvalidado</code>)</figcaption>
 </figure>
 
 A imagem reflete a disposição dos requisitos funcionais priorizados, organizada em dois grandes grupos separados pela linha vertical:
