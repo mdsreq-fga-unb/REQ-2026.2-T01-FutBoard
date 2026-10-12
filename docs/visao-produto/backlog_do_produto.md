@@ -295,6 +295,8 @@ Durante a validação via WhatsApp, o treinador Marcus Vinicius avaliou o quadro
 
 A priorização do MVP baseou-se na matriz de Valor versus Esforço e na frequência de uso de cada funcionalidade. Selecionamos os requisitos dos quadrantes 1 e 2 que são de maior valor para o cliente e que apresentavam nível de uso de 3 a 5 (mensal, semanal e diário).
 
+> O **RF01** foi marcado pelo cliente como **valor de negócio 4** e **frequência de uso de 2**, como estavámos selecionando os requisitos que estavam no quadrante 1 e 2 cuja a frequência de uso estava entre 3 e 5 esse requisito ficava de fora do MVP. Porém a equipe logo percebeu que o **RF01** é vital para o funcionamento do sistema. **Por isso o RF01 foi incorporado ao MVP.**
+
 # Por que estamos utilizando esses critérios?
 
 - Contexto e desafio: Na avaliação inicial, aproximadamente 90% das funcionalidades foram avaliadas pelo cliente com valor de negócio máximo, gerando um escopo amplo demais para o MVP.
