@@ -42,7 +42,9 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 - **Entrevista com o Stakeholder:** Encontros frequentes (via Teams e WhatsApp) com o técnico Marcus Vinicius para co-criar telas, definir fluxos operacionais e descobrir exceções e regras de negócio à medida que a interface toma forma.
 
 #### Declaração de Requisitos
-- **Histórias de Usuário com Especificação por Cenários:** Declaração do comportamento do sistema através de histórias de usuário decompostas sob a ótica do usuário, tendo como resultado da declaração critérios de aceitação objetivos e verificáveis no formato *Dado/Quando/Então*.
+- **Histórias de Usuário com Especificação por Cenários:** Declaração do comportamento do sistema através de histórias de usuário decompostas sob a ótica do usuário, tendo como resultado da declaração critérios de aceitação objetivos e verificáveis no formato *Como [tipo de usuário / persona],
+eu quero [uma ação ou funcionalidade],
+para que [um benefício ou valor gerado].*
 
 #### Representação de Requisitos
 - **Prototipação de Média Fidelidade:** Concepção e evolução das telas e componentes interativos com apoio da ferramenta Figma, fornecendo representações visuais ricas que auxiliam na especificação detalhada da interface e da experiência do usuário.
