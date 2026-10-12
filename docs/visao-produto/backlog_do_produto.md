@@ -291,3 +291,14 @@ Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`MVPvalidado`
 Durante a validação via WhatsApp, o treinador Marcus Vinicius avaliou o quadro apresentado na imagem e confirmou que o conjunto de requisitos selecionado contempla com fidelidade as necessidades prioritárias para o MVP do FutBoard.
 
 
+# 10.4 Justificativa para o MVP
+
+A priorização do MVP baseou-se na matriz de Valor versus Esforço e na frequência de uso de cada funcionalidade. Selecionamos os requisitos dos quadrantes 1 e 2 que são de maior valor para o cliente e que apresentavam nível de uso de 3 a 5 (mensal, semanal e diário).
+
+# Por que estamos utilizando esses critérios?
+
+- Contexto e desafio: Na avaliação inicial, aproximadamente 90% das funcionalidades foram avaliadas pelo cliente com valor de negócio máximo, gerando um escopo amplo demais para o MVP.
+
+- Ajuste metodológico: Seguindo a orientação do professor, adicionamos a frequência de uso como segundo critério de corte.
+
+- Resultado: O cruzamento entre valor e frequência permitiu priorizar o que era realmente essencial, reduzindo o escopo com validação e respaldo do cliente.
