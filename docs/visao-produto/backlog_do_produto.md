@@ -72,14 +72,14 @@ O valor de negócio foi definido a partir da justificativa dada pelo cliente par
 | 1 | Baixo |Não faz sentido para o projeto neste momento |
 
 #### 1.2 Frequencia de Uso
-A frequencia de uso foi definida de acordo com a opinião do cliente levando em consideracao o quao frequente será utilizado cada requisito.
+A frequencia de uso foi definida de acordo com a opinião do cliente levando em consideração o quão frequente será utilizado cada requisito.
 
 | Pontuação | Interpretação | Descrição |
 |:---:|---|---|
 | 1 | Nunca | Em nenhum momento |
 | 2 | Rara | Em situacoes especificas |
 | 3 | Ocasionalmente | Mensalmente |
-| 4 | Frequente | semanalmente |
+| 4 | Frequente | Semanalmente |
 | 5 | Muito frequente | Diariamente |
 
 #### 1.3 Esforço
@@ -289,3 +289,5 @@ Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`MVPvalidado`
 [Ou acesse a matriz no Miro](https://miro.com/welcomeonboard/YmN1NWlzM0VXeDkyTkhySndlQ3V3UTlqdmJlVDdDdnF1dmdjREpGVTdkb3RJeVptV20xYzlyTVJzd3hZNFpWdHFsVmNtMDQ5eGZIRm0rYzNCSnNybGhSYmFuVXJ3ZGdQZEkxSDRhZ3hjQ2RNK3A4TTZzNmVtUXdEVElpTjkyNFVyVmtkMG5hNDA3dVlncnBvRVB2ZXBnPT0hdjE=?share_link_id=122393869978)
 
 Durante a validação via WhatsApp, o treinador Marcus Vinicius avaliou o quadro apresentado na imagem e confirmou que o conjunto de requisitos selecionado contempla com fidelidade as necessidades prioritárias para o MVP do FutBoard.
+
+
