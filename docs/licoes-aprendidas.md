@@ -1,13 +1,5 @@
 # Lições Aprendidas
 
-## Histórico de Versões
-
-| Versão | Data | Descrição | Autor(es) | 
-| :---: | :---: | :--- | :--- | 
-| `1.0` | 15/09/2026 | Consolidação dos aprendizados, dificuldades e ações da Unidade 1 | Equipe FutBoard |
-
----
-
 ## Introdução Geral
 
 Esta seção registra a evolução da equipe ao longo do projeto **FutBoard**, documentando os principais aprendizados de cada etapa do desenvolvimento. O objetivo é transformar dificuldades observadas, feedbacks recebidos do professor, do monitor e do cliente, e decisões tomadas pela equipe em ações concretas para as próximas unidades.
