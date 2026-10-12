@@ -11,13 +11,13 @@ Para que uma User Story (US) seja escolhida para uma iteração, ela deve estar 
 
 A US deve seguir o formato padrão ("Eu como [Treinador/Auxiliar], quero [ação] para [valor]") e possuir um título claro.
 
-- **A User Story está ratreavél?**
+- **A User Story está rastreavél?**
 
-A US deve estar explicitamente vinculada a um Requisito Funcional, esse requisito está vinculado a uma caraterística de produto (CP) e a um objetivo específico (OE).
+A US deve estar explicitamente vinculada a um Requisito Funcional, esse requisito está vinculado a uma característica de produto (CP) e a um objetivo específico (OE).
 
-- **A User Story está mensuravel?**
+- **A User Story está mensurável?**
 
-Devem contemplar tanto o caminho feliz quanto os fluxos de exceção, especificamente as regras de resultado vazio. Devem ter os criterios de aceitação e regras de negócios.
+Devem contemplar tanto o caminho feliz quanto os fluxos de exceção, especificamente as regras de resultado vazio. Devem ter os critérios de aceitação e regras de negócio.
 
 - **A User Story foi prototipada?**
 
@@ -38,7 +38,7 @@ Para que a User Story seja considerada concluída e pronta para integração ao 
 
 100% dos critérios da US foram implementados, incluindo o tratamento adequado de estados vazios (sem quebra de interface ou erros de cálculo).
 
-- **O código foi integrado na branch main e revisado**
+- **O código foi integrado na branch main e revisado?**
 
 O código foi versionado, passou por Code Review (Pull Request aprovado), aprovado por outro membro, e foi integrado à branch principal sem conflitos.
 
