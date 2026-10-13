@@ -288,3 +288,29 @@ acesse diretamente pelo link: [https://youtu.be/TpDQ9dD7g3k](https://youtu.be/Tp
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+
+### Reunião da equipe 12
+
+<p class="reuniao-data">segunda-feira, 12/10/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jvtEUZl30WU" title="Reunião da equipe 12" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+acesse diretamente pelo link: [https://youtu.be/jvtEUZl30WU](https://youtu.be/jvtEUZl30WU)
+
+- **Pontos principais:**
+    - **[(0:00–2:19)](https://youtu.be/jvtEUZl30WU?t=0)** Apresentação do grupo Footboard e dos requisitos funcionais: as 5 características do produto, os requisitos de cadastro, edição e exclusão ligados ao treino, os requisitos de gráficos, as regras de negócio explícitas, os requisitos não funcionais e a matriz de rastreabilidade
+    - **[(2:19–5:12)](https://youtu.be/jvtEUZl30WU?t=139)** Backlog de produto: cada requisito funcional ligado a uma história de usuário e a requisitos não funcionais transversais, critérios de priorização avaliados pelo cliente (valor de negócio e frequência de uso) e pela equipe (esforço, complexidade e conhecimento, que geram o esforço técnico), matriz de valor x esforço e MVP validado com o cliente
+    - **[(5:12–8:24)](https://youtu.be/jvtEUZl30WU?t=312)** Justificativa do MVP, com os quadrantes 1 e 2 e frequência de uso de 3 a 5 como corte, a exceção de "cadastrar macrociclo" por ser vital, e os critérios de DOR e DOD (rastreabilidade, prototipação, validação com o cliente, 100% dos critérios de aceitação, pull request revisado, CI/CD, testes unitários e documentação atualizada)
+    - **[(8:30–10:12)](https://youtu.be/jvtEUZl30WU?t=510)** Cronograma das entregas: ajuste do plano inicial, equipe atualmente na iteração 5, prototipação a partir da iteração 6 e homologação assistida com deploy na AWS nas iterações finais
+    - **[(10:12–12:04)](https://youtu.be/jvtEUZl30WU?t=612)** Processos de Engenharia de Requisitos e de Software da Unidade 2: declaração constante dos requisitos, análise em consenso, atualização contínua do backlog e redefinição do MVP por conta de mais de 90% das notas com valor máximo
+    - **[(12:04–14:17)](https://youtu.be/jvtEUZl30WU?t=724)** Lições aprendidas e catálogo de termos técnicos: correções das issues da Unidade 1 viraram ações, criação do catálogo após a revisão de outra equipe na Semana Universitária, requisitos reduzidos de 46 para 41 e priorização feita em duas rodadas, com a frequência de uso incluída na segunda
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
