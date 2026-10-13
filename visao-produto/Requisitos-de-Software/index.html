@@ -1,0 +1,1637 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../interacao-equipe-cliente/">
+      
+      
+        <link rel="next" href="../dor-dod/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Requisitos de Software - FutBoard</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#requisitos-funcionais" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="FutBoard" class="md-header__button md-logo" aria-label="FutBoard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FutBoard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Requisitos de Software
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../cenario-atual/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Visão do Produto e Projeto
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../catalogos-termos/catalogos-termos/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Catálogo de termos do Futboard
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../atas-reunioes/reunioes-da-equipe/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reuniões
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../licoes-aprendidas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Lições Aprendidas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../entregas-unidade/entregas-unidade/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Entregas da Unidade
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="FutBoard" class="md-nav__button md-logo" aria-label="FutBoard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FutBoard
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão do Produto e Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visão do Produto e Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenario-atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cenário Atual do Cliente e Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucao-proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solução Proposta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intervencao-social/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervenção Social
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategias-esw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estratégias de Software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../engenharia-requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engenharia de Requisitos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronogramas-entregas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cronograma e Entregas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interacao-equipe-cliente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interação com Cliente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requisitos de Software
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requisitos de Software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#81-requisitos-funcionais-rfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Requisitos Funcionais — RFs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 Requisitos Funcionais — RFs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#811-regras-de-negocio-para-consultas-com-resultado-vazio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.1 Regras de Negócio para Consultas com Resultado Vazio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-requisitos-nao-funcionais-rnfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Requisitos Não Funcionais - RNFs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-matriz-sintese-de-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Matriz Síntese de Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dor-dod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DoR e DoD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backlog_do_produto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog do Produto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Catálogo de termos do Futboard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Catálogo de termos do Futboard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../catalogos-termos/catalogos-termos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Catálogo de termos do Futboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reuniões
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reuniões
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atas-reunioes/reunioes-da-equipe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reuniões da equipe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atas-reunioes/reunioes-cliente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reuniões com o cliente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../licoes-aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lições Aprendidas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entregas-unidade/entregas-unidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entregas da Unidade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#81-requisitos-funcionais-rfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Requisitos Funcionais — RFs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 Requisitos Funcionais — RFs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#811-regras-de-negocio-para-consultas-com-resultado-vazio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.1 Regras de Negócio para Consultas com Resultado Vazio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-requisitos-nao-funcionais-rnfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Requisitos Não Funcionais - RNFs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-matriz-sintese-de-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Matriz Síntese de Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="requisitos-funcionais">Requisitos Funcionais</h1>
+<h2 id="81-requisitos-funcionais-rfs">8.1 Requisitos Funcionais — RFs</h2>
+<p>Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve oferecer ao treinador e ao auxiliar, elicitadas a partir das reuniões de levantamento de requisitos com o cliente (Marcus Vinícius) e organizadas segundo as Características do Produto (CPs) definidas pela equipe:</p>
+<ul>
+<li><strong>CP01</strong> — Registro Categorizado dos Treinos</li>
+<li><strong>CP02</strong> — Estruturador de Periodização Esportiva</li>
+<li><strong>CP03</strong> — Dashboard Analítico</li>
+<li><strong>CP04</strong> — Geração Automática de Relatórios</li>
+<li><strong>CP05</strong> — Controle de Perfis de Acesso</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Identificador</th>
+<th style="text-align: left;">Descrição</th>
+<th style="text-align: center;">CP de origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>RF01</strong></td>
+<td style="text-align: left;"><strong>Cadastrar macrociclo:</strong> o sistema deve permitir que o treinador e o auxiliar cadastrem um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF02</strong></td>
+<td style="text-align: left;"><strong>Editar macrociclo:</strong> o sistema deve permitir que o treinador e o auxiliar editem os dados de um macrociclo anteriormente cadastrado.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF03</strong></td>
+<td style="text-align: left;"><strong>Excluir macrociclo:</strong> o sistema deve permitir que o treinador e o auxiliar excluam um macrociclo cadastrado, removendo-o da estrutura de periodização.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF04</strong></td>
+<td style="text-align: left;"><strong>Cadastrar mesociclo:</strong> o sistema deve permitir que o treinador e o auxiliar cadastrem um novo mesociclo vinculado a um macrociclo existente, informando o nome do mesociclo.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF05</strong></td>
+<td style="text-align: left;"><strong>Editar mesociclo:</strong> o sistema deve permitir que o treinador e o auxiliar editem os dados de um mesociclo anteriormente cadastrado.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF06</strong></td>
+<td style="text-align: left;"><strong>Excluir mesociclo:</strong> o sistema deve permitir que o treinador e o auxiliar excluam um mesociclo cadastrado.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF07</strong></td>
+<td style="text-align: left;"><strong>Cadastrar microciclo:</strong> o sistema deve permitir que o treinador e o auxiliar cadastrem um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF08</strong></td>
+<td style="text-align: left;"><strong>Editar microciclo:</strong> o sistema deve permitir que o treinador e o auxiliar editem os dados de um microciclo anteriormente cadastrado.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF09</strong></td>
+<td style="text-align: left;"><strong>Excluir microciclo:</strong> o sistema deve permitir que o treinador e o auxiliar excluam um microciclo cadastrado.</td>
+<td style="text-align: center;">CP02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF10</strong></td>
+<td style="text-align: left;"><strong>Cadastrar comportamento:</strong> o sistema deve permitir que o treinador e o auxiliar cadastrem um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF11</strong></td>
+<td style="text-align: left;"><strong>Editar comportamento:</strong> o sistema deve permitir que o treinador e o auxiliar editem um comportamento tático já cadastrado.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF12</strong></td>
+<td style="text-align: left;"><strong>Excluir comportamento:</strong> o sistema deve permitir que o treinador e o auxiliar excluam um comportamento tático cadastrado.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF13</strong></td>
+<td style="text-align: left;"><strong>Cadastrar atividade:</strong> o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova atividade, informando seus dados invariáveis: tipologia e tipo de SSP.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF14</strong></td>
+<td style="text-align: left;"><strong>Editar atividade:</strong> o sistema deve permitir que o treinador e o auxiliar editem os dados de uma atividade já cadastrada.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF15</strong></td>
+<td style="text-align: left;"><strong>Excluir atividade:</strong> o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF16</strong></td>
+<td style="text-align: left;"><strong>Cadastrar sessão:</strong> o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF17</strong></td>
+<td style="text-align: left;"><strong>Editar sessão:</strong> o sistema deve permitir que o treinador e o auxiliar editem os dados de uma sessão de treino já cadastrada.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF18</strong></td>
+<td style="text-align: left;"><strong>Excluir sessão:</strong> o sistema deve permitir que o treinador e o auxiliar excluam uma sessão de treino cadastrada.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF19</strong></td>
+<td style="text-align: left;"><strong>Cadastrar atividade na biblioteca:</strong> o sistema deve permitir que o treinador e o auxiliar cadastrem uma atividade diretamente na biblioteca de treinos, independentemente do cadastro de uma sessão específica, para que ela fique disponível para reutilização futura.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF20</strong></td>
+<td style="text-align: left;"><strong>Editar atividade na biblioteca:</strong> o sistema deve permitir que o treinador e o auxiliar editem uma atividade cadastrada na biblioteca de treinos.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF21</strong></td>
+<td style="text-align: left;"><strong>Excluir atividade na biblioteca:</strong> o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada na biblioteca de treinos.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf22"></a><strong>RF22</strong></td>
+<td style="text-align: left;"><strong>Exibir indicador de treino:</strong> o sistema deve exibir, para o treinador e o auxiliar, indicadores como número de sessões, minutos totais de treino, variabilidade de exercícios e número de execuções.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF23</strong></td>
+<td style="text-align: left;"><strong>Reutilizar atividade cadastrada:</strong> o sistema deve permitir que o treinador e o auxiliar adicionem a uma sessão de treino uma atividade já cadastrada na biblioteca, preenchendo automaticamente, no momento da seleção, os campos inerentes à atividade.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf24"></a><strong>RF24</strong></td>
+<td style="text-align: left;"><strong>Consultar informação de atividade do treino:</strong> o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de atividade, atualizando automaticamente as informações exibidas.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf25"></a><strong>RF25</strong></td>
+<td style="text-align: left;"><strong>Gerar relatório de treino:</strong> o sistema deve permitir que o treinador e o auxiliar gerem um relatório do treino em formato PDF.</td>
+<td style="text-align: center;">CP04</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF26</strong></td>
+<td style="text-align: left;"><strong>Alternar unidade de tempo:</strong> o sistema deve permitir que o treinador e o auxiliar alternem, nos gŕaficos, a visualização do tempo das atividades entre tempo absoluto (em minutos) e tempo relativo (em porcentagem do tempo total da sessão).</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF27</strong></td>
+<td style="text-align: left;"><strong>Criar conta:</strong> o sistema deve permitir que o treinador e o auxiliar criem uma conta de acesso à aplicação.</td>
+<td style="text-align: center;">CP05</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF28</strong></td>
+<td style="text-align: left;"><strong>Fazer login:</strong> o sistema deve permitir que o treinador e o auxiliar se autentiquem na aplicação a partir de um login e senha de acesso.</td>
+<td style="text-align: center;">CP05</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF29</strong></td>
+<td style="text-align: left;"><strong>Anexar imagem à atividade:</strong> o sistema deve permitir que o treinador e o auxiliar anexem uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade na biblioteca e nas sessões de treino em que ela for incluída.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF30</strong></td>
+<td style="text-align: left;"><strong>Registrar pontuação da atividade:</strong> o sistema deve permitir que o treinador e o auxiliar registrem, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF31</strong></td>
+<td style="text-align: left;"><strong>Gerar análise textual do treino:</strong> o sistema deve permitir que o treinador e o auxiliar gerem, com inteligência artificial, uma análise textual (insight) sobre as informações do treino.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF32</strong></td>
+<td style="text-align: left;"><strong>Registrar atributo técnico da atividade:</strong> o sistema deve permitir que o treinador e o auxiliar registrem, de forma opcional, o atributo técnico trabalhado em uma atividade (ex: domínio orientado, cabeceira defensiva).</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF33</strong></td>
+<td style="text-align: left;"><strong>Editar atributo técnico da atividade:</strong> o sistema deve permitir que o treinador e o auxiliar editem um atributo técnico registrado em uma atividade.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RF34</strong></td>
+<td style="text-align: left;"><strong>Excluir atributo técnico da atividade:</strong> o sistema deve permitir que o treinador e o auxiliar excluam um atributo técnico registrado em uma atividade.</td>
+<td style="text-align: center;">CP01</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf37"></a><strong>RF35</strong></td>
+<td style="text-align: left;"><strong>Consultar informação de espaço do treino:</strong> o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de espaço do treino, atualizando automaticamente as informações exibidas.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf38"></a><strong>RF36</strong></td>
+<td style="text-align: left;"><strong>Consultar informação de orientação do treino:</strong> o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de orientação do treino, atualizando automaticamente as informações exibidas.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf39"></a><strong>RF37</strong></td>
+<td style="text-align: left;"><strong>Consultar informação de momento do jogo do treino:</strong> o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de momento do jogo do treino, atualizando automaticamente as informações exibidas.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf40"></a><strong>RF38</strong></td>
+<td style="text-align: left;"><strong>Consultar informação de fase do jogo do treino:</strong> o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de fase do jogo do treino, atualizando automaticamente as informações exibidas.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf41"></a><strong>RF39</strong></td>
+<td style="text-align: left;"><strong>Consultar informação de comportamento do treino:</strong> o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de comportamento do treino, atualizando automaticamente as informações exibidas.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf42"></a><strong>RF40</strong></td>
+<td style="text-align: left;"><strong>Consultar informação de atributo técnico do treino:</strong> o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de atributo técnico, atualizando automaticamente as informações exibidas.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="rf43"></a><strong>RF41</strong></td>
+<td style="text-align: left;"><strong>Consultar análise comparativa por periodização:</strong> o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a análise comparativa por periodização (mesociclo, microciclo e mês), atualizando automaticamente as informações exibidas.</td>
+<td style="text-align: center;">CP03</td>
+</tr>
+</tbody>
+</table>
+<h3 id="811-regras-de-negocio-para-consultas-com-resultado-vazio">8.1.1 Regras de Negócio para Consultas com Resultado Vazio</h3>
+<p>Esta subseção detalha o comportamento esperado do sistema nos cenários em que as consultas e filtros não retornam dados. Nessas situações de resultado vazio, o sistema não deve apontar erros, mas sim manter a estabilidade da interface, preservar os filtros aplicados e exibir uma mensagem orientadora ao usuário, conforme descrito na tabela a seguir:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Requisito</th>
+<th style="text-align: left;">Tipo de Consulta</th>
+<th style="text-align: left;">Condição de Resultado Vazio</th>
+<th style="text-align: left;">Comportamento do Sistema (Regra de Negócio)</th>
+<th style="text-align: left;">Mensagem e Ação Sugerida ao Usuário</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><a href="#rf22"><strong>RF22</strong></a></td>
+<td style="text-align: left;">Indicadores na tela inicial</td>
+<td style="text-align: left;">Nenhum treino cadastrado no período selecionado.</td>
+<td style="text-align: left;">Os indicadores quantitativos são exibidos com valor neutro (<code>0 sessões</code>, <code>0 min</code>, <code>0 execuções</code>). Não ocorrem erros de renderização.</td>
+<td style="text-align: left;"><em>"Nenhum treino registrado neste período."</em> O sistema exibe atalho para cadastrar nova sessão.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="#rf25"><strong>RF25</strong></a></td>
+<td style="text-align: left;">Informações de atividades do treino</td>
+<td style="text-align: left;">Filtro aplicado para o qual não existem atividades cadastradas.</td>
+<td style="text-align: left;">A lista de atividades é substituída por um componente visual de estado vazio.</td>
+<td style="text-align: left;"><em>"Nenhuma atividade encontrada para os filtros aplicados."</em> O sistema disponibiliza botão para limpar filtros.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="#rf26"><strong>RF26</strong></a></td>
+<td style="text-align: left;">Geração de relatório em PDF</td>
+<td style="text-align: left;">Exportação de relatório para um período sem sessões registradas.</td>
+<td style="text-align: left;">O sistema emite notificação informativa na interface, evitando gerar arquivos vazios ou erros.</td>
+<td style="text-align: left;"><em>"Não há registros de treinos no período selecionado para compor o relatório."</em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="#rf37"><strong>RF37</strong></a> a <a href="#rf42"><strong>RF42</strong></a></td>
+<td style="text-align: left;">Informações de dimensões do treino (espaço, orientação, momento, fase, comportamento, atributo)</td>
+<td style="text-align: left;">Período filtrado não possui treinos com a dimensão selecionada.</td>
+<td style="text-align: left;">O gráfico é renderizado com visual neutro (<code>0 min</code> e <code>0%</code>), sem disparar exceções (ex.: evitar divisão por zero).</td>
+<td style="text-align: left;"><em>"Sem atividades com [esta dimensão] no período."</em> Mantém os filtros ativos para nova consulta.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><a href="#rf43"><strong>RF43</strong></a></td>
+<td style="text-align: left;">Análise comparativa por periodização</td>
+<td style="text-align: left;">Um ou ambos os ciclos selecionados não possuem treinos.</td>
+<td style="text-align: left;">O sistema renderiza a coluna do ciclo sem dados com indicativo neutro, alertando a impossibilidade de cálculo comparativo.</td>
+<td style="text-align: left;"><em>"O ciclo selecionado não possui treinos registrados para permitir o comparativo."</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="82-requisitos-nao-funcionais-rnfs">8.2 Requisitos Não Funcionais - RNFs</h2>
+<p>Lista de requisitos não funcionais, contendo: Numeração do Requisito; Nome; Descrição; Classificação URPS+; Critério de Verificação.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">ID</th>
+<th style="text-align: left;">Nome</th>
+<th style="text-align: left;">Descrição</th>
+<th style="text-align: center;">Classificação URPS+</th>
+<th style="text-align: center;">Critério de Verificação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>RNF01</strong></td>
+<td style="text-align: left;">Proteção de Dados Pessoais dos Atletas</td>
+<td style="text-align: left;">O sistema deve utilizar a aplicacao de hash irreversível de senhas via bcrypt para guardar as senhas dos usuários.</td>
+<td style="text-align: center;">Segurança</td>
+<td style="text-align: center;">Tentativas de acesso por utilizadores sem permissão devem retornar bloqueio de acesso com o código 401, verificavel nos logs do backend.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>RNF02</strong></td>
+<td style="text-align: left;">Interface Responsiva e Adaptável</td>
+<td style="text-align: left;">A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</td>
+<td style="text-align: center;">Usabilidade</td>
+<td style="text-align: center;">Ao redimensionar a janela do navegador ou abrir a aplicacao em janelas com larguras de 360px (mobile), 768px (tablet) e 1366px (desktop). O teste é considerado aprovado se nenhum gráfico ficar cortado, sobreposto ou exigir barra de rolagem horizonal na página.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>RNF03</strong></td>
+<td style="text-align: left;">Eficiência no Cadastro de Treinos</td>
+<td style="text-align: left;">O sistema deve possuir fluxos de tela com tempo máximo de prenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</td>
+<td style="text-align: center;">Usabilidade</td>
+<td style="text-align: center;">O teste inicia no momento em que o treinador clica no botão para criar um novo treino e termina no momento em que a mensagem de "Treino cadastrado com sucesso" é exibida. O critério será considerado atendido se, para um cenário de complexidade média (cadastrar um treino utilizando atividades previamente cadastradas na biblioteca), o tempo total for estritamente inferior a 2 minutos.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>RNF04</strong></td>
+<td style="text-align: left;">Atualização em Tempo Real do Dashboard</td>
+<td style="text-align: left;">Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</td>
+<td style="text-align: center;">Performance</td>
+<td style="text-align: center;">Durante os testes de sistema, o treinador cadastra um novo treino enquanto visualiza o dashboard. O tempo entre a confirmação do salvamento e a completa re-renderização do gráfico com os novos dados deve ser cronometrado. O critério é atendido se o tempo de atualização for estritamente menor ou igual a 5 segundos.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="83-matriz-sintese-de-rastreabilidade">8.3 Matriz Síntese de Rastreabilidade</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Contribuição principal</th>
+<th style="text-align: center;">Contribuição secundária</th>
+<th style="text-align: center;">CP</th>
+<th style="text-align: center;">RFs relacionados</th>
+<th style="text-align: center;">RNFs relacionados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">OE1</td>
+<td style="text-align: center;">OE4</td>
+<td style="text-align: center;">CP1</td>
+<td style="text-align: center;">RF10, RF11, RF12, RF13, RF14, RF15, RF16, RF17, RF18, RF19, RF20, RF21, RF23, RF29, RF32, RF33, RF34</td>
+<td style="text-align: center;">RNF02, RNF03, RNF04</td>
+</tr>
+<tr>
+<td style="text-align: center;">OE2</td>
+<td style="text-align: center;">OE3</td>
+<td style="text-align: center;">CP2</td>
+<td style="text-align: center;">RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF08, RF09</td>
+<td style="text-align: center;">RNF02, RNF03, RNF04</td>
+</tr>
+<tr>
+<td style="text-align: center;">OE3</td>
+<td style="text-align: center;">OE4</td>
+<td style="text-align: center;">CP3</td>
+<td style="text-align: center;">RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40, RF41</td>
+<td style="text-align: center;">RNF02, RNF03, RNF04</td>
+</tr>
+<tr>
+<td style="text-align: center;">OE4</td>
+<td style="text-align: center;">OE3</td>
+<td style="text-align: center;">CP4</td>
+<td style="text-align: center;">RF25</td>
+<td style="text-align: center;">RNF02, RNF04</td>
+</tr>
+<tr>
+<td style="text-align: center;">OE1</td>
+<td style="text-align: center;">OE4</td>
+<td style="text-align: center;">CP5</td>
+<td style="text-align: center;">RF27, RF28</td>
+<td style="text-align: center;">RNF01, RNF02</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/youtube-timestamps.js"></script>
+      
+    
+  </body>
+</html>
