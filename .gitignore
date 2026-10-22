@@ -1,11 +1,24 @@
 # MkDocs
 site/
 
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Node.js
+node_modules/
+frontend/dist/
+npm-debug.log*
+
 # Python virtual environment
 .venv/
-
-path/
-
 venv/
+env/
+path/
+__pycache__/
+*.py[cod]
+*.sqlite3
+staticfiles/
 
 .idea/
