@@ -1,6 +1,6 @@
 # Reuniões da equipe
 
-**Período:** 20/08/2026 - 13/10/2026
+**Período:** 20/08/2026 - 22/10/2026
 
 Esta aba reúne as atas das reuniões internas da equipe. Algumas reuniões também contaram com a participação do monitor Eduardo Lobo Moreira.
 
@@ -27,7 +27,8 @@ Esta aba reúne as atas das reuniões internas da equipe. Algumas reuniões tamb
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
 
----
+*** End of File
+
 
 ### Reunião da equipe 2
 
@@ -305,6 +306,52 @@ acesse diretamente pelo link: [https://youtu.be/jvtEUZl30WU](https://youtu.be/jv
     - **[(10:12–12:04)](https://youtu.be/jvtEUZl30WU?t=612)** Processos de Engenharia de Requisitos e de Software da Unidade 2: declaração constante dos requisitos, análise em consenso, atualização contínua do backlog e redefinição do MVP por conta de mais de 90% das notas com valor máximo
     - **[(12:04–14:17)](https://youtu.be/jvtEUZl30WU?t=724)** Lições aprendidas e catálogo de termos técnicos: correções das issues da Unidade 1 que viraram ações, requisitos reduzidos de 46 para 41 e mvp definido em duas rodadas, com a frequência de uso incluída na segunda
 
+---
+
+### Reunião da equipe 13
+
+<p class="reuniao-data">quinta-feira, 15/10/2026</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YsezlVObTa8" title="Reunião da equipe 13" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/YsezlVObTa8](https://youtu.be/YsezlVObTa8)
+
+- **Pontos principais:**
+    - **[(0:06–3:15)](https://youtu.be/YsezlVObTa8?t=6)** Gustavo aponta que o cronograma do GitPages está errado por ter sido montado por característica de produto. É preciso distribuir as histórias de usuário do MVP por iteração, começando pela árvore de cadastros: macrociclo, mesociclo, microciclo, atividade e sessão.
+    - **[(3:09–5:51)](https://youtu.be/YsezlVObTa8?t=189)** A equipe contabiliza 27 requisitos em cinco semanas de design e construção, cerca de 5,4 requisitos por semana. Giovana propõe usar as horas estimadas, e decidem realizar esse estudo, considerando que a sequência dos cadastros limita a ordem.
+    - **[(5:51–8:02)](https://youtu.be/YsezlVObTa8?t=351)** Discussão sobre a solicitação do professor de apresentar as histórias de usuário de cada iteração. A equipe considera o uso de épicos, mas lembra que eles e os temas não são obrigatórios; o grupo combina consultar o monitor.
+    - **[(8:02–10:19)](https://youtu.be/YsezlVObTa8?t=482)** A contagem por característica (17 na CP01, 9 na CP02, 12 na CP03, 1 na CP04 e 2 na CP05) mostra que não é possível diluir as histórias por característica. A dúvida será encaminhada ao monitor.
+    - **[(10:19–12:17)](https://youtu.be/YsezlVObTa8?t=619)** Definidos os próximos passos: estabelecer as histórias de cada iteração antes dos protótipos da semana seguinte, avisar o monitor no grupo e tirar dúvidas com o cliente pelo WhatsApp. Leonardo informa que faltará na terça-feira.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ❌ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+
+---
+
+## Unidade 03
+
+### Reunião da equipe 14
+
+<p class="reuniao-data">segunda-feira, 19/10/2026</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uG-GW3ucPjw" title="Reunião da equipe 14" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/uG-GW3ucPjw](https://youtu.be/uG-GW3ucPjw)
+
+- **Pontos principais:**
+    - **[(0:03–4:25)](https://youtu.be/uG-GW3ucPjw?t=3)** Gustavo comenta o cronograma do grupo “Salvando vidas através do esporte”, que coloca cada história de usuário em cada iteração, e lembra que o professor quer ver o que será entregue em cada ciclo. A principal preocupação é a dependência entre histórias.
+    - **[(4:25–8:13)](https://youtu.be/uG-GW3ucPjw?t=265)** Rafael apresenta no Miro a divisão das histórias por iteração com base no esforço da planilha, sem esforços altos nas primeiras iterações e com cinco ou seis histórias por iteração. A equipe discute intercalar esforços, respeitar dependências e evitar concentrar todos os CRUDs na mesma iteração.
+    - **[(8:13–15:25)](https://youtu.be/uG-GW3ucPjw?t=493)** Decidido que cada card terá a complexidade técnica, em escala de 1 a 4, e o valor, além do esforço já representado pelas cores.
+    - **[(15:25–29:09)](https://youtu.be/uG-GW3ucPjw?t=925)** Montagem das iterações com cadastro e edição de macro, meso e microciclo, biblioteca (histórias 19 e 20 em bloco), indicadores e PDF no final, além do rebalanceamento das iterações 10 e 11. As histórias 7, 8 e 9 não podem mudar por dependência, e os ajustes continuarão ao longo do projeto.
+    - **[(30:14–33:32)](https://youtu.be/uG-GW3ucPjw?t=1814)** Discussão sobre como expor o cronograma. Após comparar com outro grupo, a equipe mantém a exposição por história de usuário em cada iteração de design e construção.
+    - **[(33:32–38:48)](https://youtu.be/uG-GW3ucPjw?t=2012)** Organização da prototipação em duplas, pois cadastro e edição dependem um do outro, com dois checkpoints na iteração de 19 a 26: terminar o protótipo e iniciar a construção. A validação com o cliente será feita por reunião ou mensagem, observando o DOR e o DOD.
+    - **[(38:48–42:38)](https://youtu.be/uG-GW3ucPjw?t=2328)** Divisão das histórias entre os integrantes e uso do Figma aberto em conjunto para a prototipação.
+
 | Participante | Reunião | Função |
 | :--- | :---: | :--- |
 | Giovana Martins De Brito | ✅ | Membro da equipe |
@@ -314,3 +361,4 @@ acesse diretamente pelo link: [https://youtu.be/jvtEUZl30WU](https://youtu.be/jv
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+

@@ -1,6 +1,6 @@
 # Reuniões com o cliente
 
-**Período:** 24/08/2026 - 13/10/2026
+**Período:** 24/08/2026 - 22/10/2026
 
 Esta aba reúne as atas das reuniões realizadas com o cliente Marcus Vinicius.
 
@@ -32,7 +32,8 @@ acesse diretamente pelo link: [ https://youtu.be/SzRty4GPg_k]( https://youtu.be/
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Marcus Vinicius | ✅ | Cliente |
 
----
+*** End of File
+
 
 ### Reunião com o cliente 2
 
@@ -88,3 +89,59 @@ acesse diretamente pelo link: [https://www.youtube.com/watch?v=kc0_jxT9aeY](http
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Marcus Vinicius | ✅ | Cliente |
+
+---
+
+### Reunião com o cliente 4
+
+<p class="reuniao-data">quinta-feira, 15/10/2026</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rMuy8z_OZig" title="Reunião com o cliente 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/rMuy8z_OZig](https://youtu.be/rMuy8z_OZig)
+
+- **Pontos principais:**
+    - **[(0:00–1:02)](https://youtu.be/rMuy8z_OZig?t=0)** Gustavo explica que a reunião será rápida e focada no fluxo de interação com a aplicação, e passa a condução para Giovana.
+    - **[(1:02–8:44)](https://youtu.be/rMuy8z_OZig?t=62)** Apresentação do fluxo montado a partir dos requisitos e do processo atual de Marcus, incluindo a legenda de cores, os quatro objetivos específicos e, para cada uma das cinco características de produto, as ações, telas e requisitos associados.
+    - **[(8:44–10:50)](https://youtu.be/rMuy8z_OZig?t=524)** Marcus esclarece que consulta mais as informações no nível de macrociclo e microciclo, pois os treinos alimentam os dados do macrociclo. A equipe registra o ajuste relacionado à CP3.
+    - **[(10:50–13:29)](https://youtu.be/rMuy8z_OZig?t=650)** Marcus considera o fluxo correto e autoriza o início dos protótipos. Gustavo explica que as próximas reuniões terão protótipos de baixa fidelidade dos requisitos do MVP, enviados no grupo e validados com o cliente antes da implementação.
+    - **[(13:29–14:12)](https://youtu.be/rMuy8z_OZig?t=809)** Combinado o envio do fluxo por e-mail, com aprovação de todos para o encerramento.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Marcus Vinicius | ✅ | Cliente |
+
+---
+
+## Unidade 03
+
+### Reunião com o cliente 5
+
+<p class="reuniao-data">quinta-feira, 22/10/2026</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/s0J820mlw-E" title="Reunião com o cliente 5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/s0J820mlw-E](https://youtu.be/s0J820mlw-E)
+
+
+- **Pontos principais:**
+    - **[(0:10–4:40)](https://youtu.be/s0J820mlw-E?t=10)** Gustavo apresenta a estrutura de periodização, composta por macrociclo, mesociclo e microciclo, e exemplos de visualização do dashboard.
+    - **[(4:40–13:49)](https://youtu.be/s0J820mlw-E?t=280)** Marcus explica como organiza a periodização na prática: cadastra primeiro a temporada (macrociclo) e depois os mesociclos e microciclos, refroça que a prototipação deve seguir esse fluxo em árvore, diferente do que foi apresentado pela equipe.
+    - **[(13:49–18:49)](https://youtu.be/s0J820mlw-E?t=829)** Marcus informa que a duração dos mesociclos varia conforme o calendário de competições, sem um tamanho fixo em semanas, reforça a necessidade de data de início e data final tendo em vista esse comportamento. 
+    - **[(19:27–32:52)](https://youtu.be/s0J820mlw-E?t=1167)** Conversa com a equipe sobre a incorporação dessas informações aos requisitos e sobre o protótipo, com o combinado de realizar a validação pelo WhatsApp.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ❌ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Marcus Vinicius | ✅ | Cliente |
+
+
