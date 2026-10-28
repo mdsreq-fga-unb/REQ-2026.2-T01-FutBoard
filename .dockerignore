@@ -1,0 +1,41 @@
+# Controle de versão
+.git
+.gitignore
+.github
+
+# Documentação e artefatos estáticos do MkDocs
+docs
+site
+mkdocs.yml
+README.md
+
+# Variáveis de ambiente locais e segredos
+.env
+.env.*
+!.env.example
+
+# Ambientes virtuais e caches Python
+.venv
+venv
+env
+__pycache__
+*.py[cod]
+*$py.class
+*.sqlite3
+.pytest_cache
+.ruff_cache
+.coverage
+htmlcov
+
+# Dependências e artefatos de build Node.js
+node_modules
+frontend/node_modules
+frontend/dist
+npm-debug.log*
+
+# IDEs e arquivos de sistema operacional
+.idea
+.vscode
+*.swp
+.DS_Store
+Thumbs.db

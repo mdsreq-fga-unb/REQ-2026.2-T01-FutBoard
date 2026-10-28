@@ -1,24 +1,37 @@
 # MkDocs
 site/
 
-# Environment variables
+# Variáveis de ambiente
 .env
 .env.*
 !.env.example
 
-# Node.js
+# Node.js / Frontend
 node_modules/
+frontend/node_modules/
 frontend/dist/
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Python virtual environment
+# Python virtual environment / Backend
 .venv/
 venv/
 env/
 path/
 __pycache__/
 *.py[cod]
+*$py.class
 *.sqlite3
 staticfiles/
+mediafiles/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 
+# IDEs e Sistema Operacional
 .idea/
+.vscode/
+.DS_Store
+Thumbs.db

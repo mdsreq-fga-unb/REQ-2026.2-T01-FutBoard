@@ -1,0 +1,19 @@
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = [
+    ".venv",
+    "venv",
+    "__pycache__",
+    "migrations",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["futboard_core", "apps"]
+
+[tool.coverage.run]
+source = ["apps", "futboard_core"]
+omit = ["*/migrations/*", "*/tests.py", "futboard_core/asgi.py", "futboard_core/wsgi.py"]
