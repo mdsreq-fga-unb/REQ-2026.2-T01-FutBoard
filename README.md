@@ -7,7 +7,7 @@
 
 ## Sobre o Projeto
 
-O **FutBoard** é um sistema web idealizado para solucionar a dificuldade no controle, planejamento e análise dos treinos de equipes esportivas de futebol de base (Sub-17 do Canaã Esporte Clube). Em um ambiente esportivo desafiador e com constante demanda por resultados, o acompanhamento da equipe costumava ser feito por meio de anotações fragmentadas em planilhas e dashboards estáticos.
+O **FutBoard** é um sistema web idealizado para solucionar a dificuldade no controle, planejamento e análise dos treinos da equipe de futebol de base (Sub-17 do Canaã Esporte Clube). Em um ambiente esportivo desafiador e com constante demanda por resultados, o acompanhamento da equipe costumava ser feito por meio de anotações fragmentadas em planilhas e dashboards estáticos.
 
 O objetivo do FutBoard é centralizar, padronizar e otimizar o registro categorizado de treinos estruturado na periodização esportiva (macrociclos, mesociclos, microciclos e sessões), fornecendo indicadores analíticos em tempo real e relatórios em PDF para apoiar a tomada de decisão da comissão técnica.
 
@@ -21,8 +21,6 @@ Toda a documentação do projeto, incluindo elicitação, modelagem, análise, c
 ---
 
 ## Arquitetura e Stack Tecnológica
-
-Conforme definido no documento de [Solução Proposta](docs/visao-produto/solucao-proposta.md), a aplicação adota uma arquitetura cliente-servidor desacoplada dividida em três camadas principais:
 
 | Camada | Tecnologias | Responsabilidade |
 | :--- | :--- | :--- |
@@ -138,116 +136,115 @@ Na inicialização, o Docker Compose:
 
 ---
 
-## Padronização do Fluxo de Desenvolvimento (Comandos Úteis)
+## Guia de Comandos por Função e Quando Utilizar
 
-### Subir, Pausar e Derrubar Serviços
+> **Observação:** Todos os comandos `docker compose` devem ser executados na pasta raiz do repositório (`REQ-2026.2-T01-FutBoard`).
 
-```bash
-# Subir os serviços aproveitando imagens existentes
-docker compose up -d
+### 1. Configuração Inicial (Apenas na 1ª vez que clonar o repositório)
 
-# Parar os contêineres preservando os dados do banco
-docker compose stop
+| Comando | Quando usar |
+| :--- | :--- |
+| `Copy-Item .env.example .env` *(PowerShell)*<br>`cp .env.example .env` *(Linux / macOS / Git Bash)* | **Logo após clonar o repositório.** Cria o arquivo `.env` local com as variáveis padrão do banco, Django e Vite. |
+| `docker compose up --build` | **Na primeira vez que for subir o projeto.** Constrói as imagens do backend e frontend, sobe o PostgreSQL, roda as migrações e inicia os servidores. |
 
-# Derrubar os contêineres e a rede (mantém o volume de dados do PostgreSQL)
-docker compose down
+---
 
-# Reiniciar apenas um serviço específico (ex.: backend)
-docker compose restart backend
+### 2. Comandos de Docker (Para todos os desenvolvedores)
+
+Estes comandos gerenciam os 3 serviços (`db` na porta `5432`, `backend` na porta `8000` e `frontend` na porta `5173`):
+
+| Comando | Quando usar |
+| :--- | :--- |
+| `docker compose up -d` | **No início do dia de trabalho**, quando as imagens já foram construídas antes. Sobe tudo em segundo plano (deixando o terminal livre). |
+| `docker compose ps` | **Para checar se tudo está rodando.** Mostra o status de saúde (`healthy`) do banco, backend e frontend. |
+| `docker compose logs -f` | **Para ver erros ou logs em tempo real** de todos os serviços juntos. *(Use `Ctrl + C` para sair dos logs sem parar os contêineres).* |
+| `docker compose logs -f frontend`<br>`docker compose logs -f backend` | **Para acompanhar os logs de apenas um serviço** (útil quando você está trabalhando apenas no front ou apenas no back). |
+| `docker compose restart backend` | **Para reiniciar rapidamente apenas um serviço específico** sem derrubar os demais. |
+| `docker compose stop` | **Para pausar o trabalho** sem remover os contêineres (preserva tudo como está). |
+| `docker compose down` | **Para desligar e remover os contêineres** ao final do dia (os dados do banco continuam salvos no volume `postgres_data`). |
+| `docker compose build --no-cache`<br>`docker compose up -d --force-recreate` | **Para reconstruir todas as imagens do zero** sem cache e recriar os contêineres quando houver mudanças estruturais de ambiente. |
+| `docker compose down -v` | **CUIDADO (Ação destrutiva):** Apaga os contêineres **e zera o banco de dados** por completo. Use apenas quando quiser resetar o banco do zero. |
+
+---
+
+### 3. Comandos para Desenvolvedores Frontend
+
+Os desenvolvedores de Frontend podem rodar os comandos **sem Docker** (direto na pasta `frontend/`, o que é mais rápido quando estiverem desenvolvendo apenas telas) ou **via Docker**.
+
+> 💡 *No PowerShell do Windows, caso `npm` apresente erro de permissão de script (`PSSecurityException`), utilize `npm.cmd` no lugar de `npm`.*
+
+#### A) Rodando direto na máquina (Sem Docker — dentro da pasta `frontend/`)
+
+| Comando | Quando usar |
+| :--- | :--- |
+| `cd frontend` | **Antes de rodar comandos locais do frontend**, para entrar na pasta `frontend/`. |
+| `npm.cmd install` | **Na primeira vez que rodar sem Docker** ou quando alguém da equipe adicionar uma biblioteca nova no `package.json`. |
+| `npm.cmd run dev` | **Durante o desenvolvimento da interface.** Inicia o servidor Vite em `http://localhost:5173` com atualização automática (*hot-reload*). |
+| `npm.cmd install <nome-do-pacote>` | **Quando precisar instalar uma nova biblioteca** no frontend. |
+| `npm.cmd run lint` | **Antes de fazer commit / abrir PR.** Verifica se há erros de código, variáveis não usadas ou problemas nas regras do React (ESLint). |
+| `npm.cmd run build` | **Antes de fazer commit / abrir PR.** Testa se o código compila para produção sem erros de importação ou CSS/Sass. |
+
+#### B) Rodando via Docker (Na raiz do repositório)
+
+| Comando | Quando usar |
+| :--- | :--- |
+| `docker compose up -d --build frontend` | **Quando o `package.json` ou `frontend/Dockerfile` for alterado** (ex.: após puxar alterações da `main`/`staging` com pacotes novos). |
+| `docker compose exec frontend npm install <nome-do-pacote>` | **Para instalar um pacote novo** diretamente dentro do contêiner do frontend. |
+| `docker compose exec frontend npm run lint` | **Antes de commitar**, para rodar o ESLint dentro do contêiner. |
+| `docker compose exec frontend npm run build` | **Antes de commitar**, para testar o build de produção dentro do contêiner. |
+
+---
+
+### 4. Comandos para Desenvolvedores Backend
+
+Como o backend depende do **PostgreSQL 16**, recomenda-se executar os comandos pelo Docker Compose (na raiz do repositório):
+
+#### A) Banco de Dados, Migrações e Administração (Django)
+
+| Comando | Quando usar |
+| :--- | :--- |
+| `docker compose exec backend python manage.py makemigrations` | **Sempre que criar ou alterar um model (`models.py`).** Gera o arquivo de migração na pasta `migrations/` *(que deve ser commitado no Git)*. |
+| `docker compose exec backend python manage.py migrate` | **Logo após o `makemigrations` ou após dar `git pull`** com migrações novas feitas por colegas. Aplica as tabelas/colunas no PostgreSQL. |
+| `docker compose exec backend python manage.py createsuperuser` | **Quando quiser acessar o painel `/admin/` do Django** (`http://localhost:8000/admin/`) para inspecionar ou cadastrar registros manualmente. |
+| `docker compose exec backend python manage.py check` | **Para validar a integridade da configuração do Django** (`settings.py`, `urls.py`, `models.py`). |
+| `docker compose up -d --build backend` | **Quando adicionar uma biblioteca nova no `requirements.txt`** ou alterar o `backend/Dockerfile`. |
+| `docker compose exec backend sh` | **Para abrir um terminal interativo** dentro do contêiner do backend. |
+| `docker compose exec db psql -U futboard -d futboard` | **Para abrir o cliente SQL interativo (`psql`)** conectado diretamente ao banco PostgreSQL. |
+
+#### B) Testes Automatizados e Qualidade de Código (Ruff + Coverage)
+
+| Comando | Quando usar |
+| :--- | :--- |
+| `docker compose exec backend python manage.py test` | **Durante o desenvolvimento e antes de commitar.** Executa toda a suíte de testes automatizados (`tests.py`) dos apps `ciclos`, `treinos` e `usuarios`. |
+| `docker compose exec backend coverage run manage.py test`<br>`docker compose exec backend coverage report -m` | **Antes de abrir Pull Request (critério de DoD).** Executa os testes medindo a cobertura de código e exibe as linhas não cobertas. |
+| `docker compose exec backend ruff check .` | **Antes de commitar.** Analisa o código Python procurando erros de estilo, imports fora de ordem ou variáveis não utilizadas. |
+| `docker compose exec backend ruff format --check .` | **Antes de commitar.** Verifica se todos os arquivos `.py` estão formatados no padrão do projeto. |
+| `docker compose exec backend ruff format .` | **Quando o comando acima indicar diferenças de formatação.** Formata automaticamente todos os arquivos Python do backend. |
+
+#### C) Backup e Restauração do Banco de Dados
+
+| Comando | Quando usar |
+| :--- | :--- |
+| `docker compose exec -T db pg_dump -U futboard futboard > backup_futboard.sql` | **Quando quiser exportar um backup (`.sql`)** dos dados atuais do banco de desenvolvimento. |
+| `docker compose exec -T db psql -U futboard -d futboard < backup_futboard.sql` *(Linux/macOS)*<br>`Get-Content backup_futboard.sql \| docker compose exec -T db psql -U futboard -d futboard` *(PowerShell)* | **Quando quiser restaurar um backup (`.sql`)** no banco em execução. |
+
+---
+
+### 5. Checklist Rápido antes de cada Commit / Pull Request
+
+**Se você alterou o Frontend:**
+```powershell
+cd frontend
+npm.cmd run lint
+npm.cmd run build
 ```
 
-### Reconstruir Imagens (após alterar `Dockerfile`, `requirements.txt` ou `package.json`)
-
-```bash
-# Reconstruir todas as imagens sem cache e recriar contêineres
-docker compose build --no-cache
-docker compose up -d --force-recreate
-
-# Reconstruir apenas um serviço específico (ex.: frontend)
-docker compose up -d --build frontend
-```
-
-### Gerenciamento de Dependências e Migrações
-
-```bash
-# Criar novas migrações após alterar models.py no Django
-docker compose exec backend python manage.py makemigrations
-
-# Aplicar migrações no banco de dados
-docker compose exec backend python manage.py migrate
-
-# Criar superusuário para acessar o Django Admin
-docker compose exec backend python manage.py createsuperuser
-
-# Instalar um novo pacote no frontend dentro do contêiner
-docker compose exec frontend npm install <nome-do-pacote>
-```
-
-### Execução de Testes e Verificações
-
-```bash
-# Executar a suíte de testes automatizados do backend Django
-docker compose exec backend python manage.py test
-
-# Verificar integridade da configuração do projeto Django
+**Se você alterou o Backend:**
+```powershell
 docker compose exec backend python manage.py check
-
-# Executar testes com relatório de cobertura no backend
-docker compose exec backend coverage run manage.py test
-docker compose exec backend coverage report -m
-
-# Testar o build de produção do frontend
-docker compose exec frontend npm run build
-```
-
-### Formatação e Análise Estática de Código (Qualidade)
-
-```bash
-# Backend: análise estática (lint) e verificação de formatação com Ruff
 docker compose exec backend ruff check .
 docker compose exec backend ruff format --check .
-
-# Backend: aplicar formatação automática com Ruff
-docker compose exec backend ruff format .
-
-# Frontend: análise estática com ESLint
-docker compose exec frontend npm run lint
+docker compose exec backend python manage.py test
 ```
-
-### Consulta de Logs e Diagnóstico de Problemas
-
-```bash
-# Verificar o status e a saúde (healthcheck) dos contêineres
-docker compose ps
-
-# Acompanhar os logs de todos os serviços em tempo real
-docker compose logs -f
-
-# Acompanhar logs de um serviço específico (db, backend ou frontend)
-docker compose logs -f backend
-
-# Abrir um terminal interativo no backend ou no banco PostgreSQL
-docker compose exec backend sh
-docker compose exec db psql -U futboard -d futboard
-```
-
-### Persistência, Backup, Restauração e Limpeza de Dados
-
-Os dados do PostgreSQL ficam armazenados no volume nomeado `postgres_data`, garantindo que não sejam perdidos ao executar `docker compose down`.
-
-```bash
-# Exportar um backup (dump) do banco de dados de desenvolvimento
-docker compose exec -T db pg_dump -U futboard futboard > backup_futboard.sql
-
-# Restaurar um backup no banco em execução
-docker compose exec -T db psql -U futboard -d futboard < backup_futboard.sql
-
-# Limpar completamente os dados do banco e recriar os volumes do zero (AÇÃO DESTRUTIVA)
-docker compose down -v
-```
-
-> **Nota para usuários Windows (PowerShell):** O redirecionamento `<` não é nativo no PowerShell. Para restaurar um backup no PowerShell, utilize:  
-> `Get-Content backup_futboard.sql | docker compose exec -T db psql -U futboard -d futboard`  
-> Além disso, caso execute comandos `npm` diretamente no terminal do Windows fora do Docker e receba erro de política de execução (`PSSecurityException` no `npm.ps1`), utilize `npm.cmd` (ex.: `npm.cmd run build`) ou habilite scripts para o seu usuário com `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
 
 ---
