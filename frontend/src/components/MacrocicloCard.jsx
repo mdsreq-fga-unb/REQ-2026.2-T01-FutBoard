@@ -41,16 +41,14 @@ export default function MacrocicloCard({ macrociclo, onEditMacrociclo }) {
       }`}
     >
       {macrociclo.status === "em_andamento" && (
-        <div className="h-1 w-full bg-gradient-to-r from-[#0E3A29] via-[#0E3A29] to-[#C6E96B]" />
+        <div className="h-1 w-full bg-gradient-to-r from-[#0E3A29] via-[#0E3A29] to-[#0E3A29]" />
       )}
 
       <div className="p-5 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0 flex-1">
             <div className="mb-2 flex flex-wrap items-center gap-2">
-              <span className="rounded-md bg-[#10281E] px-2.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-[#C6E96B]">
-                {macrociclo.codigo}
-              </span>
+             
 
               <span
                 className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ${estiloStatus.badgeBg} ${estiloStatus.badgeText}`}
