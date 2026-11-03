@@ -3,9 +3,9 @@ from django.apps import apps
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import APITestCase
 from apps.ciclos.models import Macrociclo, Mesociclo
 from apps.ciclos.serializers import MesocicloSerializer
-
 
 class CiclosInfraTests(TestCase):
     """Valida o registro da aplicação ciclos e os endpoints de infraestrutura da API."""
@@ -26,6 +26,7 @@ class CiclosInfraTests(TestCase):
 
 class MesocicloSerializerTest(TestCase):
 
+    #INstancias para teste
     def setUp(self):
         self.macrociclo = Macrociclo.objects.create(
             nome="Temporada 2026",
@@ -139,6 +140,6 @@ class MesocicloSerializerTest(TestCase):
         )
 
         self.assertEqual(
-            mesociclo.data_inicio.isoformat(),
+            mesociclo.data_inicio.format(),
             "2026-02-01"
         )
