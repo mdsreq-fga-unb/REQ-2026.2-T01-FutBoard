@@ -1,4 +1,5 @@
 """Configuração da aplicação de Ciclos de Periodização Esportiva (CP02)."""
+
 from django.apps import AppConfig
 
 

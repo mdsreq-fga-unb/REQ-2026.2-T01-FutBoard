@@ -1,4 +1,5 @@
 """Views da API de ciclos de periodização."""
+
 from rest_framework import generics
 
 from .models import Macrociclo

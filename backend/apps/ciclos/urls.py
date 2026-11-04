@@ -1,4 +1,5 @@
 """Roteamento de URLs do módulo de Ciclos de Periodização (CP02)."""
+
 from django.urls import path
 
 from .views import MacrocicloDetailView, MacrocicloListCreateView

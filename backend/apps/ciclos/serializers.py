@@ -1,4 +1,5 @@
 """Serializers da API de ciclos de periodização."""
+
 from rest_framework import serializers
 
 from .models import Macrociclo
@@ -40,8 +41,7 @@ class MacrocicloSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {
                     "data_termino": (
-                        "A data de término deve ser igual ou posterior "
-                        "à data de início."
+                        "A data de término deve ser igual ou posterior à data de início."
                     )
                 }
             )

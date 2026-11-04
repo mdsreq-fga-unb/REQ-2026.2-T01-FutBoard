@@ -1,4 +1,5 @@
 """Testes do módulo de Ciclos e da API de macrociclos."""
+
 from django.apps import apps
 from django.test import TestCase
 from django.urls import reverse
