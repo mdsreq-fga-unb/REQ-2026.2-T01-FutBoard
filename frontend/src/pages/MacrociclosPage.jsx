@@ -1,18 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import KpiCard from "../components/KpiCard.jsx";
 import MacrocicloCard from "../components/MacrocicloCard.jsx";
 import MacrocicloModal from "../components/MacrocicloModal.jsx";
-
-const MACROCICLOS_INICIAIS = [
-  {
-    id: 1,
-    codigo: "MC-01",
-    nome: "Temporada 2026.2 — Campeonato Candango Sub-17",
-    dataInicio: "2026-08-03",
-    dataTermino: "2026-12-20",
-  },
-];
+import api from "../services/api.js";
 
 function calcularSemanas(dataInicio, dataTermino) {
   if (!dataInicio || !dataTermino) return 0;
@@ -31,8 +22,9 @@ function obterStatusPorDatas(dataInicio, dataTermino) {
 }
 
 export default function MacrociclosPage() {
-  const [macrociclos, setMacrociclos] = useState(MACROCICLOS_INICIAIS);
+  const [macrociclos, setMacrociclos] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [carregando, setCarregando] = useState(true);
 
   // Controle do Modal de Cadastro e Edição
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,6 +38,27 @@ export default function MacrociclosPage() {
       setToastMsg("");
     }, 3500);
   };
+
+  const formatarMacrociclo = (macrociclo) => ({
+    ...macrociclo,
+    dataInicio: macrociclo.data_inicio,
+    dataTermino: macrociclo.data_termino,
+  });
+
+  useEffect(() => {
+    const carregarMacrociclos = async () => {
+      try {
+        const resposta = await api.get("/ciclos/macrociclos/");
+        setMacrociclos(resposta.data.map(formatarMacrociclo));
+      } catch {
+        dispararToast("Não foi possível carregar os macrociclos.");
+      } finally {
+        setCarregando(false);
+      }
+    };
+
+    carregarMacrociclos();
+  }, []);
 
   const listaProcessada = useMemo(() => {
     return macrociclos.map((item) => ({
@@ -87,33 +100,45 @@ export default function MacrociclosPage() {
     setMacroEditando(null);
   };
 
-  const salvarMacrociclo = (dados) => {
-    if (macroEditando) {
-      setMacrociclos((prev) =>
-        prev.map((item) =>
-          item.id === macroEditando.id ? { ...item, ...dados } : item,
-        ),
-      );
-      dispararToast("Macrociclo atualizado com sucesso.");
-    } else {
-      const proximoId =
-        macrociclos.length > 0
-          ? Math.max(...macrociclos.map((m) => m.id)) + 1
-          : 1;
-      const codigo = `MC-${proximoId < 10 ? `0${proximoId}` : proximoId}`;
-      setMacrociclos((prev) => [
-        {
-          id: proximoId,
-          codigo,
-          ...dados,
-        },
-        ...prev,
-      ]);
-      dispararToast("Macrociclo cadastrado com sucesso.");
-    }
+  const salvarMacrociclo = async (dados) => {
+    const payload = {
+      nome: dados.nome,
+      data_inicio: dados.dataInicio,
+      data_termino: dados.dataTermino,
+    };
 
-    setModalOpen(false);
-    setMacroEditando(null);
+    try {
+      if (macroEditando) {
+        const resposta = await api.patch(
+          `/ciclos/macrociclos/${macroEditando.id}/`,
+          payload,
+        );
+        setMacrociclos((prev) =>
+          prev.map((item) =>
+            item.id === macroEditando.id
+              ? formatarMacrociclo(resposta.data)
+              : item,
+          ),
+        );
+        dispararToast("Macrociclo atualizado com sucesso.");
+      } else {
+        const resposta = await api.post("/ciclos/macrociclos/", payload);
+        setMacrociclos((prev) => [
+          formatarMacrociclo(resposta.data),
+          ...prev,
+        ]);
+        dispararToast("Macrociclo cadastrado com sucesso.");
+      }
+
+      setModalOpen(false);
+      setMacroEditando(null);
+    } catch (erro) {
+      const mensagem =
+        erro.response?.data?.data_termino?.[0] ||
+        erro.response?.data?.detail ||
+        "Não foi possível salvar o macrociclo.";
+      throw new Error(mensagem);
+    }
   };
 
   return (
@@ -233,13 +258,17 @@ export default function MacrociclosPage() {
 
           {/* Listagem de Macrociclos */}
           <section aria-label="Lista de Macrociclos" className="space-y-4">
-            {listaProcessada.map((macro) => (
+            {carregando ? (
+              <p className="text-sm text-[#8A8D80]">Carregando macrociclos...</p>
+            ) : (
+              listaProcessada.map((macro) => (
               <MacrocicloCard
                 key={macro.id}
                 macrociclo={macro}
                 onEditMacrociclo={abrirModalEdicao}
               />
-            ))}
+              ))
+            )}
           </section>
         </div>
       </main>
