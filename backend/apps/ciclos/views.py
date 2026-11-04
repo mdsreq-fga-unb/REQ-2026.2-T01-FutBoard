@@ -43,3 +43,10 @@ class MicrocicloListCreateView(generics.ListCreateAPIView):
 
     queryset = Microciclo.objects.select_related("mesociclo__macrociclo").all()
     serializer_class = MicrocicloSerializer
+
+
+class MicrocicloDetailView(generics.RetrieveUpdateAPIView):
+    """Consulta e permite editar um microciclo existente."""
+
+    queryset = Microciclo.objects.select_related("mesociclo__macrociclo").all()
+    serializer_class = MicrocicloSerializer

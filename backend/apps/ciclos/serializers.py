@@ -127,6 +127,12 @@ class MicrocicloSerializer(serializers.ModelSerializer):
             getattr(instance, "data_termino", None),
         )
 
+        if instance and "mesociclo" in attrs:
+            if attrs["mesociclo"].id != instance.mesociclo_id:
+                raise serializers.ValidationError(
+                    {"mesociclo": "Não é permitido alterar o mesociclo associado."}
+                )
+
         if data_inicio and data_termino and data_termino < data_inicio:
             raise serializers.ValidationError(
                 {"data_termino": "A data de término não pode ser anterior à inicial."}

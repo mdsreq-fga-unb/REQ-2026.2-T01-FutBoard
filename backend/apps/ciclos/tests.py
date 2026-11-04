@@ -185,6 +185,22 @@ class MicrocicloApiTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.json()), 1)
 
+    def test_edita_microciclo_sem_alterar_mesociclo(self):
+        microciclo = Microciclo.objects.create(
+            **{**self.dados_validos(), "mesociclo": self.mesociclo}
+        )
+
+        response = self.client.patch(
+            f"{self.list_url}{microciclo.id}/",
+            {"nome": "Semana 1 - Carga Intensa"},
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        microciclo.refresh_from_db()
+        self.assertEqual(microciclo.nome, "Semana 1 - Carga Intensa")
+        self.assertEqual(microciclo.mesociclo_id, self.mesociclo.id)
+
     def test_rejeita_microciclo_fora_do_mesociclo(self):
         dados = self.dados_validos()
         dados["data_termino"] = "2026-04-05"  # Mesociclo termina em 2026-03-31
@@ -211,3 +227,23 @@ class MicrocicloApiTests(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("data_termino", response.json())
+
+    def test_rejeita_alteracao_do_mesociclo_associado(self):
+        outro_meso = Mesociclo.objects.create(
+            macrociclo=self.macrociclo,
+            nome="Outro Mesociclo",
+            data_inicio="2026-04-01",
+            data_termino="2026-04-30",
+        )
+        microciclo = Microciclo.objects.create(
+            **{**self.dados_validos(), "mesociclo": self.mesociclo}
+        )
+
+        response = self.client.patch(
+            f"{self.list_url}{microciclo.id}/",
+            {"mesociclo": outro_meso.id},
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("mesociclo", response.json())

@@ -7,6 +7,7 @@ from .views import (
     MacrocicloListCreateView,
     MesocicloDetailView,
     MesocicloListCreateView,
+    MicrocicloDetailView,
     MicrocicloListCreateView,
 )
 
@@ -37,5 +38,10 @@ urlpatterns = [
         "microciclos/",
         MicrocicloListCreateView.as_view(),
         name="microciclo-list-create",
+    ),
+    path(
+        "microciclos/<int:pk>/",
+        MicrocicloDetailView.as_view(),
+        name="microciclo-detail",
     ),
 ]
