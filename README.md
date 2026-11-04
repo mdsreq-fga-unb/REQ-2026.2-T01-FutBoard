@@ -42,6 +42,7 @@ REQ-2026.2-T01-FutBoard/
 │       └── init.sql              # Inicialização do PostgreSQL (extensão pgcrypto)
 ├── .github/
 │   └── workflows/
+│       ├── ci.yml                # Integração contínua da aplicação
 │       └── deploy.yml            # CI/CD da documentação MkDocs para o GitHub Pages
 ├── backend/                      # API RESTful em Python / Django + DRF
 │   ├── apps/                     # Módulos de domínio desacoplados por Característica de Produto (CP)
@@ -135,6 +136,45 @@ Na inicialização, o Docker Compose:
 - **Healthcheck da API + Banco:** [http://localhost:8000/api/health/](http://localhost:8000/api/health/)
 - **Django Admin:** [http://localhost:8000/admin/](http://localhost:8000/admin/)
 - **PostgreSQL:** `localhost:5432` (usuário e banco padrão: `futboard`)
+
+---
+
+## CI/CD
+
+### Integração Contínua (CI)
+
+O workflow [`ci.yml`](.github/workflows/ci.yml) é executado automaticamente em Pull Requests e em pushes na branch `main`. Ele verifica se as alterações continuam compatíveis com o projeto antes da integração:
+
+- executa `manage.py check` e os testes automatizados do backend;
+- verifica lint e formatação Ruff do módulo alterado;
+- instala as dependências do frontend;
+- executa o lint e o build de produção do frontend.
+
+Essa pipeline é compartilhada por todas as histórias de usuário. Cada nova história deve incluir seus testes automatizados, que serão executados junto com os testes já existentes pela CI.
+
+### Entrega Contínua (CD)
+
+O workflow [`deploy.yml`](.github/workflows/deploy.yml) já implementa o CD da documentação: após um push na `main`, o MkDocs é construído e publicado no GitHub Pages.
+
+O CD do código da aplicação ainda deverá ser implementado quando o ambiente de hospedagem do frontend, backend e banco de dados for definido. Essa etapa deverá incluir a construção e publicação das imagens ou artefatos da aplicação, a configuração segura das variáveis de ambiente e a execução das migrações no ambiente de produção. Portanto, o deploy do GitHub Pages está automatizado, mas o deploy da aplicação ainda está pendente.
+
+### Fluxo de desenvolvimento
+
+```text
+Branch de funcionalidade
+        ↓
+Pull Request
+        ↓
+CI: testes, lint e build
+        ↓
+Revisão e aprovação
+        ↓
+Merge na main
+        ↓
+CD: publicação da documentação no GitHub Pages
+        ↓
+CD da aplicação: a implementar após a definição da hospedagem
+```
 
 ---
 
