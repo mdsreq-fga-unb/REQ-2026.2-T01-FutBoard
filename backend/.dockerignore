@@ -1,0 +1,27 @@
+# Ambientes virtuais e caches Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Bancos locais e arquivos estáticos/mídia gerados
+*.sqlite3
+staticfiles/
+mediafiles/
+
+# Variáveis de ambiente locais
+.env
+.env.*
+!.env.example
+
+# IDEs e Sistema Operacional
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
