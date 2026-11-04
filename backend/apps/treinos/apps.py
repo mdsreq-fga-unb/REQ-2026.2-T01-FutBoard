@@ -1,4 +1,5 @@
 """Configuração da aplicação de Treinos e Métricas Analíticas (CP01, CP03, CP04)."""
+
 from django.apps import AppConfig
 
 

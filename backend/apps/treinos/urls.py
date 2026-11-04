@@ -1,6 +1,20 @@
-"""Roteamento de URLs do módulo de Treinos (CP01, CP03 e CP04)."""
+"""Roteamento de URLs do módulo de Treinos."""
+
 from django.urls import path
+
+from .views import SessaoDetailView, SessaoListCreateView
 
 app_name = "treinos"
 
-urlpatterns: list = []
+urlpatterns = [
+    path(
+        "sessoes/",
+        SessaoListCreateView.as_view(),
+        name="sessao-list-create",
+    ),
+    path(
+        "sessoes/<int:pk>/",
+        SessaoDetailView.as_view(),
+        name="sessao-detail",
+    ),
+]
