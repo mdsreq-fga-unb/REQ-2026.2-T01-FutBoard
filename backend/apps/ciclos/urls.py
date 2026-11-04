@@ -7,6 +7,8 @@ from .views import (
     MacrocicloListCreateView,
     MesocicloDetailView,
     MesocicloListCreateView,
+    MicrocicloDetailView,
+    MicrocicloListCreateView,
 )
 
 app_name = "ciclos"
@@ -31,5 +33,15 @@ urlpatterns = [
         "mesociclos/<int:pk>/",
         MesocicloDetailView.as_view(),
         name="mesociclo-detail",
+    ),
+    path(
+        "microciclos/",
+        MicrocicloListCreateView.as_view(),
+        name="microciclo-list-create",
+    ),
+    path(
+        "microciclos/<int:pk>/",
+        MicrocicloDetailView.as_view(),
+        name="microciclo-detail",
     ),
 ]

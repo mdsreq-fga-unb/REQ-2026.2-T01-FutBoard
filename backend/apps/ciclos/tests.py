@@ -1,11 +1,11 @@
-"""Testes do módulo de Ciclos e da API de macrociclos."""
+"""Testes do módulo de Ciclos e da API de periodização."""
 
 from django.apps import apps
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 
-from .models import Macrociclo, Mesociclo
+from .models import Macrociclo, Mesociclo, Microciclo
 
 
 class CiclosInfraTests(TestCase):
@@ -140,3 +140,110 @@ class MesocicloApiTests(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("data_termino", response.json())
+
+
+class MicrocicloApiTests(TestCase):
+    list_url = "/api/ciclos/microciclos/"
+
+    def setUp(self):
+        self.macrociclo = Macrociclo.objects.create(
+            nome="Temporada 2026",
+            data_inicio="2026-01-01",
+            data_termino="2026-12-31",
+        )
+        self.mesociclo = Mesociclo.objects.create(
+            macrociclo=self.macrociclo,
+            nome="Preparação Geral",
+            data_inicio="2026-02-01",
+            data_termino="2026-03-31",
+        )
+
+    def dados_validos(self):
+        return {
+            "mesociclo": self.mesociclo.id,
+            "nome": "Semana 1 - Aclimação",
+            "data_inicio": "2026-02-02",
+            "data_termino": "2026-02-08",
+        }
+
+    def test_cadastra_microciclo_associado_ao_mesociclo(self):
+        response = self.client.post(
+            self.list_url,
+            self.dados_validos(),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Microciclo.objects.count(), 1)
+        self.assertEqual(response.json()["mesociclo"], self.mesociclo.id)
+        self.assertEqual(response.json()["nome"], "Semana 1 - Aclimação")
+
+    def test_lista_microciclos(self):
+        Microciclo.objects.create(**{**self.dados_validos(), "mesociclo": self.mesociclo})
+
+        response = self.client.get(self.list_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()), 1)
+
+    def test_edita_microciclo_sem_alterar_mesociclo(self):
+        microciclo = Microciclo.objects.create(
+            **{**self.dados_validos(), "mesociclo": self.mesociclo}
+        )
+
+        response = self.client.patch(
+            f"{self.list_url}{microciclo.id}/",
+            {"nome": "Semana 1 - Carga Intensa"},
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        microciclo.refresh_from_db()
+        self.assertEqual(microciclo.nome, "Semana 1 - Carga Intensa")
+        self.assertEqual(microciclo.mesociclo_id, self.mesociclo.id)
+
+    def test_rejeita_microciclo_fora_do_mesociclo(self):
+        dados = self.dados_validos()
+        dados["data_termino"] = "2026-04-05"  # Mesociclo termina em 2026-03-31
+
+        response = self.client.post(
+            self.list_url,
+            dados,
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("data_termino", response.json())
+
+    def test_rejeita_microciclo_com_data_termino_anterior_a_data_inicio(self):
+        dados = self.dados_validos()
+        dados["data_inicio"] = "2026-02-08"
+        dados["data_termino"] = "2026-02-02"
+
+        response = self.client.post(
+            self.list_url,
+            dados,
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("data_termino", response.json())
+
+    def test_rejeita_alteracao_do_mesociclo_associado(self):
+        outro_meso = Mesociclo.objects.create(
+            macrociclo=self.macrociclo,
+            nome="Outro Mesociclo",
+            data_inicio="2026-04-01",
+            data_termino="2026-04-30",
+        )
+        microciclo = Microciclo.objects.create(
+            **{**self.dados_validos(), "mesociclo": self.mesociclo}
+        )
+
+        response = self.client.patch(
+            f"{self.list_url}{microciclo.id}/",
+            {"mesociclo": outro_meso.id},
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("mesociclo", response.json())

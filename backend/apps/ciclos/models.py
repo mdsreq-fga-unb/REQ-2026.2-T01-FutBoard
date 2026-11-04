@@ -55,6 +55,9 @@ class Mesociclo(models.Model):
             )
         ]
 
+    def __str__(self):
+        return f"{self.nome} ({self.data_inicio} - {self.data_termino})"
+
     def clean(self):
         super().clean()
         erros = {}
@@ -64,6 +67,45 @@ class Mesociclo(models.Model):
                 erros["data_inicio"] = "O mesociclo não pode começar antes do macrociclo."
             if self.data_termino > self.macrociclo.data_termino:
                 erros["data_termino"] = "O mesociclo não pode terminar depois do macrociclo."
+
+        if erros:
+            raise ValidationError(erros)
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+
+class Microciclo(models.Model):
+    mesociclo = models.ForeignKey(
+        Mesociclo,
+        on_delete=models.PROTECT,
+        related_name="microciclos",
+    )
+    nome = models.CharField(max_length=255)
+    data_inicio = models.DateField()
+    data_termino = models.DateField()
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                condition=Q(data_termino__gte=F("data_inicio")),
+                name="ck_microciclo_datas_validas",
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.nome} ({self.data_inicio} - {self.data_termino})"
+
+    def clean(self):
+        super().clean()
+        erros = {}
+
+        if self.mesociclo_id and self.data_inicio and self.data_termino:
+            if self.data_inicio < self.mesociclo.data_inicio:
+                erros["data_inicio"] = "O microciclo não pode começar antes do mesociclo."
+            if self.data_termino > self.mesociclo.data_termino:
+                erros["data_termino"] = "O microciclo não pode terminar depois do mesociclo."
 
         if erros:
             raise ValidationError(erros)
