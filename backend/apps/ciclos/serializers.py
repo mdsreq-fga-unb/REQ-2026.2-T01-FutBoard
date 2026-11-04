@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from .models import Macrociclo
+from .models import Macrociclo, Mesociclo
 
 
 class MacrocicloSerializer(serializers.ModelSerializer):
@@ -44,6 +44,57 @@ class MacrocicloSerializer(serializers.ModelSerializer):
                         "A data de término deve ser igual ou posterior à data de início."
                     )
                 }
+            )
+
+        return attrs
+
+
+class MesocicloSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mesociclo
+        fields = [
+            "id",
+            "macrociclo",
+            "nome",
+            "data_inicio",
+            "data_termino",
+        ]
+        read_only_fields = ["id"]
+
+    def validate(self, attrs):
+        instance = self.instance
+        macrociclo = attrs.get(
+            "macrociclo",
+            getattr(instance, "macrociclo", None),
+        )
+        data_inicio = attrs.get(
+            "data_inicio",
+            getattr(instance, "data_inicio", None),
+        )
+        data_termino = attrs.get(
+            "data_termino",
+            getattr(instance, "data_termino", None),
+        )
+
+        if instance and "macrociclo" in attrs:
+            if attrs["macrociclo"].id != instance.macrociclo_id:
+                raise serializers.ValidationError(
+                    {"macrociclo": "Não é permitido alterar o macrociclo associado."}
+                )
+
+        if data_inicio and data_termino and data_termino < data_inicio:
+            raise serializers.ValidationError(
+                {"data_termino": "A data de término não pode ser anterior à inicial."}
+            )
+
+        if macrociclo and data_inicio and data_inicio < macrociclo.data_inicio:
+            raise serializers.ValidationError(
+                {"data_inicio": "O mesociclo não pode começar antes do macrociclo."}
+            )
+
+        if macrociclo and data_termino and data_termino > macrociclo.data_termino:
+            raise serializers.ValidationError(
+                {"data_termino": "O mesociclo não pode terminar depois do macrociclo."}
             )
 
         return attrs

@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 
-from .models import Macrociclo
+from .models import Macrociclo, Mesociclo
 
 
 class CiclosInfraTests(TestCase):
@@ -81,3 +81,62 @@ class MacrocicloApiTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("data_termino", response.json())
         self.assertEqual(Macrociclo.objects.count(), 0)
+
+
+class MesocicloApiTests(TestCase):
+    list_url = "/api/ciclos/mesociclos/"
+
+    def setUp(self):
+        self.macrociclo = Macrociclo.objects.create(
+            nome="Temporada 2026",
+            data_inicio="2026-01-01",
+            data_termino="2026-12-31",
+        )
+
+    def dados_validos(self):
+        return {
+            "macrociclo": self.macrociclo.id,
+            "nome": "Preparação física",
+            "data_inicio": "2026-02-01",
+            "data_termino": "2026-03-31",
+        }
+
+    def test_cadastra_mesociclo_associado_ao_macrociclo(self):
+        response = self.client.post(
+            self.list_url,
+            self.dados_validos(),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Mesociclo.objects.count(), 1)
+        self.assertEqual(response.json()["macrociclo"], self.macrociclo.id)
+
+    def test_edita_nome_sem_alterar_macrociclo(self):
+        mesociclo = Mesociclo.objects.create(
+            **{**self.dados_validos(), "macrociclo": self.macrociclo}
+        )
+
+        response = self.client.patch(
+            f"{self.list_url}{mesociclo.id}/",
+            {"nome": "Preparação física atualizada"},
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        mesociclo.refresh_from_db()
+        self.assertEqual(mesociclo.nome, "Preparação física atualizada")
+        self.assertEqual(mesociclo.macrociclo_id, self.macrociclo.id)
+
+    def test_rejeita_mesociclo_fora_do_macrociclo(self):
+        dados = self.dados_validos()
+        dados["data_termino"] = "2027-01-01"
+
+        response = self.client.post(
+            self.list_url,
+            dados,
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("data_termino", response.json())

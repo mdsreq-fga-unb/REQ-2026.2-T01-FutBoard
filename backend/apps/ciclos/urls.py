@@ -2,7 +2,12 @@
 
 from django.urls import path
 
-from .views import MacrocicloDetailView, MacrocicloListCreateView
+from .views import (
+    MacrocicloDetailView,
+    MacrocicloListCreateView,
+    MesocicloDetailView,
+    MesocicloListCreateView,
+)
 
 app_name = "ciclos"
 
@@ -16,5 +21,15 @@ urlpatterns = [
         "macrociclos/<int:pk>/",
         MacrocicloDetailView.as_view(),
         name="macrociclo-detail",
+    ),
+    path(
+        "mesociclos/",
+        MesocicloListCreateView.as_view(),
+        name="mesociclo-list-create",
+    ),
+    path(
+        "mesociclos/<int:pk>/",
+        MesocicloDetailView.as_view(),
+        name="mesociclo-detail",
     ),
 ]
