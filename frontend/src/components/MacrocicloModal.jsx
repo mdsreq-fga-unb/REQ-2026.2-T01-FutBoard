@@ -17,7 +17,7 @@ export default function MacrocicloModal({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErro("");
 
@@ -33,11 +33,15 @@ export default function MacrocicloModal({
       return;
     }
 
-    onSave({
-      nome: nome.trim(),
-      dataInicio,
-      dataTermino,
-    });
+    try {
+      await onSave({
+        nome: nome.trim(),
+        dataInicio,
+        dataTermino,
+      });
+    } catch (error) {
+      setErro(error.message);
+    }
   };
 
   return (
