@@ -70,6 +70,7 @@ export default function SessoesPage({ onSelectNav }) {
         onSelectNav={onSelectNav}
         mobileOpen={mobileMenuOpen}
         onCloseMobile={() => setMobileMenuOpen(false)}
+        totalSessoes={sessoes.length}
       />
 
       {/* Barra Superior Mobile */}
