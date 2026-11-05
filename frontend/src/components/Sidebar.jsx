@@ -1,12 +1,17 @@
 import React from "react";
 
 export default function Sidebar({
-  activeNav = "macrociclos",
+  activeNav = "sessoes",
   onSelectNav,
   mobileOpen = false,
   onCloseMobile,
   totalMacrociclos = 0,
 }) {
+  const handleSelect = (itemKey) => {
+    if (onSelectNav) onSelectNav(itemKey);
+    if (onCloseMobile) onCloseMobile();
+  };
+
   const navContent = (
     <div className="flex h-full flex-col justify-between px-4 py-6 select-none">
       <div>
@@ -38,7 +43,11 @@ export default function Sidebar({
                 stroke="currentColor"
                 strokeWidth="2"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           )}
@@ -46,26 +55,24 @@ export default function Sidebar({
 
         {/* Section: PLANEJAMENTO */}
         <div className="mb-6">
-          <p className="mb-2.5 px-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#8A8D80]">
+          <p className="mb-3 px-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#8A8D80]">
             PLANEJAMENTO
           </p>
 
           <nav className="space-y-1" aria-label="Menu de Planejamento">
+            {/* Macrociclos */}
             <button
               type="button"
-              onClick={() => {
-                if (onSelectNav) onSelectNav("macrociclos");
-                if (onCloseMobile) onCloseMobile();
-              }}
+              onClick={() => handleSelect("macrociclos")}
               className={`group flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-sm font-medium transition ${
                 activeNav === "macrociclos"
                   ? "bg-white/[0.11] text-[#FFFFFF] shadow-inner ring-1 ring-white/[0.08]"
-                  : "text-[#E4DFD2]/80 hover:bg-white/[0.06] hover:text-[#FFFFFF]"
+                  : "text-[#8A8D80] hover:bg-white/[0.06] hover:text-[#FFFFFF]"
               }`}
             >
               <span className="flex items-center gap-2.5">
                 <svg
-                  className="h-4 w-4 shrink-0 text-[#E4DFD2]"
+                  className="h-4 w-4 shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -86,6 +93,49 @@ export default function Sidebar({
                     {totalMacrociclos}
                   </span>
                 )}
+                {activeNav === "macrociclos" && (
+                  <svg
+                    className="h-3.5 w-3.5 text-[#C6E96B] transition-transform group-hover:translate-x-0.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 6l6 6-6 6"
+                    />
+                  </svg>
+                )}
+              </span>
+            </button>
+
+            {/* Sessão */}
+            <button
+              type="button"
+              onClick={() => handleSelect("sessoes")}
+              className={`group flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-sm font-medium transition ${
+                activeNav === "sessoes"
+                  ? "bg-white/[0.11] text-[#FFFFFF] shadow-inner ring-1 ring-white/[0.08]"
+                  : "text-[#8A8D80] hover:bg-white/[0.06] hover:text-[#FFFFFF]"
+              }`}
+            >
+              <span className="flex items-center gap-2.5">
+                <svg
+                  className="h-4 w-4 shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                >
+                  <rect x="5" y="3" width="14" height="18" rx="2" />
+                  <path strokeLinecap="round" d="M9 7h6M9 11h6M9 15h4" />
+                </svg>
+                <span>Sessão</span>
+              </span>
+
+              {activeNav === "sessoes" && (
                 <svg
                   className="h-3.5 w-3.5 text-[#C6E96B] transition-transform group-hover:translate-x-0.5"
                   viewBox="0 0 24 24"
@@ -93,9 +143,13 @@ export default function Sidebar({
                   stroke="currentColor"
                   strokeWidth="2.4"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 6l6 6-6 6"
+                  />
                 </svg>
-              </span>
+              )}
             </button>
           </nav>
         </div>
@@ -104,10 +158,13 @@ export default function Sidebar({
       {/* Discrete Club Context Footer */}
       <div className="border-t border-white/[0.08] pt-4 px-1.5">
         <div className="flex items-center gap-2.5">
-          
           <div className="min-w-0">
-            <p className="truncate text-xs font-medium text-[#FFFFFF]">Canaã Esporte Clube</p>
-            <p className="truncate font-mono text-[10px] text-[#8A8D80]">Comissão Técnica • Sub-17</p>
+            <p className="truncate text-xs font-medium text-[#FFFFFF]">
+              Canaã Esporte Clube
+            </p>
+            <p className="truncate font-mono text-[10px] text-[#8A8D80]">
+              Comissão Técnica • Sub-17
+            </p>
           </div>
         </div>
       </div>
@@ -117,11 +174,17 @@ export default function Sidebar({
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="fb-sidebar hidden w-[228px] shrink-0 lg:block">{navContent}</aside>
+      <aside className="fb-sidebar hidden w-[228px] shrink-0 lg:block">
+        {navContent}
+      </aside>
 
       {/* Mobile Drawer Overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-50 flex lg:hidden" role="dialog" aria-modal="true">
+        <div
+          className="fixed inset-0 z-50 flex lg:hidden"
+          role="dialog"
+          aria-modal="true"
+        >
           <div
             className="fixed inset-0 bg-[#10281E]/60 backdrop-blur-xs transition-opacity"
             onClick={onCloseMobile}

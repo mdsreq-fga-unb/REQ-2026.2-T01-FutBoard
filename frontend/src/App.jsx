@@ -1,5 +1,5 @@
-import MacrociclosPage from "./pages/MacrociclosPage.jsx";
+import DashboardPage from "./pages/DashboardPage.jsx";
 
 export default function App() {
-  return <MacrociclosPage />;
+  return <DashboardPage />;
 }

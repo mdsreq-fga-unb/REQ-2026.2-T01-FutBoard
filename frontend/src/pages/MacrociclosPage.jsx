@@ -21,7 +21,7 @@ function obterStatusPorDatas(dataInicio, dataTermino) {
   return "em_andamento";
 }
 
-export default function MacrociclosPage() {
+export default function MacrociclosPage({ onSelectNav }) {
   const [macrociclos, setMacrociclos] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [carregando, setCarregando] = useState(true);
@@ -146,6 +146,7 @@ export default function MacrociclosPage() {
       {/* Menu Lateral */}
       <Sidebar
         activeNav="macrociclos"
+        onSelectNav={onSelectNav}
         mobileOpen={mobileMenuOpen}
         onCloseMobile={() => setMobileMenuOpen(false)}
         totalMacrociclos={resumo.totalMacrociclos}
@@ -240,15 +241,9 @@ export default function MacrociclosPage() {
             aria-label="Indicadores de Macrociclos"
             className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3"
           >
-            <KpiCard
-              label="MACROCICLOS"
-              value={resumo.totalMacrociclos}
-            />
+            <KpiCard label="MACROCICLOS" value={resumo.totalMacrociclos} />
 
-            <KpiCard
-              label="EM ANDAMENTO"
-              value={resumo.emAndamento}
-            />
+            <KpiCard label="EM ANDAMENTO" value={resumo.emAndamento} />
 
             <KpiCard
               label="SEMANAS PLANEJADAS"
@@ -262,11 +257,11 @@ export default function MacrociclosPage() {
               <p className="text-sm text-[#8A8D80]">Carregando macrociclos...</p>
             ) : (
               listaProcessada.map((macro) => (
-              <MacrocicloCard
-                key={macro.id}
-                macrociclo={macro}
-                onEditMacrociclo={abrirModalEdicao}
-              />
+                <MacrocicloCard
+                  key={macro.id}
+                  macrociclo={macro}
+                  onEditMacrociclo={abrirModalEdicao}
+                />
               ))
             )}
           </section>
