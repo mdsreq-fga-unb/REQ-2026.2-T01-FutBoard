@@ -21,7 +21,7 @@ function obterStatusPorDatas(dataInicio, dataTermino) {
   return "em_andamento";
 }
 
-export default function MacrociclosPage() {
+export default function MacrociclosPage({ onSelectNav }) {
   const [macrociclos, setMacrociclos] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [carregando, setCarregando] = useState(true);
@@ -146,6 +146,7 @@ export default function MacrociclosPage() {
       {/* Menu Lateral */}
       <Sidebar
         activeNav="macrociclos"
+        onSelectNav={onSelectNav}
         mobileOpen={mobileMenuOpen}
         onCloseMobile={() => setMobileMenuOpen(false)}
         totalMacrociclos={resumo.totalMacrociclos}
