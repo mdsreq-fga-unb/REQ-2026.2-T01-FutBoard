@@ -20,6 +20,8 @@ Este catálogo reúne o vocabulário usado pelo cliente (Marcus Vinícius Rodrig
 
 **Hierarquia:** Macrociclo ⊃ Mesociclo ⊃ Microciclo ⊃ Sessão ⊃ Atividade (execução).
 
+> 📌 **Regra de Negócio Associada:** A árvore hierárquica e a integridade referencial da periodização são formalizadas na [RN04 (Hierarquia e Integridade da Periodização)](../visao-produto/Requisitos-de-Software.md#rn04).
+
 ---
 
 ## 2. Atividades, execuções e biblioteca
@@ -40,6 +42,8 @@ Este catálogo reúne o vocabulário usado pelo cliente (Marcus Vinícius Rodrig
 | **Tipologia da atividade** | Categoria da atividade, criada pelo cliente (tema de TCC), inspirada na literatura de SSPs. Na nomenclatura, o que fica **à esquerda do traço** é a tipologia. |
 | **SSP** | **Situações Simuladoras Preferenciais**: "nada mais é do que uma atividade", o tipo da atividade. Sigla de origem espanhola, de uma metodologia de treino espanhola. |
 
+> 📌 **Regra de Negócio Associada:** O controle de simultaneidade entre atividades de mesma ordem e a apuração da duração líquida da sessão são formalizados na [RN03 (Simultaneidade e Contagem de Tempo da Sessão)](../visao-produto/Requisitos-de-Software.md#rn03).
+
 ---
 
 ## 3. Espaço e dimensão
@@ -51,6 +55,8 @@ Este catálogo reúne o vocabulário usado pelo cliente (Marcus Vinícius Rodrig
 | **Área por jogador (m²/jogador)** | Coluna *Área (m²)* da planilha: `(comprimento × largura) ÷ nº de jogadores`. **Calculada** pelo sistema. Ex.: 24 × 25 ÷ 6 = 100. |
 | **Dimensão do espaço** | Classificação derivada da área (m²), conforme a planilha: **≤ 100 = Pequeno**; **≤ 200 = Médio**; **> 200 = Grande**. **Não Definido** quando a atividade não tem espaço delimitado (ex.: atividades de PDI). |
 | **Campo pequeno × grande** | Em espaços pequenos trabalha-se mais força e mudança de direção; em espaços grandes, mais velocidade e resistência. Os dados são cruzados com o preparador físico. |
+
+> 📌 **Regras de Negócio Associadas:** A fórmula de cálculo da área por jogador é formalizada na [RN01 (Cálculo da Área por Jogador)](../visao-produto/Requisitos-de-Software.md#rn01), e as faixas de corte para classificação automática da dimensão do espaço (Pequeno, Médio, Grande e Não Definido) são formalizadas na [RN02 (Classificação Automática da Dimensão do Espaço)](../visao-produto/Requisitos-de-Software.md#rn02).
 
 ---
 
@@ -69,7 +75,7 @@ Este catálogo reúne o vocabulário usado pelo cliente (Marcus Vinícius Rodrig
 | **Reação pós-perda** | Comportamento em que, após perder a bola, os atletas reagem imediatamente (ex.: nos primeiros 5 segundos) para recuperá-la o mais rápido possível. |
 | **Atributo técnico** (fundamento técnico) | Fundamento trabalhado de forma direta. Ex.: cabeceio e rebatida frontal (defensores), cruzamento por zona, domínio orientado, finalização, passe. Só é preenchido se for o objetivo central. |
 
-> **Regra do objetivo central:** um jogo de posse com regra de reação pós-perda envolve muitos passes, mas, se o objetivo é a reação pós-perda, o **passe não** é registrado como fundamento técnico.
+> 📌 **Regra de Negócio Associada:** A restrição metodológica do objetivo central — em que o preenchimento de momentos, fases, comportamentos e atributos técnicos é opcional e condicionado estritamente ao foco deliberado da atividade — é formalizada na [RN05 (Preenchimento Condicional pelo Objetivo Central)](../visao-produto/Requisitos-de-Software.md#rn05).
 
 ---
 
@@ -141,6 +147,8 @@ Valores que o cliente já usa e que podem virar botões/seleções no sistema. N
 | **Atividades** (card) | Número de atividades **distintas** no período. Ex.: 18. |
 | **Distribuição** | Quanto cada comportamento, técnica ou momento foi trabalhado ao longo dos ciclos; ajuda a ver o que ficou tempo sem ser treinado. |
 | **Análise comparativa** | Aba que compara a distribuição por mesociclo, microciclo e sessão (falta incluir o gráfico por mês). Para o cliente, é **a visão mais importante**. |
+
+> 📌 **Regras de Negócio Associadas:** A fórmula de cálculo do índice percentual de variabilidade e a faixa de referência metodológica (50% a 70%) são formalizadas na [RN06 (Cálculo da Variabilidade de Treinos)](../visao-produto/Requisitos-de-Software.md#rn06). O tratamento de valores nulos e estabilidade de gráficos para períodos sem registros é formalizado na [RN07 (Tratamento e Estabilidade em Consultas com Resultado Vazio)](../visao-produto/Requisitos-de-Software.md#rn07).
 
 ---
 
