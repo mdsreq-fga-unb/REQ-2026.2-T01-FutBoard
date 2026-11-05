@@ -241,15 +241,9 @@ export default function MacrociclosPage({ onSelectNav }) {
             aria-label="Indicadores de Macrociclos"
             className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3"
           >
-            <KpiCard
-              label="MACROCICLOS"
-              value={resumo.totalMacrociclos}
-            />
+            <KpiCard label="MACROCICLOS" value={resumo.totalMacrociclos} />
 
-            <KpiCard
-              label="EM ANDAMENTO"
-              value={resumo.emAndamento}
-            />
+            <KpiCard label="EM ANDAMENTO" value={resumo.emAndamento} />
 
             <KpiCard
               label="SEMANAS PLANEJADAS"
@@ -263,11 +257,11 @@ export default function MacrociclosPage({ onSelectNav }) {
               <p className="text-sm text-[#8A8D80]">Carregando macrociclos...</p>
             ) : (
               listaProcessada.map((macro) => (
-              <MacrocicloCard
-                key={macro.id}
-                macrociclo={macro}
-                onEditMacrociclo={abrirModalEdicao}
-              />
+                <MacrocicloCard
+                  key={macro.id}
+                  macrociclo={macro}
+                  onEditMacrociclo={abrirModalEdicao}
+                />
               ))
             )}
           </section>
