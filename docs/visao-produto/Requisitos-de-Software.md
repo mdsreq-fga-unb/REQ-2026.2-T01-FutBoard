@@ -84,7 +84,7 @@ Lista de requisitos não funcionais, contendo: Numeração do Requisito; Nome; D
 | Contribuição principal | Contribuição secundária | CP | RFs relacionados | RNFs relacionados |
 | :---: | :---: | :---: | :---: | :---: |
 | OE1 | OE4 | CP1 | RF10, RF11, RF12, RF13, RF14, RF15, RF16, RF17, RF18, RF19, RF20, RF21, RF23, RF29, RF32, RF33, RF34 | RNF02, RNF03, RNF04 |
-| OE2 | OE3 | CP2 | RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF08, RF09 | RNF02, RNF03, RNF04 |
+| OE2 | OE3 | CP2 | RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF08, RF09 | RNF02 |
 | OE3 | OE4 | CP3 | RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40, RF41 | RNF02, RNF03, RNF04 |
-| OE4 | OE3 | CP4 | RF25 | RNF02, RNF04 |
+| OE4 | OE3 | CP4 | RF25 | RNF02 |
 | OE1 | OE4 | CP5 | RF27, RF28 | RNF01, RNF02 |
