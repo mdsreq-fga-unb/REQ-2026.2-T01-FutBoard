@@ -19,17 +19,11 @@ Apoiar a tomada de decisões técnicas do corpo técnico do Canaã Esporte Clube
 | CP02 | OE2 | OE3 | Estruturador de Periodização Esportiva | Ferramenta para estruturar nativamente o planejamento do calendário em macrociclos, mesociclos e microciclos. | Padronização metodológica científica relacionada a rotina do clube, substituindo métodos sem padronização. |
 | CP03 | OE3 | OE4 | Dashboard Analitico | Painel visual com gráficos interativos com métricas atualizadas imediatamente após o registro dos dados | Substitui dashboards estáticos e atrasados por métricas visuais instantâneas. |
 | CP04 | OE4 | OE3 | Geração Automática de Relatórios | Sistema que processa os dados para criar relatórios comparativos entre ciclos. | Fundamenta e apoia a tomada de decisões técnicas com base em estatísticas consolidadas. |
-| CP05 | OE1 | OE4 | Controle de Perfis de Acesso | Sistema de cadastro e login para o técnico e seu auxiliar | Protege os dados contra alterações indevidas. 
+| CP05 | OE1 | OE4 | Controle de Perfis de Acesso | Sistema de cadastro e login para o técnico e seu auxiliar | Protege os dados contra alterações indevidas. |
 
 ## 2.4 Tecnologias a Serem Utilizadas
 
-A stack tecnológica e as ferramentas de gestão do **FutBoard** foram definidas a partir de um levantamento estruturado via Microsoft Forms, respondido por todos os integrantes da equipe. Isso garantiu que as escolhas refletissem o conhecimento técnico consolidado pelo grupo, equilibrando eficiência operacional e colaboração fluida. A estrutura se divide nos seguintes pilares:
-
-1. **Front-end & Interface:** Construído em **React** com estilização modular (CSS/Sass) e apoio pontual do Tailwind, garantindo interfaces responsivas, limpas e de rápida construção.
-2. **Back-end & API:** Desenvolvido em **Python** utilizando o **Django** e o **Django REST Framework (DRF)** para expor uma API RESTful, aproveitando a maturidade do framework para acelerar entregas.
-3. **Persistência de Dados:** Utiliza o **PostgreSQL**, ideal para modelar de forma estruturada e relacional o domínio esportivo (atletas, sessões e ciclos de treinamento).
-4. **Infraestrutura:** No desenvolvimento, o sistema utiliza **Vercel** (frontend) e **Render** (API), migrando para uma **VPS na AWS Lightsail** em produção.
-5. **Gestão, Design & Colaboração:** O fluxo de trabalho é apoiado por ferramentas integradas: **Figma** para prototipagem de telas, **Miro** para fluxogramas e arquitetura, **GitHub Projects** para controle de tarefas e sprints, além de **Microsoft Teams** (reuniões) e **WhatsApp** (comunicação ágil do dia a dia).
+A stack tecnológica e as ferramentas de gestão do **FutBoard** foram definidas a partir de um levantamento estruturado via Microsoft Forms, respondido por todos os integrantes da equipe. Isso garantiu que as escolhas reflitam o conhecimento técnico consolidado pelo grupo, equilibrando eficiência operacional e colaboração fluida. A estrutura se divide nos seguintes pilares:
 
 ### Resumo Estratégico
 
@@ -37,7 +31,7 @@ A stack tecnológica e as ferramentas de gestão do **FutBoard** foram definidas
 | :--- | :--- | :--- |
 | **Frontend & Interface** | React + Tailwind (pontual) + Sass | **Agilidade e Padronização:** Componentização madura e unânime na equipe, unindo velocidade de estilização a um design limpo. |
 | **Linguagem & Backend** | Python + Django + DRF | **Produtividade e Segurança:** Aproveita o domínio da equipe em Python e entrega autenticação e ORM prontos de fábrica. |
-| **Persistência de Dados** | PostgreSQL | **Integridade Relacional:** Perfeito para estruturar dados hierárquicos e relacionais de treinos (atletas, ciclos e sessões). |
+| **Persistência de Dados** | PostgreSQL | **Integração Relacional:** Perfeito para estruturar dados hierárquicos e relacionais de treinos (atletas, ciclos e sessões). |
 | **Infraestrutura (Dev & Prod)** | Vercel, Render / AWS Lightsail (VPS) | **Custo-Benefício e Controle:** Ambiente de teste ágil e sem custos iniciais, evoluindo para uma VPS dedicada em produção. |
 | **Prototipagem & Design** | Figma | **Validação Visual:** Criação rápida de telas e fluxos de experiência do usuário antes da codificação. |
 | **Modelagem & Arquitetura** | Miro | **Colaboração e Alinhamento:** Facilidade para construção conjunta de fluxogramas e diagramas de sistema pela equipe. |
@@ -62,7 +56,7 @@ Onde os concorrentes de grande porte são excessivamente caros e complexos, e fe
 
 ## 2.6 Viabilidade da Proposta
 
-A proposta é viável para o contexto da disciplina, considerando o acesso ao cliente, o escopo bem definido pelo cliente com a entrega de um MVP funcional ao final do semestre. Embora a equipe de desenvolvimento seja composta por estudantes, possua recursos limitados e um prazo ligeiramente curto, por volta de 3 meses, o projeto está sendo estruturando considerando todas essas variáveis, com priorização rigorosa das funcionalidades essenciais e validações frequentes com o cliente.
+A proposta é viável para o contexto da disciplina, considerando o acesso ao cliente, o escopo bem definido do cliente com a entrega de um MVP funcional ao final do semestre. Embora a equipe de desenvolvimento seja composta por estudantes, possua recursos limitados e um prazo ligeiramente curto, por volta de 3 meses, o projeto está sendo estruturando considerando todas essas variáveis, com priorização rigorosa das funcionalidades essenciais e validações frequentes com o cliente.
 
 O principal desafio em vista é o limite de tempo e recursos, porém esse risco é mitigado pela escopo bem definido para a entrega do MVP (produto mínimo viável) onde garantiremos a entrega das características essenciais que o cliente demonstrou como o valor central do sistema.
 

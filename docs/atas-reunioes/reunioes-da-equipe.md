@@ -1,6 +1,6 @@
 # Reuniões da equipe
 
-**Período:** 20/08/2026 - 22/10/2026
+**Período:** 20/08/2026 - 26/10/2026
 
 Esta aba reúne as atas das reuniões internas da equipe. Algumas reuniões também contaram com a participação do monitor Eduardo Lobo Moreira.
 
@@ -26,8 +26,6 @@ Esta aba reúne as atas das reuniões internas da equipe. Algumas reuniões tamb
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
-
-*** End of File
 
 
 ### Reunião da equipe 2
@@ -362,3 +360,29 @@ acesse diretamente pelo link: [https://youtu.be/uG-GW3ucPjw](https://youtu.be/uG
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
 
+### Reunião da equipe 15
+
+<p class="reuniao-data">segunda-feira, 26/10/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FnXgdN6pqME" title="Reunião da equipe 15" frameborder="0" allow="accelerometer; autoplay; clipboard-write; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/FnXgdN6pqME](https://youtu.be/FnXgdN6pqME)
+
+- **Pontos principais:**
+    - **[(0:03–2:09)](https://youtu.be/FnXgdN6pqME?t=3)** Gustavo comemora a nota anterior e divide as próximas histórias. Giovana atualiza o GitPages, Rafael informa que a transcrição anterior está na pasta, e Guilherme Nascimento é chamado sem resposta identificável.
+    - **[(2:09–9:28)](https://youtu.be/FnXgdN6pqME?t=129)** Rafael questiona o fluxo em árvore (macrociclo, mesociclo e microciclo) e propõe um filtro direto para o microciclo. Gustavo apresenta seu protótipo e Rafael pergunta como consultar macrociclos e mesociclos antigos.
+    - **[(9:28–16:32)](https://youtu.be/FnXgdN6pqME?t=568)** Leonardo sugere navegação lateral em formato de pasta para facilitar o retorno. A equipe discute agilizar o cadastro com associação automática entre sessão, microciclo, mesociclo e macrociclo.
+    - **[(16:32–24:02)](https://youtu.be/FnXgdN6pqME?t=992)** A equipe planeja validar protótipos de baixa fidelidade e consultar o professor sobre alta fidelidade. Leonardo assume DOR, DOD e cronograma; Gustavo lembra da aba de evidências, e Guilherme Lorenzi assume as issues restantes.
+    - **[(24:02–31:09)](https://youtu.be/FnXgdN6pqME?t=1442)** Gustavo apresenta o protótipo de baixa fidelidade e planeja validar o fluxo com o cliente. A edição de sessão é remanejada para junto do cadastro; Gustavo assume a história 16 e solicita os protótipos até quinta-feira.
+    - **[(31:09–33:27)](https://youtu.be/FnXgdN6pqME?t=1869)** Gustavo relata que usou o Gemini para sugerir a estrutura do banco e o fluxo de cadastro a partir da planilha do cliente, estimando aproveitar 80% a 90% da análise.
+    - **[(33:27–36:12)](https://youtu.be/FnXgdN6pqME?t=2007)** Rafael propõe aplicar o filtro e a navegação em árvore nos protótipos de alta fidelidade e alerta sobre a complexidade da associação automática. Gustavo prefere aguardar a resposta do professor para evitar retrabalho.
+    - **[(36:12–42:23)](https://youtu.be/FnXgdN6pqME?t=2172)** Giovana propõe uma planilha para registrar alterações de interface, dívidas técnicas, regras e decisões pendentes. Gustavo reforça o registro do status do protótipo e do cumprimento do DOR por história.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
