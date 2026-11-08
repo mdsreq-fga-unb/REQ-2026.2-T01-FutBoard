@@ -590,3 +590,126 @@
   cursor: pointer;
   color: #14396b;
 }
+
+/* Oculta o controle de edição exibido pelo tema nos títulos da página. */
+.md-content__button {
+  display: none !important;
+}
+
+/* Cards de RFs em coluna única, como no protótipo de requisitos */
+.md-typeset .rf-cards {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.md-typeset .rf-cards > details {
+  display: block;
+  width: 100%;
+  margin: 0 0 0.75rem;
+  overflow: hidden;
+  border-left: 4px solid #1f4e85;
+  border-radius: 0 0.35rem 0.35rem 0;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 0.15rem 0.5rem rgba(20, 57, 107, 0.14);
+}
+
+.md-typeset .rf-cards > details > summary {
+  display: flex;
+  align-items: center;
+  min-height: 3.25rem;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f4e85;
+  background: var(--md-default-bg-color);
+}
+
+.md-typeset .rf-cards > details > summary::before {
+  display: none !important;
+}
+
+.md-typeset .rf-cards > details > summary::after {
+  margin-left: auto;
+  color: #6b8198;
+}
+
+.md-typeset .rf-cards > details[open] > summary {
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset .rf-cards .rf-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 1.25rem 0;
+}
+
+.md-typeset .rf-cards .rf-status span {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  color: #397c5a;
+  background: #e0f2e8;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.md-typeset .rf-cards .rf-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 1.25rem;
+  padding: 1rem;
+  background: var(--md-code-bg-color);
+}
+
+.md-typeset .rf-cards .rf-meta > div {
+  min-width: 0;
+}
+
+.md-typeset .rf-cards .rf-meta > div + div {
+  padding-left: 1rem;
+  border-left: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset .rf-cards .rf-meta p:last-child {
+  margin-bottom: 0;
+}
+
+.md-typeset .rf-cards > details > :not(summary) {
+  margin-right: 1.25rem;
+  margin-left: 1.25rem;
+}
+
+.md-typeset .rf-cards > details > p:first-of-type {
+  margin-top: 1rem;
+}
+
+.md-typeset .rf-cards > details > p:last-child,
+.md-typeset .rf-cards > details > ul:last-child {
+  margin-bottom: 1.25rem;
+}
+
+@media screen and (max-width: 760px) {
+  .md-typeset .rf-cards > details > summary {
+    min-height: 3rem;
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .md-typeset .rf-cards > details > :not(summary) {
+    margin-right: 0.8rem;
+    margin-left: 0.8rem;
+  }
+
+  .md-typeset .rf-cards .rf-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .md-typeset .rf-cards .rf-meta > div + div {
+    padding-top: 1rem;
+    padding-left: 0;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+    border-left: 0;
+  }
+}
