@@ -1,6 +1,9 @@
 # MkDocs
 site/
 
+# Vite generated dependencies
+frontend/.vite/
+
 # Python virtual environment
 .venv/
 
