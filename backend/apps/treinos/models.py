@@ -3,6 +3,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Max
+import unicodedata
 
 from apps.ciclos.models import Microciclo
 
@@ -56,3 +57,17 @@ class Sessao(models.Model):
 
         self.full_clean()
         super().save(*args, **kwargs)
+
+
+def normalizar_nome_comportamento(nome):
+    nome = " ".join(nome.split())
+
+    nome = unicodedata.normalize("NFD", nome)
+
+    nome = "".join(
+        caractere
+        for caractere in nome
+        if not unicodedata.combining(caractere)
+    )
+
+    return nome.casefold()
