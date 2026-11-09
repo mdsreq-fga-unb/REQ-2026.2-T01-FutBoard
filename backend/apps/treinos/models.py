@@ -79,6 +79,7 @@ class ComportamentoTatico(models.Model):
         max_length=200,
         unique=True,
         editable=False,
+        blank=True,
     )
 
     class Meta:
