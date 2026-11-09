@@ -2,7 +2,12 @@
 
 from django.urls import path
 
-from .views import SessaoDetailView, SessaoListCreateView
+from .views import (
+    SessaoDetailView,
+    SessaoListCreateView,
+    ComportamentoTaticoListCreateView,
+    ComportamentoTaticoDetailView,
+)
 
 app_name = "treinos"
 
@@ -16,5 +21,15 @@ urlpatterns = [
         "sessoes/<int:pk>/",
         SessaoDetailView.as_view(),
         name="sessao-detail",
+    ),
+    path(
+        "comportamentos/",
+        ComportamentoTaticoListCreateView.as_view(),
+        name="comportamento-list-create",
+    ),
+    path(
+        "comportamentos/<int:pk>/",
+        ComportamentoTaticoDetailView.as_view(),
+        name="comportamento-detail",
     ),
 ]

@@ -2,8 +2,8 @@
 
 from rest_framework import generics
 
-from .models import Sessao
-from .serializers import SessaoSerializer
+from .models import Sessao, ComportamentoTatico
+from .serializers import SessaoSerializer, ComportamentoTaticoSerializer
 
 
 class SessaoListCreateView(generics.ListCreateAPIView):
@@ -18,3 +18,20 @@ class SessaoDetailView(generics.RetrieveUpdateAPIView):
 
     queryset = Sessao.objects.select_related("microciclo__mesociclo__macrociclo").all()
     serializer_class = SessaoSerializer
+
+class ComportamentoTaticoListCreateView(generics.ListCreateAPIView):
+    """
+    US10: listar e cadastrar comportamentos táticos.
+    """
+
+    queryset = ComportamentoTatico.objects.all()
+    serializer_class = ComportamentoTaticoSerializer
+
+
+class ComportamentoTaticoDetailView(generics.RetrieveUpdateAPIView):
+    """
+    US11: consultar e editar comportamentos táticos.
+    """
+
+    queryset = ComportamentoTatico.objects.all()
+    serializer_class = ComportamentoTaticoSerializer
