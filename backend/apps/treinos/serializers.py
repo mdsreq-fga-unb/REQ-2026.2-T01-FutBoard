@@ -2,11 +2,7 @@
 
 from rest_framework import serializers
 
-from .models import (
-    Sessao,
-    ComportamentoTatico,
-    normalizar_nome_comportamento,
-)
+from .models import Sessao
 
 
 class SessaoSerializer(serializers.ModelSerializer):
@@ -75,35 +71,3 @@ class SessaoSerializer(serializers.ModelSerializer):
                 )
 
         return attrs
-
-class ComportamentoTaticoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ComportamentoTatico
-        fields = ["id", "nome"]
-        read_only_fields = ["id"]
-
-    def validate_nome(self, value):
-        nome = " ".join(value.split())
-
-        if not nome:
-            raise serializers.ValidationError(
-                "O nome do comportamento é obrigatório."
-            )
-
-        nome_normalizado = normalizar_nome_comportamento(nome)
-
-        comportamentos = ComportamentoTatico.objects.filter(
-            nome_normalizado=nome_normalizado
-        )
-
-        if self.instance:
-            comportamentos = comportamentos.exclude(
-                pk=self.instance.pk
-            )
-
-        if comportamentos.exists():
-            raise serializers.ValidationError(
-                "Já existe um comportamento tático com esse nome."
-            )
-
-        return nome

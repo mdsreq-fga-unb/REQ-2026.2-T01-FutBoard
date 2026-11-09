@@ -3,7 +3,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Max
-import unicodedata
 
 from apps.ciclos.models import Microciclo
 
@@ -57,53 +56,3 @@ class Sessao(models.Model):
 
         self.full_clean()
         super().save(*args, **kwargs)
-
-
-def normalizar_nome_comportamento(nome):
-    nome = " ".join(nome.split())
-
-    nome = unicodedata.normalize("NFD", nome)
-
-    nome = "".join(
-        caractere
-        for caractere in nome
-        if not unicodedata.combining(caractere)
-    )
-
-    return nome.casefold()
-
-class ComportamentoTatico(models.Model):
-    nome = models.CharField(max_length=200)
-
-    nome_normalizado = models.CharField(
-        max_length=200,
-        unique=True,
-        editable=False,
-        blank=True,
-    )
-
-    class Meta:
-        ordering = ["nome"]
-        verbose_name = "comportamento tático"
-        verbose_name_plural = "comportamentos táticos"
-
-    def __str__(self):
-        return self.nome
-
-    def clean(self):
-        super().clean()
-
-        self.nome = " ".join((self.nome or "").split())
-
-        if not self.nome:
-            raise ValidationError({
-                "nome": "O nome do comportamento é obrigatório."
-            })
-
-        self.nome_normalizado = normalizar_nome_comportamento(
-            self.nome
-        )
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        return super().save(*args, **kwargs)
