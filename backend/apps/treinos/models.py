@@ -71,3 +71,38 @@ def normalizar_nome_comportamento(nome):
     )
 
     return nome.casefold()
+
+class ComportamentoTatico(models.Model):
+    nome = models.CharField(max_length=200)
+
+    nome_normalizado = models.CharField(
+        max_length=200,
+        unique=True,
+        editable=False,
+    )
+
+    class Meta:
+        ordering = ["nome"]
+        verbose_name = "comportamento tático"
+        verbose_name_plural = "comportamentos táticos"
+
+    def __str__(self):
+        return self.nome
+
+    def clean(self):
+        super().clean()
+
+        self.nome = " ".join((self.nome or "").split())
+
+        if not self.nome:
+            raise ValidationError({
+                "nome": "O nome do comportamento é obrigatório."
+            })
+
+        self.nome_normalizado = normalizar_nome_comportamento(
+            self.nome
+        )
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
