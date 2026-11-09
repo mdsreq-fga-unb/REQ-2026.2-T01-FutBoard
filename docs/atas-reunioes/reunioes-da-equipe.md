@@ -386,3 +386,31 @@ acesse diretamente pelo link: [https://youtu.be/FnXgdN6pqME](https://youtu.be/Fn
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+
+
+### Reunião da equipe 16
+
+<p class="reuniao-data">segunda-feira, 02/11/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/h_E9TOlH4SM" title="Reunião da equipe 16" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/h_E9TOlH4SM](https://youtu.be/h_E9TOlH4SM)
+
+- **Pontos principais:**
+    - **[(0:05–3:41)](https://youtu.be/h_E9TOlH4SM?t=5)** Gustavo abre a iteração 9 e informa que a US23 já está coberta pela US16. As RF27 e RF28 entram no MVP após revisão da priorização.
+    - **[(3:41–12:35)](https://youtu.be/h_E9TOlH4SM?t=221)** O professor orienta agrupar, no backlog e no cronograma, cada requisito com história, critérios, regras de negócio e validação, usando hyperlinks. A equipe também considera incluir o fluxo do Miro.
+    - **[(12:35–21:22)](https://youtu.be/h_E9TOlH4SM?t=755)** Gustavo apresenta o cadastro e a edição de macrociclo na branch `stage`, com front e back separados. A equipe discute branches de feature, testes e a necessidade de corrigir o DOD.
+    - **[(21:22–24:21)](https://youtu.be/h_E9TOlH4SM?t=1282)** A equipe debate a criação de grupos de comunicação para front e back, mantendo uma visão compartilhada por causa da interdependência entre as histórias de CRUD.
+    - **[(24:21–28:54)](https://youtu.be/h_E9TOlH4SM?t=1461)** Discutem antecipar iterações, o custo da VPS e o uso de deploy para validar as funcionalidades com o cliente conforme os critérios de aceitação e as regras de negócio.
+    - **[(28:54–33:12)](https://youtu.be/h_E9TOlH4SM?t=1734)** Guilherme relata o início do back de macrociclo, mesociclo e microciclo. A equipe discute cadastro linear e exclusão em cascata com confirmação.
+    - **[(33:12–41:59)](https://youtu.be/h_E9TOlH4SM?t=1992)** A equipe identifica regras de negócio para atividades, decide criar IDs próprios para as regras e reforça a antecipação das issues. Gustavo apresenta correções de priorização e evidências da validação do MVP.
+    - **[(41:59–49:48)](https://youtu.be/h_E9TOlH4SM?t=2519)** São criados grupos de front e back, confirmada a conclusão da US23 e definidas as histórias da semana. Giovana fica com a US14, Leonardo com a US24 e Rafael com a US27; a divisão das US13 e US28 entre os Guilhermes permanece incerta.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe; só fala a partir de 45:00, sendo recomendável confirmar a presença durante toda a reunião |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe, com presença parcial; saiu por volta de 12:00 e retornou em 41:27 |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe; apenas citado em uma mensagem |
