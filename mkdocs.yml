@@ -29,6 +29,7 @@ extra_css:
 
 extra_javascript:
   - javascripts/youtube-timestamps.js
+  - javascripts/requisitos-filtro.js
 
 nav:
   - Início: index.md

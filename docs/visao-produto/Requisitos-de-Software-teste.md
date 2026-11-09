@@ -10,14 +10,38 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - **CP04** — Geração Automática de Relatórios
 - **CP05** — Controle de Perfis de Acesso
 
+<div class="rf-filter" markdown>
+
+**Filtrar requisitos**
+
+<div class="rf-filter-dropdowns">
+<div class="rf-filter-dropdown">
+<div class="rf-filter-dropdown-title">Entrega</div>
+<label><input type="checkbox" name="rf-delivery" value="MVP"> MVP</label>
+<label><input type="checkbox" name="rf-delivery" value="Escopo Adicional"> Escopo Adicional</label>
+</div>
+
+<div class="rf-filter-dropdown">
+<div class="rf-filter-dropdown-title">Situação</div>
+<label><input type="checkbox" name="rf-situation" value="Concluído"> Concluído</label>
+<label><input type="checkbox" name="rf-situation" value="Não concluído"> Não concluído</label>
+</div>
+</div>
+
+<label class="rf-filter-search-label" for="rf-filter-input">Buscar requisito</label>
+<input id="rf-filter-input" class="rf-filter-search" type="search" placeholder="Digite código, título ou palavra-chave..." autocomplete="off">
+
+<p id="rf-filter-result" role="status" aria-live="polite"></p>
+
+</div>
+
 <div class="rf-cards" markdown>
 
 <a id="rf01"></a><a id="rf02"></a><a id="rf03"></a><a id="rf04"></a><a id="rf05"></a><a id="rf06"></a><a id="rf07"></a><a id="rf08"></a><a id="rf09"></a><a id="rf10"></a><a id="rf11"></a><a id="rf12"></a><a id="rf13"></a><a id="rf14"></a><a id="rf15"></a><a id="rf16"></a><a id="rf17"></a><a id="rf18"></a><a id="rf19"></a><a id="rf20"></a><a id="rf21"></a><a id="rf22"></a><a id="rf23"></a><a id="rf24"></a><a id="rf25"></a><a id="rf26"></a><a id="rf27"></a><a id="rf28"></a><a id="rf29"></a><a id="rf30"></a><a id="rf31"></a><a id="rf32"></a><a id="rf33"></a><a id="rf34"></a><a id="rf35"></a><a id="rf36"></a><a id="rf37"></a><a id="rf38"></a><a id="rf39"></a><a id="rf40"></a><a id="rf41"></a>
 
 <details markdown>
-<summary>RF01 · Cadastrar macrociclo</summary>
+<summary>RF01 · Cadastrar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos.
@@ -33,7 +57,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -44,18 +68,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF02 · Editar macrociclo</summary>
+<summary>RF02 · Editar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um macrociclo anteriormente cadastrado.
@@ -71,7 +94,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -82,18 +105,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF03 · Excluir macrociclo</summary>
+<summary>RF03 · Excluir macrociclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um macrociclo cadastrado, validando a integridade referencial com os ciclos subordinados.
@@ -109,7 +131,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -129,9 +151,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF04 · Cadastrar mesociclo</summary>
+<summary>RF04 · Cadastrar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo mesociclo vinculado obrigatoriamente a um macrociclo existente, informando o nome do mesociclo.
@@ -147,7 +168,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -158,18 +179,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF05 · Editar mesociclo</summary>
+<summary>RF05 · Editar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um mesociclo anteriormente cadastrado.
@@ -185,7 +205,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -196,18 +216,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF06 · Excluir mesociclo</summary>
+<summary>RF06 · Excluir mesociclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um mesociclo cadastrado, tratando as dependências estruturais.
@@ -223,7 +242,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -243,9 +262,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF07 · Cadastrar microciclo</summary>
+<summary>RF07 · Cadastrar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo microciclo vinculado obrigatoriamente a um mesociclo existente, informando o nome do microciclo.
@@ -261,7 +279,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -272,18 +290,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF08 · Editar microciclo</summary>
+<summary>RF08 · Editar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um microciclo anteriormente cadastrado.
@@ -299,7 +316,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -310,18 +327,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF09 · Excluir microciclo</summary>
+<summary>RF09 · Excluir microciclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um microciclo cadastrado.
@@ -337,7 +353,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -357,9 +373,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF10 · Cadastrar comportamento</summary>
+<summary>RF10 · Cadastrar comportamento<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades.
@@ -375,7 +390,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -386,18 +401,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF11 · Editar comportamento</summary>
+<summary>RF11 · Editar comportamento<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem um comportamento tático já cadastrado.
@@ -413,7 +427,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -424,18 +438,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF12 · Excluir comportamento</summary>
+<summary>RF12 · Excluir comportamento<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um comportamento tático cadastrado.
@@ -451,7 +464,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -471,9 +484,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF13 · Cadastrar atividade na sessão</summary>
+<summary>RF13 · Cadastrar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova atividade diretamente em uma sessão, informando dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, espaço, orientação, comportamento, momento e fase do jogo, calculando a área por jogador ([RN01](#rn01)), atribuindo a dimensão do espaço ([RN02](#rn02)), controlando a simultaneidade ([RN03](#rn03)) e respeitando o foco central ([RN05](#rn05)).
@@ -489,7 +501,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -504,18 +516,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF14 · Editar atividade na sessão</summary>
+<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma atividade incluída em uma sessão, recalculando automaticamente as métricas de espaço ([RN01](#rn01), [RN02](#rn02)) e ordem de simultaneidade ([RN03](#rn03)).
@@ -531,7 +542,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -554,9 +565,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF15 · Excluir atividade na sessão</summary>
+<summary>RF15 · Excluir atividade na sessão<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade de uma sessão, sem afetar o registro dela na biblioteca.
@@ -572,7 +582,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -591,9 +601,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF16 · Cadastrar sessão</summary>
+<summary>RF16 · Cadastrar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão, apurando o tempo real da sessão sem duplicidade de atividades simultâneas ([RN03](#rn03)).
@@ -609,7 +618,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -623,18 +632,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF17 · Editar sessão</summary>
+<summary>RF17 · Editar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma sessão de treino já cadastrada, recalculando a duração líquida da sessão ([RN03](#rn03)).
@@ -650,7 +658,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -663,18 +671,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF18 · Excluir sessão</summary>
+<summary>RF18 · Excluir sessão<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam uma sessão de treino cadastrada.
@@ -690,7 +697,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -711,9 +718,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF19 · Cadastrar atividade na biblioteca</summary>
+<summary>RF19 · Cadastrar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma atividade na biblioteca de treinos para reutilização futura, calculando a área ([RN01](#rn01)), classificando a dimensão ([RN02](#rn02)) e respeitando o objetivo central ([RN05](#rn05)).
@@ -729,7 +735,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **3,00**
 (3,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -742,18 +748,17 @@ Esforço Técnico: **3,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF20 · Editar atividade na biblioteca</summary>
+<summary>RF20 · Editar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem uma atividade cadastrada na biblioteca de treinos, atualizando sua classificação de espaço ([RN02](#rn02)).
@@ -769,7 +774,7 @@ Esforço Técnico: **3,00**
 Esforço Técnico: **3,00**
 (3,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -782,18 +787,17 @@ Esforço Técnico: **3,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF21 · Excluir atividade na biblioteca</summary>
+<summary>RF21 · Excluir atividade na biblioteca<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada na biblioteca de treinos.
@@ -809,7 +813,7 @@ Esforço Técnico: **3,00**
 Esforço Técnico: **3,00**
 (3,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -828,9 +832,8 @@ Esforço Técnico: **3,00**
 </details>
 
 <details markdown>
-<summary>RF22 · Exibir indicador de treino</summary>
+<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve exibir indicadores como número de sessões, minutos totais de treino (respeitando simultaneidade da [RN03](#rn03)), índice de variabilidade de exercícios ([RN06](#rn06)), número de execuções e tratamento neutro em períodos sem registros ([RN07](#rn07)).
@@ -846,7 +849,7 @@ Esforço Técnico: **3,00**
 Esforço Técnico: **2,33**
 (2,00/2,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -869,9 +872,8 @@ Esforço Técnico: **2,33**
 </details>
 
 <details markdown>
-<summary>RF23 · Reutilizar atividade cadastrada</summary>
+<summary>RF23 · Reutilizar atividade cadastrada<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar adicionem a uma sessão de treino uma atividade já cadastrada na biblioteca, recalculando automaticamente as dimensões se forem alteradas ([RN01](#rn01), [RN02](#rn02)).
@@ -887,7 +889,7 @@ Esforço Técnico: **2,33**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -901,18 +903,17 @@ Esforço Técnico: **2,00**
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details markdown>
-<summary>RF24 · Consultar informação de atividade do treino</summary>
+<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de atividade, com atualização automática e visual de estado vazio ([RN07](#rn07)).
@@ -928,7 +929,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **3,00**
 (3,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -949,9 +950,8 @@ Esforço Técnico: **3,00**
 </details>
 
 <details markdown>
-<summary>RF25 · Gerar relatório de treino</summary>
+<summary>RF25 · Gerar relatório de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar gerem relatório em PDF consolidando tempo de sessão ([RN03](#rn03)), variabilidade ([RN06](#rn06)) e notificação orientadora para períodos vazios ([RN07](#rn07)).
@@ -967,7 +967,7 @@ Esforço Técnico: **3,00**
 Esforço Técnico: **4,00**
 (4,00/4,00/4,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -990,9 +990,8 @@ Esforço Técnico: **4,00**
 </details>
 
 <details markdown>
-<summary>RF26 · Alternar unidade de tempo</summary>
+<summary>RF26 · Alternar unidade de tempo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar alternem, nos gráficos, a visualização do tempo entre tempo absoluto (minutos) e relativo (porcentagem), calculado a partir do tempo real da sessão ([RN03](#rn03)).
@@ -1008,7 +1007,7 @@ Esforço Técnico: **4,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1029,9 +1028,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF27 · Criar conta</summary>
+<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar criem uma conta de acesso à aplicação.
@@ -1047,7 +1045,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,33**
 (2,00/3,00/2,00) → Q4
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1067,9 +1065,8 @@ Esforço Técnico: **2,33**
 </details>
 
 <details markdown>
-<summary>RF28 · Fazer login</summary>
+<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar se autentiquem na aplicação a partir de um login e senha de acesso.
@@ -1085,7 +1082,7 @@ Esforço Técnico: **2,33**
 Esforço Técnico: **2,33**
 (2,00/3,00/2,00) → Q4
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1105,9 +1102,8 @@ Esforço Técnico: **2,33**
 </details>
 
 <details markdown>
-<summary>RF29 · Anexar imagem à atividade</summary>
+<summary>RF29 · Anexar imagem à atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar anexem uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade nas sessões de treino.
@@ -1123,7 +1119,7 @@ Esforço Técnico: **2,33**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1142,9 +1138,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF30 · Registrar pontuação da atividade</summary>
+<summary>RF30 · Registrar pontuação da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar registrem, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição.
@@ -1160,7 +1155,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q3
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1181,9 +1176,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF31 · Gerar análise textual do treino</summary>
+<summary>RF31 · Gerar análise textual do treino<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar gerem, com inteligência artificial, uma análise textual (insight) sobre as informações do treino.
@@ -1199,7 +1193,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **3,67**
 (3,00/4,00/4,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1219,9 +1213,8 @@ Esforço Técnico: **3,67**
 </details>
 
 <details markdown>
-<summary>RF32 · Registrar atributo técnico da atividade</summary>
+<summary>RF32 · Registrar atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir registrar, de forma opcional e restrita às atividades com foco técnico ([RN05](#rn05)), o atributo trabalhado (ex: domínio orientado, cabeceio defensivo).
@@ -1237,7 +1230,7 @@ Esforço Técnico: **3,67**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1257,9 +1250,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF33 · Editar atributo técnico da atividade</summary>
+<summary>RF33 · Editar atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem um atributo técnico registrado em uma atividade.
@@ -1275,7 +1267,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1295,9 +1287,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF34 · Excluir atributo técnico da atividade</summary>
+<summary>RF34 · Excluir atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um atributo técnico registrado em uma atividade.
@@ -1313,7 +1304,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,00**
 (2,00/2,00/2,00) → Q2
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1333,9 +1324,8 @@ Esforço Técnico: **2,00**
 </details>
 
 <details markdown>
-<summary>RF35 · Consultar informação de espaço do treino</summary>
+<summary>RF35 · Consultar informação de espaço do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a informação de espaço com base nas faixas da [RN02](#rn02) calculadas pela [RN01](#rn01), com tratamento neutro para ausência de dados ([RN07](#rn07)).
@@ -1351,7 +1341,7 @@ Esforço Técnico: **2,00**
 Esforço Técnico: **2,33**
 (2,00/3,00/2,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1374,9 +1364,8 @@ Esforço Técnico: **2,33**
 </details>
 
 <details markdown>
-<summary>RF36 · Consultar informação de orientação do treino</summary>
+<summary>RF36 · Consultar informação de orientação do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a orientação do treino (Aquisição, Aplicação, PDI, Eq Carga), com visual neutro para dados vazios ([RN07](#rn07)).
@@ -1392,7 +1381,7 @@ Esforço Técnico: **2,33**
 Esforço Técnico: **2,33**
 (2,00/3,00/2,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1413,9 +1402,8 @@ Esforço Técnico: **2,33**
 </details>
 
 <details markdown>
-<summary>RF37 · Consultar informação de momento do jogo do treino</summary>
+<summary>RF37 · Consultar informação de momento do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a distribuição dos momentos do jogo trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)).
@@ -1431,7 +1419,7 @@ Esforço Técnico: **2,33**
 Esforço Técnico: **3,00**
 (3,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1453,9 +1441,8 @@ Esforço Técnico: **3,00**
 </details>
 
 <details markdown>
-<summary>RF38 · Consultar informação de fase do jogo do treino</summary>
+<summary>RF38 · Consultar informação de fase do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a informação de fase do jogo ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)).
@@ -1471,7 +1458,7 @@ Esforço Técnico: **3,00**
 Esforço Técnico: **3,00**
 (3,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1493,9 +1480,8 @@ Esforço Técnico: **3,00**
 </details>
 
 <details markdown>
-<summary>RF39 · Consultar informação de comportamento do treino</summary>
+<summary>RF39 · Consultar informação de comportamento do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a informação de comportamento tático ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)).
@@ -1511,7 +1497,7 @@ Esforço Técnico: **3,00**
 Esforço Técnico: **3,00**
 (3,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1533,9 +1519,8 @@ Esforço Técnico: **3,00**
 </details>
 
 <details markdown>
-<summary>RF40 · Consultar informação de atributo técnico do treino</summary>
+<summary>RF40 · Consultar informação de atributo técnico do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a informação de atributos técnicos trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)).
@@ -1551,7 +1536,7 @@ Esforço Técnico: **3,00**
 Esforço Técnico: **3,00**
 (3,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 
@@ -1573,9 +1558,8 @@ Esforço Técnico: **3,00**
 </details>
 
 <details markdown>
-<summary>RF41 · Consultar análise comparativa por periodização</summary>
+<summary>RF41 · Consultar análise comparativa por periodização<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
 
-<div class='rf-status'><span>Entrega: A definir</span><span>Situação: A definir</span></div>
 
 
 **Declaração RF:** o sistema deve permitir consultar a análise comparativa respeitando a hierarquia da periodização ([RN04](#rn04)), com indicativo neutro se um dos ciclos não contiver treinos ([RN07](#rn07)).
@@ -1591,7 +1575,7 @@ Esforço Técnico: **3,00**
 Esforço Técnico: **3,33**
 (4,00/3,00/3,00) → Q1
 
-**Dependências:** Pré-requisitos: conforme hierarquia do requisito | Vínculos: **RNF02**
+**Dependências:** Pré-requisitos: conforme hierarquia do requisito
 
 </div>
 

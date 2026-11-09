@@ -625,6 +625,27 @@
   background: var(--md-default-bg-color);
 }
 
+.md-typeset .rf-cards > details > summary .rf-summary-status {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  margin-left: auto;
+  margin-right: 0.75rem;
+}
+
+.md-typeset .rf-cards > details > summary .rf-summary-status span {
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  color: #397c5a;
+  background: #e0f2e8;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
 .md-typeset .rf-cards > details > summary::before {
   display: none !important;
 }
@@ -652,6 +673,83 @@
   background: #e0f2e8;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+.md-typeset .rf-filter {
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+}
+
+.md-typeset .rf-filter > p:first-child {
+  margin-top: 0;
+  margin-bottom: 0.45rem;
+  font-weight: 700;
+}
+
+.md-typeset .rf-filter-dropdowns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.md-typeset .rf-filter-dropdown {
+  min-width: 13rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-left: 4px solid #1f4e85;
+  border-radius: 0 0.35rem 0.35rem 0;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 0.15rem 0.5rem rgba(20, 57, 107, 0.14);
+}
+
+.md-typeset .rf-filter-dropdown-title {
+  padding: 0.55rem 0.75rem;
+  font-weight: 700;
+}
+
+.md-typeset .rf-filter-dropdown > label {
+  display: block;
+  margin: 0;
+  padding: 0.35rem 0.75rem;
+  font-weight: 400;
+}
+
+.md-typeset .rf-filter-dropdown > label:last-child {
+  padding-bottom: 0.65rem;
+}
+
+.md-typeset .rf-filter-dropdown input {
+  margin-right: 0.4rem;
+}
+
+.md-typeset .rf-filter-search-label {
+  display: block;
+  margin-top: 0.65rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.md-typeset .rf-filter-search {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-left: 4px solid #1f4e85;
+  border-radius: 0 0.35rem 0.35rem 0;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+  box-shadow: 0 0.15rem 0.5rem rgba(20, 57, 107, 0.14);
+}
+
+.md-typeset .rf-filter-search:focus {
+  border-color: var(--fb-azul-medio);
+  outline: 2px solid rgba(44, 125, 160, 0.2);
+}
+
+.md-typeset .rf-filter #rf-filter-result {
+  margin: 0.5rem 0 0;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.85rem;
 }
 
 .md-typeset .rf-cards .rf-meta {
@@ -695,6 +793,26 @@
     min-height: 3rem;
     padding: 0.7rem 0.8rem;
     font-size: 0.9rem;
+  }
+
+  .md-typeset .rf-cards > details > summary .rf-summary-status {
+    gap: 0.2rem;
+    margin-right: 0.45rem;
+  }
+
+  .md-typeset .rf-cards > details > summary .rf-summary-status span {
+    max-width: 7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .md-typeset .rf-filter-dropdowns {
+    flex-direction: column;
+  }
+
+  .md-typeset .rf-filter-dropdown {
+    width: 100%;
+    min-width: 0;
   }
 
   .md-typeset .rf-cards > details > :not(summary) {
