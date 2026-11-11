@@ -408,9 +408,9 @@ acesse diretamente pelo link: [https://youtu.be/h_E9TOlH4SM](https://youtu.be/h_
 | Participante | Reunião | Função |
 | :--- | :---: | :--- |
 | Giovana Martins De Brito | ✅ | Membro da equipe |
-| Guilherme Lorenzi Ventura | ✅ | Membro da equipe; só fala a partir de 45:00, sendo recomendável confirmar a presença durante toda a reunião |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
 | Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
 | Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
-| Rafael Silva Wasconcelos | ✅ | Membro da equipe, com presença parcial; saiu por volta de 12:00 e retornou em 41:27 |
-| Eduardo Lobo Moreira | ❌ | Monitor da equipe; apenas citado em uma mensagem |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
