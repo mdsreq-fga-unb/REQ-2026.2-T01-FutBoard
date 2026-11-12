@@ -65,7 +65,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <tr>
 <td>Iteração 7</td>
 <td>19/10<br>-<br>26/10</td>
-<td>US01<br>US02<br>US04<br>US05<br>US07<br>US08</td>
+<td><a href="../Requisitos-de-Software-teste/#rf01">US01</a><br><a href="../Requisitos-de-Software-teste/#rf02">US02</a><br><a href="../Requisitos-de-Software-teste/#rf04">US04</a><br><a href="../Requisitos-de-Software-teste/#rf05">US05</a><br><a href="../Requisitos-de-Software-teste/#rf07">US07</a><br><a href="../Requisitos-de-Software-teste/#rf08">US08</a></td>
 <td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-5">Validação Cliente</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-15">Protótipo Baixa Fid.</a><br><span class="preencher">Mockups (inserir link)</span></td>
 <td>Finalizado</td>
 </tr>
@@ -73,7 +73,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <tr>
 <td>Iteração 8</td>
 <td>26/10<br>-<br>02/11</td>
-<td>US10<br>US11<br>US16<br>US17<br>US19<br>US20<br>US23<br>US13</td>
+<td><a href="../Requisitos-de-Software-teste/#rf10">US10</a><br><a href="../Requisitos-de-Software-teste/#rf11">US11</a><br><a href="../Requisitos-de-Software-teste/#rf16">US16</a><br><a href="../Requisitos-de-Software-teste/#rf17">US17</a><br><a href="../Requisitos-de-Software-teste/#rf19">US19</a><br><a href="../Requisitos-de-Software-teste/#rf20">US20</a><br><a href="../Requisitos-de-Software-teste/#rf23">US23</a><br><a href="../Requisitos-de-Software-teste/#rf13">US13</a></td>
 <td><span class="preencher">Validação Cliente (inserir link)</span><br><span class="preencher">Protótipo (inserir link)</span><br><a href="../dor-dod/">DoD</a></td>
 <td>Finalizado</td>
 </tr>
@@ -81,7 +81,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <tr>
 <td>Iteração 9</td>
 <td>02/11<br>-<br>09/11</td>
-<td>US14<br>US22<br>US24<br>US27<br>US28<br></td>
+<td><a href="../Requisitos-de-Software-teste/#rf14">US14</a><br><a href="../Requisitos-de-Software-teste/#rf22">US22</a><br><a href="../Requisitos-de-Software-teste/#rf24">US24</a><br><a href="../Requisitos-de-Software-teste/#rf27">US27</a><br><a href="../Requisitos-de-Software-teste/#rf28">US28</a></td>
 <td><span class="preencher">Validação Cliente (inserir link)</span><br><span class="preencher">Protótipo (inserir link)</span><br><a href="../dor-dod/">DoD</a></td>
 <td>Em andamento</td>
 </tr>
@@ -89,7 +89,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <tr>
 <td>Iteração 10</td>
 <td>09/11<br>-<br>16/11</td>
-<td>US25<br>US26<br>US32<br>US35<br>US39<br></td>
+<td><a href="../Requisitos-de-Software-teste/#rf25">US25</a><br><a href="../Requisitos-de-Software-teste/#rf26">US26</a><br><a href="../Requisitos-de-Software-teste/#rf32">US32</a><br><a href="../Requisitos-de-Software-teste/#rf35">US35</a><br><a href="../Requisitos-de-Software-teste/#rf39">US39</a></td>
 <td>Validação Cliente<br>Protótipo<br>DoD</td>
 <td>Planejado</td>
 </tr>
@@ -97,7 +97,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <tr>
 <td>Iteração 11</td>
 <td>16/11<br>-<br>23/11</td>
-<td>US38<br>US40<br>US41<br>US36<br>US37</td>
+<td><a href="../Requisitos-de-Software-teste/#rf38">US38</a><br><a href="../Requisitos-de-Software-teste/#rf40">US40</a><br><a href="../Requisitos-de-Software-teste/#rf41">US41</a><br><a href="../Requisitos-de-Software-teste/#rf36">US36</a><br><a href="../Requisitos-de-Software-teste/#rf37">US37</a></td>
 <td>Validação Cliente<br>Protótipo<br>DoD</td>
 <td>Planejado</td>
 </tr>

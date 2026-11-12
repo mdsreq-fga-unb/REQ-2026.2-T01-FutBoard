@@ -606,6 +606,12 @@
   border-radius: 0 0.35rem 0.35rem 0;
   background: var(--md-default-bg-color);
   box-shadow: 0 0.15rem 0.5rem rgba(20, 57, 107, 0.14);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.md-typeset .rf-cards>details:target {
+  border-left: 4px solid var(--fb-azul-medio);
+  box-shadow: 0 0 0 2px rgba(44, 125, 160, 0.35), 0 0.25rem 0.75rem rgba(20, 57, 107, 0.2);
 }
 
 .md-typeset .rf-cards>details>summary {
