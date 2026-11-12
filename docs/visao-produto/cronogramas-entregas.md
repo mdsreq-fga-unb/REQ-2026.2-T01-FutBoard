@@ -10,7 +10,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <div class="tabela-cronograma-html">
 <table class="tabela-cronograma-html-table">
 <thead>
-<tr><th>Iteração</th><th>Data Início<br>Data Fim</th><th>Escopo Realizado</th><th>Técnicas de Requisitos</th><th>Status</th><th>Considerações e Justificativas</th></tr>
+<tr><th>Iteração</th><th>Data Início<br>Data Fim</th><th>Escopo Realizado</th><th>Técnicas de Requisitos</th><th>Status</th></tr>
 </thead>
 <tbody>
 
@@ -20,7 +20,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td><a href="../cenario-atual/">Cenário Atual</a><br><a href="../solucao-proposta/">Solução Proposta</a><br>Priorização MoSCoW inicial</td>
 <td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-1">Entrevista</a><br><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-1">Análise de Documentos (Excel/Power BI)</a><br><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-2">MoSCoW com o Cliente</a></td>
 <td>Finalizado</td>
-<td>A elicitação começou antes do previsto (20/08 e 24/08), antecipando insumos para a Entrega 1.</td>
 </tr>
 
 <tr>
@@ -29,7 +28,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td><a href="../Requisitos-de-Software/">Lista de RFs e RNFs (v1)</a><br>Correção das issues da Unidade 1</td>
 <td><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-4">Brainstorming</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-5">Granularização (Miro)</a><br><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-3">Observação (cronometragem)</a></td>
 <td>Finalizado</td>
-<td>-</td>
 </tr>
 
 <tr>
@@ -38,7 +36,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>RFs e RNFs revisados<br>Matriz Valor x Esforço (1ª rodada)</td>
 <td><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-6">Revisão por Pares</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-7">Priorização Valor x Esforço</a></td>
 <td>Finalizado</td>
-<td>-</td>
 </tr>
 
 <tr>
@@ -47,7 +44,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>RF35 a RF41 (Dashboard)<br><a href="../Requisitos-de-Software/#82-regras-de-negocio-rns">Regras de Negócio</a></td>
 <td><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-8">Análise de Feedback</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-9">Inspeção de Requisitos</a></td>
 <td>Finalizado (replanejado)</td>
-<td>O fechamento do MVP, previsto para esta iteração, passou para a Iteração 5: a 1ª matriz gerou um MVP grande demais.</td>
 </tr>
 
 <tr>
@@ -56,7 +52,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td><a href="../backlog_do_produto/#6-requisitos-do-mvp">MVP: 27 RFs e 3 RNFs</a><br><a href="../../catalogos-termos/catalogos-termos/">Catálogo de Termos</a><br><a href="../dor-dod/">DoR / DoD</a><br><a href="../Requisitos-de-Software/#84-matriz-sintese-de-rastreabilidade">Rastreabilidade</a></td>
 <td><a href="../backlog_do_produto/#4-matriz-valor-x-esforco-e-quadrantes">Valor x Esforço + Frequência de Uso</a><br><a href="../backlog_do_produto/#103-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente">Validação Cliente</a></td>
 <td>Finalizado</td>
-<td>-</td>
 </tr>
 
 <tr>
@@ -65,7 +60,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>Replanejamento do cronograma por US<br>Fluxo de navegação geral</td>
 <td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-4">Validação Cliente</a><br><span class="preencher">Protótipo Baixa Fid. (inserir link)</span></td>
 <td>Finalizado (replanejado)</td>
-<td>Previa registro de treinos (CP01), protótipo aprovado e teste de tempo de cadastro. Foi replanejado (<a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-13">Ata 13</a> e <a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-14">Ata 14</a>) porque a sessão (RF16) depende de macro, meso e microciclo. Registro de treinos e teste de tempo foram para a Iteração 9.</td>
 </tr>
 
 <tr>
@@ -74,7 +68,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>Protótipo da periodização (US01 a US08)<br>Arquitetura do sistema</td>
 <td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-5">Validação Cliente</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-15">Protótipo Baixa Fid.</a><br><span class="preencher">Mockups (inserir link)</span></td>
 <td>Finalizado</td>
-<td>-</td>
 </tr>
 
 <tr>
@@ -83,7 +76,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>US01<br>US02<br>US04<br>US05<br>US07<br>US08<br>US16<br>US17</td>
 <td><span class="preencher">Validação Cliente (inserir link)</span><br><span class="preencher">Protótipo (inserir link)</span><br><a href="../dor-dod/">DoD</a></td>
 <td>Finalizado</td>
-<td>Periodização (CP02) entregue antes da sessão (CP01). US16 e US17 foram antecipadas da Iteração 9.</td>
 </tr>
 
 <tr>
@@ -92,7 +84,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>US10<br>US11<br>US13<br>US14<br>US19<br>US20<br>US23<br>US32<br>RNF03 (cadastro em menos de 2 min)</td>
 <td><span class="preencher">Validação Cliente (inserir link)</span><br><span class="preencher">Protótipo (inserir link)</span><br><a href="../dor-dod/">DoD</a></td>
 <td>Em andamento</td>
-<td>Registro de treinos (CP01). A decisão sobre custo e responsável pela VPS foi antecipada para esta iteração.</td>
 </tr>
 
 <tr>
@@ -101,7 +92,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>US22<br>US24<br>US26<br>US35<br>US36<br>US37<br>RNF04</td>
 <td>Validação Cliente<br>Protótipo<br>DoD</td>
 <td>Planejado</td>
-<td>Dashboard (CP03), indicadores e gráficos iniciais.</td>
 </tr>
 
 <tr>
@@ -110,7 +100,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>US38<br>US39<br>US40<br>US41<br>US25 (relatório PDF)</td>
 <td>Validação Cliente<br>Protótipo<br>DoD</td>
 <td>Planejado</td>
-<td>Dashboard comparativo (CP03) e geração de PDF (RF25 / CP04).</td>
 </tr>
 
 <tr>
@@ -119,7 +108,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>Homologação assistida<br>Implantação</td>
 <td>Validação Cliente<br>Teste de Aceitação</td>
 <td>Planejado</td>
-<td>Se o clube não aprovar a VPS, a implantação será feita em hospedagem gratuita ou via Docker em computador da comissão técnica.</td>
 </tr>
 
 <tr>
@@ -128,7 +116,6 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>Entrega final do MVP</td>
 <td>Validação Cliente (aceite final)</td>
 <td>Planejado</td>
-<td>Fechamento da linha de base de requisitos.</td>
 </tr>
 
 </tbody>
