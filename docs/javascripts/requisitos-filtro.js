@@ -94,11 +94,43 @@
     });
     input.addEventListener("input", filterCards);
     filterCards();
+    openTargetCard();
+  }
+
+  function openTargetCard() {
+    var hash = window.location.hash;
+    if (hash && hash.length > 1) {
+      try {
+        var targetId = decodeURIComponent(hash.substring(1));
+        var targetElem = document.getElementById(targetId);
+        if (targetElem && targetElem.tagName.toLowerCase() === "details") {
+          targetElem.open = true;
+          targetElem.hidden = false;
+          targetElem.style.display = "";
+          setTimeout(function () {
+            targetElem.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 150);
+        }
+      } catch (e) {}
+    }
+  }
+
+  window.addEventListener("hashchange", openTargetCard);
+
+  if (typeof document$ !== "undefined" && document$.subscribe) {
+    document$.subscribe(function () {
+      initializeRequirementFilter();
+      openTargetCard();
+    });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initializeRequirementFilter);
+    document.addEventListener("DOMContentLoaded", function () {
+      initializeRequirementFilter();
+      openTargetCard();
+    });
   } else {
     initializeRequirementFilter();
+    openTargetCard();
   }
 })();

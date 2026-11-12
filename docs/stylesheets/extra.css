@@ -496,7 +496,7 @@
   margin: 1rem 0 1.5rem;
   width: 100%;
   max-width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
   border: 0.05rem solid var(--md-default-fg-color--lightest);
   border-radius: 0.2rem;
   box-shadow: var(--md-shadow-z1);
@@ -509,31 +509,25 @@
   margin: 0;
   table-layout: fixed;
   border-collapse: collapse;
-  font-size: 0.72rem;
-}
-
-.tabela-cronograma-html-table {
-  display: table !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
+  font-size: 0.74rem;
 }
 
 .tabela-cronograma-html th,
 .tabela-cronograma-html td {
-  padding: 0.35rem 0.3rem;
+  padding: 0.55rem 0.6rem;
   border-bottom: 0.05rem solid var(--md-default-fg-color--lightest);
-  line-height: 1.25;
+  line-height: 1.4;
   text-align: left;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
   vertical-align: top;
 }
 
 .tabela-cronograma-html th {
   background-color: var(--md-default-bg-color);
   color: var(--md-default-fg-color);
-  font-size: 0.58rem;
+  font-size: 0.72rem;
   font-weight: 700;
   vertical-align: middle;
 }
@@ -542,42 +536,42 @@
   border-bottom: 0;
 }
 
-/* Larguras das colunas para a tabela de cronograma (total 7) */
+/* Colunas (total 100%): 1. Iteração | 2. Datas | 3. Escopo | 4. Técnicas | 5. Status */
 .tabela-cronograma-html th:nth-child(1),
 .tabela-cronograma-html td:nth-child(1) {
-  width: 16%;
+  width: 13%;
+  text-align: center;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .tabela-cronograma-html th:nth-child(2),
 .tabela-cronograma-html td:nth-child(2) {
   width: 12%;
   text-align: center;
+  white-space: nowrap;
 }
 
 .tabela-cronograma-html th:nth-child(3),
 .tabela-cronograma-html td:nth-child(3) {
-  width: 9%;
-  text-align: center;
+  width: 33%;
 }
 
 .tabela-cronograma-html th:nth-child(4),
 .tabela-cronograma-html td:nth-child(4) {
-  width: 17%;
+  width: 27%;
 }
 
 .tabela-cronograma-html th:nth-child(5),
 .tabela-cronograma-html td:nth-child(5) {
-  width: 17%;
+  width: 15%;
+  text-align: center;
 }
 
-.tabela-cronograma-html th:nth-child(6),
-.tabela-cronograma-html td:nth-child(6) {
-  width: 17%;
-}
-
-.tabela-cronograma-html th:nth-child(7),
-.tabela-cronograma-html td:nth-child(7) {
-  width: 21%;
+/* Marca itens cujo link ainda precisa ser preenchido */
+.tabela-cronograma-html .preencher {
+  color: #c0392b;
+  font-weight: 600;
 }
 
 .md-typeset iframe {
@@ -586,7 +580,7 @@
   box-shadow: 0 2px 10px rgba(13, 27, 42, 0.08);
 }
 
-.md-typeset details > summary {
+.md-typeset details>summary {
   cursor: pointer;
   color: #14396b;
 }
@@ -603,7 +597,7 @@
   margin: 1.5rem 0;
 }
 
-.md-typeset .rf-cards > details {
+.md-typeset .rf-cards>details {
   display: block;
   width: 100%;
   margin: 0 0 0.75rem;
@@ -612,9 +606,15 @@
   border-radius: 0 0.35rem 0.35rem 0;
   background: var(--md-default-bg-color);
   box-shadow: 0 0.15rem 0.5rem rgba(20, 57, 107, 0.14);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.md-typeset .rf-cards > details > summary {
+.md-typeset .rf-cards>details:target {
+  border-left: 4px solid var(--fb-azul-medio);
+  box-shadow: 0 0 0 2px rgba(44, 125, 160, 0.35), 0 0.25rem 0.75rem rgba(20, 57, 107, 0.2);
+}
+
+.md-typeset .rf-cards>details>summary {
   display: flex;
   align-items: center;
   min-height: 3.25rem;
@@ -625,7 +625,7 @@
   background: var(--md-default-bg-color);
 }
 
-.md-typeset .rf-cards > details > summary .rf-summary-status {
+.md-typeset .rf-cards>details>summary .rf-summary-status {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-end;
@@ -635,7 +635,7 @@
   margin-right: 0.75rem;
 }
 
-.md-typeset .rf-cards > details > summary .rf-summary-status span {
+.md-typeset .rf-cards>details>summary .rf-summary-status span {
   padding: 0.22rem 0.55rem;
   border-radius: 999px;
   font-size: 0.68rem;
@@ -664,16 +664,16 @@
   background: #f0e5fa;
 }
 
-.md-typeset .rf-cards > details > summary::before {
+.md-typeset .rf-cards>details>summary::before {
   display: none !important;
 }
 
-.md-typeset .rf-cards > details > summary::after {
+.md-typeset .rf-cards>details>summary::after {
   margin-left: auto;
   color: #6b8198;
 }
 
-.md-typeset .rf-cards > details[open] > summary {
+.md-typeset .rf-cards>details[open]>summary {
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
 }
 
@@ -698,7 +698,7 @@
   padding: 0;
 }
 
-.md-typeset .rf-filter > p:first-child {
+.md-typeset .rf-filter>p:first-child {
   margin-top: 0;
   margin-bottom: 0.45rem;
   font-weight: 700;
@@ -749,14 +749,14 @@
   content: "−";
 }
 
-.md-typeset .rf-filter-dropdown > label {
+.md-typeset .rf-filter-dropdown>label {
   display: block;
   margin: 0;
   padding: 0.35rem 0.75rem;
   font-weight: 400;
 }
 
-.md-typeset .rf-filter-dropdown > label:last-child {
+.md-typeset .rf-filter-dropdown>label:last-child {
   padding-bottom: 0.65rem;
 }
 
@@ -808,11 +808,11 @@
   background: var(--md-code-bg-color);
 }
 
-.md-typeset .rf-cards .rf-meta > div {
+.md-typeset .rf-cards .rf-meta>div {
   min-width: 0;
 }
 
-.md-typeset .rf-cards .rf-meta > div + div {
+.md-typeset .rf-cards .rf-meta>div+div {
   padding-left: 1rem;
   border-left: 1px solid var(--md-default-fg-color--lightest);
 }
@@ -821,33 +821,33 @@
   margin-bottom: 0;
 }
 
-.md-typeset .rf-cards > details > :not(summary) {
+.md-typeset .rf-cards>details> :not(summary) {
   margin-right: 1.25rem;
   margin-left: 1.25rem;
 }
 
-.md-typeset .rf-cards > details > p:first-of-type {
+.md-typeset .rf-cards>details>p:first-of-type {
   margin-top: 1rem;
 }
 
-.md-typeset .rf-cards > details > p:last-child,
-.md-typeset .rf-cards > details > ul:last-child {
+.md-typeset .rf-cards>details>p:last-child,
+.md-typeset .rf-cards>details>ul:last-child {
   margin-bottom: 1.25rem;
 }
 
 @media screen and (max-width: 760px) {
-  .md-typeset .rf-cards > details > summary {
+  .md-typeset .rf-cards>details>summary {
     min-height: 3rem;
     padding: 0.7rem 0.8rem;
     font-size: 0.9rem;
   }
 
-  .md-typeset .rf-cards > details > summary .rf-summary-status {
+  .md-typeset .rf-cards>details>summary .rf-summary-status {
     gap: 0.2rem;
     margin-right: 0.45rem;
   }
 
-  .md-typeset .rf-cards > details > summary .rf-summary-status span {
+  .md-typeset .rf-cards>details>summary .rf-summary-status span {
     max-width: 7rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -866,7 +866,7 @@
     gap: 0.85rem;
   }
 
-  .md-typeset .rf-cards > details > :not(summary) {
+  .md-typeset .rf-cards>details> :not(summary) {
     margin-right: 0.8rem;
     margin-left: 0.8rem;
   }
@@ -875,7 +875,7 @@
     grid-template-columns: 1fr;
   }
 
-  .md-typeset .rf-cards .rf-meta > div + div {
+  .md-typeset .rf-cards .rf-meta>div+div {
     padding-top: 1rem;
     padding-left: 0;
     border-top: 1px solid var(--md-default-fg-color--lightest);

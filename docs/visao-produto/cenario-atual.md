@@ -32,9 +32,8 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 - Processar automaticamente os dados registrados em relatórios estatísticos e gráficos interativos
 - Garantir usabilidade para um usuário não necessariamente técnico em tecnologia (o treinador)
 - Desafio técnicos acerca das tecnologias que o time de desenvolvimento utilizará para criar as análises e gráficos.
-- Migrar, importar os dados já existentes das planilhas de Excel atuais do treinador para o novo sistema, assegurando que os dados não sejam perdidos durante a transição.
-- Privacidade e proteção de dados tendo em vista que serão armazenado dados relacionados a jogadores menores de idade. 
-- Observar as exigências aplicáveis da LGPD
+- Conduzir a transição operacional do uso das planilhas manuais para a inserção direta no novo sistema. A importação automatizada de dados históricos das planilhas foi formalmente **retirada do compromisso do MVP** (postergada para etapas pós-MVP), adotando-se o modelo de "marco zero": as novas sessões passam a ser cadastradas diretamente no FutBoard a partir da nova periodização, enquanto as planilhas legadas de Excel permanecem arquivadas como fonte de consulta histórica sob responsabilidade do treinador.
+- Assegurar conformidade com a LGPD através do princípio de minimização de dados (*Privacy by Design*), delimitando que a aplicação trata exclusivamente métricas e dados operacionais coletivos dos treinos, sem coletar, processar ou armazenar quaisquer dados pessoais identificáveis ou prontuários individuais dos atletas menores de idade.
 
 ##1.6 Mapa de Stakeholders
 
@@ -54,13 +53,13 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 
 - **Nível de Influência:** Participa do uso da aplicação, mas não participa das validações.
 
-**3. Jogadores (Atletas do sub-17):** Os jovens atletas em formação no clube pertecem a faixa etária de 16-17 anos.
+**3. Jogadores (Atletas do sub-17):** Os jovens atletas em formação no clube pertencem à faixa etária de 16 a 17 anos.
 
-- **Relação:** São a origem das coletas de dados e o foco central das informações armazenadas no sistema (conforme apontado no fluxograma de oportunidades do projeto).
+- **Relação:** Participantes das sessões práticas de treinamento. O sistema não realiza cadastro individual, nominal ou biométrico dos atletas, registrando apenas a quantidade de participantes e os dados coletivos das atividades.
 
-- **Interesses e Expectativas:** Embora não interajam com o sistema, dependem de um bom acompanhamento automatizado para terem seu desempenho e cargas avaliados corretamente ao longo das temporadas, os atletas tem uma rotatividade mediana por ser um clube de base.
+- **Interesses e Expectativas:** Não interagem diretamente com o sistema. Beneficiam-se indiretamente da organização metodológica das cargas e conteúdos de treino planejados pela comissão técnica.
 
-- **Nível de Influência:** Baixa influência sobre o desenvolvimento ou decisão de uso da ferramenta. No entanto, são o grupo que será diretamente impactado pelas tomadas de decisões técnicas que o treinador fará com base nas análises geradas pelo produto.
+- **Nível de Influência:** Baixa influência direta sobre o software. No entanto, são o grupo impactado pelas decisões técnicas e pela dosagem das cargas de treinamento coletivo planejadas pela comissão.
 
 **4. Preparador físico:** O profissional responsável pelo condicionamento físico, prevenção de lesões e reabilitação dos atletas.
 
@@ -74,7 +73,7 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 
 - **Relação:** Público terciário da aplicação, usuário indireto. Sem acesso ao sistema, ele recebe os dados filtrados e repassados, por meio de relatórios pelo técnico principal ou seu auxiliar.
 
-- **Interesse e Expectativa:** Têm interesse em análises estatísticas específicas de desempenho treinos defensivos extraídas dos relatórios para direcionar correções e treinos individualizados para os goleiros.
+- **Interesse e Expectativa:** Têm interesse em análises estatísticas específicas de desempenho dos treinos defensivos extraídas dos relatórios para direcionar correções e ajustes nas cargas de treino do setor defensivo da equipe.
 
 - **Nível de Influência:** Não utiliza a aplicação e não valida o sistema. Sua particiapação se limita ao consumo passivo das métricas geradas para a tomada de decisão em campo.
 
@@ -82,7 +81,7 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 
 - **Relação:** Stakeholder e público terciário da aplicação, usuário indireto. Não opera o sistema, sendo impactado apenas pelas apresentações de resultados e relatórios fornecidos pelo técnico.
 
-- **Interesse e Expectativa:** Têm interesse em relatórios consolidados e gráficos de alto nível (visão macro) que demonstrem a evolução da equipe, o desempenho individual de atletas (para potenciais vendas/contratações) e a eficácia do trabalho da comissão técnica ao longo da temporada.
+- **Interesse e Expectativa:** Têm interesse em relatórios consolidados e gráficos de alto nível (visão macro) que demonstrem a evolução da equipe, a distribuição das cargas de trabalho na categoria e a eficácia metodológica do trabalho da comissão técnica ao longo da temporada.
 
 - **Nível de Influência:** Não acessa a aplicação e não atua em suas validações da aplicação, porém pode ter suas decisões influênciadas diretamente/indiretamente com base nos relatórios gerados por ela.
 

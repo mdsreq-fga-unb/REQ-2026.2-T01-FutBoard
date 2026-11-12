@@ -1,46 +1,129 @@
 ## 6. Cronograma e Entregas
 
-O cronograma foi organizado em iterações semanais distribuídas ao longo das quatro fases do RAD. Como a abordagem é **dirigida a plano** na fase de Planejamento de Requisitos, os requisitos são definidos de forma abrangente antes da prototipagem; nas iterações seguintes, os protótipos são o principal instrumento para **validar e refinar a interface (UI/UX) e os fluxos de navegação** com o cliente e para expor nuances de domínio, com os requisitos evoluindo de forma **iterativa e incremental** a partir desse feedback. Design do Usuário e Construção iteram em conjunto a cada funcionalidade, e cada iteração percorre — e registra — o seguinte **ciclo padrão**, tornando explícita a passagem entre as atividades:
+O cronograma está organizado em iterações semanais distribuídas pelas fases do RAD: **Planejamento de Requisitos** (Iterações 1 a 5), **Design do Usuário e Construção** (Iterações 6 a 11) e **Cutover** (Iterações 12 e 13). As iterações de construção seguem a ordem de dependência do domínio: **periodização (CP02)** → **sessão e registro de treinos (CP01)** → **dashboard (CP03)** → **relatório PDF (CP04)**.
 
-1. **Prototipação e refinamento** (Design do Usuário): evolução do protótipo de média fidelidade no Figma para validar a interface (UI/UX) e os fluxos de navegação, refinando histórias de usuário e critérios de aceitação conforme as mudanças e nuances de domínio que emergem;
-2. **Validação do protótipo** com o cliente: homologação visual com o técnico, avaliando também a usabilidade;
-3. **Construção** (Construção): implementação do incremento a partir do protótipo aprovado;
-4. **Verificação interna**: checklists, revisão por pares e testes funcionais frente aos critérios de aceitação;
-5. **Validação do incremento** com o cliente: demonstração e registro do resultado, com atualização de requisitos, decisões e rastreabilidade no GitHub Projects.
+> **Legenda de status:** Finalizado · Finalizado (replanejado) · Em andamento · Planejado.
+> Os itens em <span style="color:#c0392b;font-weight:600">vermelho</span> ainda precisam receber o link da evidência.
 
-Para tornar esse ciclo explícito **em cada iteração**, as colunas de saída da tabela refletem as suas etapas: **Design / refinamento (protótipo + validação do protótipo)** reúne as etapas 1 e 2; **Construção e verificação** reúne as etapas 3 e 4; e **Validação do incremento e resultado (ER)** corresponde à etapa 5. Assim, além do incremento de produto, toda iteração produz e registra os artefatos de Engenharia de Requisitos (histórias refinadas, critérios de aceitação, protótipo validado, requisitos e rastreabilidade atualizados, decisões registradas e o resultado da validação), e testes, integração e ER ocorrem de forma contínua, não apenas ao final.
-
-> As reuniões de elicitação com o cliente ocorreram em agosto de 2026, antecedendo o início formal do cronograma; a Iteração 1 consolida e prioriza esses insumos.
+### Cronograma
 
 <div class="tabela-cronograma-html">
 <table class="tabela-cronograma-html-table">
-<thead><tr><th>Fase (RAD)</th><th>Iteração</th><th>Período</th><th>Foco (funcionalidade)</th><th>Design / refinamento (protótipo + validação do protótipo)</th><th>Construção e verificação</th><th>Validação do incremento e resultado (ER)</th></tr></thead>
+<thead>
+<tr><th>Iteração</th><th>Data Início<br>Data Fim</th><th>Escopo Realizado</th><th>Técnicas de Requisitos</th><th>Status</th></tr>
+</thead>
 <tbody>
-<tr><td>Planejamento de Requisitos</td><td>Iteração 1</td><td>07/09–14/09</td><td>Elicitação (consolidação de agosto), priorização e base técnica</td><td>Escopo priorizado (MoSCoW + Valor x Esforço); Documento de Visão; backlog inicial catalogado no GitHub Projects</td><td>Construcao do quadro no Miro e Deploy do GitHub Pages</td><td>Escopo e prioridades validados com o técnico; alinhamento inicial com o técnico</td></tr>
-<tr><td>Planejamento de Requisitos</td><td>Iteração 2</td><td>14/09–21/09</td><td>Verificação e melhorias no backlog, preparacao para a elaboracao de RFs e RNFs</td><td>Escopo priorizado: corrigir as issues, refinar e melhorar as RF e RNF; Documento de Visão; backlog inicial catalogado no GitHub Projects</td><td>Melhorias do quadro no Miro e Atualiazcao do GitHub Pages</td><td>Validacao interna com os pontos do cliente</td></tr>
-<tr><td>Planejamento de Requisitos</td><td>Iteração 3</td><td>21/09–28/09</td><td>Elicitacao e Declaracao de RFs e RNFs</td><td>Escopo priorizado: Elicitar e declarar RFs e RNfs; Documento de Visão; backlog final do produto</td><td>Correcoes dos feedbacks recebidos quanto RFs e RNFs</td><td>Preparando para Validar RFs e RNFs com o técnico; alinhamento inicial com o técnico</td></tr>
-<tr><td>Planejamento de Requisitos</td><td>Iteração 4</td><td>28/09–05/10</td><td>Fazer a validacao com o cliente do escopo do MVP</td><td>Escopo priorizado: Validar e Verificar RFs e RNfs junto ao cliente; Elaborar matriz 4x4 e produzir lista de RFs e RNFs selecionadas para o MVP</td><td>Refazer a matriz com o MVP atualizado</td><td>Feito a validacao com o cliente quanto ao MVP do projeto</td></tr>
-<tr><td>Planejamento de Requisitos</td><td>Iteração 5</td><td>05/10–12/10</td><td>Refinamento de requisitos e redefinicao do backlog e MVP</td><td>Foi atualizada as matrizes de valor e esforco e a matriz 4x4</td><td>Correcoes e atualizacoes do Miro do projeto</td><td>Validacao do cliente via whatsApp do novo escopo do novo MVP</td></tr>
 
-<tr><td>Design do Usuário e Construção</td><td>Iteração 6</td><td>12/10–19/10</td><td>Registro categorizado de treinos (CP01)</td><td>Protótipo do registro (UI/UX + fluxo), histórias refinadas e critérios de aceitação de CP01 validados com o cliente (usabilidade avaliada)</td><td>Tela de registro e categorização; testes funcionais; verificação da meta de tempo de cadastro (RNF)</td><td>Registro validado em campo pelo técnico; requisitos e rastreabilidade atualizados e decisões registradas no GitHub Projects</td></tr>
-<tr><td>Design do Usuário e Construção</td><td>Iteração 7</td><td>19/10–26/10</td><td>Periodização – macrociclos (CP02)</td><td>Protótipo, histórias refinadas e critérios de macrociclos validados com o cliente (usabilidade avaliada)</td><td>Cadastro de macrociclos; testes</td><td>Estrutura de macrociclos validada com o técnico; requisitos e rastreabilidade atualizados e decisões registradas no GitHub Projects</td></tr>
-<tr><td>Design do Usuário e Construção</td><td>Iteração 8</td><td>26/10–02/11</td><td>Periodização – meso e microciclos (CP02)</td><td>Protótipo, histórias refinadas e critérios de meso/microciclos validados com o cliente (usabilidade avaliada)</td><td>Meso e microciclos vinculados aos macrociclos; testes</td><td>Hierarquia de periodização validada com o técnico; requisitos e rastreabilidade atualizados e decisões registradas no GitHub Projects</td></tr>
-<tr><td>Design do Usuário e Construção</td><td>Iteração 9</td><td>02/11–09/11</td><td>Dashboard de carga de treino (CP03)</td><td>Protótipo do painel de carga (com consulta/filtragem), histórias refinadas e critérios validados (usabilidade avaliada)</td><td>Painel de carga; testes; definição operacional de "atualização imediata após o registro" (RNF)</td><td>Dashboard de carga validado com o técnico; requisitos e rastreabilidade atualizados e decisões registradas no GitHub Projects</td></tr>
-<tr><td>Design do Usuário e Construção</td><td>Iteração 10</td><td>09/11–16/11</td><td>Dashboard de desempenho e filtros analíticos (CP03)</td><td>Protótipo de métricas e filtros (por ciclo, período, categoria), histórias refinadas e critérios validados com o cliente (usabilidade avaliada)</td><td>Métricas e filtros; testes</td><td>Métricas e filtros validados pelo técnico; requisitos e rastreabilidade atualizados e decisões registradas no GitHub Projects</td></tr>
+<tr>
+<td>Iteração 1</td>
+<td>07/09<br>-<br>14/09</td>
+<td><a href="../cenario-atual/">Cenário Atual</a><br><a href="../solucao-proposta/">Solução Proposta</a><br>Priorização MoSCoW inicial</td>
+<td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-1">Entrevista</a><br><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-1">Análise de Documentos (Excel/Power BI)</a><br><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-2">MoSCoW com o Cliente</a></td>
+<td>Finalizado</td>
+</tr>
 
+<tr>
+<td>Iteração 2</td>
+<td>14/09<br>-<br>21/09</td>
+<td><a href="../Requisitos-de-Software/">Lista de RFs e RNFs (v1)</a><br>Correção das issues da Unidade 1</td>
+<td><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-4">Brainstorming</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-5">Granularização (Miro)</a><br><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-3">Observação (cronometragem)</a></td>
+<td>Finalizado</td>
+</tr>
 
-<tr><td>Construção (integração e estabilização)</td><td>Iteração 11</td><td>16/11–23/11</td><td>Integração, correção de defeitos e usabilidade consolidada (margem para atrasos)</td><td>Ajustes de UI/UX priorizados a partir do feedback acumulado</td><td>Sistema integrado e estabilizado; defeitos priorizados corrigidos; testes de regressão</td><td>Avaliação de usabilidade com técnico; requisitos e rastreabilidade atualizados e decisões registradas no GitHub Projects (pendências repriorizadas)</td></tr>
-<tr><td>Cutover</td><td>Iteração 12</td><td>23/11–26/11</td><td>Homologação assistida e preparação da implantação (VPS)</td><td>Ajustes finais de interface conforme a homologação</td><td>Correções finais; plano de implantação em VPS</td><td>Homologação em ambiente assistido com o técnico; aprovação do clube quanto a custo, responsável operacional, credenciais e manutenção da VPS</td></tr>
-<tr><td>Cutover</td><td>Iteração 13</td><td>26/11–30/11</td><td>Implantação em produção e entrega final do MVP</td><td>Manual do usuário e notas de versão (apoio ao uso)</td><td>Deploy em VPS (AWS Lightsail ou DigitalOcean); MVP integrado</td><td>Aceite final do MVP pelo técnico; linha de base de requisitos fechada e demandas futuras registradas</td></tr>
+<tr>
+<td>Iteração 3</td>
+<td>21/09<br>-<br>28/09</td>
+<td>RFs e RNFs revisados<br>Matriz Valor x Esforço (1ª rodada)</td>
+<td><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-6">Revisão por Pares</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-7">Priorização Valor x Esforço</a></td>
+<td>Finalizado</td>
+</tr>
+
+<tr>
+<td>Iteração 4</td>
+<td>28/09<br>-<br>05/10</td>
+<td>RF35 a RF41 (Dashboard)<br><a href="../Requisitos-de-Software/#82-regras-de-negocio-rns">Regras de Negócio</a></td>
+<td><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-8">Análise de Feedback</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-9">Inspeção de Requisitos</a></td>
+<td>Finalizado (replanejado)</td>
+</tr>
+
+<tr>
+<td>Iteração 5</td>
+<td>05/10<br>-<br>12/10</td>
+<td><a href="../backlog_do_produto/#6-requisitos-do-mvp">MVP: 27 RFs e 3 RNFs</a><br><a href="../../catalogos-termos/catalogos-termos/">Catálogo de Termos</a><br><a href="../dor-dod/">DoR / DoD</a><br><a href="../Requisitos-de-Software/#84-matriz-sintese-de-rastreabilidade">Rastreabilidade</a></td>
+<td><a href="../backlog_do_produto/#4-matriz-valor-x-esforco-e-quadrantes">Valor x Esforço + Frequência de Uso</a><br><a href="../backlog_do_produto/#103-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente">Validação Cliente</a></td>
+<td>Finalizado</td>
+</tr>
+
+<tr>
+<td>Iteração 6</td>
+<td>12/10<br>-<br>19/10</td>
+<td>Replanejamento do cronograma por US<br>Fluxo de navegação geral</td>
+<td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-4">Validação Cliente</a><br><span class="preencher">Protótipo Baixa Fid. (inserir link)</span></td>
+<td>Finalizado (replanejado)</td>
+</tr>
+
+<tr>
+<td>Iteração 7</td>
+<td>19/10<br>-<br>26/10</td>
+<td><a href="../Requisitos-de-Software-teste/#rf01">US01</a><br><a href="../Requisitos-de-Software-teste/#rf02">US02</a><br><a href="../Requisitos-de-Software-teste/#rf04">US04</a><br><a href="../Requisitos-de-Software-teste/#rf05">US05</a><br><a href="../Requisitos-de-Software-teste/#rf07">US07</a><br><a href="../Requisitos-de-Software-teste/#rf08">US08</a></td>
+<td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-5">Validação Cliente</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-15">Protótipo Baixa Fid.</a><br><span class="preencher">Mockups (inserir link)</span></td>
+<td>Finalizado</td>
+</tr>
+
+<tr>
+<td>Iteração 8</td>
+<td>26/10<br>-<br>02/11</td>
+<td><a href="../Requisitos-de-Software-teste/#rf10">US10</a><br><a href="../Requisitos-de-Software-teste/#rf11">US11</a><br><a href="../Requisitos-de-Software-teste/#rf16">US16</a><br><a href="../Requisitos-de-Software-teste/#rf17">US17</a><br><a href="../Requisitos-de-Software-teste/#rf19">US19</a><br><a href="../Requisitos-de-Software-teste/#rf20">US20</a><br><a href="../Requisitos-de-Software-teste/#rf23">US23</a><br><a href="../Requisitos-de-Software-teste/#rf13">US13</a></td>
+<td><span class="preencher">Validação Cliente (inserir link)</span><br><span class="preencher">Protótipo (inserir link)</span><br><a href="../dor-dod/">DoD</a></td>
+<td>Finalizado</td>
+</tr>
+
+<tr>
+<td>Iteração 9</td>
+<td>02/11<br>-<br>09/11</td>
+<td><a href="../Requisitos-de-Software-teste/#rf14">US14</a><br><a href="../Requisitos-de-Software-teste/#rf22">US22</a><br><a href="../Requisitos-de-Software-teste/#rf24">US24</a><br><a href="../Requisitos-de-Software-teste/#rf27">US27</a><br><a href="../Requisitos-de-Software-teste/#rf28">US28</a></td>
+<td><span class="preencher">Validação Cliente (inserir link)</span><br><span class="preencher">Protótipo (inserir link)</span><br><a href="../dor-dod/">DoD</a></td>
+<td>Finalizado</td>
+</tr>
+
+<tr>
+<td>Iteração 10</td>
+<td>09/11<br>-<br>16/11</td>
+<td><a href="../Requisitos-de-Software-teste/#rf25">US25</a><br><a href="../Requisitos-de-Software-teste/#rf26">US26</a><br><a href="../Requisitos-de-Software-teste/#rf32">US32</a><br><a href="../Requisitos-de-Software-teste/#rf35">US35</a><br><a href="../Requisitos-de-Software-teste/#rf39">US39</a></td>
+<td>Validação Cliente<br>Protótipo<br>DoD</td>
+<td>Em andamento</td>
+</tr>
+
+<tr>
+<td>Iteração 11</td>
+<td>16/11<br>-<br>23/11</td>
+<td><a href="../Requisitos-de-Software-teste/#rf38">US38</a><br><a href="../Requisitos-de-Software-teste/#rf40">US40</a><br><a href="../Requisitos-de-Software-teste/#rf41">US41</a><br><a href="../Requisitos-de-Software-teste/#rf36">US36</a><br><a href="../Requisitos-de-Software-teste/#rf37">US37</a></td>
+<td>Validação Cliente<br>Protótipo<br>DoD</td>
+<td>Planejado</td>
+</tr>
+
+<tr>
+<td>Iteração 12</td>
+<td>25/11<br>-<br>28/11</td>
+<td>Homologação assistida<br>Implantação</td>
+<td>Validação Cliente<br>Teste de Aceitação</td>
+<td>Planejado</td>
+</tr>
+
+<tr>
+<td>Iteração 13</td>
+<td>28/11<br>-<br>30/11</td>
+<td>Entrega final do MVP</td>
+<td>Validação Cliente (aceite final)</td>
+<td>Planejado</td>
+</tr>
+
 </tbody>
 </table>
 </div>
 
-**Considerações importantes**
+**Considerações**
 
-- Cada iteração de Design do Usuário e Construção percorre o ciclo padrão (prototipação e refinamento → validação do protótipo → construção → verificação → validação do incremento), agora explicitado **por iteração** nas colunas de saída da tabela, mantendo o ciclo integrado do RAD.
-- Como os requisitos já foram definidos de forma abrangente na fase de Planejamento de Requisitos (elemento dirigido a plano), as iterações centram-se na **validação e no refinamento de UI/UX e dos fluxos de navegação** via protótipos; eventuais mudanças de requisitos emergem desse feedback e são incorporadas ao backlog (elemento ágil, iterativo e incremental).
-- A **usabilidade é avaliada desde os primeiros protótipos** (e não apenas ao final), e o apenas o **técnico participa das validações** ao longo de todo o processo, por serem usuários diretos. Essa decisão deve ser refletida de forma consistente no Cenário (1.6/1.7) e na Interação com o Cliente (seção 7).
-- A **importação dos dados históricos** é tratada como **requisito de transição/migração**, incluída no backlog e na rastreabilidade, e não como capacidade solta fora do escopo.
-- A **migração para VPS** está condicionada à aprovação do clube quanto a custo, responsável operacional, credenciais e manutenção — dependência registrada na Iteração 14.
-- As datas apresentadas são propostas a partir da semana de 07/09/2026 e podem ser ajustadas conforme o calendário da equipe e do cliente.
+- A numeração das iterações é contínua (1 a 13); a versão anterior saltava da Iteração 10 para a 13 por erro de edição, sem remoção de etapas.
+- A **importação automatizada de dados históricos das planilhas** foi **retirada do compromisso do MVP** (postergada para etapas pós-MVP). Por decisão metodológica com o cliente, a transição para a aplicação adotará um marco zero a partir de uma nova periodização cadastrada diretamente no FutBoard, mantendo as planilhas legadas de Excel sob consulta histórica do treinador. Por essa razão, a funcionalidade de importação não integra o rol de requisitos funcionais do MVP nem compõe o cronograma de desenvolvimento da disciplina.
+- Todos os 27 RFs do MVP estão distribuídos entre as Iterações 8 e 11 (8 + 8 + 6 + 5).
