@@ -65,39 +65,39 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <tr>
 <td>Iteração 7</td>
 <td>19/10<br>-<br>26/10</td>
-<td>Protótipo da periodização (US01 a US08)<br>Arquitetura do sistema</td>
+<td>US01<br>US02<br>US04<br>US05<br>US07<br>US08</td>
 <td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-5">Validação Cliente</a><br><a href="../../atas-reunioes/reunioes-da-equipe/#reuniao-da-equipe-15">Protótipo Baixa Fid.</a><br><span class="preencher">Mockups (inserir link)</span></td>
 <td>Finalizado</td>
 </tr>
 
 <tr>
 <td>Iteração 8</td>
-<td>26/10<br>-<br>05/11</td>
-<td>US01<br>US02<br>US04<br>US05<br>US07<br>US08<br>US16<br>US17</td>
+<td>26/10<br>-<br>02/11</td>
+<td>US10<br>US11<br>US16<br>US17<br>US19<br>US20<br>US23<br>US13</td>
 <td><span class="preencher">Validação Cliente (inserir link)</span><br><span class="preencher">Protótipo (inserir link)</span><br><a href="../dor-dod/">DoD</a></td>
 <td>Finalizado</td>
 </tr>
 
 <tr>
 <td>Iteração 9</td>
-<td>06/11<br>-<br>13/11</td>
-<td>US10<br>US11<br>US13<br>US14<br>US19<br>US20<br>US23<br>US32<br>RNF03 (cadastro em menos de 2 min)</td>
+<td>02/11<br>-<br>09/11</td>
+<td>US14<br>US22<br>US24<br>US27<br>US28<br></td>
 <td><span class="preencher">Validação Cliente (inserir link)</span><br><span class="preencher">Protótipo (inserir link)</span><br><a href="../dor-dod/">DoD</a></td>
 <td>Em andamento</td>
 </tr>
 
 <tr>
 <td>Iteração 10</td>
-<td>13/11<br>-<br>20/11</td>
-<td>US22<br>US24<br>US26<br>US35<br>US36<br>US37<br>RNF04</td>
+<td>09/11<br>-<br>16/11</td>
+<td>US25<br>US26<br>US32<br>US35<br>US39<br></td>
 <td>Validação Cliente<br>Protótipo<br>DoD</td>
 <td>Planejado</td>
 </tr>
 
 <tr>
 <td>Iteração 11</td>
-<td>20/11<br>-<br>25/11</td>
-<td>US38<br>US39<br>US40<br>US41<br>US25 (relatório PDF)</td>
+<td>16/11<br>-<br>23/11</td>
+<td>US38<br>US40<br>US41<br>US36<br>US37</td>
 <td>Validação Cliente<br>Protótipo<br>DoD</td>
 <td>Planejado</td>
 </tr>
