@@ -31,7 +31,7 @@ A stack tecnológica e as ferramentas de gestão do **FutBoard** foram definidas
 | :--- | :--- | :--- |
 | **Frontend & Interface** | React + Tailwind (pontual) + Sass | **Agilidade e Padronização:** Componentização madura e unânime na equipe, unindo velocidade de estilização a um design limpo. |
 | **Linguagem & Backend** | Python + Django + DRF | **Produtividade e Segurança:** Aproveita o domínio da equipe em Python e entrega autenticação e ORM prontos de fábrica. |
-| **Persistência de Dados** | PostgreSQL | **Integração Relacional:** Perfeito para estruturar dados hierárquicos e relacionais de treinos (atletas, ciclos e sessões). |
+| **Persistência de Dados** | PostgreSQL | **Integração Relacional:** Perfeito para estruturar dados hierárquicos e relacionais de treinos (ciclos, sessões e atividades). |
 | **Infraestrutura (Dev & Prod)** | Vercel, Render / AWS Lightsail (VPS) | **Custo-Benefício e Controle:** Ambiente de teste ágil e sem custos iniciais, evoluindo para uma VPS dedicada em produção. |
 | **Prototipagem & Design** | Figma | **Validação Visual:** Criação rápida de telas e fluxos de experiência do usuário antes da codificação. |
 | **Modelagem & Arquitetura** | Miro | **Colaboração e Alinhamento:** Facilidade para construção conjunta de fluxogramas e diagramas de sistema pela equipe. |
