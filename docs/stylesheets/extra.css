@@ -638,12 +638,30 @@
 .md-typeset .rf-cards > details > summary .rf-summary-status span {
   padding: 0.22rem 0.55rem;
   border-radius: 999px;
-  color: #397c5a;
-  background: #e0f2e8;
   font-size: 0.68rem;
   font-weight: 700;
   line-height: 1.25;
   white-space: nowrap;
+}
+
+.md-typeset .rf-cards > details > summary .rf-summary-status span:nth-child(1) {
+  color: #1f4e85;
+  background: #e2efff;
+}
+
+.md-typeset .rf-cards > details > summary .rf-summary-status span:nth-child(2) {
+  color: #397c5a;
+  background: #e0f2e8;
+}
+
+.md-typeset .rf-cards > details > summary .rf-summary-status span:nth-child(3) {
+  color: #8a5a16;
+  background: #fff0cf;
+}
+
+.md-typeset .rf-cards > details > summary .rf-summary-status span:nth-child(4) {
+  color: #70458f;
+  background: #f0e5fa;
 }
 
 .md-typeset .rf-cards > details > summary::before {
@@ -689,10 +707,13 @@
 .md-typeset .rf-filter-dropdowns {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .md-typeset .rf-filter-dropdown {
+  flex: 1 1 13rem;
   min-width: 13rem;
   border: 1px solid var(--md-default-fg-color--lightest);
   border-left: 4px solid #1f4e85;
@@ -701,9 +722,31 @@
   box-shadow: 0 0.15rem 0.5rem rgba(20, 57, 107, 0.14);
 }
 
-.md-typeset .rf-filter-dropdown-title {
+.md-typeset .rf-filter-dropdown > summary {
+  cursor: pointer;
   padding: 0.55rem 0.75rem;
   font-weight: 700;
+  list-style: none;
+}
+
+.md-typeset .rf-filter-dropdown > summary::before {
+  display: none !important;
+}
+
+.md-typeset .rf-filter-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.md-typeset .rf-filter-dropdown > summary::after {
+  float: right;
+  content: "+";
+  color: #6b8198;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.md-typeset .rf-filter-dropdown[open] > summary::after {
+  content: "−";
 }
 
 .md-typeset .rf-filter-dropdown > label {
@@ -719,6 +762,10 @@
 
 .md-typeset .rf-filter-dropdown input {
   margin-right: 0.4rem;
+}
+
+.md-typeset .rf-filter-dropdown > label:last-child {
+  padding-bottom: 0.75rem;
 }
 
 .md-typeset .rf-filter-search-label {
@@ -813,6 +860,10 @@
   .md-typeset .rf-filter-dropdown {
     width: 100%;
     min-width: 0;
+  }
+
+  .md-typeset .rf-filter-dropdowns {
+    gap: 0.85rem;
   }
 
   .md-typeset .rf-cards > details > :not(summary) {

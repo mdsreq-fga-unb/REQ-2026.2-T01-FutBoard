@@ -15,17 +15,36 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 **Filtrar requisitos**
 
 <div class="rf-filter-dropdowns">
-<div class="rf-filter-dropdown">
-<div class="rf-filter-dropdown-title">Entrega</div>
+<details class="rf-filter-dropdown" open>
+<summary>Entrega</summary>
 <label><input type="checkbox" name="rf-delivery" value="MVP"> MVP</label>
 <label><input type="checkbox" name="rf-delivery" value="Escopo Adicional"> Escopo Adicional</label>
-</div>
+</details>
 
-<div class="rf-filter-dropdown">
-<div class="rf-filter-dropdown-title">Situação</div>
+<details class="rf-filter-dropdown" open>
+<summary>Situação</summary>
 <label><input type="checkbox" name="rf-situation" value="Concluído"> Concluído</label>
 <label><input type="checkbox" name="rf-situation" value="Não concluído"> Não concluído</label>
-</div>
+</details>
+
+<details class="rf-filter-dropdown" open>
+<summary>Iteração de desenvolvimento</summary>
+<label><input type="checkbox" name="rf-iteration" value="Iteração 07"> Iteração 07</label>
+<label><input type="checkbox" name="rf-iteration" value="Iteração 08"> Iteração 08</label>
+<label><input type="checkbox" name="rf-iteration" value="Iteração 09"> Iteração 09</label>
+<label><input type="checkbox" name="rf-iteration" value="Iteração 10"> Iteração 10</label>
+<label><input type="checkbox" name="rf-iteration" value="Iteração 11"> Iteração 11</label>
+<label><input type="checkbox" name="rf-iteration" value="Não definida"> Não definida</label>
+</details>
+
+<details class="rf-filter-dropdown" open>
+<summary>Característica de produto</summary>
+<label><input type="checkbox" name="rf-product" value="CP01"> CP01 — Registro Categorizado dos Treinos</label>
+<label><input type="checkbox" name="rf-product" value="CP02"> CP02 — Estruturador de Periodização Esportiva</label>
+<label><input type="checkbox" name="rf-product" value="CP03"> CP03 — Dashboard Analítico</label>
+<label><input type="checkbox" name="rf-product" value="CP04"> CP04 — Geração Automática de Relatórios</label>
+<label><input type="checkbox" name="rf-product" value="CP05"> CP05 — Controle de Perfis de Acesso</label>
+</details>
 </div>
 
 <label class="rf-filter-search-label" for="rf-filter-input">Buscar requisito</label>
@@ -40,18 +59,18 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 <details id="rf01" markdown>
-<summary>RF01 · Cadastrar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF01 · Cadastrar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos.
+**Declara??o RF:** **Cadastrar macrociclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Cadastrar macrociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Cadastrar macrociclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -62,8 +81,11 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- Dado que preencho um nome, data de início e data de fim, quando salvo, o sistema deve criar o ciclo raiz da temporada.
+- Se os campos obrigatórios não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.
+- Se a data de fim for antes da data da inicio, o sistema deve exibir alerta e impedir o cadastro.
 
 **Definition of Ready (DoR)**
 
@@ -76,18 +98,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf02" markdown>
-<summary>RF02 · Editar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF02 · Editar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um macrociclo anteriormente cadastrado.
+**Declara??o RF:** **Editar macrociclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um macrociclo anteriormente cadastrado.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Editar macrociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Editar macrociclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -98,8 +120,10 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- Dado que seleciono um macrociclo existente, quando altero o nome, data de início ou data de fim e salvo, as modificações devem refletir na visualização da temporada.
+- A edição das datas não deve quebrar a hierarquia dos ciclos filhos já vinculados nem permitir data de fim anterior à data de início.
 
 **Definition of Ready (DoR)**
 
@@ -112,18 +136,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf03" markdown>
-<summary>RF03 · Excluir macrociclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF03 · Excluir macrociclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um macrociclo cadastrado, validando a integridade referencial com os ciclos subordinados.
+**Declara??o RF:** **Excluir macrociclo:** o sistema deve permitir que o treinador e o auxiliar excluam um macrociclo cadastrado, removendo-o da estrutura de periodização.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Excluir macrociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Excluir macrociclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -134,8 +158,8 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
 
 **Definition of Ready (DoR)**
 
@@ -148,18 +172,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf04" markdown>
-<summary>RF04 · Cadastrar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF04 · Cadastrar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo mesociclo vinculado obrigatoriamente a um macrociclo existente, informando o nome do mesociclo.
+**Declara??o RF:** **Cadastrar mesociclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo mesociclo vinculado a um macrociclo existente, informando o nome do mesociclo.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Cadastrar mesociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Cadastrar mesociclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **3,00**
 Esforço Técnico: **2,00**
@@ -170,8 +194,10 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- Dado que possuo um macrociclo ativo, quando preencho os dados do mesociclo (nome, data de início, data de término) e indico seu macrociclo pai, então ele deve ser salvo com sucesso.
+- Se não houver macrociclo prévio selecionado ou ativo, o sistema deve exibir alerta e impedir o cadastro.
 
 **Definition of Ready (DoR)**
 
@@ -184,18 +210,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf05" markdown>
-<summary>RF05 · Editar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF05 · Editar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um mesociclo anteriormente cadastrado.
+**Declara??o RF:** **Editar mesociclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um mesociclo anteriormente cadastrado.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Editar mesociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Editar mesociclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **3,00**
 Esforço Técnico: **2,00**
@@ -206,8 +232,10 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- Ao alterar o nome, data de início, data de fim de um mesociclo, o sistema deve aplicar a atualização mantendo sua posição e vínculos intactos na árvore da periodização.
+- A edição não pode desvincular o mesociclo do seu macrociclo pai.
 
 **Definition of Ready (DoR)**
 
@@ -220,18 +248,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf06" markdown>
-<summary>RF06 · Excluir mesociclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF06 · Excluir mesociclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um mesociclo cadastrado, tratando as dependências estruturais.
+**Declara??o RF:** **Excluir mesociclo:** o sistema deve permitir que o treinador e o auxiliar excluam um mesociclo cadastrado.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Excluir mesociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Excluir mesociclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -242,8 +270,8 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
 
 **Definition of Ready (DoR)**
 
@@ -256,18 +284,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf07" markdown>
-<summary>RF07 · Cadastrar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF07 · Cadastrar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo microciclo vinculado obrigatoriamente a um mesociclo existente, informando o nome do microciclo.
+**Declara??o RF:** **Cadastrar microciclo:** o sistema deve permitir que o treinador e o auxiliar cadastrem um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Cadastrar microciclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Cadastrar microciclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **4,00**
 Esforço Técnico: **2,00**
@@ -278,8 +306,11 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- Dado que existe um mesociclo ativo, quando informo o nome, data de início e data de fim do microciclo  e salvo, o registro deve ser efetuado na árvore de periodização.
+- Se não houver mesociclo prévio selecionado, o sistema deve exibir alerta e impedir o cadastro.
+- Se os campos  nome, data de início e data de fim não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.
 
 **Definition of Ready (DoR)**
 
@@ -292,18 +323,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf08" markdown>
-<summary>RF08 · Editar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF08 · Editar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um microciclo anteriormente cadastrado.
+**Declara??o RF:** **Editar microciclo:** o sistema deve permitir que o treinador e o auxiliar editem os dados de um microciclo anteriormente cadastrado.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Editar microciclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Editar microciclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **4,00**
 Esforço Técnico: **2,00**
@@ -314,8 +345,9 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- Dado que altero as informações de um microciclo salvo, o sistema deve atualizar os dados de exibição sem desconectar as sessões de treino atreladas a ele.
 
 **Definition of Ready (DoR)**
 
@@ -328,18 +360,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf09" markdown>
-<summary>RF09 · Excluir microciclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF09 · Excluir microciclo<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP02</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um microciclo cadastrado.
+**Declara??o RF:** **Excluir microciclo:** o sistema deve permitir que o treinador e o auxiliar excluam um microciclo cadastrado.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Excluir microciclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Excluir microciclo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP02** | **OE2, OE3**
+**CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -350,8 +382,8 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
 
 **Definition of Ready (DoR)**
 
@@ -364,18 +396,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf10" markdown>
-<summary>RF10 · Cadastrar comportamento<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF10 · Cadastrar comportamento<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades.
+**Declara??o RF:** **Cadastrar comportamento:** o sistema deve permitir que o treinador e o auxiliar cadastrem um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Cadastrar comportamento, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Cadastrar comportamento, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -386,8 +418,10 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- Ao inserir um nome de comportamento, ele deve ser salvo e disponibilizado nas listas de seleção (dropdowns táticos) durante o cadastro de atividades.
+- O sistema não deve permitir o cadastro de comportamentos com o exato mesmo nome (duplicidade).
 
 **Definition of Ready (DoR)**
 
@@ -400,18 +434,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf11" markdown>
-<summary>RF11 · Editar comportamento<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF11 · Editar comportamento<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem um comportamento tático já cadastrado.
+**Declara??o RF:** **Editar comportamento:** o sistema deve permitir que o treinador e o auxiliar editem um comportamento tático já cadastrado.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Editar comportamento, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Editar comportamento, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -422,8 +456,9 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- Ao corrigir o nome do comportamento tático no catálogo, as atividades já salvas que o utilizam devem exibir o nome atualizado automaticamente.
 
 **Definition of Ready (DoR)**
 
@@ -436,18 +471,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf12" markdown>
-<summary>RF12 · Excluir comportamento<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF12 · Excluir comportamento<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um comportamento tático cadastrado.
+**Declara??o RF:** **Excluir comportamento:** o sistema deve permitir que o treinador e o auxiliar excluam um comportamento tático cadastrado.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Excluir comportamento, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Excluir comportamento, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -458,8 +493,7 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 
 **Definition of Ready (DoR)**
 
@@ -472,18 +506,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf13" markdown>
-<summary>RF13 · Cadastrar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF13 · Cadastrar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova atividade diretamente em uma sessão, informando dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, espaço, orientação, comportamento, momento e fase do jogo, calculando a área por jogador ([RN01](#rn01)), atribuindo a dimensão do espaço ([RN02](#rn02)), controlando a simultaneidade ([RN03](#rn03)) e respeitando o foco central ([RN05](#rn05)).
+**Declara??o RF:** **Cadastrar atividade na sessão:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova atividade diretamente em uma sessão, sem necessidade de ela já existir na biblioteca, informando seus dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, o espaço, a orientação, o comportamento, e o momento e fase do jogo trabalhados.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Cadastrar atividade na sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Cadastrar atividade na sessão, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -494,12 +528,16 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF03](#rnf03) — **Eficiência no Cadastro de Treinos**
-- [RN01](#rn01) — **Cálculo da Área por Jogador**
-- [RN02](#rn02) — **Classificação Automática da Dimensão do Espaço**
-- [RN03](#rn03) — **Simultaneidade e Contagem de Tempo da Sessão**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Eficiência no Cadastro de Treinos:** O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.
+- **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
+- **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
+- **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- O sistema deve calcular automaticamente a Área (m²/jogador) ao inserir dimensões (Comprimento e Largura) e o Número de Jogadores.
+- O sistema deve classificar automaticamente a dimensão do espaço no ato do cadastro com base na área calculada.
+- Atividades salvas com o mesmo número de "ordem" devem ser agrupadas e tratadas como eventos simultâneos na exibição.
+- Os campos relacionados aos momentos do jogo, fases do jogo, princípios táticos e atributos técnicos devem permitir salvamento vazios (opcionais).
 
 **Definition of Ready (DoR)**
 
@@ -512,18 +550,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf14" markdown>
-<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma atividade incluída em uma sessão, recalculando automaticamente as métricas de espaço ([RN01](#rn01), [RN02](#rn02)) e ordem de simultaneidade ([RN03](#rn03)).
+**Declara??o RF:** **Editar atividade na sessão:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma atividade incluída em uma sessão, sem alterar a atividade correspondente na biblioteca.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Editar atividade na sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Editar atividade na sessão, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -534,11 +572,13 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN01](#rn01) — **Cálculo da Área por Jogador**
-- [RN02](#rn02) — **Classificação Automática da Dimensão do Espaço**
-- [RN03](#rn03) — **Simultaneidade e Contagem de Tempo da Sessão**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
+- **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
+- **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- Ao alterar as dimensões do campo ou o número de jogadores, o sistema deve recalcular instantaneamente a área por jogador e atualizar a classificação do espaço.
+- Ao alterar o campo "ordem" da atividade, a interface e o banco devem reagrupar ou separar as atividades simultâneas afetando o tempo total.
 
 **Definition of Ready (DoR)**
 
@@ -551,18 +591,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf15" markdown>
-<summary>RF15 · Excluir atividade na sessão<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF15 · Excluir atividade na sessão<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade de uma sessão, sem afetar o registro dela na biblioteca.
+**Declara??o RF:** **Excluir atividade na sessão:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade de uma sessão, sem afetar o registro dela na biblioteca.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Excluir atividade na sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Excluir atividade na sessão, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -573,7 +613,7 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 
 **Definition of Ready (DoR)**
 
@@ -586,18 +626,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf16" markdown>
-<summary>RF16 · Cadastrar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF16 · Cadastrar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão, apurando o tempo real da sessão sem duplicidade de atividades simultâneas ([RN03](#rn03)).
+**Declara??o RF:** **Cadastrar sessão:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Cadastrar sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Cadastrar sessão, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -608,11 +648,14 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF03](#rnf03) — **Eficiência no Cadastro de Treinos**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN03](#rn03) — **Simultaneidade e Contagem de Tempo da Sessão**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Eficiência no Cadastro de Treinos:** O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- O sistema só deve salvar o cadastro da sessão se ela estiver corretamente vinculada a um microciclo válido.
+- O tempo líquido total da sessão deve ser calculado automaticamente pelo somatório da duração das atividades inseridas nela.
+- Se a sessão possuir atividades marcadas com o mesmo número de ordem, a duração da maior atividade assumirá o bloco de tempo, sem duplicar a contagem.
 
 **Definition of Ready (DoR)**
 
@@ -625,18 +668,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf17" markdown>
-<summary>RF17 · Editar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF17 · Editar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma sessão de treino já cadastrada, recalculando a duração líquida da sessão ([RN03](#rn03)).
+**Declara??o RF:** **Editar sessão:** o sistema deve permitir que o treinador e o auxiliar editem os dados de uma sessão de treino já cadastrada.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Editar sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Editar sessão, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -647,10 +690,12 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN03](#rn03) — **Simultaneidade e Contagem de Tempo da Sessão**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- A alteração de data, nome, mês deve salvar com sucesso e refletir imediatamente nos gráficos que agrupam esses dados.
+- Alterar ou remover atividades dentro desta edição deve disparar o recálculo imediato do tempo total da sessão.
 
 **Definition of Ready (DoR)**
 
@@ -663,18 +708,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf18" markdown>
-<summary>RF18 · Excluir sessão<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF18 · Excluir sessão<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam uma sessão de treino cadastrada.
+**Declara??o RF:** **Excluir sessão:** o sistema deve permitir que o treinador e o auxiliar excluam uma sessão de treino cadastrada.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Excluir sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Excluir sessão, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -685,9 +730,9 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
 
 **Definition of Ready (DoR)**
 
@@ -700,18 +745,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf19" markdown>
-<summary>RF19 · Cadastrar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF19 · Cadastrar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma atividade na biblioteca de treinos para reutilização futura, calculando a área ([RN01](#rn01)), classificando a dimensão ([RN02](#rn02)) e respeitando o objetivo central ([RN05](#rn05)).
+**Declara??o RF:** **Cadastrar atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar cadastrem uma atividade na biblioteca de treinos, independentemente do cadastro em uma sessão específica, para que ela fique disponível para reutilização futura, informando seus dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, o espaço, a orientação, o comportamento, e o momento e fase do jogo trabalhados.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Cadastrar atividade na biblioteca, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Cadastrar atividade na biblioteca, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
@@ -722,10 +767,12 @@ Esforço Técnico: **3,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN01](#rn01) — **Cálculo da Área por Jogador**
-- [RN02](#rn02) — **Classificação Automática da Dimensão do Espaço**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
+- **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- Ao preencher os dados de uma nova atividade na área "Biblioteca", o sistema deve aplicar o cálculo automático de área e classificar a dimensão, salvando de forma independente no catálogo.
+- A atividade pode ser salva mantendo campos de momento de jogo, atributos técnicos, princípios táticos, fases de jogo totalmente em branco (opcionais).
 
 **Definition of Ready (DoR)**
 
@@ -738,18 +785,18 @@ Esforço Técnico: **3,00**
 </details>
 
 <details id="rf20" markdown>
-<summary>RF20 · Editar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF20 · Editar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem uma atividade cadastrada na biblioteca de treinos, atualizando sua classificação de espaço ([RN02](#rn02)).
+**Declara??o RF:** **Editar atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar editem uma atividade cadastrada na biblioteca de treinos.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Editar atividade na biblioteca, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Editar atividade na biblioteca, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
@@ -760,10 +807,12 @@ Esforço Técnico: **3,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN01](#rn01) — **Cálculo da Área por Jogador**
-- [RN02](#rn02) — **Classificação Automática da Dimensão do Espaço**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
+- **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- Modificar valores como comprimento, largura ou número sugerido de jogadores deve engatilhar o recálculo e a reclassificação automática de dimensão do espaço na biblioteca.
+- Atividades já importadas para sessões de treino passadas não devem sofrer alterações retroativas com esta edição.
 
 **Definition of Ready (DoR)**
 
@@ -776,18 +825,18 @@ Esforço Técnico: **3,00**
 </details>
 
 <details id="rf21" markdown>
-<summary>RF21 · Excluir atividade na biblioteca<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF21 · Excluir atividade na biblioteca<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada na biblioteca de treinos.
+**Declara??o RF:** **Excluir atividade na biblioteca:** o sistema deve permitir que o treinador e o auxiliar excluam uma atividade cadastrada na biblioteca de treinos.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Excluir atividade na biblioteca, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Excluir atividade na biblioteca, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **3,00**
@@ -798,7 +847,7 @@ Esforço Técnico: **3,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 
 **Definition of Ready (DoR)**
 
@@ -811,18 +860,18 @@ Esforço Técnico: **3,00**
 </details>
 
 <details id="rf22" markdown>
-<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve exibir indicadores como número de sessões, minutos totais de treino (respeitando simultaneidade da [RN03](#rn03)), índice de variabilidade de exercícios ([RN06](#rn06)), número de execuções e tratamento neutro em períodos sem registros ([RN07](#rn07)).
+**Declara??o RF:** **Exibir indicador de treino:** o sistema deve exibir, para o treinador e o auxiliar, indicadores como número de sessões, minutos totais de treino, variabilidade de exercícios e número de execuções.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Exibir indicador de treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Exibir indicador de treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
@@ -833,11 +882,14 @@ Esforço Técnico: **2,33**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN03](#rn03) — **Simultaneidade e Contagem de Tempo da Sessão**
-- [RN06](#rn06) — **Cálculo da Variabilidade de Treinos**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
+- **Cálculo da Variabilidade de Treinos:** O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
+- O card de "Minutos Totais" deve expor o tempo líquido, desconsiderando tempos sobrepostos decorrentes de atividades simultâneas na mesma sessão.
+- O card de "Variabilidade" deve calcular e expor o número de exercícios distintos em relação ao total de execuções.
+- Se o período filtrado não possuir sessões ou dados cadastrados, exibir marcações limpas como "0" ou estados vazios padronizados sem gerar erro.
 
 **Definition of Ready (DoR)**
 
@@ -850,18 +902,18 @@ Esforço Técnico: **2,33**
 </details>
 
 <details id="rf23" markdown>
-<summary>RF23 · Reutilizar atividade cadastrada<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span></span></summary>
+<summary>RF23 · Reutilizar atividade cadastrada<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar adicionem a uma sessão de treino uma atividade já cadastrada na biblioteca, recalculando automaticamente as dimensões se forem alteradas ([RN01](#rn01), [RN02](#rn02)).
+**Declara??o RF:** **Reutilizar atividade cadastrada:** o sistema deve permitir que o treinador e o auxiliar adicionem a uma sessão de treino uma atividade já cadastrada na biblioteca, preenchendo automaticamente, no momento da seleção, os campos inerentes à atividade.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Reutilizar atividade cadastrada, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Reutilizar atividade cadastrada, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -872,11 +924,13 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF03](#rnf03) — **Eficiência no Cadastro de Treinos**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN01](#rn01) — **Cálculo da Área por Jogador**
-- [RN02](#rn02) — **Classificação Automática da Dimensão do Espaço**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Eficiência no Cadastro de Treinos:** O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
+- **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
+- Ao selecionar uma atividade via lista da biblioteca durante o fluxo de cadastro da sessão, os campos descritivos e métricos já configurados devem ser populados automaticamente.
+- Após a importação, o sistema deve permitir ao usuário editar as informações da atividade (sem alterar a matriz original na biblioteca).
 
 **Definition of Ready (DoR)**
 
@@ -889,18 +943,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf24" markdown>
-<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de atividade, com atualização automática e visual de estado vazio ([RN07](#rn07)).
+**Declara??o RF:** **Consultar informação de atividade do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de atividade, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Consultar informação de atividade do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Consultar informação de atividade do treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
@@ -911,9 +965,11 @@ Esforço Técnico: **3,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
+- O usuário deve conseguir visualizar um gráfico com as atividades executadas.
+- Quando os parâmetros de filtro selecionados não retornarem nenhuma correspondência, o sistema deve apresentar um layout de estado vazio em vez de mensagens de erro cruas.
 
 **Definition of Ready (DoR)**
 
@@ -926,18 +982,18 @@ Esforço Técnico: **3,00**
 </details>
 
 <details id="rf25" markdown>
-<summary>RF25 · Gerar relatório de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF25 · Gerar relatório de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP04</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar gerem relatório em PDF consolidando tempo de sessão ([RN03](#rn03)), variabilidade ([RN06](#rn06)) e notificação orientadora para períodos vazios ([RN07](#rn07)).
+**Declara??o RF:** **Gerar relatório de treino:** o sistema deve permitir que o treinador e o auxiliar gerem um relatório do treino em formato PDF.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Gerar relatório de treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Gerar relatório de treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP04** | **OE4, OE3**
+**CPs e OEs relacionadas:** [**CP04**](solucao-proposta.md#cp04) | [**OE4**](solucao-proposta.md#oe4), [**OE3**](solucao-proposta.md#oe3)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **4,00**
@@ -948,11 +1004,11 @@ Esforço Técnico: **4,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN02](#rn02) — **Classificação Automática da Dimensão do Espaço**
-- [RN03](#rn03) — **Simultaneidade e Contagem de Tempo da Sessão**
-- [RN06](#rn06) — **Cálculo da Variabilidade de Treinos**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
+- **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
+- **Cálculo da Variabilidade de Treinos:** O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
 
@@ -965,18 +1021,18 @@ Esforço Técnico: **4,00**
 </details>
 
 <details id="rf26" markdown>
-<summary>RF26 · Alternar unidade de tempo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF26 · Alternar unidade de tempo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar alternem, nos gráficos, a visualização do tempo entre tempo absoluto (minutos) e relativo (porcentagem), calculado a partir do tempo real da sessão ([RN03](#rn03)).
+**Declara??o RF:** **Alternar unidade de tempo:** o sistema deve permitir que o treinador e o auxiliar alternem, nos gŕaficos, a visualização do tempo das atividades entre tempo absoluto (em minutos) e tempo relativo (em porcentagem do tempo total da sessão).
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Alternar unidade de tempo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Alternar unidade de tempo, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -987,9 +1043,9 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN03](#rn03) — **Simultaneidade e Contagem de Tempo da Sessão**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
 
 **Definition of Ready (DoR)**
 
@@ -1002,18 +1058,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf27" markdown>
-<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar criem uma conta de acesso à aplicação.
+**Declara??o RF:** **Criar conta:** o sistema deve permitir que o treinador e o auxiliar criem uma conta de acesso à aplicação.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Criar conta, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Criar conta, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP05** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP05**](solucao-proposta.md#cp05) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **3,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
@@ -1024,8 +1080,10 @@ Esforço Técnico: **2,33**
 
 **Critérios de Aceitação**
 
-- [RNF01](#rnf01) — **Proteção de Dados Pessoais dos Atletas**
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
+- **Proteção de Dados Pessoais dos Atletas:** O sistema deve utilizar a aplicação de hash irreversível de senhas via bcrypt para guardar as senhas dos usuários.
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- O preenchimento de e-mail e criação de senha válidos deve persistir o usuário na base de dados de forma criptografada.
+- Se o usuário tentar cadastrar um e-mail já existente na plataforma, o sistema deve retornar um alerta de e-mail duplicado ou em uso.
 
 **Definition of Ready (DoR)**
 
@@ -1038,18 +1096,18 @@ Esforço Técnico: **2,33**
 </details>
 
 <details id="rf28" markdown>
-<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar se autentiquem na aplicação a partir de um login e senha de acesso.
+**Declara??o RF:** **Fazer login:** o sistema deve permitir que o treinador e o auxiliar se autentiquem na aplicação a partir de um login e senha de acesso.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Fazer login, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Fazer login, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP05** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP05**](solucao-proposta.md#cp05) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **3,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
@@ -1060,8 +1118,10 @@ Esforço Técnico: **2,33**
 
 **Critérios de Aceitação**
 
-- [RNF01](#rnf01) — **Proteção de Dados Pessoais dos Atletas**
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
+- **Proteção de Dados Pessoais dos Atletas:** O sistema deve utilizar a aplicação de hash irreversível de senhas via bcrypt para guardar as senhas dos usuários.
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- A submissão de credenciais válidas redireciona o usuário para a página de dashboard de gráficos.
+- Credenciais inválidas (senha/e-mail errados ou não encontrados) exibem mensagem de erro e impedem a navegação para rotas internas.
 
 **Definition of Ready (DoR)**
 
@@ -1074,18 +1134,18 @@ Esforço Técnico: **2,33**
 </details>
 
 <details id="rf29" markdown>
-<summary>RF29 · Anexar imagem à atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF29 · Anexar imagem à atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar anexem uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade nas sessões de treino.
+**Declara??o RF:** **Anexar imagem à atividade:** o sistema deve permitir que o treinador e o auxiliar anexem uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade na biblioteca e nas sessões de treino em que ela for incluída.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Anexar imagem à atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Anexar imagem à atividade, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **3,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -1096,7 +1156,7 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 
 **Definition of Ready (DoR)**
 
@@ -1109,18 +1169,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf30" markdown>
-<summary>RF30 · Registrar pontuação da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF30 · Registrar pontuação da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar registrem, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição.
+**Declara??o RF:** **Registrar pontuação da atividade:** o sistema deve permitir que o treinador e o auxiliar registrem, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Registrar pontuação da atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Registrar pontuação da atividade, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **2,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -1131,9 +1191,9 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF03](#rnf03) — **Eficiência no Cadastro de Treinos**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Eficiência no Cadastro de Treinos:** O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
 
 **Definition of Ready (DoR)**
 
@@ -1146,18 +1206,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf31" markdown>
-<summary>RF31 · Gerar análise textual do treino<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF31 · Gerar análise textual do treino<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar gerem, com inteligência artificial, uma análise textual (insight) sobre as informações do treino.
+**Declara??o RF:** **Gerar análise textual do treino:** o sistema deve permitir que o treinador e o auxiliar gerem, com inteligência artificial, uma análise textual (insight) sobre as informações do treino.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Gerar análise textual do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Gerar análise textual do treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **2,00** | Frequência: **5,00**
 Esforço Técnico: **3,67**
@@ -1168,8 +1228,8 @@ Esforço Técnico: **3,67**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
 
 **Definition of Ready (DoR)**
 
@@ -1182,18 +1242,18 @@ Esforço Técnico: **3,67**
 </details>
 
 <details id="rf32" markdown>
-<summary>RF32 · Registrar atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF32 · Registrar atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir registrar, de forma opcional e restrita às atividades com foco técnico ([RN05](#rn05)), o atributo trabalhado (ex: domínio orientado, cabeceio defensivo).
+**Declara??o RF:** **Registrar atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar registrem, de forma opcional, o atributo técnico trabalhado em uma atividade (ex: domínio orientado, cabeceira defensiva).
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Registrar atributo técnico da atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Registrar atributo técnico da atividade, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
@@ -1204,8 +1264,8 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 
 **Definition of Ready (DoR)**
 
@@ -1218,18 +1278,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf33" markdown>
-<summary>RF33 · Editar atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF33 · Editar atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar editem um atributo técnico registrado em uma atividade.
+**Declara??o RF:** **Editar atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar editem um atributo técnico registrado em uma atividade.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Editar atributo técnico da atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Editar atributo técnico da atividade, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -1240,8 +1300,8 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 
 **Definition of Ready (DoR)**
 
@@ -1254,18 +1314,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf34" markdown>
-<summary>RF34 · Excluir atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF34 · Excluir atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir que o treinador e o auxiliar excluam um atributo técnico registrado em uma atividade.
+**Declara??o RF:** **Excluir atributo técnico da atividade:** o sistema deve permitir que o treinador e o auxiliar excluam um atributo técnico registrado em uma atividade.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Excluir atributo técnico da atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Excluir atributo técnico da atividade, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP01** | **OE1, OE4**
+**CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
@@ -1276,8 +1336,8 @@ Esforço Técnico: **2,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 
 **Definition of Ready (DoR)**
 
@@ -1290,18 +1350,18 @@ Esforço Técnico: **2,00**
 </details>
 
 <details id="rf35" markdown>
-<summary>RF35 · Consultar informação de espaço do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF35 · Consultar informação de espaço do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a informação de espaço com base nas faixas da [RN02](#rn02) calculadas pela [RN01](#rn01), com tratamento neutro para ausência de dados ([RN07](#rn07)).
+**Declara??o RF:** **Consultar informação de espaço do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de espaço do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Consultar informação de espaço do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Consultar informação de espaço do treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
@@ -1312,11 +1372,11 @@ Esforço Técnico: **2,33**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN01](#rn01) — **Cálculo da Área por Jogador**
-- [RN02](#rn02) — **Classificação Automática da Dimensão do Espaço**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
+- **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
 
@@ -1329,18 +1389,18 @@ Esforço Técnico: **2,33**
 </details>
 
 <details id="rf36" markdown>
-<summary>RF36 · Consultar informação de orientação do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF36 · Consultar informação de orientação do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a orientação do treino (Aquisição, Aplicação, PDI, Eq Carga), com visual neutro para dados vazios ([RN07](#rn07)).
+**Declara??o RF:** **Consultar informação de orientação do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de orientação do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Consultar informação de orientação do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Consultar informação de orientação do treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
@@ -1351,9 +1411,9 @@ Esforço Técnico: **2,33**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
 
@@ -1366,18 +1426,18 @@ Esforço Técnico: **2,33**
 </details>
 
 <details id="rf37" markdown>
-<summary>RF37 · Consultar informação de momento do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF37 · Consultar informação de momento do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a distribuição dos momentos do jogo trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)).
+**Declara??o RF:** **Consultar informação de momento do jogo do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de momento do jogo do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Consultar informação de momento do jogo do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Consultar informação de momento do jogo do treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
@@ -1388,10 +1448,10 @@ Esforço Técnico: **3,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
 
@@ -1404,18 +1464,18 @@ Esforço Técnico: **3,00**
 </details>
 
 <details id="rf38" markdown>
-<summary>RF38 · Consultar informação de fase do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF38 · Consultar informação de fase do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a informação de fase do jogo ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)).
+**Declara??o RF:** **Consultar informação de fase do jogo do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de fase do jogo do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Consultar informação de fase do jogo do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Consultar informação de fase do jogo do treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
@@ -1426,10 +1486,10 @@ Esforço Técnico: **3,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
 
@@ -1442,18 +1502,18 @@ Esforço Técnico: **3,00**
 </details>
 
 <details id="rf39" markdown>
-<summary>RF39 · Consultar informação de comportamento do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF39 · Consultar informação de comportamento do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a informação de comportamento tático ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)).
+**Declara??o RF:** **Consultar informação de comportamento do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de comportamento do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Consultar informação de comportamento do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Consultar informação de comportamento do treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
@@ -1464,10 +1524,10 @@ Esforço Técnico: **3,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
 
@@ -1480,18 +1540,18 @@ Esforço Técnico: **3,00**
 </details>
 
 <details id="rf40" markdown>
-<summary>RF40 · Consultar informação de atributo técnico do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF40 · Consultar informação de atributo técnico do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir consultar, em gráfico e filtro, a informação de atributos técnicos trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)).
+**Declara??o RF:** **Consultar informação de atributo técnico do treino:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a informação de atributo técnico, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Consultar informação de atributo técnico do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Consultar informação de atributo técnico do treino, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
@@ -1502,10 +1562,10 @@ Esforço Técnico: **3,00**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN05](#rn05) — **Preenchimento Condicional pelo Objetivo Central**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
 
@@ -1518,18 +1578,18 @@ Esforço Técnico: **3,00**
 </details>
 
 <details id="rf41" markdown>
-<summary>RF41 · Consultar análise comparativa por periodização<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span></span></summary>
+<summary>RF41 · Consultar análise comparativa por periodização<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** o sistema deve permitir consultar a análise comparativa respeitando a hierarquia da periodização ([RN04](#rn04)), com indicativo neutro se um dos ciclos não contiver treinos ([RN07](#rn07)).
+**Declara??o RF:** **Consultar análise comparativa por periodização:** o sistema deve permitir que o treinador e o auxiliar consultem, em gráfico e por meio de filtro, a análise comparativa por periodização (mesociclo, microciclo, mês e sessão), atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como treinador ou auxiliar, eu quero Consultar análise comparativa por periodização, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe t?cnica, eu quero Consultar análise comparativa por periodização, para atender ao objetivo do requisito.
 
 <div class='rf-meta' markdown>
 
-**CPs e OEs relacionadas:** **CP03** | **OE3, OE4**
+**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,33**
@@ -1540,10 +1600,10 @@ Esforço Técnico: **3,33**
 
 **Critérios de Aceitação**
 
-- [RNF02](#rnf02) — **Interface Responsiva e Adaptável**
-- [RNF04](#rnf04) — **Atualização em Tempo Real do Dashboard**
-- [RN04](#rn04) — **Hierarquia e Integridade da Periodização**
-- [RN07](#rn07) — **Tratamento e Estabilidade em Consultas com Resultado Vazio**
+- **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
+- **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
+- **Hierarquia e Integridade da Periodização:** A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.
+- **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
 

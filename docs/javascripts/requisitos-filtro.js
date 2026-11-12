@@ -9,8 +9,15 @@
     var situationFilters = Array.prototype.slice.call(
       document.querySelectorAll('input[name="rf-situation"]')
     );
+    var iterationFilters = Array.prototype.slice.call(
+      document.querySelectorAll('input[name="rf-iteration"]')
+    );
+    var productFilters = Array.prototype.slice.call(
+      document.querySelectorAll('input[name="rf-product"]')
+    );
 
     if (!input || !result || !container || !deliveryFilters.length || !situationFilters.length ||
+        !iterationFilters.length || !productFilters.length ||
         container.dataset.initialized === "true") {
       return;
     }
@@ -31,6 +38,8 @@
     function filterCards() {
       var selectedDeliveries = selectedValues(deliveryFilters);
       var selectedSituations = selectedValues(situationFilters);
+      var selectedIterations = selectedValues(iterationFilters);
+      var selectedProducts = selectedValues(productFilters);
       var query = input.value.trim().toLocaleLowerCase("pt-BR");
       var visibleCount = 0;
 
@@ -42,6 +51,12 @@
         var situation = summaryStatus && summaryStatus.children[1]
           ? summaryStatus.children[1].textContent
           : "";
+        var iteration = summaryStatus && summaryStatus.children[2]
+          ? summaryStatus.children[2].textContent
+          : "";
+        var product = summaryStatus && summaryStatus.children[3]
+          ? summaryStatus.children[3].textContent
+          : "";
         var matchesDelivery = !selectedDeliveries.length ||
           selectedDeliveries.some(function (value) {
             return delivery.indexOf(value) !== -1;
@@ -50,9 +65,18 @@
           selectedSituations.some(function (value) {
             return situation.indexOf(value) !== -1;
           });
+        var matchesIteration = !selectedIterations.length ||
+          selectedIterations.some(function (value) {
+            return iteration.indexOf(value) !== -1;
+          });
+        var matchesProduct = !selectedProducts.length ||
+          selectedProducts.some(function (value) {
+            return product.indexOf(value) !== -1;
+          });
         var matchesSearch = !query ||
           card.textContent.toLocaleLowerCase("pt-BR").indexOf(query) !== -1;
-        var matches = matchesDelivery && matchesSituation && matchesSearch;
+        var matches = matchesDelivery && matchesSituation &&
+          matchesIteration && matchesProduct && matchesSearch;
         card.hidden = !matches;
         card.style.display = matches ? "" : "none";
         if (matches) {
@@ -64,7 +88,8 @@
         (visibleCount === 1 ? " requisito." : " requisitos.");
     }
 
-    deliveryFilters.concat(situationFilters).forEach(function (filter) {
+    deliveryFilters.concat(situationFilters, iterationFilters, productFilters)
+      .forEach(function (filter) {
       filter.addEventListener("change", filterCards);
     });
     input.addEventListener("input", filterCards);
