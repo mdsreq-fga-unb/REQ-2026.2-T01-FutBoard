@@ -495,6 +495,7 @@
 .tabela-cronograma-html {
   margin: 1rem 0 1.5rem;
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   border: 0.05rem solid var(--md-default-fg-color--lightest);
   border-radius: 0.2rem;
@@ -504,18 +505,18 @@
 .tabela-cronograma-html table {
   display: table;
   width: 100%;
-  min-width: 960px;
+  min-width: 0;
   margin: 0;
   table-layout: fixed;
   border-collapse: collapse;
-  font-size: 0.75rem;
+  font-size: 0.74rem;
 }
 
 .tabela-cronograma-html th,
 .tabela-cronograma-html td {
-  padding: 0.6rem 0.7rem;
+  padding: 0.55rem 0.6rem;
   border-bottom: 0.05rem solid var(--md-default-fg-color--lightest);
-  line-height: 1.5;
+  line-height: 1.4;
   text-align: left;
   word-break: normal;
   overflow-wrap: break-word;
@@ -535,39 +536,36 @@
   border-bottom: 0;
 }
 
-/* Colunas: Ciclo | Datas | Escopo | Técnicas | Status | Considerações */
+/* Colunas (total 100%): 1. Iteração | 2. Datas | 3. Escopo | 4. Técnicas | 5. Status */
 .tabela-cronograma-html th:nth-child(1),
 .tabela-cronograma-html td:nth-child(1) {
-  width: 8%;
+  width: 13%;
   text-align: center;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .tabela-cronograma-html th:nth-child(2),
 .tabela-cronograma-html td:nth-child(2) {
-  width: 10%;
+  width: 12%;
   text-align: center;
+  white-space: nowrap;
 }
 
 .tabela-cronograma-html th:nth-child(3),
 .tabela-cronograma-html td:nth-child(3) {
-  width: 17%;
+  width: 33%;
 }
 
 .tabela-cronograma-html th:nth-child(4),
 .tabela-cronograma-html td:nth-child(4) {
-  width: 10%;
+  width: 27%;
 }
 
 .tabela-cronograma-html th:nth-child(5),
 .tabela-cronograma-html td:nth-child(5) {
-  width: 11%;
+  width: 15%;
   text-align: center;
-}
-
-.tabela-cronograma-html th:nth-child(6),
-.tabela-cronograma-html td:nth-child(6) {
-  width: 28%;
 }
 
 /* Marca itens cujo link ainda precisa ser preenchido */
