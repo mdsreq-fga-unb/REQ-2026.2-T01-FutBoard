@@ -91,7 +91,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>09/11<br>-<br>16/11</td>
 <td><a href="../Requisitos-de-Software-teste/#rf25">US25</a><br><a href="../Requisitos-de-Software-teste/#rf26">US26</a><br><a href="../Requisitos-de-Software-teste/#rf32">US32</a><br><a href="../Requisitos-de-Software-teste/#rf35">US35</a><br><a href="../Requisitos-de-Software-teste/#rf39">US39</a></td>
 <td>Validação Cliente<br>Protótipo<br>DoD</td>
-<td>Planejado</td>
+<td>Em andamento</td>
 </tr>
 
 <tr>
