@@ -32,7 +32,7 @@ O projeto surge da necessidade de solucionar a dificuldade do controle dos plane
 - Processar automaticamente os dados registrados em relatórios estatísticos e gráficos interativos
 - Garantir usabilidade para um usuário não necessariamente técnico em tecnologia (o treinador)
 - Desafio técnicos acerca das tecnologias que o time de desenvolvimento utilizará para criar as análises e gráficos.
-- Migrar, importar os dados já existentes das planilhas de Excel atuais do treinador para o novo sistema, assegurando que os dados não sejam perdidos durante a transição.
+- Conduzir a transição operacional do uso das planilhas manuais para a inserção direta no novo sistema. A importação automatizada de dados históricos das planilhas foi formalmente **retirada do compromisso do MVP** (postergada para etapas pós-MVP), adotando-se o modelo de "marco zero": as novas sessões passam a ser cadastradas diretamente no FutBoard a partir da nova periodização, enquanto as planilhas legadas de Excel permanecem arquivadas como fonte de consulta histórica sob responsabilidade do treinador.
 - Assegurar conformidade com a LGPD através do princípio de minimização de dados (*Privacy by Design*), delimitando que a aplicação trata exclusivamente métricas e dados operacionais coletivos dos treinos, sem coletar, processar ou armazenar quaisquer dados pessoais identificáveis ou prontuários individuais dos atletas menores de idade.
 
 ##1.6 Mapa de Stakeholders
