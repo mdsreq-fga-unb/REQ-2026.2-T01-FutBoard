@@ -6,20 +6,20 @@ Apoiar a tomada de decisões técnicas do corpo técnico do Canaã Esporte Clube
 
 ## 2.2 Objetivos Específicos (OE) do Produto
 
-- **(OE1):** Sistematizar a coleta de dados de treinos de forma categorizada para suporte a tomada de decisões.
-- **(OE2):** Estruturar o planejamento com base na periodização esportiva (macro, meso e microciclos).
-- **(OE3):** Possibilitar a análise e a comparação de desempenho da equipe entre diferentes ciclos e categorias.
-- **(OE4):** Fornecer apoio à decisão do corpo técnico por meio do acompanhamento dos treinos passados pelo técnico.
+- **(OE1):** Sistematizar a coleta de dados de treinos de forma categorizada e padronizada.
+- **(OE2):** Estruturar o planejamento com base na periodização esportiva nativa (macrociclos, mesociclos e microciclos).
+- **(OE3):** Fornecer diagnósticos analíticos e comparativos em tela (dashboards) sobre a distribuição de cargas e conteúdos entre ciclos de treino.
+- **(OE4):** Subsidiar a tomada de decisão e a comunicação técnica por meio da geração automatizada de relatórios executivos exportáveis (PDF).
 
 ## 2.3 Características do Produto
 
 | ID | OE principal | Contribuição secundária | Característica | Descrição resumida | Valor de negócio principal |
 | --- | --- | --- | --- | --- | --- |
 | CP01 | OE1 | OE4 | Registro Categorizado de Treinos | Interface que permite ao técnico a inserção estruturada dos dados de treino. | Diminuir o tempo de cadastros das sessões de treinos diminuindo a sobrecarga de trabalho do treinador. |
-| CP02 | OE2 | OE3 | Estruturador de Periodização Esportiva | Ferramenta para estruturar nativamente o planejamento do calendário em macrociclos, mesociclos e microciclos. | Padronização metodológica científica relacionada a rotina do clube, substituindo métodos sem padronização. |
-| CP03 | OE3 | OE4 | Dashboard Analitico | Painel visual com gráficos interativos com métricas atualizadas imediatamente após o registro dos dados | Substitui dashboards estáticos e atrasados por métricas visuais instantâneas. |
-| CP04 | OE4 | OE3 | Geração Automática de Relatórios | Sistema que processa os dados para criar relatórios comparativos entre ciclos. | Fundamenta e apoia a tomada de decisões técnicas com base em estatísticas consolidadas. |
-| CP05 | OE1 | OE4 | Controle de Perfis de Acesso | Sistema de cadastro e login para o técnico e seu auxiliar | Protege os dados contra alterações indevidas. |
+| CP02 | OE2 | OE3 | Estruturador de Periodização Esportiva | Ferramenta para estruturar nativamente o planejamento do calendário em macrociclos, mesociclos e microciclos. | Padronização metodológica científica relacionada à rotina do clube, substituindo métodos sem padronização. |
+| CP03 | OE3 | OE4 | Dashboard Analítico | Painel visual interativo com métricas e filtros analíticos atualizados após o registro dos dados. | Substitui dashboards estáticos por diagnósticos analíticos instantâneos de treino em tela. |
+| CP04 | OE4 | OE3 | Geração Automática de Relatórios | Sistema que consolida métricas e comparativos de ciclos em relatórios estruturados exportáveis em PDF. | Fornece documento executivo portátil para prestação de contas e tomada de decisão técnica fora da aplicação. |
+| CP05 | OE1 | OE4 | Controle de Perfis de Acesso | Sistema de cadastro e login para o técnico e seu auxiliar. | Protege os dados contra alterações indevidas. |
 
 ## 2.4 Tecnologias a Serem Utilizadas
 
