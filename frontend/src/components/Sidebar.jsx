@@ -9,6 +9,7 @@ export default function Sidebar({
   totalMicrociclos = 0,
   totalSessoes = 0,
   totalAtividades = 0,
+  totalComportamentos = 0,
 }) {
   const handleSelect = (itemKey) => {
     if (onSelectNav) onSelectNav(itemKey);
@@ -261,6 +262,60 @@ export default function Sidebar({
                       strokeLinejoin="round"
                       d="M9 6l6 6-6 6"
                     />
+                  </svg>
+                )}
+              </span>
+            </button>
+          </nav>
+        </div>
+
+        {/* Section: BIBLIOTECA */}
+        <div className="mb-6">
+          <p className="mb-3 px-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#8A8D80]">
+            BIBLIOTECA
+          </p>
+
+          <nav className="space-y-1" aria-label="Menu da Biblioteca">
+            {/* Comportamentos táticos */}
+            <button
+              type="button"
+              onClick={() => handleSelect("comportamentos")}
+              className={`group flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-sm font-medium transition ${
+                activeNav === "comportamentos"
+                  ? "bg-white/[0.11] text-[#FFFFFF] shadow-inner ring-1 ring-white/[0.08]"
+                  : "text-[#8A8D80] hover:bg-white/[0.06] hover:text-[#FFFFFF]"
+              }`}
+            >
+              <span className="flex items-center gap-2.5">
+                <svg
+                  className="h-4 w-4 shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                >
+                  <circle cx="6" cy="6" r="2.5" />
+                  <circle cx="18" cy="18" r="2.5" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.5 6H15a3 3 0 010 6H9a3 3 0 000 6h6.5" />
+                </svg>
+                <span>Comportamentos</span>
+              </span>
+
+              <span className="flex items-center gap-1.5">
+                {totalComportamentos > 0 && (
+                  <span className="hidden rounded-md bg-[#10281E]/60 px-1.5 py-0.5 font-mono text-[10px] text-[#C6E96B] group-hover:inline-block">
+                    {totalComportamentos}
+                  </span>
+                )}
+                {activeNav === "comportamentos" && (
+                  <svg
+                    className="h-3.5 w-3.5 text-[#C6E96B] transition-transform group-hover:translate-x-0.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
                   </svg>
                 )}
               </span>
