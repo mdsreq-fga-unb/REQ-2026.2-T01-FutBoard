@@ -1,9 +1,14 @@
-"""Views da API de sessões."""
+"""Views da API de sessões e biblioteca de treinos."""
 
 from rest_framework import generics
 
+
 from .models import Sessao, ComportamentoTatico
 from .serializers import SessaoSerializer, ComportamentoTaticoSerializer
+
+from .models import AtividadeBiblioteca, Sessao
+from .serializers import AtividadeBibliotecaSerializer, SessaoSerializer
+
 
 
 class SessaoListCreateView(generics.ListCreateAPIView):
@@ -18,6 +23,7 @@ class SessaoDetailView(generics.RetrieveUpdateAPIView):
 
     queryset = Sessao.objects.select_related("microciclo__mesociclo__macrociclo").all()
     serializer_class = SessaoSerializer
+
 
 class ComportamentoTaticoListCreateView(generics.ListCreateAPIView):
     """
@@ -35,3 +41,12 @@ class ComportamentoTaticoDetailView(generics.RetrieveUpdateAPIView):
 
     queryset = ComportamentoTatico.objects.all()
     serializer_class = ComportamentoTaticoSerializer
+
+
+class AtividadeBibliotecaListCreateView(generics.ListCreateAPIView):
+    """US19: Lista atividades da biblioteca e permite cadastrar uma nova atividade."""
+
+    queryset = AtividadeBiblioteca.objects.all()
+    serializer_class = AtividadeBibliotecaSerializer
+
+

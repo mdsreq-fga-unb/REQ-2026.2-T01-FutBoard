@@ -7,6 +7,9 @@ from .views import (
     SessaoListCreateView,
     ComportamentoTaticoListCreateView,
     ComportamentoTaticoDetailView,
+    AtividadeBibliotecaListCreateView,
+    SessaoDetailView,
+    SessaoListCreateView,
 )
 
 app_name = "treinos"
@@ -31,5 +34,10 @@ urlpatterns = [
         "comportamentos/<int:pk>/",
         ComportamentoTaticoDetailView.as_view(),
         name="comportamento-detail",
+
+        "biblioteca/",
+        AtividadeBibliotecaListCreateView.as_view(),
+        name="biblioteca-list-create",
     ),
 ]
+
