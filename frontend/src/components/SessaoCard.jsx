@@ -21,11 +21,36 @@ export default function SessaoCard({ sessao, onEditSessao }) {
               <span className="rounded-full bg-[#C6E96B]/50 px-2.5 py-0.5 font-mono text-[11px] font-medium text-[#10281E]">
                 {sessao.mes}
               </span>
+
+              {sessao.atividades?.length > 0 && (
+                <span className="rounded-full bg-[#0E3A29]/10 px-2.5 py-0.5 font-mono text-[11px] font-medium text-[#0E3A29]">
+                  {sessao.atividades.length}{" "}
+                  {sessao.atividades.length === 1 ? "atividade" : "atividades"}
+                </span>
+              )}
             </div>
 
             <h2 className="font-display text-lg font-bold tracking-tight text-[#10281E] sm:text-xl">
               {sessao.nome}
             </h2>
+
+            {sessao.atividades?.length > 0 && (
+              <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+                {sessao.atividades.map((atv, idx) => (
+                  <span
+                    key={atv.id || `${atv.codigo}-${idx}`}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-[#E4DFD2] bg-[#FAF9F5] px-2.5 py-1 text-xs font-medium text-[#10281E]"
+                  >
+                    {atv.codigo && (
+                      <span className="rounded bg-[#0E3A29] px-1.5 py-0.5 font-mono text-[10px] font-bold text-white">
+                        {atv.codigo}
+                      </span>
+                    )}
+                    <span>{atv.nome}</span>
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-4 shrink-0">
