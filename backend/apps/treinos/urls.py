@@ -2,7 +2,11 @@
 
 from django.urls import path
 
-from .views import SessaoDetailView, SessaoListCreateView
+from .views import (
+    AtividadeBibliotecaListCreateView,
+    SessaoDetailView,
+    SessaoListCreateView,
+)
 
 app_name = "treinos"
 
@@ -17,4 +21,10 @@ urlpatterns = [
         SessaoDetailView.as_view(),
         name="sessao-detail",
     ),
+    path(
+        "biblioteca/",
+        AtividadeBibliotecaListCreateView.as_view(),
+        name="biblioteca-list-create",
+    ),
 ]
+
