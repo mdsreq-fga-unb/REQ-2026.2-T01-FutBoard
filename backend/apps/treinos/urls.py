@@ -34,10 +34,10 @@ urlpatterns = [
         "comportamentos/<int:pk>/",
         ComportamentoTaticoDetailView.as_view(),
         name="comportamento-detail",
-
+    ),
+    path(
         "biblioteca/",
         AtividadeBibliotecaListCreateView.as_view(),
         name="biblioteca-list-create",
     ),
 ]
-
