@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AtividadeSessaoModal from "./AtividadeSessaoModal.jsx";
+import SelecionarAtividadeBibliotecaModal from "./SelecionarAtividadeBibliotecaModal.jsx";
 
 const MESES_ANO = [
   "Janeiro",
@@ -35,6 +36,7 @@ export default function SessaoModal({
   const [mes, setMes] = useState(initialData?.mes || "");
   const [atividades, setAtividades] = useState(initialData?.atividades || []);
   const [modalAtividadeOpen, setModalAtividadeOpen] = useState(false);
+  const [modalBibliotecaOpen, setModalBibliotecaOpen] = useState(false);
   const [atividadeEditando, setAtividadeEditando] = useState(null);
   const [erro, setErro] = useState("");
 
@@ -132,6 +134,62 @@ export default function SessaoModal({
 
   const handleRemoverAtividade = (idAtividade) => {
     setAtividades((prev) => prev.filter((atv) => atv.id !== idAtividade));
+  };
+
+  const handleAdicionarDaBiblioteca = (atividadesSelecionadas) => {
+    setAtividades((prev) => {
+      const codigosExistentes = new Set(
+        prev.map((a) => (a.codigo || "").trim().toUpperCase()).filter(Boolean),
+      );
+      const idsBibliotecaExistentes = new Set(
+        prev.map((a) => a.bibliotecaId).filter(Boolean),
+      );
+
+      const novasAtividades = [];
+
+      atividadesSelecionadas.forEach((atv) => {
+        const codigoNormalizado = (atv.codigo || "").trim().toUpperCase();
+        if (
+          (codigoNormalizado && codigosExistentes.has(codigoNormalizado)) ||
+          (atv.id && idsBibliotecaExistentes.has(atv.id))
+        ) {
+          return;
+        }
+
+        if (codigoNormalizado) {
+          codigosExistentes.add(codigoNormalizado);
+        }
+        if (atv.id) {
+          idsBibliotecaExistentes.add(atv.id);
+        }
+
+        novasAtividades.push({
+          id: Date.now() + Math.random(),
+          bibliotecaId: atv.id,
+          codigo: codigoNormalizado,
+          nome: atv.nome,
+          atividade_ssp: atv.atividade_ssp || atv.nome,
+          tipologia: atv.tipologia,
+          sigla_tipologia: atv.sigla_tipologia,
+          tipo_ssp: atv.tipo_ssp,
+          ordem: prev.length + novasAtividades.length + 1,
+          tempo: atv.tempo || null,
+          comprimento: atv.comprimento ?? null,
+          largura: atv.largura ?? null,
+          numero_jogadores: atv.numero_jogadores ?? null,
+          area_por_jogador: atv.area_por_jogador ?? null,
+          dimensao_espaco: atv.dimensao_espaco || "Não Definido",
+          momentos_jogo: atv.momentos_jogo || [],
+          fases_jogo: atv.fases_jogo || [],
+          comportamentos: atv.comportamentos || [],
+          atributos_tecnicos: atv.atributos_tecnicos || [],
+        });
+      });
+
+      return [...prev, ...novasAtividades];
+    });
+
+    setModalBibliotecaOpen(false);
   };
 
   const handleSubmit = (e) => {
@@ -297,7 +355,8 @@ export default function SessaoModal({
 
                 <button
                   type="button"
-                  className="w-full rounded-full border border-[#E4DFD2] bg-[#FAF9F5] px-4 py-2.5 text-xs font-medium text-[#10281E] transition hover:bg-[#F5F2EA]"
+                  onClick={() => setModalBibliotecaOpen(true)}
+                  className="w-full rounded-full border border-[#E4DFD2] bg-[#FAF9F5] px-4 py-2.5 text-xs font-medium text-[#10281E] transition hover:border-[#0E3A29]/40 hover:bg-[#F5F2EA]"
                 >
                   + Adicionar atividade da biblioteca
                 </button>
@@ -456,6 +515,14 @@ export default function SessaoModal({
         initialData={atividadeEditando}
         onClose={fecharModalAtividadeSessao}
         onSave={handleSalvarAtividade}
+      />
+
+      {/* Modal de Seleção de Atividades da Biblioteca sobreposto ao Modal de Sessão */}
+      <SelecionarAtividadeBibliotecaModal
+        isOpen={modalBibliotecaOpen}
+        atividadesJaIncluidas={atividades}
+        onClose={() => setModalBibliotecaOpen(false)}
+        onConfirm={handleAdicionarDaBiblioteca}
       />
     </>
   );
