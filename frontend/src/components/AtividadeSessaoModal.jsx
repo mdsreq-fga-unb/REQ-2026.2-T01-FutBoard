@@ -47,7 +47,19 @@ const MAPA_FASES_API = {
   "Transição Defensiva": "Finalização",
 };
 
-export default function AtividadeSessaoModal({ isOpen, onClose, onSave }) {
+const MAPA_MOMENTOS_REVERSO = {
+  "Trans Of": "Transição Ofensiva",
+  "Trans Def": "Transição Defensiva",
+};
+
+export default function AtividadeSessaoModal({
+  isOpen,
+  initialData = null,
+  onClose,
+  onSave,
+}) {
+  const isEditing = Boolean(initialData);
+
   const [codigo, setCodigo] = useState("");
   const [nome, setNome] = useState("");
   const [ordem, setOrdem] = useState("");
@@ -96,12 +108,47 @@ export default function AtividadeSessaoModal({ isOpen, onClose, onSave }) {
     setSalvando(false);
   };
 
-  // Toda vez que o modal for aberto, garante formulário zerado
+  // Preenche o formulário no modo edição ou reseta no modo criação
   useEffect(() => {
     if (isOpen) {
-      resetForm();
+      if (initialData) {
+        setCodigo(initialData.codigo || "");
+        setNome(initialData.nome || "");
+        setOrdem(initialData.ordem != null ? String(initialData.ordem) : "");
+        setTipoSsp(initialData.tipo_ssp || "");
+        setTipologia(initialData.tipologia || "");
+        setTempo(initialData.tempo != null ? String(initialData.tempo) : "");
+        setNumeroJogadores(
+          initialData.numero_jogadores != null
+            ? String(initialData.numero_jogadores)
+            : "",
+        );
+        setComprimento(
+          initialData.comprimento != null
+            ? String(initialData.comprimento)
+            : "",
+        );
+        setLargura(
+          initialData.largura != null ? String(initialData.largura) : "",
+        );
+        setMomentosJogo(
+          (initialData.momentos_jogo || []).map(
+            (m) => MAPA_MOMENTOS_REVERSO[m] || m,
+          ),
+        );
+        setFasesJogo(initialData.fases_jogo || []);
+        setComportamentos(initialData.comportamentos || []);
+        setAtributosTecnicos(initialData.atributos_tecnicos || []);
+        setAbertoDropdown(null);
+        setInputComportamento("");
+        setInputAtributo("");
+        setErro("");
+        setSalvando(false);
+      } else {
+        resetForm();
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, initialData]);
 
   const handleClose = () => {
     resetForm();
@@ -300,13 +347,13 @@ export default function AtividadeSessaoModal({ isOpen, onClose, onSave }) {
         <div className="flex shrink-0 items-start justify-between border-b border-[#E4DFD2]/50 px-7 pt-5 pb-3">
           <div>
             <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-[#8A8D80]">
-              BIBLIOTECA · NOVA
+              {isEditing ? "BIBLIOTECA · EDIÇÃO" : "BIBLIOTECA · NOVA"}
             </span>
             <h2
               id="modal-atividade-sessao-titulo"
               className="mt-0.5 font-display text-2xl font-bold tracking-tight text-[#10281E]"
             >
-              Nova atividade
+              {isEditing ? "Editar atividade" : "Nova atividade"}
             </h2>
           </div>
 
@@ -946,7 +993,13 @@ export default function AtividadeSessaoModal({ isOpen, onClose, onSave }) {
                 : "bg-[#D8D4CA] text-[#8A8D80] cursor-not-allowed opacity-70"
             }`}
           >
-            <span>{salvando ? "Criando..." : "Criar atividade"}</span>
+            <span>
+              {salvando
+                ? "Salvando..."
+                : isEditing
+                  ? "Salvar alterações"
+                  : "Criar atividade"}
+            </span>
           </button>
         </div>
       </div>

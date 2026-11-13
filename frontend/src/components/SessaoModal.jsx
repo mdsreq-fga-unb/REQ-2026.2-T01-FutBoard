@@ -35,17 +35,34 @@ export default function SessaoModal({
   const [mes, setMes] = useState(initialData?.mes || "");
   const [atividades, setAtividades] = useState(initialData?.atividades || []);
   const [modalAtividadeOpen, setModalAtividadeOpen] = useState(false);
+  const [atividadeEditando, setAtividadeEditando] = useState(null);
   const [erro, setErro] = useState("");
 
   if (!isOpen) return null;
 
   const camposPreenchidos = Boolean(nome.trim() && data && mes);
 
-  const handleAdicionarAtividade = async (dadosAtividade) => {
+  const abrirNovaAtividadeSessao = () => {
+    setAtividadeEditando(null);
+    setModalAtividadeOpen(true);
+  };
+
+  const abrirEdicaoAtividadeSessao = (atividade) => {
+    setAtividadeEditando(atividade);
+    setModalAtividadeOpen(true);
+  };
+
+  const fecharModalAtividadeSessao = () => {
+    setModalAtividadeOpen(false);
+    setAtividadeEditando(null);
+  };
+
+  const handleSalvarAtividade = async (dadosAtividade) => {
     const codigoNormalizado = (dadosAtividade.codigo || "").trim().toUpperCase();
 
     const duplicada = atividades.some(
       (atv) =>
+        atv.id !== atividadeEditando?.id &&
         atv.codigo &&
         codigoNormalizado &&
         atv.codigo.toUpperCase() === codigoNormalizado,
@@ -57,29 +74,60 @@ export default function SessaoModal({
       );
     }
 
-    const novaAtividade = {
-      id: Date.now() + Math.random(),
-      codigo: codigoNormalizado,
-      nome: dadosAtividade.nome,
-      atividade_ssp: dadosAtividade.nome,
-      tipologia: dadosAtividade.tipologia,
-      sigla_tipologia: dadosAtividade.sigla_tipologia,
-      tipo_ssp: dadosAtividade.tipo_ssp,
-      ordem: dadosAtividade.ordem || atividades.length + 1,
-      tempo: dadosAtividade.tempo,
-      comprimento: dadosAtividade.comprimento,
-      largura: dadosAtividade.largura,
-      numero_jogadores: dadosAtividade.numero_jogadores,
-      area_por_jogador: dadosAtividade.area_por_jogador,
-      dimensao_espaco: dadosAtividade.dimensao_espaco,
-      momentos_jogo: dadosAtividade.momentos_jogo || [],
-      fases_jogo: dadosAtividade.fases_jogo || [],
-      comportamentos: dadosAtividade.comportamentos || [],
-      atributos_tecnicos: dadosAtividade.atributos_tecnicos || [],
-    };
+    if (atividadeEditando) {
+      const atividadeAtualizada = {
+        ...atividadeEditando,
+        codigo: codigoNormalizado,
+        nome: dadosAtividade.nome,
+        atividade_ssp: dadosAtividade.nome,
+        tipologia: dadosAtividade.tipologia,
+        sigla_tipologia: dadosAtividade.sigla_tipologia,
+        tipo_ssp: dadosAtividade.tipo_ssp,
+        ordem: dadosAtividade.ordem || atividadeEditando.ordem,
+        tempo: dadosAtividade.tempo,
+        comprimento: dadosAtividade.comprimento,
+        largura: dadosAtividade.largura,
+        numero_jogadores: dadosAtividade.numero_jogadores,
+        area_por_jogador: dadosAtividade.area_por_jogador,
+        dimensao_espaco: dadosAtividade.dimensao_espaco,
+        momentos_jogo: dadosAtividade.momentos_jogo || [],
+        fases_jogo: dadosAtividade.fases_jogo || [],
+        comportamentos: dadosAtividade.comportamentos || [],
+        atributos_tecnicos: dadosAtividade.atributos_tecnicos || [],
+      };
 
-    setAtividades((prev) => [...prev, novaAtividade]);
+      setAtividades((prev) =>
+        prev.map((atv) =>
+          atv.id === atividadeEditando.id ? atividadeAtualizada : atv,
+        ),
+      );
+    } else {
+      const novaAtividade = {
+        id: Date.now() + Math.random(),
+        codigo: codigoNormalizado,
+        nome: dadosAtividade.nome,
+        atividade_ssp: dadosAtividade.nome,
+        tipologia: dadosAtividade.tipologia,
+        sigla_tipologia: dadosAtividade.sigla_tipologia,
+        tipo_ssp: dadosAtividade.tipo_ssp,
+        ordem: dadosAtividade.ordem || atividades.length + 1,
+        tempo: dadosAtividade.tempo,
+        comprimento: dadosAtividade.comprimento,
+        largura: dadosAtividade.largura,
+        numero_jogadores: dadosAtividade.numero_jogadores,
+        area_por_jogador: dadosAtividade.area_por_jogador,
+        dimensao_espaco: dadosAtividade.dimensao_espaco,
+        momentos_jogo: dadosAtividade.momentos_jogo || [],
+        fases_jogo: dadosAtividade.fases_jogo || [],
+        comportamentos: dadosAtividade.comportamentos || [],
+        atributos_tecnicos: dadosAtividade.atributos_tecnicos || [],
+      };
+
+      setAtividades((prev) => [...prev, novaAtividade]);
+    }
+
     setModalAtividadeOpen(false);
+    setAtividadeEditando(null);
   };
 
   const handleRemoverAtividade = (idAtividade) => {
@@ -241,7 +289,7 @@ export default function SessaoModal({
               <div className="grid grid-cols-1 gap-3 pt-1 sm:grid-cols-2">
                 <button
                   type="button"
-                  onClick={() => setModalAtividadeOpen(true)}
+                  onClick={abrirNovaAtividadeSessao}
                   className="w-full rounded-full border border-[#E4DFD2] bg-[#FAF9F5] px-4 py-2.5 text-xs font-medium text-[#10281E] transition hover:border-[#0E3A29]/40 hover:bg-[#F5F2EA]"
                 >
                   + Cadastrar atividade na sessão
@@ -318,27 +366,57 @@ export default function SessaoModal({
                             </p>
                           </div>
 
-                          <button
-                            type="button"
-                            onClick={() => handleRemoverAtividade(atv.id)}
-                            className="rounded-lg p-1 text-[#8A8D80] transition hover:bg-red-50 hover:text-red-600"
-                            aria-label={`Remover atividade ${atv.nome}`}
-                            title="Remover atividade da sessão"
-                          >
-                            <svg
-                              className="h-3.5 w-3.5"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
+                          <div className="flex shrink-0 items-center gap-1">
+                            <button
+                              type="button"
+                              onClick={() => abrirEdicaoAtividadeSessao(atv)}
+                              className="inline-flex items-center gap-1 rounded-full border border-[#E4DFD2] bg-white px-2.5 py-1 text-[11px] font-medium text-[#10281E] transition hover:border-[#0E3A29] hover:bg-[#F5F2EA]"
+                              aria-label={`Editar atividade ${atv.nome}`}
+                              title="Editar atividade"
                             >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
-                          </button>
+                              <svg
+                                className="h-3 w-3 text-[#0E3A29]"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"
+                                />
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"
+                                />
+                              </svg>
+                              <span>Editar</span>
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => handleRemoverAtividade(atv.id)}
+                              className="rounded-lg p-1 text-[#8A8D80] transition hover:bg-red-50 hover:text-red-600"
+                              aria-label={`Remover atividade ${atv.nome}`}
+                              title="Remover atividade da sessão"
+                            >
+                              <svg
+                                className="h-3.5 w-3.5"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M6 18L18 6M6 6l12 12"
+                                />
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                       );
                     })}
@@ -372,11 +450,12 @@ export default function SessaoModal({
         </div>
       </div>
 
-      {/* Modal de Cadastro de Atividade na Sessão sobreposto ao Modal de Sessão */}
+      {/* Modal de Cadastro e Edição de Atividade na Sessão sobreposto ao Modal de Sessão */}
       <AtividadeSessaoModal
         isOpen={modalAtividadeOpen}
-        onClose={() => setModalAtividadeOpen(false)}
-        onSave={handleAdicionarAtividade}
+        initialData={atividadeEditando}
+        onClose={fecharModalAtividadeSessao}
+        onSave={handleSalvarAtividade}
       />
     </>
   );
