@@ -2,13 +2,12 @@
 
 from rest_framework import generics
 
-
-from .models import Sessao, ComportamentoTatico
-from .serializers import SessaoSerializer, ComportamentoTaticoSerializer
-
-from .models import AtividadeBiblioteca, Sessao
-from .serializers import AtividadeBibliotecaSerializer, SessaoSerializer
-
+from .models import AtividadeBiblioteca, ComportamentoTatico, Sessao
+from .serializers import (
+    AtividadeBibliotecaSerializer,
+    ComportamentoTaticoSerializer,
+    SessaoSerializer,
+)
 
 
 class SessaoListCreateView(generics.ListCreateAPIView):
@@ -26,18 +25,14 @@ class SessaoDetailView(generics.RetrieveUpdateAPIView):
 
 
 class ComportamentoTaticoListCreateView(generics.ListCreateAPIView):
-    """
-    US10: listar e cadastrar comportamentos táticos.
-    """
+    """US10: listar e cadastrar comportamentos táticos."""
 
     queryset = ComportamentoTatico.objects.all()
     serializer_class = ComportamentoTaticoSerializer
 
 
 class ComportamentoTaticoDetailView(generics.RetrieveUpdateAPIView):
-    """
-    US11: consultar e editar comportamentos táticos.
-    """
+    """US11: consultar e editar comportamentos táticos."""
 
     queryset = ComportamentoTatico.objects.all()
     serializer_class = ComportamentoTaticoSerializer
@@ -48,5 +43,13 @@ class AtividadeBibliotecaListCreateView(generics.ListCreateAPIView):
 
     queryset = AtividadeBiblioteca.objects.all()
     serializer_class = AtividadeBibliotecaSerializer
+
+
+class AtividadeBibliotecaDetailView(generics.RetrieveUpdateAPIView):
+    """US20: Consulta e permite editar uma atividade cadastrada na biblioteca."""
+
+    queryset = AtividadeBiblioteca.objects.all()
+    serializer_class = AtividadeBibliotecaSerializer
+
 
 

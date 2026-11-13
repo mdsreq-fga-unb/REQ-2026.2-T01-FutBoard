@@ -10,8 +10,8 @@ from .models import (
     TIPOLOGIAS_MAPA,
     TIPOS_SSP_VALIDOS,
     AtividadeBiblioteca,
-    Sessao,
     ComportamentoTatico,
+    Sessao,
     normalizar_nome_comportamento,
 )
 
@@ -191,6 +191,8 @@ class AtividadeBibliotecaSerializer(serializers.ModelSerializer):
     def validate_codigo(self, value):
         codigo = (value or "").strip().upper()
         if not codigo:
+            if self.instance:
+                return self.instance.codigo
             return ""
         qs = AtividadeBiblioteca.objects.filter(codigo__iexact=codigo)
         if self.instance:

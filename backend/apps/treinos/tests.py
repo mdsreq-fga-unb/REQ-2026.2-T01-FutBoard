@@ -7,11 +7,7 @@ from rest_framework.test import APITestCase
 
 from apps.ciclos.models import Macrociclo, Mesociclo, Microciclo
 
-
-from .models import Sessao
-from .models import ComportamentoTatico
-
-from .models import AtividadeBiblioteca, Sessao
+from .models import AtividadeBiblioteca, ComportamentoTatico, Sessao
 
 
 
@@ -406,4 +402,136 @@ class AtividadeBibliotecaApiTests(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("dimensao_espaco", response.json())
+
+    def test_edita_nome_e_dados_base_mantendo_codigo(self):
+        """US20: Edita nome, tipologia e tipo_ssp de uma atividade mantendo seu código."""
+        atividade = AtividadeBiblioteca.objects.create(
+            nome="G2XG",
+            tipologia="Confrontos",
+            tipo_ssp="Especial",
+        )
+
+        response = self.client.patch(
+            f"{self.list_url}{atividade.id}/",
+            {
+                "nome": "G2XG | Rodízio 30s",
+                "tipo_ssp": "Competitivo",
+            },
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        body = response.json()
+        self.assertEqual(body["codigo"], "CF1")
+        self.assertEqual(body["nome"], "G2XG | Rodízio 30s")
+        self.assertEqual(body["atividade_ssp"], "CF | G2XG | Rodízio 30s")
+        self.assertEqual(body["tipo_ssp"], "Competitivo")
+
+    def test_edita_medidas_recalculando_area_e_dimensao_espaco(self):
+        """US20: Recalcula área (RN01) e atualiza dimensão (RN02) ao editar medidas."""
+        atividade = AtividadeBiblioteca.objects.create(
+            nome="RecPosPerd",
+            tipologia="Jogo de Posse",
+            tipo_ssp="Especial",
+            orientacao="Aquisição",
+            comprimento=20,
+            largura=20,
+            numero_jogadores=7,
+        )
+        self.assertEqual(atividade.dimensao_espaco, "Pequeno")
+
+        response = self.client.patch(
+            f"{self.list_url}{atividade.id}/",
+            {
+                "comprimento": 52,
+                "largura": 60,
+                "numero_jogadores": 12,
+            },
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        body = response.json()
+        self.assertAlmostEqual(body["area_por_jogador"], 260.0)
+        self.assertEqual(body["dimensao_espaco"], "Grande")
+
+    def test_edita_orientacao_para_pdi_limpando_medidas(self):
+        """US20: Ao mudar orientação para PDI, limpa medidas e define Não Definido."""
+        atividade = AtividadeBiblioteca.objects.create(
+            nome="DomOrien | Var1",
+            tipologia="Dinâmica de Passe",
+            tipo_ssp="Dirigido",
+            orientacao="Aquisição",
+            comprimento=24,
+            largura=25,
+            numero_jogadores=6,
+        )
+        self.assertEqual(atividade.dimensao_espaco, "Pequeno")
+
+        response = self.client.patch(
+            f"{self.list_url}{atividade.id}/",
+            {"orientacao": "PDI"},
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        body = response.json()
+        self.assertIsNone(body["comprimento"])
+        self.assertIsNone(body["largura"])
+        self.assertIsNone(body["numero_jogadores"])
+        self.assertIsNone(body["area_por_jogador"])
+        self.assertEqual(body["dimensao_espaco"], "Não Definido")
+
+    def test_edita_listas_momentos_fases_comportamentos_e_atributos(self):
+        """US20: Permite atualizar listas de momentos, fases, comportamentos e atributos."""
+        atividade = AtividadeBiblioteca.objects.create(
+            nome="Cont/Cob",
+            tipologia="Rondo",
+            tipo_ssp="Especial",
+            momentos_jogo=["Ataque"],
+            comportamentos=["Cobertura"],
+        )
+
+        response = self.client.patch(
+            f"{self.list_url}{atividade.id}/",
+            {
+                "momentos_jogo": ["Ataque", "Defesa"],
+                "fases_jogo": ["1ª Construção"],
+                "comportamentos": ["Cobertura", "Contenção", "MantPoss"],
+                "atributos_tecnicos": ["Passe Ruptura"],
+            },
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        body = response.json()
+        self.assertEqual(body["momentos_jogo"], ["Ataque", "Defesa"])
+        self.assertEqual(body["fases_jogo"], ["1ª Construção"])
+        self.assertEqual(body["comportamentos"], ["Cobertura", "Contenção", "MantPoss"])
+        self.assertEqual(body["atributos_tecnicos"], ["Passe Ruptura"])
+
+    def test_impede_edicao_com_codigo_duplicado(self):
+        """US20: Rejeita edição caso tente usar o código de outra atividade existente."""
+        AtividadeBiblioteca.objects.create(
+            codigo="CF1",
+            nome="G2XG",
+            tipologia="Confrontos",
+            tipo_ssp="Especial",
+        )
+        segunda = AtividadeBiblioteca.objects.create(
+            codigo="JC1",
+            nome="RecPosPerd",
+            tipologia="Jogo Condicionante",
+            tipo_ssp="Especial",
+        )
+
+        response = self.client.patch(
+            f"{self.list_url}{segunda.id}/",
+            {"codigo": "cf1"},
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("codigo", response.json())
+
 
