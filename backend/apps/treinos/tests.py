@@ -3,10 +3,16 @@
 from django.apps import apps
 from django.test import SimpleTestCase, TestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
 
 from apps.ciclos.models import Macrociclo, Mesociclo, Microciclo
 
+
+from .models import Sessao
+from .models import ComportamentoTatico
+
 from .models import AtividadeBiblioteca, Sessao
+
 
 
 class TreinosInfraTests(SimpleTestCase):
@@ -117,6 +123,90 @@ class SessaoApiTests(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("data", response.json())
+
+
+class ComportamentoTaticoAPITest(APITestCase):
+
+    url = "/api/treinos/comportamentos/"
+
+    def test_listar_catalogo_vazio(self):
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, [])
+
+    def test_cadastrar_comportamento(self):
+        response = self.client.post(
+            self.url,
+            {"nome": "Amplitude"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(ComportamentoTatico.objects.count(), 1)
+
+    def test_impedir_nome_vazio(self):
+        response = self.client.post(
+            self.url,
+            {"nome": "   "},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_impedir_nome_duplicado(self):
+        ComportamentoTatico.objects.create(nome="Amplitude")
+
+        response = self.client.post(
+            self.url,
+            {"nome": "Amplitude"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_impedir_duplicidade_com_acentos(self):
+        ComportamentoTatico.objects.create(nome="Reação Pós-Perda")
+
+        response = self.client.post(
+            self.url,
+            {"nome": "  REACAO   POS-PERDA  "},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_editar_comportamento(self):
+        comportamento = ComportamentoTatico.objects.create(
+            nome="Amplitude"
+        )
+
+        response = self.client.patch(
+            f"{self.url}{comportamento.id}/",
+            {"nome": "Amplitude Ofensiva"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+        comportamento.refresh_from_db()
+
+        self.assertEqual(comportamento.nome, "Amplitude Ofensiva")
+
+    def test_impedir_duplicidade_na_edicao(self):
+        ComportamentoTatico.objects.create(nome="Cobertura")
+
+        comportamento = ComportamentoTatico.objects.create(
+            nome="Amplitude"
+        )
+
+        response = self.client.patch(
+            f"{self.url}{comportamento.id}/",
+            {"nome": "cobertura"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 400)
 
 
 class AtividadeBibliotecaApiTests(TestCase):
