@@ -74,7 +74,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -113,7 +113,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -151,7 +151,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -187,7 +187,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **3,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -225,7 +225,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **3,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -263,7 +263,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -299,7 +299,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **4,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -338,7 +338,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **4,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -375,7 +375,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -411,7 +411,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -449,7 +449,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -486,7 +486,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -521,7 +521,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -565,7 +565,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -606,7 +606,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -641,7 +641,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -683,7 +683,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -723,7 +723,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -760,7 +760,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
-(3,00/3,00/3,00) → Q1
+(3,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -800,7 +800,7 @@ Esforço Técnico: **3,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
-(3,00/3,00/3,00) → Q1
+(3,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -840,7 +840,7 @@ Esforço Técnico: **3,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **3,00**
-(3,00/3,00/3,00) → Q1
+(3,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -875,7 +875,7 @@ Esforço Técnico: **3,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
-(2,00/2,00/3,00) → Q1
+(2,00/2,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -917,7 +917,7 @@ Esforço Técnico: **2,33**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -958,7 +958,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
-(3,00/3,00/3,00) → Q1
+(3,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -997,7 +997,7 @@ Esforço Técnico: **3,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **4,00**
-(4,00/4,00/4,00) → Q1
+(4,00/4,00/4,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1036,7 +1036,7 @@ Esforço Técnico: **4,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -1073,7 +1073,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **3,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
-(2,00/3,00/2,00) → Q4
+(2,00/3,00/2,00) → Q4 Baixo valor / Alta carga técnica
 
 
 </div>
@@ -1111,7 +1111,7 @@ Esforço Técnico: **2,33**
 
 **Priorização:** Valor: **3,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
-(2,00/3,00/2,00) → Q4
+(2,00/3,00/2,00) → Q4 Baixo valor / Alta carga técnica
 
 
 </div>
@@ -1149,7 +1149,7 @@ Esforço Técnico: **2,33**
 
 **Priorização:** Valor: **3,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -1184,7 +1184,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **2,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q3
+(2,00/2,00/2,00) → Q3 Baixo valor / Baixa carga técnica
 
 
 </div>
@@ -1221,7 +1221,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **2,00** | Frequência: **5,00**
 Esforço Técnico: **3,67**
-(3,00/4,00/4,00) → Q1
+(3,00/4,00/4,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1257,7 +1257,7 @@ Esforço Técnico: **3,67**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -1293,7 +1293,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -1329,7 +1329,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **2,00**
 Esforço Técnico: **2,00**
-(2,00/2,00/2,00) → Q2
+(2,00/2,00/2,00) → Q2 Alto valor / Baixa carga técnica
 
 
 </div>
@@ -1365,7 +1365,7 @@ Esforço Técnico: **2,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
-(2,00/3,00/2,00) → Q1
+(2,00/3,00/2,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1404,7 +1404,7 @@ Esforço Técnico: **2,33**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **2,33**
-(2,00/3,00/2,00) → Q1
+(2,00/3,00/2,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1441,7 +1441,7 @@ Esforço Técnico: **2,33**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
-(3,00/3,00/3,00) → Q1
+(3,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1479,7 +1479,7 @@ Esforço Técnico: **3,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
-(3,00/3,00/3,00) → Q1
+(3,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1517,7 +1517,7 @@ Esforço Técnico: **3,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
-(3,00/3,00/3,00) → Q1
+(3,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1555,7 +1555,7 @@ Esforço Técnico: **3,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,00**
-(3,00/3,00/3,00) → Q1
+(3,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1593,7 +1593,7 @@ Esforço Técnico: **3,00**
 
 **Priorização:** Valor: **4,00** | Frequência: **5,00**
 Esforço Técnico: **3,33**
-(4,00/3,00/3,00) → Q1
+(4,00/3,00/3,00) → Q1 Alto valor / Alta carga técnica
 
 
 </div>
