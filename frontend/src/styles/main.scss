@@ -81,3 +81,32 @@ textarea {
 .span{
   color: red;
 }
+
+.fb-modal-input {
+  background-color: #faf9f5;
+  border: 1px solid vars.$fb-beige;
+  border-radius: 0.75rem;
+  color: vars.$fb-green-deep;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+
+  &:focus {
+    border-color: vars.$fb-green-dark;
+    background-color: vars.$fb-white;
+  }
+}
+
+.fb-session-activity-item {
+  background-color: #faf9f5;
+  border: 1px solid vars.$fb-beige;
+  border-radius: 0.75rem;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+
+  &:hover {
+    border-color: rgba(14, 58, 41, 0.35);
+    background-color: vars.$fb-white;
+  }
+}
