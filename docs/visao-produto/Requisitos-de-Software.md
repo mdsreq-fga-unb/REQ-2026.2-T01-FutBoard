@@ -1654,3 +1654,9 @@ A matriz a seguir mapeia a correlação direta entre os Objetivos Específicos (
 | OE1 | OE4 | CP05 | RF27, RF28 | - | RNF01, RNF02 |
 
 ---
+
+## Histórico de Rastreabilidade
+| Versão | Data | Descrição | Autor(es) | Artefato |
+| :---: | :---: | :--- | :--- | :---: |
+| `1.0` | 12/10/2026 | Versão consolidada referente à entrega da Unidade 02 | Rafael Wasconcelos | [Visualizar v1.0](../entregas-unidade/Visao-Produto-Unidade-02/Requisitos-de-Software_Unidade-02.md) |
+| `2.0` | 15/11/2026 | Atualização referente à entrega da Unidade 03 | Rafael Wasconcelos | **Versão Atual** |

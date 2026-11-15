@@ -147,3 +147,10 @@ A frequência de uso isoladamente não substitui a análise de dependências de 
 - Ajuste metodológico: Seguindo a orientação do professor, adicionamos a frequência de uso como segundo critério de corte.
 
 - Resultado: O cruzamento entre valor e frequência permitiu priorizar o que era realmente essencial, reduzindo o escopo com validação e respaldo do cliente.
+
+## Histórico de Rastreabilidade
+
+| Versão | Data | Descrição | Autor(es) | Artefato |
+| :---: | :---: | :--- | :--- | :---: |
+| `1.0` | 12/10/2026 | Versão consolidada referente à entrega da Unidade 02 | Rafael Wasconcelos | [Visualizar v1.0](../entregas-unidade/Visao-Produto-Unidade-02/backlog_do_produto_Unidade-02.md) |
+| `2.0` | 15/11/2026 | Atualização referente à entrega da Unidade 03 | Rafael Wasconcelos | **Versão Atual** |
