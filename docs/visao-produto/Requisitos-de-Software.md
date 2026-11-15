@@ -158,10 +158,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 **Definition of Ready (DoR)**
 
 - [x] A estrutura da User Story está bem definida
-- [x] A User Story está rastreável
+- [] A User Story está rastreável
 - [x] A User Story está mensurável
-- [x] A User Story foi prototipada
-- [x] A User Story foi validada com o cliente
+- [] A User Story foi prototipada
+- [] A User Story foi validada com o cliente
 
 </details>
 
@@ -264,10 +264,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 **Definition of Ready (DoR)**
 
 - [x] A estrutura da User Story está bem definida
-- [x] A User Story está rastreável
+- [] A User Story está rastreável
 - [x] A User Story está mensurável
-- [x] A User Story foi prototipada
-- [x] A User Story foi validada com o cliente
+- [] A User Story foi prototipada
+- [] A User Story foi validada com o cliente
 
 </details>
 
