@@ -52,12 +52,21 @@ Cada User Story relacionada a um Requisito Funcional deve ter passado em 100% do
 
 - **Os Requisitos Não Funcionais (RNFs) vinculados foram verificados?**
 
- RNFs associados no backlog devem comprovar seu atendimento por meio de verificações específicas e suas respectivas, prints ou vídeos devem ser evidencias, anexadas e rastreaveis:
+As histórias que possuem RNFs associados no backlog devem comprovar seu atendimento por meio de verificações específicas, com capturas de tela, vídeos ou métricas anexadas:
 
-  - **RNF02 (Interface Responsiva):** A tela deve ser verificada nas resoluções de **360px (mobile)**, **768px (tablet)** e **1366px (desktop)** via ferramentas de desenvolvedor (DevTools) ou dispositivo real, comprovando que elementos e gráficos não ficam cortados, sobrepostos ou com barra de rolagem horizontal.
-  - **RNF03 (Eficiência no Cadastro de Treinos):** Para as histórias diretamente ligadas à montagem de treino (US13, US16, US23 e US30), o fluxo de preenchimento deve ser cronometrado, comprovando conclusão em **menos de 2 minutos** em um cenário de complexidade média com atividades da biblioteca.
-  - **RNF04 (Atualização em Tempo Real do Dashboard):** Para as histórias que alteram dados refletidos nos indicadores e gráficos, deve ser medido o tempo entre a confirmação do salvamento/edição e a re-renderização na tela, comprovando atualização em **no máximo 5 segundos**.
-  - **RNF01 (Proteção de Dados):** Aplicável às histórias de autenticação (US27 e US28), verificando o armazenamento de senhas com hash seguro (`bcrypt`) e o bloqueio de acessos não autorizados com código HTTP 401.
+  ▸ **RNF02 (Interface Responsiva):** A tela deve ser verificada nas resoluções de **360px (mobile)**, **768px (tablet)** e **1366px (desktop)** via ferramentas de desenvolvedor (DevTools) ou dispositivo real, comprovando que elementos e gráficos não ficam cortados, sobrepostos ou com barra de rolagem horizontal.  
+  ▸ **RNF03 (Eficiência no Cadastro de Treinos):** Para as histórias diretamente ligadas à montagem de treino (US13, US16, US23 e US30), o fluxo de preenchimento deve ser cronometrado, comprovando conclusão em **menos de 2 minutos** em um cenário de complexidade média com atividades da biblioteca.  
+  ▸ **RNF04 (Atualização em Tempo Real do Dashboard):** Para as histórias que alteram dados refletidos nos indicadores e gráficos, deve ser medido o tempo entre a confirmação do salvamento/edição e a re-renderização na tela, comprovando atualização em **no máximo 5 segundos**.  
+  ▸ **RNF01 (Proteção de Dados):** Aplicável às histórias de autenticação (US27 e US28), verificando o armazenamento de senhas com hash seguro (`bcrypt`) e o bloqueio de acessos não autorizados com código HTTP 401.
+
+
+
+- **A verificação integrada dos fluxos foi realizada com sucesso?**
+
+Quando a User Story fizer parte de fluxos encadeados do sistema (ex.: `Periodização → Sessão/Atividades → Dashboard Analítico → Relatório PDF`), deve ser comprovada a coerência dos dados de ponta a ponta:
+  - Cadastrar ou editar uma sessão com atividades (incluindo o tratamento de simultaneidade da **RN03** e dimensões da **RN01/RN02**) deve produzir resultados consistentes e idênticos entre a visualização da sessão, os indicadores/gráficos do Dashboard e o relatório gerado em PDF.
+  - Alterações ou exclusões na hierarquia de ciclos (Macro, Meso e Microciclos — **RN04**) devem refletir de forma íntegra nas opções de seleção e listagens dependentes.
+  - **Como comprovar:** A verificação pode ser comprovada por **teste de integração na API** (validando que os endpoints de Sessão, Dashboard e PDF consomem e retornam as mesmas métricas calculadas) ou por **teste manual assistido** (registrando em capturas de tela ou vídeo curto que o mesmo valor cadastrado na sessão reflete perfeitamente no Dashboard e no PDF baixado).
 
 - **A documentação e evidências da entrega estão atualizadas?**
 
