@@ -77,4 +77,4 @@ A User Story deve possuir um checklist no card do backlog contendo todos os DODs
 
 - **A funcionalidade da User Story desenvolvida foi validada pelo cliente?**
 
-O cliente deve ter testado a funcionalidade implementada em seu próprio dispositivo e validado a entrega por meio de mensagens ou de vídeos.
+O cliente deve ter testado a funcionalidade implementada em seu próprio dispositivo e validado a entrega por meio de mensagens ou de vídeos. Os vídeos estarao no carrossel de evidencias.
