@@ -63,10 +63,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar macrociclo:** o sistema deve permitir que a equipe técnica cadastrem um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos.
+**Declaração RF:** **Cadastrar macrociclo:** o sistema deve permitir que a equipe técnica cadastre um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Cadastrar macrociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero cadastrar um novo macrociclo com nome e data de início, para organizar o planejamento geral da periodização dos treinos.
 
 <div class='rf-meta' markdown>
 
@@ -100,10 +100,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Editar macrociclo:** o sistema deve permitir que a equipe técnica editem os dados de um macrociclo anteriormente cadastrado.
+**Declaração RF:** **Editar macrociclo:** o sistema deve permitir que a equipe técnica edite os dados de um macrociclo anteriormente cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Editar macrociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero editar os dados de um macrociclo, para corrigir informações ou atualizar o planejamento geral.
 
 <div class='rf-meta' markdown>
 
@@ -136,10 +136,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir macrociclo:** o sistema deve permitir que a equipe técnica excluam um macrociclo cadastrado, removendo-o da estrutura de periodização.
+**Declaração RF:** **Excluir macrociclo:** o sistema deve permitir que a equipe técnica exclua um macrociclo cadastrado, removendo-o da estrutura de periodização.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Excluir macrociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero excluir um macrociclo, para remover estruturas de periodização que não serão mais utilizadas.
 
 <div class='rf-meta' markdown>
 
@@ -157,11 +157,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -170,10 +170,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar mesociclo:** o sistema deve permitir que a equipe técnica cadastrem um novo mesociclo vinculado a um macrociclo existente, informando o nome do mesociclo.
+**Declaração RF:** **Cadastrar mesociclo:** o sistema deve permitir que a equipe técnica cadastre um novo mesociclo vinculado a um macrociclo existente, informando o nome do mesociclo.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Cadastrar mesociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero cadastrar um novo mesociclo vinculado a um macrociclo, para estruturar as fases intermediárias da periodização esportiva.
 
 <div class='rf-meta' markdown>
 
@@ -206,10 +206,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Editar mesociclo:** o sistema deve permitir que a equipe técnica editem os dados de um mesociclo anteriormente cadastrado.
+**Declaração RF:** **Editar mesociclo:** o sistema deve permitir que a equipe técnica edite os dados de um mesociclo anteriormente cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Editar mesociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero editar os dados de um mesociclo, para manter as fases do planejamento atualizadas.
 
 <div class='rf-meta' markdown>
 
@@ -242,10 +242,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir mesociclo:** o sistema deve permitir que a equipe técnica excluam um mesociclo cadastrado.
+**Declaração RF:** **Excluir mesociclo:** o sistema deve permitir que a equipe técnica exclua um mesociclo cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Excluir mesociclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero Excluir mesociclo, para remover fases da periodização que foram canceladas.
 
 <div class='rf-meta' markdown>
 
@@ -263,11 +263,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -276,11 +276,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar microciclo:** o sistema deve permitir que a equipe técnica cadastrem um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo.
+**Declaração RF:** **Cadastrar microciclo:** o sistema deve permitir que a equipe técnica cadastre um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Cadastrar microciclo, para atender ao objetivo do requisito.
-
+**Declaração US:** Como membro da equipe técnica, eu quero cadastrar um novo microciclo vinculado a um mesociclo, para organizar a rotina de treinos.
 <div class='rf-meta' markdown>
 
 **CPs e OEs relacionadas:** [**CP02**](solucao-proposta.md#cp02) | [**OE2**](solucao-proposta.md#oe2), [**OE3**](solucao-proposta.md#oe3)
@@ -313,10 +312,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Editar microciclo:** o sistema deve permitir que a equipe técnica editem os dados de um microciclo anteriormente cadastrado.
+**Declaração RF:** **Editar microciclo:** o sistema deve permitir que a equipe técnica edite os dados de um microciclo anteriormente cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Editar microciclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero editar um microciclo, para ajustar o planejamento de curto prazo conforme a necessidade da equipe.
 
 <div class='rf-meta' markdown>
 
@@ -348,10 +347,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir microciclo:** o sistema deve permitir que a equipe técnica excluam um microciclo cadastrado.
+**Declaração RF:** **Excluir microciclo:** o sistema deve permitir que a equipe técnica exclua um microciclo cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Excluir microciclo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica,eu quero excluir um microciclo, para descartar planejamentos inválidos.
 
 <div class='rf-meta' markdown>
 
@@ -369,9 +368,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -382,10 +381,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar comportamento:** o sistema deve permitir que a equipe técnica cadastrem um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades.
+**Declaração RF:** **Cadastrar comportamento:** o sistema deve permitir que a equipe técnica cadastre um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Cadastrar comportamento, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero cadastrar um comportamento tático (ex: ofensivo, defensivo), para vinculá-lo às atividades.
 
 <div class='rf-meta' markdown>
 
@@ -418,10 +417,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Editar comportamento:** o sistema deve permitir que a equipe técnica editem um comportamento tático já cadastrado.
+**Declaração RF:** **Editar comportamento:** o sistema deve permitir que a equipe técnica edite um comportamento tático já cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Editar comportamento, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero editar um comportamento tático, para corrigir sua nomenclatura ou ajustar os detalhes técnicos.
 
 <div class='rf-meta' markdown>
 
@@ -453,11 +452,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir comportamento:** o sistema deve permitir que a equipe técnica excluam um comportamento tático cadastrado.
+**Declaração RF:** **Excluir comportamento:** o sistema deve permitir que a equipe técnica exclua um comportamento tático cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Excluir comportamento, para atender ao objetivo do requisito.
-
+**Declaração US:** Como membro da equipe técnica, eu quero excluir um comportamento tático, para remover opções obsoletas.
 <div class='rf-meta' markdown>
 
 **CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
@@ -473,9 +471,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -486,10 +484,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar atividade na sessão:** o sistema deve permitir que a equipe técnica cadastrem uma nova atividade diretamente em uma sessão, sem necessidade de ela já existir na biblioteca, informando seus dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, o espaço, a orientação, o comportamento, e o momento e fase do jogo trabalhados.
+**Declaração RF:** **Cadastrar atividade na sessão:** o sistema deve permitir que a equipe técnica cadastre uma nova atividade diretamente em uma sessão, sem necessidade de ela já existir na biblioteca, informando seus dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, o espaço, a orientação, o comportamento, e o momento e fase do jogo trabalhados.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Cadastrar atividade na sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero cadastrar uma nova atividade informando sua tipologia e tipo de SSP, para estruturar os exercícios da equipe.
 
 <div class='rf-meta' markdown>
 
@@ -524,14 +522,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf14" markdown>
-<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP01</span></span></summary>
+<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** **Editar atividade na sessão:** o sistema deve permitir que a equipe técnica editem os dados de uma atividade incluída em uma sessão, sem alterar a atividade correspondente na biblioteca.
+**Declaração RF:** **Editar atividade na sessão:** o sistema deve permitir que a equipe técnica edite os dados de uma atividade incluída em uma sessão, sem alterar a atividade correspondente na biblioteca.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Editar atividade na sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero editar os dados invariáveis de uma atividade, para corrigir e atualizar detalhes do exercício.
 
 <div class='rf-meta' markdown>
 
@@ -554,11 +552,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -567,10 +565,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir atividade na sessão:** o sistema deve permitir que a equipe técnica excluam uma atividade de uma sessão, sem afetar o registro dela na biblioteca.
+**Declaração RF:** **Excluir atividade na sessão:** o sistema deve permitir que a equipe técnica exclua uma atividade de uma sessão, sem afetar o registro dela na biblioteca.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Excluir atividade na sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero excluir uma atividade cadastrada, para manter o banco de exercícios organizado.
 
 <div class='rf-meta' markdown>
 
@@ -587,9 +585,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -600,10 +598,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar sessão:** o sistema deve permitir que a equipe técnica cadastrem uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão.
+**Declaração RF:** **Cadastrar sessão:** o sistema deve permitir que a equipe técnica cadastre uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Cadastrar sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero cadastrar uma nova sessão de treino vinculada à periodização com data e sequência, para cadastrar as atividades de um dia específico.
 
 <div class='rf-meta' markdown>
 
@@ -640,10 +638,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Editar sessão:** o sistema deve permitir que a equipe técnica editem os dados de uma sessão de treino já cadastrada.
+**Declaração RF:** **Editar sessão:** o sistema deve permitir que a equipe técnica edite os dados de uma sessão de treino já cadastrada.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Editar sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero editar os dados de uma sessão de treino, para ajustar a data ou numeração do treino caso haja mudanças.
 
 <div class='rf-meta' markdown>
 
@@ -678,10 +676,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir sessão:** o sistema deve permitir que a equipe técnica excluam uma sessão de treino cadastrada.
+**Declaração RF:** **Excluir sessão:** o sistema deve permitir que a equipe técnica exclua uma sessão de treino cadastrada.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Excluir sessão, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero excluir uma sessão de treino, para remover um treino que foi cancelado ou registrado incorretamente.
 
 <div class='rf-meta' markdown>
 
@@ -700,11 +698,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [] A User Story está rastreável
+- [x] A User Story está mensurável
+- [] A User Story foi prototipada
+- [] A User Story foi validada com o cliente
 
 </details>
 
@@ -713,10 +711,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar atividade na biblioteca:** o sistema deve permitir que a equipe técnica cadastrem uma atividade na biblioteca de treinos, independentemente do cadastro em uma sessão específica, para que ela fique disponível para reutilização futura, informando seus dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, o espaço, a orientação, o comportamento, e o momento e fase do jogo trabalhados.
+**Declaração RF:** **Cadastrar atividade na biblioteca:** o sistema deve permitir que a equipe técnica cadastre uma atividade na biblioteca de treinos, independentemente do cadastro em uma sessão específica, para que ela fique disponível para reutilização futura, informando seus dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, o espaço, a orientação, o comportamento, e o momento e fase do jogo trabalhados.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Cadastrar atividade na biblioteca, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero cadastrar atividades diretamente na biblioteca de treinos, para deixá-las disponíveis para reutilização futura sem precisar atrelá-las imediatamente a uma sessão.
 
 <div class='rf-meta' markdown>
 
@@ -751,10 +749,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Editar atividade na biblioteca:** o sistema deve permitir que a equipe técnica editem uma atividade cadastrada na biblioteca de treinos.
+**Declaração RF:** **Editar atividade na biblioteca:** o sistema deve permitir que a equipe técnica edite uma atividade cadastrada na biblioteca de treinos.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Editar atividade na biblioteca, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero editar uma atividade na biblioteca de treinos, para melhorar ou corrigir a descrição base do exercício.
 
 <div class='rf-meta' markdown>
 
@@ -789,10 +787,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir atividade na biblioteca:** o sistema deve permitir que a equipe técnica excluam uma atividade cadastrada na biblioteca de treinos.
+**Declaração RF:** **Excluir atividade na biblioteca:** o sistema deve permitir que a equipe técnica exclua uma atividade cadastrada na biblioteca de treinos.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Excluir atividade na biblioteca, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero excluir uma atividade da biblioteca, para limpar exercícios que não são mais utilizados.
 
 <div class='rf-meta' markdown>
 
@@ -809,23 +807,23 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
 </details>
 
 <details id="rf22" markdown>
-<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
+<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
 
 
 
 **Declaração RF:** **Exibir indicador de treino:** o sistema deve exibir, para a equipe técnica, indicadores como número de sessões, minutos totais de treino, variabilidade de exercícios e número de execuções.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Exibir indicador de treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero visualizar indicadores de treino (número de sessões, minutos totais, variabilidade de exercícios, execuções), para acompanhar rapidamente o volume geral de trabalho.
 
 <div class='rf-meta' markdown>
 
@@ -849,11 +847,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -862,10 +860,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Reutilizar atividade cadastrada:** o sistema deve permitir que a equipe técnica adicionem a uma sessão de treino uma atividade já cadastrada na biblioteca, preenchendo automaticamente, no momento da seleção, os campos inerentes à atividade.
+**Declaração RF:** **Reutilizar atividade cadastrada:** o sistema deve permitir que a equipe técnica adicione a uma sessão de treino uma atividade já cadastrada na biblioteca, preenchendo automaticamente, no momento da seleção, os campos inerentes à atividade.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Reutilizar atividade cadastrada, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero adicionar a uma sessão uma atividade já existente na biblioteca com preenchimento automático de campos inerentes, para agilizar a montagem do treino.
 
 <div class='rf-meta' markdown>
 
@@ -897,14 +895,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf24" markdown>
-<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
+<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
 
 
 
-**Declaração RF:** **Consultar informação de atividade do treino:** o sistema deve permitir que a equipe técnica consultem, em gráfico e por meio de filtro, a informação de atividade, atualizando automaticamente as informações exibidas.
+**Declaração RF:** **Consultar informação de atividade do treino:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de atividade, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Consultar informação de atividade do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero filtrar as informações de atividade do treino, para consultar rapidamente um conjunto de atividades específicas executadas ou planejadas.
 
 <div class='rf-meta' markdown>
 
@@ -925,11 +923,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -938,10 +936,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Gerar relatório de treino:** o sistema deve permitir que a equipe técnica gerem um relatório do treino em formato PDF.
+**Declaração RF:** **Gerar relatório de treino:** o sistema deve permitir que a equipe técnica gere um relatório do treino em formato PDF.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Gerar relatório de treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero gerar um relatório da sessão em formato PDF, para conseguir compartilhar a análise com a comissão técnica.
 
 <div class='rf-meta' markdown>
 
@@ -962,11 +960,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -975,10 +973,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Alternar unidade de tempo:** o sistema deve permitir que a equipe técnica alternem, nos gŕaficos, a visualização do tempo das atividades entre tempo absoluto (em minutos) e tempo relativo (em porcentagem do tempo total da sessão).
+**Declaração RF:** **Alternar unidade de tempo:** o sistema deve permitir que a equipe técnica alterne, nos gŕaficos, a visualização do tempo das atividades entre tempo absoluto (em minutos) e tempo relativo (em porcentagem do tempo total da sessão).
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Alternar unidade de tempo, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero alternar o tempo da atividade entre valor absoluto (minutos) e relativo (porcentagem), para entender melhor o peso do exercício no contexto geral da sessão.
 
 <div class='rf-meta' markdown>
 
@@ -997,23 +995,23 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details id="rf27" markdown>
-<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
+<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
 
 
 
-**Declaração RF:** **Criar conta:** o sistema deve permitir que a equipe técnica criem uma conta de acesso à aplicação.
+**Declaração RF:** **Criar conta:** o sistema deve permitir que a equipe técnica crie uma conta de acesso à aplicação.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Criar conta, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero criar uma conta de acesso na aplicação, para ter um perfil dedicado e seguro para gerenciar meu planejamento.
 
 <div class='rf-meta' markdown>
 
@@ -1033,23 +1031,23 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
 <details id="rf28" markdown>
-<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
+<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
 
 
 
 **Declaração RF:** **Fazer login:** o sistema deve permitir que a equipe técnica se autentique na aplicação a partir de um login e senha de acesso.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Fazer login, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero fazer login com e-mail e senha, para garantir que os dados sensíveis do time sejam acessados de forma autenticada.
 
 <div class='rf-meta' markdown>
 
@@ -1069,11 +1067,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -1082,10 +1080,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Anexar imagem à atividade:** o sistema deve permitir que a equipe técnica anexem uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade na biblioteca e nas sessões de treino em que ela for incluída.
+**Declaração RF:** **Anexar imagem à atividade:** o sistema deve permitir que a equipe técnica anexe uma imagem a uma atividade cadastrada na biblioteca, exibindo-a junto à atividade na biblioteca e nas sessões de treino em que ela for incluída.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Anexar imagem à atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero anexar uma imagem à atividade na biblioteca, para reconhecer visualmente o exercício e facilitar sua reutilização.
 
 <div class='rf-meta' markdown>
 
@@ -1102,9 +1100,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1115,10 +1113,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Registrar pontuação da atividade:** o sistema deve permitir que a equipe técnica registrem, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição.
+**Declaração RF:** **Registrar pontuação da atividade:** o sistema deve permitir que a equipe técnica registre, para cada atividade de uma sessão, a pontuação planejada e a pontuação obtida em cada repetição.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Registrar pontuação da atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero registrar a pontuação planejada e a pontuação obtida em cada repetição da atividade, para monitorar a eficácia e o desempenho do grupo na execução.
 
 <div class='rf-meta' markdown>
 
@@ -1137,9 +1135,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1150,10 +1148,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Gerar análise textual do treino:** o sistema deve permitir que a equipe técnica gerem, com inteligência artificial, uma análise textual (insight) sobre as informações do treino.
+**Declaração RF:** **Gerar análise textual do treino:** o sistema deve permitir que a equipe técnica gere, com inteligência artificial, uma análise textual (insight) sobre as informações do treino.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Gerar análise textual do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero gerar insights e análises textuais com inteligência artificial, para obter resumos e observações aprofundadas sobre o andamento dos treinos.
 
 <div class='rf-meta' markdown>
 
@@ -1171,9 +1169,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1184,10 +1182,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Registrar atributo técnico da atividade:** o sistema deve permitir que a equipe técnica registrem, de forma opcional, o atributo técnico trabalhado em uma atividade (ex: domínio orientado, cabeceira defensiva).
+**Declaração RF:** **Registrar atributo técnico da atividade:** o sistema deve permitir que a equipe técnica registre, de forma opcional, o atributo técnico trabalhado em uma atividade (ex: domínio orientado, cabeceira defensiva).
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Registrar atributo técnico da atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero registrar atributos técnicos em uma atividade (ex: domínio orientado), para mapear as habilidades fundamentais trabalhadas no exercício.
 
 <div class='rf-meta' markdown>
 
@@ -1205,11 +1203,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -1218,10 +1216,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Editar atributo técnico da atividade:** o sistema deve permitir que a equipe técnica editem um atributo técnico registrado em uma atividade.
+**Declaração RF:** **Editar atributo técnico da atividade:** o sistema deve permitir que a equipe técnica edite um atributo técnico registrado em uma atividade.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Editar atributo técnico da atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero editar o atributo técnico de uma atividade, para refletir melhor o foco real do exercício.
 
 <div class='rf-meta' markdown>
 
@@ -1239,9 +1237,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1252,10 +1250,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir atributo técnico da atividade:** o sistema deve permitir que a equipe técnica excluam um atributo técnico registrado em uma atividade.
+**Declaração RF:** **Excluir atributo técnico da atividade:** o sistema deve permitir que a equipe técnica exclua um atributo técnico registrado em uma atividade.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Excluir atributo técnico da atividade, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero excluir um atributo técnico registrado em uma atividade, para remover classificações que não representam mais o exercício e manter sua análise consistente.
 
 <div class='rf-meta' markdown>
 
@@ -1273,9 +1271,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1286,10 +1284,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Consultar informação de espaço do treino:** o sistema deve permitir que a equipe técnica consultem, em gráfico e por meio de filtro, a informação de espaço do treino, atualizando automaticamente as informações exibidas.
+**Declaração RF:** **Consultar informação de espaço do treino:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de espaço do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Consultar informação de espaço do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero usar filtros para consultar informações sobre o espaço do treino, através dos gráficos, para comparar a distribuição das atividades pelos locais e apoiar decisões sobre a organização dos treinos.
 
 <div class='rf-meta' markdown>
 
@@ -1310,11 +1308,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -1323,10 +1321,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Consultar informação de orientação do treino:** o sistema deve permitir que a equipe técnica consultem, em gráfico e por meio de filtro, a informação de orientação do treino, atualizando automaticamente as informações exibidas.
+**Declaração RF:** **Consultar informação de orientação do treino:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de orientação do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Consultar informação de orientação do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero usar filtros para consultar as orientações de treino, através dos gráficos para avaliar se o direcionamento planejado está adequado.
 
 <div class='rf-meta' markdown>
 
@@ -1345,9 +1343,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1358,10 +1356,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Consultar informação de momento do jogo do treino:** o sistema deve permitir que a equipe técnica consultem, em gráfico e por meio de filtro, a informação de momento do jogo do treino, atualizando automaticamente as informações exibidas.
+**Declaração RF:** **Consultar informação de momento do jogo do treino:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de momento do jogo do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Consultar informação de momento do jogo do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero filtrar a informação por momento do jogo treinado, através dos gráficos para avaliar quais momentos de jogos foram abordados nos treinos.
 
 <div class='rf-meta' markdown>
 
@@ -1381,9 +1379,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1394,10 +1392,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Consultar informação de fase do jogo do treino:** o sistema deve permitir que a equipe técnica consultem, em gráfico e por meio de filtro, a informação de fase do jogo do treino, atualizando automaticamente as informações exibidas.
+**Declaração RF:** **Consultar informação de fase do jogo do treino:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de fase do jogo do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Consultar informação de fase do jogo do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero filtrar a informação por fase de jogo, através dos gráficos, para identificar quais fases do jogo foram associadas às atividades.
 
 <div class='rf-meta' markdown>
 
@@ -1417,9 +1415,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1430,10 +1428,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Consultar informação de comportamento do treino:** o sistema deve permitir que a equipe técnica consultem, em gráfico e por meio de filtro, a informação de comportamento do treino, atualizando automaticamente as informações exibidas.
+**Declaração RF:** **Consultar informação de comportamento do treino:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de comportamento do treino, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Consultar informação de comportamento do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero filtrar as informações de treino por comportamento, através dos gráficos para saber o quanto trabalhei os comportamentos distintos.
 
 <div class='rf-meta' markdown>
 
@@ -1453,11 +1451,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
+- [x] A estrutura da User Story está bem definida
+- [x] A User Story está rastreável
+- [x] A User Story está mensurável
+- [x] A User Story foi prototipada
+- [x] A User Story foi validada com o cliente
 
 </details>
 
@@ -1466,10 +1464,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Consultar informação de atributo técnico do treino:** o sistema deve permitir que a equipe técnica consultem, em gráfico e por meio de filtro, a informação de atributo técnico, atualizando automaticamente as informações exibidas.
+**Declaração RF:** **Consultar informação de atributo técnico do treino:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de atributo técnico, atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Consultar informação de atributo técnico do treino, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero filtrar informações por atributo técnico, através dos gráficos para saber o quanto trabalhei esse atributo.
 
 <div class='rf-meta' markdown>
 
@@ -1489,9 +1487,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
@@ -1502,10 +1500,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Consultar análise comparativa por periodização:** o sistema deve permitir que a equipe técnica consultem, em gráfico e por meio de filtro, a análise comparativa por periodização (mesociclo, microciclo, mês e sessão), atualizando automaticamente as informações exibidas.
+**Declaração RF:** **Consultar análise comparativa por periodização:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a análise comparativa por periodização (mesociclo, microciclo, mês e sessão), atualizando automaticamente as informações exibidas.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero Consultar análise comparativa por periodização, para atender ao objetivo do requisito.
+**Declaração US:** Como membro da equipe técnica, eu quero realizar uma análise comparativa através dos gráficos de periodização (meso, micro, mês, sessão), para identificar diferenças na carga e na distribuição dos treinos e apoiar o planejamento da equipe.
 
 <div class='rf-meta' markdown>
 
@@ -1525,9 +1523,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Definition of Ready (DoR)**
 
-- [ ] A estrutura da User Story está bem definida
+- [x] A estrutura da User Story está bem definida
 - [ ] A User Story está rastreável
-- [ ] A User Story está mensurável
+- [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
