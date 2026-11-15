@@ -2,59 +2,7 @@
 
 Esta seção descreve o backlog de produto (preliminar ou completo, dependendo do produto), que é uma lista priorizada de todas as funcionalidades e melhorias planejadas para o software. Também aborda a priorização dessas funcionalidades e o que será entregue no Produto Mínimo Viável (MVP).
 
-## 10.1 Backlog Geral
-
-Aqui, cabe destacar que todas as histórias de usuários relacionadas, a seguir, são derivadas da lista de requisitos funcionais apresentados, anteriormente, neste documento. Esta é uma lista preliminar e deverá sofrer ajustes sempre que necessário, durante o desenvolvimento do produto FutBoard.
-
-A tabela, a seguir, apresenta cada um dos requisitos funcionais (RFs) declarados utilizando a técnica de *User Story* (US), assim como a rastreabilidade com os requisitos não funcionais (RNFs).
-
-| RF | User Story derivada | RNFs relacionados |
-| :--- | :--- | :---: |
-| **RF01** | **US01** Como treinador ou auxiliar, eu quero cadastrar um novo macrociclo com nome e data de início, para organizar o planejamento geral da periodização dos treinos. | RNF02 |
-| **RF02** | **US02** Como treinador ou auxiliar, eu quero editar os dados de um macrociclo, para corrigir informações ou atualizar o planejamento geral. | RNF02 |
-| **RF03** | **US03** Como treinador ou auxiliar, eu quero excluir um macrociclo, para remover estruturas de periodização que não serão mais utilizadas. | RNF02 |
-| **RF04** | **US04** Como treinador ou auxiliar, eu quero cadastrar um novo mesociclo vinculado a um macrociclo, para estruturar as fases intermediárias da periodização esportiva. | RNF02 |
-| **RF05** | **US05** Como treinador ou auxiliar, eu quero editar os dados de um mesociclo, para manter as fases do planejamento atualizadas. | RNF02 |
-| **RF06** | **US06** Como treinador ou auxiliar, eu quero excluir um mesociclo, para remover fases da periodização que foram canceladas. | RNF02 |
-| **RF07** | **US07** Como treinador ou auxiliar, eu quero cadastrar um novo microciclo vinculado a um mesociclo, para organizar a rotina de treinos. | RNF02 |
-| **RF08** | **US08** Como treinador ou auxiliar, eu quero editar um microciclo, para ajustar o planejamento de curto prazo conforme a necessidade da equipe. | RNF02 |
-| **RF09** | **US09** Como treinador ou auxiliar, eu quero excluir um microciclo, para descartar planejamentos inválidos. | RNF02 |
-| **RF10** | **US10** Como treinador ou auxiliar, eu quero cadastrar um comportamento tático (ex: ofensivo, defensivo), para vinculá-lo às atividades. | RNF02 |
-| **RF11** | **US11** Como treinador ou auxiliar, eu quero editar um comportamento tático, para corrigir sua nomenclatura ou ajustar os detalhes técnicos. | RNF02 |
-| **RF12** | **US12** Como treinador ou auxiliar, eu quero excluir um comportamento tático, para remover opções obsoletas. | RNF02 |
-| **RF13** | **US13** Como treinador ou auxiliar, eu quero cadastrar uma nova atividade informando sua tipologia e tipo de SSP, para estruturar os exercícios da equipe. | RNF02, RNF03 |
-| **RF14** | **US14** Como treinador ou auxiliar, eu quero editar os dados invariáveis de uma atividade, para corrigir e atualizar detalhes do exercício. | RNF02 |
-| **RF15** | **US15** Como treinador ou auxiliar, eu quero excluir uma atividade cadastrada, para manter o banco de exercícios organizado. | RNF02 |
-| **RF16** | **US16** Como treinador ou auxiliar, eu quero cadastrar uma nova sessão de treino vinculada à periodização com data e sequência, para cadastrar as atividades de um dia específico. | RNF02, RNF03, RNF04 |
-| **RF17** | **US17** Como treinador ou auxiliar, eu quero editar os dados de uma sessão de treino, para ajustar a data ou numeração do treino caso haja mudanças. | RNF02, RNF04 |
-| **RF18** | **US18** Como treinador ou auxiliar, eu quero excluir uma sessão de treino, para remover um treino que foi cancelado ou registrado incorretamente. | RNF02, RNF04 |
-| **RF19** | **US19** Como treinador ou auxiliar, eu quero cadastrar atividades diretamente na biblioteca de treinos, para deixá-las disponíveis para reutilização futura sem precisar atrelá-las imediatamente a uma sessão. | RNF02 |
-| **RF20** | **US20** Como treinador ou auxiliar, eu quero editar uma atividade na biblioteca de treinos, para melhorar ou corrigir a descrição base do exercício. | RNF02 |
-| **RF21** | **US21** Como treinador ou auxiliar, eu quero excluir uma atividade da biblioteca, para limpar exercícios que não são mais utilizados. | RNF02 |
-| **RF22** | **US22** Como treinador ou auxiliar, eu quero visualizar indicadores de treino (número de sessões, minutos totais, variabilidade de exercícios, execuções), para acompanhar rapidamente o volume geral de trabalho. | RNF02, RNF04 |
-| **RF23** | **US23** Como treinador ou auxiliar, eu quero adicionar a uma sessão uma atividade já existente na biblioteca com preenchimento automático de campos inerentes, para agilizar a montagem do treino. | RNF02, RNF03, RNF04 |
-| **RF24** | **US24** Como treinador ou auxiliar, eu quero filtrar as informações de atividade do treino, para consultar rapidamente um conjunto de atividades específicas executadas ou planejadas. | RNF02, RNF04 |
-| **RF25** | **US25** Como treinador ou auxiliar, eu quero gerar um relatório da sessão em formato PDF, para conseguir compartilhar a análise com a comissão técnica. | RNF02 |
-| **RF26** | **US26** Como treinador ou auxiliar, eu quero alternar o tempo da atividade entre valor absoluto (minutos) e relativo (porcentagem), para entender melhor o peso do exercício no contexto geral da sessão. | RNF02, RNF04 |
-| **RF27** | **US27** Como treinador ou auxiliar, eu quero criar uma conta de acesso na aplicação, para ter um perfil dedicado e seguro para gerenciar meu planejamento. | RNF01, RNF02 |
-| **RF28** | **US28** Como treinador ou auxiliar, eu quero fazer login com e-mail e senha, para garantir que os dados sensíveis do time sejam acessados de forma autenticada. | RNF01, RNF02 |
-| **RF29** | **US29** Como treinador ou auxiliar, eu quero anexar uma imagem à atividade na biblioteca, para reconhecer visualmente o exercício e facilitar sua reutilização. | RNF02 |
-| **RF30** | **US30** Como treinador ou auxiliar, eu quero registrar a pontuação planejada e a pontuação obtida em cada repetição da atividade, para monitorar a eficácia e o desempenho do grupo na execução. | RNF02, RNF03, RNF04 |
-| **RF31** | **US31** Como treinador ou auxiliar, eu quero gerar insights e análises textuais com inteligência artificial, para obter resumos e observações aprofundadas sobre o andamento dos treinos. | RNF02, RNF04 |
-| **RF32** | **US32** Como treinador ou auxiliar, eu quero registrar atributos técnicos em uma atividade (ex: domínio orientado), para mapear as habilidades fundamentais trabalhadas no exercício. | RNF02 |
-| **RF33** | **US33** Como treinador ou auxiliar, eu quero editar o atributo técnico de uma atividade, para refletir melhor o foco real do exercício. | RNF02 |
-| **RF34** | **US34** Como treinador ou auxiliar, eu quero excluir um atributo técnico registrado em uma atividade, para remover classificações que não representam mais o exercício e manter sua análise consistente. | RNF02 |
-| **RF35** | **US35** Como treinador ou auxiliar, eu quero usar filtros para consultar informações sobre o espaço do treino, através dos gráficos, para comparar a distribuição das atividades pelos locais e apoiar decisões sobre a organização dos treinos. | RNF02, RNF04 |
-| **RF36** | **US36** Como treinador ou auxiliar, eu quero usar filtros para consultar as orientações de treino, através dos gráficos para avaliar se o direcionamento planejado está adequado. | RNF02, RNF04 |
-| **RF37** | **US37** Como treinador ou auxiliar, eu quero filtrar a informação por momento do jogo treinado, através dos gráficos para avaliar quais momentos de jogos foram abordados nos treinos. | RNF02, RNF04 |
-| **RF38** | **US38** Como treinador ou auxiliar, eu quero filtrar a informação por fase de jogo, através dos gráficos, para identificar quais fases do jogo foram associadas às atividades. | RNF02, RNF04 |
-| **RF39** | **US39** Como treinador ou auxiliar, eu quero filtrar as informações de treino por comportamento, através dos gráficos para saber o quanto trabalhei os comportamentos distintos. | RNF02, RNF04 |
-| **RF40** | **US40** Como treinador ou auxiliar, eu quero filtrar informações por atributo técnico, através dos gráficos para saber o quanto trabalhei esse atributo. | RNF02, RNF04 |
-| **RF41** | **US41** Como treinador ou auxiliar, eu quero realizar uma análise comparativa através dos gráficos de periodização (meso, micro, mês, sessão), para identificar diferenças na carga e na distribuição dos treinos e apoiar o planejamento da equipe. | RNF02, RNF04 |
-
-> **Observação:** O **RNF02 (Interface Responsiva e Adaptável)** está relacionado às histórias que possuem interface de interação, pois exige que os elementos e gráficos permaneçam utilizáveis em diferentes resoluções. O **RNF03 (Eficiência no Cadastro de Treinos)** foi restringido às histórias que participam diretamente do registro ou da montagem de um treino (**US13, US16, US23 e US30**); ele não deve ser associado automaticamente a toda operação de cadastro, edição, exclusão ou consulta. O critério de menos de 2 minutos é uma meta específica para o cenário de cadastro de um treino de complexidade média, e não um prazo universal para todas as histórias. O **RNF04 (Atualização em Tempo Real do Dashboard)** foi relacionado somente às histórias que alteram ou consultam informações refletidas em métricas e gráficos (**US16, US17, US18, US22, US23, US24, US26, US30, US31 e US35 a US41**); não se aplica automaticamente a cadastros e exclusões de estruturas de periodização, autenticação, biblioteca ou geração de PDF. O **RNF01 (Segurança e Proteção de Credenciais de Usuários)** permanece diretamente relacionado à criação de conta e autenticação (**RF27** e **RF28**). A autenticação foi postergada para entregas pós-MVP; tanto no MVP quanto no escopo geral, o sistema não armazena dados pessoais nominais ou cadastros de atletas, tratando exclusivamente métricas e sessões coletivas da categoria Sub-17.
-
-## 10.2 Priorização do Backlog Geral e MVP
+## 10.1 Priorização do Backlog Geral e MVP
 
 Para priorizar o backlog do FutBoard, cada requisito funcional (RF) recebeu cinco notas: **valor de negócio**, **frequência de uso**, **esforço**, **complexidade** e **conhecimento da equipe**. As três últimas foram combinadas em uma única medida, o **esforço técnico**, que foi cruzada com o valor de negócio para posicionar cada RF em um quadrante da matriz Valor x Esforço.
 
@@ -162,115 +110,7 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 ))
 ``` 
 
-![Matriz Valor x Esforço](../assets/MatrizValorxEsforço.jpg)
-<details>
-  <summary><strong>Explorar o Frame interativo da Matriz Valor x Esforço</strong></summary>
-<div style="position: relative; width: 100%; padding-top: 2.25%;">
-  <iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHolWByQ=/?focusWidget=3458764685315725204&embedMode=view_only_without_ui&embedId=559495672138" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
-</div>
-</details>
-
-[Ou acesse a matriz no Miro](https://miro.com/welcomeonboard/YmN1NWlzM0VXeDkyTkhySndlQ3V3UTlqdmJlVDdDdnF1dmdjREpGVTdkb3RJeVptV20xYzlyTVJzd3hZNFpWdHFsVmNtMDQ5eGZIRm0rYzNCSnNybGhSYmFuVXJ3ZGdQZEkxSDRhZ3hjQ2RNK3A4TTZzNmVtUXdEVElpTjkyNFVyVmtkMG5hNDA3dVlncnBvRVB2ZXBnPT0hdjE=?share_link_id=122393869978)
-
-
-### 5. Consolidação dos requisitos 
-<div class="tabela-consolidacao-html">
-<table class="tabela-consolidacao-html-table">
-<thead><tr><th>Código</th><th>Requisito</th><th>Valor</th><th>Frequência</th><th>Esforço</th><th>Complexidade</th><th>Conhecimento</th><th>Esforço técnico</th><th>Quadrante</th></tr></thead>
-<tbody>
-<tr><td>RF01</td><td>Cadastrar macrociclo</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF02</td><td>Editar macrociclo</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF03</td><td>Excluir macrociclo</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF04</td><td>Cadastrar mesociclo</td><td>4,00</td><td>3,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF05</td><td>Editar mesociclo</td><td>4,00</td><td>3,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF06</td><td>Excluir mesociclo</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF07</td><td>Cadastrar microciclo</td><td>4,00</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF08</td><td>Editar microciclo</td><td>4,00</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF09</td><td>Excluir microciclo</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF10</td><td>Cadastrar comportamento</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF11</td><td>Editar comportamento</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF12</td><td>Excluir comportamento</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF13</td><td>Cadastrar atividade</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF14</td><td>Editar atividade</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF15</td><td>Excluir atividade</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF16</td><td>Cadastrar sessão</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF17</td><td>Editar sessão</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF18</td><td>Excluir sessão</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF19</td><td>Cadastrar atividade na biblioteca</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF20</td><td>Editar atividade na biblioteca</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF21</td><td>Excluir atividade na biblioteca</td><td>4,00</td><td>2,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF22</td><td>Exibir indicador de treino</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>3,00</td><td>2,33</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF23</td><td>Reutilizar atividade cadastrada</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF24</td><td>Consultar informação de atividade do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF25</td><td>Gerar relatório de treino</td><td>4,00</td><td>5,00</td><td>4,00</td><td>4,00</td><td>4,00</td><td>4,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF26</td><td>Alternar unidade de tempo</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF27</td><td>Criar conta</td><td>3,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>2,33</td><td>Q4 Baixo valor / Alta carga técnica</td></tr>
-<tr><td>RF28</td><td>Fazer login</td><td>3,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>2,33</td><td>Q4 Baixo valor / Alta carga técnica</td></tr>
-<tr><td>RF29</td><td>Anexar imagem à atividade</td><td>3,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF30</td><td>Registrar pontuação da atividade</td><td>2,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q3 Baixo valor / Baixa carga técnica</td></tr>
-<tr><td>RF31</td><td>Gerar análise textual do treino</td><td>2,00</td><td>5,00</td><td>3,00</td><td>4,00</td><td>4,00</td><td>3,67</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF32</td><td>Registrar atributo técnico da atividade</td><td>4,00</td><td>5,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF33</td><td>Editar atributo técnico da atividade</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF34</td><td>Excluir atributo técnico da atividade</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
-<tr><td>RF35</td><td>Consultar informação de espaço do treino</td><td>4,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>2,33</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF36</td><td>Consultar informação de orientação do treino</td><td>4,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>2,33</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF37</td><td>Consultar informação de momento do jogo do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF38</td><td>Consultar informação de fase do jogo do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF39</td><td>Consultar informação de comportamento do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF40</td><td>Consultar informação de atributo técnico do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF41</td><td>Consultar análise comparativa por periodização</td><td>4,00</td><td>5,00</td><td>4,00</td><td>3,00</td><td>3,00</td><td>3,33</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-</tbody>
-</table>
-</div>
-
-
-### 6. Requisitos do MVP
-
-#### Requisitos Funcionais (RFs)
-
-A definição dos Requisitos Funcionais que compõem o MVP foi realizada previamente com base na matriz de valor x esforço e posteriormente validada diretamente com o cliente via WhatsApp (conforme detalhado na [Seção 10.3](#103-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente)). O MVP é composto por 27 requisitos funcionais, todos de alto valor (valor > 2), distribuídos em dois quadrantes da matriz: 15 em Q2 (esforço ≤ 2) e 12 em Q1 (esforço > 2).
-
-| Código | Requisito | Classificação |
-|:---:|---|---|
-| RF01 | Cadastrar macrociclo | Q2 - Alto valor / Baixo esforço |
-| RF02 | Editar macrociclo | Q2 - Alto valor / Baixo esforço |
-| RF04 | Cadastrar mesociclo | Q2 - Alto valor / Baixo esforço |
-| RF05 | Editar mesociclo | Q2 - Alto valor / Baixo esforço |
-| RF07 | Cadastrar microciclo | Q2 - Alto valor / Baixo esforço |
-| RF08 | Editar microciclo | Q2 - Alto valor / Baixo esforço |
-| RF10 | Cadastrar comportamento | Q2 - Alto valor / Baixo esforço |
-| RF11 | Editar comportamento | Q2 - Alto valor / Baixo esforço |
-| RF13 | Cadastrar atividade | Q2 - Alto valor / Baixo esforço |
-| RF14 | Editar atividade | Q2 - Alto valor / Baixo esforço |
-| RF16 | Cadastrar sessão | Q2 - Alto valor / Baixo esforço |
-| RF17 | Editar sessão | Q2 - Alto valor / Baixo esforço |
-| RF19 | Cadastrar atividade na biblioteca | Q1 - Alto valor / Alto esforço |
-| RF20 | Editar atividade na biblioteca | Q1 - Alto valor / Alto esforço |
-| RF22 | Exibir indicador de treino | Q1 - Alto valor / Alto esforço |
-| RF23 | Reutilizar atividade cadastrada | Q2 - Alto valor / Baixo esforço |
-| RF24 | Consultar informação de atividade do treino | Q1 - Alto valor / Alto esforço |
-| RF25 | Gerar relatório de treino | Q1 - Alto valor / Alto esforço |
-| RF26 | Alternar unidade de tempo | Q2 - Alto valor / Baixo esforço |
-| RF32 | Registrar atributo técnico da atividade | Q2 - Alto valor / Baixo esforço |
-| RF35 | Consultar informação de espaço do treino | Q1 - Alto valor / Alto esforço |
-| RF36 | Consultar informação de orientação do treino | Q1 - Alto valor / Alto esforço |
-| RF37 | Consultar informação de momento do jogo do treino | Q1 - Alto valor / Alto esforço |
-| RF38 | Consultar informação de fase do jogo do treino | Q1 - Alto valor / Alto esforço |
-| RF39 | Consultar informação de comportamento do treino | Q1 - Alto valor / Alto esforço |
-| RF40 | Consultar informação de atributo técnico do treino | Q1 - Alto valor / Alto esforço |
-| RF41 | Consultar análise comparativa por periodização | Q1 - Alto valor / Alto esforço |
-
-#### Requisitos Não Funcionais (RNFs)
-
-Os Requisitos Não Funcionais não entram diretamente na matriz de esforço/valor padrão, pois são aplicáveis de forma transversal ao produto e não representam funcionalidades isoladas. Entretanto, os requisitos compreendidos entre o RNF02 e o RNF04, especificamente o **RNF02**, o **RNF03** e o **RNF04**, foram incorporados ao escopo do MVP por serem essenciais para a usabilidade, eficiência no registro de treinos e atualização dos dados em tempo real.
-
-| Código | Requisito |
-|:---:|---|
-| RNF02 | Interface Responsiva e Adaptável |
-| RNF03 | Eficiência no Cadastro de Treinos |
-| RNF04 | Atualização em Tempo Real do Dashboard |
-
-## 10.3 Validação do Backlog e Escopo do MVP com o Cliente
+## 10.2 Validação do Backlog e Escopo do MVP com o Cliente
 
 Após a priorização preliminar do backlog por meio da matriz Valor x Esforço e a consolidação dos requisitos nos quadrantes, a equipe realizou a **validação do backlog e da delimitação do MVP diretamente com o cliente** (o técnico Marcus Vinicius).
 
@@ -291,16 +131,16 @@ Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`MVPvalidado`
 Durante a validação via WhatsApp, o treinador Marcus Vinicius avaliou o quadro apresentado na imagem e confirmou que o conjunto de requisitos selecionado contempla com fidelidade as necessidades prioritárias para o MVP do FutBoard.
 
 
-# 10.4 Justificativa para o MVP
+### 1. Justificativa para o MVP
 
 A priorização do MVP baseou-se na matriz de Valor versus Esforço e na frequência de uso de cada funcionalidade. Selecionamos os requisitos dos quadrantes 1 e 2 que são de maior valor para o cliente e que apresentavam nível de uso de 3 a 5 (mensal, semanal e diário).
 
 > O **RF01** foi marcado pelo cliente como **valor de negócio 4** e **frequência de uso de 2**, como estavámos selecionando os requisitos que estavam no quadrante 1 e 2 cuja a frequência de uso estava entre 3 e 5 esse requisito ficava de fora do MVP. Porém a equipe logo percebeu que o **RF01** é vital para o funcionamento do sistema. **Por isso o RF01 foi incorporado ao MVP.**
 
-## Análise de Dependências Estruturais (Inclusão do RF01)
+### 2. Análise de Dependências Estruturais (Inclusão do RF01)
 A frequência de uso isoladamente não substitui a análise de dependências de arquitetura e domínio. O RF01 (Cadastrar macrociclo) possui Valor 4 e Frequência 2 (pois o macrociclo representa a temporada e é cadastrado poucas vezes ao ano), o que o deixaria fora de um filtro puramente mecânico por frequência. Contudo, na árvore hierárquica de periodização do sistema (Macrociclo → Mesociclo → Microciclo → Sessão → Atividades → Indicadores/Gráficos), o RF01 é pré-requisito estrutural obrigatório para RF04, RF07, RF16 e todas as consultas analíticas. Por essa dependência técnica direta, o RF01 foi incorporado ao MVP, fechando os 27 RFs (26 RFs com Valor 4 e Frequência ≥ 3 + RF01).
 
-# Por que estamos utilizando esses critérios?
+### 3. Por que estamos utilizando esses critérios?
 
 - Contexto e desafio: Na avaliação inicial, aproximadamente 90% das funcionalidades foram avaliadas pelo cliente com valor de negócio máximo, gerando um escopo amplo demais para o MVP.
 
