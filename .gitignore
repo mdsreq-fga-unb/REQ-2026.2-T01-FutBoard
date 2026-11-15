@@ -9,3 +9,7 @@ path/
 venv/
 
 .idea/
+
+docs/issues-user-stories.txt
+        
+frontend/
