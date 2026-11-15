@@ -48,7 +48,16 @@ Os workflows de integração e entrega contínua (CI/CD) devem executar automati
 
 - **Os testes relacionados foram executados com sucesso?**
 
-Cada User Story deve ter passado em 100% dos testes unitários.
+Cada User Story relacionada a um Requisito Funcional deve ter passado em 100% dos testes unitários.
+
+- **Os Requisitos Não Funcionais (RNFs) vinculados foram verificados?**
+
+ RNFs associados no backlog devem comprovar seu atendimento por meio de verificações específicas:
+ 
+  - **RNF02 (Interface Responsiva):** A tela deve ser verificada nas resoluções de **360px (mobile)**, **768px (tablet)** e **1366px (desktop)** via ferramentas de desenvolvedor (DevTools) ou dispositivo real, comprovando que elementos e gráficos não ficam cortados, sobrepostos ou com barra de rolagem horizontal.
+  - **RNF03 (Eficiência no Cadastro de Treinos):** Para as histórias diretamente ligadas à montagem de treino (US13, US16, US23 e US30), o fluxo de preenchimento deve ser cronometrado, comprovando conclusão em **menos de 2 minutos** em um cenário de complexidade média com atividades da biblioteca.
+  - **RNF04 (Atualização em Tempo Real do Dashboard):** Para as histórias que alteram dados refletidos nos indicadores e gráficos, deve ser medido o tempo entre a confirmação do salvamento/edição e a re-renderização na tela, comprovando atualização em **no máximo 5 segundos**.
+  - **RNF01 (Proteção de Dados):** Aplicável às histórias de autenticação (US27 e US28), verificando o armazenamento de senhas com hash seguro (`bcrypt`) e o bloqueio de acessos não autorizados com código HTTP 401.
 
 - **A documentação e evidências da entrega estão atualizadas?**
 
