@@ -64,9 +64,12 @@ As histórias que possuem RNFs associados no backlog devem comprovar seu atendim
 - **A verificação integrada dos fluxos foi realizada com sucesso?**
 
 Quando a User Story fizer parte de fluxos encadeados do sistema (ex.: `Periodização → Sessão/Atividades → Dashboard Analítico → Relatório PDF`), deve ser comprovada a coerência dos dados de ponta a ponta:
-  - Cadastrar ou editar uma sessão com atividades (incluindo o tratamento de simultaneidade da **RN03** e dimensões da **RN01/RN02**) deve produzir resultados consistentes e idênticos entre a visualização da sessão, os indicadores/gráficos do Dashboard e o relatório gerado em PDF.
-  - Alterações ou exclusões na hierarquia de ciclos (Macro, Meso e Microciclos — **RN04**) devem refletir de forma íntegra nas opções de seleção e listagens dependentes.
-  - **Como comprovar:** A verificação pode ser comprovada por **teste de integração na API** (validando que os endpoints de Sessão, Dashboard e PDF consomem e retornam as mesmas métricas calculadas) ou por **teste manual assistido** (registrando em capturas de tela ou vídeo curto que o mesmo valor cadastrado na sessão reflete perfeitamente no Dashboard e no PDF baixado).
+
+  ▸ Cadastrar ou editar uma sessão com atividades ou ciclos que dependem de outro, funcionam de forma encadeada, devem produzir resultados consistentes e idênticos entre a visualizaçoes, os indicadores/gráficos do Dashboard e o relatório gerado em PDF.
+  
+  ▸ Alterações ou exclusões na hierarquia de ciclos (Macro, Meso e Microciclos — **RN04**) deve refletir de forma íntegra nas opções de seleção e listagens dependentes.
+  
+  ▸ **Como comprovar:** A verificação deve ser comprovada por **teste manual**, registrando em capturas de tela que o mesmo valor cadastrado na sessão reflete perfeitamente no Dashboard e no PDF baixado. Também vale para a exclusao
 
 - **A documentação e evidências da entrega estão atualizadas?**
 
