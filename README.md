@@ -16,6 +16,6 @@ O objetivo do FutBoard é centralizar, padronizar e otimizar o registro manual d
 Toda a documentação do projeto, incluindo elicitação, modelagem, análise e planejamento, está hospedada e versionada utilizando o **GitHub Pages**.
 
 🔗 **Acesse a documentação completa aqui:**  
-[[Link para o GitPages do FutBoard](https://mdsreq-fga-unb.github.io/REQ-2026.2-T01-FutBoard/)] 
+[[Link para o GitPages do FutBoard Unidade 02](https://mdsreq-fga-unb.github.io/REQ-2026.2-T01-FutBoard/Entrega-Unidade-02/)] 
 
 
