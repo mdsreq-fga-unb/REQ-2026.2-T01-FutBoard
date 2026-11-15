@@ -5,3 +5,7 @@ site/
 .venv/
 
 path/
+
+docs/issues-user-stories.txt
+        
+frontend/
