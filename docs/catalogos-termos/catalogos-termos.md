@@ -160,6 +160,7 @@ Valores que o cliente já usa e que podem virar botões/seleções no sistema. N
 
 | Termo | Definição |
 |---|---|
+| **Equipe técnica** |Grupo formado pelo treinador e pelo auxiliar técnico, responsáveis por planejar, conduzir e analisar os treinos no sistema. |
 | **Treinador / técnico** | Marcus Vinícius; planeja, executa e avalia os treinos; usuário principal. |
 | **Auxiliar (técnico)** | Conduz subgrupos nos treinos; também cadastra dados. |
 | **Preparador físico** | Conduz parte do grupo e analisa junto com o treinador os dados de espaço (força, velocidade, resistência). |
