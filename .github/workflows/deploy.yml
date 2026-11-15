@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - Entrega-Unidade-01
       - Entrega-Unidade-02
 
 permissions:

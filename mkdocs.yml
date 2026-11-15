@@ -51,8 +51,3 @@ nav:
       - Reuniões com o cliente: atas-reunioes/reunioes-cliente.md
   - Lições Aprendidas: licoes-aprendidas.md
   - Entregas da Unidade: entregas-unidade/entregas-unidade.md
-
-extra:
-  version:
-    provider: mike
-    default: latest
