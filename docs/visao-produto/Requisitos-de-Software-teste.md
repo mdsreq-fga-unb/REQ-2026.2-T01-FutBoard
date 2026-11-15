@@ -1647,9 +1647,9 @@ A matriz a seguir mapeia a correlação direta entre os Objetivos Específicos (
 
 | Contribuição principal | Contribuição secundária | CP | RFs relacionados | Regras de Negócio (RNs) | RNFs relacionados |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| OE1 | OE4 | CP01 | RF10, RF11, RF12, RF13, RF14, RF15, RF16, RF17, RF18, RF19, RF20, RF21, RF23, RF29, RF32, RF33, RF34 | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN05](#rn05) | RNF02, RNF03, RNF04 |
+| OE1 | OE4 | CP01 | RF10, RF11, RF12, RF13, RF14, RF15, RF16, RF17, RF18, RF19, RF20, RF21, RF23, RF29, RF32, RF33, RF34 | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN04](#rn04), [RN05](#rn05) | RNF02, RNF03, RNF04 |
 | OE2 | OE3 | CP02 | RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF08, RF09 | [RN04](#rn04) | RNF02 |
-| OE3 | OE4 | CP03 | RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40, RF41 | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN05](#rn05), [RN06](#rn06), [RN07](#rn07) | RNF02, RNF04 |
+| OE3 | OE4 | CP03 | RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40, RF41 | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN04](#rn04), [RN05](#rn05), [RN06](#rn06), [RN07](#rn07) | RNF02, RNF04 |
 | OE4 | OE3 | CP04 | RF25 | [RN02](#rn02), [RN03](#rn03), [RN06](#rn06), [RN07](#rn07) | RNF02 |
 | OE1 | OE4 | CP05 | RF27, RF28 | - | RNF01, RNF02 |
 
