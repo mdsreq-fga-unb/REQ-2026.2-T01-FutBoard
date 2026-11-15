@@ -1655,8 +1655,8 @@ A matriz a seguir mapeia a correlação direta entre os Objetivos Específicos (
 
 ---
 
-## Histórico de Rastreabilidade
+## 10.4 Histórico de Rastreabilidade
 | Versão | Data | Descrição | Autor(es) | Artefato |
 | :---: | :---: | :--- | :--- | :---: |
-| `1.0` | 12/10/2026 | Versão consolidada referente à entrega da Unidade 02 | Rafael Wasconcelos | [Visualizar v1.0](../entregas-unidade/Visao-Produto-Unidade-02/Requisitos-de-Software_Unidade-02.md) |
+| `1.0` | 12/10/2026 | Versão consolidada referente à entrega da Unidade 02 | Rafael Wasconcelos | [Visualizar v1.0](https://mdsreq-fga-unb.github.io/REQ-2026.2-T01-FutBoard/Entrega-Unidade-02/visao-produto/Requisitos-de-Software/) |
 | `2.0` | 15/11/2026 | Atualização referente à entrega da Unidade 03 | Rafael Wasconcelos | **Versão Atual** |
