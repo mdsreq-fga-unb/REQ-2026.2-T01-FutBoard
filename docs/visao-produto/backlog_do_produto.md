@@ -148,7 +148,7 @@ A frequência de uso isoladamente não substitui a análise de dependências de 
 
 - Resultado: O cruzamento entre valor e frequência permitiu priorizar o que era realmente essencial, reduzindo o escopo com validação e respaldo do cliente.
 
-## 10.4 Histórico de Rastreabilidade
+## 10.3 Histórico de Rastreabilidade
 
 | Versão | Data | Descrição | Autor(es) | Artefato |
 | :---: | :---: | :--- | :--- | :---: |
