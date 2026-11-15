@@ -97,7 +97,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <tr>
 <td>Iteração 11</td>
 <td>16/11<br>-<br>23/11</td>
-<td><a href="../Requisitos-de-Software-teste/#rf38">US38</a><br><a href="../Requisitos-de-Software-teste/#rf40">US40</a><br><a href="../Requisitos-de-Software-teste/#rf41">US41</a><br><a href="../Requisitos-de-Software-teste/#rf36">US36</a><br><a href="../Requisitos-de-Software-teste/#rf37">US37</a></td>
+<td><a href="../Requisitos-de-Software-teste/#rf38">US38</a><br><a href="../Requisitos-de-Software-teste/#rf40">US40</a><br><a href="../Requisitos-de-Software-teste/#rf41">US41</a><br><a href="../Requisitos-de-Software-teste/#rf36">US36</a><br><a href="../Requisitos-de-Software-teste/#rf37">US37</a><br>Importacao dos dados atuais do técnico</td>
 <td>Validação Cliente<br>Protótipo<br>DoD</td>
 <td>Planejado</td>
 </tr>
@@ -127,3 +127,4 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 - A numeração das iterações é contínua (1 a 13); a versão anterior saltava da Iteração 10 para a 13 por erro de edição, sem remoção de etapas.
 - A **importação automatizada de dados históricos das planilhas** foi **retirada do compromisso do MVP** (postergada para etapas pós-MVP). Por decisão metodológica com o cliente, a transição para a aplicação adotará um marco zero a partir de uma nova periodização cadastrada diretamente no FutBoard, mantendo as planilhas legadas de Excel sob consulta histórica do treinador. Por essa razão, a funcionalidade de importação não integra o rol de requisitos funcionais do MVP nem compõe o cronograma de desenvolvimento da disciplina.
 - Todos os 27 RFs do MVP estão distribuídos entre as Iterações 8 e 11 (8 + 8 + 6 + 5).
+- Na **Iteração 11**, além do fechamento das histórias analíticas do dashboard, a equipe realizará uma **tentativa técnica de exportação dos dados do técnico**, com o objetivo de apoiar a extração e o compartilhamento das informações registradas antes da fase de homologação e transição (Cutover).
