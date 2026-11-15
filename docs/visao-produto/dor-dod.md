@@ -73,7 +73,7 @@ Quando a User Story fizer parte de fluxos encadeados do sistema (ex.: `Periodiza
 
 - **A documentação e evidências da entrega estão atualizadas?**
 
-A User Story deve ser marcada como feita e atualizada.
+A User Story deve possuir um checklist no card do backlog contendo todos os DODs e suas respectivas evidencias (fotos, prints, PRS) para garantir que todos foram seguidos e concluídos para que possa ser possível verificar quais ainda estao pendentes.
 
 - **A funcionalidade da User Story desenvolvida foi validada pelo cliente?**
 
