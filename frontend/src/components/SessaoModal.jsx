@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import AtividadeSessaoModal from "./AtividadeSessaoModal.jsx";
+
+
+
 
 const MESES_ANO = [
   "Janeiro",
@@ -22,9 +25,17 @@ const SSP_BADGE_STYLES = {
   Competitivo: "bg-[#10281E] text-[#FFFFFF]",
 };
 
+function formatarDataCurta(isoDate) {
+  if (!isoDate) return "";
+  const partes = String(isoDate).split("-");
+  if (partes.length !== 3) return isoDate;
+  return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
 export default function SessaoModal({
   isOpen,
   initialData = null,
+  microciclos = [],
   onClose,
   onSave,
 }) {
@@ -35,11 +46,40 @@ export default function SessaoModal({
   const [mes, setMes] = useState(initialData?.mes || "");
   const [atividades, setAtividades] = useState(initialData?.atividades || []);
   const [modalAtividadeOpen, setModalAtividadeOpen] = useState(false);
+  const [microcicloId, setMicrocicloId] = useState(
+    initialData?.microcicloId !== undefined && initialData?.microcicloId !== null
+      ? String(initialData.microcicloId)
+      : initialData?.microciclo !== undefined && initialData?.microciclo !== null
+        ? String(initialData.microciclo)
+        : "",
+  );
   const [erro, setErro] = useState("");
+
+  const microcicloSelecionado = useMemo(() => {
+    if (!microcicloId) return null;
+    return (
+      microciclos.find((item) => String(item.id) === String(microcicloId)) ||
+      null
+    );
+  }, [microciclos, microcicloId]);
 
   if (!isOpen) return null;
 
-  const camposPreenchidos = Boolean(nome.trim() && data && mes);
+  const camposPreenchidos = Boolean(
+    nome.trim() && data && mes && microcicloId,
+  );
+
+  const formatarOpcaoMicrociclo = (micro) => {
+    const inicio = formatarDataCurta(micro.dataInicio || micro.data_inicio);
+    const termino = formatarDataCurta(micro.dataTermino || micro.data_termino);
+    const periodo = inicio && termino ? ` (${inicio} a ${termino})` : "";
+    const vinculoPai = micro.macrocicloNome
+      ? ` · ${micro.macrocicloNome}`
+      : micro.mesocicloNome
+        ? ` · ${micro.mesocicloNome}`
+        : "";
+    return `${micro.nome}${periodo}${vinculoPai}`;
+  };
 
   const handleAdicionarAtividade = async (dadosAtividade) => {
     const codigoNormalizado = (dadosAtividade.codigo || "").trim().toUpperCase();
@@ -90,16 +130,35 @@ export default function SessaoModal({
     e.preventDefault();
     setErro("");
 
-    if (!nome.trim() || !data || !mes) {
-      setErro("Preencha todos os campos obrigatórios (Nome, Data e Mês).");
+    if (!microcicloId) {
+      setErro(
+        "Selecione um microciclo para vincular à sessão antes de continuar.",
+      );
       return;
     }
+
+    if (!nome.trim() || !data || !mes) {
+      setErro(
+        "Preencha todos os campos obrigatórios (Microciclo, Nome, Data e Mês).",
+      );
+      return;
+    }
+
+    const idNumerico = Number(microcicloId);
 
     onSave({
       nome: nome.trim(),
       data,
       mes,
       atividades,
+      microcicloId: idNumerico,
+      microciclo: idNumerico,
+      microcicloNome: microcicloSelecionado?.nome || "",
+      microcicloPeriodo:
+        microcicloSelecionado &&
+        (microcicloSelecionado.dataInicio || microcicloSelecionado.data_inicio)
+          ? `${formatarDataCurta(microcicloSelecionado.dataInicio || microcicloSelecionado.data_inicio)} a ${formatarDataCurta(microcicloSelecionado.dataTermino || microcicloSelecionado.data_termino)}`
+          : "",
     });
   };
 
@@ -153,7 +212,7 @@ export default function SessaoModal({
             </button>
           </div>
 
-          {/* Corpo do Formulário */}
+{/* Corpo do Formulário */}
           <form
             onSubmit={handleSubmit}
             className="flex flex-1 flex-col overflow-hidden"
@@ -168,6 +227,33 @@ export default function SessaoModal({
                   {erro}
                 </div>
               )}
+
+              {/* Campo Microciclo */}
+              <div>
+                <label
+                  htmlFor="sessao-microciclo"
+                  className="mb-1.5 block text-xs font-medium text-[#10281E]"
+                >
+                  Microciclo *
+                </label>
+
+                <select
+                  id="sessao-microciclo"
+                  value={microcicloId}
+                  onChange={(e) => {
+                    setMicrocicloId(e.target.value);
+                    setErro("");
+                  }}
+                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#FAF9F5] px-3.5 py-2.5 text-sm text-[#10281E] outline-none transition focus:border-[#0E3A29] focus:bg-[#FFFFFF]"
+                >
+                  <option value="">Selecione um microciclo</option>
+                  {microciclos.map((micro) => (
+                    <option key={micro.id} value={String(micro.id)}>
+                      {formatarOpcaoMicrociclo(micro)}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               {/* Campo Nome */}
               <div>

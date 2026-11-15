@@ -7,7 +7,9 @@ function formatarDataExibicao(isoDate) {
   return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
-export default function SessaoCard({ sessao, onEditSessao }) {
+export default function SessaoCard({ sessao, microcicloNome, onEditSessao }) {
+  const nomeMicrocicloExibicao = microcicloNome || sessao.microcicloNome || "";
+
   return (
     <article className="fb-card overflow-hidden border-[#E4DFD2] bg-[#FFFFFF] transition-all">
       <div className="p-5 sm:p-6">
@@ -22,10 +24,18 @@ export default function SessaoCard({ sessao, onEditSessao }) {
                 {sessao.mes}
               </span>
 
+
               {sessao.atividades?.length > 0 && (
                 <span className="rounded-full bg-[#0E3A29]/10 px-2.5 py-0.5 font-mono text-[11px] font-medium text-[#0E3A29]">
                   {sessao.atividades.length}{" "}
                   {sessao.atividades.length === 1 ? "atividade" : "atividades"}
+                  </span>
+              )}
+              {nomeMicrocicloExibicao && (
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#0E3A29]/20 bg-[#F5F2EA] px-2.5 py-0.5 font-mono text-[11px] font-medium text-[#0E3A29]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0E3A29]" />
+                  {nomeMicrocicloExibicao}
+
                 </span>
               )}
             </div>
