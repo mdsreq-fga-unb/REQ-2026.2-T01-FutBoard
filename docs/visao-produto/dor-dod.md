@@ -1,4 +1,4 @@
-# 9. DoR e DoD
+# DoR e DoD
 
 Para alinhar o desenvolvimento do FutBoard com uma abordagem híbrida (RAD e Iterativo Incremental), as definições de Preparado (DoR) e Pronto (DoD) focam em prototipação rápida, ciclos curtos de feedback e validação rigorosa dos critérios de qualidade estabelecidos na documentação pelo cliente Marcus Vinicius.
 
