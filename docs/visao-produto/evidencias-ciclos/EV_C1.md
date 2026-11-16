@@ -25,40 +25,58 @@
 === "Baixa Fidelidade"
 
     === "US01"
-        <!-- Inserir foto ou link do protótipo da US01 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US01 — Cadastrar macrociclo)*
+        ![Criar macrociclo](../../assets/evidencias/US01_criar_macrociclo.jpeg)
+        *Figura 1: Ação de criar macrociclo.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US01](../../assets/Evidencias/BaixaFidelidade/US01.png) -->
+        ![Novo macrociclo](../../assets/evidencias/US01_novo_macrociclo.jpeg)
+        *Figura 2: Formulário de preenchimento do macrociclo.*
+
+        ![Lista de macrociclos atualizada](../../assets/evidencias/US01_lista_atualizada.jpeg)
+        *Figura 3: Listagem de macrociclos atualizada.*
 
     === "US02"
-        <!-- Inserir foto ou link do protótipo da US02 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US02 — Editar macrociclo)*
+        ![Editar macrociclo](../../assets/evidencias/US02_editar_macrociclo.jpeg)
+        *Figura 1: Seleção para edição do macrociclo.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US02](../../assets/Evidencias/BaixaFidelidade/US02.png) -->
+        ![Edição do macrociclo](../../assets/evidencias/US02_editar_macrociclo_2.jpeg)
+        *Figura 2: Formulário de edição dos dados do macrociclo.*
 
     === "US04"
-        <!-- Inserir foto ou link do protótipo da US04 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US04 — Cadastrar mesociclo)*
+        ![Novo mesociclo](../../assets/evidencias/US04_novo_mesociclo.jpeg)
+        *Figura 1: Formulário de preenchimento do mesociclo.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US04](../../assets/Evidencias/BaixaFidelidade/US04.png) -->
+        ![Lista de mesociclos atualizada](../../assets/evidencias/US04_lista_atualizada.jpeg)
+        *Figura 2: Listagem de mesociclos atualizada.*
 
     === "US05"
-        <!-- Inserir foto ou link do protótipo da US05 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US05 — Editar mesociclo)*
+        ![Editar mesociclo](../../assets/evidencias/US05_editar_mesociclo.jpeg)
+        *Figura 1: Seleção para edição do mesociclo.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US05](../../assets/Evidencias/BaixaFidelidade/US05.png) -->
+        ![Edição do mesociclo](../../assets/evidencias/US05_editar_mesociclo_2.jpeg)
+        *Figura 2: Formulário de edição dos dados do mesociclo.*
+
+        ![Lista de mesociclos atualizada](../../assets/evidencias/US05_lista_atualizada.jpeg)
+        *Figura 3: Listagem de mesociclos atualizada após edição.*
 
     === "US07"
-        <!-- Inserir foto ou link do protótipo da US07 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US07 — Cadastrar microciclo)*
+        ![Cadastrar novo microciclo](../../assets/evidencias/US07_cadastrar_novo_microciclo.jpeg)
+        *Figura 1: Ação de cadastrar novo microciclo.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US07](../../assets/Evidencias/BaixaFidelidade/US07.png) -->
+        ![Novo microciclo](../../assets/evidencias/US07_novo_microciclo.jpeg)
+        *Figura 2: Formulário de preenchimento do microciclo.*
+
+        ![Lista de microciclos atualizada](../../assets/evidencias/US07_lista_atualizada.jpeg)
+        *Figura 3: Listagem de microciclos atualizada.*
 
     === "US08"
-        <!-- Inserir foto ou link do protótipo da US08 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US08 — Editar microciclo)*
+        ![Editar microciclo](../../assets/evidencias/US08_editar_microciclo.jpeg)
+        *Figura 1: Seleção para edição do microciclo.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US08](../../assets/Evidencias/BaixaFidelidade/US08.png) -->
+        ![Edição do microciclo](../../assets/evidencias/US08_editar_microciclo_2.jpeg)
+        *Figura 2: Formulário de edição dos dados do microciclo.*
+
+        ![Lista de microciclos atualizada](../../assets/evidencias/US08_lista_atualizada.jpeg)
+        *Figura 3: Listagem de microciclos atualizada após edição.*
 
 ---
 
