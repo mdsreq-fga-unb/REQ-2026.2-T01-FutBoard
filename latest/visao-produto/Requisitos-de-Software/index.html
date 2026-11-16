@@ -1521,7 +1521,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Dado que preencho um nome, data de início e data de fim, quando salvo, o sistema deve criar o ciclo raiz da temporada.</li>
+<li>Criação com sucesso do ciclo raiz da temporada após o preenchimento obrigatório de nome, data de início e data de fim.</li>
 <li>Se os campos obrigatórios não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.</li>
 <li>Se a data de fim for antes da data da inicio, o sistema deve exibir alerta e impedir o cadastro.</li>
 </ul>
@@ -1552,7 +1552,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Dado que seleciono um macrociclo existente, quando altero o nome, data de início ou data de fim e salvo, as modificações devem refletir na visualização da temporada.</li>
+<li>Atualização dos dados do macrociclo na visualização da temporada após a edição do nome e/ou das datas.</li>
 <li>A edição das datas não deve quebrar a hierarquia dos ciclos filhos já vinculados nem permitir data de fim anterior à data de início.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
@@ -1611,7 +1611,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Dado que possuo um macrociclo ativo, quando preencho os dados do mesociclo (nome, data de início, data de término) e indico seu macrociclo pai, então ele deve ser salvo com sucesso.</li>
+<li>Cadastro bem-sucedido do mesociclo com nome, datas de início e término e vínculo a um macrociclo ativo.</li>
 <li>Se não houver macrociclo prévio selecionado ou ativo, o sistema deve exibir alerta e impedir o cadastro.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
@@ -1700,7 +1700,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Dado que existe um mesociclo ativo, quando informo o nome, data de início e data de fim do microciclo  e salvo, o registro deve ser efetuado na árvore de periodização.</li>
+<li>Cadastro do microciclo na árvore de periodização após informar nome, datas de início e fim e selecionar um mesociclo ativo.</li>
 <li>Se não houver mesociclo prévio selecionado, o sistema deve exibir alerta e impedir o cadastro.</li>
 <li>Se os campos  nome, data de início e data de fim não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.</li>
 </ul>
@@ -1731,7 +1731,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Dado que altero as informações de um microciclo salvo, o sistema deve atualizar os dados de exibição sem desconectar as sessões de treino atreladas a ele.</li>
+<li>Atualização das informações de exibição do microciclo sem desconectar as sessões de treino vinculadas.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
