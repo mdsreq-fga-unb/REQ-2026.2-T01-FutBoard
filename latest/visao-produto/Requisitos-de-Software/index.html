@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#requisitos-de-software-teste" class="md-skip">
+        <a href="#requisitos-de-software" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -1465,7 +1465,7 @@
 
 
 
-<h1 id="requisitos-de-software-teste">Requisitos de software (teste)</h1>
+<h1 id="requisitos-de-software">Requisitos de software</h1>
 <h2 id="81-requisitos-funcionais-rfs">8.1 Requisitos Funcionais — RFs</h2>
 <p>Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve oferecer ao treinador e ao auxiliar, elicitadas a partir das reuniões de levantamento de requisitos com o cliente (Marcus Vinícius) e organizadas segundo as Características do Produto (CPs) definidas pela equipe:</p>
 <ul>
@@ -1521,11 +1521,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
 <li>Dado que preencho um nome, data de início e data de fim, quando salvo, o sistema deve criar o ciclo raiz da temporada.</li>
 <li>Se os campos obrigatórios não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.</li>
 <li>Se a data de fim for antes da data da inicio, o sistema deve exibir alerta e impedir o cadastro.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1546,10 +1552,16 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
 <li>Dado que seleciono um macrociclo existente, quando altero o nome, data de início ou data de fim e salvo, as modificações devem refletir na visualização da temporada.</li>
 <li>A edição das datas não deve quebrar a hierarquia dos ciclos filhos já vinculados nem permitir data de fim anterior à data de início.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1570,8 +1582,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1592,10 +1611,16 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
 <li>Dado que possuo um macrociclo ativo, quando preencho os dados do mesociclo (nome, data de início, data de término) e indico seu macrociclo pai, então ele deve ser salvo com sucesso.</li>
 <li>Se não houver macrociclo prévio selecionado ou ativo, o sistema deve exibir alerta e impedir o cadastro.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1616,10 +1641,16 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
 <li>Ao alterar o nome, data de início, data de fim de um mesociclo, o sistema deve aplicar a atualização mantendo sua posição e vínculos intactos na árvore da periodização.</li>
 <li>A edição não pode desvincular o mesociclo do seu macrociclo pai.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1640,8 +1671,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1662,11 +1700,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
 <li>Dado que existe um mesociclo ativo, quando informo o nome, data de início e data de fim do microciclo  e salvo, o registro deve ser efetuado na árvore de periodização.</li>
 <li>Se não houver mesociclo prévio selecionado, o sistema deve exibir alerta e impedir o cadastro.</li>
 <li>Se os campos  nome, data de início e data de fim não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1687,9 +1731,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
 <li>Dado que altero as informações de um microciclo salvo, o sistema deve atualizar os dados de exibição sem desconectar as sessões de treino atreladas a ele.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1710,8 +1760,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1732,10 +1789,16 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
 <li>Ao inserir um nome de comportamento, ele deve ser salvo e disponibilizado nas listas de seleção (dropdowns táticos) durante o cadastro de atividades.</li>
 <li>O sistema não deve permitir o cadastro de comportamentos com o exato mesmo nome (duplicidade).</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1756,9 +1819,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
 <li>Ao corrigir o nome do princípio tático no catálogo, as atividades já salvas que o utilizam devem exibir o nome atualizado automaticamente.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1779,7 +1848,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li>Nenhuma regra de negócio associada a este requisito.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1800,16 +1877,22 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Eficiência no Cadastro de Treinos:</strong> O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</li>
-<li><strong>Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
-<li><strong>Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
-<li><strong>Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
 <li>O sistema deve calcular automaticamente a Área (m²/jogador) ao inserir dimensões (Comprimento e Largura) e o Número de Jogadores.</li>
 <li>O sistema deve classificar automaticamente a dimensão do espaço no ato do cadastro com base na área calculada.</li>
 <li>Atividades salvas com o mesmo número de "ordem" devem ser agrupadas e tratadas como eventos simultâneos na exibição.</li>
 <li>Os campos relacionados aos momentos do jogo, fases do jogo, princípios táticos e atributos técnicos devem permitir salvamento vazios (opcionais).</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn01">RN01</a> · Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
+<li><strong><a href="#rn02">RN02</a> · Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
+<li><strong><a href="#rn03">RN03</a> · Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf03">RNF03</a> · Eficiência no Cadastro de Treinos:</strong> O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1830,13 +1913,19 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
-<li><strong>Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
-<li><strong>Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
 <li>Ao alterar as dimensões do campo ou o número de jogadores, o sistema deve recalcular instantaneamente a área por jogador e atualizar a classificação do espaço.</li>
 <li>Ao alterar o campo "ordem" da atividade, a interface e o banco devem reagrupar ou separar as atividades simultâneas afetando o tempo total.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn01">RN01</a> · Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
+<li><strong><a href="#rn02">RN02</a> · Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
+<li><strong><a href="#rn03">RN03</a> · Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1857,7 +1946,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li>Nenhuma regra de negócio associada a este requisito.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1878,14 +1975,20 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Eficiência no Cadastro de Treinos:</strong> O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
 <li>O sistema só deve salvar o cadastro da sessão se ela estiver corretamente vinculada a um microciclo válido.</li>
 <li>O tempo líquido total da sessão deve ser calculado automaticamente pelo somatório da duração das atividades inseridas nela.</li>
 <li>Se a sessão possuir atividades marcadas com o mesmo número de ordem, a duração da maior atividade assumirá o bloco de tempo, sem duplicar a contagem.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn03">RN03</a> · Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf03">RNF03</a> · Eficiência no Cadastro de Treinos:</strong> O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1906,12 +2009,18 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
 <li>A alteração de data, nome, mês deve salvar com sucesso e refletir imediatamente nos gráficos que agrupam esses dados.</li>
 <li>Alterar ou remover atividades dentro desta edição deve disparar o recálculo imediato do tempo total da sessão.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn03">RN03</a> · Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1932,9 +2041,16 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1955,12 +2071,18 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
-<li><strong>Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
 <li>Ao preencher os dados de uma nova atividade na área "Biblioteca", o sistema deve aplicar o cálculo automático de área e classificar a dimensão, salvando de forma independente no catálogo.</li>
 <li>A atividade pode ser salva mantendo campos de momento de jogo, atributos técnicos, princípios táticos, fases de jogo totalmente em branco (opcionais).</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn01">RN01</a> · Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
+<li><strong><a href="#rn02">RN02</a> · Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -1981,12 +2103,18 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
-<li><strong>Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
 <li>Modificar valores como comprimento, largura ou número sugerido de jogadores deve engatilhar o recálculo e a reclassificação automática de dimensão do espaço na biblioteca.</li>
 <li>Atividades já importadas para sessões de treino passadas não devem sofrer alterações retroativas com esta edição.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn01">RN01</a> · Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
+<li><strong><a href="#rn02">RN02</a> · Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2007,7 +2135,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li>Nenhuma regra de negócio associada a este requisito.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2028,14 +2164,20 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
-<li><strong>Cálculo da Variabilidade de Treinos:</strong> O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
 <li>O card de "Minutos Totais" deve expor o tempo líquido, desconsiderando tempos sobrepostos decorrentes de atividades simultâneas na mesma sessão.</li>
 <li>O card de "Variabilidade" deve calcular e expor o número de exercícios distintos em relação ao total de execuções.</li>
 <li>Se o período filtrado não possuir sessões ou dados cadastrados, exibir marcações limpas como "0" ou estados vazios padronizados sem gerar erro.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn03">RN03</a> · Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
+<li><strong><a href="#rn06">RN06</a> · Cálculo da Variabilidade de Treinos:</strong> O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).</li>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2056,13 +2198,19 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Eficiência no Cadastro de Treinos:</strong> O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
-<li><strong>Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
 <li>Ao selecionar uma atividade via lista da biblioteca durante o fluxo de cadastro da sessão, os campos descritivos e métricos já configurados devem ser populados automaticamente.</li>
 <li>Após a importação, o sistema deve permitir ao usuário editar as informações da atividade (sem alterar a matriz original na biblioteca).</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn01">RN01</a> · Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
+<li><strong><a href="#rn02">RN02</a> · Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf03">RNF03</a> · Eficiência no Cadastro de Treinos:</strong> O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2083,11 +2231,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
 <li>O usuário deve conseguir visualizar um gráfico com as atividades executadas.</li>
 <li>Quando os parâmetros de filtro selecionados não retornarem nenhuma correspondência, o sistema deve apresentar um layout de estado vazio em vez de mensagens de erro cruas.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2108,11 +2262,18 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
-<li><strong>Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
-<li><strong>Cálculo da Variabilidade de Treinos:</strong> O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn02">RN02</a> · Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
+<li><strong><a href="#rn03">RN03</a> · Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
+<li><strong><a href="#rn06">RN06</a> · Cálculo da Variabilidade de Treinos:</strong> O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).</li>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2133,9 +2294,16 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn03">RN03</a> · Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2156,10 +2324,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Proteção de Dados Pessoais dos Atletas:</strong> O sistema deve utilizar a aplicação de hash irreversível de senhas via bcrypt para guardar as senhas dos usuários.</li>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 <li>O preenchimento de e-mail e criação de senha válidos deve persistir o usuário na base de dados de forma criptografada.</li>
 <li>Se o usuário tentar cadastrar um e-mail já existente na plataforma, o sistema deve retornar um alerta de e-mail duplicado ou em uso.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li>Nenhuma regra de negócio associada a este requisito.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf01">RNF01</a> · Proteção de Dados Pessoais dos Atletas:</strong> O sistema deve utilizar a aplicação de hash irreversível de senhas via bcrypt para guardar as senhas dos usuários.</li>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2180,10 +2355,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Proteção de Dados Pessoais dos Atletas:</strong> O sistema deve utilizar a aplicação de hash irreversível de senhas via bcrypt para guardar as senhas dos usuários.</li>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 <li>A submissão de credenciais válidas redireciona o usuário para a página de dashboard de gráficos.</li>
 <li>Credenciais inválidas (senha/e-mail errados ou não encontrados) exibem mensagem de erro e impedem a navegação para rotas internas.</li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li>Nenhuma regra de negócio associada a este requisito.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf01">RNF01</a> · Proteção de Dados Pessoais dos Atletas:</strong> O sistema deve utilizar a aplicação de hash irreversível de senhas via bcrypt para guardar as senhas dos usuários.</li>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2204,7 +2386,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li>Nenhuma regra de negócio associada a este requisito.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2225,9 +2415,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Eficiência no Cadastro de Treinos:</strong> O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li>Nenhuma regra de negócio associada a este requisito.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf03">RNF03</a> · Eficiência no Cadastro de Treinos:</strong> O sistema deve possuir fluxos de tela com tempo máximo de preenchimento dos dados inferior ao tempo atual de 4 minutos e meio para o preenchimento dos dados. Como objetivo, o sistema deve garantir que o processo de registro de um novo treino seja concluído pelo treinador em menos de 2 minutos.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2248,8 +2446,16 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li>Nenhuma regra de negócio associada a este requisito.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2270,8 +2476,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2292,8 +2505,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2314,8 +2534,15 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2336,11 +2563,18 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
-<li><strong>Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn01">RN01</a> · Cálculo da Área por Jogador:</strong> A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</li>
+<li><strong><a href="#rn02">RN02</a> · Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2361,9 +2595,16 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2384,10 +2625,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2408,10 +2656,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2432,10 +2687,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2456,10 +2718,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn05">RN05</a> · Preenchimento Condicional pelo Objetivo Central:</strong> O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</li>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
@@ -2480,10 +2749,17 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><strong>Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
-<li><strong>Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
-<li><strong>Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
-<li><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn04">RN04</a> · Hierarquia e Integridade da Periodização:</strong> A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</li>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
 </ul>
 <p><strong>Definition of Ready (DoR)</strong></p>
 <ul>
