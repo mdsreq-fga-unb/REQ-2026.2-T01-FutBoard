@@ -34,7 +34,7 @@ A stack tecnológica e as ferramentas de gestão do **FutBoard** foram definidas
 | **Infraestrutura (Dev & Prod)** | Vercel, Render / AWS Lightsail (VPS) | **Custo-Benefício e Controle:** Ambiente de teste ágil e sem custos iniciais, evoluindo para uma VPS dedicada em produção. |
 | **Prototipagem & Design** | Figma | **Validação Visual:** Criação rápida de telas e fluxos de experiência do usuário antes da codificação. |
 | **Modelagem & Arquitetura** | Miro | **Colaboração e Alinhamento:** Facilidade para construção conjunta de fluxogramas e diagramas de sistema pela equipe. |
-| **Gestão de Projetos** | GitHub Projects | **Rastreabilidade e Controle:** Centralização de tarefas, acompanhamento de sprints e alinhamento direto com o código-fonte. |
+| **Gestão de Projetos** | GitHub Projects | **Rastreabilidade e Controle:** Centralização de tarefas, acompanhamento de iterações, histórias de usuário para desenvolvimento e alinhamento direto com o código-fonte. |
 | **Comunicação & Reuniões** | WhatsApp & Microsoft Teams | **Fluidez Operacional:** WhatsApp para alinhamentos rápidos cotidianos e Teams para reuniões síncronas formais. |
 
 ## 2.5 Pesquisa de Mercado e Análise Competitiva
