@@ -170,7 +170,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar mesociclo:** o sistema deve permitir que a equipe técnica cadastre um novo mesociclo vinculado a um macrociclo existente, informando o nome do mesociclo.
+**Declaração RF:** **Cadastrar mesociclo:** o sistema deve permitir que a equipe técnica cadastre um novo mesociclo vinculado a um macrociclo existente, informando o nome, data de inicio e data de fim do mesociclo.
 
 
 **Declaração US:** Como membro da equipe técnica, eu quero cadastrar um novo mesociclo vinculado a um macrociclo, para estruturar as fases intermediárias da periodização esportiva.
