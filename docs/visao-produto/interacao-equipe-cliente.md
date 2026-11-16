@@ -1,6 +1,6 @@
 ## Composição da Equipe
 
-#### Composição da equipe
+#### 7.1 Composição da equipe
 
 | Papel | Descrição | Responsável |
 |---|---|---|

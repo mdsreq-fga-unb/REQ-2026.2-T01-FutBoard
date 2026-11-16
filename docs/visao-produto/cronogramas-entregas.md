@@ -5,7 +5,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 > **Legenda de status:** Finalizado · Finalizado (replanejado) · Em andamento · Planejado.
 > Os itens em <span style="color:#c0392b;font-weight:600">vermelho</span> ainda precisam receber o link da evidência.
 
-### Cronograma
+### 6. Cronograma
 
 <div class="tabela-cronograma-html">
 <table class="tabela-cronograma-html-table">
