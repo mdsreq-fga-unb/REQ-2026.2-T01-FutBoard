@@ -58,7 +58,7 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <td>Iteração 6</td>
 <td>12/10<br>-<br>19/10</td>
 <td>Replanejamento do cronograma por US<br>Fluxo de navegação geral</td>
-<td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-4">Validação Cliente</a><br><span class="preencher">Protótipo Baixa Fid. (inserir link)</span></td>
+<td><a href="../../atas-reunioes/reunioes-cliente/#reuniao-com-o-cliente-4">Validação Cliente</a><br></td>
 <td>Finalizado (replanejado)</td>
 </tr>
 
@@ -122,9 +122,3 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 </table>
 </div>
 
-**Considerações**
-
-- A numeração das iterações é contínua (1 a 13); a versão anterior saltava da Iteração 10 para a 13 por erro de edição, sem remoção de etapas.
-- A **importação automatizada de dados históricos das planilhas** foi **retirada do compromisso do MVP** (postergada para etapas pós-MVP). Por decisão metodológica com o cliente, a transição para a aplicação adotará um marco zero a partir de uma nova periodização cadastrada diretamente no FutBoard, mantendo as planilhas legadas de Excel sob consulta histórica do treinador. Por essa razão, a funcionalidade de importação não integra o rol de requisitos funcionais do MVP nem compõe o cronograma de desenvolvimento da disciplina.
-- Todos os 27 RFs do MVP estão distribuídos entre as Iterações 8 e 11 (8 + 8 + 6 + 5).
-- Na **Iteração 11**, além do fechamento das histórias analíticas do dashboard, a equipe realizará uma **tentativa técnica de exportação dos dados do técnico**, com o objetivo de apoiar a extração e o compartilhamento das informações registradas antes da fase de homologação e transição (Cutover).
