@@ -109,23 +109,23 @@ Como consequência dessas mudanças, a numeração dos RFs mudou (de 46 para 41)
 
 ### 3.1. Contexto e Visão Geral
 
-A Unidade 3 consolidou a etapa final do projeto **FutBoard**, com foco na **Organização e Atualização**, **Verificação e Validação (V&V)** e na entrega do incremento funcional do MVP. O objetivo central deste ciclo foi corrigir as fragilidades metodológicas herdadas da Unidade 2, transformar os critérios de DoR e DoD em instrumentos práticos de controle e demonstrar a passagem completa pelo ciclo de desenvolvimento do RAD (prototipação no Figma $\to$ validação com o treinador Marcus Vinícius $\to$ construção $\to$ verificação por testes).
+A Unidade 3 consolidou a etapa final do projeto **FutBoard**, com foco na **Organização e Atualização**, **Verificação e Validação (V&V)** e na entrega do incremento funcional do MVP. O objetivo central deste ciclo foi corrigir as fragilidades metodológicas herdadas da Unidade 2, transformar os critérios de DoR e DoD em instrumentos práticos de controle e demonstrar a passagem completa pelo ciclo de desenvolvimento do RAD (prototipação no Figma -> validação com o treinador Marcus Vinícius -> construção -> verificação por testes).
 
-### 3.2. Dificuldades Observadas e Feedbacks Recebidos
+### 3.2. Dificuldades Observadas das Issues Corrigidas
 
 A avaliação da Unidade 2 evidenciou quatro grandes grupos de fragilidades que demandaram intervenção imediata da equipe:
 
 1. **Abstração de DoR e DoD:** Os critérios funcionavam como questionários genéricos de "cumprir tabela", sem um exemplo real de história preenchida e sem barrar dependências técnicas (o cronograma previa o cadastro de treinos antes da hierarquia de periodização).
 2. **Inconsistências Métricas e no Recorte do MVP:** A fórmula de esforço técnico continha distorções (valores 5 em uma escala de 1 a 4) e classificação errônea de quadrantes (RF27 e RF28 em Q4 em vez de Q1), o que levou à retirada indevida da autenticação com base em uma justificativa matemática incorreta.
-3. **Rastreabilidade Quebrada e Códigos Desatualizados:** A renomeação de requisitos gerou referências cruzadas incorretas (regras apontando para RF24/RF25 antigos, menção a requisitos inexistentes como RF42/RF43 e login vinculado a RF29/RF30), além de uma matriz síntese que ignorava o Problema e o Objetivo Geral.
-4. **Evidências Frágeis e Regras Implícitas:** Ausência de links públicos para os protótipos navegáveis, registros de validação no WhatsApp limitados ao envio dos cartões (sem o print da devolutiva/aceite do cliente) e regras essenciais de domínio (simultaneidade de exercícios e exclusão em cascata) isoladas no catálogo de termos em vez de especificadas nos requisitos.
+3. **Rastreabilidade Quebrada** A renomeação de requisitos gerou referências cruzadas incorretas (regras apontando para RF24/RF25 antigos, menção a requisitos inexistentes como RF42/RF43 e login vinculado a RF29/RF30), além de uma matriz síntese que ignorava o Problema e o Objetivo Geral.
+4. **Falta de evidência** Ausência de links públicos para os protótipos navegáveis, registros de validação no WhatsApp limitados ao envio dos cartões (sem o print da devolutiva/aceite do cliente) e regras essenciais de domínio (simultaneidade de exercícios e exclusão em cascata) isoladas no catálogo de termos em vez de especificadas nos requisitos.
 
 ### 3.3. Aprendizados Adquiridos
 
-1. **DoR e DoD como Filtros Operacionais:** O DoR só é efetivo se atuar como *gatekeeper* real, impedindo que histórias avancem sem protótipo validado ou com dependências estruturais pendentes. Da mesma forma, o DoD deve auditar a integração entre fluxos (cadastrar treino $\to$ atualizar dashboard $\to$ gerar PDF) e a conformidade com Requisitos Não Funcionais (meta de tempo e responsividade), indo além de testes unitários isolados.
+1. **DoR e DoD como Filtros Operacionais:** O DoR só é efetivo se atuar como *gatekeeper* real, impedindo que histórias avancem sem protótipo validado ou com dependências estruturais pendentes. Da mesma forma, o DoD deve auditar a integração entre fluxos (cadastrar treino -> atualizar dashboard -> gerar PDF) e a conformidade com Requisitos Não Funcionais (meta de tempo e responsividade), indo além de testes unitários isolados.
 2. **Rigor Métrico e Decisões Fundamentadas:** Fórmulas em planilhas não substituem a verificação humana. O recorte do MVP precisa ponderar valor, esforço, frequência e arquitetura técnica conjuntamente — como provou a exceção do RF01 (Macrociclo), essencial para a integridade da periodização.
-3. **Preservar Relações é Preservar Sentido:** Rastreabilidade não é conectar tudo indiscriminadamente, mas garantir que a cadeia causal ($\text{Problema} \to \text{Objetivos} \to \text{CPs} \to \text{RFs/RNFs}$) esteja viva, consistente e sem referências desatualizadas.
-4. **Validação Exige Registro:** A aprovação geral de um recorte visual não comprova o aceite de cada tela ou regra de negócio. Validar com o cliente exige registrar o retorno explícito sobre funcionalidades e versões identificáveis.
+3. **Manter a Rastreabilidade** Garantir que a cadeia causal ( Problema -> Objetivos -> CPs -> RFs/RNFs) esteja viva, consistente e sem referências desatualizadas.
+4. **Evidências** A aprovação geral de um recorte visual não comprova o aceite de cada tela ou regra de negócio. Validar com o cliente exige registrar o retorno explícito sobre funcionalidades e versões identificáveis.
 5. **Especificação Completa das Regras de Domínio:** A dinâmica esportiva (diferença entre atividade na biblioteca e execução na sessão, cálculo de m²/atleta e impactos de exclusão) deve estar explícita nas Regras de Negócio e conectada aos campos de entrada dos cadastros.
 
 ### 3.4. Ações Concretas e Encerramento
