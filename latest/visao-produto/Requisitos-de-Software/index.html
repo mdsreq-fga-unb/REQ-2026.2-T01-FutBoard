@@ -635,6 +635,10 @@
     
       
         
+          
+        
+      
+        
       
         
       
@@ -665,8 +669,9 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
         
           
-          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../evidencias-ciclos/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -680,8 +685,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_7">
@@ -693,6 +704,8 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
             
               
                 
@@ -2923,49 +2936,49 @@
 <td style="text-align: center;"><a id="rn01"></a><strong>RN01</strong></td>
 <td style="text-align: left;"><strong>Cálculo da Área por Jogador</strong></td>
 <td style="text-align: center;">Cálculo Esportivo</td>
-<td style="text-align: left;">A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</td>
+<td style="text-align: left;">A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.<br><br><strong>Origem:</strong> Análise da planilha e do Power BI do técnico e <a href="https://youtu.be/SzRty4GPg_k?t=2277">Reunião com o cliente 1 (37:57)</a></td>
 <td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf19">RF19</a>, <a href="#rf20">RF20</a>, <a href="#rf23">RF23</a>, <a href="#rf35">RF35</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn02"></a><strong>RN02</strong></td>
 <td style="text-align: left;"><strong>Classificação Automática da Dimensão do Espaço</strong></td>
 <td style="text-align: center;">Validação Automática</td>
-<td style="text-align: left;">A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da <a href="#rn01">RN01</a>:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</td>
+<td style="text-align: left;">A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da <a href="#rn01">RN01</a>:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido<br><br><strong>Origem:</strong> Análise da planilha e do Power BI do técnico e <a href="https://youtu.be/SzRty4GPg_k?t=2277">Reunião com o cliente 1 (37:57)</a></td>
 <td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf19">RF19</a>, <a href="#rf20">RF20</a>, <a href="#rf25">RF25</a>, <a href="#rf35">RF35</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn03"></a><strong>RN03</strong></td>
 <td style="text-align: left;"><strong>Simultaneidade e Contagem de Tempo da Sessão</strong></td>
 <td style="text-align: center;">Cálculo Esportivo</td>
-<td style="text-align: left;">Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</td>
+<td style="text-align: left;">Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.<br><br><strong>Origem:</strong> <a href="https://youtu.be/SzRty4GPg_k?t=1542">Reunião com o cliente 1 (25:42)</a> e pedido do cliente de 03/11 para o campo Ordem (<a href="../evidencias-ciclos/EV_C2/#registro-de-decisoes">decisão D08</a>)</td>
 <td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf16">RF16</a>, <a href="#rf17">RF17</a>, <a href="#rf22">RF22</a>, <a href="#rf25">RF25</a>, <a href="#rf26">RF26</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn04"></a><strong>RN04</strong></td>
 <td style="text-align: left;"><strong>Hierarquia e Integridade da Periodização</strong></td>
 <td style="text-align: center;">Integridade Estrutural</td>
-<td style="text-align: left;">A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</td>
+<td style="text-align: left;">A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.<br><br><strong>Origem:</strong> <a href="https://youtu.be/LYDLdFKbS0Q?t=2554">Reunião com o cliente 2 (42:34)</a> e <a href="https://youtu.be/s0J820mlw-E?t=280">Reunião com o cliente 5 (4:40)</a></td>
 <td style="text-align: center;"><a href="#rf01">RF01</a> a <a href="#rf09">RF09</a>, <a href="#rf16">RF16</a>, <a href="#rf18">RF18</a>, <a href="#rf41">RF41</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn05"></a><strong>RN05</strong></td>
 <td style="text-align: left;"><strong>Preenchimento Condicional pelo Objetivo Central</strong></td>
 <td style="text-align: center;">Validação de Entrada</td>
-<td style="text-align: left;">O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</td>
+<td style="text-align: left;">O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).<br><br><strong>Origem:</strong> <a href="https://youtu.be/kc0_jxT9aeY?t=1339">Reunião com o cliente 3 (22:19)</a></td>
 <td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf19">RF19</a>, <a href="#rf20">RF20</a>, <a href="#rf32">RF32</a>, <a href="#rf37">RF37</a> a <a href="#rf40">RF40</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn06"></a><strong>RN06</strong></td>
 <td style="text-align: left;"><strong>Cálculo da Variabilidade de Treinos</strong></td>
 <td style="text-align: center;">Cálculo Esportivo</td>
-<td style="text-align: left;">O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).</td>
+<td style="text-align: left;">O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).<br><br><strong>Origem:</strong> Análise do Power BI do técnico na <a href="https://youtu.be/SzRty4GPg_k?t=254">Reunião com o cliente 1 (4:14)</a></td>
 <td style="text-align: center;"><a href="#rf22">RF22</a>, <a href="#rf25">RF25</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn07"></a><strong>RN07</strong></td>
 <td style="text-align: left;"><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio</strong></td>
 <td style="text-align: center;">Comportamento do Sistema</td>
-<td style="text-align: left;">Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</td>
+<td style="text-align: left;">Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.<br><br><strong>Origem:</strong> Definida pela equipe a partir do DoR, que exige o tratamento do resultado vazio em toda consulta</td>
 <td style="text-align: center;"><a href="#rf22">RF22</a>, <a href="#rf24">RF24</a>, <a href="#rf25">RF25</a>, <a href="#rf35">RF35</a> a <a href="#rf41">RF41</a></td>
 </tr>
 </tbody>

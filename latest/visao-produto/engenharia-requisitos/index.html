@@ -769,10 +769,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#representacao" class="md-nav__link">
+  <a href="#representacao-de-requisitos_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Representação
+        Representação de Requisitos
       
     </span>
   </a>
@@ -806,17 +806,6 @@
     <span class="md-ellipsis">
       
         Verificação e Validação
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#declaracao-de-requisitos_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Declaração de Requisitos
       
     </span>
   </a>
@@ -897,6 +886,10 @@
     
       
         
+          
+        
+      
+        
       
         
       
@@ -927,8 +920,9 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
         
           
-          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../evidencias-ciclos/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -942,8 +936,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_7">
@@ -955,6 +955,8 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
             
               
                 
@@ -1653,10 +1655,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#representacao" class="md-nav__link">
+  <a href="#representacao-de-requisitos_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Representação
+        Representação de Requisitos
       
     </span>
   </a>
@@ -1690,17 +1692,6 @@
     <span class="md-ellipsis">
       
         Verificação e Validação
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#declaracao-de-requisitos_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Declaração de Requisitos
       
     </span>
   </a>
@@ -1788,9 +1779,7 @@
 </ul>
 <h4 id="declaracao-de-requisitos_1">Declaração de Requisitos</h4>
 <ul>
-<li><strong>Histórias de Usuário com Especificação por Cenários:</strong> Declaração do comportamento do sistema através de histórias de usuário decompostas sob a ótica do usuário, tendo como resultado da declaração critérios de aceitação objetivos e verificáveis no formato <em>Como [tipo de usuário / persona],
-eu quero [uma ação ou funcionalidade],
-para que [um benefício ou valor gerado].</em></li>
+<li><strong>Histórias de Usuário com Critérios de Aceitação por Cenários:</strong> Cada requisito funcional é declarado como uma história de usuário (<em>Como [treinador ou auxiliar], eu quero [ação], para [valor]</em>). Os critérios de aceitação de cada história são escritos como cenários verificáveis, com o caminho feliz e os cenários de erro, e ficam registrados no requisito e na issue da história, criada depois que o cliente valida o protótipo.</li>
 </ul>
 <h4 id="representacao-de-requisitos">Representação de Requisitos</h4>
 <ul>
@@ -1802,16 +1791,18 @@ para que [um benefício ou valor gerado].</em></li>
 </ul>
 <h4 id="verificacao-e-validacao_1">Verificação e Validação</h4>
 <ul>
+<li><strong>Confronto Cruzado (Declaração × Protótipo):</strong> Antes do código, o requisito declarado (critérios de aceitação, regras de negócio e RNFs) é comparado com o frame correspondente no Figma. Cada divergência vira uma correção no requisito ou no protótipo e entra no Registro de Decisões.</li>
 <li><strong>Validação dos Protótipos com o Cliente:</strong> Homologação visual iterativa com o treinador. No RAD, os protótipos validados servem simultaneamente como especificação e instrumento formal de validação de requisitos.</li>
 </ul>
 <h4 id="organizacao-e-atualizacao_1">Organização e Atualização</h4>
 <ul>
 <li><strong>Refinamento Contínuo do Backlog:</strong> Atualização constante do backlog e das tarefas com apoio da ferramenta GitHub Projects, mantendo a rastreabilidade entre as telas validadas no Figma e os requisitos a serem construídos.</li>
+<li><strong>Registro de Decisões e Matriz de Impacto:</strong> Cada decisão que altera um requisito é registrada com a data, a evidência de origem e os artefatos que ela atinge (requisito, história, critérios, regras, protótipo, código e documentação). A decisão só é marcada como concluída quando todos esses artefatos foram atualizados.</li>
 </ul>
 <hr />
-<h4 id="representacao">Representação</h4>
+<h4 id="representacao-de-requisitos_1">Representação de Requisitos</h4>
 <ul>
-<li><strong>Evolução dos Protótipos Validados:</strong> Os protótipos e especificações aprovados na fase de design evoluem em código e incrementos funcionais até se consolidarem no sistema final.</li>
+<li><strong>Protótipo Validado como Referência:</strong> O protótipo validado na fase de design continua sendo a representação do requisito durante a construção. Quando a implementação revela uma mudança, o protótipo é atualizado antes do código e a mudança entra no Registro de Decisões.</li>
 </ul>
 <h4 id="verificacao-e-validacao_2">Verificação e Validação</h4>
 <ul>
@@ -1827,13 +1818,10 @@ para que [um benefício ou valor gerado].</em></li>
 <ul>
 <li><strong>Prática de Validação com o Cliente e Testes de Aceitação:</strong> Utilização do sistema em ambiente real de produção pelo técnico Marcus Vinicius no Canaã Esporte Clube, atestando a aderência plena da solução às atividades do técnico e seu auxiliar técnico.</li>
 </ul>
-<h4 id="declaracao-de-requisitos_2">Declaração de Requisitos</h4>
-<ul>
-<li><strong>Notas de Versão e Documento de apoio ao uso:</strong> Elaboração de documentação técnica de entrega (<em>release notes</em>) e guia prático do usuário para apoiar o treinador e seu auxiliar técnico na operação do FutBoard.</li>
-</ul>
 <h4 id="organizacao-e-atualizacao_3">Organização e Atualização</h4>
 <ul>
 <li><strong>Fechamento da Linha de Base:</strong> Fechamento e consolidação do escopo final implementado na ferramenta GitHub Projects, formalizando a linha de base de requisitos entregue e registrando demandas futuras para novas versões do produto.</li>
+<li><strong>Notas de Versão e Manual do Usuário:</strong> Documentação de entrega que acompanha a linha de base e apoia o treinador e o auxiliar técnico no uso do FutBoard. Ela registra o que foi entregue, sem declarar novos requisitos.</li>
 </ul>
 <h2 id="52-mapeamento-er-x-processo">5.2 Mapeamento ER x Processo</h2>
 <p>O quadro a seguir relaciona cada fase do processo RAD adotado (Planejamento de Requisitos, Design do Usuário, Construção e Cutover) à atividade de Engenharia de Requisitos correspondente, à técnica aplicada e ao resultado esperado, em coerência com o detalhamento do item 5.1. O mapeamento diferencia explicitamente a <strong>verificação interna</strong> (feita pela equipe contra os critérios de aceitação) da <strong>validação com o cliente</strong> (homologação de protótipos e incrementos junto ao técnico Marcus Vinicius).</p>
@@ -1886,8 +1874,8 @@ para que [um benefício ou valor gerado].</em></li>
 <tr>
 <td>Design do Usuário</td>
 <td>Declaração de Requisitos</td>
-<td>Histórias de Usuário com Especificação por Cenários</td>
-<td>Comportamento declarado com critérios de aceitação objetivos (Dado/Quando/Então)</td>
+<td>Histórias de usuário com critérios de aceitação por cenários</td>
+<td>Critérios de aceitação em cenários (caminho feliz e erro), registrados no requisito e na issue da história</td>
 </tr>
 <tr>
 <td>Design do Usuário</td>
@@ -1904,6 +1892,12 @@ para que [um benefício ou valor gerado].</em></li>
 <tr>
 <td>Design do Usuário</td>
 <td>Verificação e Validação</td>
+<td>Confronto cruzado (declaração × protótipo)</td>
+<td>Divergências entre o requisito declarado e o protótipo corrigidas antes do código</td>
+</tr>
+<tr>
+<td>Design do Usuário</td>
+<td>Verificação e Validação</td>
 <td>Validação dos protótipos com o cliente</td>
 <td>Protótipos validados que servem como especificação e validação</td>
 </tr>
@@ -1914,10 +1908,16 @@ para que [um benefício ou valor gerado].</em></li>
 <td>Rastreabilidade entre telas do Figma e requisitos mantida</td>
 </tr>
 <tr>
+<td>Design do Usuário</td>
+<td>Organização e Atualização</td>
+<td>Registro de decisões e matriz de impacto</td>
+<td>Cada mudança registrada e propagada a todos os artefatos que atinge</td>
+</tr>
+<tr>
 <td>Construção</td>
-<td>Representação</td>
-<td>Evolução dos protótipos validados em incrementos</td>
-<td>Funcionalidades construídas a partir do protótipo aprovado</td>
+<td>Representação de Requisitos</td>
+<td>Protótipo validado como referência</td>
+<td>Protótipo coerente com o que está sendo construído</td>
 </tr>
 <tr>
 <td>Construção</td>
@@ -1945,15 +1945,9 @@ para que [um benefício ou valor gerado].</em></li>
 </tr>
 <tr>
 <td>Cutover</td>
-<td>Declaração de Requisitos</td>
-<td>Notas de versão e manual do usuário</td>
-<td>Documentação de entrega (release notes e guia) consolidada</td>
-</tr>
-<tr>
-<td>Cutover</td>
 <td>Organização e Atualização</td>
-<td>Fechamento da linha de base (apoio: GitHub Projects)</td>
-<td>Linha de base entregue formalizada e demandas futuras registradas</td>
+<td>Fechamento da linha de base (apoio: GitHub Projects), notas de versão e manual do usuário</td>
+<td>Linha de base entregue formalizada, documentação de entrega consolidada e demandas futuras registradas</td>
 </tr>
 </tbody>
 </table>
