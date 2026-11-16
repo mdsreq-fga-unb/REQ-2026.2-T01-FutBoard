@@ -1,4 +1,4 @@
-## 6. Cronograma e Entregas
+## Cronograma e Entregas
 
 O cronograma está organizado em iterações semanais distribuídas pelas fases do RAD: **Planejamento de Requisitos** (Iterações 1 a 5), **Design do Usuário e Construção** (Iterações 6 a 11) e **Cutover** (Iterações 12 e 13). As iterações de construção seguem a ordem de dependência do domínio: **periodização (CP02)** → **sessão e registro de treinos (CP01)** → **dashboard (CP03)** → **relatório PDF (CP04)**.
 

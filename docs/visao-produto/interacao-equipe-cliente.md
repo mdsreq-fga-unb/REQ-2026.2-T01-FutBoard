@@ -1,4 +1,4 @@
-## 7.1 Composição da Equipe
+## Composição da Equipe
 
 #### Composição da equipe
 

@@ -1,4 +1,4 @@
-# 10 Escopo do Produto
+# Escopo do Produto
 
 Esta seção descreve o Escopo de produto (preliminar ou completo, dependendo do produto), que é uma lista priorizada de todas as funcionalidades e melhorias planejadas para o software. Também aborda a priorização dessas funcionalidades e o que será entregue no Produto Mínimo Viável (MVP).
 

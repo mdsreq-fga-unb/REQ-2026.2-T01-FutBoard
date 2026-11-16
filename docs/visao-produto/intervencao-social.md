@@ -1,4 +1,4 @@
-## 3. Intervenção Social
+## Intervenção Social
 
 A solução FutBoard tende a produzir uma intervenção social voltada à profissionalização da gestão de treinos no futebol de base, à substituição de métodos manuais e não padronizados (como planilhas e anotações soltas) por um processo estruturado e cientificamente orientado, e à mudança na forma como o corpo técnico do Canaã Esporte Clube acompanha o desenvolvimento dos atletas da categoria Sub-17 ao longo do tempo.
 
