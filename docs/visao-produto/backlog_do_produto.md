@@ -138,9 +138,15 @@ A priorização do MVP baseou-se na matriz de Valor versus Esforço e na frequê
 > O **RF01** foi marcado pelo cliente como **valor de negócio 4** e **frequência de uso de 2**, como estavámos selecionando os requisitos que estavam no quadrante 1 e 2 cuja a frequência de uso estava entre 3 e 5 esse requisito ficava de fora do MVP. Porém a equipe logo percebeu que o **RF01** é vital para o funcionamento do sistema. **Por isso o RF01 foi incorporado ao MVP.**
 
 ### 2. Análise de Dependências Estruturais (Inclusão do RF01)
-A frequência de uso isoladamente não substitui a análise de dependências de arquitetura e domínio. O RF01 (Cadastrar macrociclo) possui Valor 4 e Frequência 2 (pois o macrociclo representa a temporada e é cadastrado poucas vezes ao ano), o que o deixaria fora de um filtro puramente mecânico por frequência. Contudo, na árvore hierárquica de periodização do sistema (Macrociclo → Mesociclo → Microciclo → Sessão → Atividades → Indicadores/Gráficos), o RF01 é pré-requisito estrutural obrigatório para RF04, RF07, RF16 e todas as consultas analíticas. Por essa dependência técnica direta, o RF01 foi incorporado ao MVP, fechando os 27 RFs (26 RFs com Valor 4 e Frequência ≥ 3 + RF01).
+A frequência de uso isoladamente não substitui a análise de dependências de arquitetura e domínio. O RF01 (Cadastrar macrociclo) possui Valor 4 e Frequência 2 (pois o macrociclo representa a temporada e é cadastrado poucas vezes ao ano), o que o deixaria fora de um filtro puramente mecânico por frequência. Contudo, na árvore hierárquica de periodização do sistema (Macrociclo → Mesociclo → Microciclo → Sessão → Atividades → Indicadores/Gráficos), o RF01 é pré-requisito estrutural obrigatório para RF04, RF07, RF16 e todas as consultas analíticas. Por essa dependência técnica direta, o RF01 foi incorporado ao MVP.
 
-### 3. Por que estamos utilizando esses critérios?
+### 3. Inclusão do RF27 e do RF28 e permanência do RF29 fora do MVP
+
+Na revisão da Unidade 3, a equipe identificou que o RF27 (Criar conta) e o RF28 (Fazer login) estavam classificados em Q4, embora tenham valor 3 e esforço técnico 2,33, o que pela regra da matriz corresponde a Q1. Com a classificação corrigida e frequência de uso 5, os dois passaram a atender aos critérios de corte e foram incluídos no MVP. Assim, o MVP reúne **29 RFs**: 26 RFs com valor 4 e frequência ≥ 3, o RF27, o RF28 e o RF01, incluído por dependência estrutural.
+
+O **RF29** (Anexar imagem à atividade) também tem valor 3, está em Q2 e tem frequência 5, mas permanece fora do MVP: nenhum outro RF depende dele, ele não alimenta indicadores, gráficos nem o relatório, e exige armazenamento de arquivos, que só estará disponível com a implantação em VPS.
+
+### 4. Por que estamos utilizando esses critérios?
 
 - Contexto e desafio: Na avaliação inicial, aproximadamente 90% das funcionalidades foram avaliadas pelo cliente com valor de negócio máximo, gerando um escopo amplo demais para o MVP.
 

@@ -18,9 +18,9 @@ As ferramentas de comunicação são essenciais para que a equipe de desenvolvim
 
 **Ferramenta principal:** As reuniões de acompanhamento, revisão e alinhamento com o cliente serão realizadas por videoconferência, utilizando o Microsoft Teams. Essas reuniões permitirão a validação das entregas, a elicitação e o refinamento de requisitos, a coleta de feedback e a discussão das próximas atividades do projeto.
 
-**Frequência e Método:** As reuniões com o cliente ocorrerão semanalmente às quintas-feiras, garantindo o envolvimento constante do cliente nas etapas de elicitação, validação de entregas e ajuste de requisitos. Novas demandas ou alterações de escopo identificadas durante essas reuniões são registradas pela equipe e incorporadas ao backlog do projeto para posterior priorização.
+**Frequência e Método:** O plano inicial previa reuniões semanais às quintas-feiras. Na prática, a agenda do técnico levou a equipe a combinar dois formatos: reuniões por videoconferência nos marcos do processo (24/08, 10/09, 21/09, 15/10 e 22/10) e validações pelo WhatsApp entre esses marcos, com o envio de vídeos dos protótipos e o retorno do técnico por mensagem. As validações pelo WhatsApp são registradas com prints nas [Evidências por Iteração](evidencias-ciclos/index.md), e as decisões que alteram requisitos entram no Registro de Decisões de cada iteração. Novas demandas ou alterações de escopo são incorporadas ao backlog do projeto para posterior priorização.
 
-**Ferramenta secundária:** O WhatsApp será utilizado como meio de comunicação rápida e informal com o cliente, para esclarecimento de dúvidas pontuais e alinhamentos que não demandam uma reunião formal entre as reuniões semanais.
+**Ferramenta secundária:** O WhatsApp é utilizado para esclarecer dúvidas pontuais e para validar protótipos e escopo entre as reuniões.
 
 ### Comunicação entre os membros da equipe
 
@@ -35,10 +35,10 @@ As ferramentas de comunicação são essenciais para que a equipe de desenvolvim
 - **Reunião de revisão geral:** ao final de cada ciclo de desenvolvimento, a equipe revisa as entregas realizadas, analisa os aprendizados obtidos e define melhorias a serem aplicadas nos próximos ciclos.
 
 
-##7.3 Processo de Validação
+## 7.3 Processo de Validação
 Com base na metodologia RAD, o processo de validação pelo cliente será executada em ciclos rápidos de prototipação e feedback, com a participação constante da evolução do produto. A abordagem iterativa garante que erros sejam identificados e corrigidos o quanto antes, aumentando o alinhamento entre a solução e as expectativas do cliente ao longo de todo o projeto, a abordagem incremental adotada no projeto garante que a cada ciclo seja entregue uma parte funcional do produto.
 
-##Validação pelo Cliente
+### Validação pelo Cliente
 O cliente participará ativamente na revisão de artefatos concretos em diferentes momentos do ciclo de desenvolvimento:
 
 - **Backlog do Produto:** O cliente valida o escopo geral do projeto de forma colaborativa, participando da priorização dos itens que compõem o backlog. Nesse processo, avalia quais funcionalidades geram mais valor para o negócio, contribuindo diretamente para a definição do que será construído em cada iteração.

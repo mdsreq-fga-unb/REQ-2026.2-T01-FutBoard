@@ -42,9 +42,7 @@ Abaixo estão detalhadas as atividades e técnicas de Engenharia de Requisitos a
 - **Entrevista com o Stakeholder:** Encontros frequentes (via Teams e WhatsApp) com o técnico Marcus Vinicius para co-criar telas, definir fluxos operacionais e descobrir exceções e regras de negócio à medida que a interface toma forma.
 
 #### Declaração de Requisitos
-- **Histórias de Usuário com Especificação por Cenários:** Declaração do comportamento do sistema através de histórias de usuário decompostas sob a ótica do usuário, tendo como resultado da declaração critérios de aceitação objetivos e verificáveis no formato *Como [tipo de usuário / persona],
-eu quero [uma ação ou funcionalidade],
-para que [um benefício ou valor gerado].*
+- **Histórias de Usuário com Critérios de Aceitação por Cenários:** Cada requisito funcional é declarado como uma história de usuário (*Como [treinador ou auxiliar], eu quero [ação], para [valor]*). Os critérios de aceitação de cada história são escritos como cenários verificáveis, com o caminho feliz e os cenários de erro, e ficam registrados no requisito e na issue da história, criada depois que o cliente valida o protótipo.
 
 #### Representação de Requisitos
 - **Prototipação de Média Fidelidade:** Concepção e evolução das telas e componentes interativos com apoio da ferramenta Figma, fornecendo representações visuais ricas que auxiliam na especificação detalhada da interface e da experiência do usuário.
@@ -53,18 +51,20 @@ para que [um benefício ou valor gerado].*
 - **Repriorização MoSCoW:** Ajuste dinâmico das prioridades do escopo conforme o feedback visual do cliente nas sessões de design, aproveitando a flexibilidade do RAD onde o escopo atua como variável de ajuste.
 
 #### Verificação e Validação
+- **Confronto Cruzado (Declaração × Protótipo):** Antes do código, o requisito declarado (critérios de aceitação, regras de negócio e RNFs) é comparado com o frame correspondente no Figma. Cada divergência vira uma correção no requisito ou no protótipo e entra no Registro de Decisões.
 - **Validação dos Protótipos com o Cliente:** Homologação visual iterativa com o treinador. No RAD, os protótipos validados servem simultaneamente como especificação e instrumento formal de validação de requisitos.
 
 #### Organização e Atualização
 - **Refinamento Contínuo do Backlog:** Atualização constante do backlog e das tarefas com apoio da ferramenta GitHub Projects, mantendo a rastreabilidade entre as telas validadas no Figma e os requisitos a serem construídos.
+- **Registro de Decisões e Matriz de Impacto:** Cada decisão que altera um requisito é registrada com a data, a evidência de origem e os artefatos que ela atinge (requisito, história, critérios, regras, protótipo, código e documentação). A decisão só é marcada como concluída quando todos esses artefatos foram atualizados.
 
 ---
 
 
 
 
-#### Representação
-- **Evolução dos Protótipos Validados:** Os protótipos e especificações aprovados na fase de design evoluem em código e incrementos funcionais até se consolidarem no sistema final.
+#### Representação de Requisitos
+- **Protótipo Validado como Referência:** O protótipo validado na fase de design continua sendo a representação do requisito durante a construção. Quando a implementação revela uma mudança, o protótipo é atualizado antes do código e a mudança entra no Registro de Decisões.
 
 #### Verificação e Validação
 - **Verificação Interna (Checklists e Testes):** Inspeção técnica conduzida pela equipe de desenvolvimento através de checklists de qualidade de código, revisão por pares e tecnicas de verificação do software frente aos critérios de aceitação declarados.
@@ -82,11 +82,9 @@ para que [um benefício ou valor gerado].*
 #### Verificação e Validação
 - **Prática de Validação com o Cliente e Testes de Aceitação:** Utilização do sistema em ambiente real de produção pelo técnico Marcus Vinicius no Canaã Esporte Clube, atestando a aderência plena da solução às atividades do técnico e seu auxiliar técnico.
 
-#### Declaração de Requisitos
-- **Notas de Versão e Documento de apoio ao uso:** Elaboração de documentação técnica de entrega (*release notes*) e guia prático do usuário para apoiar o treinador e seu auxiliar técnico na operação do FutBoard.
-
 #### Organização e Atualização
 - **Fechamento da Linha de Base:** Fechamento e consolidação do escopo final implementado na ferramenta GitHub Projects, formalizando a linha de base de requisitos entregue e registrando demandas futuras para novas versões do produto.
+- **Notas de Versão e Manual do Usuário:** Documentação de entrega que acompanha a linha de base e apoia o treinador e o auxiliar técnico no uso do FutBoard. Ela registra o que foi entregue, sem declarar novos requisitos.
 
 
 
@@ -102,16 +100,17 @@ O quadro a seguir relaciona cada fase do processo RAD adotado (Planejamento de R
 | Planejamento de Requisitos | Verificação e Validação | Validação do escopo com o cliente e Revisão em Pares | Escopo de alto nível validado com o técnico e Documento de Visão sem ambiguidades |
 | Planejamento de Requisitos | Organização e Atualização | Catalogação de Requisitos (apoio: GitHub Projects) | Escopo inicial versionado e rastreável |
 | Design do Usuário | Elicitação e Descoberta | Entrevista com o stakeholder (encontros frequentes via Teams e WhatsApp) | Telas co-criadas e regras de negócio descobertas conforme a interface toma forma |
-| Design do Usuário | Declaração de Requisitos | Histórias de Usuário com Especificação por Cenários | Comportamento declarado com critérios de aceitação objetivos (Dado/Quando/Então) |
+| Design do Usuário | Declaração de Requisitos | Histórias de usuário com critérios de aceitação por cenários | Critérios de aceitação em cenários (caminho feliz e erro), registrados no requisito e na issue da história |
 | Design do Usuário | Representação de Requisitos | Prototipação de Média Fidelidade (apoio: Figma) | Interface especificada e representada visualmente por protótipos de média fidelidade |
 | Design do Usuário | Análise e Consenso | Repriorização MoSCoW | Escopo ajustado conforme o feedback visual (escopo como variável no RAD) |
+| Design do Usuário | Verificação e Validação | Confronto cruzado (declaração × protótipo) | Divergências entre o requisito declarado e o protótipo corrigidas antes do código |
 | Design do Usuário | Verificação e Validação | Validação dos protótipos com o cliente | Protótipos validados que servem como especificação e validação |
 | Design do Usuário | Organização e Atualização | Refinamento contínuo do backlog (apoio: GitHub Projects) | Rastreabilidade entre telas do Figma e requisitos mantida |
-| Construção | Representação | Evolução dos protótipos validados em incrementos | Funcionalidades construídas a partir do protótipo aprovado |
+| Design do Usuário | Organização e Atualização | Registro de decisões e matriz de impacto | Cada mudança registrada e propagada a todos os artefatos que atinge |
+| Construção | Representação de Requisitos | Protótipo validado como referência | Protótipo coerente com o que está sendo construído |
 | Construção | Verificação e Validação | Verificação interna: checklists de qualidade, revisão por pares e tecnicas de verificação do software | Incrementos verificados internamente contra os critérios de aceitação |
 | Construção | Verificação e Validação | Validação com o cliente: demonstração do incremento | Incrementos validados pelo técnico frente à rotina real de treinos |
 | Construção | Organização e Atualização | Gestão visual do backlog (apoio: GitHub Projects) | Impedimentos mitigados e escopo repriorizado conforme as validações |
 | Cutover | Verificação e Validação | Prática de validação com o cliente e testes de aceitação | MVP homologado em uso real no Canaã Esporte Clube |
-| Cutover | Declaração de Requisitos | Notas de versão e manual do usuário | Documentação de entrega (release notes e guia) consolidada |
-| Cutover | Organização e Atualização | Fechamento da linha de base (apoio: GitHub Projects) | Linha de base entregue formalizada e demandas futuras registradas |
+| Cutover | Organização e Atualização | Fechamento da linha de base (apoio: GitHub Projects), notas de versão e manual do usuário | Linha de base entregue formalizada, documentação de entrega consolidada e demandas futuras registradas |
 

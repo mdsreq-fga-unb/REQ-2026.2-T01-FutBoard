@@ -44,6 +44,7 @@ nav:
       - Engenharia de Requisitos: visao-produto/engenharia-requisitos.md
       - Cronograma e Entregas: visao-produto/cronogramas-entregas.md
       - Evidências por Iteração:
+          - visao-produto/evidencias-ciclos/index.md
           - Iteração 7: visao-produto/evidencias-ciclos/EV_C1.md
           - Iteração 8: visao-produto/evidencias-ciclos/EV_C2.md
           - Iteração 9: visao-produto/evidencias-ciclos/EV_C3.md

@@ -8,4 +8,4 @@
   <figcaption>Figura 1: Comprovação de Validação do Cliente sobre o MVP</figcaption>
 </figure>
 
-[Voltar para o MVP](backlog_do_produto.md##-10.3-Validação-do-Backlog-e-Escopo-do-MVP-com-o-Cliente)
+[Voltar para o MVP](backlog_do_produto.md#102-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente)

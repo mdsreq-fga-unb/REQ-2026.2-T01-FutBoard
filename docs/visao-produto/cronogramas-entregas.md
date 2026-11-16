@@ -49,8 +49,8 @@ O cronograma está organizado em iterações semanais distribuídas pelas fases 
 <tr>
 <td>Iteração 5</td>
 <td>05/10<br>-<br>12/10</td>
-<td><a href="../backlog_do_produto/#6-requisitos-do-mvp">MVP: 27 RFs e 3 RNFs</a><br><a href="../../catalogos-termos/catalogos-termos/">Catálogo de Termos</a><br><a href="../dor-dod/">DoR / DoD</a><br><a href="../Requisitos-de-Software/#84-matriz-sintese-de-rastreabilidade">Rastreabilidade</a></td>
-<td><a href="../backlog_do_produto/#4-matriz-valor-x-esforco-e-quadrantes">Valor x Esforço + Frequência de Uso</a><br><a href="../backlog_do_produto/#103-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente">Validação Cliente</a></td>
+<td><a href="../backlog_do_produto/#102-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente">MVP: 27 RFs e 3 RNFs</a><br><a href="../../catalogos-termos/catalogos-termos/">Catálogo de Termos</a><br><a href="../dor-dod/">DoR / DoD</a><br><a href="../Requisitos-de-Software/#84-matriz-sintese-de-rastreabilidade">Rastreabilidade</a></td>
+<td><a href="../backlog_do_produto/#4-matriz-valor-x-esforco-e-quadrantes">Valor x Esforço + Frequência de Uso</a><br><a href="../backlog_do_produto/#102-validacao-do-backlog-e-escopo-do-mvp-com-o-cliente">Validação Cliente</a></td>
 <td>Finalizado</td>
 </tr>
 

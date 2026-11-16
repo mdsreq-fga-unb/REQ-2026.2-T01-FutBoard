@@ -30,7 +30,7 @@ Explore as seções da documentação do projeto por meio dos painéis interativ
     Reuniões gravadas para o desenvolvimento do projeto.
 
 
-    [Acessar Reuniões](atas-reunioes/reunioes.md)
+    [Acessar Reuniões](atas-reunioes/reunioes-da-equipe.md)
 
 
 -   __Lições Aprendidas__
