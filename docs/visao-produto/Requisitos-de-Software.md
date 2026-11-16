@@ -1157,7 +1157,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
 
-**Priorização:** Valor: 2,00 | Frequência: 5,00 | Esforço: 3,00 | Complexidade: 4,00 | Conhecimento: 4,00 | Esforço Técnico: 3,67 → Q1 Alto valor / Alta carga técnica
+**Priorização:** Valor: 2,00 | Frequência: 5,00 | Esforço: 3,00 | Complexidade: 4,00 | Conhecimento: 4,00 | Esforço Técnico: 3,67 → Q4 Baixo valor / Alta carga técnica
 
 
 </div>
