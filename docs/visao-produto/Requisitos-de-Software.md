@@ -1584,15 +1584,121 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 ---
 ## 8.2 Requisitos Não Funcionais — RNFs
 
-Lista de requisitos não funcionais, contendo: Numeração do Requisito; Nome; Descrição; Classificação FURPS+; Critério de Verificação.
+Os requisitos não funcionais definem as propriedades de qualidade do sistema e os respectivos critérios de verificação.
 
-| ID | Nome | Descrição | Classificação FURPS+ | Critério de Verificação |
-|---|---|---|---|---|
-| **RNF01** | Segurança e Proteção de Credenciais de Usuários | O sistema deve armazenar as senhas dos usuários exclusivamente como hash bcrypt com salt, sem armazenamento em texto puro. O acesso aos recursos internos deve exigir autenticação válida, e a comunicação em produção deve ocorrer por HTTPS. O sistema deve armazenar somente os dados pessoais necessários à identificação e autenticação dos operadores, sem cadastro de dados pessoais nominais ou biométricos dos atletas. | Segurança | **1. Proteção das senhas:** cadastrar dois usuários com a mesma senha e verificar no banco que ambos possuem hashes bcrypt distintos, com salt individual, sem armazenamento da senha em texto puro. **2. Controle de acesso:** realizar requisições às APIs protegidas sem autenticação ou com credenciais inválidas e verificar o bloqueio com HTTP 401, sem exposição dos dados internos. Realizar uma requisição com autenticação válida e verificar o acesso aos recursos permitidos. **3. Comunicação segura:** verificar que a comunicação em produção utiliza HTTPS com certificado válido. **4. Escopo dos dados:** inspecionar os modelos, formulários e APIs para confirmar que não são coletados dados pessoais nominais ou biométricos dos atletas. |
-| **RNF02** | Interface Responsiva e Adaptável | A interface deve adaptar automaticamente seu layout à resolução do dispositivo, preservando a legibilidade e a utilização dos gráficos, indicadores, tabelas, formulários e demais componentes. | Usabilidade | Executar os principais fluxos da aplicação nas larguras de 360 px (mobile), 768 px (tablet) e 1366 px (desktop). O teste será aprovado se os componentes permanecerem legíveis e acessíveis, sem cortes, sobreposições ou necessidade de rolagem horizontal na página. |
-| **RNF03** | Eficiência no Cadastro de Treinos | O sistema deve permitir que o treinador ou auxiliar técnico conclua o cadastro de uma sessão de treino de complexidade média em menos de dois minutos, incluindo o registro de suas atividades e respectivas classificações. | Usabilidade | Com a periodização, biblioteca de atividades e catálogos previamente cadastrados, registrar uma sessão baseada no treino demonstrado pelo cliente em 21/09/2026, contendo três atividades sequenciais, sem simultaneidade: **1)** PDI, ordem 1, duração de 20 min, sem dimensões ou número de jogadores; **2)** Aquisição, ordem 2, duração de 25 min, espaço de 50 × 60 m e 18 jogadores; **3)** Aplicação, ordem 3, duração de 30 min, espaço de 105 × 68 m e 22 jogadores. Iniciar a medição ao acionar o cadastro da sessão e encerrá-la após a confirmação do registro completo das três atividades, incluindo suas classificações táticas e técnicas conforme o treino de referência. O teste será aprovado se o tempo total for estritamente inferior a 120 segundos, os dados estiverem corretamente registrados, as dimensões do espaço forem calculadas automaticamente e a duração total da sessão corresponder a 75 minutos. |
-| **RNF04** | Atualização Automática do Dashboard | Os gráficos e indicadores do dashboard devem ser recalculados e atualizados em até cinco segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino. A atualização automática deve ocorrer na interface do usuário que realizou a operação, sem necessidade de recarregamento manual da página. Outros usuários poderão atualizar manualmente a página para consultar os dados mais recentes. | Performance | No ambiente implantado, com conexão estável e uma base de referência representativa de uma temporada completa, contendo 1 macrociclo, 10 mesociclos, 40 microciclos, 200 sessões e 600 execuções de atividades, realizar separadamente operações de cadastro, edição e exclusão. Medir o intervalo entre a confirmação de sucesso da operação e a atualização completa dos gráficos e indicadores afetados. O teste será aprovado se cada atualização ocorrer em até cinco segundos, sem recarregamento manual da página pelo usuário responsável, e os indicadores refletirem corretamente os dados persistidos. Verificar também que outro usuário conectado consegue visualizar os dados atualizados ao recarregar manualmente a página. |
-| **RNF05** | Backup e Recuperação de Dados | O sistema deve preservar os dados históricos mediante a realização automática de backups completos diários, preferencialmente durante a madrugada, mantidos por, no mínimo, 30 dias em armazenamento privado e separado do servidor principal, com acesso restrito aos responsáveis. As cópias devem contemplar todos os dados persistidos no banco, incluindo periodização, sessões, atividades, biblioteca, classificações e contas de usuários, bem como os arquivos associados, quando aplicável. Em caso de falha, corrupção ou perda de dados, o sistema deve permitir a recuperação das informações com perda máxima de 24 horas de registros (RPO) e restabelecimento do serviço em até 24 horas após a identificação do incidente (RTO). A geração dos backups e a restauração dos dados serão responsabilidade da administração da infraestrutura. | Confiabilidade | Verificar os registros de execução automática dos backups, a frequência diária, a retenção mínima de 30 dias, o armazenamento separado e o acesso restrito. Simular uma falha do banco de dados em ambiente de teste e realizar a restauração de uma cópia de segurança. O teste será aprovado se a perda de dados não ultrapassar 24 horas, o serviço for restabelecido em até 24 horas após a identificação da falha e os registros restaurados estiverem íntegros, com seus relacionamentos preservados e disponíveis para consulta na aplicação. Verificar também a recuperação dos arquivos associados, quando aplicável. |
+<div class="rf-cards" markdown>
+
+<details id="rnf01" markdown>
+<summary>RNF01 · Segurança e Proteção de Credenciais de Usuários</summary>
+
+**Nome:** Segurança e Proteção de Credenciais de Usuários
+
+**Classificação FURPS+:** Segurança
+
+**Descrição**
+
+O sistema deve armazenar as senhas dos usuários exclusivamente como hash bcrypt com salt, sem armazenamento em texto puro. O acesso aos recursos internos deve exigir autenticação válida, e a comunicação em produção deve ocorrer por HTTPS. O sistema deve armazenar somente os dados pessoais necessários à identificação e autenticação dos operadores, sem cadastro de dados pessoais nominais ou biométricos dos atletas.
+
+**Critérios de Verificação**
+
+- **Proteção das senhas:** cadastrar dois usuários com a mesma senha e verificar no banco que ambos possuem hashes bcrypt distintos, com salt individual, sem armazenamento da senha em texto puro.
+- **Controle de acesso:** realizar requisições às APIs protegidas sem autenticação ou com credenciais inválidas e verificar o bloqueio com HTTP 401, sem exposição dos dados internos. Realizar uma requisição com autenticação válida e verificar o acesso aos recursos permitidos.
+- **Comunicação segura:** verificar que a comunicação em produção utiliza HTTPS com certificado válido.
+- **Escopo dos dados:** inspecionar os modelos, formulários e APIs para confirmar que não são coletados dados pessoais nominais ou biométricos dos atletas.
+
+</details>
+
+<details id="rnf02" markdown>
+<summary>RNF02 · Interface Responsiva e Adaptável</summary>
+
+**Nome:** Interface Responsiva e Adaptável
+
+**Classificação FURPS+:** Usabilidade
+
+**Descrição**
+
+A interface deve adaptar automaticamente seu layout à resolução do dispositivo, preservando a legibilidade e a utilização dos gráficos, indicadores, tabelas, formulários e demais componentes.
+
+**Critérios de Verificação**
+
+- Executar os principais fluxos da aplicação nas larguras de 360 px (mobile), 768 px (tablet) e 1366 px (desktop).
+- Verificar que os componentes permanecem legíveis e acessíveis, sem cortes, sobreposições ou necessidade de rolagem horizontal na página.
+
+</details>
+
+<details id="rnf03" markdown>
+<summary>RNF03 · Eficiência no Cadastro de Treinos</summary>
+
+**Nome:** Eficiência no Cadastro de Treinos
+
+**Classificação FURPS+:** Usabilidade
+
+**Descrição**
+
+O sistema deve permitir que o treinador ou auxiliar técnico conclua o cadastro de uma sessão de treino de complexidade média em menos de dois minutos, incluindo o registro de suas atividades e respectivas classificações.
+
+**Critérios de Verificação**
+
+- Utilizar a periodização, a biblioteca de atividades e os catálogos previamente cadastrados.
+- Registrar uma sessão baseada no treino demonstrado pelo cliente em 21/09/2026, contendo três atividades sequenciais, sem simultaneidade:
+
+    - **Ordem 1:** PDI, 20 min, sem dimensões ou número de jogadores.
+    - **Ordem 2:** Aquisição, 25 min, espaço de 50 × 60 m e 18 jogadores.
+    - **Ordem 3:** Aplicação, 30 min, espaço de 105 × 68 m e 22 jogadores.
+
+- Iniciar a medição ao acionar o cadastro da sessão e encerrá-la após a confirmação do registro completo das três atividades, incluindo suas classificações táticas e técnicas conforme o treino de referência.
+- Verificar que o tempo total é estritamente inferior a 120 segundos, que os dados estão corretamente registrados, que as dimensões do espaço são calculadas automaticamente e que a duração total da sessão corresponde a 75 minutos.
+
+</details>
+
+<details id="rnf04" markdown>
+<summary>RNF04 · Atualização Automática do Dashboard</summary>
+
+**Nome:** Atualização Automática do Dashboard
+
+**Classificação FURPS+:** Performance
+
+**Descrição**
+
+Os gráficos e indicadores do dashboard devem ser recalculados e atualizados em até cinco segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino. A atualização automática deve ocorrer na interface do usuário que realizou a operação, sem necessidade de recarregamento manual da página. Outros usuários poderão atualizar manualmente a página para consultar os dados mais recentes.
+
+**Critérios de Verificação**
+
+- Realizar o teste no ambiente implantado, com conexão estável e uma base de referência representativa de uma temporada completa: 1 macrociclo, 10 mesociclos, 40 microciclos, 200 sessões e 600 execuções de atividades.
+- Realizar separadamente operações de cadastro, edição e exclusão de um treino.
+- Medir o intervalo entre a confirmação de sucesso da operação e a atualização completa dos gráficos e indicadores afetados.
+- Verificar que cada atualização ocorre em até cinco segundos, sem recarregamento manual da página pelo usuário responsável, e que os indicadores refletem corretamente os dados persistidos.
+- Verificar que outro usuário conectado consegue visualizar os dados atualizados ao recarregar manualmente a página.
+
+</details>
+
+<details id="rnf05" markdown>
+<summary>RNF05 · Backup e Recuperação de Dados</summary>
+
+**Nome:** Backup e Recuperação de Dados
+
+**Classificação FURPS+:** Confiabilidade
+
+**Descrição**
+
+O sistema deve preservar os dados históricos mediante a realização automática de backups completos diários, preferencialmente durante a madrugada, mantidos por, no mínimo, 30 dias em armazenamento privado e separado do servidor principal, com acesso restrito aos responsáveis.
+
+As cópias devem contemplar todos os dados persistidos no banco, incluindo periodização, sessões, atividades, biblioteca, classificações e contas de usuários, bem como os arquivos associados, quando aplicável. Em caso de falha, corrupção ou perda de dados, o sistema deve permitir a recuperação das informações com perda máxima de 24 horas de registros (RPO) e restabelecimento do serviço em até 24 horas após a identificação do incidente (RTO).
+
+A geração dos backups e a restauração dos dados serão responsabilidade da administração da infraestrutura.
+
+**Critérios de Verificação**
+
+- Verificar os registros de execução automática dos backups, a frequência diária, a retenção mínima de 30 dias, o armazenamento separado e o acesso restrito.
+- Simular uma falha do banco de dados em ambiente de teste e realizar a restauração de uma cópia de segurança.
+- Verificar que a perda de dados não ultrapassa 24 horas e que o serviço é restabelecido em até 24 horas após a identificação da falha.
+- Confirmar que os registros restaurados estão íntegros, com seus relacionamentos preservados e disponíveis para consulta na aplicação.
+- Verificar também a recuperação dos arquivos associados, quando aplicável.
+
+</details>
+
+</div>
+
 
 ---
 
