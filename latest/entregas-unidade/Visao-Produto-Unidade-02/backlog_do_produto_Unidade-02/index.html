@@ -399,6 +399,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,220 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evidências por Ciclo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Evidências por Ciclo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visao-produto/evidencias-ciclos/EV_C1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ciclo 1 (Iteração 7)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visao-produto/evidencias-ciclos/EV_C2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ciclo 2 (Iteração 8)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visao-produto/evidencias-ciclos/EV_C3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ciclo 3 (Iteração 9)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visao-produto/evidencias-ciclos/EV_C4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ciclo 4 (Iteração 10)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visao-produto/evidencias-ciclos/EV_C5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ciclo 5 (Iteração 11)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1668,8 +1884,8 @@
 <p>Cálculo: (3 + 3 + 2 + 2 + 3 + 2) / 6 = 2,5, arredondado para <strong>3</strong>.</p>
 <h3 id="3-esforco-tecnico">3. Esforço técnico</h3>
 <p>O esforço técnico resume o custo de desenvolvimento de um RF em um único número, entre 1 e 4, calculado como a média simples das três notas finais:</p>
-<pre><code>Esforço técnico = (Esforço + Complexidade + Conhecimento da equipe) / 3
-</code></pre>
+<div class="highlight"><pre><span></span><code>Esforço técnico = (Esforço + Complexidade + Conhecimento da equipe) / 3
+</code></pre></div>
 <p>Exemplo com o RF34 (Gerar análises textuais dos dados cadastrados, com IA): (3 + 4 + 4) / 3 = 3,67.</p>
 <h3 id="4-matriz-valor-x-esforco-e-quadrantes">4. Matriz Valor x Esforço e quadrantes</h3>
 <p>Cada RF é posicionado em um quadrante comparando o <strong>valor de negócio</strong> com o <strong>esforço técnico</strong>, tendo 2 como ponto de corte nos dois eixos.</p>
@@ -1710,16 +1926,16 @@
 </tbody>
 </table>
 <p>A classificação foi automatizada na planilha com a fórmula abaixo, em que a coluna C guarda o valor de negócio e a coluna H o esforço técnico:</p>
-<pre><code class="language-excel">=MAP(C3:C500; H3:H500; LAMBDA(val; esf;
-  SE(esf=&quot;&quot;; &quot;&quot;;
+<div class="highlight"><pre><span></span><code>=MAP(C3:C500; H3:H500; LAMBDA(val; esf;
+  SE(esf=""; "";
   IFS(
-    (esf&gt;2)*(val&gt;2);   &quot;Quadrante 1&quot;;
-    (esf&lt;=2)*(val&gt;2);  &quot;Quadrante 2&quot;;
-    (esf&lt;=2)*(val&lt;=2); &quot;Quadrante 3&quot;;
-    (esf&gt;2)*(val&lt;=2);  &quot;Quadrante 4&quot;
+    (esf&gt;2)*(val&gt;2);   "Quadrante 1";
+    (esf&lt;=2)*(val&gt;2);  "Quadrante 2";
+    (esf&lt;=2)*(val&lt;=2); "Quadrante 3";
+    (esf&gt;2)*(val&lt;=2);  "Quadrante 4"
   ))
 ))
-</code></pre>
+</code></pre></div>
 <p><img alt="Matriz Valor x Esforço" src="../assets/MatrizValorxEsforço.jpg" /></p>
 <details>
   <summary><strong>Explorar o Frame interativo da Matriz Valor x Esforço</strong></summary>
