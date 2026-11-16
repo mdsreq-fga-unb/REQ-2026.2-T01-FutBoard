@@ -10,7 +10,11 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| *(Inserir link da Gravação / Validação com o Cliente)* | *(Inserir descrição da validação das histórias do Ciclo 5 com o cliente Marcus Vinicius)* |
+| *(Inserir link de validação — US38)* | Vídeo de validação da **US38** com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US40)* | Vídeo de validação da **US40** com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US41)* | Vídeo de validação da **US41** com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US36)* | Vídeo de validação da **US36** com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US37)* | Vídeo de validação da **US37** com o cliente Marcus Vinicius. |
 | *(Inserir link da Ata da Reunião)* | *(Inserir descrição da ata correspondente ao ciclo)* |
 
 ### Protótipos
@@ -62,5 +66,5 @@
 | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | *(Inserir evidência de RNF02 — Responsividade e RNF04 — Atualização do Dashboard em no máximo 5s)* | ✅ |
 | A verificação integrada dos fluxos foi realizada com sucesso? | *(Inserir captura de tela comprovando consistência de ponta a ponta entre Sessão, Dashboard e PDF)* | ✅ |
 | A documentação e evidências da entrega estão atualizadas? | *(Inserir link do PR de atualização da documentação)* | ✅ |
-| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | *(Inserir link da Gravação / Mensagem de validação com o cliente)* | ✅ |
+| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US38](#)<br>[Validação US40](#)<br>[Validação US41](#)<br>[Validação US36](#)<br>[Validação US37](#) | ✅ |
 

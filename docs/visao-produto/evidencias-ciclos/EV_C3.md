@@ -10,9 +10,12 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
+| *(Inserir link de validação — US14)* | Vídeo de validação da **US14** com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US22)* | Vídeo de validação da **US22** com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US24)* | Vídeo de validação da **US24** com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US27)* | Vídeo de validação da **US27** com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US28)* | Vídeo de validação da **US28** com o cliente Marcus Vinicius. |
 | [Ata 02/11 (Reunião Equipe 16)](../../atas-reunioes/reunioes-da-equipe.md#reuniao-da-equipe-16) | Abertura da Iteração 9, inclusão das histórias de controle de acesso (US27 e US28) e divisão das tarefas entre a equipe (US14, US22, US24, US27 e US28). |
-| *(Inserir link da Gravação / Validação com o Cliente)* | *(Inserir descrição da validação das histórias do Ciclo 3 com o cliente Marcus Vinicius)* |
-| *(Inserir link da Ata da Reunião)* | *(Inserir descrição da ata correspondente ao ciclo)* |
 
 ### Protótipos
 
@@ -63,5 +66,5 @@
 | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | *(Inserir evidência de RNF01 — Proteção de Dados/Autenticação para US27 e US28, e RNF02 — Responsividade)* | ✅ |
 | A verificação integrada dos fluxos foi realizada com sucesso? | *(Inserir captura de tela comprovando a consistência da listagem e detalhes de sessões/atividades)* | ✅ |
 | A documentação e evidências da entrega estão atualizadas? | *(Inserir link do PR de atualização da documentação)* | ✅ |
-| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | *(Inserir link da Gravação / Mensagem de validação com o cliente)* | ✅ |
+| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US14](#)<br>[Validação US22](#)<br>[Validação US24](#)<br>[Validação US27](#)<br>[Validação US28](#) | ✅ |
 
