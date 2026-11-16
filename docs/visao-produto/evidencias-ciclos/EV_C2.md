@@ -26,52 +26,60 @@
 === "Baixa Fidelidade"
 
     === "US10"
-        <!-- Inserir foto ou link do protótipo da US10 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US10 — RF10)*
+        ![Comportamentos táticos](../../assets/evidencias/US10_comportamento_tatico.jpeg)
+        *Figura 1: Vinculando comportamentos táticos.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US10](../../assets/Evidencias/BaixaFidelidade/US10.png) -->
+        ![Cadastrar comportamento](../../assets/evidencias/US10_cadastrar_comportamento.jpeg)
+        *Figura 2: Formulário de cadastro de comportamento tático.*
+
+        ![Lista de comportamentos atualizada](../../assets/evidencias/US10_lista_atualizada_comportamentos.jpeg)
+        *Figura 3: Listagem de comportamentos táticos atualizada.*
 
     === "US11"
-        <!-- Inserir foto ou link do protótipo da US11 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US11 — RF11)*
+        ![Editar comportamento tático](../../assets/evidencias/US11_editar_comportamento_tatico_1.jpeg)
+        *Figura 1: Formulário de edição de comportamento tático.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US11](../../assets/Evidencias/BaixaFidelidade/US11.png) -->
+        ![Lista de comportamentos atualizada](../../assets/evidencias/US11_lista_atualizada_comportamento_2.jpeg)
+        *Figura 2: Listagem de comportamentos táticos atualizada após edição.*
 
     === "US16"
-        <!-- Inserir foto ou link do protótipo da US16 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US16 — RF16)*
+        ![Cadastrar sessão](../../assets/evidencias/US16_cadastrar_sessao.jpeg)
+        *Figura 1: Formulário de cadastro de sessão de treino.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US16](../../assets/Evidencias/BaixaFidelidade/US16.png) -->
+        ![Lista de sessões atualizada](../../assets/evidencias/US16_lista_atualizada_sessao.jpeg)
+        *Figura 2: Listagem de sessões atualizada.*
 
     === "US17"
-        <!-- Inserir foto ou link do protótipo da US17 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US17 — RF17)*
+        ![Editar sessão](../../assets/evidencias/US17_editar_sessao.jpeg)
+        *Figura 1: Formulário de edição dos dados da sessão.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US17](../../assets/Evidencias/BaixaFidelidade/US17.png) -->
+        ![Lista de sessões atualizada](../../assets/evidencias/US17_lista_atualizada.jpeg)
+        *Figura 2: Listagem de sessões atualizada após edição.*
 
     === "US19"
-        <!-- Inserir foto ou link do protótipo da US19 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US19 — RF19)*
+        ![Criar atividade na biblioteca](../../assets/evidencias/US19_criar_atividade_biblioteca.jpeg)
+        *Figura 1: Ação de criar atividade na biblioteca.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US19](../../assets/Evidencias/BaixaFidelidade/US19.png) -->
+        ![Cadastrar atividade](../../assets/evidencias/US19_cadastrar_atividade_biblioteca.jpeg)
+        *Figura 2: Formulário de cadastro de atividade na biblioteca.*
+
+        ![Lista de atividades atualizada](../../assets/evidencias/US19_lista_atualizada.jpeg)
+        *Figura 3: Listagem de atividades da biblioteca atualizada.*
 
     === "US20"
-        <!-- Inserir foto ou link do protótipo da US20 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US20 — RF20)*
+        ![Editar atividade na biblioteca](../../assets/evidencias/US20_editar_atividade_biblioteca.jpeg)
+        *Figura 1: Seleção para edição da atividade.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US20](../../assets/Evidencias/BaixaFidelidade/US20.png) -->
+        ![Edição da atividade na biblioteca](../../assets/evidencias/US20_editar_atividade_biblioteca_2.jpeg)
+        *Figura 2: Formulário de edição dos dados da atividade.*
 
     === "US23"
-        <!-- Inserir foto ou link do protótipo da US23 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US23 — RF23)*
-
-        <!-- Exemplo: ![Baixa Fidelidade US23](../../assets/Evidencias/BaixaFidelidade/US23.png) -->
+        ![Reutilizar atividade cadastrada](../../assets/evidencias/US23_adiciona_atividade_da_biblioteca_na_sessao.jpeg)
+        *Figura 1: Adicionar atividade da biblioteca na sessão de treino.*
 
     === "US13"
-        <!-- Inserir foto ou link do protótipo da US13 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US13 — RF13)*
-
-        <!-- Exemplo: ![Baixa Fidelidade US13](../../assets/Evidencias/BaixaFidelidade/US13.png) -->
+        ![Criar atividade na sessão](../../assets/evidencias/US13_criar_atividade_na_sessao.jpeg)
+        *Figura 1: Cadastro de atividade diretamente na sessão de treino.*
 
 ---
 
