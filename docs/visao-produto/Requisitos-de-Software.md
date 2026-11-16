@@ -276,7 +276,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar microciclo:** o sistema deve permitir que a equipe técnica cadastre um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo.
+**Declaração RF:** **Cadastrar microciclo:** o sistema deve permitir que a equipe técnica cadastre um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo, data de inicio e data de fim.
 
 
 **Declaração US:** Como membro da equipe técnica, eu quero cadastrar um novo microciclo vinculado a um mesociclo, para organizar a rotina de treinos.
@@ -381,10 +381,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar comportamento:** o sistema deve permitir que a equipe técnica cadastre um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades.
+**Declaração RF:** **Cadastrar princípio tático:** o sistema deve permitir que a equipe técnica cadastre um princípio tático (ex: ofensivo, defensivo), para uso nas atividades.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero cadastrar um comportamento tático (ex: ofensivo, defensivo), para vinculá-lo às atividades.
+**Declaração US:** Como membro da equipe técnica, eu quero cadastrar um princípio tático (ex: ofensivo, defensivo), para vinculá-lo às atividades.
 
 <div class='rf-meta' markdown>
 
@@ -398,7 +398,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 **Critérios de Aceitação**
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - Ao inserir um nome de comportamento, ele deve ser salvo e disponibilizado nas listas de seleção (dropdowns táticos) durante o cadastro de atividades.
 - O sistema não deve permitir o cadastro de comportamentos com o exato mesmo nome (duplicidade).
 
@@ -413,14 +413,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf11" markdown>
-<summary>RF11 · Editar comportamento<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF11 · Editar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
-**Declaração RF:** **Editar comportamento:** o sistema deve permitir que a equipe técnica edite um comportamento tático já cadastrado.
+**Declaração RF:** **Editar princípio tático:** o sistema deve permitir que a equipe técnica edite um princípio tático já cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero editar um comportamento tático, para corrigir sua nomenclatura ou ajustar os detalhes técnicos.
+**Declaração US:** Como membro da equipe técnica, eu quero editar um princípio tático, para corrigir sua nomenclatura ou ajustar os detalhes técnicos.
 
 <div class='rf-meta' markdown>
 
@@ -434,8 +434,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 **Critérios de Aceitação**
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
-- Ao corrigir o nome do comportamento tático no catálogo, as atividades já salvas que o utilizam devem exibir o nome atualizado automaticamente.
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- Ao corrigir o nome do princípio tático no catálogo, as atividades já salvas que o utilizam devem exibir o nome atualizado automaticamente.
 
 **Definition of Ready (DoR)**
 
@@ -452,10 +452,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Excluir comportamento:** o sistema deve permitir que a equipe técnica exclua um comportamento tático cadastrado.
+**Declaração RF:** **Excluir comportamento:** o sistema deve permitir que a equipe técnica exclua um princípio tático cadastrado.
 
 
-**Declaração US:** Como membro da equipe técnica, eu quero excluir um comportamento tático, para remover opções obsoletas.
+**Declaração US:** Como membro da equipe técnica, eu quero excluir um princípio tático, para remover opções obsoletas.
 <div class='rf-meta' markdown>
 
 **CPs e OEs relacionadas:** [**CP01**](solucao-proposta.md#cp01) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
@@ -505,7 +505,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
 - **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
 - **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - O sistema deve calcular automaticamente a Área (m²/jogador) ao inserir dimensões (Comprimento e Largura) e o Número de Jogadores.
 - O sistema deve classificar automaticamente a dimensão do espaço no ato do cadastro com base na área calculada.
 - Atividades salvas com o mesmo número de "ordem" devem ser agrupadas e tratadas como eventos simultâneos na exibição.
@@ -546,7 +546,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
 - **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
 - **Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - Ao alterar as dimensões do campo ou o número de jogadores, o sistema deve recalcular instantaneamente a área por jogador e atualizar a classificação do espaço.
 - Ao alterar o campo "ordem" da atividade, a interface e o banco devem reagrupar ou separar as atividades simultâneas afetando o tempo total.
 
@@ -730,7 +730,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 - **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
 - **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - Ao preencher os dados de uma nova atividade na área "Biblioteca", o sistema deve aplicar o cálculo automático de área e classificar a dimensão, salvando de forma independente no catálogo.
 - A atividade pode ser salva mantendo campos de momento de jogo, atributos técnicos, princípios táticos, fases de jogo totalmente em branco (opcionais).
 
@@ -768,7 +768,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 - **Cálculo da Área por Jogador:** A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.
 - **Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - Modificar valores como comprimento, largura ou número sugerido de jogadores deve engatilhar o recálculo e a reclassificação automática de dimensão do espaço na biblioteca.
 - Atividades já importadas para sessões de treino passadas não devem sofrer alterações retroativas com esta edição.
 
@@ -1199,7 +1199,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 **Critérios de Aceitação**
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 
 **Definition of Ready (DoR)**
 
@@ -1233,7 +1233,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 **Critérios de Aceitação**
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 
 **Definition of Ready (DoR)**
 
@@ -1267,7 +1267,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 **Critérios de Aceitação**
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 
 **Definition of Ready (DoR)**
 
@@ -1374,7 +1374,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 - **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
@@ -1410,7 +1410,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 - **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
@@ -1446,7 +1446,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 - **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
@@ -1482,7 +1482,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 - **Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
 - **Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
-- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
+- **Preenchimento Condicional pelo Objetivo Central:** O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).
 - **Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Definition of Ready (DoR)**
@@ -1546,9 +1546,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 | **RF07** | **Cadastrar microciclo:** o sistema deve permitir que a equipe técnica cadastrem um novo microciclo vinculado obrigatoriamente a um mesociclo existente, informando o nome do microciclo. | [RN04](#rn04) | CP02 |
 | **RF08** | **Editar microciclo:** o sistema deve permitir que a equipe técnica editem os dados de um microciclo anteriormente cadastrado. | [RN04](#rn04) | CP02 |
 | **RF09** | **Excluir microciclo:** o sistema deve permitir que a equipe técnica excluam um microciclo cadastrado. | [RN04](#rn04) | CP02 |
-| **RF10** | **Cadastrar comportamento:** o sistema deve permitir que a equipe técnica cadastrem um comportamento tático (ex: ofensivo, defensivo), para uso nas atividades. | [RN05](#rn05) | CP01 |
-| **RF11** | **Editar comportamento:** o sistema deve permitir que a equipe técnica editem um comportamento tático já cadastrado. | [RN05](#rn05) | CP01 |
-| **RF12** | **Excluir comportamento:** o sistema deve permitir que a equipe técnica excluam um comportamento tático cadastrado. | - | CP01 |
+| **RF10** | **Cadastrar comportamento:** o sistema deve permitir que a equipe técnica cadastrem um princípio tático (ex: ofensivo, defensivo), para uso nas atividades. | [RN05](#rn05) | CP01 |
+| **RF11** | **Editar comportamento:** o sistema deve permitir que a equipe técnica editem um princípio tático já cadastrado. | [RN05](#rn05) | CP01 |
+| **RF12** | **Excluir comportamento:** o sistema deve permitir que a equipe técnica excluam um princípio tático cadastrado. | - | CP01 |
 | **RF13** | **Cadastrar atividade na sessão:** o sistema deve permitir que a equipe técnica cadastrem uma nova atividade diretamente em uma sessão, informando dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, espaço, orientação, comportamento, momento e fase do jogo, calculando a área por jogador ([RN01](#rn01)), atribuindo a dimensão do espaço ([RN02](#rn02)), controlando a simultaneidade ([RN03](#rn03)) e respeitando o foco central ([RN05](#rn05)). | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN05](#rn05) | CP01 |
 | **RF14** | **Editar atividade na sessão:** o sistema deve permitir que a equipe técnica editem os dados de uma atividade incluída em uma sessão, recalculando automaticamente as métricas de espaço ([RN01](#rn01), [RN02](#rn02)) e ordem de simultaneidade ([RN03](#rn03)). | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN05](#rn05) | CP01 |
 | **RF15** | **Excluir atividade na sessão:** o sistema deve permitir que a equipe técnica excluam uma atividade de uma sessão, sem afetar o registro dela na biblioteca. | - | CP01 |
@@ -1575,7 +1575,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 | **RF36** | **Consultar informação de orientação do treino:** o sistema deve permitir consultar, em gráfico e filtro, a orientação do treino (Aquisição, Aplicação, PDI, Eq Carga), com visual neutro para dados vazios ([RN07](#rn07)). | [RN07](#rn07) | CP03 |
 | **RF37** | **Consultar informação de momento do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a distribuição dos momentos do jogo trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
 | **RF38** | **Consultar informação de fase do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de fase do jogo ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF39** | **Consultar informação de comportamento do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de comportamento tático ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF39** | **Consultar informação de comportamento do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de princípio tático ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
 | **RF40** | **Consultar informação de atributo técnico do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de atributos técnicos trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
 | **RF41** | **Consultar análise comparativa por periodização:** o sistema deve permitir consultar a análise comparativa respeitando a hierarquia da periodização ([RN04](#rn04)), com indicativo neutro se um dos ciclos não contiver treinos ([RN07](#rn07)). | [RN04](#rn04), [RN07](#rn07) | CP03 |
 
@@ -1606,7 +1606,7 @@ As Regras de Negócio (RNs) definem a lógica de domínio esportivo do treinador
 | <a id="rn02"></a>**RN02** | **Classificação Automática da Dimensão do Espaço** | Validação Automática | A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da [RN01](#rn01):<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF25](#rf25), [RF35](#rf35) |
 | <a id="rn03"></a>**RN03** | **Simultaneidade e Contagem de Tempo da Sessão** | Cálculo Esportivo | Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução. | [RF13](#rf13), [RF14](#rf14), [RF16](#rf16), [RF17](#rf17), [RF22](#rf22), [RF25](#rf25), [RF26](#rf26) |
 | <a id="rn04"></a>**RN04** | **Hierarquia e Integridade da Periodização** | Integridade Estrutural | A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade. | [RF01](#rf01) a [RF09](#rf09), [RF16](#rf16), [RF18](#rf18), [RF41](#rf41) |
-| <a id="rn05"></a>**RN05** | **Preenchimento Condicional pelo Objetivo Central** | Validação de Entrada | O preenchimento dos campos de momento do jogo, fase do jogo, comportamento tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual). | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF32](#rf32), [RF37](#rf37) a [RF40](#rf40) |
+| <a id="rn05"></a>**RN05** | **Preenchimento Condicional pelo Objetivo Central** | Validação de Entrada | O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual). | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF32](#rf32), [RF37](#rf37) a [RF40](#rf40) |
 | <a id="rn06"></a>**RN06** | **Cálculo da Variabilidade de Treinos** | Cálculo Esportivo | O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo). | [RF22](#rf22), [RF25](#rf25) |
 | <a id="rn07"></a>**RN07** | **Tratamento e Estabilidade em Consultas com Resultado Vazio** | Comportamento do Sistema | Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo. | [RF22](#rf22), [RF24](#rf24), [RF25](#rf25), [RF35](#rf35) a [RF41](#rf41) |
 
