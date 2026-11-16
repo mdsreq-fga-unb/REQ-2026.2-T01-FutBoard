@@ -63,7 +63,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 
-**Declaração RF:** **Cadastrar macrociclo:** o sistema deve permitir que a equipe técnica cadastre um novo macrociclo, informando campos como nome e data de início para organizar a periodização dos treinos.
+**Declaração RF:** **Cadastrar macrociclo:** o sistema deve permitir que a equipe técnica cadastre um novo macrociclo, informando campos como nome, data de início e data de fim para organizar a periodização dos treinos.
 
 
 **Declaração US:** Como membro da equipe técnica, eu quero cadastrar um novo macrociclo com nome e data de início, para organizar o planejamento geral da periodização dos treinos.
