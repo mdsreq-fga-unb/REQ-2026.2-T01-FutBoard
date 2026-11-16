@@ -22,34 +22,30 @@
 === "Baixa Fidelidade"
 
     === "US14"
-        <!-- Inserir foto ou link do protótipo da US14 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US14 — RF14)*
+        ![Editar atividade na sessão](../../assets/evidencias/US14_editar_atividade_sessao_formulario.jpeg)
+        *Figura 1: Formulário de edição de atividade na sessão.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US14](../../assets/Evidencias/BaixaFidelidade/US14.png) -->
+        ![Lista de atividades atualizada](../../assets/evidencias/US14_lista_atualizada.jpeg)
+        *Figura 2: Listagem de atividades da sessão atualizada após edição.*
 
     === "US22"
-        <!-- Inserir foto ou link do protótipo da US22 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US22 — RF22)*
-
-        <!-- Exemplo: ![Baixa Fidelidade US22](../../assets/Evidencias/BaixaFidelidade/US22.png) -->
+        ![Indicadores de treino](../../assets/evidencias/US22_indicadores_treino.jpeg)
+        *Figura 1: Visualização dos indicadores do treino.*
 
     === "US24"
-        <!-- Inserir foto ou link do protótipo da US24 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US24 — RF24)*
-
-        <!-- Exemplo: ![Baixa Fidelidade US24](../../assets/Evidencias/BaixaFidelidade/US24.png) -->
+        ![Consultar informação da atividade](../../assets/evidencias/US24_consultar_informacao_atividade_treino.jpeg)
+        *Figura 1: Consulta de informações detalhadas da atividade do treino.*
 
     === "US27"
-        <!-- Inserir foto ou link do protótipo da US27 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US27 — RF27)*
+        ![Criar conta](../../assets/evidencias/US27_criar_conta.jpeg)
+        *Figura 1: Formulário de cadastro de nova conta.*
 
-        <!-- Exemplo: ![Baixa Fidelidade US27](../../assets/Evidencias/BaixaFidelidade/US27.png) -->
+        ![Confirmação de conta criada](../../assets/evidencias/US27_confirmacao_conta_criada.jpeg)
+        *Figura 2: Confirmação de criação de conta com sucesso.*
 
     === "US28"
-        <!-- Inserir foto ou link do protótipo da US28 abaixo -->
-        *(Inserir foto ou link do protótipo de baixa fidelidade da US28 — RF28)*
-
-        <!-- Exemplo: ![Baixa Fidelidade US28](../../assets/Evidencias/BaixaFidelidade/US28.png) -->
+        ![Login](../../assets/evidencias/US28_login.jpeg)
+        *Figura 1: Tela de login e autenticação de usuário.*
 
 ---
 
