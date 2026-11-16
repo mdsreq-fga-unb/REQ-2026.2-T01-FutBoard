@@ -80,7 +80,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Dado que preencho um nome, data de início e data de fim, quando salvo, o sistema deve criar o ciclo raiz da temporada.
+- Criação com sucesso do ciclo raiz da temporada após o preenchimento obrigatório de nome, data de início e data de fim.
 - Se os campos obrigatórios não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.
 - Se a data de fim for antes da data da inicio, o sistema deve exibir alerta e impedir o cadastro.
 
@@ -123,7 +123,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Dado que seleciono um macrociclo existente, quando altero o nome, data de início ou data de fim e salvo, as modificações devem refletir na visualização da temporada.
+- Atualização dos dados do macrociclo na visualização da temporada após a edição do nome e/ou das datas.
 - A edição das datas não deve quebrar a hierarquia dos ciclos filhos já vinculados nem permitir data de fim anterior à data de início.
 
 **Regras de Negócio Associadas**
@@ -206,7 +206,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Dado que possuo um macrociclo ativo, quando preencho os dados do mesociclo (nome, data de início, data de término) e indico seu macrociclo pai, então ele deve ser salvo com sucesso.
+- Cadastro bem-sucedido do mesociclo com nome, datas de início e término e vínculo a um macrociclo ativo.
 - Se não houver macrociclo prévio selecionado ou ativo, o sistema deve exibir alerta e impedir o cadastro.
 
 **Regras de Negócio Associadas**
@@ -330,7 +330,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Dado que existe um mesociclo ativo, quando informo o nome, data de início e data de fim do microciclo  e salvo, o registro deve ser efetuado na árvore de periodização.
+- Cadastro do microciclo na árvore de periodização após informar nome, datas de início e fim e selecionar um mesociclo ativo.
 - Se não houver mesociclo prévio selecionado, o sistema deve exibir alerta e impedir o cadastro.
 - Se os campos  nome, data de início e data de fim não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.
 
@@ -373,7 +373,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Dado que altero as informações de um microciclo salvo, o sistema deve atualizar os dados de exibição sem desconectar as sessões de treino atreladas a ele.
+- Atualização das informações de exibição do microciclo sem desconectar as sessões de treino vinculadas.
 
 **Regras de Negócio Associadas**
 
