@@ -1017,7 +1017,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **CPs e OEs relacionadas:** [**CP05**](solucao-proposta.md#cp05) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
-**Priorização:** Valor: 3,00 | Frequência: 5,00 | Esforço: 2,00 | Complexidade: 3,00 | Conhecimento: 2,00 | Esforço Técnico: 2,33 → Q4 Baixo valor / Alta carga técnica
+**Priorização:** Valor: 3,00 | Frequência: 5,00 | Esforço: 2,00 | Complexidade: 3,00 | Conhecimento: 2,00 | Esforço Técnico: 2,33 → Q1 Alto valor / Alta carga técnica
 
 
 </div>
@@ -1053,7 +1053,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **CPs e OEs relacionadas:** [**CP05**](solucao-proposta.md#cp05) | [**OE1**](solucao-proposta.md#oe1), [**OE4**](solucao-proposta.md#oe4)
 
-**Priorização:** Valor: 3,00 | Frequência: 5,00 | Esforço: 2,00 | Complexidade: 3,00 | Conhecimento: 2,00 | Esforço Técnico: 2,33 → Q4 Baixo valor / Alta carga técnica
+**Priorização:** Valor: 3,00 | Frequência: 5,00 | Esforço: 2,00 | Complexidade: 3,00 | Conhecimento: 2,00 | Esforço Técnico: 2,33 → Q1 Alto valor / Alta carga técnica
 
 
 </div>
