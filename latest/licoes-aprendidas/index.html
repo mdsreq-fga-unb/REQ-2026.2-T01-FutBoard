@@ -1885,14 +1885,33 @@ Como consequência dessas mudanças, a numeração dos RFs mudou (de 46 para 41)
 <hr />
 <h2 id="3-unidade-3">3. Unidade 3</h2>
 <h3 id="31-contexto-e-visao-geral">3.1. Contexto e Visão Geral</h3>
-<p><em>Esta seção será preenchida ao final da Unidade 3.</em></p>
+<p>A Unidade 3 consolidou a etapa final do projeto <strong>FutBoard</strong>, com foco na <strong>Organização e Atualização</strong>, <strong>Verificação e Validação (V&amp;V)</strong> e na entrega do incremento funcional do MVP. O objetivo central deste ciclo foi corrigir as fragilidades metodológicas herdadas da Unidade 2, transformar os critérios de DoR e DoD em instrumentos práticos de controle e demonstrar a passagem completa pelo ciclo de desenvolvimento do RAD (prototipação no Figma $\to$ validação com o treinador Marcus Vinícius $\to$ construção $\to$ verificação por testes).</p>
 <h3 id="32-dificuldades-observadas-e-feedbacks-recebidos">3.2. Dificuldades Observadas e Feedbacks Recebidos</h3>
-<p><em>A ser preenchido.</em></p>
+<p>A avaliação da Unidade 2 evidenciou quatro grandes grupos de fragilidades que demandaram intervenção imediata da equipe:</p>
+<ol>
+<li><strong>Abstração de DoR e DoD:</strong> Os critérios funcionavam como questionários genéricos de "cumprir tabela", sem um exemplo real de história preenchida e sem barrar dependências técnicas (o cronograma previa o cadastro de treinos antes da hierarquia de periodização).</li>
+<li><strong>Inconsistências Métricas e no Recorte do MVP:</strong> A fórmula de esforço técnico continha distorções (valores 5 em uma escala de 1 a 4) e classificação errônea de quadrantes (RF27 e RF28 em Q4 em vez de Q1), o que levou à retirada indevida da autenticação com base em uma justificativa matemática incorreta.</li>
+<li><strong>Rastreabilidade Quebrada e Códigos Desatualizados:</strong> A renomeação de requisitos gerou referências cruzadas incorretas (regras apontando para RF24/RF25 antigos, menção a requisitos inexistentes como RF42/RF43 e login vinculado a RF29/RF30), além de uma matriz síntese que ignorava o Problema e o Objetivo Geral.</li>
+<li><strong>Evidências Frágeis e Regras Implícitas:</strong> Ausência de links públicos para os protótipos navegáveis, registros de validação no WhatsApp limitados ao envio dos cartões (sem o print da devolutiva/aceite do cliente) e regras essenciais de domínio (simultaneidade de exercícios e exclusão em cascata) isoladas no catálogo de termos em vez de especificadas nos requisitos.</li>
+</ol>
 <h3 id="33-aprendizados-adquiridos">3.3. Aprendizados Adquiridos</h3>
-<p><em>A ser preenchido.</em></p>
+<ol>
+<li><strong>DoR e DoD como Filtros Operacionais:</strong> O DoR só é efetivo se atuar como <em>gatekeeper</em> real, impedindo que histórias avancem sem protótipo validado ou com dependências estruturais pendentes. Da mesma forma, o DoD deve auditar a integração entre fluxos (cadastrar treino $\to$ atualizar dashboard $\to$ gerar PDF) e a conformidade com Requisitos Não Funcionais (meta de tempo e responsividade), indo além de testes unitários isolados.</li>
+<li><strong>Rigor Métrico e Decisões Fundamentadas:</strong> Fórmulas em planilhas não substituem a verificação humana. O recorte do MVP precisa ponderar valor, esforço, frequência e arquitetura técnica conjuntamente — como provou a exceção do RF01 (Macrociclo), essencial para a integridade da periodização.</li>
+<li><strong>Preservar Relações é Preservar Sentido:</strong> Rastreabilidade não é conectar tudo indiscriminadamente, mas garantir que a cadeia causal ($\text{Problema} \to \text{Objetivos} \to \text{CPs} \to \text{RFs/RNFs}$) esteja viva, consistente e sem referências desatualizadas.</li>
+<li><strong>Validação Exige Registro:</strong> A aprovação geral de um recorte visual não comprova o aceite de cada tela ou regra de negócio. Validar com o cliente exige registrar o retorno explícito sobre funcionalidades e versões identificáveis.</li>
+<li><strong>Especificação Completa das Regras de Domínio:</strong> A dinâmica esportiva (diferença entre atividade na biblioteca e execução na sessão, cálculo de m²/atleta e impactos de exclusão) deve estar explícita nas Regras de Negócio e conectada aos campos de entrada dos cadastros.</li>
+</ol>
 <h3 id="34-acoes-concretas-e-encerramento">3.4. Ações Concretas e Encerramento</h3>
-<p><em>A ser preenchido.</em></p>
-<hr />
+<p>Para sanear os apontamentos e encerrar o ciclo com qualidade técnica, a equipe executou as seguintes ações:</p>
+<ul>
+<li><strong>Saneamento e Recálculo da Matriz:</strong> Correção das fórmulas de esforço técnico e realocação correta dos quadrantes no Backlog, formalizando a estratégia operacional de acesso ao MVP.</li>
+<li><strong>Uniformização da Rastreabilidade:</strong> Eliminação de todos os códigos inexistentes e sincronização das regras de resultado vazio com a numeração oficial RF01–RF41.</li>
+<li><strong>Operacionalização dos Critérios de Qualidade:</strong> Publicação de uma história modelo com checklist de DoR preenchido e incorporação de cenários testáveis aos requisitos.</li>
+<li><strong>Readequação do Cronograma:</strong> Reordenamento da sequência de desenvolvimento (construção da periodização antes das sessões), alocação explícita da geração de PDF (RF25) e antecipação dos marcos de infraestrutura/VPS.</li>
+<li><strong>Disponibilização de Evidências:</strong> Acesso público aos protótipos do Figma, documentação das respostas de validação do treinador Marcus Vinícius e delimitação clara do escopo (foco coletivo nos treinos, sem gestão de dados individuais de atletas menores).</li>
+</ul>
+<p><strong>Encerramento:</strong> A assimilação crítica dos feedbacks permitiu à equipe amadurecer a governança de Engenharia de Requisitos do FutBoard, transformando uma documentação estática em um repositório confiável, rastreável e verdadeiramente aderente às necessidades da comissão técnica.</p>
 <h2 id="historico-de-versoes">Histórico de Versões</h2>
 <table>
 <thead>
@@ -1914,6 +1933,12 @@ Como consequência dessas mudanças, a numeração dos RFs mudou (de 46 para 41)
 <td><code>1.1</code></td>
 <td>12/10/2026</td>
 <td>Consolidação dos aprendizados, dificuldades e ações da Unidade 2</td>
+<td>Equipe FutBoard</td>
+</tr>
+<tr>
+<td><code>1.2</code></td>
+<td>16/11/2026</td>
+<td>Consolidação dos aprendizados, dificuldades e ações da Unidade 3</td>
 <td>Equipe FutBoard</td>
 </tr>
 </tbody>
