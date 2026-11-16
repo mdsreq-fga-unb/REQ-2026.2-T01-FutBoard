@@ -1,10 +1,10 @@
-# 10 Backlog do Produto
+# 10 Escopo do Produto
 
-Esta seção descreve o backlog de produto (preliminar ou completo, dependendo do produto), que é uma lista priorizada de todas as funcionalidades e melhorias planejadas para o software. Também aborda a priorização dessas funcionalidades e o que será entregue no Produto Mínimo Viável (MVP).
+Esta seção descreve o Escopo de produto (preliminar ou completo, dependendo do produto), que é uma lista priorizada de todas as funcionalidades e melhorias planejadas para o software. Também aborda a priorização dessas funcionalidades e o que será entregue no Produto Mínimo Viável (MVP).
 
-## 10.1 Priorização do Backlog Geral e MVP
+## 10.1 Priorização do Escopo Geral e MVP
 
-Para priorizar o backlog do FutBoard, cada requisito funcional (RF) recebeu cinco notas: **valor de negócio**, **frequência de uso**, **esforço**, **complexidade** e **conhecimento da equipe**. As três últimas foram combinadas em uma única medida, o **esforço técnico**, que foi cruzada com o valor de negócio para posicionar cada RF em um quadrante da matriz Valor x Esforço.
+Para priorizar o Escopo do FutBoard, cada requisito funcional (RF) recebeu cinco notas: **valor de negócio**, **frequência de uso**, **esforço**, **complexidade** e **conhecimento da equipe**. As três últimas foram combinadas em uma única medida, o **esforço técnico**, que foi cruzada com o valor de negócio para posicionar cada RF em um quadrante da matriz Valor x Esforço.
 
 ### 1. Critérios e legendas
 
@@ -110,15 +110,15 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 ))
 ``` 
 
-## 10.2 Validação do Backlog e Escopo do MVP com o Cliente
+## 10.2 Validação do Escopo e Escopo do MVP com o Cliente
 
-Após a priorização preliminar do backlog por meio da matriz Valor x Esforço e a consolidação dos requisitos nos quadrantes, a equipe realizou a **validação do backlog e da delimitação do MVP diretamente com o cliente** (o técnico Marcus Vinicius).
+Após a priorização preliminar do Escopo por meio da matriz Valor x Esforço e a consolidação dos requisitos nos quadrantes, a equipe realizou a **validação do Escopo e da delimitação do MVP diretamente com o cliente** (o técnico Marcus Vinicius).
 
 Via Whatsapp, a equipe utilizou e encaminhou ao cliente a imagem **`MVPvalidado`** (armazenada na pasta `assets` e ilustrada a seguir), contendo a organização visual dos cartões de requisitos levantados para o MVP. [Acessar Validação do Cliente](validacao_cliente.md)
 
 <figure markdown="span" style="text-align: center; margin: 1.5em 0;">
-  ![Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp](../assets/MVPValidado.jpg){ width="85%" style="border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" }
-  <figcaption>Figura: Evidência da validação do backlog e escopo do MVP com o cliente via WhatsApp (artefato <code>MVPvalidado</code>)</figcaption>
+  ![Evidência da validação do Escopo e escopo do MVP com o cliente via WhatsApp](../assets/MVPValidado.jpg){ width="85%" style="border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" }
+  <figcaption>Figura: Evidência da validação do Escopo e escopo do MVP com o cliente via WhatsApp (artefato <code>MVPvalidado</code>)</figcaption>
 </figure>
 <details>
   <summary><strong>Explorar o Frame interativo do MVP validado</strong></summary>
@@ -158,5 +158,5 @@ O **RF29** (Anexar imagem à atividade) também tem valor 3, está em Q2 e tem f
 
 | Versão | Data | Descrição | Autor(es) | Artefato |
 | :---: | :---: | :--- | :--- | :---: |
-| `1.0` | 12/10/2026 | Versão consolidada referente à entrega da Unidade 02 | Rafael Wasconcelos | [Visualizar v1.0](https://mdsreq-fga-unb.github.io/REQ-2026.2-T01-FutBoard/Entrega-Unidade-02/visao-produto/backlog_do_produto/) |
+| `1.0` | 12/10/2026 | Versão consolidada referente à entrega da Unidade 02 | Rafael Wasconcelos | [Visualizar v1.0](https://mdsreq-fga-unb.github.io/REQ-2026.2-T01-FutBoard/Entrega-Unidade-02/visao-produto/Escopo_do_produto/) |
 | `2.0` | 15/11/2026 | Atualização referente à entrega da Unidade 03 | Rafael Wasconcelos | **Versão Atual** |
