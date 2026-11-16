@@ -1,4 +1,4 @@
-# Evidências — Ciclo 4 (Iteração 10)
+# Evidências — Iteração 10
 **Período:** 09/11/2026 a 16/11/2026 <br>
 **Histórias trabalhadas:** [US25](../Requisitos-de-Software.md#rf25), [US26](../Requisitos-de-Software.md#rf26), [US32](../Requisitos-de-Software.md#rf32), [US35](../Requisitos-de-Software.md#rf35), [US39](../Requisitos-de-Software.md#rf39)
 
@@ -15,7 +15,7 @@
 | *(Inserir link de validação — US32)* | Vídeo de validação da **US32** com o cliente Marcus Vinicius. |
 | *(Inserir link de validação — US35)* | Vídeo de validação da **US35** com o cliente Marcus Vinicius. |
 | *(Inserir link de validação — US39)* | Vídeo de validação da **US39** com o cliente Marcus Vinicius. |
-| *(Inserir link da Ata da Reunião)* | *(Inserir descrição da ata correspondente ao ciclo)* |
+| *(Inserir link da Ata da Reunião)* | *(Inserir descrição da ata correspondente à iteração)* |
 
 ### Protótipos
 
@@ -55,7 +55,7 @@
 
 ## Definition of Done { #dod }
 
-### Checklist do Ciclo 4 (Iteração 10)
+### Checklist da Iteração 10
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |

@@ -1,4 +1,4 @@
-# Evidências — Ciclo 3 (Iteração 9)
+# Evidências — Iteração 9
 **Período:** 02/11/2026 a 09/11/2026 <br>
 **Histórias trabalhadas:** [US14](../Requisitos-de-Software.md#rf14), [US22](../Requisitos-de-Software.md#rf22), [US24](../Requisitos-de-Software.md#rf24), [US27](../Requisitos-de-Software.md#rf27), [US28](../Requisitos-de-Software.md#rf28)
 
@@ -55,7 +55,7 @@
 
 ## Definition of Done { #dod }
 
-### Checklist do Ciclo 3 (Iteração 9)
+### Checklist da Iteração 9
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |

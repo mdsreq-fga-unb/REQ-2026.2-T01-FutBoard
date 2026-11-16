@@ -1,4 +1,4 @@
-# Evidências — Ciclo 5 (Iteração 11)
+# Evidências — Iteração 11
 **Período:** 16/11/2026 a 23/11/2026 <br>
 **Histórias trabalhadas:** [US38](../Requisitos-de-Software.md#rf38), [US40](../Requisitos-de-Software.md#rf40), [US41](../Requisitos-de-Software.md#rf41), [US36](../Requisitos-de-Software.md#rf36), [US37](../Requisitos-de-Software.md#rf37)
 
@@ -15,7 +15,7 @@
 | *(Inserir link de validação — US41)* | Vídeo de validação da **US41** com o cliente Marcus Vinicius. |
 | *(Inserir link de validação — US36)* | Vídeo de validação da **US36** com o cliente Marcus Vinicius. |
 | *(Inserir link de validação — US37)* | Vídeo de validação da **US37** com o cliente Marcus Vinicius. |
-| *(Inserir link da Ata da Reunião)* | *(Inserir descrição da ata correspondente ao ciclo)* |
+| *(Inserir link da Ata da Reunião)* | *(Inserir descrição da ata correspondente à iteração)* |
 
 ### Protótipos
 
@@ -55,7 +55,7 @@
 
 ## Definition of Done { #dod }
 
-### Checklist do Ciclo 5 (Iteração 11)
+### Checklist da Iteração 11
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |

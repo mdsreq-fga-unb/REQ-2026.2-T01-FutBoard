@@ -43,12 +43,12 @@ nav:
       - Estratégias de Software: visao-produto/estrategias-esw.md
       - Engenharia de Requisitos: visao-produto/engenharia-requisitos.md
       - Cronograma e Entregas: visao-produto/cronogramas-entregas.md
-      - Evidências por Ciclo:
-          - Ciclo 1 (Iteração 7): visao-produto/evidencias-ciclos/EV_C1.md
-          - Ciclo 2 (Iteração 8): visao-produto/evidencias-ciclos/EV_C2.md
-          - Ciclo 3 (Iteração 9): visao-produto/evidencias-ciclos/EV_C3.md
-          - Ciclo 4 (Iteração 10): visao-produto/evidencias-ciclos/EV_C4.md
-          - Ciclo 5 (Iteração 11): visao-produto/evidencias-ciclos/EV_C5.md
+      - Evidências por Iteração:
+          - Iteração 7: visao-produto/evidencias-ciclos/EV_C1.md
+          - Iteração 8: visao-produto/evidencias-ciclos/EV_C2.md
+          - Iteração 9: visao-produto/evidencias-ciclos/EV_C3.md
+          - Iteração 10: visao-produto/evidencias-ciclos/EV_C4.md
+          - Iteração 11: visao-produto/evidencias-ciclos/EV_C5.md
       - Interação com Cliente: visao-produto/interacao-equipe-cliente.md
       - Requisitos de software: visao-produto/Requisitos-de-Software.md
       - DoR e DoD: visao-produto/dor-dod.md

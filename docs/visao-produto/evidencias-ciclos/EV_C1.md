@@ -1,4 +1,4 @@
-# Evidências — Ciclo 1 (Iteração 7)
+# Evidências — Iteração 7
 **Período:** 19/10/2026 a 26/10/2026 <br>
 **Histórias trabalhadas:** [US01](../Requisitos-de-Software.md#rf01), [US02](../Requisitos-de-Software.md#rf02), [US04](../Requisitos-de-Software.md#rf04), [US05](../Requisitos-de-Software.md#rf05), [US07](../Requisitos-de-Software.md#rf07), [US08](../Requisitos-de-Software.md#rf08)
 
@@ -64,7 +64,7 @@
 
 ## Definition of Done { #dod }
 
-### Checklist do Ciclo 1 (Iteração 7)
+### Checklist da Iteração 7
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |

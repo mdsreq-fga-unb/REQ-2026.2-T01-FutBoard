@@ -1,4 +1,4 @@
-# Evidências — Ciclo 2 (Iteração 8)
+# Evidências — Iteração 8
 **Período:** 26/10/2026 a 02/11/2026 <br>
 **Histórias trabalhadas:** [US10](../Requisitos-de-Software.md#rf10), [US11](../Requisitos-de-Software.md#rf11), [US16](../Requisitos-de-Software.md#rf16), [US17](../Requisitos-de-Software.md#rf17), [US19](../Requisitos-de-Software.md#rf19), [US20](../Requisitos-de-Software.md#rf20), [US23](../Requisitos-de-Software.md#rf23), [US13](../Requisitos-de-Software.md#rf13)
 
@@ -77,7 +77,7 @@
 
 ## Definition of Done { #dod }
 
-### Checklist do Ciclo 2 (Iteração 8)
+### Checklist da Iteração 8
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
