@@ -377,7 +377,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf10" markdown>
-<summary>RF10 · Cadastrar comportamento<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF10 · Cadastrar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -1546,7 +1546,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 | **RF07** | **Cadastrar microciclo:** o sistema deve permitir que a equipe técnica cadastrem um novo microciclo vinculado obrigatoriamente a um mesociclo existente, informando o nome do microciclo. | [RN04](#rn04) | CP02 |
 | **RF08** | **Editar microciclo:** o sistema deve permitir que a equipe técnica editem os dados de um microciclo anteriormente cadastrado. | [RN04](#rn04) | CP02 |
 | **RF09** | **Excluir microciclo:** o sistema deve permitir que a equipe técnica excluam um microciclo cadastrado. | [RN04](#rn04) | CP02 |
-| **RF10** | **Cadastrar comportamento:** o sistema deve permitir que a equipe técnica cadastrem um princípio tático (ex: ofensivo, defensivo), para uso nas atividades. | [RN05](#rn05) | CP01 |
+| **RF10** | **Cadastrar princípio tático:** o sistema deve permitir que a equipe técnica cadastrem um princípio tático (ex: ofensivo, defensivo), para uso nas atividades. | [RN05](#rn05) | CP01 |
 | **RF11** | **Editar comportamento:** o sistema deve permitir que a equipe técnica editem um princípio tático já cadastrado. | [RN05](#rn05) | CP01 |
 | **RF12** | **Excluir comportamento:** o sistema deve permitir que a equipe técnica excluam um princípio tático cadastrado. | - | CP01 |
 | **RF13** | **Cadastrar atividade na sessão:** o sistema deve permitir que a equipe técnica cadastrem uma nova atividade diretamente em uma sessão, informando dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, espaço, orientação, comportamento, momento e fase do jogo, calculando a área por jogador ([RN01](#rn01)), atribuindo a dimensão do espaço ([RN02](#rn02)), controlando a simultaneidade ([RN03](#rn03)) e respeitando o foco central ([RN05](#rn05)). | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN05](#rn05) | CP01 |

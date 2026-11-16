@@ -17,7 +17,7 @@ A US deve estar explicitamente vinculada a um Requisito Funcional, esse requisit
 
 - **A User Story está mensurável?**
 
-Devem contemplar tanto o caminho feliz quanto os fluxos de exceção, especificamente as regras de resultado vazio. Devem ter os critérios de aceitação e regras de negócio.
+Devem contemplar tanto o caminho feliz quanto os fluxos de exceção, especificamente as regras de resultado vazio. Devem ter os critérios de aceitação e regras de negócio e requisitos não funcionais.
 
 - **A User Story foi prototipada?**
 
