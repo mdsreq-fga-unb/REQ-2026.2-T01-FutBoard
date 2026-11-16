@@ -86,7 +86,7 @@
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
-| Os critérios de aceitação foram atendidos? | [Issue US01](#)<br>[Issue US02](#)<br>[Issue US04](#)<br>[Issue US05](#)<br>[Issue US07](#)<br>[Issue US08](#) | [] |
+| Os critérios de aceitação foram atendidos? | [Issue US01](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23)<br>[Issue US02](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23)<br>[Issue US04](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/28)<br>[Issue US05](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/29)<br>[Issue US07](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/30)<br>[Issue US08](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/31) | [] |
 | O código foi integrado na branch main e revisado? | *(Inserir link do Pull Request)* | [] |
 | Os workflows de CI/CD do projeto foram executados com sucesso? | *(Inserir link do Workflow / GitHub Actions)* | [] |
 | Os testes relacionados foram executados com sucesso? | *(Inserir link da execução dos testes unitários)* | [] |
