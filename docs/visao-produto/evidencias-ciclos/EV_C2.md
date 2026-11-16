@@ -10,14 +10,14 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| [Validação Cliente — US10](https://youtu.be/ia-ayXJykKA) | Vídeo de validação da **US10** (Cadastrar atividade na biblioteca) com o cliente Marcus Vinicius. |
-| [Validação Cliente — US11](https://youtu.be/9pT__tOB93Y) | Vídeo de validação da **US11** (Editar atividade da biblioteca) com o cliente Marcus Vinicius. |
-| *(Inserir link de validação — US16)* | Vídeo de validação da **US16** (Cadastrar sessão de treino) com o cliente Marcus Vinicius. |
-| *(Inserir link de validação — US17)* | Vídeo de validação da **US17** (Editar sessão de treino) com o cliente Marcus Vinicius. |
-| *(Inserir link de validação — US19)* | Vídeo de validação da **US19** (Adicionar atividade da biblioteca à sessão) com o cliente Marcus Vinicius. |
-| *(Inserir link de validação — US20)* | Vídeo de validação da **US20** (Registrar tempo e observações da atividade na sessão) com o cliente Marcus Vinicius. |
-| *(Inserir link de validação — US23)* | Vídeo de validação da **US23** (Vincular comportamentos táticos à sessão) com o cliente Marcus Vinicius. |
-| *(Inserir link de validação — US13)* | Vídeo de validação da **US13** (Consultar e filtrar atividades da biblioteca) com o cliente Marcus Vinicius. |
+| [Validação Cliente — US10](https://youtu.be/ia-ayXJykKA) | Vídeo de validação da **US10** (Cadastrar princípio tático) com o cliente Marcus Vinicius. |
+| [Validação Cliente — US11](https://youtu.be/9pT__tOB93Y) | Vídeo de validação da **US11** (Editar princípio tático) com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US16)* | Vídeo de validação da **US16** (Cadastrar sessão) com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US17)* | Vídeo de validação da **US17** (Editar sessão) com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US19)* | Vídeo de validação da **US19** (Cadastrar atividade na biblioteca) com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US20)* | Vídeo de validação da **US20** (Editar atividade na biblioteca) com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US23)* | Vídeo de validação da **US23** (Reutilizar atividade cadastrada) com o cliente Marcus Vinicius. |
+| *(Inserir link de validação — US13)* | Vídeo de validação da **US13** (Cadastrar atividade na sessão) com o cliente Marcus Vinicius. |
 | [Ata 26/10 (Reunião Equipe 15)](../../atas-reunioes/reunioes-da-equipe.md#reuniao-da-equipe-15) | Planejamento e distribuição das histórias de sessão de treino e biblioteca de atividades (US10, US11, US13, US16, US17, US19, US20, US23). |
 | [Ata 02/11 (Reunião Equipe 16)](../../atas-reunioes/reunioes-da-equipe.md#reuniao-da-equipe-16) | Revisão das entregas da iteração, validação das regras de negócio de atividades e confirmação da conclusão do fluxo de sessão. |
 
@@ -81,12 +81,12 @@
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
-| Os critérios de aceitação foram atendidos? | [Issue US10](#)<br>[Issue US11](#)<br>[Issue US16](#)<br>[Issue US17](#)<br>[Issue US19](#)<br>[Issue US20](#)<br>[Issue US23](#)<br>[Issue US13](#) | ✅ |
-| O código foi integrado na branch main e revisado? | *(Inserir link do Pull Request)* | ✅ |
-| Os workflows de CI/CD do projeto foram executados com sucesso? | *(Inserir link do Workflow / GitHub Actions)* | ✅ |
-| Os testes relacionados foram executados com sucesso? | *(Inserir link da execução dos testes unitários)* | ✅ |
-| Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | *(Inserir evidência de RNF02 — Responsividade e RNF03 — Cadastro de treino em menos de 2 min para US13, US16 e US23)* | ✅ |
-| A verificação integrada dos fluxos foi realizada com sucesso? | *(Inserir captura de tela comprovando o vínculo entre Periodização e Sessão/Atividades)* | ✅ |
-| A documentação e evidências da entrega estão atualizadas? | *(Inserir link do PR de atualização da documentação)* | ✅ |
-| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US10](https://youtu.be/ia-ayXJykKA)<br>[Validação US11](https://youtu.be/9pT__tOB93Y)<br>[Validação US16](#)<br>[Validação US17](#)<br>[Validação US19](#)<br>[Validação US20](#)<br>[Validação US23](#)<br>[Validação US13](#) | ✅ |
+| Os critérios de aceitação foram atendidos? | [Issue US10](#)<br>[Issue US11](#)<br>[Issue US16](#)<br>[Issue US17](#)<br>[Issue US19](#)<br>[Issue US20](#)<br>[Issue US23](#)<br>[Issue US13](#) | [] |
+| O código foi integrado na branch main e revisado? | *(Inserir link do Pull Request)* | [] |
+| Os workflows de CI/CD do projeto foram executados com sucesso? | *(Inserir link do Workflow / GitHub Actions)* | [] |
+| Os testes relacionados foram executados com sucesso? | *(Inserir link da execução dos testes unitários)* | [] |
+| Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | *(Inserir evidência de RNF02 — Responsividade e RNF03 — Cadastro de treino em menos de 2 min para US13, US16 e US23)* | [] |
+| A verificação integrada dos fluxos foi realizada com sucesso? | *(Inserir captura de tela comprovando o vínculo entre Periodização e Sessão/Atividades)* | [] |
+| A documentação e evidências da entrega estão atualizadas? | *(Inserir link do PR de atualização da documentação)* | [] |
+| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [x] [Validação US10](https://youtu.be/ia-ayXJykKA)<br>[x] [Validação US11](https://youtu.be/9pT__tOB93Y)<br>[] [Validação US16](#)<br>[] [Validação US17](#)<br>[] [Validação US19](#)<br>[] [Validação US20](#)<br>[] [Validação US23](#)<br>[] [Validação US13](#) | [] |
 

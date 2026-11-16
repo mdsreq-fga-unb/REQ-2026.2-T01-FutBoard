@@ -59,12 +59,12 @@
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
-| Os critérios de aceitação foram atendidos? | [Issue US14](#)<br>[Issue US22](#)<br>[Issue US24](#)<br>[Issue US27](#)<br>[Issue US28](#) | ✅ |
-| O código foi integrado na branch main e revisado? | *(Inserir link do Pull Request)* | ✅ |
-| Os workflows de CI/CD do projeto foram executados com sucesso? | *(Inserir link do Workflow / GitHub Actions)* | ✅ |
-| Os testes relacionados foram executados com sucesso? | *(Inserir link da execução dos testes unitários)* | ✅ |
-| Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | *(Inserir evidência de RNF01 — Proteção de Dados/Autenticação para US27 e US28, e RNF02 — Responsividade)* | ✅ |
-| A verificação integrada dos fluxos foi realizada com sucesso? | *(Inserir captura de tela comprovando a consistência da listagem e detalhes de sessões/atividades)* | ✅ |
-| A documentação e evidências da entrega estão atualizadas? | *(Inserir link do PR de atualização da documentação)* | ✅ |
-| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US14](#)<br>[Validação US22](#)<br>[Validação US24](#)<br>[Validação US27](#)<br>[Validação US28](#) | ✅ |
+| Os critérios de aceitação foram atendidos? | [Issue US14](#)<br>[Issue US22](#)<br>[Issue US24](#)<br>[Issue US27](#)<br>[Issue US28](#) | [] |
+| O código foi integrado na branch main e revisado? | *(Inserir link do Pull Request)* | [] |
+| Os workflows de CI/CD do projeto foram executados com sucesso? | *(Inserir link do Workflow / GitHub Actions)* | [] |
+| Os testes relacionados foram executados com sucesso? | *(Inserir link da execução dos testes unitários)* | [] |
+| Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | *(Inserir evidência de RNF01 — Proteção de Dados/Autenticação para US27 e US28, e RNF02 — Responsividade)* | [] |
+| A verificação integrada dos fluxos foi realizada com sucesso? | *(Inserir captura de tela comprovando a consistência da listagem e detalhes de sessões/atividades)* | [] |
+| A documentação e evidências da entrega estão atualizadas? | *(Inserir link do PR de atualização da documentação)* | [] |
+| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [] [Validação US14](#)<br>[] [Validação US22](#)<br>[] [Validação US24](#)<br>[] [Validação US27](#)<br>[] [Validação US28](#) | [] |
 

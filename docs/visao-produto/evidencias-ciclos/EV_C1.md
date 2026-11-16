@@ -68,12 +68,12 @@
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
-| Os critérios de aceitação foram atendidos? | [Issue US01](#)<br>[Issue US02](#)<br>[Issue US04](#)<br>[Issue US05](#)<br>[Issue US07](#)<br>[Issue US08](#) | ✅ |
-| O código foi integrado na branch main e revisado? | *(Inserir link do Pull Request)* | ✅ |
-| Os workflows de CI/CD do projeto foram executados com sucesso? | *(Inserir link do Workflow / GitHub Actions)* | ✅ |
-| Os testes relacionados foram executados com sucesso? | *(Inserir link da execução dos testes unitários)* | ✅ |
-| Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | *(Inserir print/vídeo da verificação de RNF02 — Responsividade em 360px, 768px e 1366px)* | ✅ |
-| A verificação integrada dos fluxos foi realizada com sucesso? | *(Inserir captura de tela comprovando integridade hierárquica Macro ⊃ Meso ⊃ Micro — RN04)* | ✅ |
-| A documentação e evidências da entrega estão atualizadas? | *(Inserir link do PR de atualização da documentação)* | ✅ |
-| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US01](https://youtu.be/jytb0jdUH10)<br>[Validação US02](https://youtu.be/UvoZ22L7Od0)<br>[Validação US04](https://youtu.be/Vrb2pxO-gQE)<br>[Validação US05](#)<br>[Validação US07](https://youtu.be/w4jOr4qmkJI)<br>[Validação US08](https://youtu.be/Iq24Y1mtWh4) | ✅ |
+| Os critérios de aceitação foram atendidos? | [Issue US01](#)<br>[Issue US02](#)<br>[Issue US04](#)<br>[Issue US05](#)<br>[Issue US07](#)<br>[Issue US08](#) | [] |
+| O código foi integrado na branch main e revisado? | *(Inserir link do Pull Request)* | [] |
+| Os workflows de CI/CD do projeto foram executados com sucesso? | *(Inserir link do Workflow / GitHub Actions)* | [] |
+| Os testes relacionados foram executados com sucesso? | *(Inserir link da execução dos testes unitários)* | [] |
+| Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | *(Inserir print/vídeo da verificação de RNF02 — Responsividade em 360px, 768px e 1366px)* | [] |
+| A verificação integrada dos fluxos foi realizada com sucesso? | *(Inserir captura de tela comprovando integridade hierárquica Macro ⊃ Meso ⊃ Micro — RN04)* | [] |
+| A documentação e evidências da entrega estão atualizadas? | *(Inserir link do PR de atualização da documentação)* | [] |
+| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [x] [Validação US01](https://youtu.be/jytb0jdUH10)<br>[x] [Validação US02](https://youtu.be/UvoZ22L7Od0)<br>[x] [Validação US04](https://youtu.be/Vrb2pxO-gQE)<br>[] [Validação US05](#)<br>[x] [Validação US07](https://youtu.be/w4jOr4qmkJI)<br>[x] [Validação US08](https://youtu.be/Iq24Y1mtWh4) | [] |
 
