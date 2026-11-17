@@ -469,4 +469,31 @@ acesse diretamente pelo link: [https://youtu.be/6FvMvqdlXdU](https://youtu.be/6F
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
 
+---
+
+### Reunião da equipe 19
+
+<p class="reuniao-data">segunda-feira, 16/11/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uiq7P6KYAPY" title="Reunião da equipe 19" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/uiq7P6KYAPY](https://youtu.be/uiq7P6KYAPY)
+
+- **Pontos principais:**
+    - **[(0:00–2:33)](https://youtu.be/uiq7P6KYAPY?t=0)** Revisão e apresentação dos Requisitos de Software consolidados para a entrega da Unidade 03.
+    - **[(2:33–3:55)](https://youtu.be/uiq7P6KYAPY?t=153)** Apresentação das evidências de execução e rastreabilidade por iteração.
+    - **[(3:55–5:20)](https://youtu.be/uiq7P6KYAPY?t=235)** Acompanhamento e resolução das issues apontadas no repositório.
+    - **[(5:20–6:41)](https://youtu.be/uiq7P6KYAPY?t=320)** Atualização do cronograma e revisão das entregas previstas.
+    - **[(6:41–11:08)](https://youtu.be/uiq7P6KYAPY?t=401)** Detalhamento das práticas e processos de Engenharia de Requisitos aplicados ao projeto.
+    - **[(11:08–13:53)](https://youtu.be/uiq7P6KYAPY?t=668)** Demonstração do andamento da aplicação e consolidação das lições aprendidas da unidade.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+
 
