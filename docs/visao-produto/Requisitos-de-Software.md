@@ -60,7 +60,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 
 <details id="rf01" markdown>
-<summary>RF01 · Cadastrar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF01 · Cadastrar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
@@ -80,7 +80,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Criação com sucesso do ciclo raiz da temporada após o preenchimento obrigatório de nome, data de início e data de fim.
+- Dado que preencho um nome, data de início e data de fim, quando salvo, o sistema deve criar o ciclo raiz da temporada.
 - Se os campos obrigatórios não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.
 - Se a data de fim for antes da data da inicio, o sistema deve exibir alerta e impedir o cadastro.
 
@@ -100,10 +100,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 07](evidencias-ciclos/EV_C1.md)
+
 </details>
 
 <details id="rf02" markdown>
-<summary>RF02 · Editar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF02 · Editar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
@@ -123,7 +127,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Atualização dos dados do macrociclo na visualização da temporada após a edição do nome e/ou das datas.
+- Dado que seleciono um macrociclo existente, quando altero o nome, data de início ou data de fim e salvo, as modificações devem refletir na visualização da temporada.
 - A edição das datas não deve quebrar a hierarquia dos ciclos filhos já vinculados nem permitir data de fim anterior à data de início.
 
 **Regras de Negócio Associadas**
@@ -141,6 +145,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 07](evidencias-ciclos/EV_C1.md)
 
 </details>
 
@@ -186,7 +194,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf04" markdown>
-<summary>RF04 · Cadastrar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF04 · Cadastrar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
@@ -206,7 +214,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Cadastro bem-sucedido do mesociclo com nome, datas de início e término e vínculo a um macrociclo ativo.
+- Dado que possuo um macrociclo ativo, quando preencho os dados do mesociclo (nome, data de início, data de término) e indico seu macrociclo pai, então ele deve ser salvo com sucesso.
 - Se não houver macrociclo prévio selecionado ou ativo, o sistema deve exibir alerta e impedir o cadastro.
 
 **Regras de Negócio Associadas**
@@ -225,10 +233,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 07](evidencias-ciclos/EV_C1.md)
+
 </details>
 
 <details id="rf05" markdown>
-<summary>RF05 · Editar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF05 · Editar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
@@ -266,6 +278,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 07](evidencias-ciclos/EV_C1.md)
 
 </details>
 
@@ -311,7 +327,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf07" markdown>
-<summary>RF07 · Cadastrar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF07 · Cadastrar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
@@ -330,7 +346,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Cadastro do microciclo na árvore de periodização após informar nome, datas de início e fim e selecionar um mesociclo ativo.
+- Dado que existe um mesociclo ativo, quando informo o nome, data de início e data de fim do microciclo  e salvo, o registro deve ser efetuado na árvore de periodização.
 - Se não houver mesociclo prévio selecionado, o sistema deve exibir alerta e impedir o cadastro.
 - Se os campos  nome, data de início e data de fim não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.
 
@@ -350,10 +366,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 07](evidencias-ciclos/EV_C1.md)
+
 </details>
 
 <details id="rf08" markdown>
-<summary>RF08 · Editar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF08 · Editar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 
 
 
@@ -373,7 +393,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Atualização das informações de exibição do microciclo sem desconectar as sessões de treino vinculadas.
+- Dado que altero as informações de um microciclo salvo, o sistema deve atualizar os dados de exibição sem desconectar as sessões de treino atreladas a ele.
 
 **Regras de Negócio Associadas**
 
@@ -390,6 +410,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 07](evidencias-ciclos/EV_C1.md)
 
 </details>
 
@@ -435,7 +459,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf10" markdown>
-<summary>RF10 · Cadastrar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF10 · Cadastrar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -474,10 +498,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 08](evidencias-ciclos/EV_C2.md)
+
 </details>
 
 <details id="rf11" markdown>
-<summary>RF11 · Editar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF11 · Editar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -514,6 +542,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 08](evidencias-ciclos/EV_C2.md)
 
 </details>
 
@@ -558,7 +590,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf13" markdown>
-<summary>RF13 · Cadastrar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF13 · Cadastrar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -603,10 +635,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 08](evidencias-ciclos/EV_C2.md)
+
 </details>
 
 <details id="rf14" markdown>
-<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP01</span></span></summary>
+<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -647,6 +683,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 09](evidencias-ciclos/EV_C3.md)
 
 </details>
 
@@ -692,7 +732,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf16" markdown>
-<summary>RF16 · Cadastrar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF16 · Cadastrar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -735,10 +775,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 08](evidencias-ciclos/EV_C2.md)
+
 </details>
 
 <details id="rf17" markdown>
-<summary>RF17 · Editar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF17 · Editar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -778,6 +822,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 08](evidencias-ciclos/EV_C2.md)
 
 </details>
 
@@ -824,7 +872,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf19" markdown>
-<summary>RF19 · Cadastrar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF19 · Cadastrar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -865,10 +913,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 08](evidencias-ciclos/EV_C2.md)
+
 </details>
 
 <details id="rf20" markdown>
-<summary>RF20 · Editar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF20 · Editar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -908,6 +960,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 08](evidencias-ciclos/EV_C2.md)
 
 </details>
 
@@ -953,7 +1009,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf22" markdown>
-<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
+<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
 
 
 
@@ -996,10 +1052,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 09](evidencias-ciclos/EV_C3.md)
+
 </details>
 
 <details id="rf23" markdown>
-<summary>RF23 · Reutilizar atividade cadastrada<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF23 · Reutilizar atividade cadastrada<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 
 
 
@@ -1041,10 +1101,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 08](evidencias-ciclos/EV_C2.md)
+
 </details>
 
 <details id="rf24" markdown>
-<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
+<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
 
 
 
@@ -1083,6 +1147,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 09](evidencias-ciclos/EV_C3.md)
 
 </details>
 
@@ -1128,6 +1196,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 10](evidencias-ciclos/EV_C4.md)
+
 </details>
 
 <details id="rf26" markdown>
@@ -1170,10 +1242,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 10](evidencias-ciclos/EV_C4.md)
+
 </details>
 
 <details id="rf27" markdown>
-<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
+<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
 
 
 
@@ -1213,10 +1289,14 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 09](evidencias-ciclos/EV_C3.md)
+
 </details>
 
 <details id="rf28" markdown>
-<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
+<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
 
 
 
@@ -1255,6 +1335,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 09](evidencias-ciclos/EV_C3.md)
 
 </details>
 
@@ -1423,6 +1507,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 10](evidencias-ciclos/EV_C4.md)
+
 </details>
 
 <details id="rf33" markdown>
@@ -1549,6 +1637,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 10](evidencias-ciclos/EV_C4.md)
+
 </details>
 
 <details id="rf36" markdown>
@@ -1590,6 +1682,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 11](evidencias-ciclos/EV_C5.md)
 
 </details>
 
@@ -1634,6 +1730,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 11](evidencias-ciclos/EV_C5.md)
+
 </details>
 
 <details id="rf38" markdown>
@@ -1676,6 +1776,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 11](evidencias-ciclos/EV_C5.md)
 
 </details>
 
@@ -1720,6 +1824,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story foi prototipada
 - [x] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 10](evidencias-ciclos/EV_C4.md)
+
 </details>
 
 <details id="rf40" markdown>
@@ -1763,6 +1871,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
 
+**Evidências**
+
+- [Evidências da Iteração 11](evidencias-ciclos/EV_C5.md)
+
 </details>
 
 <details id="rf41" markdown>
@@ -1805,6 +1917,10 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 - [x] A User Story está mensurável
 - [ ] A User Story foi prototipada
 - [ ] A User Story foi validada com o cliente
+
+**Evidências**
+
+- [Evidências da Iteração 11](evidencias-ciclos/EV_C5.md)
 
 </details>
 
@@ -1985,13 +2101,13 @@ As Regras de Negócio (RNs) definem a lógica de domínio esportivo do treinador
 
 | ID | Regra de Negócio | Categoria | Descrição / Fórmula de Negócio | Requisitos Relacionados |
 | :---: | :--- | :---: | :--- | :---: |
-| <a id="rn01"></a>**RN01** | **Cálculo da Área por Jogador** | Cálculo Esportivo | A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.<br><br>**Origem:** Análise da planilha e do Power BI do técnico e [Reunião com o cliente 1 (37:57)](https://youtu.be/SzRty4GPg_k?t=2277) | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF23](#rf23), [RF35](#rf35) |
-| <a id="rn02"></a>**RN02** | **Classificação Automática da Dimensão do Espaço** | Validação Automática | A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da [RN01](#rn01):<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido<br><br>**Origem:** Análise da planilha e do Power BI do técnico e [Reunião com o cliente 1 (37:57)](https://youtu.be/SzRty4GPg_k?t=2277) | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF25](#rf25), [RF35](#rf35) |
-| <a id="rn03"></a>**RN03** | **Simultaneidade e Contagem de Tempo da Sessão** | Cálculo Esportivo | Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.<br><br>**Origem:** [Reunião com o cliente 1 (25:42)](https://youtu.be/SzRty4GPg_k?t=1542) e pedido do cliente de 03/11 para o campo Ordem ([decisão D08](evidencias-ciclos/EV_C2.md#registro-de-decisoes)) | [RF13](#rf13), [RF14](#rf14), [RF16](#rf16), [RF17](#rf17), [RF22](#rf22), [RF25](#rf25), [RF26](#rf26) |
-| <a id="rn04"></a>**RN04** | **Hierarquia e Integridade da Periodização** | Integridade Estrutural | A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.<br><br>**Origem:** [Reunião com o cliente 2 (42:34)](https://youtu.be/LYDLdFKbS0Q?t=2554) e [Reunião com o cliente 5 (4:40)](https://youtu.be/s0J820mlw-E?t=280) | [RF01](#rf01) a [RF09](#rf09), [RF16](#rf16), [RF18](#rf18), [RF41](#rf41) |
-| <a id="rn05"></a>**RN05** | **Preenchimento Condicional pelo Objetivo Central** | Validação de Entrada | O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).<br><br>**Origem:** [Reunião com o cliente 3 (22:19)](https://youtu.be/kc0_jxT9aeY?t=1339) | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF32](#rf32), [RF37](#rf37) a [RF40](#rf40) |
-| <a id="rn06"></a>**RN06** | **Cálculo da Variabilidade de Treinos** | Cálculo Esportivo | O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).<br><br>**Origem:** Análise do Power BI do técnico na [Reunião com o cliente 1 (4:14)](https://youtu.be/SzRty4GPg_k?t=254) | [RF22](#rf22), [RF25](#rf25) |
-| <a id="rn07"></a>**RN07** | **Tratamento e Estabilidade em Consultas com Resultado Vazio** | Comportamento do Sistema | Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.<br><br>**Origem:** Definida pela equipe a partir do DoR, que exige o tratamento do resultado vazio em toda consulta | [RF22](#rf22), [RF24](#rf24), [RF25](#rf25), [RF35](#rf35) a [RF41](#rf41) |
+| <a id="rn01"></a>**RN01** | **Cálculo da Área por Jogador** | Cálculo Esportivo | A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais. | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF23](#rf23), [RF35](#rf35) |
+| <a id="rn02"></a>**RN02** | **Classificação Automática da Dimensão do Espaço** | Validação Automática | A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da [RN01](#rn01):<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF25](#rf25), [RF35](#rf35) |
+| <a id="rn03"></a>**RN03** | **Simultaneidade e Contagem de Tempo da Sessão** | Cálculo Esportivo | Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução. | [RF13](#rf13), [RF14](#rf14), [RF16](#rf16), [RF17](#rf17), [RF22](#rf22), [RF25](#rf25), [RF26](#rf26) |
+| <a id="rn04"></a>**RN04** | **Hierarquia e Integridade da Periodização** | Integridade Estrutural | A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade. | [RF01](#rf01) a [RF09](#rf09), [RF16](#rf16), [RF18](#rf18), [RF41](#rf41) |
+| <a id="rn05"></a>**RN05** | **Preenchimento Condicional pelo Objetivo Central** | Validação de Entrada | O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual). | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF32](#rf32), [RF37](#rf37) a [RF40](#rf40) |
+| <a id="rn06"></a>**RN06** | **Cálculo da Variabilidade de Treinos** | Cálculo Esportivo | O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo). | [RF22](#rf22), [RF25](#rf25) |
+| <a id="rn07"></a>**RN07** | **Tratamento e Estabilidade em Consultas com Resultado Vazio** | Comportamento do Sistema | Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo. | [RF22](#rf22), [RF24](#rf24), [RF25](#rf25), [RF35](#rf35) a [RF41](#rf41) |
 
 ---
 
