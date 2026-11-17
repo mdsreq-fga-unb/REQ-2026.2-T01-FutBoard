@@ -1525,7 +1525,7 @@
 </div>
 <div class="rf-cards">
 <details id="rf01">
-<summary>RF01 · Cadastrar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF01 · Cadastrar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Cadastrar macrociclo:</strong> o sistema deve permitir que a equipe técnica cadastre um novo macrociclo, informando campos como nome, data de início e data de fim para organizar a periodização dos treinos.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero cadastrar um novo macrociclo com nome e data de início, para organizar o planejamento geral da periodização dos treinos.</p>
 <div class="rf-meta">
@@ -1534,7 +1534,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Criação com sucesso do ciclo raiz da temporada após o preenchimento obrigatório de nome, data de início e data de fim.</li>
+<li>Dado que preencho um nome, data de início e data de fim, quando salvo, o sistema deve criar o ciclo raiz da temporada.</li>
 <li>Se os campos obrigatórios não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.</li>
 <li>Se a data de fim for antes da data da inicio, o sistema deve exibir alerta e impedir o cadastro.</li>
 </ul>
@@ -1554,9 +1554,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C1/">Evidências da Iteração 07</a></li>
+</ul>
 </details>
 <details id="rf02">
-<summary>RF02 · Editar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF02 · Editar macrociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Editar macrociclo:</strong> o sistema deve permitir que a equipe técnica edite os dados de um macrociclo anteriormente cadastrado.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero editar os dados de um macrociclo, para corrigir informações ou atualizar o planejamento geral.</p>
 <div class="rf-meta">
@@ -1565,7 +1569,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Atualização dos dados do macrociclo na visualização da temporada após a edição do nome e/ou das datas.</li>
+<li>Dado que seleciono um macrociclo existente, quando altero o nome, data de início ou data de fim e salvo, as modificações devem refletir na visualização da temporada.</li>
 <li>A edição das datas não deve quebrar a hierarquia dos ciclos filhos já vinculados nem permitir data de fim anterior à data de início.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
@@ -1583,6 +1587,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C1/">Evidências da Iteração 07</a></li>
 </ul>
 </details>
 <details id="rf03">
@@ -1615,7 +1623,7 @@
 </ul>
 </details>
 <details id="rf04">
-<summary>RF04 · Cadastrar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF04 · Cadastrar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Cadastrar mesociclo:</strong> o sistema deve permitir que a equipe técnica cadastre um novo mesociclo vinculado a um macrociclo existente, informando o nome, data de inicio e data de fim do mesociclo.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero cadastrar um novo mesociclo vinculado a um macrociclo, para estruturar as fases intermediárias da periodização esportiva.</p>
 <div class="rf-meta">
@@ -1624,7 +1632,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Cadastro bem-sucedido do mesociclo com nome, datas de início e término e vínculo a um macrociclo ativo.</li>
+<li>Dado que possuo um macrociclo ativo, quando preencho os dados do mesociclo (nome, data de início, data de término) e indico seu macrociclo pai, então ele deve ser salvo com sucesso.</li>
 <li>Se não houver macrociclo prévio selecionado ou ativo, o sistema deve exibir alerta e impedir o cadastro.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
@@ -1643,9 +1651,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C1/">Evidências da Iteração 07</a></li>
+</ul>
 </details>
 <details id="rf05">
-<summary>RF05 · Editar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF05 · Editar mesociclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Editar mesociclo:</strong> o sistema deve permitir que a equipe técnica edite os dados de um mesociclo anteriormente cadastrado.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero editar os dados de um mesociclo, para manter as fases do planejamento atualizadas.</p>
 <div class="rf-meta">
@@ -1672,6 +1684,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C1/">Evidências da Iteração 07</a></li>
 </ul>
 </details>
 <details id="rf06">
@@ -1704,7 +1720,7 @@
 </ul>
 </details>
 <details id="rf07">
-<summary>RF07 · Cadastrar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF07 · Cadastrar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Cadastrar microciclo:</strong> o sistema deve permitir que a equipe técnica cadastre um novo microciclo vinculado a um mesociclo existente, informando o nome do microciclo, data de inicio e data de fim.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero cadastrar um novo microciclo vinculado a um mesociclo, para organizar a rotina de treinos.</p>
 <div class="rf-meta">
@@ -1713,7 +1729,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Cadastro do microciclo na árvore de periodização após informar nome, datas de início e fim e selecionar um mesociclo ativo.</li>
+<li>Dado que existe um mesociclo ativo, quando informo o nome, data de início e data de fim do microciclo  e salvo, o registro deve ser efetuado na árvore de periodização.</li>
 <li>Se não houver mesociclo prévio selecionado, o sistema deve exibir alerta e impedir o cadastro.</li>
 <li>Se os campos  nome, data de início e data de fim não forem preenchidos, o sistema deve exibir alerta e impedir o cadastro.</li>
 </ul>
@@ -1733,9 +1749,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C1/">Evidências da Iteração 07</a></li>
+</ul>
 </details>
 <details id="rf08">
-<summary>RF08 · Editar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
+<summary>RF08 · Editar microciclo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 07</span><span>Produto: CP02</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Editar microciclo:</strong> o sistema deve permitir que a equipe técnica edite os dados de um microciclo anteriormente cadastrado.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero editar um microciclo, para ajustar o planejamento de curto prazo conforme a necessidade da equipe.</p>
 <div class="rf-meta">
@@ -1744,7 +1764,7 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li>Atualização das informações de exibição do microciclo sem desconectar as sessões de treino vinculadas.</li>
+<li>Dado que altero as informações de um microciclo salvo, o sistema deve atualizar os dados de exibição sem desconectar as sessões de treino atreladas a ele.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
@@ -1761,6 +1781,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C1/">Evidências da Iteração 07</a></li>
 </ul>
 </details>
 <details id="rf09">
@@ -1793,7 +1817,7 @@
 </ul>
 </details>
 <details id="rf10">
-<summary>RF10 · Cadastrar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF10 · Cadastrar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Cadastrar princípio tático:</strong> o sistema deve permitir que a equipe técnica cadastre um princípio tático (ex: ofensivo, defensivo), para uso nas atividades.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero cadastrar um princípio tático (ex: ofensivo, defensivo), para vinculá-lo às atividades.</p>
 <div class="rf-meta">
@@ -1821,9 +1845,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C2/">Evidências da Iteração 08</a></li>
+</ul>
 </details>
 <details id="rf11">
-<summary>RF11 · Editar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF11 · Editar princípio tático<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Editar princípio tático:</strong> o sistema deve permitir que a equipe técnica edite um princípio tático já cadastrado.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero editar um princípio tático, para corrigir sua nomenclatura ou ajustar os detalhes técnicos.</p>
 <div class="rf-meta">
@@ -1849,6 +1877,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C2/">Evidências da Iteração 08</a></li>
 </ul>
 </details>
 <details id="rf12">
@@ -1881,7 +1913,7 @@
 </ul>
 </details>
 <details id="rf13">
-<summary>RF13 · Cadastrar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF13 · Cadastrar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Cadastrar atividade na sessão:</strong> o sistema deve permitir que a equipe técnica cadastre uma nova atividade diretamente em uma sessão, sem necessidade de ela já existir na biblioteca, informando seus dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, o espaço, a orientação, o comportamento, e o momento e fase do jogo trabalhados.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero cadastrar uma nova atividade informando sua tipologia e tipo de SSP, para estruturar os exercícios da equipe.</p>
 <div class="rf-meta">
@@ -1915,9 +1947,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C2/">Evidências da Iteração 08</a></li>
+</ul>
 </details>
 <details id="rf14">
-<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP01</span></span></summary>
+<summary>RF14 · Editar atividade na sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Editar atividade na sessão:</strong> o sistema deve permitir que a equipe técnica edite os dados de uma atividade incluída em uma sessão, sem alterar a atividade correspondente na biblioteca.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero editar os dados invariáveis de uma atividade, para corrigir e atualizar detalhes do exercício.</p>
 <div class="rf-meta">
@@ -1947,6 +1983,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C3/">Evidências da Iteração 09</a></li>
 </ul>
 </details>
 <details id="rf15">
@@ -1979,7 +2019,7 @@
 </ul>
 </details>
 <details id="rf16">
-<summary>RF16 · Cadastrar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF16 · Cadastrar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Cadastrar sessão:</strong> o sistema deve permitir que a equipe técnica cadastre uma nova sessão de treino vinculada à periodização (macrociclo, mesociclo e microciclo), contendo a data e o número sequencial da sessão.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero cadastrar uma nova sessão de treino vinculada à periodização com data e sequência, para cadastrar as atividades de um dia específico.</p>
 <div class="rf-meta">
@@ -2011,9 +2051,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C2/">Evidências da Iteração 08</a></li>
+</ul>
 </details>
 <details id="rf17">
-<summary>RF17 · Editar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF17 · Editar sessão<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Editar sessão:</strong> o sistema deve permitir que a equipe técnica edite os dados de uma sessão de treino já cadastrada.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero editar os dados de uma sessão de treino, para ajustar a data ou numeração do treino caso haja mudanças.</p>
 <div class="rf-meta">
@@ -2042,6 +2086,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C2/">Evidências da Iteração 08</a></li>
 </ul>
 </details>
 <details id="rf18">
@@ -2075,7 +2123,7 @@
 </ul>
 </details>
 <details id="rf19">
-<summary>RF19 · Cadastrar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF19 · Cadastrar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Cadastrar atividade na biblioteca:</strong> o sistema deve permitir que a equipe técnica cadastre uma atividade na biblioteca de treinos, independentemente do cadastro em uma sessão específica, para que ela fique disponível para reutilização futura, informando seus dados invariáveis (tipologia e tipo de SSP) e, de forma opcional, o espaço, a orientação, o comportamento, e o momento e fase do jogo trabalhados.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero cadastrar atividades diretamente na biblioteca de treinos, para deixá-las disponíveis para reutilização futura sem precisar atrelá-las imediatamente a uma sessão.</p>
 <div class="rf-meta">
@@ -2105,9 +2153,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C2/">Evidências da Iteração 08</a></li>
+</ul>
 </details>
 <details id="rf20">
-<summary>RF20 · Editar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF20 · Editar atividade na biblioteca<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Editar atividade na biblioteca:</strong> o sistema deve permitir que a equipe técnica edite uma atividade cadastrada na biblioteca de treinos.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero editar uma atividade na biblioteca de treinos, para melhorar ou corrigir a descrição base do exercício.</p>
 <div class="rf-meta">
@@ -2136,6 +2188,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C2/">Evidências da Iteração 08</a></li>
 </ul>
 </details>
 <details id="rf21">
@@ -2168,7 +2224,7 @@
 </ul>
 </details>
 <details id="rf22">
-<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
+<summary>RF22 · Exibir indicador de treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Exibir indicador de treino:</strong> o sistema deve exibir, para a equipe técnica, indicadores como número de sessões, minutos totais de treino, variabilidade de exercícios e número de execuções.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero visualizar indicadores de treino (número de sessões, minutos totais, variabilidade de exercícios, execuções), para acompanhar rapidamente o volume geral de trabalho.</p>
 <div class="rf-meta">
@@ -2200,9 +2256,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C3/">Evidências da Iteração 09</a></li>
+</ul>
 </details>
 <details id="rf23">
-<summary>RF23 · Reutilizar atividade cadastrada<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
+<summary>RF23 · Reutilizar atividade cadastrada<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 08</span><span>Produto: CP01</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Reutilizar atividade cadastrada:</strong> o sistema deve permitir que a equipe técnica adicione a uma sessão de treino uma atividade já cadastrada na biblioteca, preenchendo automaticamente, no momento da seleção, os campos inerentes à atividade.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero adicionar a uma sessão uma atividade já existente na biblioteca com preenchimento automático de campos inerentes, para agilizar a montagem do treino.</p>
 <div class="rf-meta">
@@ -2233,9 +2293,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C2/">Evidências da Iteração 08</a></li>
+</ul>
 </details>
 <details id="rf24">
-<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
+<summary>RF24 · Consultar informação de atividade do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP03</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Consultar informação de atividade do treino:</strong> o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de atividade, atualizando automaticamente as informações exibidas.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero filtrar as informações de atividade do treino, para consultar rapidamente um conjunto de atividades específicas executadas ou planejadas.</p>
 <div class="rf-meta">
@@ -2263,6 +2327,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C3/">Evidências da Iteração 09</a></li>
 </ul>
 </details>
 <details id="rf25">
@@ -2296,6 +2364,10 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C4/">Evidências da Iteração 10</a></li>
+</ul>
 </details>
 <details id="rf26">
 <summary>RF26 · Alternar unidade de tempo<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP03</span></span></summary>
@@ -2326,9 +2398,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C4/">Evidências da Iteração 10</a></li>
+</ul>
 </details>
 <details id="rf27">
-<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
+<summary>RF27 · Criar conta<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Criar conta:</strong> o sistema deve permitir que a equipe técnica crie uma conta de acesso à aplicação.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero criar uma conta de acesso na aplicação, para ter um perfil dedicado e seguro para gerenciar meu planejamento.</p>
 <div class="rf-meta">
@@ -2357,9 +2433,13 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C3/">Evidências da Iteração 09</a></li>
+</ul>
 </details>
 <details id="rf28">
-<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
+<summary>RF28 · Fazer login<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 09</span><span>Produto: CP05</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Fazer login:</strong> o sistema deve permitir que a equipe técnica se autentique na aplicação a partir de um login e senha de acesso.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero fazer login com e-mail e senha, para garantir que os dados sensíveis do time sejam acessados de forma autenticada.</p>
 <div class="rf-meta">
@@ -2387,6 +2467,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C3/">Evidências da Iteração 09</a></li>
 </ul>
 </details>
 <details id="rf29">
@@ -2507,6 +2591,10 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C4/">Evidências da Iteração 10</a></li>
+</ul>
 </details>
 <details id="rf33">
 <summary>RF33 · Editar atributo técnico da atividade<span class='rf-summary-status'><span>Entrega: Escopo Adicional</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: N&atilde;o definida</span><span>Produto: CP01</span></span></summary>
@@ -2597,6 +2685,10 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C4/">Evidências da Iteração 10</a></li>
+</ul>
 </details>
 <details id="rf36">
 <summary>RF36 · Consultar informação de orientação do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
@@ -2626,6 +2718,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[ ] A User Story foi prototipada</li>
 <li>[ ] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
 </ul>
 </details>
 <details id="rf37">
@@ -2658,6 +2754,10 @@
 <li>[ ] A User Story foi prototipada</li>
 <li>[ ] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
+</ul>
 </details>
 <details id="rf38">
 <summary>RF38 · Consultar informação de fase do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
@@ -2688,6 +2788,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[ ] A User Story foi prototipada</li>
 <li>[ ] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
 </ul>
 </details>
 <details id="rf39">
@@ -2720,6 +2824,10 @@
 <li>[x] A User Story foi prototipada</li>
 <li>[x] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C4/">Evidências da Iteração 10</a></li>
+</ul>
 </details>
 <details id="rf40">
 <summary>RF40 · Consultar informação de atributo técnico do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
@@ -2751,6 +2859,10 @@
 <li>[ ] A User Story foi prototipada</li>
 <li>[ ] A User Story foi validada com o cliente</li>
 </ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
+</ul>
 </details>
 <details id="rf41">
 <summary>RF41 · Consultar análise comparativa por periodização<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
@@ -2781,6 +2893,10 @@
 <li>[x] A User Story está mensurável</li>
 <li>[ ] A User Story foi prototipada</li>
 <li>[ ] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
 </ul>
 </details>
 </div>
@@ -2936,49 +3052,49 @@
 <td style="text-align: center;"><a id="rn01"></a><strong>RN01</strong></td>
 <td style="text-align: left;"><strong>Cálculo da Área por Jogador</strong></td>
 <td style="text-align: center;">Cálculo Esportivo</td>
-<td style="text-align: left;">A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.<br><br><strong>Origem:</strong> Análise da planilha e do Power BI do técnico e <a href="https://youtu.be/SzRty4GPg_k?t=2277">Reunião com o cliente 1 (37:57)</a></td>
+<td style="text-align: left;">A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de <strong>Aquisição</strong>, <strong>Aplicação</strong> e <strong>Equilíbrio de Carga</strong>. Dispensado para atividades de <strong>PDI</strong> (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais.</td>
 <td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf19">RF19</a>, <a href="#rf20">RF20</a>, <a href="#rf23">RF23</a>, <a href="#rf35">RF35</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn02"></a><strong>RN02</strong></td>
 <td style="text-align: left;"><strong>Classificação Automática da Dimensão do Espaço</strong></td>
 <td style="text-align: center;">Validação Automática</td>
-<td style="text-align: left;">A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da <a href="#rn01">RN01</a>:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido<br><br><strong>Origem:</strong> Análise da planilha e do Power BI do técnico e <a href="https://youtu.be/SzRty4GPg_k?t=2277">Reunião com o cliente 1 (37:57)</a></td>
+<td style="text-align: left;">A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da <a href="#rn01">RN01</a>:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</td>
 <td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf19">RF19</a>, <a href="#rf20">RF20</a>, <a href="#rf25">RF25</a>, <a href="#rf35">RF35</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn03"></a><strong>RN03</strong></td>
 <td style="text-align: left;"><strong>Simultaneidade e Contagem de Tempo da Sessão</strong></td>
 <td style="text-align: center;">Cálculo Esportivo</td>
-<td style="text-align: left;">Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.<br><br><strong>Origem:</strong> <a href="https://youtu.be/SzRty4GPg_k?t=1542">Reunião com o cliente 1 (25:42)</a> e pedido do cliente de 03/11 para o campo Ordem (<a href="../evidencias-ciclos/EV_C2/#registro-de-decisoes">decisão D08</a>)</td>
+<td style="text-align: left;">Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</td>
 <td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf16">RF16</a>, <a href="#rf17">RF17</a>, <a href="#rf22">RF22</a>, <a href="#rf25">RF25</a>, <a href="#rf26">RF26</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn04"></a><strong>RN04</strong></td>
 <td style="text-align: left;"><strong>Hierarquia e Integridade da Periodização</strong></td>
 <td style="text-align: center;">Integridade Estrutural</td>
-<td style="text-align: left;">A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.<br><br><strong>Origem:</strong> <a href="https://youtu.be/LYDLdFKbS0Q?t=2554">Reunião com o cliente 2 (42:34)</a> e <a href="https://youtu.be/s0J820mlw-E?t=280">Reunião com o cliente 5 (4:40)</a></td>
+<td style="text-align: left;">A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</td>
 <td style="text-align: center;"><a href="#rf01">RF01</a> a <a href="#rf09">RF09</a>, <a href="#rf16">RF16</a>, <a href="#rf18">RF18</a>, <a href="#rf41">RF41</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn05"></a><strong>RN05</strong></td>
 <td style="text-align: left;"><strong>Preenchimento Condicional pelo Objetivo Central</strong></td>
 <td style="text-align: center;">Validação de Entrada</td>
-<td style="text-align: left;">O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).<br><br><strong>Origem:</strong> <a href="https://youtu.be/kc0_jxT9aeY?t=1339">Reunião com o cliente 3 (22:19)</a></td>
+<td style="text-align: left;">O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</td>
 <td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf19">RF19</a>, <a href="#rf20">RF20</a>, <a href="#rf32">RF32</a>, <a href="#rf37">RF37</a> a <a href="#rf40">RF40</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn06"></a><strong>RN06</strong></td>
 <td style="text-align: left;"><strong>Cálculo da Variabilidade de Treinos</strong></td>
 <td style="text-align: center;">Cálculo Esportivo</td>
-<td style="text-align: left;">O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).<br><br><strong>Origem:</strong> Análise do Power BI do técnico na <a href="https://youtu.be/SzRty4GPg_k?t=254">Reunião com o cliente 1 (4:14)</a></td>
+<td style="text-align: left;">O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).</td>
 <td style="text-align: center;"><a href="#rf22">RF22</a>, <a href="#rf25">RF25</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn07"></a><strong>RN07</strong></td>
 <td style="text-align: left;"><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio</strong></td>
 <td style="text-align: center;">Comportamento do Sistema</td>
-<td style="text-align: left;">Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.<br><br><strong>Origem:</strong> Definida pela equipe a partir do DoR, que exige o tratamento do resultado vazio em toda consulta</td>
+<td style="text-align: left;">Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</td>
 <td style="text-align: center;"><a href="#rf22">RF22</a>, <a href="#rf24">RF24</a>, <a href="#rf25">RF25</a>, <a href="#rf35">RF35</a> a <a href="#rf41">RF41</a></td>
 </tr>
 </tbody>
