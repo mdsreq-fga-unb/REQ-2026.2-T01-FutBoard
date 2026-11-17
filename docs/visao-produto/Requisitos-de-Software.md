@@ -2111,19 +2111,7 @@ As Regras de Negócio (RNs) definem a lógica de domínio esportivo do treinador
 
 ---
 
-### <a id="811-regras-de-negocio-para-consultas-com-resultado-vazio"></a>8.3.1 Detalhamento da RN07: Comportamento para Consultas com Resultado Vazio
 
-Esta subseção detalha a especificação operacional da **RN07**, descrevendo o comportamento visual e interativo do sistema nos cenários em que consultas e filtros não retornam dados:
-
-| Requisito | Tipo de Consulta | Condição de Resultado Vazio | Comportamento do Sistema (Regra de Negócio) | Mensagem e Ação Sugerida ao Usuário |
-|:---:|:---|:---|:---|:---|
-| [**RF22**](#rf22) | Indicadores na tela inicial | Nenhum treino cadastrado no período selecionado. | Os indicadores quantitativos são exibidos com valor neutro (`0 sessões`, `0 min`, `0 execuções`). Não ocorrem erros de renderização. | *"Nenhum treino registrado neste período."* O sistema exibe atalho para cadastrar nova sessão. |
-| [**RF24**](#rf24) | Informações de atividades do treino | Filtro aplicado para o qual não existem atividades cadastradas. | A lista de atividades é substituída por um componente visual de estado vazio. | *"Nenhuma atividade encontrada para os filtros aplicados."* O sistema disponibiliza botão para limpar filtros. |
-| [**RF25**](#rf25) | Geração de relatório em PDF | Exportação de relatório para um período sem sessões registradas. | O sistema emite notificação informativa na interface, evitando gerar arquivos vazios ou erros. | *"Não há registros de treinos no período selecionado para compor o relatório."* |
-| [**RF35**](#rf35) a [**RF40**](#rf40) | Informações de dimensões do treino (espaço, orientação, momento, fase, comportamento, atributo) | Período filtrado não possui treinos com a dimensão selecionada. | O gráfico é renderizado com visual neutro (`0 min` e `0%`), sem disparar exceções (ex.: evitar divisão por zero). | *"Sem atividades com [esta dimensão] no período."* Mantém os filtros ativos para nova consulta. |
-| [**RF41**](#rf41) | Análise comparativa por periodização | Um ou ambos os ciclos selecionados não possuem treinos. | O sistema renderiza a coluna do ciclo sem dados com indicativo neutro, alertando a impossibilidade de cálculo comparativo. | *"O ciclo selecionado não possui treinos registrados para permitir o comparativo."* |
-
----
 
 <!-- RNFs moved to section 8.1.
 
