@@ -980,23 +980,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="8.3 Regras de Negócio — RNs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#831-detalhamento-da-rn07-comportamento-para-consultas-com-resultado-vazio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8.3.1 Detalhamento da RN07: Comportamento para Consultas com Resultado Vazio
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1419,23 +1402,6 @@
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="8.3 Regras de Negócio — RNs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#831-detalhamento-da-rn07-comportamento-para-consultas-com-resultado-vazio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8.3.1 Detalhamento da RN07: Comportamento para Consultas com Resultado Vazio
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3096,57 +3062,6 @@
 <td style="text-align: center;">Comportamento do Sistema</td>
 <td style="text-align: left;">Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</td>
 <td style="text-align: center;"><a href="#rf22">RF22</a>, <a href="#rf24">RF24</a>, <a href="#rf25">RF25</a>, <a href="#rf35">RF35</a> a <a href="#rf41">RF41</a></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3 id="831-detalhamento-da-rn07-comportamento-para-consultas-com-resultado-vazio"><a id="811-regras-de-negocio-para-consultas-com-resultado-vazio"></a>8.3.1 Detalhamento da RN07: Comportamento para Consultas com Resultado Vazio</h3>
-<p>Esta subseção detalha a especificação operacional da <strong>RN07</strong>, descrevendo o comportamento visual e interativo do sistema nos cenários em que consultas e filtros não retornam dados:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Requisito</th>
-<th style="text-align: left;">Tipo de Consulta</th>
-<th style="text-align: left;">Condição de Resultado Vazio</th>
-<th style="text-align: left;">Comportamento do Sistema (Regra de Negócio)</th>
-<th style="text-align: left;">Mensagem e Ação Sugerida ao Usuário</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><a href="#rf22"><strong>RF22</strong></a></td>
-<td style="text-align: left;">Indicadores na tela inicial</td>
-<td style="text-align: left;">Nenhum treino cadastrado no período selecionado.</td>
-<td style="text-align: left;">Os indicadores quantitativos são exibidos com valor neutro (<code>0 sessões</code>, <code>0 min</code>, <code>0 execuções</code>). Não ocorrem erros de renderização.</td>
-<td style="text-align: left;"><em>"Nenhum treino registrado neste período."</em> O sistema exibe atalho para cadastrar nova sessão.</td>
-</tr>
-<tr>
-<td style="text-align: center;"><a href="#rf24"><strong>RF24</strong></a></td>
-<td style="text-align: left;">Informações de atividades do treino</td>
-<td style="text-align: left;">Filtro aplicado para o qual não existem atividades cadastradas.</td>
-<td style="text-align: left;">A lista de atividades é substituída por um componente visual de estado vazio.</td>
-<td style="text-align: left;"><em>"Nenhuma atividade encontrada para os filtros aplicados."</em> O sistema disponibiliza botão para limpar filtros.</td>
-</tr>
-<tr>
-<td style="text-align: center;"><a href="#rf25"><strong>RF25</strong></a></td>
-<td style="text-align: left;">Geração de relatório em PDF</td>
-<td style="text-align: left;">Exportação de relatório para um período sem sessões registradas.</td>
-<td style="text-align: left;">O sistema emite notificação informativa na interface, evitando gerar arquivos vazios ou erros.</td>
-<td style="text-align: left;"><em>"Não há registros de treinos no período selecionado para compor o relatório."</em></td>
-</tr>
-<tr>
-<td style="text-align: center;"><a href="#rf35"><strong>RF35</strong></a> a <a href="#rf40"><strong>RF40</strong></a></td>
-<td style="text-align: left;">Informações de dimensões do treino (espaço, orientação, momento, fase, comportamento, atributo)</td>
-<td style="text-align: left;">Período filtrado não possui treinos com a dimensão selecionada.</td>
-<td style="text-align: left;">O gráfico é renderizado com visual neutro (<code>0 min</code> e <code>0%</code>), sem disparar exceções (ex.: evitar divisão por zero).</td>
-<td style="text-align: left;"><em>"Sem atividades com [esta dimensão] no período."</em> Mantém os filtros ativos para nova consulta.</td>
-</tr>
-<tr>
-<td style="text-align: center;"><a href="#rf41"><strong>RF41</strong></a></td>
-<td style="text-align: left;">Análise comparativa por periodização</td>
-<td style="text-align: left;">Um ou ambos os ciclos selecionados não possuem treinos.</td>
-<td style="text-align: left;">O sistema renderiza a coluna do ciclo sem dados com indicativo neutro, alertando a impossibilidade de cálculo comparativo.</td>
-<td style="text-align: left;"><em>"O ciclo selecionado não possui treinos registrados para permitir o comparativo."</em></td>
 </tr>
 </tbody>
 </table>
