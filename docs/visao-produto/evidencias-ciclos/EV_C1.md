@@ -13,7 +13,7 @@
 | [Validação Cliente — US01](https://youtu.be/jytb0jdUH10) | Vídeo de validação da **US01** (Cadastrar macrociclo) com o cliente Marcus Vinicius. |
 | [Validação Cliente — US02](https://youtu.be/UvoZ22L7Od0) | Vídeo de validação da **US02** (Editar macrociclo) com o cliente Marcus Vinicius. |
 | [Validação Cliente — US04](https://youtu.be/Vrb2pxO-gQE) | Vídeo de validação da **US04** (Cadastrar mesociclo) com o cliente Marcus Vinicius. |
-| [Print WhatsApp 28/10](../../assets/evidencias/whatsapp/whatsapp-2810-validacao-fluxo-arvore.png) | Validação da **US05** (Editar mesociclo) junto com o fluxo em árvore da periodização. |
+| [Validação Cliente — US05](https://youtu.be/lUtvgRjILr8) | Vídeo de validação da **US05** (Editar mesociclo)  com o cliente Marcus Vinicius. |
 | [Validação Cliente — US07](https://youtu.be/w4jOr4qmkJI) | Vídeo de validação da **US07** (Cadastrar microciclo) com o cliente Marcus Vinicius. |
 | [Validação Cliente — US08](https://youtu.be/Iq24Y1mtWh4) | Vídeo de validação da **US08** (Editar microciclo) com o cliente Marcus Vinicius. |
 | [Gravação 22/10 (Reunião Cliente 5)](../../atas-reunioes/reunioes-cliente.md#reuniao-com-o-cliente-5) | Apresentação e validação da estrutura de periodização (macrociclo, mesociclo e microciclo) junto ao cliente Marcus Vinicius, alinhando o fluxo em árvore e as datas variáveis dos ciclos. |
