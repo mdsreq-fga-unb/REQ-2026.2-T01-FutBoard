@@ -32,7 +32,6 @@ acesse diretamente pelo link: [ https://youtu.be/SzRty4GPg_k]( https://youtu.be/
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Marcus Vinicius | ✅ | Cliente |
 
-*** End of File
 
 
 ### Reunião com o cliente 2
@@ -138,6 +137,48 @@ acesse diretamente pelo link: [https://youtu.be/s0J820mlw-E](https://youtu.be/s0
 | :--- | :---: | :--- |
 | Giovana Martins De Brito | ✅ | Membro da equipe |
 | Guilherme Lorenzi Ventura | ❌ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Marcus Vinicius | ✅ | Cliente |
+
+---
+
+### Reunião com o cliente 6
+
+<p class="reuniao-data">quinta-feira, 29/10/2026</p>
+
+- **Pontos principais:**
+    - Reunião realizada de forma assíncrona via WhatsApp com o cliente Marcus Vinicius, conforme combinado na reunião anterior.
+    - Envio e validação assíncrona dos protótipos atualizados da iteração 08
+    - Coleta de feedbacks e aprovação das telas e interações propostas antes do avanço para a etapa de implementação.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Marcus Vinicius | ✅ | Cliente |
+
+---
+
+### Reunião com o cliente 7
+
+<p class="reuniao-data">quinta-feira, 05/11/2026</p>
+
+- **Pontos principais:**
+    - Reunião realizada de forma assíncrona via WhatsApp com o cliente Marcus Vinicius para continuidade do ciclo de validação.
+    - Validação assíncrona dos protótipos das histórias da iteração 09
+    - Alinhamento final dos requisitos validados para consolidar a rastreabilidade e direcionar o desenvolvimento das funcionalidades.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
 | Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
 | Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |

@@ -34,3 +34,19 @@ Acesse diretamente pelo link: [Vídeo da Entrega da Unidade 02](https://youtu.be
     - **[(8:16–9:48)](https://youtu.be/jvtEUZl30WU?t=496)** Cronograma de entregas
     - **[(9:49–11:37)](https://youtu.be/jvtEUZl30WU?t=589)** Evidências de execução de processo de ESW e ER
     - **[(11:37–13:53)](https://youtu.be/jvtEUZl30WU?t=697)** Lições aprendidas
+
+## Unidade 03
+
+Vídeo da terceira entrega do projeto:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uiq7P6KYAPY" title="Vídeo da Entrega 03" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Acesse diretamente pelo link: [Vídeo da Entrega da Unidade 03](https://youtu.be/uiq7P6KYAPY)
+
+- **Pontos principais:**
+    - **[(0:00–2:33)](https://youtu.be/uiq7P6KYAPY?t=0)** Requisitos de Software
+    - **[(2:33–3:55)](https://youtu.be/uiq7P6KYAPY?t=153)** Evidências por Iteração
+    - **[(3:55–5:20)](https://youtu.be/uiq7P6KYAPY?t=235)** Issues
+    - **[(5:20–6:41)](https://youtu.be/uiq7P6KYAPY?t=320)** Cronograma e Entregas
+    - **[(6:41–11:08)](https://youtu.be/uiq7P6KYAPY?t=401)** Engenharia de Requisitos
+    - **[(11:08–13:53)](https://youtu.be/uiq7P6KYAPY?t=668)** Aplicação e Lições Aprendidas

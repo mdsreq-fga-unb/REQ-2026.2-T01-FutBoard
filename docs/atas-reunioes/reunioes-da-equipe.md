@@ -414,3 +414,59 @@ acesse diretamente pelo link: [https://youtu.be/h_E9TOlH4SM](https://youtu.be/h_
 | Leonardo Lopes Cruz | ✅ | Membro da equipe |
 | Rafael Silva Wasconcelos | ✅ | Membro da equipe |
 | Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+
+### Reunião da equipe 17
+
+<p class="reuniao-data">segunda-feira, 09/11/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0XqRJBWmjEc" title="Reunião da equipe 17" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/0XqRJBWmjEc](https://youtu.be/0XqRJBWmjEc)
+
+- **Pontos principais:**
+    - **[(0:03–1:14)](https://youtu.be/0XqRJBWmjEc?t=3)** Gustavo alinha com a equipe a possibilidade de realizar a apresentação do projeto no dia 17, antes de sua viagem no dia 18 à tarde (após a prova de Bancos de Dados), e informa que consultará o professor sobre a viabilidade ou necessidade de sorteio.
+    - **[(1:14–6:26)](https://youtu.be/0XqRJBWmjEc?t=74)** Gustavo apresenta a nova aba criada por Rafael com cards interativos e filtros para os requisitos (MVP, concluídos, busca por nome). A equipe debate como exibir critérios de aceitação, requisitos não funcionais e regras de negócio (via hyperlinks para evitar repetição) e concorda em adicionar cards e filtros por iteração, além de links para evidências.
+    - **[(6:26–12:25)](https://youtu.be/0XqRJBWmjEc?t=386)** Leonardo apresenta a atualização do cronograma com links para evidências de validação do cliente. A equipe decide remover a coluna de consideração/justificativa para eliminar o scroll lateral e opta por direcionar os hyperlinks das US para os cards já existentes, mantendo os protótipos de baixa fidelidade e o DoD no próprio cronograma.
+    - **[(12:25–15:56)](https://youtu.be/0XqRJBWmjEc?t=745)** Gustavo reforça a obrigatoriedade de abrir Pull Requests para a branch `stage` visando a rastreabilidade exigida no DoD, solicita a Giovana a transcrição dos áudios de alteração do cliente da iteração 8 e informa que está trabalhando no deploy no Render para hospedar banco, back-end e front-end para validação.
+    - **[(15:56–22:47)](https://youtu.be/0XqRJBWmjEc?t=956)** A equipe repassa o status do desenvolvimento (US07, US08, macrociclo, sessão) e dos testes de QA planejados por Leonardo (caixa preta, caixa branca e unitário). Giovana alerta sobre a cobrança do professor quanto à estratégia de atualização de requisitos, e Gustavo propõe criar um fluxograma no GitPages para facilitar a navegação do docente pela documentação.
+    - **[(22:47–28:25)](https://youtu.be/0XqRJBWmjEc?t=1367)** Gustavo identifica a necessidade de ajustar o fluxo de cadastro de entidades (mesociclo, microciclo, sessão e atividade) para exigir a seleção do item antecessor de referência quando o cadastro não seguir a ordem linear desde o macrociclo. Também alinham a divergência de redação da US24 entre o Miro e o GitPages.
+    - **[(28:25–38:49)](https://youtu.be/0XqRJBWmjEc?t=1705)** Discutem dúvidas pendentes para tirar com o professor: remoção da matriz de priorização, nomenclatura adequada do backlog no RAD e o escopo exato da fase de "Design de Usuário e Construção" nas iterações, avaliando como tratar débitos técnicos e ajustes no calendário.
+    - **[(38:49–46:42)](https://youtu.be/0XqRJBWmjEc?t=2329)** São divididas as tarefas da próxima iteração: para prototipação da iteração 10, Leonardo fica com a US25, Giovana com a US35 e Guilherme Lorenzi com a US26 (enquanto Guilherme Tegnoué assumirá demandas no GitPages); para desenvolvimento da iteração 9, Gustavo e Rafael ficam com três histórias (incluindo US13 e US23), Giovana e Leonardo com US22 e US24, e os Guilhermes com US27 e US28.
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ✅ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+
+---
+
+### Reunião da equipe 18
+
+<p class="reuniao-data">quinta-feira, 12/11/2026 - 20h</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6FvMvqdlXdU" title="Reunião da equipe 18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+acesse diretamente pelo link: [https://youtu.be/6FvMvqdlXdU](https://youtu.be/6FvMvqdlXdU)
+
+- **Pontos principais:**
+    - **[(0:04–2:52)](https://youtu.be/6FvMvqdlXdU?t=4)** Gustavo confirma a divisão dos protótipos restantes (US32 para Guilherme Tegnoué e US26 para Guilherme Lorenzi) e verifica o andamento do desenvolvimento com Giovana e Leonardo. Leonardo informa que finalizou o back-end da US19 e estima concluir até sábado o back-end da US20, US22 e US24 para Giovana integrar o front-end.
+    - **[(2:52–8:15)](https://youtu.be/6FvMvqdlXdU?t=172)** Guilherme Tegnoué relata a conclusão das US10 e US11 via Pull Request e levanta um impedimento sobre o controle de criação de contas e login. A equipe debate e concorda que o treinador deve atuar como administrador para aprovar ou liberar novos cadastros, evitando acesso aberto indevido, e decide consultar o monitor sobre a melhor abordagem.
+    - **[(8:15–15:23)](https://youtu.be/6FvMvqdlXdU?t=495)** A equipe analisa o plano de ensino para confirmar o prazo final de entrega do código e da documentação no GitHub (30 de novembro, um dia antes do início das apresentações). Discutem o ritmo das iterações frente às provas de Bancos de Dados e FSO, e Leonardo se oferece para ajudar Gustavo na configuração do deploy (Render/VPS) após a prova do dia 18.
+    - **[(15:23–21:15)](https://youtu.be/6FvMvqdlXdU?t=923)** Planejam incluir no cronograma uma etapa específica para exportação/importação dos dados das planilhas do cliente após o deploy e a conclusão dos CRUDs. Também definem a estrutura da página de protótipos e validações do cliente para garantir rastreabilidade e reforçam a necessidade de formalizar a estratégia de atualização dos requisitos exigida pelo professor.
+    - **[(21:15–23:58)](https://youtu.be/6FvMvqdlXdU?t=1275)** Gustavo e Giovana revisam as melhorias visuais e funcionais aplicadas por Rafael na página de requisitos (filtros combinados e hyperlinks). Rafael aponta que ainda ajustará a redação das declarações para padronizar "equipe técnica" no lugar de treinador/auxiliar e corrigirá pequenos problemas de formatação.
+    - **[(23:58–30:03)](https://youtu.be/6FvMvqdlXdU?t=1438)** Guilherme Tegnoué questiona a US32 (registro de atributos técnicos em atividade), e Gustavo esclarece que será necessário criar um CRUD para gerenciar a lista dinâmica de atributos cadastráveis. Por fim, abordam a cobrança do professor na issue 15 sobre preservação de histórico, decidindo propor ao cliente um requisito não funcional de backup automático diário (a cada 24 horas).
+
+| Participante | Reunião | Função |
+| :--- | :---: | :--- |
+| Giovana Martins De Brito | ✅ | Membro da equipe |
+| Guilherme Lorenzi Ventura | ❌ | Membro da equipe |
+| Guilherme Nascimento Tegnoué | ✅ | Membro da equipe |
+| Gustavo Rodrigues de Noronha | ✅ | Líder da equipe |
+| Leonardo Lopes Cruz | ✅ | Membro da equipe |
+| Rafael Silva Wasconcelos | ✅ | Membro da equipe |
+| Eduardo Lobo Moreira | ❌ | Monitor da equipe |
+
+
