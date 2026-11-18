@@ -3,11 +3,11 @@
 from django.urls import path
 
 from .views import (
-    SessaoDetailView,
-    SessaoListCreateView,
-    ComportamentoTaticoListCreateView,
-    ComportamentoTaticoDetailView,
     AtividadeBibliotecaListCreateView,
+    AtividadeSessaoDetailView,
+    AtividadeSessaoListCreateView,
+    ComportamentoTaticoDetailView,
+    ComportamentoTaticoListCreateView,
     SessaoDetailView,
     SessaoListCreateView,
 )
@@ -39,5 +39,15 @@ urlpatterns = [
         "biblioteca/",
         AtividadeBibliotecaListCreateView.as_view(),
         name="biblioteca-list-create",
+    ),
+      path(
+        "atividades-sessao/",
+        AtividadeSessaoListCreateView.as_view(),
+        name="atividade-sessao-list-create",
+    ),
+    path(
+        "atividades-sessao/<int:pk>/",
+        AtividadeSessaoDetailView.as_view(),
+        name="atividade-sessao-detail",
     ),
 ]

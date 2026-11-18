@@ -10,6 +10,7 @@ from .models import (
     TIPOLOGIAS_MAPA,
     TIPOS_SSP_VALIDOS,
     AtividadeBiblioteca,
+    AtividadeSessao,
     Sessao,
     ComportamentoTatico,
     normalizar_nome_comportamento,
@@ -300,6 +301,179 @@ class AtividadeBibliotecaSerializer(serializers.ModelSerializer):
         if numero_jogadores is not None and numero_jogadores <= 0:
             erros["numero_jogadores"] = "O número de jogadores deve ser maior que zero."
 
+        if erros:
+            raise serializers.ValidationError(erros)
+
+        return attrs
+
+class AtividadeSessaoSerializer(serializers.ModelSerializer):
+    codigo = serializers.CharField(max_length=20, required=False, allow_blank=True)
+    nome = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    tipologia = serializers.CharField(max_length=50, required=False, allow_blank=True)
+    tipo_ssp = serializers.CharField(max_length=20, required=False, allow_blank=True)
+
+    class Meta:
+        model = AtividadeSessao
+        fields = [
+            "id",
+            "sessao",
+            "atividade_biblioteca",
+            "codigo",
+            "nome",
+            "tipologia",
+            "tipo_ssp",
+            "orientacao",
+            "ordem",
+            "tempo",
+            "comprimento",
+            "largura",
+            "numero_jogadores",
+            "area_por_jogador",
+            "dimensao_espaco",
+            "momentos_jogo",
+            "fases_jogo",
+            "comportamentos",
+            "atributos_tecnicos",
+            "criado_em",
+            "atualizado_em",
+        ]
+        read_only_fields = [
+            "id",
+            "area_por_jogador",
+            "dimensao_espaco",
+            "criado_em",
+            "atualizado_em",
+        ]
+
+    def validate_nome(self, value):
+        return " ".join((value or "").split())
+
+    def validate_codigo(self, value):
+        return (value or "").strip().upper()
+
+    def validate_tipologia(self, value):
+        texto = " ".join((value or "").split())
+        if not texto:
+            return ""
+        sigla_upper = texto.upper()
+        if sigla_upper in TIPOLOGIAS_MAPA:
+            return TIPOLOGIAS_MAPA[sigla_upper]
+        if texto in SIGLAS_POR_TIPOLOGIA:
+            return texto
+        opcoes = ", ".join(f"{sigla} ({nome})" for sigla, nome in TIPOLOGIAS_MAPA.items())
+        raise serializers.ValidationError(
+            f"Tipologia inválida. Informe uma das opções válidas: {opcoes}."
+        )
+
+    def validate_tipo_ssp(self, value):
+        texto = (value or "").strip()
+        if not texto:
+            return ""
+        if texto not in TIPOS_SSP_VALIDOS:
+            opcoes = ", ".join(TIPOS_SSP_VALIDOS)
+            raise serializers.ValidationError(
+                f"Tipo de SSP inválido. Opções válidas: {opcoes}."
+            )
+        return texto
+
+    def validate_momentos_jogo(self, value):
+        return _normalizar_lista_textos(
+            value, "momentos_jogo", opcoes_validas=MOMENTOS_JOGO_VALIDOS
+        )
+
+    def validate_fases_jogo(self, value):
+        return _normalizar_lista_textos(
+            value, "fases_jogo", opcoes_validas=FASES_JOGO_VALIDAS
+        )
+
+    def validate_comportamentos(self, value):
+        return _normalizar_lista_textos(value, "comportamentos")
+
+    def validate_atributos_tecnicos(self, value):
+        return _normalizar_lista_textos(value, "atributos_tecnicos")
+
+    def validate(self, attrs):
+        instance = self.instance
+
+        # 1. US23: Copia atributos da AtividadeBiblioteca se for criação a partir dela
+        atividade_bib = attrs.get("atividade_biblioteca")
+        if atividade_bib and not instance:
+            campos_copiar = [
+                "codigo",
+                "nome",
+                "tipologia",
+                "tipo_ssp",
+                "orientacao",
+                "comprimento",
+                "largura",
+                "numero_jogadores",
+                "momentos_jogo",
+                "fases_jogo",
+                "comportamentos",
+                "atributos_tecnicos",
+            ]
+            for campo in campos_copiar:
+                valor_atual = attrs.get(campo)
+                if campo not in attrs or valor_atual in (None, "", []):
+                    valor_bib = getattr(atividade_bib, campo)
+                    attrs[campo] = list(valor_bib) if isinstance(valor_bib, list) else valor_bib
+
+        # 2. Validação de campos obrigatórios após possível cópia da biblioteca
+        erros_obrigatorios = {}
+        nome_final = attrs.get("nome", getattr(instance, "nome", ""))
+        tipologia_final = attrs.get("tipologia", getattr(instance, "tipologia", ""))
+        tipo_ssp_final = attrs.get("tipo_ssp", getattr(instance, "tipo_ssp", ""))
+
+        if not nome_final:
+            erros_obrigatorios["nome"] = "O nome da atividade é obrigatório."
+        if not tipologia_final:
+            erros_obrigatorios["tipologia"] = "A tipologia é obrigatória."
+        if not tipo_ssp_final:
+            erros_obrigatorios["tipo_ssp"] = "O tipo de SSP é obrigatório."
+        if erros_obrigatorios:
+            raise serializers.ValidationError(erros_obrigatorios)
+
+        # 3. Impede troca de sessão na edição (US14)
+        if instance and "sessao" in attrs and attrs["sessao"].id != instance.sessao_id:
+            raise serializers.ValidationError(
+                {"sessao": "Não é permitido alterar a sessão de uma atividade."}
+            )
+
+        # 4. RN01 e RN02: Dimensões do espaço e regra de PDI
+        orientacao = attrs.get("orientacao", getattr(instance, "orientacao", ""))
+        comprimento = attrs.get("comprimento", getattr(instance, "comprimento", None))
+        largura = attrs.get("largura", getattr(instance, "largura", None))
+        numero_jogadores = attrs.get(
+            "numero_jogadores", getattr(instance, "numero_jogadores", None)
+        )
+
+        if orientacao == "PDI":
+            attrs["comprimento"] = None
+            attrs["largura"] = None
+            attrs["numero_jogadores"] = None
+            return attrs
+
+        campos_espaco = (comprimento, largura, numero_jogadores)
+        algum_preenchido = any(v is not None for v in campos_espaco)
+        todos_preenchidos = all(v is not None for v in campos_espaco)
+
+        if algum_preenchido and not todos_preenchidos:
+            raise serializers.ValidationError(
+                {
+                    "dimensao_espaco": (
+                        "Para calcular a área e a dimensão do espaço, informe comprimento, "
+                        "largura e número de jogadores."
+                    )
+                }
+            )
+
+        erros = {}
+        if comprimento is not None and comprimento <= 0:
+            erros["comprimento"] = "O comprimento deve ser maior que zero."
+        if largura is not None and largura <= 0:
+            erros["largura"] = "A largura deve ser maior que zero."
+        if numero_jogadores is not None and numero_jogadores <= 0:
+            erros["numero_jogadores"] = "O número de jogadores deve ser maior que zero."
         if erros:
             raise serializers.ValidationError(erros)
 
