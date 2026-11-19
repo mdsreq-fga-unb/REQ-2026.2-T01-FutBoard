@@ -37,3 +37,6 @@ htmlcov/
 .vscode/
 .DS_Store
 Thumbs.db
+
+
+docs/issues-user-stories.txt
