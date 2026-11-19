@@ -3,9 +3,11 @@
 import re
 
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models import Max
 import unicodedata
+
 
 from apps.ciclos.models import Microciclo
 
@@ -281,3 +283,128 @@ class AtividadeBiblioteca(models.Model):
             self.codigo = self._gerar_proximo_codigo()
         super().save(*args, **kwargs)
 
+def calcular_area_e_dimensao(comprimento, largura, numero_jogadores):
+    """RN01 e RN02: devolve (area_por_jogador, dimensao_espaco)."""
+    area = (comprimento * largura) / numero_jogadores
+    if area <= 100:
+        return area, "Pequeno"
+    if area <= 200:
+        return area, "Médio"
+    return area, "Grande"
+
+
+class AtividadeSessao(models.Model):
+    """Atividade registrada dentro de uma sessão de treino (US13 / RF13).
+
+    Os dados são uma CÓPIA: editar aqui nunca altera a biblioteca (US14 / US23).
+    """
+
+    TIPOLOGIA_CHOICES = AtividadeBiblioteca.TIPOLOGIA_CHOICES
+    TIPO_SSP_CHOICES = AtividadeBiblioteca.TIPO_SSP_CHOICES
+    ORIENTACAO_CHOICES = AtividadeBiblioteca.ORIENTACAO_CHOICES
+    DIMENSAO_ESPACO_CHOICES = AtividadeBiblioteca.DIMENSAO_ESPACO_CHOICES
+
+    sessao = models.ForeignKey(
+        Sessao,
+        on_delete=models.PROTECT,
+        related_name="atividades",
+    )
+    # US23: de qual atividade da biblioteca esta cópia veio (vazio se foi criada direto na sessão).
+    atividade_biblioteca = models.ForeignKey(
+        AtividadeBiblioteca,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="usos_em_sessoes",
+    )
+
+    codigo = models.CharField(max_length=20, blank=True)
+    nome = models.CharField(max_length=255)
+    tipologia = models.CharField(max_length=50, choices=TIPOLOGIA_CHOICES)
+    tipo_ssp = models.CharField(max_length=20, choices=TIPO_SSP_CHOICES)
+    orientacao = models.CharField(
+        max_length=20, choices=ORIENTACAO_CHOICES, blank=True, default=""
+    )
+
+    # RN03: mesma ordem dentro da sessão = atividades simultâneas.
+    ordem = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+    tempo = models.PositiveIntegerField(validators=[MinValueValidator(1)])  # minutos
+
+    comprimento = models.FloatField(null=True, blank=True)
+    largura = models.FloatField(null=True, blank=True)
+    numero_jogadores = models.PositiveIntegerField(null=True, blank=True)
+    # Calculados pelo sistema (RN01 e RN02): o usuário não digita.
+    area_por_jogador = models.FloatField(null=True, blank=True, editable=False)
+    dimensao_espaco = models.CharField(
+        max_length=20,
+        choices=DIMENSAO_ESPACO_CHOICES,
+        default="Não Definido",
+        editable=False,
+    )
+
+    # RN05: todos opcionais.
+    momentos_jogo = models.JSONField(default=list, blank=True)
+    fases_jogo = models.JSONField(default=list, blank=True)
+    comportamentos = models.JSONField(default=list, blank=True)
+    atributos_tecnicos = models.JSONField(default=list, blank=True)
+
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["sessao", "ordem", "id"]
+        verbose_name = "atividade da sessão"
+        verbose_name_plural = "atividades da sessão"
+
+    def __str__(self):
+        return f"Sessão {self.sessao_id} - ordem {self.ordem} - {self.nome}"
+
+    def clean(self):
+        super().clean()
+        erros = {}
+
+        self.nome = " ".join((self.nome or "").split())
+        if not self.nome:
+            erros["nome"] = "O nome da atividade é obrigatório."
+
+        if self.codigo:
+            self.codigo = self.codigo.strip().upper()
+
+        if self.orientacao == "PDI":
+            # RN01: PDI dispensa dimensões.
+            self.comprimento = None
+            self.largura = None
+            self.numero_jogadores = None
+            self.area_por_jogador = None
+            self.dimensao_espaco = "Não Definido"
+        else:
+            campos = (self.comprimento, self.largura, self.numero_jogadores)
+            if any(v is not None for v in campos) and not all(v is not None for v in campos):
+                erros["dimensao_espaco"] = (
+                    "Para calcular a área e a dimensão do espaço, informe comprimento, "
+                    "largura e número de jogadores."
+                )
+            elif all(v is not None for v in campos):
+                if self.comprimento <= 0:
+                    erros["comprimento"] = "O comprimento deve ser maior que zero."
+                if self.largura <= 0:
+                    erros["largura"] = "A largura deve ser maior que zero."
+                if self.numero_jogadores <= 0:
+                    erros["numero_jogadores"] = "O número de jogadores deve ser maior que zero."
+                if not erros:
+                    self.area_por_jogador, self.dimensao_espaco = calcular_area_e_dimensao(
+                        self.comprimento, self.largura, self.numero_jogadores
+                    )
+            else:
+                self.area_por_jogador = None
+                self.dimensao_espaco = "Não Definido"
+
+        if erros:
+            raise ValidationError(erros)
+
+    def save(self, *args, **kwargs):
+        # A sigla (ex.: "CF") precisa virar nome ANTES do full_clean, que valida os choices.
+        if self.tipologia in TIPOLOGIAS_MAPA:
+            self.tipologia = TIPOLOGIAS_MAPA[self.tipologia]
+        self.full_clean()
+        super().save(*args, **kwargs)
