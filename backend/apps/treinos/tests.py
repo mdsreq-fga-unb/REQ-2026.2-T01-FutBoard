@@ -636,3 +636,259 @@ class AtividadeSessaoApiTests(APITestCase):
         self.assertEqual(self.bib_cf1.nome, "G2XG")
         self.assertEqual(self.bib_cf1.comprimento, 24)
         self.assertEqual(self.bib_cf1.dimensao_espaco, "Pequeno")
+
+
+class IndicadoresTreinoApiTests(APITestCase):
+    """Testes automatizados da US22 / RF22 (Exibir indicador de treino — RN03, RN06 e RN07)."""
+
+    url = "/api/treinos/indicadores/"
+
+    def setUp(self):
+        self.macrociclo = Macrociclo.objects.create(
+            nome="Temporada 2026",
+            data_inicio="2026-01-01",
+            data_termino="2026-12-31",
+        )
+        self.mesociclo = Mesociclo.objects.create(
+            macrociclo=self.macrociclo,
+            nome="Preparatório Geral",
+            data_inicio="2026-02-01",
+            data_termino="2026-06-30",
+        )
+        self.microciclo_marco = Microciclo.objects.create(
+            mesociclo=self.mesociclo,
+            nome="Microciclo 01 - Março",
+            data_inicio="2026-03-01",
+            data_termino="2026-03-07",
+        )
+        self.microciclo_abril = Microciclo.objects.create(
+            mesociclo=self.mesociclo,
+            nome="Microciclo 02 - Abril",
+            data_inicio="2026-04-01",
+            data_termino="2026-04-07",
+        )
+
+        self.bib_cf1 = AtividadeBiblioteca.objects.create(
+            nome="G2XG",
+            tipologia="Confrontos",
+            tipo_ssp="Especial",
+            orientacao="Aquisição",
+            comprimento=24,
+            largura=25,
+            numero_jogadores=6,
+        )
+        self.bib_jc1 = AtividadeBiblioteca.objects.create(
+            nome="RecPosPerd",
+            tipologia="Jogo Condicionante",
+            tipo_ssp="Especial",
+            orientacao="Aquisição",
+            comprimento=50,
+            largura=50,
+            numero_jogadores=18,
+        )
+        self.bib_dp1 = AtividadeBiblioteca.objects.create(
+            nome="DomOrien | Var1",
+            tipologia="Dinâmica de Passe",
+            tipo_ssp="Dirigido",
+            orientacao="PDI",
+        )
+
+    def test_us22_retorna_estado_vazio_neutro_sem_sessoes_rn07(self):
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(data["numero_sessoes"], 0)
+        self.assertEqual(data["minutos_totais"], 0)
+        self.assertEqual(data["numero_execucoes"], 0)
+        self.assertEqual(data["atividades_distintas"], 0)
+        self.assertEqual(data["variabilidade"], 0.0)
+        self.assertEqual(data["minutos_por_sessao"], 0.0)
+        self.assertEqual(data["minutos_por_execucao"], 0.0)
+        self.assertTrue(data["estado_vazio"])
+        self.assertEqual(data["mensagem"], "Nenhum treino registrado neste período.")
+
+    def test_us22_calcula_tempo_liquido_desconsiderando_simultaneas_rn03(self):
+        sessao = Sessao.objects.create(
+            microciclo=self.microciclo_marco,
+            nome="Sessão 1",
+            data="2026-03-02",
+        )
+        # Duas atividades simultâneas na Ordem 1 (15 min cada -> conta 15 min e 1 execução)
+        AtividadeSessao.objects.create(
+            sessao=sessao,
+            atividade_biblioteca=self.bib_dp1,
+            codigo=self.bib_dp1.codigo,
+            nome=self.bib_dp1.nome,
+            tipologia=self.bib_dp1.tipologia,
+            tipo_ssp=self.bib_dp1.tipo_ssp,
+            orientacao="PDI",
+            ordem=1,
+            tempo=15,
+        )
+        AtividadeSessao.objects.create(
+            sessao=sessao,
+            codigo="DPD1",
+            nome="Circ+CabRebFrontLat",
+            tipologia="Dinâmica ProtDef",
+            tipo_ssp="Dirigido",
+            orientacao="PDI",
+            ordem=1,
+            tempo=15,
+        )
+        # Ordem 2 (20 min) e Ordem 3 (25 min)
+        AtividadeSessao.objects.create(
+            sessao=sessao,
+            atividade_biblioteca=self.bib_jc1,
+            codigo=self.bib_jc1.codigo,
+            nome=self.bib_jc1.nome,
+            tipologia=self.bib_jc1.tipologia,
+            tipo_ssp=self.bib_jc1.tipo_ssp,
+            orientacao="Aquisição",
+            ordem=2,
+            tempo=20,
+        )
+        AtividadeSessao.objects.create(
+            sessao=sessao,
+            atividade_biblioteca=self.bib_cf1,
+            codigo=self.bib_cf1.codigo,
+            nome=self.bib_cf1.nome,
+            tipologia=self.bib_cf1.tipologia,
+            tipo_ssp=self.bib_cf1.tipo_ssp,
+            orientacao="Aquisição",
+            ordem=3,
+            tempo=25,
+        )
+
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(data["numero_sessoes"], 1)
+        self.assertEqual(data["minutos_totais"], 60)
+        self.assertEqual(data["numero_execucoes"], 3)
+        self.assertEqual(data["atividades_distintas"], 4)
+        self.assertAlmostEqual(data["minutos_por_sessao"], 60.0)
+        self.assertAlmostEqual(data["minutos_por_execucao"], 20.0)
+        self.assertFalse(data["estado_vazio"])
+        self.assertIsNone(data["mensagem"])
+
+    def test_us22_calcula_variabilidade_exercicios_distintos_por_execucoes_rn06(self):
+        s1 = Sessao.objects.create(
+            microciclo=self.microciclo_marco,
+            nome="Sessão 1",
+            data="2026-03-02",
+        )
+        s2 = Sessao.objects.create(
+            microciclo=self.microciclo_marco,
+            nome="Sessão 2",
+            data="2026-03-04",
+        )
+        for sessao in (s1, s2):
+            AtividadeSessao.objects.create(
+                sessao=sessao,
+                atividade_biblioteca=self.bib_cf1,
+                codigo=self.bib_cf1.codigo,
+                nome=self.bib_cf1.nome,
+                tipologia=self.bib_cf1.tipologia,
+                tipo_ssp=self.bib_cf1.tipo_ssp,
+                ordem=1,
+                tempo=20,
+            )
+            AtividadeSessao.objects.create(
+                sessao=sessao,
+                atividade_biblioteca=self.bib_jc1,
+                codigo=self.bib_jc1.codigo,
+                nome=self.bib_jc1.nome,
+                tipologia=self.bib_jc1.tipologia,
+                tipo_ssp=self.bib_jc1.tipo_ssp,
+                ordem=2,
+                tempo=20,
+            )
+
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(data["numero_sessoes"], 2)
+        self.assertEqual(data["minutos_totais"], 80)
+        self.assertEqual(data["numero_execucoes"], 4)
+        self.assertEqual(data["atividades_distintas"], 2)
+        self.assertAlmostEqual(data["variabilidade"], 50.0)
+
+    def test_us22_filtra_indicadores_por_periodizacao_mes_e_sessao(self):
+        s_marco = Sessao.objects.create(
+            microciclo=self.microciclo_marco,
+            nome="Sessão Março",
+            data="2026-03-03",
+        )
+        AtividadeSessao.objects.create(
+            sessao=s_marco,
+            codigo="CF1",
+            nome="G2XG",
+            tipologia="Confrontos",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=40,
+        )
+
+        s_abril = Sessao.objects.create(
+            microciclo=self.microciclo_abril,
+            nome="Sessão Abril",
+            data="2026-04-02",
+        )
+        AtividadeSessao.objects.create(
+            sessao=s_abril,
+            codigo="JC1",
+            nome="RecPosPerd",
+            tipologia="Jogo Condicionante",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=30,
+        )
+
+        # Filtro por microciclo de março
+        r_micro = self.client.get(f"{self.url}?microciclo={self.microciclo_marco.id}")
+        self.assertEqual(r_micro.json()["numero_sessoes"], 1)
+        self.assertEqual(r_micro.json()["minutos_totais"], 40)
+
+        # Filtro por nome do mês (com acento) e número do mês
+        r_mes_nome = self.client.get(f"{self.url}?mes=Março")
+        self.assertEqual(r_mes_nome.json()["minutos_totais"], 40)
+        r_mes_num = self.client.get(f"{self.url}?mes=4")
+        self.assertEqual(r_mes_num.json()["minutos_totais"], 30)
+
+        # Filtro por sessão específica
+        r_sessao = self.client.get(f"{self.url}?sessao={s_abril.id}")
+        self.assertEqual(r_sessao.json()["numero_sessoes"], 1)
+        self.assertEqual(r_sessao.json()["minutos_totais"], 30)
+
+        # Filtro por mesociclo e macrociclo (soma ambas as sessões)
+        r_meso = self.client.get(f"{self.url}?mesociclo={self.mesociclo.id}")
+        self.assertEqual(r_meso.json()["numero_sessoes"], 2)
+        self.assertEqual(r_meso.json()["minutos_totais"], 70)
+
+        # Filtro sem correspondência -> estado vazio neutro (RN07)
+        r_vazio = self.client.get(f"{self.url}?microciclo=99999")
+        self.assertEqual(r_vazio.status_code, status.HTTP_200_OK)
+        self.assertTrue(r_vazio.json()["estado_vazio"])
+        self.assertEqual(r_vazio.json()["minutos_totais"], 0)
+
+    def test_us22_sessao_sem_atividades_nao_causa_divisao_por_zero_rn07(self):
+        Sessao.objects.create(
+            microciclo=self.microciclo_marco,
+            nome="Sessão Planejada Sem Atividades",
+            data="2026-03-05",
+        )
+
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(data["numero_sessoes"], 1)
+        self.assertEqual(data["minutos_totais"], 0)
+        self.assertEqual(data["numero_execucoes"], 0)
+        self.assertEqual(data["atividades_distintas"], 0)
+        self.assertEqual(data["variabilidade"], 0.0)
+        self.assertEqual(data["minutos_por_execucao"], 0.0)
+        self.assertFalse(data["estado_vazio"])
