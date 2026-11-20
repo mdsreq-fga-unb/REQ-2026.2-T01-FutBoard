@@ -110,3 +110,30 @@ textarea {
     background-color: vars.$fb-white;
   }
 }
+
+.fb-library-select-item {
+  background-color: #faf9f5;
+  border: 1.5px solid vars.$fb-beige;
+  border-radius: 1rem;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.15s ease;
+
+  &:hover:not(:disabled) {
+    border-color: rgba(16, 40, 30, 0.45);
+  }
+
+  &--selected {
+    background-color: #dfefe4;
+    border-color: vars.$fb-green-deep;
+  }
+
+  &--disabled {
+    background-color: #f3f0e8;
+    border-color: vars.$fb-beige;
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
+
