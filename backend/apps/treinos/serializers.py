@@ -306,6 +306,7 @@ class AtividadeBibliotecaSerializer(serializers.ModelSerializer):
 
         return attrs
 
+
 class AtividadeSessaoSerializer(serializers.ModelSerializer):
     codigo = serializers.CharField(max_length=20, required=False, allow_blank=True)
     nome = serializers.CharField(max_length=255, required=False, allow_blank=True)
@@ -478,5 +479,20 @@ class AtividadeSessaoSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(erros)
 
         return attrs
+
+
+class IndicadoresTreinoSerializer(serializers.Serializer):
+    """RF22 (US22): Serializador de saída dos indicadores quantitativos de treino."""
+
+    numero_sessoes = serializers.IntegerField(read_only=True)
+    minutos_totais = serializers.IntegerField(read_only=True)
+    numero_execucoes = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+    variabilidade = serializers.FloatField(read_only=True)
+    minutos_por_sessao = serializers.FloatField(read_only=True)
+    minutos_por_execucao = serializers.FloatField(read_only=True)
+    estado_vazio = serializers.BooleanField(read_only=True)
+    mensagem = serializers.CharField(read_only=True, allow_null=True)
+
 
 
