@@ -89,6 +89,21 @@ class Sessao(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
+    @property
+    def tempo_liquido(self):
+        """RN03: Duração líquida da sessão contabilizando atividades de mesma ordem uma única vez."""
+        tempos_por_ordem = {}
+        for atividade in self.atividades.all():
+            ordem = atividade.ordem
+            if ordem not in tempos_por_ordem or atividade.tempo > tempos_por_ordem[ordem]:
+                tempos_por_ordem[ordem] = atividade.tempo
+        return sum(tempos_por_ordem.values())
+
+    @property
+    def numero_execucoes(self):
+        """RN03: Quantidade de execuções distintas (par Sessão + Ordem) na sessão."""
+        return len({atividade.ordem for atividade in self.atividades.all()})
+
 
 
 def normalizar_nome_comportamento(nome):
@@ -408,3 +423,78 @@ class AtividadeSessao(models.Model):
             self.tipologia = TIPOLOGIAS_MAPA[self.tipologia]
         self.full_clean()
         super().save(*args, **kwargs)
+
+
+MENSAGEM_INDICADORES_VAZIO = "Nenhum treino registrado neste período."
+
+
+def identificador_atividade_distinta(atividade):
+    """RN06: Identifica univocamente uma atividade para contagem de exercícios distintos no período."""
+    codigo = (atividade.codigo or "").strip().upper()
+    if codigo:
+        return ("codigo", codigo)
+    if atividade.atividade_biblioteca_id:
+        return ("biblioteca", atividade.atividade_biblioteca_id)
+    tipologia = (atividade.tipologia or "").strip().casefold()
+    nome = " ".join((atividade.nome or "").split()).casefold()
+    return ("manual", tipologia, nome)
+
+
+def calcular_indicadores_treino(sessoes_queryset):
+    """RF22 (US22): Calcula os indicadores de treino aplicando RN03, RN06 e RN07."""
+    if hasattr(sessoes_queryset, "prefetch_related"):
+        sessoes = list(sessoes_queryset.prefetch_related("atividades"))
+    else:
+        sessoes = list(sessoes_queryset)
+
+    numero_sessoes = len(sessoes)
+    if numero_sessoes == 0:
+        return {
+            "numero_sessoes": 0,
+            "minutos_totais": 0,
+            "numero_execucoes": 0,
+            "atividades_distintas": 0,
+            "variabilidade": 0.0,
+            "minutos_por_sessao": 0.0,
+            "minutos_por_execucao": 0.0,
+            "estado_vazio": True,
+            "mensagem": MENSAGEM_INDICADORES_VAZIO,
+        }
+
+    minutos_totais = 0
+    numero_execucoes = 0
+    chaves_atividades_distintas = set()
+
+    for sessao in sessoes:
+        tempos_por_ordem = {}
+        for atividade in sessao.atividades.all():
+            ordem = atividade.ordem
+            if ordem not in tempos_por_ordem or atividade.tempo > tempos_por_ordem[ordem]:
+                tempos_por_ordem[ordem] = atividade.tempo
+            chaves_atividades_distintas.add(identificador_atividade_distinta(atividade))
+
+        minutos_totais += sum(tempos_por_ordem.values())
+        numero_execucoes += len(tempos_por_ordem)
+
+    atividades_distintas = len(chaves_atividades_distintas)
+    variabilidade = (
+        round((atividades_distintas / numero_execucoes) * 100, 2)
+        if numero_execucoes > 0
+        else 0.0
+    )
+    minutos_por_sessao = round(minutos_totais / numero_sessoes, 2)
+    minutos_por_execucao = (
+        round(minutos_totais / numero_execucoes, 2) if numero_execucoes > 0 else 0.0
+    )
+
+    return {
+        "numero_sessoes": numero_sessoes,
+        "minutos_totais": minutos_totais,
+        "numero_execucoes": numero_execucoes,
+        "atividades_distintas": atividades_distintas,
+        "variabilidade": variabilidade,
+        "minutos_por_sessao": minutos_por_sessao,
+        "minutos_por_execucao": minutos_por_execucao,
+        "estado_vazio": False,
+        "mensagem": None,
+    }
