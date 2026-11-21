@@ -47,7 +47,14 @@ const MAPA_FASES_API = {
   "Transição Defensiva": "Finalização",
 };
 
-export default function AtividadeBibliotecaModal({ isOpen, onClose, onSave }) {
+export default function AtividadeBibliotecaModal({
+  isOpen,
+  initialData = null,
+  onClose,
+  onSave,
+}) {
+  const isEditing = Boolean(initialData);
+
   const [sessao, setSessao] = useState("");
   const [codigo, setCodigo] = useState("");
   const [nome, setNome] = useState("");
@@ -98,12 +105,53 @@ export default function AtividadeBibliotecaModal({ isOpen, onClose, onSave }) {
     setSalvando(false);
   };
 
-  // Toda vez que o modal for aberto, garante formulário zerado
+  // Toda vez que o modal for aberto, popula com initialData (se edição) ou zera
   useEffect(() => {
     if (isOpen) {
-      resetForm();
+      if (initialData) {
+        setSessao(initialData.sessao || "");
+        setCodigo(initialData.codigo || "");
+        setNome(initialData.nome || "");
+        setOrdem(
+          initialData.ordem !== undefined && initialData.ordem !== null
+            ? String(initialData.ordem)
+            : "",
+        );
+        setTipoSsp(initialData.tipo_ssp || initialData.tipoSsp || "");
+        setTipologia(initialData.tipologia || "");
+        setTempo(
+          initialData.tempo !== undefined && initialData.tempo !== null
+            ? String(initialData.tempo)
+            : "",
+        );
+        setNumeroJogadores(
+          initialData.numero_jogadores !== undefined &&
+            initialData.numero_jogadores !== null
+            ? String(initialData.numero_jogadores)
+            : "",
+        );
+        setComprimento(
+          initialData.comprimento !== undefined &&
+            initialData.comprimento !== null
+            ? String(initialData.comprimento)
+            : "",
+        );
+        setLargura(
+          initialData.largura !== undefined && initialData.largura !== null
+            ? String(initialData.largura)
+            : "",
+        );
+        setMomentosJogo(initialData.momentos_jogo || []);
+        setFasesJogo(initialData.fases_jogo || []);
+        setComportamentos(initialData.comportamentos || []);
+        setAtributosTecnicos(initialData.atributos_tecnicos || []);
+        setErro("");
+        setSalvando(false);
+      } else {
+        resetForm();
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, initialData]);
 
   const handleClose = () => {
     resetForm();
@@ -259,7 +307,7 @@ export default function AtividadeBibliotecaModal({ isOpen, onClose, onSave }) {
 
     try {
       setSalvando(true);
-      await onSave(payload);
+      await onSave(payload, initialData?.id);
       resetForm();
     } catch (error) {
       setErro(error.message);
@@ -287,13 +335,13 @@ export default function AtividadeBibliotecaModal({ isOpen, onClose, onSave }) {
         <div className="flex shrink-0 items-start justify-between border-b border-[#E4DFD2]/50 px-7 pt-5 pb-3">
           <div>
             <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-[#8A8D80]">
-              BIBLIOTECA · NOVA
+              {isEditing ? "BIBLIOTECA · EDITAR" : "BIBLIOTECA · NOVA"}
             </span>
             <h2
               id="modal-atividade-titulo"
               className="mt-0.5 font-display text-2xl font-bold tracking-tight text-[#10281E]"
             >
-              Nova atividade
+              {isEditing ? "Editar atividade" : "Nova atividade"}
             </h2>
           </div>
 
@@ -950,7 +998,15 @@ export default function AtividadeBibliotecaModal({ isOpen, onClose, onSave }) {
                 : "bg-[#D8D4CA] text-[#8A8D80] cursor-not-allowed opacity-70"
             }`}
           >
-            <span>{salvando ? "Criando..." : "Criar atividade"}</span>
+            <span>
+              {salvando
+                ? isEditing
+                  ? "Salvando..."
+                  : "Criando..."
+                : isEditing
+                  ? "Salvar alterações"
+                  : "Criar atividade"}
+            </span>
           </button>
         </div>
       </div>
