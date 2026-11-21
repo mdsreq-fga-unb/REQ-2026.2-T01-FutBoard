@@ -2657,7 +2657,41 @@
 </ul>
 </details>
 <details id="rf36">
-<summary>RF36 · Consultar informação de momento do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<summary>RF36 · Consultar informação de orientação do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<p><strong>Declaração RF:</strong> <strong>Consultar informação de orientação do treino:</strong> o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de orientação do treino, atualizando automaticamente as informações exibidas.</p>
+<p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero usar filtros para consultar as orientações de treino, através dos gráficos para avaliar se o direcionamento planejado está adequado.</p>
+<div class="rf-meta">
+<p><strong>CPs e OEs relacionadas:</strong> <a href="../solucao-proposta/#cp03"><strong>CP03</strong></a> | <a href="../solucao-proposta/#oe3"><strong>OE3</strong></a>, <a href="../solucao-proposta/#oe4"><strong>OE4</strong></a></p>
+<p><strong>Priorização:</strong> Valor: 4,00 | Frequência: 5,00 | Esforço: 2,00 | Complexidade: 3,00 | Conhecimento: 2,00 | Esforço Técnico: 2,33 → Q1 Alto valor / Alta carga técnica</p>
+</div>
+<p><strong>Critérios de Aceitação</strong></p>
+<ul>
+<li><em>Cenários de aceitação a definir.</em></li>
+</ul>
+<p><strong>Regras de Negócio Associadas</strong></p>
+<ul>
+<li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
+</ul>
+<p><strong>Requisitos Não Funcionais Associados</strong></p>
+<ul>
+<li><strong><a href="#rnf02">RNF02</a> · Interface Responsiva e Adaptável:</strong> A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.</li>
+<li><strong><a href="#rnf04">RNF04</a> · Atualização em Tempo Real do Dashboard:</strong> Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.</li>
+</ul>
+<p><strong>Definition of Ready (DoR)</strong></p>
+<ul>
+<li>[x] A estrutura da User Story está bem definida</li>
+<li>[ ] A User Story está rastreável</li>
+<li>[x] A User Story está mensurável</li>
+<li>[ ] A User Story foi prototipada</li>
+<li>[ ] A User Story foi validada com o cliente</li>
+</ul>
+<p><strong>Evidências</strong></p>
+<ul>
+<li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
+</ul>
+</details>
+<details id="rf37">
+<summary>RF37 · Consultar informação de momento do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Consultar informação de momento do jogo do treino:</strong> o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de momento do jogo do treino, atualizando automaticamente as informações exibidas.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero filtrar a informação por momento do jogo treinado, através dos gráficos para avaliar quais momentos de jogos foram abordados nos treinos.</p>
 <div class="rf-meta">
@@ -2691,8 +2725,8 @@
 <li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
 </ul>
 </details>
-<details id="rf37">
-<summary>RF37 · Consultar informação de fase do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<details id="rf38">
+<summary>RF38 · Consultar informação de fase do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Consultar informação de fase do jogo do treino:</strong> o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de fase do jogo do treino, atualizando automaticamente as informações exibidas.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero filtrar a informação por fase de jogo, através dos gráficos, para identificar quais fases do jogo foram associadas às atividades.</p>
 <div class="rf-meta">
@@ -2726,8 +2760,8 @@
 <li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
 </ul>
 </details>
-<details id="rf38">
-<summary>RF38 · Consultar informação de comportamento do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP03</span></span></summary>
+<details id="rf39">
+<summary>RF39 · Consultar informação de comportamento do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP03</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Consultar informação de comportamento do treino:</strong> o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de comportamento do treino, atualizando automaticamente as informações exibidas.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero filtrar as informações de treino por comportamento, através dos gráficos para saber o quanto trabalhei os comportamentos distintos.</p>
 <div class="rf-meta">
@@ -2761,8 +2795,8 @@
 <li><a href="../evidencias-ciclos/EV_C4/">Evidências da Iteração 10</a></li>
 </ul>
 </details>
-<details id="rf39">
-<summary>RF39 · Consultar informação de atributo técnico do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<details id="rf40">
+<summary>RF40 · Consultar informação de atributo técnico do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Consultar informação de atributo técnico do treino:</strong> o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de atributo técnico, atualizando automaticamente as informações exibidas.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero filtrar informações por atributo técnico, através dos gráficos para saber o quanto trabalhei esse atributo.</p>
 <div class="rf-meta">
@@ -2796,8 +2830,8 @@
 <li><a href="../evidencias-ciclos/EV_C5/">Evidências da Iteração 11</a></li>
 </ul>
 </details>
-<details id="rf40">
-<summary>RF40 · Consultar análise comparativa por periodização<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<details id="rf41">
+<summary>RF41 · Consultar análise comparativa por periodização<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 <p><strong>Declaração RF:</strong> <strong>Consultar análise comparativa por periodização:</strong> o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a análise comparativa por periodização (mesociclo, microciclo, mês e sessão), atualizando automaticamente as informações exibidas.</p>
 <p><strong>Declaração US:</strong> Como membro da equipe técnica, eu quero realizar uma análise comparativa através dos gráficos de periodização (meso, micro, mês, sessão), para identificar diferenças na carga e na distribuição dos treinos e apoiar o planejamento da equipe.</p>
 <div class="rf-meta">
@@ -2871,11 +2905,12 @@
 | **RF33** | **Editar atributo técnico da atividade:** o sistema deve permitir que a equipe técnica editem um atributo técnico registrado em uma atividade. | [RN05](#rn05) | CP01 |
 | **RF34** | **Excluir atributo técnico da atividade:** o sistema deve permitir que a equipe técnica excluam um atributo técnico registrado em uma atividade. | [RN05](#rn05) | CP01 |
 | **RF35** | **Consultar informação de espaço do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de espaço com base nas faixas da [RN02](#rn02) calculadas pela [RN01](#rn01), com tratamento neutro para ausência de dados ([RN07](#rn07)). | [RN01](#rn01), [RN02](#rn02), [RN07](#rn07) | CP03 |
-| **RF36** | **Consultar informação de momento do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a distribuição dos momentos do jogo trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF37** | **Consultar informação de fase do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de fase do jogo ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF38** | **Consultar informação de comportamento do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de princípio tático ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF39** | **Consultar informação de atributo técnico do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de atributos técnicos trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF40** | **Consultar análise comparativa por periodização:** o sistema deve permitir consultar a análise comparativa respeitando a hierarquia da periodização ([RN04](#rn04)), com indicativo neutro se um dos ciclos não contiver treinos ([RN07](#rn07)). | [RN04](#rn04), [RN07](#rn07) | CP03 |
+| **RF36** | **Consultar informação de orientação do treino:** o sistema deve permitir consultar, em gráfico e filtro, a orientação do treino (Aquisição, Aplicação, PDI, Eq Carga), com visual neutro para dados vazios ([RN07](#rn07)). | [RN07](#rn07) | CP03 |
+| **RF37** | **Consultar informação de momento do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a distribuição dos momentos do jogo trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF38** | **Consultar informação de fase do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de fase do jogo ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF39** | **Consultar informação de comportamento do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de princípio tático ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF40** | **Consultar informação de atributo técnico do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de atributos técnicos trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF41** | **Consultar análise comparativa por periodização:** o sistema deve permitir consultar a análise comparativa respeitando a hierarquia da periodização ([RN04](#rn04)), com indicativo neutro se um dos ciclos não contiver treinos ([RN07](#rn07)). | [RN04](#rn04), [RN07](#rn07) | CP03 |
 
 -->
 
@@ -3005,14 +3040,14 @@
 <td style="text-align: left;"><strong>Hierarquia e Integridade da Periodização</strong></td>
 <td style="text-align: center;">Integridade Estrutural</td>
 <td style="text-align: left;">A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade.</td>
-<td style="text-align: center;"><a href="#rf01">RF01</a> a <a href="#rf09">RF09</a>, <a href="#rf16">RF16</a>, <a href="#rf18">RF18</a>, <a href="#rf40">RF40</a></td>
+<td style="text-align: center;"><a href="#rf01">RF01</a> a <a href="#rf09">RF09</a>, <a href="#rf16">RF16</a>, <a href="#rf18">RF18</a>, <a href="#rf41">RF41</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn05"></a><strong>RN05</strong></td>
 <td style="text-align: left;"><strong>Preenchimento Condicional pelo Objetivo Central</strong></td>
 <td style="text-align: center;">Validação de Entrada</td>
 <td style="text-align: left;">O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é <strong>opcional</strong> por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual).</td>
-<td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf19">RF19</a>, <a href="#rf20">RF20</a>, <a href="#rf32">RF32</a>, <a href="#rf36">RF36</a> a <a href="#rf39">RF39</a></td>
+<td style="text-align: center;"><a href="#rf13">RF13</a>, <a href="#rf14">RF14</a>, <a href="#rf19">RF19</a>, <a href="#rf20">RF20</a>, <a href="#rf32">RF32</a>, <a href="#rf37">RF37</a> a <a href="#rf40">RF40</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a id="rn06"></a><strong>RN06</strong></td>
@@ -3026,7 +3061,7 @@
 <td style="text-align: left;"><strong>Tratamento e Estabilidade em Consultas com Resultado Vazio</strong></td>
 <td style="text-align: center;">Comportamento do Sistema</td>
 <td style="text-align: left;">Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</td>
-<td style="text-align: center;"><a href="#rf22">RF22</a>, <a href="#rf24">RF24</a>, <a href="#rf25">RF25</a>, <a href="#rf35">RF35</a> a <a href="#rf40">RF40</a></td>
+<td style="text-align: center;"><a href="#rf22">RF22</a>, <a href="#rf24">RF24</a>, <a href="#rf25">RF25</a>, <a href="#rf35">RF35</a> a <a href="#rf41">RF41</a></td>
 </tr>
 </tbody>
 </table>
@@ -3079,7 +3114,7 @@ Lista de requisitos não funcionais, contendo: Numeração do Requisito; Nome; D
 <td style="text-align: center;">OE3</td>
 <td style="text-align: center;">OE4</td>
 <td style="text-align: center;">CP03</td>
-<td style="text-align: center;">RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40</td>
+<td style="text-align: center;">RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40, RF41</td>
 <td style="text-align: center;"><a href="#rn01">RN01</a>, <a href="#rn02">RN02</a>, <a href="#rn03">RN03</a>, <a href="#rn04">RN04</a>, <a href="#rn05">RN05</a>, <a href="#rn06">RN06</a>, <a href="#rn07">RN07</a></td>
 <td style="text-align: center;">RNF02, RNF04</td>
 </tr>
