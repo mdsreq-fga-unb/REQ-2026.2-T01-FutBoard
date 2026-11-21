@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DashboardPage from "./pages/DashboardPage.jsx";
 import MacrociclosPage from "./pages/MacrociclosPage.jsx";
 import MesociclosPage from "./pages/MesociclosPage.jsx";
 import ComportamentosPage from "./pages/ComportamentosPage.jsx";
@@ -7,7 +8,11 @@ import SessoesPage from "./pages/SessoesPage.jsx";
 import BibliotecaPage from "./pages/BibliotecaPage.jsx";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState("biblioteca");
+  const [currentPage, setCurrentPage] = useState("dashboard");
+
+  if (currentPage === "dashboard") {
+    return <DashboardPage onSelectNav={setCurrentPage} />;
+  }
 
   if (currentPage === "comportamentos") {
     return <ComportamentosPage onSelectNav={setCurrentPage} />;
