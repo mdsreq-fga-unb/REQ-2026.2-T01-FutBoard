@@ -35,7 +35,14 @@ const MICROCICLOS_DEMO_PDF = [
 ];
 
 export default function SessoesPage({ onSelectNav }) {
-  const [sessoes, setSessoes] = useState([]);
+  const [sessoes, setSessoes] = useState(() => {
+    try {
+      const salvas = localStorage.getItem("futboard_sessoes");
+      return salvas ? JSON.parse(salvas) : [];
+    } catch {
+      return [];
+    }
+  });
   const [microciclos, setMicrociclos] = useState(MICROCICLOS_DEMO_PDF);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -43,6 +50,26 @@ export default function SessoesPage({ onSelectNav }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [sessaoEditando, setSessaoEditando] = useState(null);
   const [toastMsg, setToastMsg] = useState("");
+
+  // Busca sessões da API caso esteja ativa
+  useEffect(() => {
+    const carregarSessoesApi = async () => {
+      try {
+        const resp = await api.get("/treinos/sessoes/");
+        if (Array.isArray(resp.data) && resp.data.length > 0) {
+          setSessoes(resp.data);
+          try {
+            localStorage.setItem("futboard_sessoes", JSON.stringify(resp.data));
+          } catch (errLocal) {
+            console.warn("Não foi possível salvar sessões no localStorage:", errLocal);
+          }
+        }
+      } catch (errApi) {
+        console.warn("API de sessões offline, utilizando dados locais:", errApi);
+      }
+    };
+    carregarSessoesApi();
+  }, []);
 
   useEffect(() => {
     const carregarMicrociclos = async () => {
@@ -119,27 +146,35 @@ export default function SessoesPage({ onSelectNav }) {
   };
 
   const salvarSessao = (dados) => {
+    let novasSessoes = [];
     if (sessaoEditando) {
-      setSessoes((prev) =>
-        prev.map((item) =>
-          item.id === sessaoEditando.id ? { ...item, ...dados } : item,
-        ),
+      novasSessoes = sessoes.map((item) =>
+        item.id === sessaoEditando.id ? { ...item, ...dados } : item,
       );
       dispararToast("Sessão atualizada com sucesso.");
     } else {
       const proximoId =
         sessoes.length > 0 ? Math.max(...sessoes.map((s) => s.id)) + 1 : 1;
       const codigo = `SES-${proximoId < 10 ? `0${proximoId}` : proximoId}`;
-      setSessoes((prev) => [
-        ...prev,
+      novasSessoes = [
+        ...sessoes,
         {
           id: proximoId,
           codigo,
           ...dados,
         },
-      ]);
+      ];
       dispararToast("Sessão cadastrada com sucesso.");
     }
+
+    setSessoes(novasSessoes);
+    try {
+      localStorage.setItem("futboard_sessoes", JSON.stringify(novasSessoes));
+    } catch (errLocal) {
+      console.warn("Não foi possível persistir no localStorage:", errLocal);
+    }
+
+    api.post("/treinos/sessoes/", dados).catch(() => {});
 
     setModalOpen(false);
     setSessaoEditando(null);

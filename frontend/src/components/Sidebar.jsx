@@ -65,6 +65,51 @@ export default function Sidebar({
           </p>
 
           <nav className="space-y-1" aria-label="Menu de Planejamento">
+            {/* Dashboard */}
+            <button
+              type="button"
+              onClick={() => handleSelect("dashboard")}
+              className={`group flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-sm font-medium transition ${
+                activeNav === "dashboard"
+                  ? "bg-white/[0.11] text-[#FFFFFF] shadow-inner ring-1 ring-white/[0.08]"
+                  : "text-[#8A8D80] hover:bg-white/[0.06] hover:text-[#FFFFFF]"
+              }`}
+            >
+              <span className="flex items-center gap-2.5">
+                <svg
+                  className="h-4 w-4 shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                >
+                  <rect x="3" y="3" width="7" height="9" rx="1.5" />
+                  <rect x="14" y="3" width="7" height="5" rx="1.5" />
+                  <rect x="14" y="12" width="7" height="9" rx="1.5" />
+                  <rect x="3" y="16" width="7" height="5" rx="1.5" />
+                </svg>
+                <span>Dashboard</span>
+              </span>
+
+              <span className="flex items-center gap-1.5">
+                {activeNav === "dashboard" && (
+                  <svg
+                    className="h-3.5 w-3.5 text-[#C6E96B] transition-transform group-hover:translate-x-0.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 6l6 6-6 6"
+                    />
+                  </svg>
+                )}
+              </span>
+            </button>
+
             {/* Macrociclos */}
             <button
               type="button"
