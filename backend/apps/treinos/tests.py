@@ -7,7 +7,7 @@ from rest_framework.test import APITestCase
 
 from apps.ciclos.models import Macrociclo, Mesociclo, Microciclo
 
-from .models import AtividadeBiblioteca, ComportamentoTatico, Sessao
+from .models import AtividadeBiblioteca, AtividadeSessao, ComportamentoTatico, Sessao
 
 
 
@@ -534,4 +534,231 @@ class AtividadeBibliotecaApiTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("codigo", response.json())
 
+
+class AtividadeSessaoApiTests(APITestCase):
+    """Testes automatizados das US13, US14 e US23 baseados na planilha oficial."""
+
+    list_url = "/api/treinos/atividades-sessao/"
+
+    def setUp(self):
+        self.macrociclo = Macrociclo.objects.create(
+            nome="Temporada 2026",
+            data_inicio="2026-01-01",
+            data_termino="2026-12-31",
+        )
+        self.mesociclo = Mesociclo.objects.create(
+            macrociclo=self.macrociclo,
+            nome="Preparatório Geral",
+            data_inicio="2026-02-01",
+            data_termino="2026-06-30",
+        )
+        self.microciclo = Microciclo.objects.create(
+            mesociclo=self.mesociclo,
+            nome="Microciclo 01",
+            data_inicio="2026-03-01",
+            data_termino="2026-03-07",
+        )
+        self.sessao = Sessao.objects.create(
+            microciclo=self.microciclo,
+            nome="Sessão 1 - Aquisição",
+            data="2026-03-02",
+        )
+
+        self.bib_cf1 = AtividadeBiblioteca.objects.create(
+            nome="G2XG",
+            tipologia="Confrontos",
+            tipo_ssp="Especial",
+            orientacao="Aquisição",
+            comprimento=24,
+            largura=25,
+            numero_jogadores=6,
+            momentos_jogo=["Ataque", "Defesa"],
+            fases_jogo=["Finalização"],
+            comportamentos=["Finalização", "Proteção Baliza"],
+        )
+        self.bib_jc1 = AtividadeBiblioteca.objects.create(
+            nome="RecPosPerd",
+            tipologia="Jogo Condicionante",
+            tipo_ssp="Especial",
+            orientacao="Aquisição",
+            comprimento=50,
+            largura=50,
+            numero_jogadores=18,
+            momentos_jogo=["Trans Of", "Trans Def"],
+            fases_jogo=["1ª Construção", "Criação"],
+            comportamentos=["Reação Pós-Perda", "Amplitude"],
+        )
+        self.bib_dp1 = AtividadeBiblioteca.objects.create(
+            nome="DomOrien | Var1",
+            tipologia="Dinâmica de Passe",
+            tipo_ssp="Dirigido",
+            orientacao="PDI",
+            momentos_jogo=["Ataque"],
+            fases_jogo=["1ª Construção"],
+            atributos_tecnicos=["DomOrient", "Passe Curto"],
+        )
+
+    def test_us13_cadastra_atividade_manual_grande_js1(self):
+        payload = {
+            "sessao": self.sessao.id,
+            "codigo": "JS1",
+            "nome": "1ª/2ªConst",
+            "tipologia": "JS",
+            "tipo_ssp": "Especial",
+            "orientacao": "Aquisição",
+            "ordem": 1,
+            "tempo": 25,
+            "comprimento": 52,
+            "largura": 60,
+            "numero_jogadores": 12,
+            "momentos_jogo": ["Ataque"],
+            "fases_jogo": ["1ª Construção", "2ª Construção"],
+            "comportamentos": ["Saída Sustentada"],
+        }
+        response = self.client.post(self.list_url, payload, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        data = response.json()
+        self.assertEqual(data["tipologia"], "Jogo Setorial")
+        self.assertAlmostEqual(data["area_por_jogador"], 260.0)
+        self.assertEqual(data["dimensao_espaco"], "Grande")
+
+    def test_us13_permite_atividades_simultaneas_na_mesma_ordem_rn03(self):
+        r1 = self.client.post(
+            self.list_url,
+            {
+                "sessao": self.sessao.id,
+                "nome": "DomOrien | Var1",
+                "tipologia": "Dinâmica de Passe",
+                "tipo_ssp": "Dirigido",
+                "orientacao": "PDI",
+                "ordem": 1,
+                "tempo": 15,
+                "atributos_tecnicos": ["DomOrient"],
+            },
+            format="json",
+        )
+        r2 = self.client.post(
+            self.list_url,
+            {
+                "sessao": self.sessao.id,
+                "nome": "Circ+CabRebFrontLat",
+                "tipologia": "Dinâmica ProtDef",
+                "tipo_ssp": "Dirigido",
+                "orientacao": "PDI",
+                "ordem": 1,
+                "tempo": 15,
+                "atributos_tecnicos": ["Cab/Reb Frontal", "Cab/Reb Lateral"],
+            },
+            format="json",
+        )
+
+        self.assertEqual(r1.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(r2.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(
+            AtividadeSessao.objects.filter(sessao=self.sessao, ordem=1).count(), 2
+        )
+
+    def test_us13_rejeita_tempo_zero(self):
+        response = self.client.post(
+            self.list_url,
+            {
+                "sessao": self.sessao.id,
+                "nome": "Atividade Tempo Zero",
+                "tipologia": "Rondo",
+                "tipo_ssp": "Especial",
+                "ordem": 1,
+                "tempo": 0,
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("tempo", response.json())
+
+    def test_us13_rejeita_medidas_incompletas(self):
+        response = self.client.post(
+            self.list_url,
+            {
+                "sessao": self.sessao.id,
+                "nome": "Atividade Medidas Incompletas",
+                "tipologia": "Rondo",
+                "tipo_ssp": "Especial",
+                "ordem": 1,
+                "tempo": 15,
+                "comprimento": 20,
+                "largura": 20,
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("dimensao_espaco", response.json())
+
+    def test_us23_reutiliza_jc1_da_biblioteca_calculando_espaco_medio(self):
+        payload = {
+            "sessao": self.sessao.id,
+            "atividade_biblioteca": self.bib_jc1.id,
+            "ordem": 2,
+            "tempo": 20,
+        }
+        response = self.client.post(self.list_url, payload, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        data = response.json()
+        self.assertEqual(data["codigo"], "JC1")
+        self.assertEqual(data["nome"], "RecPosPerd")
+        self.assertEqual(data["tipologia"], "Jogo Condicionante")
+        self.assertAlmostEqual(data["area_por_jogador"], 50 * 50 / 18)
+        self.assertEqual(data["dimensao_espaco"], "Médio")
+        self.assertEqual(data["comportamentos"], ["Reação Pós-Perda", "Amplitude"])
+
+    def test_us23_reutiliza_dp1_pdi_da_biblioteca(self):
+        payload = {
+            "sessao": self.sessao.id,
+            "atividade_biblioteca": self.bib_dp1.id,
+            "ordem": 1,
+            "tempo": 12,
+        }
+        response = self.client.post(self.list_url, payload, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        data = response.json()
+        self.assertEqual(data["codigo"], "DP1")
+        self.assertEqual(data["orientacao"], "PDI")
+        self.assertIsNone(data["area_por_jogador"])
+        self.assertEqual(data["dimensao_espaco"], "Não Definido")
+        self.assertEqual(data["atributos_tecnicos"], ["DomOrient", "Passe Curto"])
+
+    def test_us14_edita_copia_na_sessao_sem_alterar_cf1_na_biblioteca(self):
+        post_resp = self.client.post(
+            self.list_url,
+            {
+                "sessao": self.sessao.id,
+                "atividade_biblioteca": self.bib_cf1.id,
+                "ordem": 3,
+                "tempo": 18,
+            },
+            format="json",
+        )
+        atividade_id = post_resp.json()["id"]
+
+        patch_resp = self.client.patch(
+            f"{self.list_url}{atividade_id}/",
+            {
+                "nome": "G2XG (Espaço Ampliado)",
+                "tempo": 22,
+                "comprimento": 30,
+                "largura": 30,
+                "numero_jogadores": 6,
+            },
+            format="json",
+        )
+
+        self.assertEqual(patch_resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(patch_resp.json()["dimensao_espaco"], "Médio")
+        self.assertAlmostEqual(patch_resp.json()["area_por_jogador"], 150.0)
+
+        self.bib_cf1.refresh_from_db()
+        self.assertEqual(self.bib_cf1.nome, "G2XG")
+        self.assertEqual(self.bib_cf1.comprimento, 24)
+        self.assertEqual(self.bib_cf1.dimensao_espaco, "Pequeno")
 

@@ -5,6 +5,8 @@ from django.urls import path
 from .views import (
     AtividadeBibliotecaDetailView,
     AtividadeBibliotecaListCreateView,
+    AtividadeSessaoDetailView,
+    AtividadeSessaoListCreateView,
     ComportamentoTaticoDetailView,
     ComportamentoTaticoListCreateView,
     SessaoDetailView,
@@ -44,5 +46,14 @@ urlpatterns = [
         AtividadeBibliotecaDetailView.as_view(),
         name="biblioteca-detail",
     ),
+    path(
+        "atividades-sessao/",
+        AtividadeSessaoListCreateView.as_view(),
+        name="atividade-sessao-list-create",
+    ),
+    path(
+        "atividades-sessao/<int:pk>/",
+        AtividadeSessaoDetailView.as_view(),
+        name="atividade-sessao-detail",
+    ),
 ]
-

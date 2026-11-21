@@ -1,16 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import SessaoCard from "../components/SessaoCard.jsx";
 import SessaoModal from "../components/SessaoModal.jsx";
+import api from "../services/api.js";
+
+const MICROCICLOS_DEMO_PDF = [
+  {
+    id: 1,
+    nome: "Microciclo 01",
+    data_inicio: "2026-10-18",
+    data_termino: "2026-10-24",
+    mesociclo: 1,
+    mesocicloNome: "Mesociclo 01 - Preparação Física",
+    macrocicloNome: "Temporada 2026",
+  },
+  {
+    id: 2,
+    nome: "Microciclo 02",
+    data_inicio: "2026-10-25",
+    data_termino: "2026-10-31",
+    mesociclo: 1,
+    mesocicloNome: "Mesociclo 01 - Preparação Física",
+    macrocicloNome: "Temporada 2026",
+  },
+  {
+    id: 3,
+    nome: "Microciclo 03",
+    data_inicio: "2026-11-01",
+    data_termino: "2026-11-07",
+    mesociclo: 1,
+    mesocicloNome: "Mesociclo 01 - Preparação Física",
+    macrocicloNome: "Temporada 2026",
+  },
+];
 
 export default function SessoesPage({ onSelectNav }) {
   const [sessoes, setSessoes] = useState([]);
+  const [microciclos, setMicrociclos] = useState(MICROCICLOS_DEMO_PDF);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Controle do Modal de Cadastro e Edição
   const [modalOpen, setModalOpen] = useState(false);
   const [sessaoEditando, setSessaoEditando] = useState(null);
   const [toastMsg, setToastMsg] = useState("");
+
+  useEffect(() => {
+    const carregarMicrociclos = async () => {
+      try {
+        const [respMicro, respMeso, respMacro] = await Promise.all([
+          api.get("/ciclos/microciclos/"),
+          api.get("/ciclos/mesociclos/").catch(() => ({ data: [] })),
+          api.get("/ciclos/macrociclos/").catch(() => ({ data: [] })),
+        ]);
+
+        if (Array.isArray(respMicro.data) && respMicro.data.length > 0) {
+          const mesoMap = new Map();
+          if (Array.isArray(respMeso.data)) {
+            respMeso.data.forEach((meso) => mesoMap.set(meso.id, meso));
+          }
+
+          const macroMap = new Map();
+          if (Array.isArray(respMacro.data)) {
+            respMacro.data.forEach((macro) => macroMap.set(macro.id, macro));
+          }
+
+          const formatados = respMicro.data.map((micro) => {
+            const mesoAssociado = mesoMap.get(micro.mesociclo);
+            const macroAssociado = mesoAssociado
+              ? macroMap.get(mesoAssociado.macrociclo)
+              : null;
+
+            return {
+              ...micro,
+              dataInicio: micro.data_inicio || micro.dataInicio,
+              dataTermino: micro.data_termino || micro.dataTermino,
+              mesocicloNome: mesoAssociado?.nome || "",
+              macrocicloNome: macroAssociado?.nome || "",
+            };
+          });
+
+          setMicrociclos(formatados);
+        }
+      } catch {
+        // Mantém os microciclos de demonstração caso a API não esteja ativa
+      }
+    };
+
+    carregarMicrociclos();
+  }, []);
+
+  const microcicloMap = useMemo(() => {
+    const map = new Map();
+    microciclos.forEach((item) => map.set(Number(item.id), item));
+    return map;
+  }, [microciclos]);
 
   const dispararToast = (mensagem) => {
     setToastMsg(mensagem);
@@ -71,6 +154,7 @@ export default function SessoesPage({ onSelectNav }) {
         mobileOpen={mobileMenuOpen}
         onCloseMobile={() => setMobileMenuOpen(false)}
         totalSessoes={sessoes.length}
+        totalMicrociclos={microciclos.length}
       />
 
       {/* Barra Superior Mobile */}
@@ -184,13 +268,24 @@ export default function SessoesPage({ onSelectNav }) {
             </section>
           ) : (
             <section aria-label="Lista de Sessões" className="space-y-3.5">
-              {sessoes.map((sessao) => (
-                <SessaoCard
-                  key={sessao.id}
-                  sessao={sessao}
-                  onEditSessao={abrirModalEdicao}
-                />
-              ))}
+              {sessoes.map((sessao) => {
+                const microId = sessao.microcicloId ?? sessao.microciclo;
+                const microObj =
+                  microId !== undefined && microId !== null && microId !== ""
+                    ? microcicloMap.get(Number(microId))
+                    : null;
+
+                return (
+                  <SessaoCard
+                    key={sessao.id}
+                    sessao={sessao}
+                    microcicloNome={
+                      microObj?.nome || sessao.microcicloNome || ""
+                    }
+                    onEditSessao={abrirModalEdicao}
+                  />
+                );
+              })}
             </section>
           )}
         </div>
@@ -227,6 +322,7 @@ export default function SessoesPage({ onSelectNav }) {
         key={sessaoEditando ? `edit-${sessaoEditando.id}` : `new-${modalOpen}`}
         isOpen={modalOpen}
         initialData={sessaoEditando}
+        microciclos={microciclos}
         onClose={fecharModal}
         onSave={salvarSessao}
       />
