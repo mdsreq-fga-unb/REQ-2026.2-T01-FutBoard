@@ -43,11 +43,11 @@ urlpatterns = [
         name="biblioteca-list-create",
     ),
     path(
-    path(
         "biblioteca/<int:pk>/",
         AtividadeBibliotecaDetailView.as_view(),
         name="biblioteca-detail",
     ),
+    path(
         "atividades-sessao/",
         AtividadeSessaoListCreateView.as_view(),
         name="atividade-sessao-list-create",
