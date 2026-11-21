@@ -25,6 +25,7 @@ export default function BibliotecaPage({ onSelectNav }) {
 
   // Controle do Modal de Cadastro (US19)
   const [modalOpen, setModalOpen] = useState(false);
+  const [atividadeEditando, setAtividadeEditando] = useState(null);
   const [toastMsg, setToastMsg] = useState("");
 
   const dispararToast = (mensagem) => {
@@ -54,15 +55,69 @@ export default function BibliotecaPage({ onSelectNav }) {
   }, []);
 
   const abrirModalCadastro = () => {
+    setAtividadeEditando(null);
+    setModalOpen(true);
+  };
+
+  const abrirModalEdicao = (atividade) => {
+    setAtividadeEditando(atividade);
     setModalOpen(true);
   };
 
   const fecharModal = () => {
     setModalOpen(false);
+    setAtividadeEditando(null);
   };
 
-  const salvarAtividade = async (dados) => {
+  const salvarAtividade = async (dados, id) => {
     try {
+      if (id) {
+        // MODO EDIÇÃO (US20)
+        let atividadeAtualizada = null;
+        try {
+          const resposta = await api.patch(`/treinos/biblioteca/${id}/`, dados);
+          atividadeAtualizada = resposta.data;
+        } catch (apiErr) {
+          if (apiErr.response?.data) {
+            throw apiErr;
+          }
+
+          const sigla =
+            TIPOLOGIAS_SIGLAS[dados.tipologia] ||
+            dados.tipologia.slice(0, 2).toUpperCase();
+          const area =
+            dados.comprimento && dados.largura && dados.numero_jogadores
+              ? (dados.comprimento * dados.largura) / dados.numero_jogadores
+              : null;
+
+          let dimensao = "Não Definido";
+          if (dados.orientacao === "PDI") {
+            dimensao = "Não Definido";
+          } else if (area) {
+            dimensao =
+              area <= 100 ? "Pequeno" : area <= 200 ? "Médio" : "Grande";
+          }
+
+          atividadeAtualizada = {
+            id,
+            ...dados,
+            atividade_ssp: `${sigla} | ${dados.nome}`,
+            sigla_tipologia: sigla,
+            area_por_jogador: area,
+            dimensao_espaco: dimensao,
+          };
+        }
+
+        setAtividades((prev) =>
+          prev.map((a) => (a.id === id ? { ...a, ...atividadeAtualizada } : a)),
+        );
+        dispararToast("Atividade Atualizada");
+        setModalOpen(false);
+        setAtividadeEditando(null);
+        return;
+      }
+
+      // MODO CADASTRO (US19)
       let novaAtividade = null;
       try {
         const resposta = await api.post("/treinos/biblioteca/", dados);
@@ -118,6 +173,7 @@ export default function BibliotecaPage({ onSelectNav }) {
       setAtividades((prev) => [novaAtividade, ...prev]);
       dispararToast("Atividade Criada");
       setModalOpen(false);
+      setAtividadeEditando(null);
     } catch (erro) {
       const dadosErro = erro.response?.data;
       const mensagem =
@@ -125,9 +181,10 @@ export default function BibliotecaPage({ onSelectNav }) {
         dadosErro?.tipologia?.[0] ||
         dadosErro?.tipo_ssp?.[0] ||
         dadosErro?.dimensao_espaco?.[0] ||
+        dadosErro?.codigo?.[0] ||
         dadosErro?.detail ||
         erro.message ||
-        "Não foi possível cadastrar a atividade.";
+        "Não foi possível salvar a atividade.";
       throw new Error(mensagem);
     }
   };
@@ -278,7 +335,11 @@ export default function BibliotecaPage({ onSelectNav }) {
 
               <section aria-label="Lista de Atividades" className="space-y-4">
                 {atividades.map((atv) => (
-                  <AtividadeBibliotecaCard key={atv.id} atividade={atv} />
+                  <AtividadeBibliotecaCard
+                    key={atv.id}
+                    atividade={atv}
+                    onEdit={abrirModalEdicao}
+                  />
                 ))}
               </section>
             </div>
@@ -312,10 +373,11 @@ export default function BibliotecaPage({ onSelectNav }) {
         </div>
       )}
 
-      {/* Modal de Cadastro de Atividade (US19) */}
+      {/* Modal de Cadastro / Edição de Atividade (US19 / US20) */}
       {modalOpen && (
         <AtividadeBibliotecaModal
           isOpen={modalOpen}
+          initialData={atividadeEditando}
           onClose={fecharModal}
           onSave={salvarAtividade}
         />

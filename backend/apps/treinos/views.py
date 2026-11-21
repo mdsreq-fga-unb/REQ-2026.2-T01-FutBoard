@@ -101,18 +101,14 @@ class SessaoDetailView(generics.RetrieveUpdateAPIView):
 
 
 class ComportamentoTaticoListCreateView(generics.ListCreateAPIView):
-    """
-    US10: listar e cadastrar comportamentos táticos.
-    """
+    """US10: listar e cadastrar comportamentos táticos."""
 
     queryset = ComportamentoTatico.objects.all()
     serializer_class = ComportamentoTaticoSerializer
 
 
 class ComportamentoTaticoDetailView(generics.RetrieveUpdateAPIView):
-    """
-    US11: consultar e editar comportamentos táticos.
-    """
+    """US11: consultar e editar comportamentos táticos."""
 
     queryset = ComportamentoTatico.objects.all()
     serializer_class = ComportamentoTaticoSerializer
@@ -123,6 +119,7 @@ class AtividadeBibliotecaListCreateView(generics.ListCreateAPIView):
 
     queryset = AtividadeBiblioteca.objects.all()
     serializer_class = AtividadeBibliotecaSerializer
+
 
 class AtividadeSessaoListCreateView(generics.ListCreateAPIView):
     """US13: lista as atividades de sessões e cadastra uma nova atividade na sessão.
@@ -151,6 +148,13 @@ class AtividadeSessaoDetailView(generics.RetrieveUpdateAPIView):
     serializer_class = AtividadeSessaoSerializer
 
 
+class AtividadeBibliotecaDetailView(generics.RetrieveUpdateAPIView):
+    """US20: Consulta e permite editar uma atividade cadastrada na biblioteca."""
+
+    queryset = AtividadeBiblioteca.objects.all()
+    serializer_class = AtividadeBibliotecaSerializer
+
+
 class IndicadoresTreinoView(APIView):
     """US22 (RF22): Retorna os indicadores de treino filtráveis por periodização, mês e sessão."""
 
@@ -160,5 +164,3 @@ class IndicadoresTreinoView(APIView):
         indicadores = calcular_indicadores_treino(queryset_filtrado)
         serializer = IndicadoresTreinoSerializer(indicadores)
         return Response(serializer.data)
-
-
