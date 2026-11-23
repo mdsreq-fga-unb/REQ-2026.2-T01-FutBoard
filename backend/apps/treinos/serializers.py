@@ -314,6 +314,8 @@ class AtividadeSessaoSerializer(serializers.ModelSerializer):
     nome = serializers.CharField(max_length=255, required=False, allow_blank=True)
     tipologia = serializers.CharField(max_length=50, required=False, allow_blank=True)
     tipo_ssp = serializers.CharField(max_length=20, required=False, allow_blank=True)
+    sigla_tipologia = serializers.ReadOnlyField()
+    atividade_ssp = serializers.ReadOnlyField()
 
     class Meta:
         model = AtividadeSessao
@@ -323,7 +325,9 @@ class AtividadeSessaoSerializer(serializers.ModelSerializer):
             "atividade_biblioteca",
             "codigo",
             "nome",
+            "atividade_ssp",
             "tipologia",
+            "sigla_tipologia",
             "tipo_ssp",
             "orientacao",
             "ordem",
@@ -342,6 +346,8 @@ class AtividadeSessaoSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "id",
+            "sigla_tipologia",
+            "atividade_ssp",
             "area_por_jogador",
             "dimensao_espaco",
             "criado_em",
@@ -493,6 +499,85 @@ class IndicadoresTreinoSerializer(serializers.Serializer):
     variabilidade = serializers.FloatField(read_only=True)
     minutos_por_sessao = serializers.FloatField(read_only=True)
     minutos_por_execucao = serializers.FloatField(read_only=True)
+    estado_vazio = serializers.BooleanField(read_only=True)
+    mensagem = serializers.CharField(read_only=True, allow_null=True)
+
+
+class InformacaoAtividadeItemSerializer(serializers.Serializer):
+    """Item consolidado por atividade distinta para gráfico da guia Atividades (US24 / RF24)."""
+
+    codigo = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    atividade_ssp = serializers.CharField(read_only=True)
+    tipologia = serializers.CharField(read_only=True)
+    sigla_tipologia = serializers.CharField(read_only=True)
+    tipo_ssp = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    percentual_tempo_liquido = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    sessoes_distintas = serializers.IntegerField(read_only=True)
+
+
+class InformacaoTipologiaItemSerializer(serializers.Serializer):
+    """Item consolidado por tipologia de atividade para gráfico (US24 / RF24)."""
+
+    tipologia = serializers.CharField(read_only=True)
+    sigla_tipologia = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+
+
+class InformacaoTipoSspItemSerializer(serializers.Serializer):
+    """Item consolidado por tipo de SSP (Especial, Dirigido, Competitivo) para gráfico (US24 / RF24)."""
+
+    tipo_ssp = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+
+
+class ExecucaoAtividadeItemSerializer(serializers.Serializer):
+    """Item individual de execução de atividade em sessão filtrada (US24 / RF24)."""
+
+    id = serializers.IntegerField(read_only=True)
+    sessao = serializers.IntegerField(read_only=True)
+    sessao_nome = serializers.CharField(read_only=True)
+    sessao_sequencia = serializers.IntegerField(read_only=True, allow_null=True)
+    data = serializers.CharField(read_only=True, allow_null=True)
+    mes = serializers.CharField(read_only=True)
+    microciclo = serializers.IntegerField(read_only=True, allow_null=True)
+    microciclo_nome = serializers.CharField(read_only=True)
+    mesociclo = serializers.IntegerField(read_only=True, allow_null=True)
+    mesociclo_nome = serializers.CharField(read_only=True)
+    macrociclo = serializers.IntegerField(read_only=True, allow_null=True)
+    macrociclo_nome = serializers.CharField(read_only=True)
+    ordem = serializers.IntegerField(read_only=True)
+    codigo = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    atividade_ssp = serializers.CharField(read_only=True)
+    tipologia = serializers.CharField(read_only=True)
+    sigla_tipologia = serializers.CharField(read_only=True)
+    tipo_ssp = serializers.CharField(read_only=True)
+    orientacao = serializers.CharField(read_only=True)
+    tempo = serializers.IntegerField(read_only=True)
+    dimensao_espaco = serializers.CharField(read_only=True)
+
+
+class InformacoesAtividadesTreinoSerializer(serializers.Serializer):
+    """RF24 (US24): Serializador de saída da consulta e gráficos de atividades do treino."""
+
+    total_atividades_distintas = serializers.IntegerField(read_only=True)
+    total_registros = serializers.IntegerField(read_only=True)
+    minutos_totais_atividades = serializers.IntegerField(read_only=True)
+    minutos_totais_liquidos = serializers.IntegerField(read_only=True)
+    atividades = InformacaoAtividadeItemSerializer(many=True, read_only=True)
+    por_tipologia = InformacaoTipologiaItemSerializer(many=True, read_only=True)
+    por_tipo_ssp = InformacaoTipoSspItemSerializer(many=True, read_only=True)
+    execucoes = ExecucaoAtividadeItemSerializer(many=True, read_only=True)
     estado_vazio = serializers.BooleanField(read_only=True)
     mensagem = serializers.CharField(read_only=True, allow_null=True)
 

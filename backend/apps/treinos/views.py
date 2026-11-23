@@ -2,16 +2,20 @@
 
 from datetime import date
 
+from django.db.models import Q
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import (
+    SIGLAS_POR_TIPOLOGIA,
+    TIPOLOGIAS_MAPA,
     AtividadeBiblioteca,
     AtividadeSessao,
     ComportamentoTatico,
     Sessao,
     calcular_indicadores_treino,
+    calcular_informacoes_atividades_treino,
     normalizar_nome_comportamento,
 )
 from .serializers import (
@@ -19,22 +23,35 @@ from .serializers import (
     AtividadeSessaoSerializer,
     ComportamentoTaticoSerializer,
     IndicadoresTreinoSerializer,
+    InformacoesAtividadesTreinoSerializer,
     SessaoSerializer,
 )
 
 MESES_POR_NOME = {
     "janeiro": 1,
+    "jan": 1,
     "fevereiro": 2,
+    "fev": 2,
     "marco": 3,
+    "mar": 3,
     "abril": 4,
+    "abr": 4,
     "maio": 5,
+    "mai": 5,
     "junho": 6,
+    "jun": 6,
     "julho": 7,
+    "jul": 7,
     "agosto": 8,
+    "ago": 8,
     "setembro": 9,
+    "set": 9,
     "outubro": 10,
+    "out": 10,
     "novembro": 11,
+    "nov": 11,
     "dezembro": 12,
+    "dez": 12,
 }
 
 
@@ -130,15 +147,105 @@ class AtividadeSessaoListCreateView(generics.ListCreateAPIView):
     serializer_class = AtividadeSessaoSerializer
 
     def get_queryset(self):
-        queryset = AtividadeSessao.objects.select_related("sessao", "atividade_biblioteca")
+        queryset = AtividadeSessao.objects.select_related(
+            "sessao__microciclo__mesociclo__macrociclo",
+            "atividade_biblioteca",
+        )
+        return filtrar_atividades_sessao_por_parametros(queryset, self.request.query_params)
 
-        sessao_id = self.request.query_params.get("sessao")
-        if sessao_id is not None:
-            if not sessao_id.isdigit():
+
+def filtrar_atividades_sessao_por_parametros(queryset, query_params):
+    """US24 (RF24): Filtra atividades de sessão por periodização, mês, tipologia, SSP, orientação, código e busca (RN07)."""
+    filtros_id = {
+        "macrociclo": "sessao__microciclo__mesociclo__macrociclo_id",
+        "mesociclo": "sessao__microciclo__mesociclo_id",
+        "microciclo": "sessao__microciclo_id",
+        "sessao": "sessao_id",
+        "atividade_biblioteca": "atividade_biblioteca_id",
+    }
+
+    for param, lookup in filtros_id.items():
+        valor = query_params.get(param)
+        if valor not in (None, ""):
+            if not str(valor).isdigit():
                 return queryset.none()
-            queryset = queryset.filter(sessao_id=int(sessao_id))
+            queryset = queryset.filter(**{lookup: int(valor)})
 
-        return queryset
+    mes = query_params.get("mes")
+    if mes not in (None, ""):
+        mes_str = str(mes).strip()
+        if mes_str.isdigit():
+            mes_num = int(mes_str)
+            if not 1 <= mes_num <= 12:
+                return queryset.none()
+            queryset = queryset.filter(sessao__data__month=mes_num)
+        else:
+            mes_normalizado = normalizar_nome_comportamento(mes_str)
+            mes_num = MESES_POR_NOME.get(mes_normalizado)
+            if mes_num is None:
+                return queryset.none()
+            queryset = queryset.filter(sessao__data__month=mes_num)
+
+    data_inicio = query_params.get("data_inicio")
+    if data_inicio not in (None, ""):
+        try:
+            queryset = queryset.filter(
+                sessao__data__gte=date.fromisoformat(str(data_inicio).strip())
+            )
+        except ValueError:
+            return queryset.none()
+
+    data_termino = query_params.get("data_termino")
+    if data_termino not in (None, ""):
+        try:
+            queryset = queryset.filter(
+                sessao__data__lte=date.fromisoformat(str(data_termino).strip())
+            )
+        except ValueError:
+            return queryset.none()
+
+    tipologia = query_params.get("tipologia")
+    if tipologia not in (None, ""):
+        texto_tip = " ".join(str(tipologia).split())
+        sigla_upper = texto_tip.upper()
+        if sigla_upper in TIPOLOGIAS_MAPA:
+            queryset = queryset.filter(tipologia=TIPOLOGIAS_MAPA[sigla_upper])
+        else:
+            tipologia_norm = normalizar_nome_comportamento(texto_tip)
+            correspondente = next(
+                (
+                    nome
+                    for nome in SIGLAS_POR_TIPOLOGIA
+                    if normalizar_nome_comportamento(nome) == tipologia_norm
+                ),
+                None,
+            )
+            if correspondente is None:
+                return queryset.none()
+            queryset = queryset.filter(tipologia=correspondente)
+
+    tipo_ssp = query_params.get("tipo_ssp")
+    if tipo_ssp not in (None, ""):
+        queryset = queryset.filter(tipo_ssp__iexact=str(tipo_ssp).strip())
+
+    orientacao = query_params.get("orientacao")
+    if orientacao not in (None, ""):
+        queryset = queryset.filter(orientacao__iexact=str(orientacao).strip())
+
+    codigo = query_params.get("codigo")
+    if codigo not in (None, ""):
+        queryset = queryset.filter(codigo__iexact=str(codigo).strip())
+
+    busca = query_params.get("busca") or query_params.get("q")
+    if busca not in (None, ""):
+        termo = " ".join(str(busca).split())
+        queryset = queryset.filter(
+            Q(codigo__icontains=termo)
+            | Q(nome__icontains=termo)
+            | Q(tipologia__icontains=termo)
+        )
+
+    return queryset
 
 
 class AtividadeSessaoDetailView(generics.RetrieveUpdateAPIView):
@@ -163,4 +270,20 @@ class IndicadoresTreinoView(APIView):
         queryset_filtrado = filtrar_sessoes_por_parametros(queryset, request.query_params)
         indicadores = calcular_indicadores_treino(queryset_filtrado)
         serializer = IndicadoresTreinoSerializer(indicadores)
+        return Response(serializer.data)
+
+
+class InformacoesAtividadesTreinoView(APIView):
+    """US24 (RF24): Retorna informações consolidadas e gráficos de atividades do treino por filtro (RN07)."""
+
+    def get(self, request, *args, **kwargs):
+        queryset = AtividadeSessao.objects.select_related(
+            "sessao__microciclo__mesociclo__macrociclo",
+            "atividade_biblioteca",
+        ).all()
+        queryset_filtrado = filtrar_atividades_sessao_por_parametros(
+            queryset, request.query_params
+        )
+        dados = calcular_informacoes_atividades_treino(queryset_filtrado)
+        serializer = InformacoesAtividadesTreinoSerializer(dados)
         return Response(serializer.data)
