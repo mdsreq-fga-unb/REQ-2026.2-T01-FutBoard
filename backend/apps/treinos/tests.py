@@ -1,5 +1,7 @@
 """Testes da API de sessões e biblioteca de treinos."""
 
+from datetime import date
+
 from django.apps import apps
 from django.test import SimpleTestCase, TestCase
 from rest_framework import status
@@ -7,7 +9,16 @@ from rest_framework.test import APITestCase
 
 from apps.ciclos.models import Macrociclo, Mesociclo, Microciclo
 
-from .models import AtividadeBiblioteca, AtividadeSessao, ComportamentoTatico, Sessao
+from .models import (
+    MENSAGEM_ATIVIDADES_VAZIO,
+    AtividadeBiblioteca,
+    AtividadeSessao,
+    ComportamentoTatico,
+    Sessao,
+    calcular_informacoes_atividades_treino,
+    identificador_atividade_distinta,
+)
+from .serializers import InformacoesAtividadesTreinoSerializer
 
 
 
@@ -1017,6 +1028,221 @@ class IndicadoresTreinoApiTests(APITestCase):
         self.assertEqual(data["variabilidade"], 0.0)
         self.assertEqual(data["minutos_por_execucao"], 0.0)
         self.assertFalse(data["estado_vazio"])
+
+
+class InformacoesAtividadesTreinoUnitTests(SimpleTestCase):
+    """Testes unitários puros (em memória, sem banco de dados) da US24 / RF24."""
+
+    def _criar_sessao_em_memoria(self, sessao_id, nome, sequencia, data_iso):
+        macro = Macrociclo(
+            id=1,
+            codigo="MC-01",
+            nome="2026",
+            data_inicio=date(2026, 1, 1),
+            data_termino=date(2026, 12, 31),
+        )
+        meso = Mesociclo(
+            id=1,
+            macrociclo=macro,
+            nome="ME1",
+            data_inicio=date(2026, 8, 1),
+            data_termino=date(2026, 8, 15),
+        )
+        micro = Microciclo(
+            id=1,
+            mesociclo=meso,
+            nome="MC1",
+            data_inicio=date(2026, 8, 3),
+            data_termino=date(2026, 8, 9),
+        )
+        return Sessao(
+            id=sessao_id,
+            microciclo=micro,
+            sequencia=sequencia,
+            nome=nome,
+            data=date.fromisoformat(data_iso),
+        )
+
+    def test_us24_unitario_propriedades_sigla_tipologia_e_atividade_ssp(self):
+        """Valida unitariamente a formatação de sigla_tipologia e atividade_ssp sem duplicar prefixo."""
+        atv_sem_prefixo = AtividadeSessao(
+            codigo="CF1",
+            nome="G2XG",
+            tipologia="Confrontos",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=29,
+        )
+        self.assertEqual(atv_sem_prefixo.sigla_tipologia, "CF")
+        self.assertEqual(atv_sem_prefixo.atividade_ssp, "CF | G2XG")
+
+        atv_com_prefixo = AtividadeSessao(
+            codigo="EC1",
+            nome="JC | 2Eq MeioCampo",
+            tipologia="Jogo Condicionante",
+            tipo_ssp="Competitivo",
+            ordem=2,
+            tempo=16,
+        )
+        self.assertEqual(atv_com_prefixo.sigla_tipologia, "JC")
+        self.assertEqual(atv_com_prefixo.atividade_ssp, "JC | 2Eq MeioCampo")
+
+    def test_us24_unitario_identificador_atividade_distinta(self):
+        """Valida unitariamente a chave de identificação de atividade por código, biblioteca ou nome manual."""
+        atv_por_codigo = AtividadeSessao(
+            codigo="  rd1 ",
+            nome="Cont/Cob",
+            tipologia="Rondo",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=16,
+        )
+        self.assertEqual(identificador_atividade_distinta(atv_por_codigo), ("codigo", "RD1"))
+
+        atv_por_biblioteca = AtividadeSessao(
+            atividade_biblioteca_id=42,
+            codigo="",
+            nome="Cont/Cob",
+            tipologia="Rondo",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=16,
+        )
+        self.assertEqual(
+            identificador_atividade_distinta(atv_por_biblioteca),
+            ("biblioteca", 42),
+        )
+
+        atv_manual = AtividadeSessao(
+            codigo="",
+            nome="  Posse   Rápida ",
+            tipologia="Jogo de Posse",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=20,
+        )
+        self.assertEqual(
+            identificador_atividade_distinta(atv_manual),
+            ("manual", "jogo de posse", "posse rápida"),
+        )
+
+    def test_us24_unitario_calcular_informacoes_lista_vazia_rn07(self):
+        """Valida unitariamente o retorno neutro e a mensagem padrão da RN07 quando a lista está vazia."""
+        resultado = calcular_informacoes_atividades_treino([])
+
+        self.assertTrue(resultado["estado_vazio"])
+        self.assertEqual(resultado["mensagem"], MENSAGEM_ATIVIDADES_VAZIO)
+        self.assertEqual(resultado["total_atividades_distintas"], 0)
+        self.assertEqual(resultado["total_registros"], 0)
+        self.assertEqual(resultado["minutos_totais_atividades"], 0)
+        self.assertEqual(resultado["minutos_totais_liquidos"], 0)
+        self.assertEqual(resultado["atividades"], [])
+        self.assertEqual(resultado["por_tipologia"], [])
+        self.assertEqual(resultado["por_tipo_ssp"], [])
+        self.assertEqual(resultado["execucoes"], [])
+
+    def test_us24_unitario_calcular_informacoes_agrega_tempo_bruto_e_liquido_rn03(self):
+        """Valida unitariamente a agregação por atividade, tipologia, SSP e tempo líquido de simultâneas (RN03)."""
+        s03 = self._criar_sessao_em_memoria(1, "S03", 3, "2026-08-05")
+        s04 = self._criar_sessao_em_memoria(2, "S04", 4, "2026-08-06")
+
+        atividades_em_memoria = [
+            AtividadeSessao(
+                id=1,
+                sessao=s03,
+                codigo="CD1",
+                nome="5Corredores",
+                tipologia="Coletivo Direcionado",
+                tipo_ssp="Competitivo",
+                orientacao="Aplicação",
+                ordem=1,
+                tempo=28,
+            ),
+            # Duas atividades simultâneas na S04 (Ordem 1, 18 min cada -> 36 brutos / 18 líquidos pela RN03)
+            AtividadeSessao(
+                id=2,
+                sessao=s04,
+                codigo="DF1",
+                nome="FinCruz/Chap",
+                tipologia="Dinâmica de Finalização",
+                tipo_ssp="Dirigido",
+                orientacao="PDI",
+                ordem=1,
+                tempo=18,
+            ),
+            AtividadeSessao(
+                id=3,
+                sessao=s04,
+                codigo="DPD1",
+                nome="Circ+CabRebFrontLat",
+                tipologia="Dinâmica ProtDef",
+                tipo_ssp="Dirigido",
+                orientacao="PDI",
+                ordem=1,
+                tempo=18,
+            ),
+            # Repetição de CD1 na S04 (Ordem 2, 33 min) -> CD1 soma 28 + 33 = 61 min
+            AtividadeSessao(
+                id=4,
+                sessao=s04,
+                codigo="CD1",
+                nome="5Corredores",
+                tipologia="Coletivo Direcionado",
+                tipo_ssp="Competitivo",
+                orientacao="Aplicação",
+                ordem=2,
+                tempo=33,
+            ),
+        ]
+
+        resultado = calcular_informacoes_atividades_treino(atividades_em_memoria)
+
+        self.assertFalse(resultado["estado_vazio"])
+        self.assertIsNone(resultado["mensagem"])
+        self.assertEqual(resultado["total_atividades_distintas"], 3)
+        self.assertEqual(resultado["total_registros"], 4)
+        self.assertEqual(resultado["minutos_totais_atividades"], 97)  # 28 + 18 + 18 + 33
+        self.assertEqual(resultado["minutos_totais_liquidos"], 79)  # 28 + 18 (simultânea) + 33
+
+        # Ranking de atividades: CD1 em 1º lugar com 61 min e 2 execuções em 2 sessões
+        lider = resultado["atividades"][0]
+        self.assertEqual(lider["codigo"], "CD1")
+        self.assertEqual(lider["atividade_ssp"], "CD | 5Corredores")
+        self.assertEqual(lider["minutos"], 61)
+        self.assertEqual(lider["execucoes"], 2)
+        self.assertEqual(lider["sessoes_distintas"], 2)
+        self.assertAlmostEqual(lider["percentual_tempo"], round((61 / 97) * 100, 2))
+        self.assertAlmostEqual(lider["percentual_tempo_liquido"], round((61 / 79) * 100, 2))
+
+        # Agrupamento por Tipo de SSP: Competitivo (61 min) e Dirigido (36 min)
+        ssp_map = {item["tipo_ssp"]: item for item in resultado["por_tipo_ssp"]}
+        self.assertEqual(ssp_map["Competitivo"]["minutos"], 61)
+        self.assertEqual(ssp_map["Competitivo"]["atividades_distintas"], 1)
+        self.assertEqual(ssp_map["Dirigido"]["minutos"], 36)
+        self.assertEqual(ssp_map["Dirigido"]["atividades_distintas"], 2)
+
+    def test_us24_unitario_serializador_saida_formata_campos_corretamente(self):
+        """Valida unitariamente o InformacoesAtividadesTreinoSerializer sem acesso ao banco."""
+        dados_dominio = calcular_informacoes_atividades_treino([])
+        serializer = InformacoesAtividadesTreinoSerializer(dados_dominio)
+
+        self.assertEqual(
+            set(serializer.data.keys()),
+            {
+                "total_atividades_distintas",
+                "total_registros",
+                "minutos_totais_atividades",
+                "minutos_totais_liquidos",
+                "atividades",
+                "por_tipologia",
+                "por_tipo_ssp",
+                "execucoes",
+                "estado_vazio",
+                "mensagem",
+            },
+        )
+        self.assertTrue(serializer.data["estado_vazio"])
+        self.assertEqual(serializer.data["mensagem"], MENSAGEM_ATIVIDADES_VAZIO)
 
 
 class InformacoesAtividadesTreinoApiTests(APITestCase):
