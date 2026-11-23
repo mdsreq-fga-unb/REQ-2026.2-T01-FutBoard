@@ -13,7 +13,7 @@ from .serializers import MacrocicloSerializer
 
 
 class MacrocicloEdicaoUnitTests(SimpleTestCase):
-    """Testes unitários puros (em memória, sem banco de dados) da US02 / RF02 (Editar macrociclo)."""
+    """Testes unitários puros (em memória) da US02 / RF02 (Editar macrociclo)."""
 
     def _macrociclo_existente_em_memoria(self):
         return Macrociclo(
@@ -25,7 +25,7 @@ class MacrocicloEdicaoUnitTests(SimpleTestCase):
         )
 
     def test_us02_unitario_edita_nome_e_datas_mantendo_codigo_inalteravel(self):
-        """Valida unitariamente a edição parcial de nome e datas preservando o código (read-only)."""
+        """Valida unitariamente a edição parcial de nome e datas preservando o código."""
         macro = self._macrociclo_existente_em_memoria()
         serializer = MacrocicloSerializer(
             instance=macro,
@@ -47,7 +47,7 @@ class MacrocicloEdicaoUnitTests(SimpleTestCase):
         self.assertEqual(macro.codigo, "MC-01")
 
     def test_us02_unitario_rejeita_edicao_com_data_termino_anterior_ao_inicio_existente(self):
-        """Valida unitariamente que editar apenas data_termino para antes de data_inicio é bloqueado."""
+        """Valida que editar data_termino para antes de data_inicio é bloqueado."""
         macro = self._macrociclo_existente_em_memoria()
         serializer = MacrocicloSerializer(
             instance=macro,
@@ -64,7 +64,7 @@ class MacrocicloEdicaoUnitTests(SimpleTestCase):
         self.assertIn("data_termino", ctx.exception.message_dict)
 
     def test_us02_unitario_rejeita_edicao_com_data_inicio_posterior_ao_termino_existente(self):
-        """Valida unitariamente que editar apenas data_inicio para depois de data_termino é bloqueado."""
+        """Valida que editar data_inicio para depois de data_termino é bloqueado."""
         macro = self._macrociclo_existente_em_memoria()
         serializer = MacrocicloSerializer(
             instance=macro,
@@ -76,7 +76,7 @@ class MacrocicloEdicaoUnitTests(SimpleTestCase):
         self.assertIn("data_termino", serializer.errors)
 
     def test_us02_unitario_valida_integridade_hierarquica_com_mesociclo_filho_rn04(self):
-        """Valida unitariamente (RN04) que datas do macrociclo incompatíveis com o mesociclo filho geram erro."""
+        """Valida (RN04) que datas do macrociclo incompatíveis com o mesociclo geram erro."""
         macro = self._macrociclo_existente_em_memoria()
         mesociclo = Mesociclo(
             id=1,
