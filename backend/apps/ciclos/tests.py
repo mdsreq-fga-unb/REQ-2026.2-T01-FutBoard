@@ -1,11 +1,81 @@
 """Testes do módulo de Ciclos e da API de periodização."""
 
+from datetime import date
+
 from django.apps import apps
-from django.test import TestCase
+from django.core.exceptions import ValidationError
+from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 from rest_framework import status
 
 from .models import Macrociclo, Mesociclo, Microciclo
+from .serializers import MacrocicloSerializer
+
+
+class MacrocicloUnitTests(SimpleTestCase):
+    """Testes unitários puros (em memória, sem banco de dados) da US01 / RF01 (Cadastrar macrociclo)."""
+
+    def test_us01_unitario_representacao_str_macrociclo(self):
+        """Valida unitariamente a formatação textual (__str__) do Macrociclo em memória."""
+        macro = Macrociclo(
+            codigo="MC-01",
+            nome="Temporada 2026.2 - Sub-17",
+            data_inicio=date(2026, 8, 3),
+            data_termino=date(2026, 12, 20),
+        )
+        self.assertEqual(str(macro), "MC-01 - Temporada 2026.2 - Sub-17")
+
+    def test_us01_unitario_clean_aceita_datas_validas(self):
+        """Valida unitariamente o método clean() do Macrociclo quando data_termino >= data_inicio."""
+        macro = Macrociclo(
+            nome="Temporada 2026.2",
+            data_inicio=date(2026, 8, 3),
+            data_termino=date(2026, 12, 20),
+        )
+        macro.clean()
+
+    def test_us01_unitario_clean_rejeita_data_termino_anterior_a_data_inicio(self):
+        """Valida unitariamente que clean() lança ValidationError se data_termino < data_inicio."""
+        macro = Macrociclo(
+            nome="Temporada Inválida",
+            data_inicio=date(2026, 12, 20),
+            data_termino=date(2026, 8, 3),
+        )
+        with self.assertRaises(ValidationError) as ctx:
+            macro.clean()
+        self.assertIn("data_termino", ctx.exception.message_dict)
+
+    def test_us01_unitario_serializer_valida_payload_cadastro(self):
+        """Valida unitariamente o MacrocicloSerializer com dados válidos de cadastro sem tocar no banco."""
+        serializer = MacrocicloSerializer(
+            data={
+                "nome": "Temporada 2026.2 - Sub-17",
+                "data_inicio": "2026-08-03",
+                "data_termino": "2026-12-20",
+            }
+        )
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.validated_data["nome"], "Temporada 2026.2 - Sub-17")
+        self.assertEqual(serializer.validated_data["data_inicio"], date(2026, 8, 3))
+        self.assertEqual(serializer.validated_data["data_termino"], date(2026, 12, 20))
+
+    def test_us01_unitario_serializer_rejeita_datas_invertidas_e_campos_ausentes(self):
+        """Valida unitariamente as rejeições do MacrocicloSerializer para datas inválidas e campos obrigatórios."""
+        s_datas = MacrocicloSerializer(
+            data={
+                "nome": "Temporada 2026",
+                "data_inicio": "2026-12-20",
+                "data_termino": "2026-08-03",
+            }
+        )
+        self.assertFalse(s_datas.is_valid())
+        self.assertIn("data_termino", s_datas.errors)
+
+        s_vazio = MacrocicloSerializer(data={})
+        self.assertFalse(s_vazio.is_valid())
+        self.assertIn("nome", s_vazio.errors)
+        self.assertIn("data_inicio", s_vazio.errors)
+        self.assertIn("data_termino", s_vazio.errors)
 
 
 class CiclosInfraTests(TestCase):
