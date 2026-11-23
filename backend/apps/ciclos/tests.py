@@ -46,7 +46,8 @@ class MacrocicloUnitTests(SimpleTestCase):
         self.assertIn("data_termino", ctx.exception.message_dict)
 
     def test_us01_unitario_serializer_valida_payload_cadastro(self):
-        """Valida unitariamente o MacrocicloSerializer com dados válidos de cadastro sem tocar no banco."""
+        """Valida unitariamente o MacrocicloSerializer com dados
+         válidos de cadastro sem tocar no banco."""
         serializer = MacrocicloSerializer(
             data={
                 "nome": "Temporada 2026.2 - Sub-17",
@@ -60,7 +61,8 @@ class MacrocicloUnitTests(SimpleTestCase):
         self.assertEqual(serializer.validated_data["data_termino"], date(2026, 12, 20))
 
     def test_us01_unitario_serializer_rejeita_datas_invertidas_e_campos_ausentes(self):
-        """Valida unitariamente as rejeições do MacrocicloSerializer para datas inválidas e campos obrigatórios."""
+        """Valida unitariamente as rejeições do MacrocicloSerializer
+         para datas inválidas e campos obrigatórios."""
         s_datas = MacrocicloSerializer(
             data={
                 "nome": "Temporada 2026",
