@@ -1,11 +1,89 @@
 """Testes do módulo de Ciclos e da API de periodização."""
 
+from datetime import date
+
 from django.apps import apps
-from django.test import TestCase
+from django.core.exceptions import ValidationError
+from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.exceptions import ValidationError as DRFValidationError
 
 from .models import Macrociclo, Mesociclo, Microciclo
+from .serializers import MesocicloSerializer
+
+
+class MesocicloUnitTests(SimpleTestCase):
+    """Testes unitários puros (em memória) da US04 / RF04 (Cadastrar mesociclo)."""
+
+    def _macrociclo_ativo_em_memoria(self):
+        return Macrociclo(
+            id=1,
+            codigo="MC-01",
+            nome="Temporada 2026.2",
+            data_inicio=date(2026, 8, 1),
+            data_termino=date(2026, 12, 20),
+        )
+
+    def test_us04_unitario_cenario1_valida_mesociclo_com_macrociclo_pai(self):
+        """Cenário 1: Valida mesociclo com nome, datas e vínculo ao macrociclo ativo."""
+        macro = self._macrociclo_ativo_em_memoria()
+        mesociclo = Mesociclo(
+            macrociclo=macro,
+            nome="ME1 - Preparatório",
+            data_inicio=date(2026, 8, 1),
+            data_termino=date(2026, 8, 15),
+        )
+        mesociclo.clean()
+        self.assertEqual(str(mesociclo), "ME1 - Preparatório (2026-08-01 - 2026-08-15)")
+
+        attrs = {
+            "macrociclo": macro,
+            "nome": "ME1 - Preparatório",
+            "data_inicio": date(2026, 8, 1),
+            "data_termino": date(2026, 8, 15),
+        }
+        validado = MesocicloSerializer().validate(attrs)
+        self.assertEqual(validado["macrociclo"], macro)
+        self.assertEqual(validado["nome"], "ME1 - Preparatório")
+
+    def test_us04_unitario_cenario2_impede_cadastro_sem_macrociclo_pai(self):
+        """Cenário 2 (Erro): Impede cadastro quando nenhum macrociclo prévio é informado."""
+        serializer = MesocicloSerializer(
+            data={
+                "nome": "ME1 - Sem Pai",
+                "data_inicio": "2026-08-01",
+                "data_termino": "2026-08-15",
+            }
+        )
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("macrociclo", serializer.errors)
+
+    def test_us04_unitario_rejeita_datas_fora_do_macrociclo_ou_invertidas_rn04(self):
+        """RN04: Impede cadastro com datas fora do macrociclo pai ou término < início."""
+        macro = self._macrociclo_ativo_em_memoria()
+
+        meso_fora = Mesociclo(
+            macrociclo=macro,
+            nome="ME1 Fora do Intervalo",
+            data_inicio=date(2026, 7, 20),
+            data_termino=date(2026, 12, 25),
+        )
+        with self.assertRaises(ValidationError) as ctx:
+            meso_fora.clean()
+        self.assertIn("data_inicio", ctx.exception.message_dict)
+        self.assertIn("data_termino", ctx.exception.message_dict)
+
+        with self.assertRaises(DRFValidationError) as ctx_ser:
+            MesocicloSerializer().validate(
+                {
+                    "macrociclo": macro,
+                    "nome": "ME1 Datas Invertidas",
+                    "data_inicio": date(2026, 8, 15),
+                    "data_termino": date(2026, 8, 1),
+                }
+            )
+        self.assertIn("data_termino", ctx_ser.exception.detail)
 
 
 class CiclosInfraTests(TestCase):
