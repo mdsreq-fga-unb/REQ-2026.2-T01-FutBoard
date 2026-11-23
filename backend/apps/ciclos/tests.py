@@ -1,11 +1,97 @@
 """Testes do módulo de Ciclos e da API de periodização."""
 
+from datetime import date
+
 from django.apps import apps
-from django.test import TestCase
+from django.core.exceptions import ValidationError
+from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 from rest_framework import status
 
 from .models import Macrociclo, Mesociclo, Microciclo
+from .serializers import MacrocicloSerializer
+
+
+class MacrocicloEdicaoUnitTests(SimpleTestCase):
+    """Testes unitários puros (em memória, sem banco de dados) da US02 / RF02 (Editar macrociclo)."""
+
+    def _macrociclo_existente_em_memoria(self):
+        return Macrociclo(
+            id=1,
+            codigo="MC-01",
+            nome="Temporada 2026.2 - Sub-17",
+            data_inicio=date(2026, 8, 3),
+            data_termino=date(2026, 12, 20),
+        )
+
+    def test_us02_unitario_edita_nome_e_datas_mantendo_codigo_inalteravel(self):
+        """Valida unitariamente a edição parcial de nome e datas preservando o código (read-only)."""
+        macro = self._macrociclo_existente_em_memoria()
+        serializer = MacrocicloSerializer(
+            instance=macro,
+            data={
+                "codigo": "MC-99",
+                "nome": "Temporada 2026.2 - Sub-17 (Revisada)",
+                "data_termino": "2026-12-28",
+            },
+            partial=True,
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(
+            serializer.validated_data["nome"],
+            "Temporada 2026.2 - Sub-17 (Revisada)",
+        )
+        self.assertEqual(serializer.validated_data["data_termino"], date(2026, 12, 28))
+        self.assertNotIn("codigo", serializer.validated_data)
+        self.assertEqual(macro.codigo, "MC-01")
+
+    def test_us02_unitario_rejeita_edicao_com_data_termino_anterior_ao_inicio_existente(self):
+        """Valida unitariamente que editar apenas data_termino para antes de data_inicio é bloqueado."""
+        macro = self._macrociclo_existente_em_memoria()
+        serializer = MacrocicloSerializer(
+            instance=macro,
+            data={"data_termino": "2026-07-15"},
+            partial=True,
+        )
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("data_termino", serializer.errors)
+
+        macro.data_termino = date(2026, 7, 15)
+        with self.assertRaises(ValidationError) as ctx:
+            macro.clean()
+        self.assertIn("data_termino", ctx.exception.message_dict)
+
+    def test_us02_unitario_rejeita_edicao_com_data_inicio_posterior_ao_termino_existente(self):
+        """Valida unitariamente que editar apenas data_inicio para depois de data_termino é bloqueado."""
+        macro = self._macrociclo_existente_em_memoria()
+        serializer = MacrocicloSerializer(
+            instance=macro,
+            data={"data_inicio": "2026-12-25"},
+            partial=True,
+        )
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("data_termino", serializer.errors)
+
+    def test_us02_unitario_valida_integridade_hierarquica_com_mesociclo_filho_rn04(self):
+        """Valida unitariamente (RN04) que datas do macrociclo incompatíveis com o mesociclo filho geram erro."""
+        macro = self._macrociclo_existente_em_memoria()
+        mesociclo = Mesociclo(
+            id=1,
+            macrociclo=macro,
+            nome="ME1 - Preparatório",
+            data_inicio=date(2026, 8, 3),
+            data_termino=date(2026, 8, 31),
+        )
+        mesociclo.clean()
+
+        # Simula edição do macrociclo encurtando início para depois do início do mesociclo filho
+        macro.data_inicio = date(2026, 8, 10)
+        with self.assertRaises(ValidationError) as ctx:
+            mesociclo.clean()
+        self.assertIn("data_inicio", ctx.exception.message_dict)
 
 
 class CiclosInfraTests(TestCase):
