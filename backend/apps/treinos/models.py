@@ -374,6 +374,22 @@ class AtividadeSessao(models.Model):
     def __str__(self):
         return f"Sessão {self.sessao_id} - ordem {self.ordem} - {self.nome}"
 
+    @property
+    def sigla_tipologia(self):
+        return SIGLAS_POR_TIPOLOGIA.get(self.tipologia, "")
+
+    @property
+    def atividade_ssp(self):
+        sigla = self.sigla_tipologia
+        nome_limpo = (self.nome or "").strip()
+        if not sigla:
+            return nome_limpo
+        padrao_prefixo = re.compile(rf"^{re.escape(sigla)}\s*\|\s*", re.IGNORECASE)
+        if padrao_prefixo.match(nome_limpo):
+            corpo = padrao_prefixo.sub("", nome_limpo).strip()
+            return f"{sigla} | {corpo}"
+        return f"{sigla} | {nome_limpo}"
+
     def clean(self):
         super().clean()
         erros = {}
@@ -495,6 +511,239 @@ def calcular_indicadores_treino(sessoes_queryset):
         "variabilidade": variabilidade,
         "minutos_por_sessao": minutos_por_sessao,
         "minutos_por_execucao": minutos_por_execucao,
+        "estado_vazio": False,
+        "mensagem": None,
+    }
+
+
+MENSAGEM_ATIVIDADES_VAZIO = "Nenhuma atividade encontrada para os filtros aplicados."
+
+NOMES_MESES_PT = (
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+)
+
+
+def calcular_informacoes_atividades_treino(atividades_queryset):
+    """RF24 (US24): Consolida informações e gráficos de atividades do treino aplicando RN03 e RN07."""
+    if hasattr(atividades_queryset, "select_related"):
+        atividades = list(
+            atividades_queryset.select_related(
+                "sessao__microciclo__mesociclo__macrociclo",
+                "atividade_biblioteca",
+            ).order_by("sessao__data", "sessao__sequencia", "ordem", "id")
+        )
+    else:
+        atividades = list(atividades_queryset)
+
+    total_registros = len(atividades)
+    if total_registros == 0:
+        return {
+            "total_atividades_distintas": 0,
+            "total_registros": 0,
+            "minutos_totais_atividades": 0,
+            "minutos_totais_liquidos": 0,
+            "atividades": [],
+            "por_tipologia": [],
+            "por_tipo_ssp": [],
+            "execucoes": [],
+            "estado_vazio": True,
+            "mensagem": MENSAGEM_ATIVIDADES_VAZIO,
+        }
+
+    minutos_totais_atividades = 0
+    tempos_por_sessao_ordem = {}
+    agrupado_atividades = {}
+    agrupado_tipologias = {}
+    agrupado_tipos_ssp = {}
+    execucoes_detalhadas = []
+
+    for atv in atividades:
+        tempo = atv.tempo
+        minutos_totais_atividades += tempo
+
+        chave_ordem = (atv.sessao_id, atv.ordem)
+        if (
+            chave_ordem not in tempos_por_sessao_ordem
+            or tempo > tempos_por_sessao_ordem[chave_ordem]
+        ):
+            tempos_por_sessao_ordem[chave_ordem] = tempo
+
+        chave_atv = identificador_atividade_distinta(atv)
+        codigo_exibicao = (atv.codigo or "").strip().upper()
+        if not codigo_exibicao and atv.atividade_biblioteca_id and atv.atividade_biblioteca:
+            codigo_exibicao = (atv.atividade_biblioteca.codigo or "").strip().upper()
+
+        if chave_atv not in agrupado_atividades:
+            agrupado_atividades[chave_atv] = {
+                "codigo": codigo_exibicao,
+                "nome": atv.nome,
+                "atividade_ssp": atv.atividade_ssp,
+                "tipologia": atv.tipologia,
+                "sigla_tipologia": atv.sigla_tipologia,
+                "tipo_ssp": atv.tipo_ssp,
+                "minutos": 0,
+                "execucoes": 0,
+                "sessoes_ids": set(),
+            }
+
+        item_atv = agrupado_atividades[chave_atv]
+        item_atv["minutos"] += tempo
+        item_atv["execucoes"] += 1
+        item_atv["sessoes_ids"].add(atv.sessao_id)
+
+        tipologia = atv.tipologia
+        if tipologia not in agrupado_tipologias:
+            agrupado_tipologias[tipologia] = {
+                "tipologia": tipologia,
+                "sigla_tipologia": atv.sigla_tipologia,
+                "minutos": 0,
+                "execucoes": 0,
+                "chaves_atividades": set(),
+            }
+        item_tip = agrupado_tipologias[tipologia]
+        item_tip["minutos"] += tempo
+        item_tip["execucoes"] += 1
+        item_tip["chaves_atividades"].add(chave_atv)
+
+        tipo_ssp = atv.tipo_ssp
+        if tipo_ssp not in agrupado_tipos_ssp:
+            agrupado_tipos_ssp[tipo_ssp] = {
+                "tipo_ssp": tipo_ssp,
+                "minutos": 0,
+                "execucoes": 0,
+                "chaves_atividades": set(),
+            }
+        item_ssp = agrupado_tipos_ssp[tipo_ssp]
+        item_ssp["minutos"] += tempo
+        item_ssp["execucoes"] += 1
+        item_ssp["chaves_atividades"].add(chave_atv)
+
+        sessao = atv.sessao
+        micro = sessao.microciclo if sessao else None
+        meso = micro.mesociclo if micro else None
+        macro = meso.macrociclo if meso else None
+        mes_nome = NOMES_MESES_PT[sessao.data.month - 1] if sessao and sessao.data else ""
+
+        execucoes_detalhadas.append(
+            {
+                "id": atv.id,
+                "sessao": atv.sessao_id,
+                "sessao_nome": sessao.nome if sessao else "",
+                "sessao_sequencia": sessao.sequencia if sessao else None,
+                "data": sessao.data.isoformat() if sessao and sessao.data else None,
+                "mes": mes_nome,
+                "microciclo": micro.id if micro else None,
+                "microciclo_nome": micro.nome if micro else "",
+                "mesociclo": meso.id if meso else None,
+                "mesociclo_nome": meso.nome if meso else "",
+                "macrociclo": macro.id if macro else None,
+                "macrociclo_nome": macro.nome if macro else "",
+                "ordem": atv.ordem,
+                "codigo": codigo_exibicao,
+                "nome": atv.nome,
+                "atividade_ssp": atv.atividade_ssp,
+                "tipologia": atv.tipologia,
+                "sigla_tipologia": atv.sigla_tipologia,
+                "tipo_ssp": atv.tipo_ssp,
+                "orientacao": atv.orientacao,
+                "tempo": atv.tempo,
+                "dimensao_espaco": atv.dimensao_espaco,
+            }
+        )
+
+    minutos_totais_liquidos = sum(tempos_por_sessao_ordem.values())
+
+    lista_atividades = []
+    for item in agrupado_atividades.values():
+        minutos = item["minutos"]
+        lista_atividades.append(
+            {
+                "codigo": item["codigo"],
+                "nome": item["nome"],
+                "atividade_ssp": item["atividade_ssp"],
+                "tipologia": item["tipologia"],
+                "sigla_tipologia": item["sigla_tipologia"],
+                "tipo_ssp": item["tipo_ssp"],
+                "minutos": minutos,
+                "percentual_tempo": (
+                    round((minutos / minutos_totais_atividades) * 100, 2)
+                    if minutos_totais_atividades > 0
+                    else 0.0
+                ),
+                "percentual_tempo_liquido": (
+                    round((minutos / minutos_totais_liquidos) * 100, 2)
+                    if minutos_totais_liquidos > 0
+                    else 0.0
+                ),
+                "execucoes": item["execucoes"],
+                "sessoes_distintas": len(item["sessoes_ids"]),
+            }
+        )
+    lista_atividades.sort(
+        key=lambda x: (-x["minutos"], -x["execucoes"], x["codigo"], x["nome"])
+    )
+
+    lista_tipologias = []
+    for item in agrupado_tipologias.values():
+        minutos = item["minutos"]
+        lista_tipologias.append(
+            {
+                "tipologia": item["tipologia"],
+                "sigla_tipologia": item["sigla_tipologia"],
+                "minutos": minutos,
+                "percentual_tempo": (
+                    round((minutos / minutos_totais_atividades) * 100, 2)
+                    if minutos_totais_atividades > 0
+                    else 0.0
+                ),
+                "execucoes": item["execucoes"],
+                "atividades_distintas": len(item["chaves_atividades"]),
+            }
+        )
+    lista_tipologias.sort(
+        key=lambda x: (-x["minutos"], -x["execucoes"], x["tipologia"])
+    )
+
+    lista_tipos_ssp = []
+    for item in agrupado_tipos_ssp.values():
+        minutos = item["minutos"]
+        lista_tipos_ssp.append(
+            {
+                "tipo_ssp": item["tipo_ssp"],
+                "minutos": minutos,
+                "percentual_tempo": (
+                    round((minutos / minutos_totais_atividades) * 100, 2)
+                    if minutos_totais_atividades > 0
+                    else 0.0
+                ),
+                "execucoes": item["execucoes"],
+                "atividades_distintas": len(item["chaves_atividades"]),
+            }
+        )
+    lista_tipos_ssp.sort(
+        key=lambda x: (-x["minutos"], -x["execucoes"], x["tipo_ssp"])
+    )
+
+    return {
+        "total_atividades_distintas": len(lista_atividades),
+        "total_registros": total_registros,
+        "minutos_totais_atividades": minutos_totais_atividades,
+        "minutos_totais_liquidos": minutos_totais_liquidos,
+        "atividades": lista_atividades,
+        "por_tipologia": lista_tipologias,
+        "por_tipo_ssp": lista_tipos_ssp,
+        "execucoes": execucoes_detalhadas,
         "estado_vazio": False,
         "mensagem": None,
     }

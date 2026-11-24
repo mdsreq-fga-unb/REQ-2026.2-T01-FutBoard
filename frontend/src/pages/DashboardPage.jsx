@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
+import GraficoRoscaAtividades from "../components/GraficoRoscaAtividades.jsx";
+import GraficoBarrasAtividades from "../components/GraficoBarrasAtividades.jsx";
 import api from "../services/api.js";
 
 const ESTADO_VAZIO_PADRAO = {
@@ -12,6 +14,19 @@ const ESTADO_VAZIO_PADRAO = {
   variabilidade: 0.0,
   estado_vazio: true,
   mensagem: "Nenhum treino registrado neste período.",
+};
+
+const ESTADO_VAZIO_ATIVIDADES = {
+  total_atividades_distintas: 0,
+  total_registros: 0,
+  minutos_totais_atividades: 0,
+  minutos_totais_liquidos: 0,
+  atividades: [],
+  por_tipologia: [],
+  por_tipo_ssp: [],
+  execucoes: [],
+  estado_vazio: true,
+  mensagem: "Nenhuma atividade encontrada para os filtros aplicados.",
 };
 
 const MESES = [
@@ -31,7 +46,7 @@ const MESES = [
 
 /**
  * Calcula os indicadores de treino dinamicamente aplicando as regras de negócio:
- * - RN03: Simultaneidade e contagem de tempo (atividades com mesma ordem somam tempo líquido uma única vez).
+ * - RN03: Simultaneidade e contagem de tempo líquido.
  * - RN06: Variabilidade (%) = (Atividades distintas ÷ Total de execuções) × 100.
  * - RN07: Estabilidade em caso de ausência de dados no período filtrado.
  */
@@ -116,12 +131,97 @@ function calcularIndicadoresLocais(todasSessoes, { microciclo, mes }) {
   };
 }
 
+/**
+ * Consolida as informações de atividades do treino para os gráficos (US24 / RF24).
+ */
+function calcularInformacoesAtividadesLocais(todasSessoes, { microciclo, mes }) {
+  let sessoesFiltradas = todasSessoes;
+
+  if (microciclo) {
+    sessoesFiltradas = sessoesFiltradas.filter(
+      (s) => String(s.microcicloId ?? s.microciclo) === String(microciclo)
+    );
+  }
+
+  if (mes) {
+    sessoesFiltradas = sessoesFiltradas.filter((s) => {
+      if (s.mes && String(s.mes) === String(mes)) return true;
+      if (s.data) {
+        const partes = String(s.data).split("-");
+        if (partes.length >= 2) {
+          const mesNum = parseInt(partes[1], 10);
+          return String(mesNum) === String(mes);
+        }
+      }
+      return false;
+    });
+  }
+
+  if (sessoesFiltradas.length === 0) {
+    return ESTADO_VAZIO_ATIVIDADES;
+  }
+
+  const agrupado = {};
+  let totalMinutos = 0;
+
+  for (const sessao of sessoesFiltradas) {
+    const atividades = Array.isArray(sessao.atividades) ? sessao.atividades : [];
+    for (const atv of atividades) {
+      const codigo = (atv.codigo || "").trim();
+      const nome = (atv.nome || "").trim();
+      const chave = codigo || nome || atv.id;
+      if (!chave) continue;
+
+      const tempo = Number(atv.tempo) || 0;
+      totalMinutos += tempo;
+
+      if (!agrupado[chave]) {
+        agrupado[chave] = {
+          codigo: codigo,
+          nome: nome,
+          atividade_ssp:
+            atv.atividade_ssp ||
+            (atv.sigla_tipologia ? `${atv.sigla_tipologia} | ${nome}` : nome || chave),
+          tipologia: atv.tipologia || "",
+          sigla_tipologia: atv.sigla_tipologia || "",
+          tipo_ssp: atv.tipo_ssp || "",
+          minutos: 0,
+          execucoes: 0,
+        };
+      }
+      agrupado[chave].minutos += tempo;
+      agrupado[chave].execucoes += 1;
+    }
+  }
+
+  const listaAtividades = Object.values(agrupado).map((item) => ({
+    ...item,
+    percentual_tempo:
+      totalMinutos > 0 ? Number(((item.minutos / totalMinutos) * 100).toFixed(2)) : 0,
+  }));
+
+  if (listaAtividades.length === 0) {
+    return ESTADO_VAZIO_ATIVIDADES;
+  }
+
+  return {
+    total_atividades_distintas: listaAtividades.length,
+    total_registros: listaAtividades.reduce((acc, a) => acc + a.execucoes, 0),
+    minutos_totais_atividades: totalMinutos,
+    minutos_totais_liquidos: totalMinutos,
+    atividades: listaAtividades,
+    estado_vazio: false,
+    mensagem: null,
+  };
+}
+
 export default function DashboardPage({ onSelectNav }) {
   const [indicadores, setIndicadores] = useState(ESTADO_VAZIO_PADRAO);
+  const [dadosAtividades, setDadosAtividades] = useState(ESTADO_VAZIO_ATIVIDADES);
   const [carregando, setCarregando] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Filtros de periodização (US22 / RF22)
+  // Filtros de periodização (US22 / US24)
   const [macrociclos, setMacrociclos] = useState([]);
   const [mesociclos, setMesociclos] = useState([]);
   const [microciclos, setMicrociclos] = useState([]);
@@ -187,50 +287,76 @@ export default function DashboardPage({ onSelectNav }) {
     return microciclos.filter((m) => String(m.mesociclo) === String(filtroMeso));
   }, [microciclos, filtroMeso]);
 
-  // Busca ou calcula os indicadores (US22: GET /api/treinos/indicadores/ ou cálculo dinâmico das sessões cadastradas)
+  // Busca indicadores gerais (US22) e gráficos de atividades (US24)
   const buscarIndicadores = useCallback(async () => {
     setCarregando(true);
-    let dadosObtidosDaApi = null;
+    let dadosIndicadoresApi = null;
+    let dadosAtividadesApi = null;
+
+    const params = {};
+    if (filtroMacro) params.macrociclo = filtroMacro;
+    if (filtroMeso) params.mesociclo = filtroMeso;
+    if (filtroMicro) params.microciclo = filtroMicro;
+    if (filtroMes) params.mes = filtroMes;
 
     try {
-      const params = {};
-      if (filtroMacro) params.macrociclo = filtroMacro;
-      if (filtroMeso) params.mesociclo = filtroMeso;
-      if (filtroMicro) params.microciclo = filtroMicro;
-      if (filtroMes) params.mes = filtroMes;
+      const [respInd, respAtv] = await Promise.all([
+        api.get("/treinos/indicadores/", { params }).catch(() => null),
+        api.get("/treinos/informacoes-atividades/", { params }).catch(() => null),
+      ]);
 
-      const resp = await api.get("/treinos/indicadores/", { params });
-      if (resp?.data && typeof resp.data.numero_sessoes === "number") {
-        dadosObtidosDaApi = resp.data;
+      if (respInd?.data && typeof respInd.data.numero_sessoes === "number") {
+        dadosIndicadoresApi = respInd.data;
+      }
+      if (respAtv?.data && Array.isArray(respAtv.data.atividades)) {
+        dadosAtividadesApi = respAtv.data;
       }
     } catch {
-      // API backend offline no ambiente de desenvolvimento local
+      // Backend offline no ambiente local
     } finally {
       setCarregando(false);
     }
 
-    if (dadosObtidosDaApi) {
-      setIndicadores(dadosObtidosDaApi);
-      return;
+    // Atualiza indicadores (API ou cálculo local)
+    if (dadosIndicadoresApi) {
+      setIndicadores(dadosIndicadoresApi);
+    } else {
+      try {
+        const salvas = localStorage.getItem("futboard_sessoes");
+        const todasSessoes = salvas ? JSON.parse(salvas) : [];
+        const calculados = calcularIndicadoresLocais(todasSessoes, {
+          macrociclo: filtroMacro,
+          mesociclo: filtroMeso,
+          microciclo: filtroMicro,
+          mes: filtroMes,
+        });
+        setIndicadores(calculados);
+      } catch {
+        setIndicadores(ESTADO_VAZIO_PADRAO);
+      }
     }
 
-    // Calcula em tempo real com base nas sessões efetivamente cadastradas no sistema
-    try {
-      const salvas = localStorage.getItem("futboard_sessoes");
-      const todasSessoes = salvas ? JSON.parse(salvas) : [];
-      const calculados = calcularIndicadoresLocais(todasSessoes, {
-        macrociclo: filtroMacro,
-        mesociclo: filtroMeso,
-        microciclo: filtroMicro,
-        mes: filtroMes,
-      });
-      setIndicadores(calculados);
-    } catch {
-      setIndicadores(ESTADO_VAZIO_PADRAO);
+    // Atualiza gráficos de atividades da US24 (API ou cálculo local)
+    if (dadosAtividadesApi) {
+      setDadosAtividades(dadosAtividadesApi);
+    } else {
+      try {
+        const salvas = localStorage.getItem("futboard_sessoes");
+        const todasSessoes = salvas ? JSON.parse(salvas) : [];
+        const atvCalculadas = calcularInformacoesAtividadesLocais(todasSessoes, {
+          macrociclo: filtroMacro,
+          mesociclo: filtroMeso,
+          microciclo: filtroMicro,
+          mes: filtroMes,
+        });
+        setDadosAtividades(atvCalculadas);
+      } catch {
+        setDadosAtividades(ESTADO_VAZIO_ATIVIDADES);
+      }
     }
   }, [filtroMacro, filtroMeso, filtroMicro, filtroMes]);
 
-  // Atualiza indicadores ao mudar os filtros ou ao carregar a tela
+  // Atualiza indicadores e gráficos ao mudar os filtros ou ao carregar a tela
   useEffect(() => {
     buscarIndicadores();
   }, [buscarIndicadores]);
@@ -347,13 +473,13 @@ export default function DashboardPage({ onSelectNav }) {
             </div>
 
             <div className="flex items-center gap-3">
-              {/* Botão de atualização rápida */}
+              {/* Botão de atualização rápida (RNF04) */}
               <button
                 type="button"
                 onClick={buscarIndicadores}
                 disabled={carregando}
                 className="hidden sm:inline-flex items-center gap-2 rounded-xl border border-[#E4DFD2] bg-white px-3.5 py-2 text-xs font-semibold text-[#10281E] shadow-2xs transition hover:bg-[#F5F2EA] active:scale-95"
-                title="Recalcular e atualizar indicadores"
+                title="Recalcular e atualizar indicadores (RNF04)"
               >
                 <svg
                   className={`h-4 w-4 text-[#0E3A29] ${carregando ? "animate-spin" : ""}`}
@@ -373,114 +499,7 @@ export default function DashboardPage({ onSelectNav }) {
             </div>
           </div>
 
-          {/* Barra de Filtros de Periodização */}
-          <section
-            aria-label="Filtros de Periodização"
-            className="mb-6 rounded-2xl border border-[#E4DFD2] bg-white p-4 shadow-2xs"
-          >
-            <div className="mb-2 flex items-center justify-between">
-              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#8A8D80]">
-                Filtros de Treino
-              </span>
-
-              {temFiltroAtivo && (
-                <button
-                  type="button"
-                  onClick={limparFiltros}
-                  className="font-mono text-[11px] font-semibold text-[#0E3A29] hover:underline"
-                >
-                  Limpar filtros
-                </button>
-              )}
-            </div>
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
-              {/* Macrociclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Macrociclo
-                </label>
-                <select
-                  value={filtroMacro}
-                  onChange={(e) => {
-                    setFiltroMacro(e.target.value);
-                    setFiltroMeso("");
-                    setFiltroMicro("");
-                  }}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Todos os macrociclos</option>
-                  {macrociclos.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Mesociclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Mesociclo
-                </label>
-                <select
-                  value={filtroMeso}
-                  onChange={(e) => {
-                    setFiltroMeso(e.target.value);
-                    setFiltroMicro("");
-                  }}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Todos os mesociclos</option>
-                  {mesociclosFiltrados.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Microciclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Microciclo
-                </label>
-                <select
-                  value={filtroMicro}
-                  onChange={(e) => setFiltroMicro(e.target.value)}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Todos os microciclos</option>
-                  {microciclosFiltrados.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Mês */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Mês
-                </label>
-                <select
-                  value={filtroMes}
-                  onChange={(e) => setFiltroMes(e.target.value)}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Todos os meses</option>
-                  {MESES.map((mes) => (
-                    <option key={mes.valor} value={mes.valor}>
-                      {mes.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </section>
-
-          {/* Grid dos 7 Indicadores */}
+          {/* Grid dos 7 Indicadores (US22) */}
           <section aria-label="Indicadores de Treino" className="mb-6">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
               {/* 1. Qtd Sessões */}
@@ -567,8 +586,131 @@ export default function DashboardPage({ onSelectNav }) {
             </div>
           </section>
 
-          {/* Tratamento e Estabilidade em Consultas com Resultado Vazio */}
-          {(indicadores.estado_vazio || indicadores.numero_sessoes === 0) && (
+          {/* Barra de Filtros de Periodização (Conforme Protótipo) */}
+          <section
+            aria-label="Filtros de Periodização"
+            className="mb-6 rounded-2xl border border-[#E4DFD2] bg-white p-4 shadow-2xs"
+          >
+            <div className="mb-2 flex items-center justify-between">
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#8A8D80]">
+                Filtros de Treino
+              </span>
+
+              {temFiltroAtivo && (
+                <button
+                  type="button"
+                  onClick={limparFiltros}
+                  className="font-mono text-[11px] font-semibold text-[#0E3A29] hover:underline"
+                >
+                  Limpar filtros
+                </button>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
+              {/* Macrociclo */}
+              <div>
+                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                  Macrociclo
+                </label>
+                <select
+                  value={filtroMacro}
+                  onChange={(e) => {
+                    setFiltroMacro(e.target.value);
+                    setFiltroMeso("");
+                    setFiltroMicro("");
+                  }}
+                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                >
+                  <option value="">Selecionar macrociclo</option>
+                  {macrociclos.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Mesociclo */}
+              <div>
+                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                  Mesociclo
+                </label>
+                <select
+                  value={filtroMeso}
+                  onChange={(e) => {
+                    setFiltroMeso(e.target.value);
+                    setFiltroMicro("");
+                  }}
+                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                >
+                  <option value="">Selecionar mesociclo</option>
+                  {mesociclosFiltrados.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Microciclo */}
+              <div>
+                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                  Microciclo
+                </label>
+                <select
+                  value={filtroMicro}
+                  onChange={(e) => setFiltroMicro(e.target.value)}
+                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                >
+                  <option value="">Selecionar microciclo</option>
+                  {microciclosFiltrados.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Mês */}
+              <div>
+                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                  Mês
+                </label>
+                <select
+                  value={filtroMes}
+                  onChange={(e) => setFiltroMes(e.target.value)}
+                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                >
+                  <option value="">Todos os meses</option>
+                  {MESES.map((mes) => (
+                    <option key={mes.valor} value={mes.valor}>
+                      {mes.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </section>
+
+          {/* Gráficos de Atividades do Treino (US24 / RF24 - Conforme Protótipo) */}
+          <section aria-label="Gráficos de Atividades do Treino" className="mb-6">
+            <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+              {/* Gráfico 1: Rosca / Donut (Volume de Tempo por Atividade) */}
+              <GraficoRoscaAtividades
+                atividades={dadosAtividades.atividades}
+                minutosTotais={dadosAtividades.minutos_totais_atividades}
+              />
+
+              {/* Gráfico 2: Barras Verticais (Qtd Execuções por Atividade) */}
+              <GraficoBarrasAtividades
+                atividades={dadosAtividades.atividades}
+              />
+            </div>
+          </section>
+
+          {/* Tratamento e Estabilidade em Consultas com Resultado Vazio (RN07) */}
+          {(indicadores.estado_vazio || dadosAtividades.estado_vazio) && (
             <section
               aria-label="Aviso de período sem dados"
               className="mt-6 flex flex-col gap-3 rounded-2xl border border-[#E4DFD2] bg-white p-6 shadow-2xs sm:flex-row sm:items-center"
@@ -587,10 +729,12 @@ export default function DashboardPage({ onSelectNav }) {
               </div>
               <div className="flex-1">
                 <h3 className="font-display text-base font-bold text-[#10281E]">
-                  {indicadores.mensagem || "Nenhum treino registrado neste período."}
+                  {dadosAtividades.mensagem ||
+                    indicadores.mensagem ||
+                    "Nenhum treino registrado neste período."}
                 </h3>
                 <p className="mt-0.5 text-xs text-[#8A8D80]">
-                  Tente selecionar outro macrociclo, mesociclo, microciclo ou mês para visualizar os indicadores.
+                  Tente selecionar outro macrociclo, mesociclo, microciclo ou mês para visualizar os indicadores e gráficos.
                 </p>
               </div>
               {temFiltroAtivo && (
