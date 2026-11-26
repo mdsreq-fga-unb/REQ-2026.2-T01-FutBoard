@@ -5,6 +5,8 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 
+from apps.usuarios.test_utils import UsuarioAprovadoMixin
+
 from .models import Macrociclo, Mesociclo, Microciclo
 
 
@@ -26,7 +28,7 @@ class CiclosInfraTests(TestCase):
         self.assertEqual(response.json()["status"], "healthy")
 
 
-class MacrocicloApiTests(TestCase):
+class MacrocicloApiTests(UsuarioAprovadoMixin, TestCase):
     """Valida o cadastro, a edição e as regras de macrociclos."""
 
     list_url = "/api/ciclos/macrociclos/"
@@ -83,10 +85,11 @@ class MacrocicloApiTests(TestCase):
         self.assertEqual(Macrociclo.objects.count(), 0)
 
 
-class MesocicloApiTests(TestCase):
+class MesocicloApiTests(UsuarioAprovadoMixin, TestCase):
     list_url = "/api/ciclos/mesociclos/"
 
     def setUp(self):
+        super().setUp()
         self.macrociclo = Macrociclo.objects.create(
             nome="Temporada 2026",
             data_inicio="2026-01-01",
@@ -142,10 +145,11 @@ class MesocicloApiTests(TestCase):
         self.assertIn("data_termino", response.json())
 
 
-class MicrocicloApiTests(TestCase):
+class MicrocicloApiTests(UsuarioAprovadoMixin, TestCase):
     list_url = "/api/ciclos/microciclos/"
 
     def setUp(self):
+        super().setUp()
         self.macrociclo = Macrociclo.objects.create(
             nome="Temporada 2026",
             data_inicio="2026-01-01",

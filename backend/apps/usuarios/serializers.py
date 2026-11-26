@@ -21,7 +21,7 @@ class CampoNomeCompleto(CampoTexto):
         return " ".join(super().to_internal_value(data).split())
 
 
-class CampoEmailCadastro(serializers.EmailField):
+class CampoEmailNormalizado(serializers.EmailField):
     def to_internal_value(self, data):
         email = super().to_internal_value(data)
         return get_user_model().normalize_username(email).lower()
@@ -32,7 +32,7 @@ class CadastroSerializer(serializers.Serializer):
 
     nome_completo = CampoNomeCompleto(max_length=150)
 
-    email = CampoEmailCadastro(max_length=150)
+    email = CampoEmailNormalizado(max_length=150)
 
     senha = CampoTexto(
         write_only=True,
@@ -118,3 +118,20 @@ class CadastroSerializer(serializers.Serializer):
             raise APIException("Não foi possível concluir o cadastro.") from erro
 
         return usuario
+
+
+class LoginSerializer(serializers.Serializer):
+    email = CampoEmailNormalizado(max_length=254)
+    senha = CampoTexto(write_only=True, trim_whitespace=False, style={"input_type": "password"})
+
+
+def dados_usuario(usuario):
+    perfil = getattr(usuario, "perfil_acesso", None)
+    nome = perfil.nome_completo if perfil else usuario.get_full_name() or usuario.get_username()
+    return {
+        "id": usuario.pk,
+        "nome_completo": nome,
+        "email": usuario.email,
+        "situacao": perfil.situacao if perfil else PerfilAcesso.Situacao.APROVADA,
+        "administrador": usuario.is_superuser,
+    }
