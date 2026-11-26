@@ -747,3 +747,237 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
         "estado_vazio": False,
         "mensagem": None,
     }
+
+
+MENSAGEM_ESPACO_VAZIO = "Sem atividades com espaço no período."
+
+DIMENSOES_ESPACO_ORDEM = (
+    "Pequeno",
+    "Médio",
+    "Grande",
+    "Não Definido",
+)
+
+METADADOS_DIMENSAO_ESPACO = {
+    "Pequeno": ("PEQ", "Espaço Reduzido (Pequeno)", "≤ 100 m²"),
+    "Médio": ("MED", "Espaço Médio", "101 a 200 m²"),
+    "Grande": ("GRD", "Espaço Amplo (Grande)", "> 200 m²"),
+    "Não Definido": ("ND", "Não Definido", "Sem dimensões delimitadas"),
+}
+
+SINONIMOS_DIMENSAO_ESPACO = {
+    "pequeno": "Pequeno",
+    "reduzido": "Pequeno",
+    "espaco reduzido": "Pequeno",
+    "peq": "Pequeno",
+    "medio": "Médio",
+    "espaco medio": "Médio",
+    "med": "Médio",
+    "grande": "Grande",
+    "amplo": "Grande",
+    "espaco amplo": "Grande",
+    "grd": "Grande",
+    "nao definido": "Não Definido",
+    "nd": "Não Definido",
+    "indefinido": "Não Definido",
+}
+
+
+def normalizar_dimensao_espaco(valor):
+    """Normaliza o nome ou sinônimo de uma dimensão de espaço para o padrão RN02."""
+    texto = " ".join(str(valor or "").split())
+    if not texto:
+        return ""
+    if texto in METADADOS_DIMENSAO_ESPACO:
+        return texto
+    chave = normalizar_nome_comportamento(texto)
+    return SINONIMOS_DIMENSAO_ESPACO.get(chave, "")
+
+
+def _montar_item_espaco(
+    dimensao,
+    minutos,
+    minutos_brutos,
+    execucoes,
+    registros,
+    atividades_distintas,
+    area_media,
+    minutos_totais_liquidos,
+    minutos_totais_brutos,
+):
+    codigo, rotulo, faixa_area = METADADOS_DIMENSAO_ESPACO.get(
+        dimensao,
+        ("ND", dimensao, "Sem dimensões delimitadas"),
+    )
+    slug = normalizar_nome_comportamento(dimensao).replace(" ", "-")
+    return {
+        "id": f"espaco-{slug}",
+        "codigo": codigo,
+        "dimensao_espaco": dimensao,
+        "nome": dimensao,
+        "rotulo": rotulo,
+        "faixa_area": faixa_area,
+        "minutos": minutos,
+        "minutos_brutos": minutos_brutos,
+        "percentual_tempo": (
+            round((minutos / minutos_totais_liquidos) * 100, 2)
+            if minutos_totais_liquidos > 0
+            else 0.0
+        ),
+        "percentual_tempo_bruto": (
+            round((minutos_brutos / minutos_totais_brutos) * 100, 2)
+            if minutos_totais_brutos > 0
+            else 0.0
+        ),
+        "execucoes": execucoes,
+        "registros": registros,
+        "atividades_distintas": atividades_distintas,
+        "area_media_por_jogador": area_media,
+    }
+
+
+def calcular_informacoes_espaco_treino(atividades_queryset):
+    """RF35 (US35): Consolida distribuição por espaço do treino (RN01, RN02, RN03 e RN07)."""
+    if hasattr(atividades_queryset, "select_related"):
+        atividades = list(
+            atividades_queryset.select_related(
+                "sessao__microciclo__mesociclo__macrociclo",
+                "atividade_biblioteca",
+            ).order_by("sessao__data", "sessao__sequencia", "ordem", "id")
+        )
+    else:
+        atividades = list(atividades_queryset)
+
+    total_registros = len(atividades)
+    if total_registros == 0:
+        categorias_neutras = [
+            _montar_item_espaco(dim, 0, 0, 0, 0, 0, None, 0, 0)
+            for dim in DIMENSOES_ESPACO_ORDEM
+        ]
+        return {
+            "total_dimensoes_utilizadas": 0,
+            "total_registros": 0,
+            "total_execucoes": 0,
+            "minutos_totais_liquidos": 0,
+            "minutos_totais_brutos": 0,
+            "espacos": [],
+            "categorias": categorias_neutras,
+            "estado_vazio": True,
+            "mensagem": MENSAGEM_ESPACO_VAZIO,
+        }
+
+    tempos_globais_ordem = {}
+    agrupado = {}
+    minutos_totais_brutos = 0
+
+    for atv in atividades:
+        tempo = atv.tempo
+        minutos_totais_brutos += tempo
+
+        chave_ordem = (atv.sessao_id, atv.ordem)
+        if (
+            chave_ordem not in tempos_globais_ordem
+            or tempo > tempos_globais_ordem[chave_ordem]
+        ):
+            tempos_globais_ordem[chave_ordem] = tempo
+
+        dimensao = atv.dimensao_espaco or "Não Definido"
+        area = atv.area_por_jogador
+        if (
+            atv.orientacao != "PDI"
+            and atv.comprimento is not None
+            and atv.largura is not None
+            and atv.numero_jogadores
+        ):
+            if dimensao not in METADADOS_DIMENSAO_ESPACO or (
+                dimensao == "Não Definido" and area is None
+            ):
+                area, dimensao = calcular_area_e_dimensao(
+                    atv.comprimento, atv.largura, atv.numero_jogadores
+                )
+            elif area is None:
+                area, _ = calcular_area_e_dimensao(
+                    atv.comprimento, atv.largura, atv.numero_jogadores
+                )
+        elif dimensao not in METADADOS_DIMENSAO_ESPACO:
+            dimensao = "Não Definido"
+
+        if dimensao not in agrupado:
+            agrupado[dimensao] = {
+                "tempos_ordem": {},
+                "minutos_brutos": 0,
+                "registros": 0,
+                "chaves_atividades": set(),
+                "areas": [],
+            }
+
+        item = agrupado[dimensao]
+        item["minutos_brutos"] += tempo
+        item["registros"] += 1
+        item["chaves_atividades"].add(identificador_atividade_distinta(atv))
+        if (
+            chave_ordem not in item["tempos_ordem"]
+            or tempo > item["tempos_ordem"][chave_ordem]
+        ):
+            item["tempos_ordem"][chave_ordem] = tempo
+
+        if area is not None:
+            item["areas"].append(area)
+
+    minutos_totais_liquidos = sum(tempos_globais_ordem.values())
+    total_execucoes = len(tempos_globais_ordem)
+
+    itens_por_dimensao = {}
+    for dimensao, dados in agrupado.items():
+        minutos_liq = sum(dados["tempos_ordem"].values())
+        area_media = (
+            round(sum(dados["areas"]) / len(dados["areas"]), 2)
+            if dados["areas"]
+            else None
+        )
+        itens_por_dimensao[dimensao] = _montar_item_espaco(
+            dimensao=dimensao,
+            minutos=minutos_liq,
+            minutos_brutos=dados["minutos_brutos"],
+            execucoes=len(dados["tempos_ordem"]),
+            registros=dados["registros"],
+            atividades_distintas=len(dados["chaves_atividades"]),
+            area_media=area_media,
+            minutos_totais_liquidos=minutos_totais_liquidos,
+            minutos_totais_brutos=minutos_totais_brutos,
+        )
+
+    espacos_ordenados = sorted(
+        itens_por_dimensao.values(),
+        key=lambda x: (-x["minutos"], -x["execucoes"], x["dimensao_espaco"]),
+    )
+
+    categorias_completas = [
+        itens_por_dimensao.get(
+            dim,
+            _montar_item_espaco(
+                dim,
+                0,
+                0,
+                0,
+                0,
+                0,
+                None,
+                minutos_totais_liquidos,
+                minutos_totais_brutos,
+            ),
+        )
+        for dim in DIMENSOES_ESPACO_ORDEM
+    ]
+
+    return {
+        "total_dimensoes_utilizadas": len(espacos_ordenados),
+        "total_registros": total_registros,
+        "total_execucoes": total_execucoes,
+        "minutos_totais_liquidos": minutos_totais_liquidos,
+        "minutos_totais_brutos": minutos_totais_brutos,
+        "espacos": espacos_ordenados,
+        "categorias": categorias_completas,
+        "estado_vazio": False,
+        "mensagem": None,
+    }
