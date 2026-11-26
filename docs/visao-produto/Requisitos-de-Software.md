@@ -1644,53 +1644,7 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 </details>
 
 <details id="rf36" markdown>
-<summary>RF36 · Consultar informação de orientação do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
-
-
-
-**Declaração RF:** **Consultar informação de orientação do treino:** o sistema deve permitir que a equipe técnica consulte, em gráfico e por meio de filtro, a informação de orientação do treino, atualizando automaticamente as informações exibidas.
-
-
-**Declaração US:** Como membro da equipe técnica, eu quero usar filtros para consultar as orientações de treino, através dos gráficos para avaliar se o direcionamento planejado está adequado.
-
-<div class='rf-meta' markdown>
-
-**CPs e OEs relacionadas:** [**CP03**](solucao-proposta.md#cp03) | [**OE3**](solucao-proposta.md#oe3), [**OE4**](solucao-proposta.md#oe4)
-
-**Priorização:** Valor: 4,00 | Frequência: 5,00 | Esforço: 2,00 | Complexidade: 3,00 | Conhecimento: 2,00 | Esforço Técnico: 2,33 → Q1 Alto valor / Alta carga técnica
-
-
-</div>
-
-**Critérios de Aceitação**
-
-- *Cenários de aceitação a definir.*
-
-**Regras de Negócio Associadas**
-
-- **[RN07](#rn07) · Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
-
-**Requisitos Não Funcionais Associados**
-
-- **[RNF02](#rnf02) · Interface Responsiva e Adaptável:** A interface do sistema deve ser responsiva, adaptando o layout automaticamente de acordo com a resolução do dispositivo para não prejudicar a visualização dos gráficos na tela.
-- **[RNF04](#rnf04) · Atualização em Tempo Real do Dashboard:** Os gráficos e indicadores do dashboard devem ser recalculados e atualizados na interface do usuário em um tempo máximo de 5 segundos após a confirmação de sucesso no cadastro, edição ou exclusão de um treino.
-
-**Definition of Ready (DoR)**
-
-- [x] A estrutura da User Story está bem definida
-- [ ] A User Story está rastreável
-- [x] A User Story está mensurável
-- [ ] A User Story foi prototipada
-- [ ] A User Story foi validada com o cliente
-
-**Evidências**
-
-- [Evidências da Iteração 11](evidencias-ciclos/EV_C5.md)
-
-</details>
-
-<details id="rf37" markdown>
-<summary>RF37 · Consultar informação de momento do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<summary>RF36 · Consultar informação de momento do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
@@ -1736,8 +1690,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 </details>
 
-<details id="rf38" markdown>
-<summary>RF38 · Consultar informação de fase do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<details id="rf37" markdown>
+<summary>RF37 · Consultar informação de fase do jogo do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
@@ -1783,8 +1737,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 </details>
 
-<details id="rf39" markdown>
-<summary>RF39 · Consultar informação de comportamento do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP03</span></span></summary>
+<details id="rf38" markdown>
+<summary>RF38 · Consultar informação de comportamento do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 10</span><span>Produto: CP03</span></span></summary>
 
 
 
@@ -1830,8 +1784,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 </details>
 
-<details id="rf40" markdown>
-<summary>RF40 · Consultar informação de atributo técnico do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<details id="rf39" markdown>
+<summary>RF39 · Consultar informação de atributo técnico do treino<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
@@ -1877,8 +1831,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 </details>
 
-<details id="rf41" markdown>
-<summary>RF41 · Consultar análise comparativa por periodização<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
+<details id="rf40" markdown>
+<summary>RF40 · Consultar análise comparativa por periodização<span class='rf-summary-status'><span>Entrega: MVP</span><span>Situação: Não concluído</span><span>Itera&ccedil;&atilde;o: Itera&ccedil;&atilde;o 11</span><span>Produto: CP03</span></span></summary>
 
 
 
@@ -1965,12 +1919,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 | **RF33** | **Editar atributo técnico da atividade:** o sistema deve permitir que a equipe técnica editem um atributo técnico registrado em uma atividade. | [RN05](#rn05) | CP01 |
 | **RF34** | **Excluir atributo técnico da atividade:** o sistema deve permitir que a equipe técnica excluam um atributo técnico registrado em uma atividade. | [RN05](#rn05) | CP01 |
 | **RF35** | **Consultar informação de espaço do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de espaço com base nas faixas da [RN02](#rn02) calculadas pela [RN01](#rn01), com tratamento neutro para ausência de dados ([RN07](#rn07)). | [RN01](#rn01), [RN02](#rn02), [RN07](#rn07) | CP03 |
-| **RF36** | **Consultar informação de orientação do treino:** o sistema deve permitir consultar, em gráfico e filtro, a orientação do treino (Aquisição, Aplicação, PDI, Eq Carga), com visual neutro para dados vazios ([RN07](#rn07)). | [RN07](#rn07) | CP03 |
-| **RF37** | **Consultar informação de momento do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a distribuição dos momentos do jogo trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF38** | **Consultar informação de fase do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de fase do jogo ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF39** | **Consultar informação de comportamento do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de princípio tático ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF40** | **Consultar informação de atributo técnico do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de atributos técnicos trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
-| **RF41** | **Consultar análise comparativa por periodização:** o sistema deve permitir consultar a análise comparativa respeitando a hierarquia da periodização ([RN04](#rn04)), com indicativo neutro se um dos ciclos não contiver treinos ([RN07](#rn07)). | [RN04](#rn04), [RN07](#rn07) | CP03 |
+| **RF36** | **Consultar informação de momento do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a distribuição dos momentos do jogo trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF37** | **Consultar informação de fase do jogo do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de fase do jogo ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF38** | **Consultar informação de comportamento do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de princípio tático ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF39** | **Consultar informação de atributo técnico do treino:** o sistema deve permitir consultar, em gráfico e filtro, a informação de atributos técnicos trabalhados ([RN05](#rn05)), tratando períodos sem registros ([RN07](#rn07)). | [RN05](#rn05), [RN07](#rn07) | CP03 |
+| **RF40** | **Consultar análise comparativa por periodização:** o sistema deve permitir consultar a análise comparativa respeitando a hierarquia da periodização ([RN04](#rn04)), com indicativo neutro se um dos ciclos não contiver treinos ([RN07](#rn07)). | [RN04](#rn04), [RN07](#rn07) | CP03 |
 
 -->
 
@@ -2104,10 +2057,10 @@ As Regras de Negócio (RNs) definem a lógica de domínio esportivo do treinador
 | <a id="rn01"></a>**RN01** | **Cálculo da Área por Jogador** | Cálculo Esportivo | A área por jogador em metros quadrados é calculada pela fórmula:<br><br><code>Área (m²/jogador) = (Comprimento × Largura) ÷ Nº de Jogadores</code><br><br>Obrigatório para atividades com orientação de **Aquisição**, **Aplicação** e **Equilíbrio de Carga**. Dispensado para atividades de **PDI** (Proposta de Desenvolvimento Individual), nas quais comprimento, largura e jogadores são opcionais. | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF23](#rf23), [RF35](#rf35) |
 | <a id="rn02"></a>**RN02** | **Classificação Automática da Dimensão do Espaço** | Validação Automática | A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da [RN01](#rn01):<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF25](#rf25), [RF35](#rf35) |
 | <a id="rn03"></a>**RN03** | **Simultaneidade e Contagem de Tempo da Sessão** | Cálculo Esportivo | Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução. | [RF13](#rf13), [RF14](#rf14), [RF16](#rf16), [RF17](#rf17), [RF22](#rf22), [RF25](#rf25), [RF26](#rf26) |
-| <a id="rn04"></a>**RN04** | **Hierarquia e Integridade da Periodização** | Integridade Estrutural | A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade. | [RF01](#rf01) a [RF09](#rf09), [RF16](#rf16), [RF18](#rf18), [RF41](#rf41) |
-| <a id="rn05"></a>**RN05** | **Preenchimento Condicional pelo Objetivo Central** | Validação de Entrada | O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual). | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF32](#rf32), [RF37](#rf37) a [RF40](#rf40) |
+| <a id="rn04"></a>**RN04** | **Hierarquia e Integridade da Periodização** | Integridade Estrutural | A estrutura esportiva organiza-se estritamente na árvore hierárquica:<br><br><code>Macrociclo (Temporada) ⊃ Mesociclo ⊃ Microciclo (Semana) ⊃ Sessão (Treino) ⊃ Atividades</code><br><br>Nenhum registro subordinado pode ser persistido sem vínculo obrigatório a um elemento pai válido. Não é permitido excluir elementos pais que possuam ciclos ou treinos associados sem validação prévia de integridade. | [RF01](#rf01) a [RF09](#rf09), [RF16](#rf16), [RF18](#rf18), [RF40](#rf40) |
+| <a id="rn05"></a>**RN05** | **Preenchimento Condicional pelo Objetivo Central** | Validação de Entrada | O preenchimento dos campos de momento do jogo, fase do jogo, princípio tático e atributo técnico é **opcional** por atividade. O preenchimento deve ser restrito ao foco do exercício (ex.: se o objetivo principal for tático de reação pós-perda, o fundamento de passe não deve ser marcado como atributo técnico, evitando distorções nos indicadores de desenvolvimento técnico individual). | [RF13](#rf13), [RF14](#rf14), [RF19](#rf19), [RF20](#rf20), [RF32](#rf32), [RF36](#rf36) a [RF39](#rf39) |
 | <a id="rn06"></a>**RN06** | **Cálculo da Variabilidade de Treinos** | Cálculo Esportivo | O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo). | [RF22](#rf22), [RF25](#rf25) |
-| <a id="rn07"></a>**RN07** | **Tratamento e Estabilidade em Consultas com Resultado Vazio** | Comportamento do Sistema | Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo. | [RF22](#rf22), [RF24](#rf24), [RF25](#rf25), [RF35](#rf35) a [RF41](#rf41) |
+| <a id="rn07"></a>**RN07** | **Tratamento e Estabilidade em Consultas com Resultado Vazio** | Comportamento do Sistema | Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo. | [RF22](#rf22), [RF24](#rf24), [RF25](#rf25), [RF35](#rf35) a [RF40](#rf40) |
 
 ---
 
@@ -2136,7 +2089,7 @@ A matriz a seguir mapeia a correlação direta entre os Objetivos Específicos (
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | OE1 | OE4 | CP01 | RF10, RF11, RF12, RF13, RF14, RF15, RF16, RF17, RF18, RF19, RF20, RF21, RF23, RF29, RF32, RF33, RF34 | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN04](#rn04), [RN05](#rn05) | RNF02, RNF03, RNF04 |
 | OE2 | OE3 | CP02 | RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF08, RF09 | [RN04](#rn04) | RNF02 |
-| OE3 | OE4 | CP03 | RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40, RF41 | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN04](#rn04), [RN05](#rn05), [RN06](#rn06), [RN07](#rn07) | RNF02, RNF04 |
+| OE3 | OE4 | CP03 | RF22, RF24, RF26, RF30, RF31, RF35, RF36, RF37, RF38, RF39, RF40 | [RN01](#rn01), [RN02](#rn02), [RN03](#rn03), [RN04](#rn04), [RN05](#rn05), [RN06](#rn06), [RN07](#rn07) | RNF02, RNF04 |
 | OE4 | OE3 | CP04 | RF25 | [RN02](#rn02), [RN03](#rn03), [RN06](#rn06), [RN07](#rn07) | RNF02 |
 | OE1 | OE4 | CP05 | RF27, RF28 | - | RNF01, RNF02 |
 

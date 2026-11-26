@@ -45,12 +45,11 @@ A tabela, a seguir, apresenta cada um dos requisitos funcionais (RFs) declarados
 | **RF33** | **US33** Como treinador ou auxiliar, eu quero editar o atributo técnico de uma atividade, para refletir melhor o foco real do exercício. | RNF02, RNF03 |
 | **RF34** | **US34** Como treinador ou auxiliar, eu quero excluir um atributo técnico registrado em uma atividade. | RNF02, RNF04 |
 | **RF35** | **US35** Como treinador ou auxiliar, eu quero usar filtros para consultar informações sobre o espaço do treino, através dos gráficos. | RNF02, RNF04 |
-| **RF36** | **US36** Como treinador ou auxiliar, eu quero usar filtros para consultar as orientações de treino, através dos gráficos para avaliar se o direcionamento planejado está adequado. | RNF02, RNF04 |
-| **RF37** | **US37** Como treinador ou auxiliar, eu quero filtrar a informação por momento do jogo treinado, através dos gráficos para avaliar quais momentos de jogos foram abordados nos treinos. | RNF02, RNF04 |
-| **RF38** | **US38** Como treinador ou auxiliar, eu quero filtrar a informação por fase de jogo, através dos gráficos para saber qual saber a fase do jogo associada a atividade. | RNF02, RNF04 |
-| **RF39** | **US39** Como treinador ou auxiliar, eu quero filtrar as informações de treino por comportamento, através dos gráficos para saber o quanto trabalhei os comportamentos distintos. | RNF02, RNF04 |
-| **RF40** | **US40** Como treinador ou auxiliar, eu quero filtrar informações por atributo técnico, através dos gráficos para saber o quanto trabalhei esse atributo. | RNF02, RNF04 |
-| **RF41** | **US41** Como treinador ou auxiliar, eu quero realizar uma análise comparativa através dos gráficos de periodização (meso, micro, mês, sessão). | RNF02, RNF04 |
+| **RF36** | **US36** Como treinador ou auxiliar, eu quero filtrar a informação por momento do jogo treinado, através dos gráficos para avaliar quais momentos de jogos foram abordados nos treinos. | RNF02, RNF04 |
+| **RF37** | **US37** Como treinador ou auxiliar, eu quero filtrar a informação por fase de jogo, através dos gráficos para saber qual saber a fase do jogo associada a atividade. | RNF02, RNF04 |
+| **RF38** | **US38** Como treinador ou auxiliar, eu quero filtrar as informações de treino por comportamento, através dos gráficos para saber o quanto trabalhei os comportamentos distintos. | RNF02, RNF04 |
+| **RF39** | **US39** Como treinador ou auxiliar, eu quero filtrar informações por atributo técnico, através dos gráficos para saber o quanto trabalhei esse atributo. | RNF02, RNF04 |
+| **RF40** | **US40** Como treinador ou auxiliar, eu quero realizar uma análise comparativa através dos gráficos de periodização (meso, micro, mês, sessão). | RNF02, RNF04 |
 
 > **Observação:** O **RNF02 (Interface Responsiva e Adaptável)** e o **RNF03 (Eficiência no Cadastro de Treinos)** aplicam-se de forma transversal a quase todas as interfaces e fluxos de cadastro da aplicação, assegurando que o tempo de registro de treinos pelo treinador seja inferior a 2 minutos e utilizável em qualquer dispositivo (desktop, tablet e mobile). O **RNF04 (Atualização em Tempo Real do Dashboard)** aplica-se transversalmente a todas as operações de cadastro, edição ou exclusão de ciclos, sessões e atividades que reflitam em métricas visuais, garantindo atualização em até 5 segundos. O **RNF01 (Proteção de Dados Pessoais dos Atletas)** relaciona-se diretamente com o módulo de autenticação e perfis de acesso (RF29 e RF30), e ambos foram postergados para entregas futuras.
 
@@ -213,12 +212,11 @@ A classificação foi automatizada na planilha com a fórmula abaixo, em que a c
 <tr><td>RF33</td><td>Editar atributo técnico da atividade</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
 <tr><td>RF34</td><td>Excluir atributo técnico da atividade</td><td>4,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>2,00</td><td>Q2 Alto valor / Baixa carga técnica</td></tr>
 <tr><td>RF35</td><td>Consultar informação de espaço do treino</td><td>4,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF36</td><td>Consultar informação de orientação do treino</td><td>4,00</td><td>5,00</td><td>2,00</td><td>3,00</td><td>2,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF37</td><td>Consultar informação de momento do jogo do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF38</td><td>Consultar informação de fase do jogo do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF39</td><td>Consultar informação de comportamento do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF40</td><td>Consultar informação de atributo técnico do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
-<tr><td>RF41</td><td>Consultar análise comparativa por periodização</td><td>4,00</td><td>5,00</td><td>4,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF36</td><td>Consultar informação de momento do jogo do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF37</td><td>Consultar informação de fase do jogo do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF38</td><td>Consultar informação de comportamento do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF39</td><td>Consultar informação de atributo técnico do treino</td><td>4,00</td><td>5,00</td><td>3,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
+<tr><td>RF40</td><td>Consultar análise comparativa por periodização</td><td>4,00</td><td>5,00</td><td>4,00</td><td>3,00</td><td>3,00</td><td>5,00</td><td>Q1 Alto valor / Alta carga técnica</td></tr>
 </tbody>
 </table>
 </div>
@@ -253,12 +251,11 @@ A definição dos Requisitos Funcionais que compõem o MVP foi realizada previam
 | RF26 | Alternar unidade de tempo | Q2 - Alto valor / Baixo esforço |
 | RF32 | Registrar atributo técnico da atividade | Q2 - Alto valor / Baixo esforço |
 | RF35 | Consultar informação de espaço do treino | Q1 - Alto valor / Alto esforço |
-| RF36 | Consultar informação de orientação do treino | Q1 - Alto valor / Alto esforço |
-| RF37 | Consultar informação de momento do jogo do treino | Q1 - Alto valor / Alto esforço |
-| RF38 | Consultar informação de fase do jogo do treino | Q1 - Alto valor / Alto esforço |
-| RF39 | Consultar informação de comportamento do treino | Q1 - Alto valor / Alto esforço |
-| RF40 | Consultar informação de atributo técnico do treino | Q1 - Alto valor / Alto esforço |
-| RF41 | Consultar análise comparativa por periodização | Q1 - Alto valor / Alto esforço |
+| RF36 | Consultar informação de momento do jogo do treino | Q1 - Alto valor / Alto esforço |
+| RF37 | Consultar informação de fase do jogo do treino | Q1 - Alto valor / Alto esforço |
+| RF38 | Consultar informação de comportamento do treino | Q1 - Alto valor / Alto esforço |
+| RF39 | Consultar informação de atributo técnico do treino | Q1 - Alto valor / Alto esforço |
+| RF40 | Consultar análise comparativa por periodização | Q1 - Alto valor / Alto esforço |
 
 #### Requisitos Não Funcionais (RNFs)
 
