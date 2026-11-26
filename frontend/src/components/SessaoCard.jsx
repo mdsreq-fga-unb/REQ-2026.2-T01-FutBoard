@@ -7,7 +7,13 @@ function formatarDataExibicao(isoDate) {
   return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
-export default function SessaoCard({ sessao, microcicloNome, onEditSessao }) {
+export default function SessaoCard({
+  sessao,
+  microcicloNome,
+  onEditSessao,
+  onGerarRelatorioPdf,
+  gerandoPdf = false,
+}) {
   const nomeMicrocicloExibicao = microcicloNome || sessao.microcicloNome || "";
 
   return (
@@ -63,7 +69,7 @@ export default function SessaoCard({ sessao, microcicloNome, onEditSessao }) {
             )}
           </div>
 
-          <div className="flex items-center gap-4 shrink-0">
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
             <div className="text-left sm:text-right">
               <span className="block font-mono text-[10px] uppercase tracking-wider text-[#8A8D80]">
                 DATA DA SESSÃO
@@ -72,6 +78,61 @@ export default function SessaoCard({ sessao, microcicloNome, onEditSessao }) {
                 {formatarDataExibicao(sessao.data)}
               </span>
             </div>
+
+            {onGerarRelatorioPdf && (
+              <button
+                type="button"
+                onClick={() => onGerarRelatorioPdf(sessao)}
+                disabled={gerandoPdf}
+                aria-label={`Gerar relatório PDF da sessão ${sessao.nome || sessao.codigo || sessao.id}`}
+                title="Gerar relatório PDF"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#E4DFD2] bg-white px-4 py-2 text-xs font-medium text-[#10281E] transition hover:border-[#0E3A29] hover:bg-[#F5F2EA] disabled:cursor-wait disabled:opacity-65"
+              >
+                {/* Ícone de Documento PDF conforme protótipo */}
+                <svg
+                  className="h-4 w-4 text-[#10281E]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14 2v6h6"
+                  />
+                  <rect
+                    x="7"
+                    y="13"
+                    width="10"
+                    height="5.5"
+                    rx="1"
+                    fill="#10281E"
+                    stroke="none"
+                  />
+                  <text
+                    x="12"
+                    y="17"
+                    textAnchor="middle"
+                    fill="#FFFFFF"
+                    fontSize="4.3"
+                    fontWeight="bold"
+                    fontFamily="monospace"
+                    stroke="none"
+                  >
+                    PDF
+                  </text>
+                </svg>
+                <span>
+                  {gerandoPdf ? "Gerando PDF..." : "Gerar relatório PDF"}
+                </span>
+              </button>
+            )}
 
             <button
               type="button"
