@@ -12,6 +12,7 @@ from .models import (
     TIPOLOGIAS_MAPA,
     AtividadeBiblioteca,
     AtividadeSessao,
+    AtributoTecnico,
     ComportamentoTatico,
     Sessao,
     calcular_indicadores_treino,
@@ -21,6 +22,7 @@ from .models import (
 from .serializers import (
     AtividadeBibliotecaSerializer,
     AtividadeSessaoSerializer,
+    AtributoTecnicoSerializer,
     ComportamentoTaticoSerializer,
     IndicadoresTreinoSerializer,
     InformacoesAtividadesTreinoSerializer,
@@ -129,6 +131,13 @@ class ComportamentoTaticoDetailView(generics.RetrieveUpdateAPIView):
 
     queryset = ComportamentoTatico.objects.all()
     serializer_class = ComportamentoTaticoSerializer
+
+
+class AtributoTecnicoListCreateView(generics.ListCreateAPIView):
+    """US32: lista atributos técnicos reutilizáveis e cadastra novos nomes."""
+
+    queryset = AtributoTecnico.objects.all()
+    serializer_class = AtributoTecnicoSerializer
 
 
 class AtividadeBibliotecaListCreateView(generics.ListCreateAPIView):

@@ -7,6 +7,7 @@ from .views import (
     AtividadeBibliotecaListCreateView,
     AtividadeSessaoDetailView,
     AtividadeSessaoListCreateView,
+    AtributoTecnicoListCreateView,
     ComportamentoTaticoDetailView,
     ComportamentoTaticoListCreateView,
     IndicadoresTreinoView,
@@ -37,6 +38,11 @@ urlpatterns = [
         "comportamentos/<int:pk>/",
         ComportamentoTaticoDetailView.as_view(),
         name="comportamento-detail",
+    ),
+    path(
+        "atributos-tecnicos/",
+        AtributoTecnicoListCreateView.as_view(),
+        name="atributo-tecnico-list-create",
     ),
     path(
         "biblioteca/",

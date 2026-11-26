@@ -1,5 +1,7 @@
 """Serializers da API de sessões e biblioteca de treinos."""
 
+from django.core.exceptions import ValidationError
+from django.db import transaction
 from rest_framework import serializers
 
 from .models import (
@@ -11,9 +13,11 @@ from .models import (
     TIPOS_SSP_VALIDOS,
     AtividadeBiblioteca,
     AtividadeSessao,
+    AtributoTecnico,
     ComportamentoTatico,
     Sessao,
     normalizar_nome_comportamento,
+    preparar_nome_atributo_tecnico,
 )
 
 
@@ -117,6 +121,40 @@ class ComportamentoTaticoSerializer(serializers.ModelSerializer):
         return nome
 
 
+class NomeAtributoTecnicoField(serializers.CharField):
+    def to_internal_value(self, data):
+        if not isinstance(data, str):
+            self.fail("invalid")
+        return super().to_internal_value(data)
+
+
+class AtributoTecnicoSerializer(serializers.ModelSerializer):
+    nome = NomeAtributoTecnicoField()
+
+    class Meta:
+        model = AtributoTecnico
+        fields = ["id", "nome"]
+        read_only_fields = ["id"]
+
+    def validate_nome(self, value):
+        try:
+            nome, _ = preparar_nome_atributo_tecnico(value)
+        except ValidationError as erro:
+            raise serializers.ValidationError(erro.messages) from erro
+        return nome
+
+    def create(self, validated_data):
+        nome, chave = preparar_nome_atributo_tecnico(validated_data["nome"])
+        atributo, criado = AtributoTecnico.objects.get_or_create(
+            chave_normalizada=chave, defaults={"nome": nome}
+        )
+        if not criado:
+            raise serializers.ValidationError(
+                {"nome": "Já existe um atributo técnico com esse nome."}
+            )
+        return atributo
+
+
 def _normalizar_lista_textos(valor, nome_campo, opcoes_validas=None):
     if valor is None:
         return []
@@ -144,7 +182,31 @@ def _normalizar_lista_textos(valor, nome_campo, opcoes_validas=None):
     return resultado
 
 
-class AtividadeBibliotecaSerializer(serializers.ModelSerializer):
+class CatalogoAtributosTecnicosMixin:
+    def validate_atributos_tecnicos(self, value):
+        nomes = _normalizar_lista_textos(value, "atributos_tecnicos")
+        for nome in nomes:
+            try:
+                preparar_nome_atributo_tecnico(nome)
+            except ValidationError as erro:
+                raise serializers.ValidationError(erro.messages) from erro
+        return nomes
+
+    @transaction.atomic
+    def create(self, validated_data):
+        atividade = super().create(validated_data)
+        AtributoTecnico.registrar_nomes(atividade.atributos_tecnicos)
+        return atividade
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        atividade = super().update(instance, validated_data)
+        if "atributos_tecnicos" in validated_data:
+            AtributoTecnico.registrar_nomes(atividade.atributos_tecnicos)
+        return atividade
+
+
+class AtividadeBibliotecaSerializer(CatalogoAtributosTecnicosMixin, serializers.ModelSerializer):
     codigo = serializers.CharField(max_length=20, required=False, allow_blank=True)
     tipologia = serializers.CharField(max_length=50)
     sigla_tipologia = serializers.ReadOnlyField()
@@ -253,9 +315,6 @@ class AtividadeBibliotecaSerializer(serializers.ModelSerializer):
     def validate_comportamentos(self, value):
         return _normalizar_lista_textos(value, "comportamentos")
 
-    def validate_atributos_tecnicos(self, value):
-        return _normalizar_lista_textos(value, "atributos_tecnicos")
-
     def validate(self, attrs):
         instance = self.instance
         orientacao = attrs.get(
@@ -309,7 +368,7 @@ class AtividadeBibliotecaSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AtividadeSessaoSerializer(serializers.ModelSerializer):
+class AtividadeSessaoSerializer(CatalogoAtributosTecnicosMixin, serializers.ModelSerializer):
     codigo = serializers.CharField(max_length=20, required=False, allow_blank=True)
     nome = serializers.CharField(max_length=255, required=False, allow_blank=True)
     tipologia = serializers.CharField(max_length=50, required=False, allow_blank=True)
@@ -397,9 +456,6 @@ class AtividadeSessaoSerializer(serializers.ModelSerializer):
 
     def validate_comportamentos(self, value):
         return _normalizar_lista_textos(value, "comportamentos")
-
-    def validate_atributos_tecnicos(self, value):
-        return _normalizar_lista_textos(value, "atributos_tecnicos")
 
     def validate(self, attrs):
         instance = self.instance
