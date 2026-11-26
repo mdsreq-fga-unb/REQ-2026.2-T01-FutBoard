@@ -1466,3 +1466,92 @@ class InformacoesAtividadesTreinoApiTests(APITestCase):
             "Nenhuma atividade encontrada para os filtros aplicados.",
         )
 
+
+class SincronizacaoPrincipiosTaticosAtividadeTests(APITestCase):
+    """Testa a sincronização entre princípios táticos das atividades e o catálogo ComportamentoTatico."""
+
+    def test_criacao_atividade_biblioteca_reutiliza_existente_e_cadastra_novo_principio(self):
+        ComportamentoTatico.objects.create(nome="Reação Pós-Perda")
+
+        response = self.client.post(
+            "/api/treinos/biblioteca/",
+            {
+                "nome": "Circ+CabRebFrontLat",
+                "tipologia": "Dinâmica ProtDef",
+                "tipo_ssp": "Dirigido",
+                "orientacao": "PDI",
+                "comportamentos": ["reacao pos-perda", "CoordLinDef"],
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(
+            response.json()["comportamentos"],
+            ["Reação Pós-Perda", "CoordLinDef"],
+        )
+
+        catalogo = self.client.get("/api/treinos/comportamentos/").json()
+        nomes_catalogo = [item["nome"] for item in catalogo]
+        self.assertEqual(nomes_catalogo, ["CoordLinDef", "Reação Pós-Perda"])
+
+    def test_edicao_atividade_biblioteca_cadastra_novo_principio_no_catalogo(self):
+        atv = AtividadeBiblioteca.objects.create(
+            nome="G2XG",
+            tipologia="Confrontos",
+            tipo_ssp="Especial",
+            comportamentos=["Cobertura"],
+        )
+
+        response = self.client.patch(
+            f"/api/treinos/biblioteca/{atv.id}/",
+            {"comportamentos": ["Cobertura", "DefCruz"]},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(ComportamentoTatico.objects.filter(nome="DefCruz").exists())
+
+    def test_criacao_atividade_sessao_cadastra_novo_principio_no_catalogo(self):
+        macro = Macrociclo.objects.create(
+            nome="2026",
+            data_inicio="2026-01-01",
+            data_termino="2026-12-31",
+        )
+        meso = Mesociclo.objects.create(
+            macrociclo=macro,
+            nome="ME1",
+            data_inicio="2026-08-01",
+            data_termino="2026-08-15",
+        )
+        micro = Microciclo.objects.create(
+            mesociclo=meso,
+            nome="MC1",
+            data_inicio="2026-08-03",
+            data_termino="2026-08-09",
+        )
+        sessao = Sessao.objects.create(
+            microciclo=micro,
+            nome="S01",
+            data="2026-08-03",
+        )
+
+        response = self.client.post(
+            "/api/treinos/atividades-sessao/",
+            {
+                "sessao": sessao.id,
+                "nome": "5Corredores",
+                "tipologia": "Coletivo Direcionado",
+                "tipo_ssp": "Competitivo",
+                "ordem": 1,
+                "tempo": 28,
+                "comportamentos": ["Amplitude", "Balanço Def"],
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(ComportamentoTatico.objects.filter(nome="Amplitude").exists())
+        self.assertTrue(ComportamentoTatico.objects.filter(nome="Balanço Def").exists())
+
+
