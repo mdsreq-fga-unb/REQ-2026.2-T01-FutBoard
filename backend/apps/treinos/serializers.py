@@ -582,4 +582,37 @@ class InformacoesAtividadesTreinoSerializer(serializers.Serializer):
     mensagem = serializers.CharField(read_only=True, allow_null=True)
 
 
+class InformacaoEspacoItemSerializer(serializers.Serializer):
+    """Item consolidado por dimensão de espaço (Pequeno, Médio, Grande, Não Definido) — US35."""
+
+    id = serializers.CharField(read_only=True)
+    codigo = serializers.CharField(read_only=True)
+    dimensao_espaco = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    rotulo = serializers.CharField(read_only=True)
+    faixa_area = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    minutos_brutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    percentual_tempo_bruto = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    registros = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+    area_media_por_jogador = serializers.FloatField(read_only=True, allow_null=True)
+
+
+class InformacoesEspacoTreinoSerializer(serializers.Serializer):
+    """RF35 (US35): Serializador de saída da consulta de espaço do treino em gráficos."""
+
+    total_dimensoes_utilizadas = serializers.IntegerField(read_only=True)
+    total_registros = serializers.IntegerField(read_only=True)
+    total_execucoes = serializers.IntegerField(read_only=True)
+    minutos_totais_liquidos = serializers.IntegerField(read_only=True)
+    minutos_totais_brutos = serializers.IntegerField(read_only=True)
+    espacos = InformacaoEspacoItemSerializer(many=True, read_only=True)
+    categorias = InformacaoEspacoItemSerializer(many=True, read_only=True)
+    estado_vazio = serializers.BooleanField(read_only=True)
+    mensagem = serializers.CharField(read_only=True, allow_null=True)
+
+
 
