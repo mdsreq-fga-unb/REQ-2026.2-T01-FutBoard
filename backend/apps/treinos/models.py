@@ -1,13 +1,13 @@
 """Modelos de sessões e treinos."""
 
+import hashlib
 import re
+import unicodedata
 
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models import Max
-import unicodedata
-
 
 from apps.ciclos.models import Microciclo
 
@@ -154,6 +154,73 @@ class ComportamentoTatico(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()
         return super().save(*args, **kwargs)
+
+
+def preparar_nome_atributo_tecnico(nome):
+    if not isinstance(nome, str):
+        raise ValidationError("O nome do atributo técnico deve ser um texto.")
+    nome = " ".join(nome.split())
+    normalizado = normalizar_nome_comportamento(nome)
+    if not normalizado or "\0" in nome:
+        raise ValidationError("Informe um nome válido para o atributo técnico.")
+    try:
+        chave = hashlib.sha256(normalizado.encode("utf-8")).hexdigest()
+    except UnicodeEncodeError as erro:
+        raise ValidationError("Informe um nome válido para o atributo técnico.") from erro
+    return nome, chave
+
+
+class AtributoTecnico(models.Model):
+    nome = models.TextField()
+    # Uma chave de tamanho fixo preserva os nomes longos aceitos pelo JSON das atividades.
+    chave_normalizada = models.CharField(max_length=64, unique=True, editable=False)
+
+    class Meta:
+        ordering = ["nome", "id"]
+        verbose_name = "atributo técnico"
+        verbose_name_plural = "atributos técnicos"
+        constraints = [
+            models.CheckConstraint(
+                condition=~models.Q(nome=""), name="atributo_tecnico_nome_valido"
+            ),
+        ]
+
+    def __str__(self):
+        return self.nome
+
+    def clean(self):
+        super().clean()
+        try:
+            self.nome, self.chave_normalizada = preparar_nome_atributo_tecnico(self.nome)
+        except ValidationError as erro:
+            raise ValidationError({"nome": erro.messages}) from erro
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        campos = kwargs.get("update_fields")
+        if campos is not None and "nome" in campos:
+            kwargs["update_fields"] = {*campos, "chave_normalizada"}
+        return super().save(*args, **kwargs)
+
+    @classmethod
+    def registrar_nomes(cls, nomes):
+        if not isinstance(nomes, list):
+            return
+
+        por_chave = {}
+        for valor in nomes:
+            try:
+                nome, chave = preparar_nome_atributo_tecnico(valor)
+            except ValidationError:
+                # A cópia de uma atividade pode conter dados anteriores às validações da US32.
+                continue
+            por_chave.setdefault(chave, nome)
+
+        cls.objects.bulk_create(
+            [cls(nome=por_chave[chave], chave_normalizada=chave) for chave in sorted(por_chave)],
+            ignore_conflicts=True,
+        )
+
 
 class AtividadeBiblioteca(models.Model):
     """Atividade cadastrada na biblioteca de treinos para reutilização futura (US19 / RF19)."""
