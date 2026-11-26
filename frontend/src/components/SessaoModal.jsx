@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import AtividadeSessaoModal from "./AtividadeSessaoModal.jsx";
 import SelecionarAtividadeBibliotecaModal from "./SelecionarAtividadeBibliotecaModal.jsx";
+import api from "../services/api.js";
 
 
 
@@ -58,6 +59,23 @@ export default function SessaoModal({
   );
   const [erro, setErro] = useState("");
 
+  useEffect(() => {
+    if (initialData?.id) {
+      api
+        .get("/treinos/atividades-sessao/", {
+          params: { sessao: initialData.id },
+        })
+        .then((resp) => {
+          if (Array.isArray(resp.data) && resp.data.length > 0) {
+            setAtividades(resp.data);
+          }
+        })
+        .catch((err) => {
+          console.warn("Erro ao carregar atividades da sessão:", err);
+        });
+    }
+  }, [initialData?.id]);
+
   const microcicloSelecionado = useMemo(() => {
     if (!microcicloId) return null;
     return (
@@ -102,22 +120,48 @@ export default function SessaoModal({
   const handleSalvarAtividade = async (dadosAtividade) => {
     const codigoNormalizado = (dadosAtividade.codigo || "").trim().toUpperCase();
 
-    const duplicada = atividades.some(
-      (atv) =>
-        atv.id !== atividadeEditando?.id &&
-        atv.codigo &&
-        codigoNormalizado &&
-        atv.codigo.toUpperCase() === codigoNormalizado,
-    );
-
-    if (duplicada) {
-      throw new Error(
-        `A atividade com código "${codigoNormalizado}" já foi adicionada a esta sessão.`,
+    if (codigoNormalizado) {
+      const duplicada = atividades.some(
+        (atv) =>
+          atv.id !== atividadeEditando?.id &&
+          atv.codigo &&
+          codigoNormalizado &&
+          atv.codigo.toUpperCase() === codigoNormalizado,
       );
+
+      if (duplicada) {
+        throw new Error(
+          `A atividade com código "${codigoNormalizado}" já foi adicionada a esta sessão.`,
+        );
+      }
     }
 
+    const payloadBackend = {
+      sessao: initialData?.id || undefined,
+      atividade_biblioteca:
+        dadosAtividade.bibliotecaId ||
+        dadosAtividade.atividade_biblioteca ||
+        null,
+      codigo: codigoNormalizado || "",
+      nome: dadosAtividade.nome,
+      tipologia: dadosAtividade.tipologia,
+      tipo_ssp: dadosAtividade.tipo_ssp,
+      orientacao: dadosAtividade.orientacao || "",
+      ordem:
+        dadosAtividade.ordem ||
+        (atividadeEditando?.ordem || atividades.length + 1),
+      tempo: dadosAtividade.tempo || 15,
+      comprimento: dadosAtividade.comprimento ?? null,
+      largura: dadosAtividade.largura ?? null,
+      numero_jogadores: dadosAtividade.numero_jogadores ?? null,
+      momentos_jogo: dadosAtividade.momentos_jogo || [],
+      fases_jogo: dadosAtividade.fases_jogo || [],
+      comportamentos: dadosAtividade.comportamentos || [],
+      atributos_tecnicos: dadosAtividade.atributos_tecnicos || [],
+    };
+
     if (atividadeEditando) {
-      const atividadeAtualizada = {
+      let atividadeAtualizada = {
         ...atividadeEditando,
         codigo: codigoNormalizado,
         nome: dadosAtividade.nome,
@@ -126,7 +170,7 @@ export default function SessaoModal({
         sigla_tipologia: dadosAtividade.sigla_tipologia,
         tipo_ssp: dadosAtividade.tipo_ssp,
         ordem: dadosAtividade.ordem || atividadeEditando.ordem,
-        tempo: dadosAtividade.tempo,
+        tempo: dadosAtividade.tempo || atividadeEditando.tempo || 15,
         comprimento: dadosAtividade.comprimento,
         largura: dadosAtividade.largura,
         numero_jogadores: dadosAtividade.numero_jogadores,
@@ -138,13 +182,38 @@ export default function SessaoModal({
         atributos_tecnicos: dadosAtividade.atributos_tecnicos || [],
       };
 
+      if (
+        initialData?.id &&
+        atividadeEditando.id &&
+        typeof atividadeEditando.id === "number" &&
+        atividadeEditando.id < 1000000000
+      ) {
+        try {
+          const resp = await api.patch(
+            `/treinos/atividades-sessao/${atividadeEditando.id}/`,
+            payloadBackend,
+          );
+          if (resp?.data) {
+            atividadeAtualizada = { ...atividadeAtualizada, ...resp.data };
+          }
+        } catch (apiErr) {
+          console.warn("Erro ao atualizar atividade no backend:", apiErr);
+          if (apiErr.response?.data) {
+            const detalhe = Object.entries(apiErr.response.data)
+              .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(", ") : v}`)
+              .join(" | ");
+            throw new Error(`Erro na API ao atualizar atividade: ${detalhe}`);
+          }
+        }
+      }
+
       setAtividades((prev) =>
         prev.map((atv) =>
           atv.id === atividadeEditando.id ? atividadeAtualizada : atv,
         ),
       );
     } else {
-      const novaAtividade = {
+      let novaAtividade = {
         id: Date.now() + Math.random(),
         codigo: codigoNormalizado,
         nome: dadosAtividade.nome,
@@ -153,7 +222,7 @@ export default function SessaoModal({
         sigla_tipologia: dadosAtividade.sigla_tipologia,
         tipo_ssp: dadosAtividade.tipo_ssp,
         ordem: dadosAtividade.ordem || atividades.length + 1,
-        tempo: dadosAtividade.tempo,
+        tempo: dadosAtividade.tempo || 15,
         comprimento: dadosAtividade.comprimento,
         largura: dadosAtividade.largura,
         numero_jogadores: dadosAtividade.numero_jogadores,
@@ -164,6 +233,30 @@ export default function SessaoModal({
         comportamentos: dadosAtividade.comportamentos || [],
         atributos_tecnicos: dadosAtividade.atributos_tecnicos || [],
       };
+
+      if (initialData?.id) {
+        try {
+          const resp = await api.post(
+            "/treinos/atividades-sessao/",
+            payloadBackend,
+          );
+          if (resp?.data) {
+            novaAtividade = {
+              ...novaAtividade,
+              ...resp.data,
+              id: resp.data.id,
+            };
+          }
+        } catch (apiErr) {
+          console.warn("Erro ao cadastrar atividade no backend:", apiErr);
+          if (apiErr.response?.data) {
+            const detalhe = Object.entries(apiErr.response.data)
+              .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(", ") : v}`)
+              .join(" | ");
+            throw new Error(`Erro na API ao criar atividade: ${detalhe}`);
+          }
+        }
+      }
 
       setAtividades((prev) => [...prev, novaAtividade]);
     }
@@ -182,7 +275,7 @@ export default function SessaoModal({
         prev.map((a) => (a.codigo || "").trim().toUpperCase()).filter(Boolean),
       );
       const idsBibliotecaExistentes = new Set(
-        prev.map((a) => a.bibliotecaId).filter(Boolean),
+        prev.map((a) => a.bibliotecaId || a.atividade_biblioteca).filter(Boolean),
       );
 
       const novasAtividades = [];
@@ -206,6 +299,7 @@ export default function SessaoModal({
         novasAtividades.push({
           id: Date.now() + Math.random(),
           bibliotecaId: atv.id,
+          atividade_biblioteca: atv.id,
           codigo: codigoNormalizado,
           nome: atv.nome,
           atividade_ssp: atv.atividade_ssp || atv.nome,
@@ -213,7 +307,7 @@ export default function SessaoModal({
           sigla_tipologia: atv.sigla_tipologia,
           tipo_ssp: atv.tipo_ssp,
           ordem: prev.length + novasAtividades.length + 1,
-          tempo: atv.tempo || null,
+          tempo: atv.tempo || 15,
           comprimento: atv.comprimento ?? null,
           largura: atv.largura ?? null,
           numero_jogadores: atv.numero_jogadores ?? null,
@@ -225,6 +319,43 @@ export default function SessaoModal({
           atributos_tecnicos: atv.atributos_tecnicos || [],
         });
       });
+
+      if (initialData?.id && novasAtividades.length > 0) {
+        novasAtividades.forEach(async (novaAtv) => {
+          try {
+            const payloadAtv = {
+              sessao: initialData.id,
+              atividade_biblioteca: novaAtv.bibliotecaId,
+              codigo: novaAtv.codigo || "",
+              nome: novaAtv.nome,
+              tipologia: novaAtv.tipologia,
+              tipo_ssp: novaAtv.tipo_ssp,
+              orientacao: novaAtv.orientacao || "",
+              ordem: novaAtv.ordem,
+              tempo: novaAtv.tempo || 15,
+              comprimento: novaAtv.comprimento,
+              largura: novaAtv.largura,
+              numero_jogadores: novaAtv.numero_jogadores,
+              momentos_jogo: novaAtv.momentos_jogo,
+              fases_jogo: novaAtv.fases_jogo,
+              comportamentos: novaAtv.comportamentos,
+              atributos_tecnicos: novaAtv.atributos_tecnicos,
+            };
+            const resp = await api.post("/treinos/atividades-sessao/", payloadAtv);
+            if (resp?.data) {
+              setAtividades((current) =>
+                current.map((item) =>
+                  item.id === novaAtv.id
+                    ? { ...item, ...resp.data, id: resp.data.id }
+                    : item,
+                ),
+              );
+            }
+          } catch (err) {
+            console.warn("Erro ao salvar atividade da biblioteca na sessão:", err);
+          }
+        });
+      }
 
       return [...prev, ...novasAtividades];
     });
@@ -253,6 +384,7 @@ export default function SessaoModal({
     const idNumerico = Number(microcicloId);
 
     onSave({
+      id: initialData?.id,
       nome: nome.trim(),
       data,
       mes,

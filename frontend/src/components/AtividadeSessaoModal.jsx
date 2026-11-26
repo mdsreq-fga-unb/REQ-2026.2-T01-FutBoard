@@ -218,7 +218,7 @@ export default function AtividadeSessaoModal({
 
   // Validação em tempo real para habilitar o botão "Criar atividade" e deixá-lo verdinho
   const camposObrigatoriosPreenchidos = useMemo(() => {
-    if (!nome.trim() || !tipoSsp || !tipologia || !codigo.trim()) {
+    if (!nome.trim() || !tipoSsp || !tipologia) {
       return false;
     }
 
@@ -241,7 +241,7 @@ export default function AtividadeSessaoModal({
     }
 
     return true;
-  }, [nome, tipoSsp, tipologia, codigo, comprimento, largura, numeroJogadores]);
+  }, [nome, tipoSsp, tipologia, comprimento, largura, numeroJogadores]);
 
   if (!isOpen) return null;
 
@@ -251,11 +251,6 @@ export default function AtividadeSessaoModal({
 
     if (!nome.trim()) {
       setErro("O campo Nome da Atividade (SSP) é obrigatório.");
-      return;
-    }
-
-    if (!codigo.trim()) {
-      setErro("O campo Código da Atividade é obrigatório.");
       return;
     }
 
@@ -299,13 +294,14 @@ export default function AtividadeSessaoModal({
     }
 
     const payload = {
-      codigo: codigo.trim() || undefined,
+      codigo: codigo.trim() || "",
       nome: nome.trim(),
       tipologia,
       sigla_tipologia: sigla,
       tipo_ssp: tipoSsp,
+      orientacao: (initialData?.orientacao || "").trim(),
       ordem: ordem ? parseInt(ordem, 10) : null,
-      tempo: tempo ? parseInt(tempo, 10) : null,
+      tempo: tempo ? parseInt(tempo, 10) : 15,
       comprimento: c,
       largura: l,
       numero_jogadores: j,
@@ -401,7 +397,7 @@ export default function AtividadeSessaoModal({
                 htmlFor="campo-codigo"
                 className="mb-1 block text-xs font-medium text-[#10281E]"
               >
-                Código da Atividade <span className="text-red-500">*</span>
+                Código da Atividade
               </label>
               <input
                 id="campo-codigo"
