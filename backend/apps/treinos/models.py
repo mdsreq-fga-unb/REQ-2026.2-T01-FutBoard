@@ -155,6 +155,38 @@ class ComportamentoTatico(models.Model):
         self.full_clean()
         return super().save(*args, **kwargs)
 
+
+def sincronizar_comportamentos_taticos(nomes):
+    """Sincroniza princípios táticos usados em uma atividade com o catálogo ComportamentoTatico.
+
+    - Reutiliza o nome canônico quando já existe um princípio equivalente (sem duplicar por acento/caixa).
+    - Cadastra automaticamente no catálogo quando é um princípio tático novo informado direto na atividade.
+    """
+    if not nomes:
+        return []
+
+    resultado = []
+    chaves_vistas = set()
+
+    for item in nomes:
+        texto = " ".join(str(item or "").split())
+        if not texto:
+            continue
+
+        chave = normalizar_nome_comportamento(texto)
+        if chave in chaves_vistas:
+            continue
+        chaves_vistas.add(chave)
+
+        existente = ComportamentoTatico.objects.filter(nome_normalizado=chave).first()
+        if existente:
+            resultado.append(existente.nome)
+        else:
+            criado = ComportamentoTatico.objects.create(nome=texto)
+            resultado.append(criado.nome)
+
+    return resultado
+
 class AtividadeBiblioteca(models.Model):
     """Atividade cadastrada na biblioteca de treinos para reutilização futura (US19 / RF19)."""
 

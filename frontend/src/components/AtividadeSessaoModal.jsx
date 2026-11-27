@@ -104,6 +104,9 @@ export default function AtividadeSessaoModal({
   const [abertoDropdown, setAbertoDropdown] = useState(null);
   const [inputComportamento, setInputComportamento] = useState("");
   const [inputAtributo, setInputAtributo] = useState("");
+  const [comportamentosCatalogo, setComportamentosCatalogo] = useState([]);
+  const [carregandoComportamentos, setCarregandoComportamentos] =
+    useState(false);
 
   const [erro, setErro] = useState("");
   const [salvando, setSalvando] = useState(false);
@@ -208,6 +211,106 @@ export default function AtividadeSessaoModal({
       document.removeEventListener("mousedown", handleClickFora);
     };
   }, [abertoDropdown]);
+
+  // Carrega os princípios táticos cadastrados (US10) sempre que o modal abre
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    let ativo = true;
+    setCarregandoComportamentos(true);
+
+    api
+      .get("/treinos/comportamentos/")
+      .then((resposta) => {
+        if (!ativo) return;
+        const lista = Array.isArray(resposta.data)
+          ? resposta.data
+              .map((item) => (typeof item === "string" ? item : item?.nome))
+              .filter(Boolean)
+          : [];
+        setComportamentosCatalogo(
+          [...new Set(lista)].sort((a, b) => a.localeCompare(b, "pt-BR")),
+        );
+      })
+      .catch(() => {
+        if (ativo) {
+          setComportamentosCatalogo([]);
+        }
+      })
+      .finally(() => {
+        if (ativo) {
+          setCarregandoComportamentos(false);
+        }
+      });
+
+    return () => {
+      ativo = false;
+    };
+  }, [isOpen]);
+
+  const opcoesComportamentos = useMemo(() => {
+    const mapa = new Map();
+    [...comportamentosCatalogo, ...comportamentos].forEach((nomeItem) => {
+      const limpo = String(nomeItem || "")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!limpo) return;
+      const chave = normalizarTexto(limpo);
+      if (!mapa.has(chave)) {
+        mapa.set(chave, limpo);
+      }
+    });
+    return Array.from(mapa.values()).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  }, [comportamentosCatalogo, comportamentos]);
+
+  const opcoesComportamentosFiltradas = useMemo(() => {
+    const termo = normalizarTexto(inputComportamento);
+    if (!termo) return opcoesComportamentos;
+    return opcoesComportamentos.filter((item) =>
+      normalizarTexto(item).includes(termo),
+    );
+  }, [opcoesComportamentos, inputComportamento]);
+
+  const comportamentoSelecionado = (nomeItem) => {
+    const chave = normalizarTexto(nomeItem);
+    return comportamentos.some((item) => normalizarTexto(item) === chave);
+  };
+
+  const toggleComportamento = (nomeItem) => {
+    const chave = normalizarTexto(nomeItem);
+    if (comportamentos.some((item) => normalizarTexto(item) === chave)) {
+      setComportamentos(
+        comportamentos.filter((item) => normalizarTexto(item) !== chave),
+      );
+    } else {
+      setComportamentos([...comportamentos, nomeItem]);
+    }
+  };
+
+  const adicionarComportamento = () => {
+    const texto = inputComportamento.replace(/\s+/g, " ").trim();
+    if (!texto) return;
+
+    const chave = normalizarTexto(texto);
+    const existente = opcoesComportamentos.find(
+      (item) => normalizarTexto(item) === chave,
+    );
+    const nomeFinal = existente || texto;
+
+    if (!comportamentoSelecionado(nomeFinal)) {
+      setComportamentos([...comportamentos, nomeFinal]);
+    }
+
+    if (
+      !comportamentosCatalogo.some((item) => normalizarTexto(item) === chave)
+    ) {
+      setComportamentosCatalogo((anterior) =>
+        [...anterior, nomeFinal].sort((a, b) => a.localeCompare(b, "pt-BR")),
+      );
+    }
+
+    setInputComportamento("");
+  };
 
   // Cálculo de Área e Dimensão em tempo real (RN01 e RN02)
   const espacoCalculado = useMemo(() => {
@@ -1012,6 +1115,34 @@ export default function AtividadeSessaoModal({
                       })
                     )}
                   </div>
+
+                  {comportamentos.length > 0 && (
+                    <div className="border-t border-[#E4DFD2]/70 bg-[#FAF9F5] p-2">
+                      <div className="flex flex-wrap gap-1">
+                        {comportamentos.map((item) => (
+                          <span
+                            key={item}
+                            className="inline-flex items-center gap-1 rounded-md border border-[#E4DFD2] bg-white px-2 py-0.5 text-[11px] text-[#10281E]"
+                          >
+                            <span className="font-mono text-[10px]">
+                              {item}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleComportamento(item);
+                              }}
+                              className="text-red-500 hover:font-bold"
+                              aria-label={`Remover ${item}`}
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

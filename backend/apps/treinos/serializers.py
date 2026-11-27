@@ -14,6 +14,7 @@ from .models import (
     ComportamentoTatico,
     Sessao,
     normalizar_nome_comportamento,
+    sincronizar_comportamentos_taticos,
 )
 
 
@@ -308,6 +309,20 @@ class AtividadeBibliotecaSerializer(serializers.ModelSerializer):
 
         return attrs
 
+    def create(self, validated_data):
+        if "comportamentos" in validated_data:
+            validated_data["comportamentos"] = sincronizar_comportamentos_taticos(
+                validated_data["comportamentos"]
+            )
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        if "comportamentos" in validated_data:
+            validated_data["comportamentos"] = sincronizar_comportamentos_taticos(
+                validated_data["comportamentos"]
+            )
+        return super().update(instance, validated_data)
+
 
 class AtividadeSessaoSerializer(serializers.ModelSerializer):
     codigo = serializers.CharField(max_length=20, required=False, allow_blank=True)
@@ -487,6 +502,20 @@ class AtividadeSessaoSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(erros)
 
         return attrs
+
+    def create(self, validated_data):
+        if "comportamentos" in validated_data:
+            validated_data["comportamentos"] = sincronizar_comportamentos_taticos(
+                validated_data["comportamentos"]
+            )
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        if "comportamentos" in validated_data:
+            validated_data["comportamentos"] = sincronizar_comportamentos_taticos(
+                validated_data["comportamentos"]
+            )
+        return super().update(instance, validated_data)
 
 
 class IndicadoresTreinoSerializer(serializers.Serializer):
