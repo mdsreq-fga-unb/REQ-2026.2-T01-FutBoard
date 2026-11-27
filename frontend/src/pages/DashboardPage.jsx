@@ -624,7 +624,7 @@ export default function DashboardPage({ onSelectNav }) {
     try {
       const [respInd, respAtv] = await Promise.all([
         api.get("/treinos/indicadores/", { params }).catch(() => null),
-        api.get("/treinos/informacoes-atividades/", { params }).catch(() => null),
+        api.get("/treinos/atividades-treino/", { params }).catch(() => null),
       ]);
 
       if (respInd?.data && typeof respInd.data.numero_sessoes === "number") {

@@ -155,6 +155,38 @@ class ComportamentoTatico(models.Model):
         self.full_clean()
         return super().save(*args, **kwargs)
 
+
+def sincronizar_comportamentos_taticos(nomes):
+    """Sincroniza princípios táticos usados em uma atividade com o catálogo ComportamentoTatico.
+
+    - Reutiliza o nome canônico quando já existe um princípio equivalente (sem duplicar por acento/caixa).
+    - Cadastra automaticamente no catálogo quando é um princípio tático novo informado direto na atividade.
+    """
+    if not nomes:
+        return []
+
+    resultado = []
+    chaves_vistas = set()
+
+    for item in nomes:
+        texto = " ".join(str(item or "").split())
+        if not texto:
+            continue
+
+        chave = normalizar_nome_comportamento(texto)
+        if chave in chaves_vistas:
+            continue
+        chaves_vistas.add(chave)
+
+        existente = ComportamentoTatico.objects.filter(nome_normalizado=chave).first()
+        if existente:
+            resultado.append(existente.nome)
+        else:
+            criado = ComportamentoTatico.objects.create(nome=texto)
+            resultado.append(criado.nome)
+
+    return resultado
+
 class AtividadeBiblioteca(models.Model):
     """Atividade cadastrada na biblioteca de treinos para reutilização futura (US19 / RF19)."""
 
@@ -556,6 +588,7 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
             "atividades": [],
             "por_tipologia": [],
             "por_tipo_ssp": [],
+            "por_momento_jogo": [],
             "execucoes": [],
             "estado_vazio": True,
             "mensagem": MENSAGEM_ATIVIDADES_VAZIO,
@@ -566,6 +599,7 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
     agrupado_atividades = {}
     agrupado_tipologias = {}
     agrupado_tipos_ssp = {}
+    agrupado_momentos_jogo = {}
     execucoes_detalhadas = []
 
     for atv in atividades:
@@ -628,6 +662,26 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
         item_ssp["minutos"] += tempo
         item_ssp["execucoes"] += 1
         item_ssp["chaves_atividades"].add(chave_atv)
+
+        # US36: Agrupamento por momentos de jogo (RN05: opcional; cada momento da lista recebe o tempo da atividade)
+        momentos = atv.momentos_jogo if isinstance(atv.momentos_jogo, list) else []
+        for momento_item in momentos:
+            nome_momento = str(momento_item or "").strip()
+            if not nome_momento:
+                continue
+            if nome_momento not in agrupado_momentos_jogo:
+                agrupado_momentos_jogo[nome_momento] = {
+                    "id": f"momento-{nome_momento.lower().replace(' ', '-')}",
+                    "codigo": nome_momento,
+                    "nome": nome_momento,
+                    "minutos": 0,
+                    "execucoes": 0,
+                    "chaves_atividades": set(),
+                }
+            item_mom = agrupado_momentos_jogo[nome_momento]
+            item_mom["minutos"] += tempo
+            item_mom["execucoes"] += 1
+            item_mom["chaves_atividades"].add(chave_atv)
 
         sessao = atv.sessao
         micro = sessao.microciclo if sessao else None
@@ -735,6 +789,29 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
         key=lambda x: (-x["minutos"], -x["execucoes"], x["tipo_ssp"])
     )
 
+    lista_momentos_jogo = []
+    for item in agrupado_momentos_jogo.values():
+        minutos = item["minutos"]
+        lista_momentos_jogo.append(
+            {
+                "id": item["id"],
+                "codigo": item["codigo"],
+                "nome": item["nome"],
+                "momento_jogo": item["nome"],
+                "minutos": minutos,
+                "percentual_tempo": (
+                    round((minutos / minutos_totais_atividades) * 100, 2)
+                    if minutos_totais_atividades > 0
+                    else 0.0
+                ),
+                "execucoes": item["execucoes"],
+                "atividades_distintas": len(item["chaves_atividades"]),
+            }
+        )
+    lista_momentos_jogo.sort(
+        key=lambda x: (-x["minutos"], -x["execucoes"], x["nome"])
+    )
+
     return {
         "total_atividades_distintas": len(lista_atividades),
         "total_registros": total_registros,
@@ -743,6 +820,7 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
         "atividades": lista_atividades,
         "por_tipologia": lista_tipologias,
         "por_tipo_ssp": lista_tipos_ssp,
+        "por_momento_jogo": lista_momentos_jogo,
         "execucoes": execucoes_detalhadas,
         "estado_vazio": False,
         "mensagem": None,
