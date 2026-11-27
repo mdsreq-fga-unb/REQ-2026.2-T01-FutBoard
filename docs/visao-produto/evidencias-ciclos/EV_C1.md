@@ -98,10 +98,10 @@
 
     | Critério do DoD | Evidência | Status |
     | :--- | :--- | :---: |
-    | Os critérios de aceitação foram atendidos? | [Issue US01](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23) | [] |
+    | Os critérios de aceitação foram atendidos? | [Issue US01](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23) | [x] |
     | O código foi integrado na branch main e revisado? | [PR #22](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/22), integrado na `staging` (pendente integração na `main`). | [] |
     | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
-    | Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`apps/ciclos/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/ciclos/tests.py), sem registro de execução publicado. O frontend não tem testes. | [] |
+    | Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`testes unitarios`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23#issuecomment-7116241276) Testes do Frontend [`testes Exploratório`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23#issuecomment-7219972939). | [] |
     | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
     | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
     | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
