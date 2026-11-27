@@ -80,37 +80,6 @@
         ![Lista de microciclos atualizada](../../assets/evidencias/US08_lista_atualizada.jpeg)
         *Figura 3: Listagem de microciclos atualizada após edição.*
 
-### Confronto Cruzado { #confronto-cruzado }
-
-| História | Item declarado | Evidência no protótipo | Status |
-| :--- | :--- | :--- | :---: |
-| **US01** | Cadastro com nome, data de início e data de fim obrigatórios (CA) | [Formulário](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=35-214) | [x] |
-| **US01** | Alerta quando campos obrigatórios não são preenchidos (CA) | Ausente: nenhum frame mostra o alerta | [] |
-| **US01** | Alerta quando a data de fim é anterior à de início (CA) | Ausente: nenhum frame mostra o alerta | [] |
-| **US01** | Estado vazio antes do primeiro cadastro (DoR) | [Estado vazio](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=35-179) | [x] |
-| **US01** | Macrociclo como raiz da árvore (RN04) | [Lista atualizada](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=36-276) | [x] |
-| **US01** | Data de fim na declaração da US01 | Divergente: o protótipo tem a data de fim, mas a US01 pede só nome e data de início (D02) | [] |
-| **US02** | Dados atualizados na visualização após a edição (CA) | Ausente: nenhum frame mostra a lista atualizada | [] |
-| **US02** | Bloqueio de data de fim anterior à de início (CA) | Ausente: nenhum frame mostra o alerta | [] |
-| **US02** | Edição sem quebrar a hierarquia dos ciclos filhos (CA, RN04) | Ausente: nenhum frame mostra o alerta | [] |
-| **US02** | Data de término obrigatória (CA) | Divergente: o [formulário de edição](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=38-2) usa "Término previsto" sem asterisco | [] |
-| **US04** | Cadastro com nome, datas e vínculo a um macrociclo (CA, RN04) | [Formulário](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=159-2) | [x] |
-| **US04** | Data de término obrigatória (CA) | Divergente: o [formulário](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=159-2) não marca o campo como obrigatório | [] |
-| **US04** | Alerta quando não há macrociclo (CA) | Ausente: nenhum frame mostra o alerta | [] |
-| **US04** | Estado vazio de mesociclos (DoR) | Ausente: nenhum frame mostra o estado vazio | [] |
-| **US05** | Atualização mantendo posição e vínculos na árvore (CA) | [Lista atualizada](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=159-184) | [x] |
-| **US05** | Edição não desvincula o mesociclo do macrociclo (CA, RN04) | [Formulário de edição](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=159-141) | [x] |
-| **US05** | Exemplo do campo Nome | Divergente: o [formulário de edição](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=159-141) usa "Temporada 2027", exemplo de macrociclo | [] |
-| **US07** | Cadastro com nome, datas e seleção de mesociclo (CA, RN04) | [Formulário](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=84-33) | [x] |
-| **US07** | Alerta quando não há mesociclo (CA) | Ausente: nenhum frame mostra o alerta | [] |
-| **US07** | Alerta quando campos obrigatórios não são preenchidos (CA) | Ausente: nenhum frame mostra o alerta | [] |
-| **US07** | Seleção do mesociclo | Divergente: o [formulário](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=84-33) diz "Selecione um macrociclo" | [] |
-| **US07** | Estado vazio antes do primeiro cadastro (DoR) | [Estado vazio](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=84-2) | [x] |
-| **US08** | Atualização sem desconectar as sessões vinculadas (CA, RN04) | [Lista atualizada](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=159-270) | [x] |
-| **US08** | Campos obrigatórios marcados (CA) | [Formulário de edição](https://www.figma.com/design/BDeb0IKSdM2vWSrp9FaePu/FutBoard?node-id=159-314) | [x] |
-
-**Resultado:** 10 itens conferidos e 14 com pendência (5 divergentes e 9 ausentes). As correções estão na decisão D03.
-
 ### Registro de Decisões e Matriz de Impacto { #registro-de-decisoes }
 
 | ID | Decisão | Evidência | Impacto nos artefatos | Status |
@@ -123,16 +92,83 @@
 
 ## Definition of Done { #dod }
 
-### Checklist da Iteração 7
+### Checklist por História — Iteração 7
 
-| Critério do DoD | Evidência | Status |
-| :--- | :--- | :---: |
-| Os critérios de aceitação foram atendidos? | [Issue US01](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23)<br>[Issue US02](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23)<br>[Issue US04](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/28)<br>[Issue US05](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/29)<br>[Issue US07](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/30)<br>[Issue US08](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/31) | [] |
-| O código foi integrado na branch main e revisado? | [PR #22](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/22) (US01, US02) · [PR #49](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/49) (US04, US05) · [PR #25](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/25) (US07, US08), integrados na `staging`. | [] |
-| Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código. | [] |
-| Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`apps/ciclos/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/ciclos/tests.py) (15 testes), sem registro de execução publicado. O frontend não tem testes. | [] |
-| Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada. | [] |
-| A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
-| A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
-| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [x] [Validação US01](https://youtu.be/jytb0jdUH10)<br>[x] [Validação US02](https://youtu.be/UvoZ22L7Od0)<br>[x] [Validação US04](https://youtu.be/Vrb2pxO-gQE)<br>[] [Protótipo validado — US05](../../assets/evidencias/whatsapp/whatsapp-2810-validacao-fluxo-arvore.png)<br>[x] [Validação US07](https://youtu.be/w4jOr4qmkJI)<br>[x] [Validação US08](https://youtu.be/Iq24Y1mtWh4) | [] |
+=== "US01"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US01](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23) | [] |
+    | O código foi integrado na branch main e revisado? | [PR #22](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/22), integrado na `staging` (pendente integração na `main`). | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`apps/ciclos/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/ciclos/tests.py), sem registro de execução publicado. O frontend não tem testes. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US01](https://youtu.be/jytb0jdUH10) | [x] |
+
+=== "US02"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US02](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/23) | [] |
+    | O código foi integrado na branch main e revisado? | [PR #22](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/22), integrado na `staging` (pendente integração na `main`). | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`apps/ciclos/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/ciclos/tests.py), sem registro de execução publicado. O frontend não tem testes. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US02](https://youtu.be/UvoZ22L7Od0) | [x] |
+
+=== "US04"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US04](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/28) | [] |
+    | O código foi integrado na branch main e revisado? | [PR #49](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/49), integrado na `staging` (pendente integração na `main`). | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`apps/ciclos/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/ciclos/tests.py), sem registro de execução publicado. O frontend não tem testes. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US04](https://youtu.be/Vrb2pxO-gQE) | [x] |
+
+=== "US05"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US05](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/29) | [] |
+    | O código foi integrado na branch main e revisado? | [PR #49](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/49), integrado na `staging` (pendente integração na `main`). | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`apps/ciclos/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/ciclos/tests.py), sem registro de execução publicado. O frontend não tem testes. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | Pendente validação da funcionalidade implementada. [Protótipo validado — US05](../../assets/evidencias/whatsapp/whatsapp-2810-validacao-fluxo-arvore.png) | [] |
+
+=== "US07"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US07](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/30) | [] |
+    | O código foi integrado na branch main e revisado? | [PR #25](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/25), integrado na `staging` (pendente integração na `main`). | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`apps/ciclos/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/ciclos/tests.py), sem registro de execução publicado. O frontend não tem testes. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US07](https://youtu.be/w4jOr4qmkJI) | [x] |
+
+=== "US08"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US08](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/issues/31) | [] |
+    | O código foi integrado na branch main e revisado? | [PR #25](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/pull/25), integrado na `staging` (pendente integração na `main`). | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Testes unitários do backend em [`apps/ciclos/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/ciclos/tests.py), sem registro de execução publicado. O frontend não tem testes. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [Validação US08](https://youtu.be/Iq24Y1mtWh4) | [x] |
 

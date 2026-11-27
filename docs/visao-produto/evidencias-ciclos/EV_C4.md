@@ -48,18 +48,6 @@
         ![Gráfico de tempo por princípio tático](../../assets/evidencias/US39_consulta_principio_tatico.png)
         *Figura 1: Gráfico de tempo por princípio tático.*
 
-### Confronto Cruzado { #confronto-cruzado }
-
-| História | Item declarado | Evidência no protótipo | Status |
-| :--- | :--- | :--- | :---: |
-| **US25** | Critérios de aceitação | O [protótipo](../../assets/evidencias/US25_lista_sessoes.png) foi enviado ao cliente em 12/11 e aguarda validação; os critérios entram na issue da história depois dela | [] |
-| **US26** | Critérios de aceitação | O [protótipo](../../assets/evidencias/US26_tempo_relativo.png) foi enviado ao cliente em 12/11 e aguarda validação; os critérios entram na issue da história depois dela | [] |
-| **US32** | Critérios de aceitação | O [protótipo](../../assets/evidencias/US32_novo_atributo_tecnico.png) foi enviado ao cliente em 12/11 e aguarda validação; os critérios entram na issue da história depois dela | [] |
-| **US35** | Critérios de aceitação | O [protótipo](../../assets/evidencias/US35_consulta_espaco.png) foi enviado ao cliente em 12/11 e aguarda validação; os critérios entram na issue da história depois dela | [] |
-| **US38** | Critérios de aceitação | O [protótipo](../../assets/evidencias/US39_consulta_principio_tatico.png) foi enviado ao cliente em 12/11 e aguarda validação; os critérios entram na issue da história depois dela | [] |
-
-**Resultado:** os protótipos foram enviados ao cliente em 12/11 e aguardam validação. Pelo processo da equipe, os critérios de aceitação são declarados na issue de cada história depois que o cliente valida o protótipo; o confronto é feito em seguida, antes da construção.
-
 ### Registro de Decisões e Matriz de Impacto { #registro-de-decisoes }
 
 | ID | Decisão | Evidência | Impacto nos artefatos | Status |
@@ -70,16 +58,70 @@
 
 ## Definition of Done { #dod }
 
-### Checklist da Iteração 10
+### Checklist por História — Iteração 10
 
-| Critério do DoD | Evidência | Status |
-| :--- | :--- | :---: |
-| Os critérios de aceitação foram atendidos? | [Issue US25](#)<br>[Issue US26](#)<br>[Issue US32](#)<br>[Issue US35](#)<br>[Issue US38](#) | [] |
-| O código foi integrado na branch main e revisado? | Nenhum PR das histórias desta iteração até 16/11/2026. | [] |
-| Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código. | [] |
-| Os testes relacionados foram executados com sucesso? | Nenhum teste das histórias desta iteração até 16/11/2026. | [] |
-| Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada. | [] |
-| A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
-| A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
-| A funcionalidade da User Story desenvolvida foi validada pelo cliente? | [] [Protótipo enviado — US25](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png)<br>[] [Protótipo enviado — US26](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png)<br>[] [Protótipo enviado — US32](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png)<br>[] [Protótipo enviado — US35](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png)<br>[] [Protótipo enviado — US38](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png) | [] |
+=== "US25"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US25](#) | [] |
+    | O código foi integrado na branch main e revisado? | Nenhum PR da US25 integrado até 16/11/2026. | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Nenhum teste da US25 registrado até 16/11/2026. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | Pendente validação da funcionalidade implementada. [Protótipo enviado — US25](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png) | [] |
+
+=== "US26"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US26](#) | [] |
+    | O código foi integrado na branch main e revisado? | Nenhum PR da US26 integrado até 16/11/2026. | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Nenhum teste da US26 registrado até 16/11/2026. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | Pendente validação da funcionalidade implementada. [Protótipo enviado — US26](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png) | [] |
+
+=== "US32"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US32](#) | [] |
+    | O código foi integrado na branch main e revisado? | Nenhum PR da US32 integrado até 16/11/2026. | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Nenhum teste da US32 registrado até 16/11/2026. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | Pendente validação da funcionalidade implementada. [Protótipo enviado — US32](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png) | [] |
+
+=== "US35"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US35](#) | [] |
+    | O código foi integrado na branch main e revisado? | Nenhum PR da US35 integrado até 16/11/2026. | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Nenhum teste da US35 registrado até 16/11/2026. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | Pendente validação da funcionalidade implementada. [Protótipo enviado — US35](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png) | [] |
+
+=== "US38"
+
+    | Critério do DoD | Evidência | Status |
+    | :--- | :--- | :---: |
+    | Os critérios de aceitação foram atendidos? | [Issue US38](#) | [] |
+    | O código foi integrado na branch main e revisado? | Nenhum PR da US38 integrado até 16/11/2026. | [] |
+    | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código na `main`. | [] |
+    | Os testes relacionados foram executados com sucesso? | Nenhum teste da US38 registrado até 16/11/2026. | [] |
+    | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada (RNF02, RNF04). | [] |
+    | A verificação integrada dos fluxos foi realizada com sucesso? | Pendente: verificação ainda não registrada. | [] |
+    | A documentação e evidências da entrega estão atualizadas? | Esta página de evidências, atualizada em 16/11/2026. | [] |
+    | A funcionalidade da User Story desenvolvida foi validada pelo cliente? | Pendente validação da funcionalidade implementada. [Protótipo enviado — US38](../../assets/evidencias/whatsapp/whatsapp-1211-prototipos-iteracao-10.png) | [] |
 
