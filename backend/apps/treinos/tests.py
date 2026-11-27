@@ -1466,3 +1466,259 @@ class InformacoesAtividadesTreinoApiTests(APITestCase):
             "Nenhuma atividade encontrada para os filtros aplicados.",
         )
 
+
+class RelatorioSessaoAPITests(APITestCase):
+    """Testes automatizados da US25 / RF25 (Gerar relatório de treino individual por sessão)."""
+
+    def setUp(self):
+        self.macrociclo = Macrociclo.objects.create(
+            nome="Macrociclo Temporada 2026",
+            data_inicio="2026-01-01",
+            data_termino="2026-12-31",
+        )
+        self.mesociclo = Mesociclo.objects.create(
+            macrociclo=self.macrociclo,
+            nome="Mesociclo 1 - Preparatório",
+            data_inicio="2026-02-01",
+            data_termino="2026-05-31",
+        )
+        self.microciclo = Microciclo.objects.create(
+            mesociclo=self.mesociclo,
+            nome="Microciclo 1",
+            data_inicio="2026-03-01",
+            data_termino="2026-03-07",
+        )
+        self.sessao1 = Sessao.objects.create(
+            microciclo=self.microciclo,
+            nome="Sessão Tática 01",
+            data="2026-03-02",
+        )
+        self.sessao2 = Sessao.objects.create(
+            microciclo=self.microciclo,
+            nome="Sessão Física 02",
+            data="2026-03-04",
+        )
+
+    def test_01_hierarquia_periodizacao_completa(self):
+        """1. Retorno exato da hierarquia Macrociclo -> Mesociclo -> Microciclo -> Sessão."""
+        url = f"/api/treinos/sessoes/{self.sessao1.id}/relatorio/"
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        dados = resp.json()
+
+        # Sessão
+        self.assertEqual(dados["sessao"]["id"], self.sessao1.id)
+        self.assertEqual(dados["sessao"]["nome"], "Sessão Tática 01")
+        self.assertEqual(dados["sessao"]["data"], "2026-03-02")
+        self.assertEqual(dados["sessao"]["mes"], "Março")
+        self.assertEqual(dados["sessao"]["codigo"], f"SES-{self.sessao1.sequencia:02d}")
+
+        # Periodização
+        periodizacao = dados["periodizacao"]
+        self.assertEqual(periodizacao["microciclo"]["id"], self.microciclo.id)
+        self.assertEqual(periodizacao["microciclo"]["nome"], "Microciclo 1")
+        self.assertEqual(periodizacao["microciclo"]["data_inicio"], "2026-03-01")
+        self.assertEqual(periodizacao["microciclo"]["data_termino"], "2026-03-07")
+
+        self.assertEqual(periodizacao["mesociclo"]["id"], self.mesociclo.id)
+        self.assertEqual(periodizacao["mesociclo"]["nome"], "Mesociclo 1 - Preparatório")
+        self.assertEqual(periodizacao["mesociclo"]["data_inicio"], "2026-02-01")
+        self.assertEqual(periodizacao["mesociclo"]["data_termino"], "2026-05-31")
+
+        self.assertEqual(periodizacao["macrociclo"]["id"], self.macrociclo.id)
+        self.assertEqual(periodizacao["macrociclo"]["codigo"], self.macrociclo.codigo)
+        self.assertEqual(periodizacao["macrociclo"]["nome"], "Macrociclo Temporada 2026")
+        self.assertEqual(periodizacao["macrociclo"]["data_inicio"], "2026-01-01")
+        self.assertEqual(periodizacao["macrociclo"]["data_termino"], "2026-12-31")
+
+    def test_02_isolamento_estrito_entre_sessoes(self):
+        """2. Isolamento estrito entre sessões: atividades de outra sessão nunca interferem nos gráficos."""
+        AtividadeSessao.objects.create(
+            sessao=self.sessao1,
+            codigo="RD1",
+            nome="Rondo",
+            tipologia="Rondo",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=15,
+            momentos_jogo=["Ataque"],
+        )
+        AtividadeSessao.objects.create(
+            sessao=self.sessao2,
+            codigo="CF1",
+            nome="Confronto",
+            tipologia="Confrontos",
+            tipo_ssp="Competitivo",
+            ordem=1,
+            tempo=50,
+            momentos_jogo=["Defesa"],
+        )
+
+        resp1 = self.client.get(f"/api/treinos/sessoes/{self.sessao1.id}/relatorio/")
+        self.assertEqual(resp1.status_code, status.HTTP_200_OK)
+        dados1 = resp1.json()
+
+        # Deve conter apenas a atividade da sessão 1
+        self.assertEqual(dados1["sessao"]["total_atividades"], 1)
+        self.assertEqual(dados1["sessao"]["tempo_total_bruto"], 15)
+        self.assertEqual(dados1["sessao"]["tempo_liquido"], 15)
+        self.assertEqual(len(dados1["sessao"]["atividades"]), 1)
+        self.assertEqual(dados1["sessao"]["atividades"][0]["codigo"], "RD1")
+
+        # Gráfico de momentos da sessão 1 deve ter apenas Ataque, sem Defesa
+        nomes_momentos_1 = [item["nome"] for item in dados1["graficos"]["momentos_jogo"]["itens"]]
+        self.assertIn("Ataque", nomes_momentos_1)
+        self.assertNotIn("Defesa", nomes_momentos_1)
+
+    def test_03_consolidacao_matematica_dos_6_graficos_e_tempo_liquido_rn03(self):
+        """3. Consolidação matemática dos 6 gráficos e cálculo do tempo_liquido (RN03)."""
+        # Atividade 1 (ordem 1, 15 min)
+        AtividadeSessao.objects.create(
+            sessao=self.sessao1,
+            codigo="RD1",
+            nome="Rondo de Pressão",
+            tipologia="Rondo",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=15,
+            comprimento=20,
+            largura=20,
+            numero_jogadores=8,  # Área = 50 -> Pequeno
+            momentos_jogo=["Ataque", "Trans Def"],
+            fases_jogo=["1ª Construção"],
+            atributos_tecnicos=["Passe Curto"],
+            comportamentos=["Pressão Pós-Perda"],
+        )
+        # Atividade 2 (simultânea: ordem 1, 25 min)
+        AtividadeSessao.objects.create(
+            sessao=self.sessao1,
+            codigo="JS1",
+            nome="Jogo Setorial",
+            tipologia="Jogo Setorial",
+            tipo_ssp="Dirigido",
+            ordem=1,
+            tempo=25,
+            comprimento=45,
+            largura=35,
+            numero_jogadores=10,  # Área = 157.5 -> Médio
+            momentos_jogo=["Ataque"],
+            fases_jogo=["Criação", "Finalização"],
+            atributos_tecnicos=["Finalização"],
+            comportamentos=["Infiltração"],
+        )
+        # Atividade 3 (ordem 2, 20 min)
+        AtividadeSessao.objects.create(
+            sessao=self.sessao1,
+            codigo="CF1",
+            nome="Confronto Coletivo",
+            tipologia="Confrontos",
+            tipo_ssp="Competitivo",
+            ordem=2,
+            tempo=20,
+            comprimento=70,
+            largura=50,
+            numero_jogadores=14,  # Área = 250 -> Grande
+            momentos_jogo=["Defesa"],
+            fases_jogo=["Bola Parada"],
+            atributos_tecnicos=["Cabeceio"],
+            comportamentos=["Compactação Defensiva"],
+        )
+
+        resp = self.client.get(f"/api/treinos/sessoes/{self.sessao1.id}/relatorio/")
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        dados = resp.json()
+
+        # RN03: tempo líquido = max(15, 25) + 20 = 45 min
+        self.assertEqual(dados["sessao"]["tempo_total_bruto"], 60)
+        self.assertEqual(dados["sessao"]["tempo_liquido"], 45)
+        self.assertEqual(dados["sessao"]["numero_execucoes"], 2)
+        self.assertEqual(dados["sessao"]["total_atividades"], 3)
+
+        graficos = dados["graficos"]
+
+        # 1. Atividades
+        self.assertEqual(graficos["atividades"]["total_minutos"], 60)
+        self.assertEqual(graficos["atividades"]["total_execucoes"], 3)
+        self.assertFalse(graficos["atividades"]["estado_vazio"])
+        self.assertEqual(len(graficos["atividades"]["itens"]), 3)
+
+        # 2. Momentos de Jogo: Ataque (15+25=40), Defesa (20), Transição Defensiva (15) = 75
+        self.assertEqual(graficos["momentos_jogo"]["total_minutos"], 75)
+        self.assertEqual(graficos["momentos_jogo"]["total_execucoes"], 4)
+        mapa_momentos = {i["nome"]: i["minutos"] for i in graficos["momentos_jogo"]["itens"]}
+        self.assertEqual(mapa_momentos["Ataque"], 40)
+        self.assertEqual(mapa_momentos["Defesa"], 20)
+        self.assertEqual(mapa_momentos["Transição Defensiva"], 15)
+
+        # 3. Fases de Jogo: 1ª Construção (15), Criação (25), Finalização (25), Bola Parada (20) = 85
+        self.assertEqual(graficos["fases_jogo"]["total_minutos"], 85)
+        self.assertEqual(len(graficos["fases_jogo"]["itens"]), 4)
+
+        # 4. Atributos Técnicos
+        self.assertEqual(graficos["atributos_tecnicos"]["total_minutos"], 60)
+        mapa_atributos = {i["nome"]: i["minutos"] for i in graficos["atributos_tecnicos"]["itens"]}
+        self.assertEqual(mapa_atributos["Finalização"], 25)
+        self.assertEqual(mapa_atributos["Cabeceio"], 20)
+        self.assertEqual(mapa_atributos["Passe Curto"], 15)
+
+        # 5. Espaços de Treino (Pequeno: 15, Médio: 25, Grande: 20)
+        self.assertEqual(graficos["espacos_treino"]["total_minutos"], 60)
+        self.assertEqual(len(graficos["espacos_treino"]["itens"]), 3)
+
+        # 6. Comportamentos de Treino
+        self.assertEqual(graficos["comportamentos_treino"]["total_minutos"], 60)
+        mapa_comp = {i["nome"]: i["minutos"] for i in graficos["comportamentos_treino"]["itens"]}
+        self.assertEqual(mapa_comp["Infiltração"], 25)
+        self.assertEqual(mapa_comp["Compactação Defensiva"], 20)
+        self.assertEqual(mapa_comp["Pressão Pós-Perda"], 15)
+
+    def test_04_sessao_sem_atividades_e_campos_opcionais_vazios(self):
+        """4. Estabilidade e estado vazio (RN07) em sessão sem atividades e com campos vazios."""
+        # Sessão 1 sem atividades
+        resp = self.client.get(f"/api/treinos/sessoes/{self.sessao1.id}/relatorio/")
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        dados = resp.json()
+
+        self.assertEqual(dados["sessao"]["total_atividades"], 0)
+        self.assertEqual(dados["sessao"]["tempo_total_bruto"], 0)
+        self.assertEqual(dados["sessao"]["tempo_liquido"], 0)
+        self.assertEqual(dados["sessao"]["numero_execucoes"], 0)
+        self.assertEqual(dados["sessao"]["atividades"], [])
+
+        for chave_grafico in [
+            "atividades",
+            "momentos_jogo",
+            "fases_jogo",
+            "atributos_tecnicos",
+            "espacos_treino",
+            "comportamentos_treino",
+        ]:
+            grafico = dados["graficos"][chave_grafico]
+            self.assertTrue(grafico["estado_vazio"], f"Gráfico {chave_grafico} deveria estar vazio")
+            self.assertEqual(grafico["total_minutos"], 0)
+            self.assertEqual(grafico["total_execucoes"], 0)
+            self.assertEqual(grafico["itens"], [])
+            self.assertTrue(bool(grafico["mensagem_vazio"]))
+
+        # Adiciona uma atividade com orientação PDI e campos opcionais nulos (RN05)
+        AtividadeSessao.objects.create(
+            sessao=self.sessao1,
+            nome="Atividade Mínima PDI",
+            tipologia="Situacional",
+            tipo_ssp="Dirigido",
+            orientacao="PDI",
+            ordem=1,
+            tempo=10,
+        )
+        resp2 = self.client.get(f"/api/treinos/sessoes/{self.sessao1.id}/relatorio/")
+        self.assertEqual(resp2.status_code, status.HTTP_200_OK)
+        dados2 = resp2.json()
+        self.assertEqual(dados2["sessao"]["total_atividades"], 1)
+        # Espaços de treino permanece vazio (dimensão "Não Definido" ignorada)
+        self.assertTrue(dados2["graficos"]["espacos_treino"]["estado_vazio"])
+
+    def test_05_sessao_inexistente_retorna_404(self):
+        """5. Retorno 404 Not Found para sessão inexistente."""
+        resp = self.client.get("/api/treinos/sessoes/999999/relatorio/")
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+

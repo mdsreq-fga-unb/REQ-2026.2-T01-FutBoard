@@ -678,13 +678,21 @@ export function gerarNomeArquivoPdfSessao(sessao) {
 }
 
 /**
+ * [US25] Consulta os dados consolidados e gráficos do relatório da sessão diretamente da API backend.
+ */
+export async function buscarDadosRelatorioSessaoApi(sessaoId) {
+  if (!sessaoId) return null;
+  const resp = await api.get(`/treinos/sessoes/${sessaoId}/relatorio/`);
+  return resp?.data || null;
+}
+
+/**
  * [PONTO DE INTEGRAÇÃO COM O BACKEND]
  * Obtém e estrutura todos os dados necessários para o relatório PDF individual de uma sessão.
  *
- * - Busca dinamicamente as atividades da sessão e ciclos pai caso não estejam presentes em memória.
+ * - Busca dinamicamente os dados consolidados no backend (/treinos/sessoes/<id>/relatorio/).
+ * - Mantém fallback local completo caso o endpoint esteja indisponível.
  * - Consolida exclusivamente os dados da sessão selecionada (sem misturar outras sessões).
- * - Caso `dadosRelatorioApi` seja fornecido futuramente por um endpoint dedicado do backend,
- *   utiliza-o diretamente mantendo o mesmo contrato visual.
  */
 export async function montarDadosRelatorioSessao(
   sessao,
@@ -706,12 +714,32 @@ export async function montarDadosRelatorioSessao(
     ? [...sessao.atividades]
     : [];
 
+  let dadosRelatorioApiAtual = dadosRelatorioApi;
+  if (!dadosRelatorioApiAtual && sessao?.id) {
+    try {
+      const retornoApi = await buscarDadosRelatorioSessaoApi(sessao.id);
+      if (retornoApi) {
+        dadosRelatorioApiAtual = retornoApi;
+        if (
+          Array.isArray(retornoApi.sessao?.atividades) &&
+          retornoApi.sessao.atividades.length > 0 &&
+          atividadesSessao.length === 0
+        ) {
+          atividadesSessao = retornoApi.sessao.atividades;
+        }
+      }
+    } catch {
+      // Segue com o fallback local
+    }
+  }
+
   // Caso as atividades da sessão ou os ciclos superiores ainda não estejam carregados em memória,
   // tenta consultar os endpoints existentes do backend de forma transparente.
   const precisaBuscarAtividades =
     atividadesSessao.length === 0 && sessao.id !== undefined && sessao.id !== null;
   const precisaBuscarCiclos =
-    listaMesos.length === 0 || listaMacros.length === 0 || listaMicros.length === 0;
+    !dadosRelatorioApiAtual?.periodizacao &&
+    (listaMesos.length === 0 || listaMacros.length === 0 || listaMicros.length === 0);
 
   if (precisaBuscarAtividades || precisaBuscarCiclos) {
     try {
@@ -817,11 +845,92 @@ export async function montarDadosRelatorioSessao(
     return ordemA - ordemB;
   });
 
-  const periodizacao = resolverHierarquiaPeriodizacao(sessao, {
-    microciclos: listaMicros,
-    mesociclos: listaMesos,
-    macrociclos: listaMacros,
-  });
+  const periodizacao =
+    dadosRelatorioApiAtual?.periodizacao?.macrociclo &&
+    dadosRelatorioApiAtual?.periodizacao?.mesociclo &&
+    dadosRelatorioApiAtual?.periodizacao?.microciclo
+      ? {
+          macrociclo: {
+            ...dadosRelatorioApiAtual.periodizacao.macrociclo,
+            dataInicioFormatada: formatarDataRelatorio(
+              dadosRelatorioApiAtual.periodizacao.macrociclo.data_inicio ||
+                dadosRelatorioApiAtual.periodizacao.macrociclo.dataInicio
+            ),
+            dataTerminoFormatada: formatarDataRelatorio(
+              dadosRelatorioApiAtual.periodizacao.macrociclo.data_termino ||
+                dadosRelatorioApiAtual.periodizacao.macrociclo.dataTermino
+            ),
+            periodoFormatado:
+              (dadosRelatorioApiAtual.periodizacao.macrociclo.data_inicio ||
+                dadosRelatorioApiAtual.periodizacao.macrociclo.dataInicio) &&
+              (dadosRelatorioApiAtual.periodizacao.macrociclo.data_termino ||
+                dadosRelatorioApiAtual.periodizacao.macrociclo.dataTermino)
+                ? `${formatarDataRelatorio(
+                    dadosRelatorioApiAtual.periodizacao.macrociclo.data_inicio ||
+                      dadosRelatorioApiAtual.periodizacao.macrociclo.dataInicio
+                  )} a ${formatarDataRelatorio(
+                    dadosRelatorioApiAtual.periodizacao.macrociclo.data_termino ||
+                      dadosRelatorioApiAtual.periodizacao.macrociclo.dataTermino
+                  )}`
+                : "Período não informado",
+            disponivel: Boolean(dadosRelatorioApiAtual.periodizacao.macrociclo.nome),
+          },
+          mesociclo: {
+            ...dadosRelatorioApiAtual.periodizacao.mesociclo,
+            dataInicioFormatada: formatarDataRelatorio(
+              dadosRelatorioApiAtual.periodizacao.mesociclo.data_inicio ||
+                dadosRelatorioApiAtual.periodizacao.mesociclo.dataInicio
+            ),
+            dataTerminoFormatada: formatarDataRelatorio(
+              dadosRelatorioApiAtual.periodizacao.mesociclo.data_termino ||
+                dadosRelatorioApiAtual.periodizacao.mesociclo.dataTermino
+            ),
+            periodoFormatado:
+              (dadosRelatorioApiAtual.periodizacao.mesociclo.data_inicio ||
+                dadosRelatorioApiAtual.periodizacao.mesociclo.dataInicio) &&
+              (dadosRelatorioApiAtual.periodizacao.mesociclo.data_termino ||
+                dadosRelatorioApiAtual.periodizacao.mesociclo.dataTermino)
+                ? `${formatarDataRelatorio(
+                    dadosRelatorioApiAtual.periodizacao.mesociclo.data_inicio ||
+                      dadosRelatorioApiAtual.periodizacao.mesociclo.dataInicio
+                  )} a ${formatarDataRelatorio(
+                    dadosRelatorioApiAtual.periodizacao.mesociclo.data_termino ||
+                      dadosRelatorioApiAtual.periodizacao.mesociclo.dataTermino
+                  )}`
+                : "Período não informado",
+            disponivel: Boolean(dadosRelatorioApiAtual.periodizacao.mesociclo.nome),
+          },
+          microciclo: {
+            ...dadosRelatorioApiAtual.periodizacao.microciclo,
+            dataInicioFormatada: formatarDataRelatorio(
+              dadosRelatorioApiAtual.periodizacao.microciclo.data_inicio ||
+                dadosRelatorioApiAtual.periodizacao.microciclo.dataInicio
+            ),
+            dataTerminoFormatada: formatarDataRelatorio(
+              dadosRelatorioApiAtual.periodizacao.microciclo.data_termino ||
+                dadosRelatorioApiAtual.periodizacao.microciclo.dataTermino
+            ),
+            periodoFormatado:
+              (dadosRelatorioApiAtual.periodizacao.microciclo.data_inicio ||
+                dadosRelatorioApiAtual.periodizacao.microciclo.dataInicio) &&
+              (dadosRelatorioApiAtual.periodizacao.microciclo.data_termino ||
+                dadosRelatorioApiAtual.periodizacao.microciclo.dataTermino)
+                ? `${formatarDataRelatorio(
+                    dadosRelatorioApiAtual.periodizacao.microciclo.data_inicio ||
+                      dadosRelatorioApiAtual.periodizacao.microciclo.dataInicio
+                  )} a ${formatarDataRelatorio(
+                    dadosRelatorioApiAtual.periodizacao.microciclo.data_termino ||
+                      dadosRelatorioApiAtual.periodizacao.microciclo.dataTermino
+                  )}`
+                : "Período não informado",
+            disponivel: Boolean(dadosRelatorioApiAtual.periodizacao.microciclo.nome),
+          },
+        }
+      : resolverHierarquiaPeriodizacao(sessao, {
+          microciclos: listaMicros,
+          mesociclos: listaMesos,
+          macrociclos: listaMacros,
+        });
 
   const metricasTempo = calcularMetricasTempoSessao(atividadesOrdenadas);
   const codigoSessao =
@@ -834,16 +943,24 @@ export async function montarDadosRelatorioSessao(
   const dataHoraGeracao = `${agora.toLocaleDateString("pt-BR")} às ${agora
     .toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
 
-  // Se o backend futuramente fornecer os gráficos já consolidados em `dadosRelatorioApi.graficos`,
-  // eles podem substituir diretamente os cálculos locais mantendo a mesma interface.
-  const graficos = dadosRelatorioApi?.graficos || {
-    atividades: agruparAtividadesSessao(atividadesOrdenadas),
-    momentosJogo: agruparMomentosJogoSessao(atividadesOrdenadas),
-    fasesJogo: agruparFasesJogoSessao(atividadesOrdenadas),
-    atributosTecnicos: agruparAtributosTecnicosSessao(atividadesOrdenadas),
-    espacosTreino: agruparEspacosTreinoSessao(atividadesOrdenadas),
-    comportamentosTreino: agruparComportamentosTreinoSessao(atividadesOrdenadas),
-  };
+  const graficosApi = dadosRelatorioApiAtual?.graficos;
+  const graficos = graficosApi
+    ? {
+        atividades: graficosApi.atividades,
+        momentosJogo: graficosApi.momentosJogo || graficosApi.momentos_jogo,
+        fasesJogo: graficosApi.fasesJogo || graficosApi.fases_jogo,
+        atributosTecnicos: graficosApi.atributosTecnicos || graficosApi.atributos_tecnicos,
+        espacosTreino: graficosApi.espacosTreino || graficosApi.espacos_treino,
+        comportamentosTreino: graficosApi.comportamentosTreino || graficosApi.comportamentos_treino,
+      }
+    : {
+        atividades: agruparAtividadesSessao(atividadesOrdenadas),
+        momentosJogo: agruparMomentosJogoSessao(atividadesOrdenadas),
+        fasesJogo: agruparFasesJogoSessao(atividadesOrdenadas),
+        atributosTecnicos: agruparAtributosTecnicosSessao(atividadesOrdenadas),
+        espacosTreino: agruparEspacosTreinoSessao(atividadesOrdenadas),
+        comportamentosTreino: agruparComportamentosTreinoSessao(atividadesOrdenadas),
+      };
 
   return {
     nomeArquivo: gerarNomeArquivoPdfSessao(sessao),
