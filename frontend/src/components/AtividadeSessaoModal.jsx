@@ -1,15 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import api from "../services/api.js";
 
-function normalizarTexto(valor) {
-  return valor
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
-}
-
 const TIPOLOGIAS = [
   { valor: "Confrontos", sigla: "CF" },
   { valor: "Jogo Condicionante", sigla: "JC" },
@@ -62,9 +53,30 @@ const MAPA_MOMENTOS_REVERSO = {
   "Trans Def": "Transição Defensiva",
 };
 
+// Princípios táticos / comportamentos padronizados do catálogo do cliente
+const COMPORTAMENTOS_PADRAO = [
+  "CoordLinDef",
+  "Cobertura",
+  "Contenção",
+  "RecPosPerd",
+  "MantPoss",
+  "Quebrar Linha",
+  "Balanço Def",
+  "Amplitude",
+  "Abrir o Campo",
+  "Atacar Espaço",
+  "DefCruz",
+  "JogoEntrelinhas",
+  "ContrProf",
+  "Pisar Área",
+  "Atq o Gol/AO",
+  "Atq o Gol/CAeAR",
+];
+
 export default function AtividadeSessaoModal({
   isOpen,
   initialData = null,
+  atividadesDaSessao = [],
   onClose,
   onSave,
 }) {
@@ -85,15 +97,13 @@ export default function AtividadeSessaoModal({
   const [momentosJogo, setMomentosJogo] = useState([]);
   const [fasesJogo, setFasesJogo] = useState([]);
   const [comportamentos, setComportamentos] = useState([]);
+  const [catalogoComportamentos, setCatalogoComportamentos] = useState([]);
   const [atributosTecnicos, setAtributosTecnicos] = useState([]);
 
   // Controle do dropdown aberto ('momentos' | 'fases' | 'comportamentos' | 'atributos' | null)
   const [abertoDropdown, setAbertoDropdown] = useState(null);
   const [inputComportamento, setInputComportamento] = useState("");
   const [inputAtributo, setInputAtributo] = useState("");
-  const [comportamentosCatalogo, setComportamentosCatalogo] = useState([]);
-  const [carregandoComportamentos, setCarregandoComportamentos] =
-    useState(false);
 
   const [erro, setErro] = useState("");
   const [salvando, setSalvando] = useState(false);
@@ -163,6 +173,22 @@ export default function AtividadeSessaoModal({
     }
   }, [isOpen, initialData]);
 
+  // Busca os princípios táticos cadastrados no backend ao abrir o modal
+  useEffect(() => {
+    if (isOpen) {
+      api
+        .get("/treinos/comportamentos/")
+        .then((resp) => {
+          if (Array.isArray(resp.data)) {
+            setCatalogoComportamentos(resp.data);
+          }
+        })
+        .catch((err) => {
+          console.warn("Erro ao carregar comportamentos da API:", err);
+        });
+    }
+  }, [isOpen]);
+
   const handleClose = () => {
     resetForm();
     onClose();
@@ -182,106 +208,6 @@ export default function AtividadeSessaoModal({
       document.removeEventListener("mousedown", handleClickFora);
     };
   }, [abertoDropdown]);
-
-  // Carrega os princípios táticos cadastrados (US10) sempre que o modal abre
-  useEffect(() => {
-    if (!isOpen) return undefined;
-
-    let ativo = true;
-    setCarregandoComportamentos(true);
-
-    api
-      .get("/treinos/comportamentos/")
-      .then((resposta) => {
-        if (!ativo) return;
-        const lista = Array.isArray(resposta.data)
-          ? resposta.data
-              .map((item) => (typeof item === "string" ? item : item?.nome))
-              .filter(Boolean)
-          : [];
-        setComportamentosCatalogo(
-          [...new Set(lista)].sort((a, b) => a.localeCompare(b, "pt-BR")),
-        );
-      })
-      .catch(() => {
-        if (ativo) {
-          setComportamentosCatalogo([]);
-        }
-      })
-      .finally(() => {
-        if (ativo) {
-          setCarregandoComportamentos(false);
-        }
-      });
-
-    return () => {
-      ativo = false;
-    };
-  }, [isOpen]);
-
-  const opcoesComportamentos = useMemo(() => {
-    const mapa = new Map();
-    [...comportamentosCatalogo, ...comportamentos].forEach((nomeItem) => {
-      const limpo = String(nomeItem || "")
-        .replace(/\s+/g, " ")
-        .trim();
-      if (!limpo) return;
-      const chave = normalizarTexto(limpo);
-      if (!mapa.has(chave)) {
-        mapa.set(chave, limpo);
-      }
-    });
-    return Array.from(mapa.values()).sort((a, b) => a.localeCompare(b, "pt-BR"));
-  }, [comportamentosCatalogo, comportamentos]);
-
-  const opcoesComportamentosFiltradas = useMemo(() => {
-    const termo = normalizarTexto(inputComportamento);
-    if (!termo) return opcoesComportamentos;
-    return opcoesComportamentos.filter((item) =>
-      normalizarTexto(item).includes(termo),
-    );
-  }, [opcoesComportamentos, inputComportamento]);
-
-  const comportamentoSelecionado = (nomeItem) => {
-    const chave = normalizarTexto(nomeItem);
-    return comportamentos.some((item) => normalizarTexto(item) === chave);
-  };
-
-  const toggleComportamento = (nomeItem) => {
-    const chave = normalizarTexto(nomeItem);
-    if (comportamentos.some((item) => normalizarTexto(item) === chave)) {
-      setComportamentos(
-        comportamentos.filter((item) => normalizarTexto(item) !== chave),
-      );
-    } else {
-      setComportamentos([...comportamentos, nomeItem]);
-    }
-  };
-
-  const adicionarComportamento = () => {
-    const texto = inputComportamento.replace(/\s+/g, " ").trim();
-    if (!texto) return;
-
-    const chave = normalizarTexto(texto);
-    const existente = opcoesComportamentos.find(
-      (item) => normalizarTexto(item) === chave,
-    );
-    const nomeFinal = existente || texto;
-
-    if (!comportamentoSelecionado(nomeFinal)) {
-      setComportamentos([...comportamentos, nomeFinal]);
-    }
-
-    if (
-      !comportamentosCatalogo.some((item) => normalizarTexto(item) === chave)
-    ) {
-      setComportamentosCatalogo((anterior) =>
-        [...anterior, nomeFinal].sort((a, b) => a.localeCompare(b, "pt-BR")),
-      );
-    }
-
-    setInputComportamento("");
-  };
 
   // Cálculo de Área e Dimensão em tempo real (RN01 e RN02)
   const espacoCalculado = useMemo(() => {
@@ -329,9 +255,121 @@ export default function AtividadeSessaoModal({
     }
   };
 
+  const listaOpcoesComportamentos = useMemo(() => {
+    const mapaNomes = new Map();
+
+    // 1. Princípios táticos padrão do catálogo do cliente
+    COMPORTAMENTOS_PADRAO.forEach((nome) => {
+      mapaNomes.set(nome.toLowerCase(), { id: `padrao-${nome}`, nome });
+    });
+
+    // 2. Princípios já cadastrados em outras atividades da sessão
+    (atividadesDaSessao || []).forEach((atv) => {
+      (atv.comportamentos || []).forEach((cNome) => {
+        const limpo = (cNome || "").trim();
+        if (limpo && !mapaNomes.has(limpo.toLowerCase())) {
+          mapaNomes.set(limpo.toLowerCase(), {
+            id: `sessao-${limpo}`,
+            nome: limpo,
+          });
+        }
+      });
+    });
+
+    // 3. Princípios cadastrados no banco via API
+    catalogoComportamentos.forEach((c) => {
+      const limpo = (c.nome || "").trim();
+      if (limpo) {
+        mapaNomes.set(limpo.toLowerCase(), { id: c.id, nome: limpo });
+      }
+    });
+
+    // 4. Princípios selecionados na atividade atual
+    comportamentos.forEach((cNome) => {
+      const limpo = (cNome || "").trim();
+      if (limpo && !mapaNomes.has(limpo.toLowerCase())) {
+        mapaNomes.set(limpo.toLowerCase(), {
+          id: `atual-${limpo}`,
+          nome: limpo,
+        });
+      }
+    });
+
+    const todos = Array.from(mapaNomes.values()).sort((a, b) =>
+      (a.nome || "").localeCompare(b.nome || "", "pt-BR"),
+    );
+
+    const termo = inputComportamento.trim().toLowerCase();
+    if (!termo) return todos;
+    return todos.filter((c) =>
+      (c.nome || "").toLowerCase().includes(termo),
+    );
+  }, [
+    catalogoComportamentos,
+    atividadesDaSessao,
+    comportamentos,
+    inputComportamento,
+  ]);
+
+  const handleAdicionarComportamento = async () => {
+    const nomeLimpo = inputComportamento.trim();
+    if (!nomeLimpo) return;
+
+    // Se já existir na lista combinada, seleciona sem duplicar
+    const existente = listaOpcoesComportamentos.find(
+      (c) => (c.nome || "").trim().toLowerCase() === nomeLimpo.toLowerCase(),
+    );
+
+    if (existente) {
+      const nomeReal = existente.nome;
+      if (!comportamentos.includes(nomeReal)) {
+        setComportamentos((prev) => [...prev, nomeReal]);
+      }
+
+      // Se ainda não estiver salvo na API do banco, sincroniza em background
+      const noBanco = catalogoComportamentos.some(
+        (c) => (c.nome || "").trim().toLowerCase() === nomeLimpo.toLowerCase(),
+      );
+      if (!noBanco) {
+        api
+          .post("/treinos/comportamentos/", { nome: nomeReal })
+          .then((resp) => {
+            if (resp?.data) {
+              setCatalogoComportamentos((prev) => [...prev, resp.data]);
+            }
+          })
+          .catch(() => {});
+      }
+
+      setInputComportamento("");
+      return;
+    }
+
+    try {
+      const resp = await api.post("/treinos/comportamentos/", { nome: nomeLimpo });
+      if (resp?.data) {
+        const novo = resp.data;
+        setCatalogoComportamentos((prev) => [...prev, novo]);
+        const nomeAdicionado = novo.nome || nomeLimpo;
+        if (!comportamentos.includes(nomeAdicionado)) {
+          setComportamentos((prev) => [...prev, nomeAdicionado]);
+        }
+      }
+    } catch (err) {
+      console.warn("Erro ao cadastrar comportamento na API:", err);
+      const itemLocal = { id: Date.now(), nome: nomeLimpo };
+      setCatalogoComportamentos((prev) => [...prev, itemLocal]);
+      if (!comportamentos.includes(nomeLimpo)) {
+        setComportamentos((prev) => [...prev, nomeLimpo]);
+      }
+    }
+
+    setInputComportamento("");
+  };
+
   // Validação em tempo real para habilitar o botão "Criar atividade" e deixá-lo verdinho
   const camposObrigatoriosPreenchidos = useMemo(() => {
-    if (!nome.trim() || !tipoSsp || !tipologia || !codigo.trim()) {
+    if (!nome.trim() || !tipoSsp || !tipologia) {
       return false;
     }
 
@@ -354,7 +392,7 @@ export default function AtividadeSessaoModal({
     }
 
     return true;
-  }, [nome, tipoSsp, tipologia, codigo, comprimento, largura, numeroJogadores]);
+  }, [nome, tipoSsp, tipologia, comprimento, largura, numeroJogadores]);
 
   if (!isOpen) return null;
 
@@ -364,11 +402,6 @@ export default function AtividadeSessaoModal({
 
     if (!nome.trim()) {
       setErro("O campo Nome da Atividade (SSP) é obrigatório.");
-      return;
-    }
-
-    if (!codigo.trim()) {
-      setErro("O campo Código da Atividade é obrigatório.");
       return;
     }
 
@@ -412,13 +445,14 @@ export default function AtividadeSessaoModal({
     }
 
     const payload = {
-      codigo: codigo.trim() || undefined,
+      codigo: codigo.trim() || "",
       nome: nome.trim(),
       tipologia,
       sigla_tipologia: sigla,
       tipo_ssp: tipoSsp,
+      orientacao: (initialData?.orientacao || "").trim(),
       ordem: ordem ? parseInt(ordem, 10) : null,
-      tempo: tempo ? parseInt(tempo, 10) : null,
+      tempo: tempo ? parseInt(tempo, 10) : 15,
       comprimento: c,
       largura: l,
       numero_jogadores: j,
@@ -514,7 +548,7 @@ export default function AtividadeSessaoModal({
                 htmlFor="campo-codigo"
                 className="mb-1 block text-xs font-medium text-[#10281E]"
               >
-                Código da Atividade <span className="text-red-500">*</span>
+                Código da Atividade
               </label>
               <input
                 id="campo-codigo"
@@ -915,10 +949,10 @@ export default function AtividadeSessaoModal({
                 </button>
               </div>
 
-              {/* Dropdown com princípios cadastrados + cadastro direto */}
+              {/* Dropdown com busca/filtro e scroll */}
               {abertoDropdown === "comportamentos" && (
-                <div className="absolute top-full left-0 z-30 mt-1.5 w-full min-w-[260px] overflow-hidden rounded-xl border border-[#E4DFD2] bg-white shadow-xl">
-                  <div className="border-b border-[#E4DFD2]/70 p-2.5">
+                <div className="absolute top-full left-0 z-30 mt-1.5 w-full min-w-[240px] overflow-hidden rounded-xl border border-[#E4DFD2] bg-white shadow-xl">
+                  <div className="border-b border-[#E4DFD2] p-2.5">
                     <div className="flex gap-1.5">
                       <input
                         type="text"
@@ -927,16 +961,16 @@ export default function AtividadeSessaoModal({
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
                             e.preventDefault();
-                            adicionarComportamento();
+                            handleAdicionarComportamento();
                           }
                         }}
-                        placeholder="Ex.: CoordLinDef"
-                        className="w-full rounded-lg border border-[#E4DFD2] px-2.5 py-1 text-xs text-[#10281E] outline-none focus:border-[#0E3A29]"
+                        placeholder="Buscar ou cadastrar..."
+                        className="w-full rounded-lg border border-[#E4DFD2] px-2.5 py-1 text-xs text-[#10281E] outline-none transition focus:border-[#0E3A29]"
                       />
                       <button
                         type="button"
-                        onClick={adicionarComportamento}
-                        className="rounded-lg bg-[#0E3A29] px-2.5 py-1 text-xs font-medium text-white hover:bg-[#10281E]"
+                        onClick={handleAdicionarComportamento}
+                        className="shrink-0 rounded-lg bg-[#0E3A29] px-2.5 py-1 text-xs font-medium text-white transition hover:bg-[#10281E]"
                       >
                         Ok
                       </button>
@@ -944,30 +978,30 @@ export default function AtividadeSessaoModal({
                   </div>
 
                   <div className="max-h-40 overflow-y-auto py-1">
-                    {carregandoComportamentos ? (
+                    {listaOpcoesComportamentos.length === 0 ? (
                       <div className="px-3.5 py-2 text-xs text-[#8A8D80]">
-                        Carregando princípios táticos...
-                      </div>
-                    ) : opcoesComportamentosFiltradas.length === 0 ? (
-                      <div className="px-3.5 py-2 text-xs text-[#8A8D80]">
-                        {inputComportamento.trim()
-                          ? "Nenhum princípio encontrado. Clique em Ok para cadastrar."
-                          : "Nenhum princípio cadastrado. Digite acima e clique em Ok."}
+                        Nenhum princípio encontrado. Clique em "Ok" para cadastrar.
                       </div>
                     ) : (
-                      opcoesComportamentosFiltradas.map((opcao) => {
-                        const selecionado = comportamentoSelecionado(opcao);
+                      listaOpcoesComportamentos.map((item) => {
+                        const selecionado = comportamentos.includes(item.nome);
                         return (
                           <div
-                            key={opcao}
-                            onClick={() => toggleComportamento(opcao)}
+                            key={item.id || item.nome}
+                            onClick={() =>
+                              toggleItemLista(
+                                comportamentos,
+                                setComportamentos,
+                                item.nome,
+                              )
+                            }
                             className={`flex cursor-pointer items-center justify-between px-3.5 py-2 text-xs transition ${
                               selecionado
                                 ? "bg-[#0E3A29]/10 font-semibold text-[#0E3A29]"
                                 : "text-[#10281E] hover:bg-[#F5F2EA]"
                             }`}
                           >
-                            <span className="truncate pr-2">{opcao}</span>
+                            <span>{item.nome}</span>
                             {selecionado && (
                               <span className="text-xs font-bold text-[#0E3A29]">
                                 ✓
@@ -994,7 +1028,11 @@ export default function AtividadeSessaoModal({
                               type="button"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                toggleComportamento(item);
+                                toggleItemLista(
+                                  comportamentos,
+                                  setComportamentos,
+                                  item,
+                                );
                               }}
                               className="text-red-500 hover:font-bold"
                               aria-label={`Remover ${item}`}

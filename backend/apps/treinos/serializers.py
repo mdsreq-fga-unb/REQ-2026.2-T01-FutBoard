@@ -569,6 +569,19 @@ class InformacaoTipoSspItemSerializer(serializers.Serializer):
     atividades_distintas = serializers.IntegerField(read_only=True)
 
 
+class InformacaoMomentoJogoItemSerializer(serializers.Serializer):
+    """Item consolidado por momento de jogo para gráfico de barras horizontais (US36)."""
+
+    id = serializers.CharField(read_only=True)
+    codigo = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    momento_jogo = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+
+
 class ExecucaoAtividadeItemSerializer(serializers.Serializer):
     """Item individual de execução de atividade em sessão filtrada (US24 / RF24)."""
 
@@ -606,6 +619,7 @@ class InformacoesAtividadesTreinoSerializer(serializers.Serializer):
     atividades = InformacaoAtividadeItemSerializer(many=True, read_only=True)
     por_tipologia = InformacaoTipologiaItemSerializer(many=True, read_only=True)
     por_tipo_ssp = InformacaoTipoSspItemSerializer(many=True, read_only=True)
+    por_momento_jogo = InformacaoMomentoJogoItemSerializer(many=True, read_only=True)
     execucoes = ExecucaoAtividadeItemSerializer(many=True, read_only=True)
     estado_vazio = serializers.BooleanField(read_only=True)
     mensagem = serializers.CharField(read_only=True, allow_null=True)

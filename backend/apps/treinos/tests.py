@@ -1236,6 +1236,7 @@ class InformacoesAtividadesTreinoUnitTests(SimpleTestCase):
                 "atividades",
                 "por_tipologia",
                 "por_tipo_ssp",
+                "por_momento_jogo",
                 "execucoes",
                 "estado_vazio",
                 "mensagem",
@@ -1243,6 +1244,71 @@ class InformacoesAtividadesTreinoUnitTests(SimpleTestCase):
         )
         self.assertTrue(serializer.data["estado_vazio"])
         self.assertEqual(serializer.data["mensagem"], MENSAGEM_ATIVIDADES_VAZIO)
+
+    def test_us36_unitario_agrupamento_por_momento_jogo_rn05_rn07(self):
+        """Valida agregação de momentos_jogo (US36) com lista vazia, opcionalidade (RN05) e resultado vazio (RN07)."""
+        s01 = self._criar_sessao_em_memoria(1, "S01", 1, "2026-08-01")
+
+        atividades = [
+            AtividadeSessao(
+                id=1,
+                sessao=s01,
+                codigo="ATV1",
+                nome="Treino Ataque",
+                tipologia="Rondo",
+                tipo_ssp="Especial",
+                ordem=1,
+                tempo=20,
+                momentos_jogo=["Ataque", "Trans Of"],
+            ),
+            AtividadeSessao(
+                id=2,
+                sessao=s01,
+                codigo="ATV2",
+                nome="Treino Defesa",
+                tipologia="Confrontos",
+                tipo_ssp="Dirigido",
+                ordem=2,
+                tempo=15,
+                momentos_jogo=["Defesa", "Ataque"],
+            ),
+            AtividadeSessao(
+                id=3,
+                sessao=s01,
+                codigo="ATV3",
+                nome="Treino Sem Momento",
+                tipologia="Físico-Técnico",
+                tipo_ssp="Geral",
+                ordem=3,
+                tempo=10,
+                momentos_jogo=[],  # RN05 opcional/vazio
+            ),
+        ]
+
+        resultado = calcular_informacoes_atividades_treino(atividades)
+
+        self.assertFalse(resultado["estado_vazio"])
+        # Ataque deve ter 35 minutos (20 + 15) e 2 execuções
+        # Trans Of deve ter 20 minutos e 1 execução
+        # Defesa deve ter 15 minutos e 1 execução
+        momentos_map = {item["nome"]: item for item in resultado["por_momento_jogo"]}
+        self.assertIn("Ataque", momentos_map)
+        self.assertEqual(momentos_map["Ataque"]["minutos"], 35)
+        self.assertEqual(momentos_map["Ataque"]["execucoes"], 2)
+        self.assertEqual(momentos_map["Ataque"]["codigo"], "Ataque")
+        self.assertEqual(momentos_map["Ataque"]["id"], "momento-ataque")
+
+        self.assertIn("Trans Of", momentos_map)
+        self.assertEqual(momentos_map["Trans Of"]["minutos"], 20)
+        self.assertEqual(momentos_map["Trans Of"]["execucoes"], 1)
+
+        self.assertIn("Defesa", momentos_map)
+        self.assertEqual(momentos_map["Defesa"]["minutos"], 15)
+        self.assertEqual(momentos_map["Defesa"]["execucoes"], 1)
+
+        # O retorno vazio também inclui a chave
+        resultado_vazio = calcular_informacoes_atividades_treino([])
+        self.assertEqual(resultado_vazio["por_momento_jogo"], [])
 
 
 class InformacoesAtividadesTreinoApiTests(APITestCase):

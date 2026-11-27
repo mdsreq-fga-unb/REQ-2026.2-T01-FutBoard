@@ -55,13 +55,39 @@ export default function SessoesPage({ onSelectNav }) {
   useEffect(() => {
     const carregarSessoesApi = async () => {
       try {
-        const resp = await api.get("/treinos/sessoes/");
-        if (Array.isArray(resp.data) && resp.data.length > 0) {
-          setSessoes(resp.data);
+        const [respSessoes, respAtividades] = await Promise.all([
+          api.get("/treinos/sessoes/"),
+          api.get("/treinos/atividades-sessao/").catch(() => ({ data: [] })),
+        ]);
+        if (Array.isArray(respSessoes.data) && respSessoes.data.length > 0) {
+          const atividadesPorSessao = new Map();
+          if (Array.isArray(respAtividades.data)) {
+            respAtividades.data.forEach((atv) => {
+              const sId = atv.sessao;
+              if (!atividadesPorSessao.has(sId)) {
+                atividadesPorSessao.set(sId, []);
+              }
+              atividadesPorSessao.get(sId).push(atv);
+            });
+          }
+
+          const sessoesFormatadas = respSessoes.data.map((sessao) => ({
+            ...sessao,
+            atividades:
+              atividadesPorSessao.get(sessao.id) || sessao.atividades || [],
+          }));
+
+          setSessoes(sessoesFormatadas);
           try {
-            localStorage.setItem("futboard_sessoes", JSON.stringify(resp.data));
+            localStorage.setItem(
+              "futboard_sessoes",
+              JSON.stringify(sessoesFormatadas),
+            );
           } catch (errLocal) {
-            console.warn("Não foi possível salvar sessões no localStorage:", errLocal);
+            console.warn(
+              "Não foi possível salvar sessões no localStorage:",
+              errLocal,
+            );
           }
         }
       } catch (errApi) {
@@ -145,36 +171,158 @@ export default function SessoesPage({ onSelectNav }) {
     setSessaoEditando(null);
   };
 
-  const salvarSessao = (dados) => {
-    let novasSessoes = [];
-    if (sessaoEditando) {
-      novasSessoes = sessoes.map((item) =>
-        item.id === sessaoEditando.id ? { ...item, ...dados } : item,
+  const salvarSessao = async (dados) => {
+    const editId = sessaoEditando?.id || dados?.id;
+    const isEdit = Boolean(editId);
+
+    const payload = {
+      microciclo: dados.microciclo || dados.microcicloId,
+      nome: dados.nome,
+      data: dados.data,
+    };
+
+    if (isEdit) {
+      let dadosAtualizados = { ...sessaoEditando, ...dados, id: editId };
+      try {
+        const resp = await api.patch(
+          `/treinos/sessoes/${editId}/`,
+          payload,
+        );
+        if (resp?.data) {
+          dadosAtualizados = { ...dadosAtualizados, ...resp.data };
+        }
+      } catch (err) {
+        console.warn("Erro ao atualizar sessão na API:", err);
+      }
+
+      if (Array.isArray(dados.atividades)) {
+        const atividadesAtualizadas = [];
+        for (const atv of dados.atividades) {
+          if (!atv.id || typeof atv.id !== "number" || atv.id > 1000000000) {
+            try {
+              const payloadAtv = {
+                sessao: editId,
+                atividade_biblioteca:
+                  atv.bibliotecaId || atv.atividade_biblioteca || null,
+                codigo: atv.codigo || "",
+                nome: atv.nome,
+                tipologia: atv.tipologia,
+                tipo_ssp: atv.tipo_ssp,
+                orientacao: atv.orientacao || "",
+                ordem: atv.ordem || 1,
+                tempo: atv.tempo || 15,
+                comprimento: atv.comprimento || null,
+                largura: atv.largura || null,
+                numero_jogadores: atv.numero_jogadores || null,
+                momentos_jogo: atv.momentos_jogo || [],
+                fases_jogo: atv.fases_jogo || [],
+                comportamentos: atv.comportamentos || [],
+                atributos_tecnicos: atv.atributos_tecnicos || [],
+              };
+              const respAtv = await api.post(
+                "/treinos/atividades-sessao/",
+                payloadAtv,
+              );
+              if (respAtv?.data) {
+                atividadesAtualizadas.push({ ...atv, ...respAtv.data });
+                continue;
+              }
+            } catch (errAtv) {
+              console.warn("Erro ao persistir atividade da sessão:", errAtv);
+            }
+          }
+          atividadesAtualizadas.push(atv);
+        }
+        dadosAtualizados.atividades = atividadesAtualizadas;
+      }
+
+      const novasSessoes = sessoes.map((item) =>
+        item.id === editId ? { ...item, ...dadosAtualizados } : item,
       );
+      setSessoes(novasSessoes);
+      try {
+        localStorage.setItem("futboard_sessoes", JSON.stringify(novasSessoes));
+      } catch (errLocal) {
+        console.warn("Não foi possível persistir no localStorage:", errLocal);
+      }
       dispararToast("Sessão atualizada com sucesso.");
     } else {
-      const proximoId =
-        sessoes.length > 0 ? Math.max(...sessoes.map((s) => s.id)) + 1 : 1;
-      const codigo = `SES-${proximoId < 10 ? `0${proximoId}` : proximoId}`;
-      novasSessoes = [
-        ...sessoes,
-        {
-          id: proximoId,
+      let novaSessao = null;
+      let novoId = null;
+      try {
+        const resp = await api.post("/treinos/sessoes/", payload);
+        if (resp?.data) {
+          novoId = resp.data.id;
+          novaSessao = {
+            ...dados,
+            ...resp.data,
+            id: novoId,
+            codigo: `SES-${novoId < 10 ? `0${novoId}` : novoId}`,
+          };
+        }
+      } catch (err) {
+        console.warn("Erro ao cadastrar sessão na API:", err);
+      }
+
+      if (!novaSessao) {
+        novoId =
+          sessoes.length > 0 ? Math.max(...sessoes.map((s) => s.id)) + 1 : 1;
+        const codigo = `SES-${novoId < 10 ? `0${novoId}` : novoId}`;
+        novaSessao = {
+          id: novoId,
           codigo,
           ...dados,
-        },
-      ];
+        };
+      }
+
+      if (Array.isArray(dados.atividades) && novoId) {
+        const atividadesAtualizadas = [];
+        for (const atv of dados.atividades) {
+          try {
+            const payloadAtv = {
+              sessao: novoId,
+              atividade_biblioteca:
+                atv.bibliotecaId || atv.atividade_biblioteca || null,
+              codigo: atv.codigo || "",
+              nome: atv.nome,
+              tipologia: atv.tipologia,
+              tipo_ssp: atv.tipo_ssp,
+              orientacao: atv.orientacao || "",
+              ordem: atv.ordem || 1,
+              tempo: atv.tempo || 15,
+              comprimento: atv.comprimento || null,
+              largura: atv.largura || null,
+              numero_jogadores: atv.numero_jogadores || null,
+              momentos_jogo: atv.momentos_jogo || [],
+              fases_jogo: atv.fases_jogo || [],
+              comportamentos: atv.comportamentos || [],
+              atributos_tecnicos: atv.atributos_tecnicos || [],
+            };
+            const respAtv = await api.post(
+              "/treinos/atividades-sessao/",
+              payloadAtv,
+            );
+            if (respAtv?.data) {
+              atividadesAtualizadas.push({ ...atv, ...respAtv.data });
+              continue;
+            }
+          } catch (errAtv) {
+            console.warn("Erro ao persistir atividade da nova sessão:", errAtv);
+          }
+          atividadesAtualizadas.push(atv);
+        }
+        novaSessao.atividades = atividadesAtualizadas;
+      }
+
+      const novasSessoes = [...sessoes, novaSessao];
+      setSessoes(novasSessoes);
+      try {
+        localStorage.setItem("futboard_sessoes", JSON.stringify(novasSessoes));
+      } catch (errLocal) {
+        console.warn("Não foi possível persistir no localStorage:", errLocal);
+      }
       dispararToast("Sessão cadastrada com sucesso.");
     }
-
-    setSessoes(novasSessoes);
-    try {
-      localStorage.setItem("futboard_sessoes", JSON.stringify(novasSessoes));
-    } catch (errLocal) {
-      console.warn("Não foi possível persistir no localStorage:", errLocal);
-    }
-
-    api.post("/treinos/sessoes/", dados).catch(() => {});
 
     setModalOpen(false);
     setSessaoEditando(null);
