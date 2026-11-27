@@ -239,6 +239,16 @@ def filtrar_atividades_sessao_por_parametros(queryset, query_params):
     if codigo not in (None, ""):
         queryset = queryset.filter(codigo__iexact=str(codigo).strip())
 
+    momento_jogo = query_params.get("momento_jogo") or query_params.get("momento")
+    if momento_jogo not in (None, ""):
+        termo_momento = str(momento_jogo).strip()
+        queryset = queryset.filter(momentos_jogo__icontains=termo_momento)
+
+    fase_jogo = query_params.get("fase_jogo") or query_params.get("fase")
+    if fase_jogo not in (None, ""):
+        termo_fase = str(fase_jogo).strip()
+        queryset = queryset.filter(fases_jogo__icontains=termo_fase)
+
     busca = query_params.get("busca") or query_params.get("q")
     if busca not in (None, ""):
         termo = " ".join(str(busca).split())
