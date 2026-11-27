@@ -825,3 +825,347 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
         "estado_vazio": False,
         "mensagem": None,
     }
+
+
+MENSAGEM_GRAFICO_ATIVIDADES_VAZIO = "Nenhuma atividade registrada nesta sessão."
+MENSAGEM_GRAFICO_MOMENTOS_VAZIO = "Nenhum momento de jogo registrado nesta sessão."
+MENSAGEM_GRAFICO_FASES_VAZIO = "Nenhuma fase de jogo registrada nesta sessão."
+MENSAGEM_GRAFICO_ATRIBUTOS_VAZIO = "Nenhum atributo técnico registrado nesta sessão."
+MENSAGEM_GRAFICO_ESPACOS_VAZIO = "Nenhum espaço de treino dimensionado nesta sessão."
+MENSAGEM_GRAFICO_COMPORTAMENTOS_VAZIO = "Nenhum comportamento de treino registrado nesta sessão."
+
+MAPA_MOMENTOS_RELATORIO = {
+    "Trans Def": "Transição Defensiva",
+    "Trans Of": "Transição Ofensiva",
+    "Transição Defensiva": "Transição Defensiva",
+    "Transição Ofensiva": "Transição Ofensiva",
+    "Ataque": "Ataque",
+    "Defesa": "Defesa",
+    "Bola Parada": "Bola Parada",
+    "Bola parada": "Bola Parada",
+}
+
+
+def _montar_bloco_grafico_relatorio(titulo, subtitulo, mensagem_vazio, itens_lista):
+    """Monta a estrutura de um bloco de gráfico para o relatório de sessão (RN07)."""
+    total_minutos = sum(item["minutos"] for item in itens_lista)
+    total_execucoes = sum(item["execucoes"] for item in itens_lista)
+
+    if not itens_lista:
+        return {
+            "titulo": titulo,
+            "subtitulo": subtitulo,
+            "unidade": "min",
+            "total_minutos": 0,
+            "total_execucoes": 0,
+            "itens": [],
+            "estado_vazio": True,
+            "mensagem_vazio": mensagem_vazio,
+        }
+
+    unidade = "min" if total_minutos > 0 else "exec"
+    itens_formatados = []
+    for item in itens_lista:
+        minutos = item["minutos"]
+        execucoes = item["execucoes"]
+        if total_minutos > 0:
+            percentual = round((minutos / total_minutos) * 100, 1)
+        elif total_execucoes > 0:
+            percentual = round((execucoes / total_execucoes) * 100, 1)
+        else:
+            percentual = 0.0
+
+        itens_formatados.append(
+            {
+                "id": item["id"],
+                "codigo": item.get("codigo", "") or "",
+                "nome": item["nome"],
+                "minutos": minutos,
+                "execucoes": execucoes,
+                "percentual": percentual,
+            }
+        )
+
+    itens_formatados.sort(key=lambda x: (-x["minutos"], -x["execucoes"], x["nome"].lower()))
+
+    return {
+        "titulo": titulo,
+        "subtitulo": subtitulo,
+        "unidade": unidade,
+        "total_minutos": total_minutos,
+        "total_execucoes": total_execucoes,
+        "itens": itens_formatados,
+        "estado_vazio": False,
+        "mensagem_vazio": "",
+    }
+
+
+def gerar_dados_relatorio_sessao(sessao):
+    """RF25 (US25): Consolida os dados e os 6 gráficos exclusivos para o relatório individual de sessão."""
+    if hasattr(sessao, "atividades") and hasattr(sessao.atividades, "all"):
+        atividades = list(sessao.atividades.all())
+    elif isinstance(getattr(sessao, "atividades", None), list):
+        atividades = list(sessao.atividades)
+    else:
+        atividades = []
+
+    atividades.sort(key=lambda a: (getattr(a, "ordem", 0) or 0, getattr(a, "id", 0) or 0))
+
+    tempos_por_ordem = {}
+    tempo_total_bruto = 0
+    atividades_detalhadas = []
+
+    agrupado_atividades = {}
+    agrupado_momentos = {}
+    agrupado_fases = {}
+    agrupado_atributos = {}
+    agrupado_espacos = {}
+    agrupado_comportamentos = {}
+
+    for atv in atividades:
+        tempo = getattr(atv, "tempo", 0) or 0
+        ordem = getattr(atv, "ordem", 1) or 1
+        tempo_total_bruto += tempo
+
+        if ordem not in tempos_por_ordem or tempo > tempos_por_ordem[ordem]:
+            tempos_por_ordem[ordem] = tempo
+
+        codigo_exibicao = (getattr(atv, "codigo", None) or "").strip().upper()
+        if not codigo_exibicao and getattr(atv, "atividade_biblioteca", None):
+            codigo_exibicao = (atv.atividade_biblioteca.codigo or "").strip().upper()
+
+        nome_atv = getattr(atv, "nome", "")
+        rotulo_atv = (
+            getattr(atv, "atividade_ssp", "")
+            or (f"{codigo_exibicao} | {nome_atv}" if codigo_exibicao and nome_atv else nome_atv)
+            or f"Atividade {atv.id}"
+        )
+
+        atividades_detalhadas.append(
+            {
+                "id": getattr(atv, "id", None),
+                "sessao": getattr(atv, "sessao_id", sessao.id if sessao else None),
+                "atividade_biblioteca": getattr(atv, "atividade_biblioteca_id", None),
+                "codigo": codigo_exibicao,
+                "nome": nome_atv,
+                "atividade_ssp": rotulo_atv,
+                "tipologia": getattr(atv, "tipologia", ""),
+                "sigla_tipologia": getattr(atv, "sigla_tipologia", ""),
+                "tipo_ssp": getattr(atv, "tipo_ssp", ""),
+                "orientacao": getattr(atv, "orientacao", "") or "",
+                "ordem": ordem,
+                "tempo": tempo,
+                "comprimento": getattr(atv, "comprimento", None),
+                "largura": getattr(atv, "largura", None),
+                "numero_jogadores": getattr(atv, "numero_jogadores", None),
+                "area_por_jogador": getattr(atv, "area_por_jogador", None),
+                "dimensao_espaco": getattr(atv, "dimensao_espaco", "Não Definido") or "Não Definido",
+                "momentos_jogo": getattr(atv, "momentos_jogo", None) or [],
+                "fases_jogo": getattr(atv, "fases_jogo", None) or [],
+                "comportamentos": getattr(atv, "comportamentos", None) or [],
+                "atributos_tecnicos": getattr(atv, "atributos_tecnicos", None) or [],
+                "criado_em": getattr(atv, "criado_em", None),
+                "atualizado_em": getattr(atv, "atualizado_em", None),
+            }
+        )
+
+        # 1. Gráfico de Atividades
+        chave_atv = (codigo_exibicao or nome_atv or f"atv-{atv.id}").lower()
+        if chave_atv not in agrupado_atividades:
+            agrupado_atividades[chave_atv] = {
+                "id": f"atv-{chave_atv}",
+                "codigo": codigo_exibicao,
+                "nome": rotulo_atv,
+                "minutos": 0,
+                "execucoes": 0,
+            }
+        agrupado_atividades[chave_atv]["minutos"] += tempo
+        agrupado_atividades[chave_atv]["execucoes"] += 1
+
+        # 2. Gráfico de Momentos de Jogo
+        for m in (getattr(atv, "momentos_jogo", None) or []):
+            nome_m = str(m.get("nome") or m.get("momento_jogo") if isinstance(m, dict) else m).strip()
+            if not nome_m:
+                continue
+            nome_exib = MAPA_MOMENTOS_RELATORIO.get(nome_m, nome_m)
+            chave_m = nome_exib.lower()
+            if chave_m not in agrupado_momentos:
+                agrupado_momentos[chave_m] = {
+                    "id": f"momentos_jogo-{chave_m.replace(' ', '-')}",
+                    "codigo": nome_m,
+                    "nome": nome_exib,
+                    "minutos": 0,
+                    "execucoes": 0,
+                }
+            agrupado_momentos[chave_m]["minutos"] += tempo
+            agrupado_momentos[chave_m]["execucoes"] += 1
+
+        # 3. Gráfico de Fases de Jogo
+        for f in (getattr(atv, "fases_jogo", None) or []):
+            nome_f = str(f.get("nome") or f.get("fase_jogo") if isinstance(f, dict) else f).strip()
+            if not nome_f:
+                continue
+            chave_f = nome_f.lower()
+            if chave_f not in agrupado_fases:
+                agrupado_fases[chave_f] = {
+                    "id": f"fases_jogo-{chave_f.replace(' ', '-')}",
+                    "codigo": nome_f,
+                    "nome": nome_f,
+                    "minutos": 0,
+                    "execucoes": 0,
+                }
+            agrupado_fases[chave_f]["minutos"] += tempo
+            agrupado_fases[chave_f]["execucoes"] += 1
+
+        # 4. Gráfico de Atributos Técnicos
+        for a in (getattr(atv, "atributos_tecnicos", None) or []):
+            nome_a = str(a.get("nome") if isinstance(a, dict) else a).strip()
+            if not nome_a:
+                continue
+            chave_a = nome_a.lower()
+            if chave_a not in agrupado_atributos:
+                agrupado_atributos[chave_a] = {
+                    "id": f"atributos_tecnicos-{chave_a.replace(' ', '-')}",
+                    "codigo": nome_a,
+                    "nome": nome_a,
+                    "minutos": 0,
+                    "execucoes": 0,
+                }
+            agrupado_atributos[chave_a]["minutos"] += tempo
+            agrupado_atributos[chave_a]["execucoes"] += 1
+
+        # 5. Gráfico de Espaços de Treino (ignora "Não Definido")
+        dimensao = getattr(atv, "dimensao_espaco", "") or ""
+        if dimensao and dimensao != "Não Definido":
+            chave_dim = dimensao.lower()
+            if chave_dim not in agrupado_espacos:
+                agrupado_espacos[chave_dim] = {
+                    "id": f"espacos_treino-{chave_dim}",
+                    "codigo": dimensao[:3].upper(),
+                    "nome": f"Espaço {dimensao}",
+                    "minutos": 0,
+                    "execucoes": 0,
+                }
+            agrupado_espacos[chave_dim]["minutos"] += tempo
+            agrupado_espacos[chave_dim]["execucoes"] += 1
+
+        # 6. Gráfico de Comportamentos de Treino
+        for c in (getattr(atv, "comportamentos", None) or []):
+            nome_c = str(c.get("nome") if isinstance(c, dict) else c).strip()
+            if not nome_c:
+                continue
+            chave_c = nome_c.lower()
+            if chave_c not in agrupado_comportamentos:
+                agrupado_comportamentos[chave_c] = {
+                    "id": f"comportamentos_treino-{chave_c.replace(' ', '-')}",
+                    "codigo": nome_c,
+                    "nome": nome_c,
+                    "minutos": 0,
+                    "execucoes": 0,
+                }
+            agrupado_comportamentos[chave_c]["minutos"] += tempo
+            agrupado_comportamentos[chave_c]["execucoes"] += 1
+
+    tempo_liquido = sum(tempos_por_ordem.values())
+    numero_execucoes = len(tempos_por_ordem)
+
+    sequencia = getattr(sessao, "sequencia", None)
+    if sequencia:
+        codigo_sessao = f"SES-{sequencia:02d}"
+    elif getattr(sessao, "id", None):
+        codigo_sessao = f"SES-{sessao.id:02d}"
+    else:
+        codigo_sessao = "SES-01"
+
+    data_sessao = getattr(sessao, "data", None)
+    mes_sessao = ""
+    if data_sessao and hasattr(data_sessao, "month"):
+        mes_sessao = NOMES_MESES_PT[data_sessao.month - 1]
+
+    dados_sessao = {
+        "id": getattr(sessao, "id", None),
+        "sequencia": sequencia,
+        "codigo": codigo_sessao,
+        "nome": getattr(sessao, "nome", "") or (f"Sessão {sequencia}" if sequencia else "Sessão"),
+        "data": data_sessao,
+        "mes": mes_sessao,
+        "total_atividades": len(atividades),
+        "numero_execucoes": numero_execucoes,
+        "tempo_total_bruto": tempo_total_bruto,
+        "tempo_liquido": tempo_liquido,
+        "atividades": atividades_detalhadas,
+    }
+
+    # Hierarquia de periodização
+    micro = getattr(sessao, "microciclo", None)
+    meso = getattr(micro, "mesociclo", None) if micro else None
+    macro = getattr(meso, "macrociclo", None) if meso else None
+
+    periodizacao = {
+        "microciclo": {
+            "id": getattr(micro, "id", None),
+            "codigo": None,
+            "nome": getattr(micro, "nome", "") if micro else "",
+            "data_inicio": getattr(micro, "data_inicio", None) if micro else None,
+            "data_termino": getattr(micro, "data_termino", None) if micro else None,
+        },
+        "mesociclo": {
+            "id": getattr(meso, "id", None),
+            "codigo": None,
+            "nome": getattr(meso, "nome", "") if meso else "",
+            "data_inicio": getattr(meso, "data_inicio", None) if meso else None,
+            "data_termino": getattr(meso, "data_termino", None) if meso else None,
+        },
+        "macrociclo": {
+            "id": getattr(macro, "id", None),
+            "codigo": getattr(macro, "codigo", "") if macro else "",
+            "nome": getattr(macro, "nome", "") if macro else "",
+            "data_inicio": getattr(macro, "data_inicio", None) if macro else None,
+            "data_termino": getattr(macro, "data_termino", None) if macro else None,
+        },
+    }
+
+    graficos = {
+        "atividades": _montar_bloco_grafico_relatorio(
+            "Atividades da Sessão",
+            "Tempo e execuções por atividade realizada na sessão",
+            MENSAGEM_GRAFICO_ATIVIDADES_VAZIO,
+            list(agrupado_atividades.values()),
+        ),
+        "momentos_jogo": _montar_bloco_grafico_relatorio(
+            "Momento de Jogo",
+            "Tempo dedicado a cada momento de jogo na sessão",
+            MENSAGEM_GRAFICO_MOMENTOS_VAZIO,
+            list(agrupado_momentos.values()),
+        ),
+        "fases_jogo": _montar_bloco_grafico_relatorio(
+            "Fases de Jogo",
+            "Tempo em minutos dedicado a cada fase de jogo na sessão",
+            MENSAGEM_GRAFICO_FASES_VAZIO,
+            list(agrupado_fases.values()),
+        ),
+        "atributos_tecnicos": _montar_bloco_grafico_relatorio(
+            "Atributo Técnico",
+            "Atributos técnicos trabalhados nas atividades da sessão",
+            MENSAGEM_GRAFICO_ATRIBUTOS_VAZIO,
+            list(agrupado_atributos.values()),
+        ),
+        "espacos_treino": _montar_bloco_grafico_relatorio(
+            "Espaço de Treino",
+            "Dimensões de espaço utilizadas nas atividades da sessão",
+            MENSAGEM_GRAFICO_ESPACOS_VAZIO,
+            list(agrupado_espacos.values()),
+        ),
+        "comportamentos_treino": _montar_bloco_grafico_relatorio(
+            "Comportamento de Treino",
+            "Comportamentos e princípios táticos trabalhados na sessão",
+            MENSAGEM_GRAFICO_COMPORTAMENTOS_VAZIO,
+            list(agrupado_comportamentos.values()),
+        ),
+    }
+
+    return {
+        "sessao": dados_sessao,
+        "periodizacao": periodizacao,
+        "graficos": graficos,
+    }

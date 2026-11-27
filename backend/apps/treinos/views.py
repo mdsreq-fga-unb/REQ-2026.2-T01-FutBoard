@@ -3,6 +3,7 @@
 from datetime import date
 
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -16,6 +17,7 @@ from .models import (
     Sessao,
     calcular_indicadores_treino,
     calcular_informacoes_atividades_treino,
+    gerar_dados_relatorio_sessao,
     normalizar_nome_comportamento,
 )
 from .serializers import (
@@ -24,6 +26,7 @@ from .serializers import (
     ComportamentoTaticoSerializer,
     IndicadoresTreinoSerializer,
     InformacoesAtividadesTreinoSerializer,
+    RelatorioSessaoSerializer,
     SessaoSerializer,
 )
 
@@ -286,4 +289,19 @@ class InformacoesAtividadesTreinoView(APIView):
         )
         dados = calcular_informacoes_atividades_treino(queryset_filtrado)
         serializer = InformacoesAtividadesTreinoSerializer(dados)
+        return Response(serializer.data)
+
+
+class RelatorioSessaoView(APIView):
+    """US25 (RF25): Retorna dados consolidados e gráficos para relatório individual de sessão."""
+
+    def get(self, request, pk, *args, **kwargs):
+        sessao = get_object_or_404(
+            Sessao.objects.select_related("microciclo__mesociclo__macrociclo").prefetch_related(
+                "atividades__atividade_biblioteca"
+            ),
+            pk=pk,
+        )
+        dados = gerar_dados_relatorio_sessao(sessao)
+        serializer = RelatorioSessaoSerializer(dados)
         return Response(serializer.data)

@@ -2,7 +2,30 @@ import React, { useEffect, useMemo, useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import SessaoCard from "../components/SessaoCard.jsx";
 import SessaoModal from "../components/SessaoModal.jsx";
+import RelatorioSessaoModal from "../components/RelatorioSessaoModal.jsx";
 import api from "../services/api.js";
+import { montarDadosRelatorioSessao } from "../services/relatorioSessaoService.js";
+import { gerarEBaixarPdfSessao } from "../services/geradorPdfSessao.js";
+
+const MACROCICLOS_DEMO_PDF = [
+  {
+    id: 1,
+    codigo: "MC-01",
+    nome: "Temporada 2026",
+    data_inicio: "2026-01-01",
+    data_termino: "2026-12-31",
+  },
+];
+
+const MESOCICLOS_DEMO_PDF = [
+  {
+    id: 1,
+    nome: "Mesociclo 01 - Preparação Física",
+    data_inicio: "2026-10-01",
+    data_termino: "2026-11-30",
+    macrociclo: 1,
+  },
+];
 
 const MICROCICLOS_DEMO_PDF = [
   {
@@ -12,7 +35,12 @@ const MICROCICLOS_DEMO_PDF = [
     data_termino: "2026-10-24",
     mesociclo: 1,
     mesocicloNome: "Mesociclo 01 - Preparação Física",
+    mesocicloDataInicio: "2026-10-01",
+    mesocicloDataTermino: "2026-11-30",
+    macrociclo: 1,
     macrocicloNome: "Temporada 2026",
+    macrocicloDataInicio: "2026-01-01",
+    macrocicloDataTermino: "2026-12-31",
   },
   {
     id: 2,
@@ -21,7 +49,12 @@ const MICROCICLOS_DEMO_PDF = [
     data_termino: "2026-10-31",
     mesociclo: 1,
     mesocicloNome: "Mesociclo 01 - Preparação Física",
+    mesocicloDataInicio: "2026-10-01",
+    mesocicloDataTermino: "2026-11-30",
+    macrociclo: 1,
     macrocicloNome: "Temporada 2026",
+    macrocicloDataInicio: "2026-01-01",
+    macrocicloDataTermino: "2026-12-31",
   },
   {
     id: 3,
@@ -30,7 +63,12 @@ const MICROCICLOS_DEMO_PDF = [
     data_termino: "2026-11-07",
     mesociclo: 1,
     mesocicloNome: "Mesociclo 01 - Preparação Física",
+    mesocicloDataInicio: "2026-10-01",
+    mesocicloDataTermino: "2026-11-30",
+    macrociclo: 1,
     macrocicloNome: "Temporada 2026",
+    macrocicloDataInicio: "2026-01-01",
+    macrocicloDataTermino: "2026-12-31",
   },
 ];
 
@@ -44,12 +82,18 @@ export default function SessoesPage({ onSelectNav }) {
     }
   });
   const [microciclos, setMicrociclos] = useState(MICROCICLOS_DEMO_PDF);
+  const [mesociclos, setMesociclos] = useState(MESOCICLOS_DEMO_PDF);
+  const [macrociclos, setMacrociclos] = useState(MACROCICLOS_DEMO_PDF);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Controle do Modal de Cadastro e Edição
   const [modalOpen, setModalOpen] = useState(false);
   const [sessaoEditando, setSessaoEditando] = useState(null);
   const [toastMsg, setToastMsg] = useState("");
+
+  // Controle de Geração e Visualização de Relatório PDF Individual por Sessão (US25)
+  const [gerandoPdfId, setGerandoPdfId] = useState(null);
+  const [relatorioAtivo, setRelatorioAtivo] = useState(null);
 
   // Busca sessões da API caso esteja ativa
   useEffect(() => {
@@ -106,21 +150,30 @@ export default function SessoesPage({ onSelectNav }) {
           api.get("/ciclos/macrociclos/").catch(() => ({ data: [] })),
         ]);
 
+        if (Array.isArray(respMeso.data) && respMeso.data.length > 0) {
+          setMesociclos(respMeso.data);
+        }
+        if (Array.isArray(respMacro.data) && respMacro.data.length > 0) {
+          setMacrociclos(respMacro.data);
+        }
+
         if (Array.isArray(respMicro.data) && respMicro.data.length > 0) {
           const mesoMap = new Map();
           if (Array.isArray(respMeso.data)) {
-            respMeso.data.forEach((meso) => mesoMap.set(meso.id, meso));
+            respMeso.data.forEach((meso) => mesoMap.set(Number(meso.id), meso));
           }
 
           const macroMap = new Map();
           if (Array.isArray(respMacro.data)) {
-            respMacro.data.forEach((macro) => macroMap.set(macro.id, macro));
+            respMacro.data.forEach((macro) =>
+              macroMap.set(Number(macro.id), macro)
+            );
           }
 
           const formatados = respMicro.data.map((micro) => {
-            const mesoAssociado = mesoMap.get(micro.mesociclo);
+            const mesoAssociado = mesoMap.get(Number(micro.mesociclo));
             const macroAssociado = mesoAssociado
-              ? macroMap.get(mesoAssociado.macrociclo)
+              ? macroMap.get(Number(mesoAssociado.macrociclo))
               : null;
 
             return {
@@ -128,7 +181,22 @@ export default function SessoesPage({ onSelectNav }) {
               dataInicio: micro.data_inicio || micro.dataInicio,
               dataTermino: micro.data_termino || micro.dataTermino,
               mesocicloNome: mesoAssociado?.nome || "",
+              mesocicloDataInicio:
+                mesoAssociado?.data_inicio || mesoAssociado?.dataInicio || null,
+              mesocicloDataTermino:
+                mesoAssociado?.data_termino ||
+                mesoAssociado?.dataTermino ||
+                null,
+              macrociclo: mesoAssociado?.macrociclo ?? null,
               macrocicloNome: macroAssociado?.nome || "",
+              macrocicloDataInicio:
+                macroAssociado?.data_inicio ||
+                macroAssociado?.dataInicio ||
+                null,
+              macrocicloDataTermino:
+                macroAssociado?.data_termino ||
+                macroAssociado?.dataTermino ||
+                null,
             };
           });
 
@@ -328,6 +396,46 @@ export default function SessoesPage({ onSelectNav }) {
     setSessaoEditando(null);
   };
 
+  /**
+   * Gera e baixa o relatório PDF referente exclusivamente à sessão selecionada (US25).
+   * Também abre a visualização estruturada do relatório na tela conforme o protótipo.
+   */
+  const handleGerarRelatorioPdf = async (sessaoSelecionada) => {
+    if (!sessaoSelecionada || gerandoPdfId !== null) return;
+
+    try {
+      setGerandoPdfId(sessaoSelecionada.id);
+      const dadosRelatorio = await montarDadosRelatorioSessao(
+        sessaoSelecionada,
+        {
+          microciclos,
+          mesociclos,
+          macrociclos,
+        }
+      );
+
+      gerarEBaixarPdfSessao(dadosRelatorio);
+      setRelatorioAtivo(dadosRelatorio);
+      dispararToast(`Relatório ${dadosRelatorio.nomeArquivo} gerado com sucesso.`);
+    } catch (erro) {
+      console.error("Erro ao gerar relatório PDF da sessão:", erro);
+      dispararToast("Não foi possível gerar o relatório PDF da sessão.");
+    } finally {
+      setGerandoPdfId(null);
+    }
+  };
+
+  const handleDownloadPdfRelatorio = (dadosRelatorio) => {
+    if (!dadosRelatorio) return;
+    try {
+      gerarEBaixarPdfSessao(dadosRelatorio);
+      dispararToast(`Download de ${dadosRelatorio.nomeArquivo} iniciado.`);
+    } catch (erro) {
+      console.error("Erro ao baixar PDF:", erro);
+      dispararToast("Não foi possível baixar o arquivo PDF.");
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-[#F5F2EA] text-[#10281E] lg:flex-row">
       {/* Menu Lateral */}
@@ -466,6 +574,8 @@ export default function SessoesPage({ onSelectNav }) {
                       microObj?.nome || sessao.microcicloNome || ""
                     }
                     onEditSessao={abrirModalEdicao}
+                    onGerarRelatorioPdf={handleGerarRelatorioPdf}
+                    gerandoPdf={gerandoPdfId === sessao.id}
                   />
                 );
               })}
@@ -508,6 +618,14 @@ export default function SessoesPage({ onSelectNav }) {
         microciclos={microciclos}
         onClose={fecharModal}
         onSave={salvarSessao}
+      />
+
+      {/* Modal de Visualização e Download do Relatório PDF da Sessão (US25) */}
+      <RelatorioSessaoModal
+        isOpen={Boolean(relatorioAtivo)}
+        dadosRelatorio={relatorioAtivo}
+        onClose={() => setRelatorioAtivo(null)}
+        onDownloadPdf={handleDownloadPdfRelatorio}
       />
     </div>
   );
