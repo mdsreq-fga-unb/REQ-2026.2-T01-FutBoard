@@ -17,6 +17,8 @@ const CORES_PALETA = [
 export default function GraficoRoscaAtividades({
   atividades = [],
   minutosTotais = 0,
+  unidadeTempo = "minutos",
+  minutosReferencia = 0,
 }) {
   const [itemHover, setItemHover] = useState(null);
 
@@ -32,6 +34,20 @@ export default function GraficoRoscaAtividades({
     minutosTotais > 0
       ? minutosTotais
       : itensOrdenados.reduce((acc, atv) => acc + (atv.minutos || 0), 0);
+
+  // Base do tempo relativo (US26 / RN03): tempo líquido do período, se informado
+  const referenciaPercentual =
+    minutosReferencia > 0 ? minutosReferencia : totalMinutosCalculado;
+  const exibirPercentual = unidadeTempo === "percentual";
+
+  const calcularPercentual = (minutos) =>
+    referenciaPercentual > 0 ? ((minutos || 0) / referenciaPercentual) * 100 : 0;
+
+  const formatarPercentual = (minutos) =>
+    `${calcularPercentual(minutos).toLocaleString("pt-BR", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 1,
+    })}%`;
 
   // Monta lista de fatias com percentuais e ângulos
   const fatias = [];
@@ -118,7 +134,9 @@ export default function GraficoRoscaAtividades({
         </span>
         {totalMinutosCalculado > 0 && (
           <span className="font-mono text-xs font-medium text-[#10281E]">
-            {totalMinutosCalculado} min totais
+            {exibirPercentual
+              ? `100% = ${referenciaPercentual} min`
+              : `${totalMinutosCalculado} min totais`}
           </span>
         )}
       </div>
@@ -159,7 +177,7 @@ export default function GraficoRoscaAtividades({
                       onMouseEnter={() => setItemHover(arco)}
                       onMouseLeave={() => setItemHover(null)}
                     >
-                      <title>{`${arco.rotulo}: ${arco.minutos} min (${arco.percentual.toFixed(1)}%)`}</title>
+                      <title>{`${arco.rotulo}: ${arco.minutos} min (${formatarPercentual(arco.minutos)})`}</title>
                     </path>
                   );
                 })}
@@ -172,7 +190,11 @@ export default function GraficoRoscaAtividades({
                 textAnchor="middle"
                 className="font-mono text-lg font-bold fill-[#10281E]"
               >
-                {itemHover ? `${itemHover.minutos}m` : `${totalMinutosCalculado}m`}
+                {exibirPercentual
+                  ? itemHover
+                    ? formatarPercentual(itemHover.minutos)
+                    : "100%"
+                  : `${itemHover ? itemHover.minutos : totalMinutosCalculado}m`}
               </text>
               <text
                 x={cx}
@@ -181,7 +203,9 @@ export default function GraficoRoscaAtividades({
                 className="font-mono text-[10px] font-medium fill-[#8A8D80]"
               >
                 {itemHover
-                  ? `${itemHover.percentual.toFixed(1)}%`
+                  ? exibirPercentual
+                    ? `${itemHover.minutos} min`
+                    : formatarPercentual(itemHover.minutos)
                   : `${fatias.length} atividades`}
               </text>
             </svg>
@@ -212,7 +236,9 @@ export default function GraficoRoscaAtividades({
                   </div>
 
                   <span className="ml-2 shrink-0 font-mono text-[11px] text-[#8A8D80]">
-                    {fatia.minutos} ({fatia.percentual.toFixed(1)}%)
+                    {exibirPercentual
+                      ? formatarPercentual(fatia.minutos)
+                      : `${fatia.minutos} (${formatarPercentual(fatia.minutos)})`}
                   </span>
                 </div>
               );

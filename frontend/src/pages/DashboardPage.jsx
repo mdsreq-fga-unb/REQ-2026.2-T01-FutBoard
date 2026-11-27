@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar.jsx";
 import GraficoRoscaAtividades from "../components/GraficoRoscaAtividades.jsx";
 import GraficoBarrasAtividades from "../components/GraficoBarrasAtividades.jsx";
 import GraficoBarrasHorizontaisAtividades from "../components/GraficoBarrasHorizontaisAtividades.jsx";
+import AlternarUnidadeTempo from "../components/AlternarUnidadeTempo.jsx";
 import api from "../services/api.js";
 
 /**
@@ -391,6 +392,10 @@ export default function DashboardPage({ onSelectNav }) {
   const [filtroMicro, setFiltroMicro] = useState("");
   const [filtroMes, setFiltroMes] = useState("");
 
+  // Unidade de tempo dos gráficos (US26): "minutos" (absoluto) ou "percentual" (relativo).
+  // É só estado de exibição: trocar não refaz a consulta nem limpa os filtros.
+  const [unidadeTempo, setUnidadeTempo] = useState("minutos");
+
   // Carrega opções de ciclos para os filtros
   useEffect(() => {
     let montado = true;
@@ -576,6 +581,18 @@ export default function DashboardPage({ onSelectNav }) {
     });
   };
 
+  // Base do tempo relativo (RN03): tempo líquido do período filtrado
+  const minutosReferencia = Number(indicadores.minutos_totais) || 0;
+  const exibirPercentual = unidadeTempo === "percentual";
+
+  // Converte minutos em % do tempo líquido do período (US26)
+  const formatarTempo = (minutos) => {
+    if (!exibirPercentual) return formatarNumero(minutos);
+    const percentual =
+      minutosReferencia > 0 ? ((Number(minutos) || 0) / minutosReferencia) * 100 : 0;
+    return `${formatarNumero(Math.round(percentual * 10) / 10)}%`;
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-[#F5F2EA] text-[#10281E] lg:flex-row">
       {/* Menu Lateral */}
@@ -714,7 +731,7 @@ export default function DashboardPage({ onSelectNav }) {
                 title="Tempo líquido: atividades com a mesma ordem contam uma única vez"
               >
                 <span className="font-mono text-3xl font-bold tracking-tight text-[#10281E] sm:text-4xl">
-                  {indicadores.minutos_totais}
+                  {formatarTempo(indicadores.minutos_totais)}
                 </span>
                 <span className="mt-3 text-xs font-medium text-[#10281E] sm:text-[13px]">
                   Tempo Total
@@ -724,7 +741,7 @@ export default function DashboardPage({ onSelectNav }) {
               {/* 3. Min/Sessão */}
               <div className="fb-card flex min-h-[120px] flex-col items-center justify-center rounded-2xl border border-[#E4DFD2] bg-white p-4 text-center shadow-2xs transition hover:border-[#0E3A29]/30">
                 <span className="font-mono text-3xl font-bold tracking-tight text-[#10281E] sm:text-4xl">
-                  {formatarNumero(indicadores.minutos_por_sessao)}
+                  {formatarTempo(indicadores.minutos_por_sessao)}
                 </span>
                 <span className="mt-3 text-xs font-medium text-[#10281E] sm:text-[13px]">
                   Min/Sessão
@@ -747,7 +764,7 @@ export default function DashboardPage({ onSelectNav }) {
               {/* 5. Min/Execução */}
               <div className="fb-card flex min-h-[120px] flex-col items-center justify-center rounded-2xl border border-[#E4DFD2] bg-white p-4 text-center shadow-2xs transition hover:border-[#0E3A29]/30">
                 <span className="font-mono text-3xl font-bold tracking-tight text-[#10281E] sm:text-4xl">
-                  {formatarNumero(indicadores.minutos_por_execucao)}
+                  {formatarTempo(indicadores.minutos_por_execucao)}
                 </span>
                 <span className="mt-3 text-xs font-medium text-[#10281E] sm:text-[13px]">
                   Min/Execução
@@ -803,88 +820,96 @@ export default function DashboardPage({ onSelectNav }) {
               )}
             </div>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
-              {/* Macrociclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Macrociclo
-                </label>
-                <select
-                  value={filtroMacro}
-                  onChange={(e) => {
-                    setFiltroMacro(e.target.value);
-                    setFiltroMeso("");
-                    setFiltroMicro("");
-                  }}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Selecionar macrociclo</option>
-                  {macrociclos.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
+            {/* Selects de periodização + alternador Min | % à direita (conforme protótipo da US26) */}
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
+              <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
+                {/* Macrociclo */}
+                <div>
+                  <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                    Macrociclo
+                  </label>
+                  <select
+                    value={filtroMacro}
+                    onChange={(e) => {
+                      setFiltroMacro(e.target.value);
+                      setFiltroMeso("");
+                      setFiltroMicro("");
+                    }}
+                    className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                  >
+                    <option value="">Selecionar macrociclo</option>
+                    {macrociclos.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.nome}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Mesociclo */}
+                <div>
+                  <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                    Mesociclo
+                  </label>
+                  <select
+                    value={filtroMeso}
+                    onChange={(e) => {
+                      setFiltroMeso(e.target.value);
+                      setFiltroMicro("");
+                    }}
+                    className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                  >
+                    <option value="">Selecionar mesociclo</option>
+                    {mesociclosFiltrados.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.nome}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Microciclo */}
+                <div>
+                  <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                    Microciclo
+                  </label>
+                  <select
+                    value={filtroMicro}
+                    onChange={(e) => setFiltroMicro(e.target.value)}
+                    className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                  >
+                    <option value="">Selecionar microciclo</option>
+                    {microciclosFiltrados.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.nome}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Mês */}
+                <div>
+                  <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                    Mês
+                  </label>
+                  <select
+                    value={filtroMes}
+                    onChange={(e) => setFiltroMes(e.target.value)}
+                    className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                  >
+                    <option value="">Todos os meses</option>
+                    {MESES.map((mes) => (
+                      <option key={mes.valor} value={mes.valor}>
+                        {mes.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
-              {/* Mesociclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Mesociclo
-                </label>
-                <select
-                  value={filtroMeso}
-                  onChange={(e) => {
-                    setFiltroMeso(e.target.value);
-                    setFiltroMicro("");
-                  }}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Selecionar mesociclo</option>
-                  {mesociclosFiltrados.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Microciclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Microciclo
-                </label>
-                <select
-                  value={filtroMicro}
-                  onChange={(e) => setFiltroMicro(e.target.value)}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Selecionar microciclo</option>
-                  {microciclosFiltrados.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Mês */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Mês
-                </label>
-                <select
-                  value={filtroMes}
-                  onChange={(e) => setFiltroMes(e.target.value)}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Todos os meses</option>
-                  {MESES.map((mes) => (
-                    <option key={mes.valor} value={mes.valor}>
-                      {mes.label}
-                    </option>
-                  ))}
-                </select>
+              {/* Unidade de tempo dos gráficos (US26) */}
+              <div className="flex justify-end lg:shrink-0">
+                <AlternarUnidadeTempo valor={unidadeTempo} onChange={setUnidadeTempo} />
               </div>
             </div>
           </section>
@@ -896,6 +921,8 @@ export default function DashboardPage({ onSelectNav }) {
               <GraficoRoscaAtividades
                 atividades={dadosAtividades.atividades}
                 minutosTotais={dadosAtividades.minutos_totais_atividades}
+                unidadeTempo={unidadeTempo}
+                minutosReferencia={minutosReferencia}
               />
 
               {/* Gráfico 2: Barras Verticais (Qtd Execuções por Atividade) */}
@@ -911,6 +938,8 @@ export default function DashboardPage({ onSelectNav }) {
                   dadosMomentosJogo.mensagem ||
                   ESTADO_VAZIO_MOMENTOS_JOGO.mensagem
                 }
+                unidadeTempo={unidadeTempo}
+                minutosReferencia={minutosReferencia}
               />
             </div>
           </section>
