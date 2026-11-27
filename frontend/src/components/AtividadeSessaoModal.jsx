@@ -1,6 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import api from "../services/api.js";
 
+function normalizarTexto(valor) {
+  return valor
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
 const TIPOLOGIAS = [
   { valor: "Confrontos", sigla: "CF" },
   { valor: "Jogo Condicionante", sigla: "JC" },
@@ -104,6 +113,9 @@ export default function AtividadeSessaoModal({
   const [abertoDropdown, setAbertoDropdown] = useState(null);
   const [inputComportamento, setInputComportamento] = useState("");
   const [inputAtributo, setInputAtributo] = useState("");
+  // Catálogo de atributos técnicos cadastrados (US32)
+  const [atributosCatalogo, setAtributosCatalogo] = useState([]);
+  const [carregandoAtributos, setCarregandoAtributos] = useState(false);
 
   const [erro, setErro] = useState("");
   const [salvando, setSalvando] = useState(false);
@@ -247,12 +259,99 @@ export default function AtividadeSessaoModal({
     }
   };
 
-  const adicionarItemTexto = (lista, setLista, valor, setInput) => {
-    const texto = valor.trim();
-    if (texto && !lista.includes(texto)) {
-      setLista([...lista, texto]);
-      setInput("");
+  // Carrega os atributos técnicos cadastrados (US32) sempre que o modal abre
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    let ativo = true;
+    setCarregandoAtributos(true);
+
+    api
+      .get("/treinos/atributos-tecnicos/")
+      .then((resposta) => {
+        if (!ativo) return;
+        const lista = Array.isArray(resposta.data)
+          ? resposta.data
+              .map((item) => (typeof item === "string" ? item : item?.nome))
+              .filter(Boolean)
+          : [];
+        setAtributosCatalogo(
+          [...new Set(lista)].sort((a, b) => a.localeCompare(b, "pt-BR")),
+        );
+      })
+      .catch(() => {
+        if (ativo) {
+          setAtributosCatalogo([]);
+        }
+      })
+      .finally(() => {
+        if (ativo) {
+          setCarregandoAtributos(false);
+        }
+      });
+
+    return () => {
+      ativo = false;
+    };
+  }, [isOpen]);
+
+  const opcoesAtributos = useMemo(() => {
+    const mapa = new Map();
+    [...atributosCatalogo, ...atributosTecnicos].forEach((nomeItem) => {
+      const limpo = String(nomeItem || "")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!limpo) return;
+      const chave = normalizarTexto(limpo);
+      if (!mapa.has(chave)) {
+        mapa.set(chave, limpo);
+      }
+    });
+    return Array.from(mapa.values()).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  }, [atributosCatalogo, atributosTecnicos]);
+
+  const opcoesAtributosFiltradas = useMemo(() => {
+    const termo = normalizarTexto(inputAtributo);
+    if (!termo) return opcoesAtributos;
+    return opcoesAtributos.filter((item) => normalizarTexto(item).includes(termo));
+  }, [opcoesAtributos, inputAtributo]);
+
+  const atributoSelecionado = (nomeItem) => {
+    const chave = normalizarTexto(nomeItem);
+    return atributosTecnicos.some((item) => normalizarTexto(item) === chave);
+  };
+
+  const toggleAtributo = (nomeItem) => {
+    const chave = normalizarTexto(nomeItem);
+    if (atributosTecnicos.some((item) => normalizarTexto(item) === chave)) {
+      setAtributosTecnicos(
+        atributosTecnicos.filter((item) => normalizarTexto(item) !== chave),
+      );
+    } else {
+      setAtributosTecnicos([...atributosTecnicos, nomeItem]);
     }
+  };
+
+  // Nome novo digitado: entra na atividade e o backend o registra no catálogo ao salvar
+  const adicionarAtributo = () => {
+    const texto = inputAtributo.replace(/\s+/g, " ").trim();
+    if (!texto) return;
+
+    const chave = normalizarTexto(texto);
+    const existente = opcoesAtributos.find((item) => normalizarTexto(item) === chave);
+    const nomeFinal = existente || texto;
+
+    if (!atributoSelecionado(nomeFinal)) {
+      setAtributosTecnicos([...atributosTecnicos, nomeFinal]);
+    }
+
+    if (!atributosCatalogo.some((item) => normalizarTexto(item) === chave)) {
+      setAtributosCatalogo((anterior) =>
+        [...anterior, nomeFinal].sort((a, b) => a.localeCompare(b, "pt-BR")),
+      );
+    }
+
+    setInputAtributo("");
   };
 
   const listaOpcoesComportamentos = useMemo(() => {
@@ -1090,65 +1189,104 @@ export default function AtividadeSessaoModal({
                 </button>
               </div>
 
-              {/* Dropdown com scroll */}
+              {/* Dropdown com atributos cadastrados (US32) + cadastro direto */}
               {abertoDropdown === "atributos" && (
-                <div className="absolute top-full right-0 z-30 mt-1.5 w-full min-w-[240px] rounded-xl border border-[#E4DFD2] bg-white p-3 shadow-xl">
-                  <div className="flex gap-1.5">
-                    <input
-                      type="text"
-                      value={inputAtributo}
-                      onChange={(e) => setInputAtributo(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          adicionarItemTexto(
-                            atributosTecnicos,
-                            setAtributosTecnicos,
-                            inputAtributo,
-                            setInputAtributo,
-                          );
-                        }
-                      }}
-                      placeholder="Ex.: DomOrient"
-                      className="w-full rounded-lg border border-[#E4DFD2] px-2.5 py-1 text-xs text-[#10281E] outline-none"
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        adicionarItemTexto(
-                          atributosTecnicos,
-                          setAtributosTecnicos,
-                          inputAtributo,
-                          setInputAtributo,
-                        )
-                      }
-                      className="rounded-lg bg-[#0E3A29] px-2.5 py-1 text-xs font-medium text-white hover:bg-[#10281E]"
-                    >
-                      Ok
-                    </button>
+                <div className="absolute top-full right-0 z-30 mt-1.5 w-full min-w-[260px] overflow-hidden rounded-xl border border-[#E4DFD2] bg-white shadow-xl">
+                  <div className="border-b border-[#E4DFD2]/70 p-2.5">
+                    <div className="flex gap-1.5">
+                      <input
+                        type="text"
+                        value={inputAtributo}
+                        onChange={(e) => setInputAtributo(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            adicionarAtributo();
+                          }
+                        }}
+                        placeholder="Buscar ou cadastrar (ex.: Domínio orientado)"
+                        aria-label="Buscar ou cadastrar atributo técnico"
+                        className="w-full rounded-lg border border-[#E4DFD2] px-2.5 py-1 text-xs text-[#10281E] outline-none focus:border-[#0E3A29]"
+                      />
+                      <button
+                        type="button"
+                        onClick={adicionarAtributo}
+                        className="rounded-lg bg-[#0E3A29] px-2.5 py-1 text-xs font-medium text-white hover:bg-[#10281E]"
+                      >
+                        Ok
+                      </button>
+                    </div>
+                    {/* Regra do Objetivo Central (RN32) */}
+                    <p className="mt-1.5 text-[10px] text-[#8A8D80]">
+                      Opcional: marque apenas se for o objetivo central da atividade.
+                    </p>
                   </div>
 
-                  <div className="mt-2.5 max-h-32 overflow-y-auto space-y-1">
-                    {atributosTecnicos.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between rounded bg-[#C6E96B]/30 px-2 py-1 text-xs text-[#0E3A29]"
-                      >
-                        <span className="font-mono text-[11px]">{item}</span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setAtributosTecnicos(
-                              atributosTecnicos.filter((_, i) => i !== idx),
-                            )
-                          }
-                          className="text-red-500 hover:font-bold"
-                        >
-                          ×
-                        </button>
+                  <div className="max-h-40 overflow-y-auto py-1">
+                    {carregandoAtributos ? (
+                      <div className="px-3.5 py-2 text-xs text-[#8A8D80]">
+                        Carregando atributos técnicos...
                       </div>
-                    ))}
+                    ) : opcoesAtributosFiltradas.length === 0 ? (
+                      <div className="px-3.5 py-2 text-xs text-[#8A8D80]">
+                        {inputAtributo.trim()
+                          ? "Nenhum atributo encontrado. Clique em Ok para cadastrar."
+                          : "Nenhum atributo cadastrado. Digite acima e clique em Ok."}
+                      </div>
+                    ) : (
+                      opcoesAtributosFiltradas.map((opcao) => {
+                        const selecionado = atributoSelecionado(opcao);
+                        return (
+                          <div
+                            key={opcao}
+                            role="option"
+                            aria-selected={selecionado}
+                            onClick={() => toggleAtributo(opcao)}
+                            className={`flex cursor-pointer items-center justify-between px-3.5 py-2 text-xs transition ${
+                              selecionado
+                                ? "bg-[#0E3A29]/10 font-semibold text-[#0E3A29]"
+                                : "text-[#10281E] hover:bg-[#F5F2EA]"
+                            }`}
+                          >
+                            <span className="truncate pr-2">{opcao}</span>
+                            {selecionado && (
+                              <span className="text-xs font-bold text-[#0E3A29]">
+                                ✓
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })
+                    )}
                   </div>
+
+                  {atributosTecnicos.length > 0 && (
+                    <div className="border-t border-[#E4DFD2]/70 bg-[#FAF9F5] p-2">
+                      <div className="flex flex-wrap gap-1">
+                        {atributosTecnicos.map((item) => (
+                          <span
+                            key={item}
+                            className="inline-flex items-center gap-1 rounded-md border border-[#C6E96B]/80 bg-[#C6E96B]/30 px-2 py-0.5 text-[11px] text-[#0E3A29]"
+                          >
+                            <span className="font-mono text-[10px]">
+                              {item}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleAtributo(item);
+                              }}
+                              className="text-red-500 hover:font-bold"
+                              aria-label={`Remover ${item}`}
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

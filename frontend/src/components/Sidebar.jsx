@@ -11,6 +11,7 @@ export default function Sidebar({
   totalSessoes = 0,
   totalAtividades = 0,
   totalComportamentos = 0,
+  totalAtributosTecnicos = 0,
 }) {
   const handleSelect = (itemKey) => {
     if (onSelectNav) onSelectNav(itemKey);
@@ -410,6 +411,50 @@ export default function Sidebar({
                   </span>
                 )}
                 {activeNav === "comportamentos" && (
+                  <svg
+                    className="h-3.5 w-3.5 text-[#C6E96B] transition-transform group-hover:translate-x-0.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
+                  </svg>
+                )}
+              </span>
+            </button>
+
+            {/* Atributos técnicos (US32) */}
+            <button
+              type="button"
+              onClick={() => handleSelect("atributos-tecnicos")}
+              className={`group flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-sm font-medium transition ${
+                activeNav === "atributos-tecnicos"
+                  ? "bg-white/[0.11] text-[#FFFFFF] shadow-inner ring-1 ring-white/[0.08]"
+                  : "text-[#8A8D80] hover:bg-white/[0.06] hover:text-[#FFFFFF]"
+              }`}
+            >
+              <span className="flex items-center gap-2.5">
+                <svg
+                  className="h-4 w-4 shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5l3.8 2.8-1.5 4.4H9.7l-1.5-4.4L12 7.5z" />
+                </svg>
+                <span>Atributos técnicos</span>
+              </span>
+
+              <span className="flex items-center gap-1.5">
+                {totalAtributosTecnicos > 0 && (
+                  <span className="hidden rounded-md bg-[#10281E]/60 px-1.5 py-0.5 font-mono text-[10px] text-[#C6E96B] group-hover:inline-block">
+                    {totalAtributosTecnicos}
+                  </span>
+                )}
+                {activeNav === "atributos-tecnicos" && (
                   <svg
                     className="h-3.5 w-3.5 text-[#C6E96B] transition-transform group-hover:translate-x-0.5"
                     viewBox="0 0 24 24"

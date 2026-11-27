@@ -3,6 +3,7 @@ import DashboardPage from "./pages/DashboardPage.jsx";
 import MacrociclosPage from "./pages/MacrociclosPage.jsx";
 import MesociclosPage from "./pages/MesociclosPage.jsx";
 import ComportamentosPage from "./pages/ComportamentosPage.jsx";
+import AtributosTecnicosPage from "./pages/AtributosTecnicosPage.jsx";
 import MicrociclosPage from "./pages/MicrociclosPage.jsx";
 import SessoesPage from "./pages/SessoesPage.jsx";
 import BibliotecaPage from "./pages/BibliotecaPage.jsx";
@@ -16,6 +17,10 @@ export default function App() {
 
   if (currentPage === "comportamentos") {
     return <ComportamentosPage onSelectNav={setCurrentPage} />;
+  }
+
+  if (currentPage === "atributos-tecnicos") {
+    return <AtributosTecnicosPage onSelectNav={setCurrentPage} />;
   }
 
   if (currentPage === "mesociclos") {
