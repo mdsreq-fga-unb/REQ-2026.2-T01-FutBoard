@@ -82,7 +82,7 @@
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
 | Os critérios de aceitação foram atendidos? | [Issue US14](#)<br>[Issue US22](#)<br>[Issue US24](#)<br>[Issue US27](#)<br>[Issue US28](#) | [] |
-| O código foi integrado na branch staging e revisado? | Nenhum PR das histórias desta iteração até 16/11/2026. | [] |
+| O código foi integrado na branch main e revisado? | Nenhum PR das histórias desta iteração até 16/11/2026. | [] |
 | Os workflows de CI/CD do projeto foram executados com sucesso? | O repositório tem apenas o workflow de deploy da documentação ([deploy.yml](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/main/.github/workflows/deploy.yml)); não há workflow de CI para o código. | [] |
 | Os testes relacionados foram executados com sucesso? | Testes de autenticação em [`apps/usuarios/tests.py`](https://github.com/mdsreq-fga-unb/REQ-2026.2-T01-FutBoard/blob/staging/backend/apps/usuarios/tests.py) (2 testes), sem registro de execução publicado. | [] |
 | Os Requisitos Não Funcionais (RNFs) vinculados foram verificados? | Pendente: verificação ainda não registrada. | [] |
