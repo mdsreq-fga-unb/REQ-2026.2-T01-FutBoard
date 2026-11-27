@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import api from "../services/api.js";
 
 const TIPOLOGIAS = [
   { valor: "Confrontos", sigla: "CF" },
@@ -52,9 +53,30 @@ const MAPA_MOMENTOS_REVERSO = {
   "Trans Def": "Transição Defensiva",
 };
 
+// Princípios táticos / comportamentos padronizados do catálogo do cliente
+const COMPORTAMENTOS_PADRAO = [
+  "CoordLinDef",
+  "Cobertura",
+  "Contenção",
+  "RecPosPerd",
+  "MantPoss",
+  "Quebrar Linha",
+  "Balanço Def",
+  "Amplitude",
+  "Abrir o Campo",
+  "Atacar Espaço",
+  "DefCruz",
+  "JogoEntrelinhas",
+  "ContrProf",
+  "Pisar Área",
+  "Atq o Gol/AO",
+  "Atq o Gol/CAeAR",
+];
+
 export default function AtividadeSessaoModal({
   isOpen,
   initialData = null,
+  atividadesDaSessao = [],
   onClose,
   onSave,
 }) {
@@ -75,6 +97,7 @@ export default function AtividadeSessaoModal({
   const [momentosJogo, setMomentosJogo] = useState([]);
   const [fasesJogo, setFasesJogo] = useState([]);
   const [comportamentos, setComportamentos] = useState([]);
+  const [catalogoComportamentos, setCatalogoComportamentos] = useState([]);
   const [atributosTecnicos, setAtributosTecnicos] = useState([]);
 
   // Controle do dropdown aberto ('momentos' | 'fases' | 'comportamentos' | 'atributos' | null)
@@ -150,6 +173,22 @@ export default function AtividadeSessaoModal({
     }
   }, [isOpen, initialData]);
 
+  // Busca os princípios táticos cadastrados no backend ao abrir o modal
+  useEffect(() => {
+    if (isOpen) {
+      api
+        .get("/treinos/comportamentos/")
+        .then((resp) => {
+          if (Array.isArray(resp.data)) {
+            setCatalogoComportamentos(resp.data);
+          }
+        })
+        .catch((err) => {
+          console.warn("Erro ao carregar comportamentos da API:", err);
+        });
+    }
+  }, [isOpen]);
+
   const handleClose = () => {
     resetForm();
     onClose();
@@ -216,9 +255,121 @@ export default function AtividadeSessaoModal({
     }
   };
 
+  const listaOpcoesComportamentos = useMemo(() => {
+    const mapaNomes = new Map();
+
+    // 1. Princípios táticos padrão do catálogo do cliente
+    COMPORTAMENTOS_PADRAO.forEach((nome) => {
+      mapaNomes.set(nome.toLowerCase(), { id: `padrao-${nome}`, nome });
+    });
+
+    // 2. Princípios já cadastrados em outras atividades da sessão
+    (atividadesDaSessao || []).forEach((atv) => {
+      (atv.comportamentos || []).forEach((cNome) => {
+        const limpo = (cNome || "").trim();
+        if (limpo && !mapaNomes.has(limpo.toLowerCase())) {
+          mapaNomes.set(limpo.toLowerCase(), {
+            id: `sessao-${limpo}`,
+            nome: limpo,
+          });
+        }
+      });
+    });
+
+    // 3. Princípios cadastrados no banco via API
+    catalogoComportamentos.forEach((c) => {
+      const limpo = (c.nome || "").trim();
+      if (limpo) {
+        mapaNomes.set(limpo.toLowerCase(), { id: c.id, nome: limpo });
+      }
+    });
+
+    // 4. Princípios selecionados na atividade atual
+    comportamentos.forEach((cNome) => {
+      const limpo = (cNome || "").trim();
+      if (limpo && !mapaNomes.has(limpo.toLowerCase())) {
+        mapaNomes.set(limpo.toLowerCase(), {
+          id: `atual-${limpo}`,
+          nome: limpo,
+        });
+      }
+    });
+
+    const todos = Array.from(mapaNomes.values()).sort((a, b) =>
+      (a.nome || "").localeCompare(b.nome || "", "pt-BR"),
+    );
+
+    const termo = inputComportamento.trim().toLowerCase();
+    if (!termo) return todos;
+    return todos.filter((c) =>
+      (c.nome || "").toLowerCase().includes(termo),
+    );
+  }, [
+    catalogoComportamentos,
+    atividadesDaSessao,
+    comportamentos,
+    inputComportamento,
+  ]);
+
+  const handleAdicionarComportamento = async () => {
+    const nomeLimpo = inputComportamento.trim();
+    if (!nomeLimpo) return;
+
+    // Se já existir na lista combinada, seleciona sem duplicar
+    const existente = listaOpcoesComportamentos.find(
+      (c) => (c.nome || "").trim().toLowerCase() === nomeLimpo.toLowerCase(),
+    );
+
+    if (existente) {
+      const nomeReal = existente.nome;
+      if (!comportamentos.includes(nomeReal)) {
+        setComportamentos((prev) => [...prev, nomeReal]);
+      }
+
+      // Se ainda não estiver salvo na API do banco, sincroniza em background
+      const noBanco = catalogoComportamentos.some(
+        (c) => (c.nome || "").trim().toLowerCase() === nomeLimpo.toLowerCase(),
+      );
+      if (!noBanco) {
+        api
+          .post("/treinos/comportamentos/", { nome: nomeReal })
+          .then((resp) => {
+            if (resp?.data) {
+              setCatalogoComportamentos((prev) => [...prev, resp.data]);
+            }
+          })
+          .catch(() => {});
+      }
+
+      setInputComportamento("");
+      return;
+    }
+
+    try {
+      const resp = await api.post("/treinos/comportamentos/", { nome: nomeLimpo });
+      if (resp?.data) {
+        const novo = resp.data;
+        setCatalogoComportamentos((prev) => [...prev, novo]);
+        const nomeAdicionado = novo.nome || nomeLimpo;
+        if (!comportamentos.includes(nomeAdicionado)) {
+          setComportamentos((prev) => [...prev, nomeAdicionado]);
+        }
+      }
+    } catch (err) {
+      console.warn("Erro ao cadastrar comportamento na API:", err);
+      const itemLocal = { id: Date.now(), nome: nomeLimpo };
+      setCatalogoComportamentos((prev) => [...prev, itemLocal]);
+      if (!comportamentos.includes(nomeLimpo)) {
+        setComportamentos((prev) => [...prev, nomeLimpo]);
+      }
+    }
+
+    setInputComportamento("");
+  };
+
   // Validação em tempo real para habilitar o botão "Criar atividade" e deixá-lo verdinho
   const camposObrigatoriosPreenchidos = useMemo(() => {
-    if (!nome.trim() || !tipoSsp || !tipologia || !codigo.trim()) {
+    if (!nome.trim() || !tipoSsp || !tipologia) {
       return false;
     }
 
@@ -241,7 +392,7 @@ export default function AtividadeSessaoModal({
     }
 
     return true;
-  }, [nome, tipoSsp, tipologia, codigo, comprimento, largura, numeroJogadores]);
+  }, [nome, tipoSsp, tipologia, comprimento, largura, numeroJogadores]);
 
   if (!isOpen) return null;
 
@@ -251,11 +402,6 @@ export default function AtividadeSessaoModal({
 
     if (!nome.trim()) {
       setErro("O campo Nome da Atividade (SSP) é obrigatório.");
-      return;
-    }
-
-    if (!codigo.trim()) {
-      setErro("O campo Código da Atividade é obrigatório.");
       return;
     }
 
@@ -299,13 +445,14 @@ export default function AtividadeSessaoModal({
     }
 
     const payload = {
-      codigo: codigo.trim() || undefined,
+      codigo: codigo.trim() || "",
       nome: nome.trim(),
       tipologia,
       sigla_tipologia: sigla,
       tipo_ssp: tipoSsp,
+      orientacao: (initialData?.orientacao || "").trim(),
       ordem: ordem ? parseInt(ordem, 10) : null,
-      tempo: tempo ? parseInt(tempo, 10) : null,
+      tempo: tempo ? parseInt(tempo, 10) : 15,
       comprimento: c,
       largura: l,
       numero_jogadores: j,
@@ -401,7 +548,7 @@ export default function AtividadeSessaoModal({
                 htmlFor="campo-codigo"
                 className="mb-1 block text-xs font-medium text-[#10281E]"
               >
-                Código da Atividade <span className="text-red-500">*</span>
+                Código da Atividade
               </label>
               <input
                 id="campo-codigo"
@@ -802,65 +949,101 @@ export default function AtividadeSessaoModal({
                 </button>
               </div>
 
-              {/* Dropdown com scroll */}
+              {/* Dropdown com busca/filtro e scroll */}
               {abertoDropdown === "comportamentos" && (
-                <div className="absolute top-full left-0 z-30 mt-1.5 w-full min-w-[240px] rounded-xl border border-[#E4DFD2] bg-white p-3 shadow-xl">
-                  <div className="flex gap-1.5">
-                    <input
-                      type="text"
-                      value={inputComportamento}
-                      onChange={(e) => setInputComportamento(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          adicionarItemTexto(
-                            comportamentos,
-                            setComportamentos,
-                            inputComportamento,
-                            setInputComportamento,
-                          );
-                        }
-                      }}
-                      placeholder="Ex.: CoordLinDef"
-                      className="w-full rounded-lg border border-[#E4DFD2] px-2.5 py-1 text-xs text-[#10281E] outline-none"
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        adicionarItemTexto(
-                          comportamentos,
-                          setComportamentos,
-                          inputComportamento,
-                          setInputComportamento,
-                        )
-                      }
-                      className="rounded-lg bg-[#0E3A29] px-2.5 py-1 text-xs font-medium text-white hover:bg-[#10281E]"
-                    >
-                      Ok
-                    </button>
+                <div className="absolute top-full left-0 z-30 mt-1.5 w-full min-w-[240px] overflow-hidden rounded-xl border border-[#E4DFD2] bg-white shadow-xl">
+                  <div className="border-b border-[#E4DFD2] p-2.5">
+                    <div className="flex gap-1.5">
+                      <input
+                        type="text"
+                        value={inputComportamento}
+                        onChange={(e) => setInputComportamento(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            handleAdicionarComportamento();
+                          }
+                        }}
+                        placeholder="Buscar ou cadastrar..."
+                        className="w-full rounded-lg border border-[#E4DFD2] px-2.5 py-1 text-xs text-[#10281E] outline-none transition focus:border-[#0E3A29]"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleAdicionarComportamento}
+                        className="shrink-0 rounded-lg bg-[#0E3A29] px-2.5 py-1 text-xs font-medium text-white transition hover:bg-[#10281E]"
+                      >
+                        Ok
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="mt-2.5 max-h-32 overflow-y-auto space-y-1">
-                    {comportamentos.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between rounded bg-[#E4DFD2]/50 px-2 py-1 text-xs text-[#10281E]"
-                      >
-                        <span className="font-mono text-[11px]">{item}</span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setComportamentos(
-                              comportamentos.filter((_, i) => i !== idx),
-                            )
-                          }
-                          className="text-red-500 hover:font-bold"
-                        >
-                          ×
-                        </button>
+                  <div className="max-h-40 overflow-y-auto py-1">
+                    {listaOpcoesComportamentos.length === 0 ? (
+                      <div className="px-3.5 py-2 text-xs text-[#8A8D80]">
+                        Nenhum princípio encontrado. Clique em "Ok" para cadastrar.
                       </div>
-                    ))}
+                    ) : (
+                      listaOpcoesComportamentos.map((item) => {
+                        const selecionado = comportamentos.includes(item.nome);
+                        return (
+                          <div
+                            key={item.id || item.nome}
+                            onClick={() =>
+                              toggleItemLista(
+                                comportamentos,
+                                setComportamentos,
+                                item.nome,
+                              )
+                            }
+                            className={`flex cursor-pointer items-center justify-between px-3.5 py-2 text-xs transition ${
+                              selecionado
+                                ? "bg-[#0E3A29]/10 font-semibold text-[#0E3A29]"
+                                : "text-[#10281E] hover:bg-[#F5F2EA]"
+                            }`}
+                          >
+                            <span>{item.nome}</span>
+                            {selecionado && (
+                              <span className="text-xs font-bold text-[#0E3A29]">
+                                ✓
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })
+                    )}
                   </div>
+
+                  {comportamentos.length > 0 && (
+                    <div className="border-t border-[#E4DFD2]/70 bg-[#FAF9F5] p-2">
+                      <div className="flex flex-wrap gap-1">
+                        {comportamentos.map((item) => (
+                          <span
+                            key={item}
+                            className="inline-flex items-center gap-1 rounded-md border border-[#E4DFD2] bg-white px-2 py-0.5 text-[11px] text-[#10281E]"
+                          >
+                            <span className="font-mono text-[10px]">
+                              {item}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleItemLista(
+                                  comportamentos,
+                                  setComportamentos,
+                                  item,
+                                );
+                              }}
+                              className="text-red-500 hover:font-bold"
+                              aria-label={`Remover ${item}`}
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

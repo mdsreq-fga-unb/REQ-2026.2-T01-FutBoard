@@ -1236,6 +1236,7 @@ class InformacoesAtividadesTreinoUnitTests(SimpleTestCase):
                 "atividades",
                 "por_tipologia",
                 "por_tipo_ssp",
+                "por_momento_jogo",
                 "execucoes",
                 "estado_vazio",
                 "mensagem",
@@ -1243,6 +1244,71 @@ class InformacoesAtividadesTreinoUnitTests(SimpleTestCase):
         )
         self.assertTrue(serializer.data["estado_vazio"])
         self.assertEqual(serializer.data["mensagem"], MENSAGEM_ATIVIDADES_VAZIO)
+
+    def test_us36_unitario_agrupamento_por_momento_jogo_rn05_rn07(self):
+        """Valida agregação de momentos_jogo (US36) com lista vazia, opcionalidade (RN05) e resultado vazio (RN07)."""
+        s01 = self._criar_sessao_em_memoria(1, "S01", 1, "2026-08-01")
+
+        atividades = [
+            AtividadeSessao(
+                id=1,
+                sessao=s01,
+                codigo="ATV1",
+                nome="Treino Ataque",
+                tipologia="Rondo",
+                tipo_ssp="Especial",
+                ordem=1,
+                tempo=20,
+                momentos_jogo=["Ataque", "Trans Of"],
+            ),
+            AtividadeSessao(
+                id=2,
+                sessao=s01,
+                codigo="ATV2",
+                nome="Treino Defesa",
+                tipologia="Confrontos",
+                tipo_ssp="Dirigido",
+                ordem=2,
+                tempo=15,
+                momentos_jogo=["Defesa", "Ataque"],
+            ),
+            AtividadeSessao(
+                id=3,
+                sessao=s01,
+                codigo="ATV3",
+                nome="Treino Sem Momento",
+                tipologia="Físico-Técnico",
+                tipo_ssp="Geral",
+                ordem=3,
+                tempo=10,
+                momentos_jogo=[],  # RN05 opcional/vazio
+            ),
+        ]
+
+        resultado = calcular_informacoes_atividades_treino(atividades)
+
+        self.assertFalse(resultado["estado_vazio"])
+        # Ataque deve ter 35 minutos (20 + 15) e 2 execuções
+        # Trans Of deve ter 20 minutos e 1 execução
+        # Defesa deve ter 15 minutos e 1 execução
+        momentos_map = {item["nome"]: item for item in resultado["por_momento_jogo"]}
+        self.assertIn("Ataque", momentos_map)
+        self.assertEqual(momentos_map["Ataque"]["minutos"], 35)
+        self.assertEqual(momentos_map["Ataque"]["execucoes"], 2)
+        self.assertEqual(momentos_map["Ataque"]["codigo"], "Ataque")
+        self.assertEqual(momentos_map["Ataque"]["id"], "momento-ataque")
+
+        self.assertIn("Trans Of", momentos_map)
+        self.assertEqual(momentos_map["Trans Of"]["minutos"], 20)
+        self.assertEqual(momentos_map["Trans Of"]["execucoes"], 1)
+
+        self.assertIn("Defesa", momentos_map)
+        self.assertEqual(momentos_map["Defesa"]["minutos"], 15)
+        self.assertEqual(momentos_map["Defesa"]["execucoes"], 1)
+
+        # O retorno vazio também inclui a chave
+        resultado_vazio = calcular_informacoes_atividades_treino([])
+        self.assertEqual(resultado_vazio["por_momento_jogo"], [])
 
 
 class InformacoesAtividadesTreinoApiTests(APITestCase):
@@ -1721,4 +1787,91 @@ class RelatorioSessaoAPITests(APITestCase):
         """5. Retorno 404 Not Found para sessão inexistente."""
         resp = self.client.get("/api/treinos/sessoes/999999/relatorio/")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+class SincronizacaoPrincipiosTaticosAtividadeTests(APITestCase):
+    """Testa a sincronização entre princípios táticos das atividades e o catálogo ComportamentoTatico."""
+
+    def test_criacao_atividade_biblioteca_reutiliza_existente_e_cadastra_novo_principio(self):
+        ComportamentoTatico.objects.create(nome="Reação Pós-Perda")
+
+        response = self.client.post(
+            "/api/treinos/biblioteca/",
+            {
+                "nome": "Circ+CabRebFrontLat",
+                "tipologia": "Dinâmica ProtDef",
+                "tipo_ssp": "Dirigido",
+                "orientacao": "PDI",
+                "comportamentos": ["reacao pos-perda", "CoordLinDef"],
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(
+            response.json()["comportamentos"],
+            ["Reação Pós-Perda", "CoordLinDef"],
+        )
+
+        catalogo = self.client.get("/api/treinos/comportamentos/").json()
+        nomes_catalogo = [item["nome"] for item in catalogo]
+        self.assertEqual(nomes_catalogo, ["CoordLinDef", "Reação Pós-Perda"])
+
+    def test_edicao_atividade_biblioteca_cadastra_novo_principio_no_catalogo(self):
+        atv = AtividadeBiblioteca.objects.create(
+            nome="G2XG",
+            tipologia="Confrontos",
+            tipo_ssp="Especial",
+            comportamentos=["Cobertura"],
+        )
+
+        response = self.client.patch(
+            f"/api/treinos/biblioteca/{atv.id}/",
+            {"comportamentos": ["Cobertura", "DefCruz"]},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(ComportamentoTatico.objects.filter(nome="DefCruz").exists())
+
+    def test_criacao_atividade_sessao_cadastra_novo_principio_no_catalogo(self):
+        macro = Macrociclo.objects.create(
+            nome="2026",
+            data_inicio="2026-01-01",
+            data_termino="2026-12-31",
+        )
+        meso = Mesociclo.objects.create(
+            macrociclo=macro,
+            nome="ME1",
+            data_inicio="2026-08-01",
+            data_termino="2026-08-15",
+        )
+        micro = Microciclo.objects.create(
+            mesociclo=meso,
+            nome="MC1",
+            data_inicio="2026-08-03",
+            data_termino="2026-08-09",
+        )
+        sessao = Sessao.objects.create(
+            microciclo=micro,
+            nome="S01",
+            data="2026-08-03",
+        )
+
+        response = self.client.post(
+            "/api/treinos/atividades-sessao/",
+            {
+                "sessao": sessao.id,
+                "nome": "5Corredores",
+                "tipologia": "Coletivo Direcionado",
+                "tipo_ssp": "Competitivo",
+                "ordem": 1,
+                "tempo": 28,
+                "comportamentos": ["Amplitude", "Balanço Def"],
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(ComportamentoTatico.objects.filter(nome="Amplitude").exists())
+        self.assertTrue(ComportamentoTatico.objects.filter(nome="Balanço Def").exists())
+
 
