@@ -261,6 +261,15 @@ export default function SessaoModal({
       setAtividades((prev) => [...prev, novaAtividade]);
     }
 
+    if (Array.isArray(dadosAtividade.comportamentos)) {
+      dadosAtividade.comportamentos.forEach((cNome) => {
+        const limpo = (cNome || "").trim();
+        if (limpo) {
+          api.post("/treinos/comportamentos/", { nome: limpo }).catch(() => {});
+        }
+      });
+    }
+
     setModalAtividadeOpen(false);
     setAtividadeEditando(null);
   };
@@ -731,6 +740,7 @@ export default function SessaoModal({
       <AtividadeSessaoModal
         isOpen={modalAtividadeOpen}
         initialData={atividadeEditando}
+        atividadesDaSessao={atividades}
         onClose={fecharModalAtividadeSessao}
         onSave={handleSalvarAtividade}
       />
