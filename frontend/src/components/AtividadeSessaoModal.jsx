@@ -1,4 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import api from "../services/api.js";
+
+function normalizarTexto(valor) {
+  return valor
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
 
 const TIPOLOGIAS = [
   { valor: "Confrontos", sigla: "CF" },
@@ -81,6 +91,9 @@ export default function AtividadeSessaoModal({
   const [abertoDropdown, setAbertoDropdown] = useState(null);
   const [inputComportamento, setInputComportamento] = useState("");
   const [inputAtributo, setInputAtributo] = useState("");
+  const [comportamentosCatalogo, setComportamentosCatalogo] = useState([]);
+  const [carregandoComportamentos, setCarregandoComportamentos] =
+    useState(false);
 
   const [erro, setErro] = useState("");
   const [salvando, setSalvando] = useState(false);
@@ -169,6 +182,106 @@ export default function AtividadeSessaoModal({
       document.removeEventListener("mousedown", handleClickFora);
     };
   }, [abertoDropdown]);
+
+  // Carrega os princípios táticos cadastrados (US10) sempre que o modal abre
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    let ativo = true;
+    setCarregandoComportamentos(true);
+
+    api
+      .get("/treinos/comportamentos/")
+      .then((resposta) => {
+        if (!ativo) return;
+        const lista = Array.isArray(resposta.data)
+          ? resposta.data
+              .map((item) => (typeof item === "string" ? item : item?.nome))
+              .filter(Boolean)
+          : [];
+        setComportamentosCatalogo(
+          [...new Set(lista)].sort((a, b) => a.localeCompare(b, "pt-BR")),
+        );
+      })
+      .catch(() => {
+        if (ativo) {
+          setComportamentosCatalogo([]);
+        }
+      })
+      .finally(() => {
+        if (ativo) {
+          setCarregandoComportamentos(false);
+        }
+      });
+
+    return () => {
+      ativo = false;
+    };
+  }, [isOpen]);
+
+  const opcoesComportamentos = useMemo(() => {
+    const mapa = new Map();
+    [...comportamentosCatalogo, ...comportamentos].forEach((nomeItem) => {
+      const limpo = String(nomeItem || "")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!limpo) return;
+      const chave = normalizarTexto(limpo);
+      if (!mapa.has(chave)) {
+        mapa.set(chave, limpo);
+      }
+    });
+    return Array.from(mapa.values()).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  }, [comportamentosCatalogo, comportamentos]);
+
+  const opcoesComportamentosFiltradas = useMemo(() => {
+    const termo = normalizarTexto(inputComportamento);
+    if (!termo) return opcoesComportamentos;
+    return opcoesComportamentos.filter((item) =>
+      normalizarTexto(item).includes(termo),
+    );
+  }, [opcoesComportamentos, inputComportamento]);
+
+  const comportamentoSelecionado = (nomeItem) => {
+    const chave = normalizarTexto(nomeItem);
+    return comportamentos.some((item) => normalizarTexto(item) === chave);
+  };
+
+  const toggleComportamento = (nomeItem) => {
+    const chave = normalizarTexto(nomeItem);
+    if (comportamentos.some((item) => normalizarTexto(item) === chave)) {
+      setComportamentos(
+        comportamentos.filter((item) => normalizarTexto(item) !== chave),
+      );
+    } else {
+      setComportamentos([...comportamentos, nomeItem]);
+    }
+  };
+
+  const adicionarComportamento = () => {
+    const texto = inputComportamento.replace(/\s+/g, " ").trim();
+    if (!texto) return;
+
+    const chave = normalizarTexto(texto);
+    const existente = opcoesComportamentos.find(
+      (item) => normalizarTexto(item) === chave,
+    );
+    const nomeFinal = existente || texto;
+
+    if (!comportamentoSelecionado(nomeFinal)) {
+      setComportamentos([...comportamentos, nomeFinal]);
+    }
+
+    if (
+      !comportamentosCatalogo.some((item) => normalizarTexto(item) === chave)
+    ) {
+      setComportamentosCatalogo((anterior) =>
+        [...anterior, nomeFinal].sort((a, b) => a.localeCompare(b, "pt-BR")),
+      );
+    }
+
+    setInputComportamento("");
+  };
 
   // Cálculo de Área e Dimensão em tempo real (RN01 e RN02)
   const espacoCalculado = useMemo(() => {
@@ -802,65 +915,97 @@ export default function AtividadeSessaoModal({
                 </button>
               </div>
 
-              {/* Dropdown com scroll */}
+              {/* Dropdown com princípios cadastrados + cadastro direto */}
               {abertoDropdown === "comportamentos" && (
-                <div className="absolute top-full left-0 z-30 mt-1.5 w-full min-w-[240px] rounded-xl border border-[#E4DFD2] bg-white p-3 shadow-xl">
-                  <div className="flex gap-1.5">
-                    <input
-                      type="text"
-                      value={inputComportamento}
-                      onChange={(e) => setInputComportamento(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          adicionarItemTexto(
-                            comportamentos,
-                            setComportamentos,
-                            inputComportamento,
-                            setInputComportamento,
-                          );
-                        }
-                      }}
-                      placeholder="Ex.: CoordLinDef"
-                      className="w-full rounded-lg border border-[#E4DFD2] px-2.5 py-1 text-xs text-[#10281E] outline-none"
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        adicionarItemTexto(
-                          comportamentos,
-                          setComportamentos,
-                          inputComportamento,
-                          setInputComportamento,
-                        )
-                      }
-                      className="rounded-lg bg-[#0E3A29] px-2.5 py-1 text-xs font-medium text-white hover:bg-[#10281E]"
-                    >
-                      Ok
-                    </button>
+                <div className="absolute top-full left-0 z-30 mt-1.5 w-full min-w-[260px] overflow-hidden rounded-xl border border-[#E4DFD2] bg-white shadow-xl">
+                  <div className="border-b border-[#E4DFD2]/70 p-2.5">
+                    <div className="flex gap-1.5">
+                      <input
+                        type="text"
+                        value={inputComportamento}
+                        onChange={(e) => setInputComportamento(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            adicionarComportamento();
+                          }
+                        }}
+                        placeholder="Ex.: CoordLinDef"
+                        className="w-full rounded-lg border border-[#E4DFD2] px-2.5 py-1 text-xs text-[#10281E] outline-none focus:border-[#0E3A29]"
+                      />
+                      <button
+                        type="button"
+                        onClick={adicionarComportamento}
+                        className="rounded-lg bg-[#0E3A29] px-2.5 py-1 text-xs font-medium text-white hover:bg-[#10281E]"
+                      >
+                        Ok
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="mt-2.5 max-h-32 overflow-y-auto space-y-1">
-                    {comportamentos.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between rounded bg-[#E4DFD2]/50 px-2 py-1 text-xs text-[#10281E]"
-                      >
-                        <span className="font-mono text-[11px]">{item}</span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setComportamentos(
-                              comportamentos.filter((_, i) => i !== idx),
-                            )
-                          }
-                          className="text-red-500 hover:font-bold"
-                        >
-                          ×
-                        </button>
+                  <div className="max-h-40 overflow-y-auto py-1">
+                    {carregandoComportamentos ? (
+                      <div className="px-3.5 py-2 text-xs text-[#8A8D80]">
+                        Carregando princípios táticos...
                       </div>
-                    ))}
+                    ) : opcoesComportamentosFiltradas.length === 0 ? (
+                      <div className="px-3.5 py-2 text-xs text-[#8A8D80]">
+                        {inputComportamento.trim()
+                          ? "Nenhum princípio encontrado. Clique em Ok para cadastrar."
+                          : "Nenhum princípio cadastrado. Digite acima e clique em Ok."}
+                      </div>
+                    ) : (
+                      opcoesComportamentosFiltradas.map((opcao) => {
+                        const selecionado = comportamentoSelecionado(opcao);
+                        return (
+                          <div
+                            key={opcao}
+                            onClick={() => toggleComportamento(opcao)}
+                            className={`flex cursor-pointer items-center justify-between px-3.5 py-2 text-xs transition ${
+                              selecionado
+                                ? "bg-[#0E3A29]/10 font-semibold text-[#0E3A29]"
+                                : "text-[#10281E] hover:bg-[#F5F2EA]"
+                            }`}
+                          >
+                            <span className="truncate pr-2">{opcao}</span>
+                            {selecionado && (
+                              <span className="text-xs font-bold text-[#0E3A29]">
+                                ✓
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })
+                    )}
                   </div>
+
+                  {comportamentos.length > 0 && (
+                    <div className="border-t border-[#E4DFD2]/70 bg-[#FAF9F5] p-2">
+                      <div className="flex flex-wrap gap-1">
+                        {comportamentos.map((item) => (
+                          <span
+                            key={item}
+                            className="inline-flex items-center gap-1 rounded-md border border-[#E4DFD2] bg-white px-2 py-0.5 text-[11px] text-[#10281E]"
+                          >
+                            <span className="font-mono text-[10px]">
+                              {item}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleComportamento(item);
+                              }}
+                              className="text-red-500 hover:font-bold"
+                              aria-label={`Remover ${item}`}
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
