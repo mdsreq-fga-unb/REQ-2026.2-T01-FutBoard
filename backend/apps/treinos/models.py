@@ -589,6 +589,7 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
             "por_tipologia": [],
             "por_tipo_ssp": [],
             "por_momento_jogo": [],
+            "por_fase_jogo": [],
             "execucoes": [],
             "estado_vazio": True,
             "mensagem": MENSAGEM_ATIVIDADES_VAZIO,
@@ -600,6 +601,7 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
     agrupado_tipologias = {}
     agrupado_tipos_ssp = {}
     agrupado_momentos_jogo = {}
+    agrupado_fases_jogo = {}
     execucoes_detalhadas = []
 
     for atv in atividades:
@@ -683,6 +685,26 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
             item_mom["execucoes"] += 1
             item_mom["chaves_atividades"].add(chave_atv)
 
+        # US37: Agrupamento por fases de jogo (RN05: opcional; cada fase da lista recebe o tempo da atividade)
+        fases = atv.fases_jogo if isinstance(atv.fases_jogo, list) else []
+        for fase_item in fases:
+            nome_fase = str(fase_item or "").strip()
+            if not nome_fase:
+                continue
+            if nome_fase not in agrupado_fases_jogo:
+                agrupado_fases_jogo[nome_fase] = {
+                    "id": f"fase-{nome_fase.lower().replace(' ', '-')}",
+                    "codigo": nome_fase,
+                    "nome": nome_fase,
+                    "minutos": 0,
+                    "execucoes": 0,
+                    "chaves_atividades": set(),
+                }
+            item_fase = agrupado_fases_jogo[nome_fase]
+            item_fase["minutos"] += tempo
+            item_fase["execucoes"] += 1
+            item_fase["chaves_atividades"].add(chave_atv)
+
         sessao = atv.sessao
         micro = sessao.microciclo if sessao else None
         meso = micro.mesociclo if micro else None
@@ -713,6 +735,8 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
                 "orientacao": atv.orientacao,
                 "tempo": atv.tempo,
                 "dimensao_espaco": atv.dimensao_espaco,
+                "momentos_jogo": atv.momentos_jogo or [],
+                "fases_jogo": atv.fases_jogo or [],
             }
         )
 
@@ -812,6 +836,29 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
         key=lambda x: (-x["minutos"], -x["execucoes"], x["nome"])
     )
 
+    lista_fases_jogo = []
+    for item in agrupado_fases_jogo.values():
+        minutos = item["minutos"]
+        lista_fases_jogo.append(
+            {
+                "id": item["id"],
+                "codigo": item["codigo"],
+                "nome": item["nome"],
+                "fase_jogo": item["nome"],
+                "minutos": minutos,
+                "percentual_tempo": (
+                    round((minutos / minutos_totais_atividades) * 100, 2)
+                    if minutos_totais_atividades > 0
+                    else 0.0
+                ),
+                "execucoes": item["execucoes"],
+                "atividades_distintas": len(item["chaves_atividades"]),
+            }
+        )
+    lista_fases_jogo.sort(
+        key=lambda x: (-x["minutos"], -x["execucoes"], x["nome"])
+    )
+
     return {
         "total_atividades_distintas": len(lista_atividades),
         "total_registros": total_registros,
@@ -821,6 +868,7 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
         "por_tipologia": lista_tipologias,
         "por_tipo_ssp": lista_tipos_ssp,
         "por_momento_jogo": lista_momentos_jogo,
+        "por_fase_jogo": lista_fases_jogo,
         "execucoes": execucoes_detalhadas,
         "estado_vazio": False,
         "mensagem": None,

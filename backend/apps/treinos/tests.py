@@ -1237,6 +1237,7 @@ class InformacoesAtividadesTreinoUnitTests(SimpleTestCase):
                 "por_tipologia",
                 "por_tipo_ssp",
                 "por_momento_jogo",
+                "por_fase_jogo",
                 "execucoes",
                 "estado_vazio",
                 "mensagem",
@@ -1309,6 +1310,72 @@ class InformacoesAtividadesTreinoUnitTests(SimpleTestCase):
         # O retorno vazio também inclui a chave
         resultado_vazio = calcular_informacoes_atividades_treino([])
         self.assertEqual(resultado_vazio["por_momento_jogo"], [])
+
+    def test_us37_unitario_agrupamento_por_fase_jogo_rn05_rn07(self):
+        """Valida agregação de fases_jogo (US37) com lista vazia, opcionalidade (RN05) e resultado vazio (RN07)."""
+        s01 = self._criar_sessao_em_memoria(1, "S01", 1, "2026-08-01")
+
+        atividades = [
+            AtividadeSessao(
+                id=1,
+                sessao=s01,
+                codigo="ATV1",
+                nome="Treino Construção",
+                tipologia="Rondo",
+                tipo_ssp="Especial",
+                ordem=1,
+                tempo=20,
+                fases_jogo=["1ª Construção", "Criação"],
+            ),
+            AtividadeSessao(
+                id=2,
+                sessao=s01,
+                codigo="ATV2",
+                nome="Treino Finalização",
+                tipologia="Confrontos",
+                tipo_ssp="Dirigido",
+                ordem=2,
+                tempo=15,
+                fases_jogo=["Finalização", "1ª Construção"],
+            ),
+            AtividadeSessao(
+                id=3,
+                sessao=s01,
+                codigo="ATV3",
+                nome="Treino Sem Fase",
+                tipologia="Físico-Técnico",
+                tipo_ssp="Geral",
+                ordem=3,
+                tempo=10,
+                fases_jogo=[],  # RN05 opcional/vazio
+            ),
+        ]
+
+        resultado = calcular_informacoes_atividades_treino(atividades)
+
+        self.assertFalse(resultado["estado_vazio"])
+        # 1ª Construção deve ter 35 minutos (20 + 15) e 2 execuções
+        # Criação deve ter 20 minutos e 1 execução
+        # Finalização deve ter 15 minutos e 1 execução
+        fases_map = {item["nome"]: item for item in resultado["por_fase_jogo"]}
+        self.assertIn("1ª Construção", fases_map)
+        self.assertEqual(fases_map["1ª Construção"]["minutos"], 35)
+        self.assertEqual(fases_map["1ª Construção"]["execucoes"], 2)
+        self.assertEqual(fases_map["1ª Construção"]["codigo"], "1ª Construção")
+        self.assertEqual(fases_map["1ª Construção"]["fase_jogo"], "1ª Construção")
+        self.assertEqual(fases_map["1ª Construção"]["id"], "fase-1ª-construção")
+
+        self.assertIn("Criação", fases_map)
+        self.assertEqual(fases_map["Criação"]["minutos"], 20)
+        self.assertEqual(fases_map["Criação"]["execucoes"], 1)
+
+        self.assertIn("Finalização", fases_map)
+        self.assertEqual(fases_map["Finalização"]["minutos"], 15)
+        self.assertEqual(fases_map["Finalização"]["execucoes"], 1)
+
+        # O retorno vazio também inclui a chave
+        resultado_vazio = calcular_informacoes_atividades_treino([])
+        self.assertEqual(resultado_vazio["por_fase_jogo"], [])
 
 
 class InformacoesAtividadesTreinoApiTests(APITestCase):
@@ -1531,6 +1598,64 @@ class InformacoesAtividadesTreinoApiTests(APITestCase):
             r_vazio.json()["mensagem"],
             "Nenhuma atividade encontrada para os filtros aplicados.",
         )
+
+    def test_us37_api_retorna_por_fase_jogo_e_suporta_filtro(self):
+        """US37: Valida que a API retorna por_fase_jogo consolidado e suporta filtro por fase_jogo."""
+        sessao = Sessao.objects.create(microciclo=self.mc1, nome="Sessão Fases", data="2026-08-03")
+        AtividadeSessao.objects.create(
+            sessao=sessao,
+            codigo="ATV1",
+            nome="Treino Construção",
+            tipologia="Rondo",
+            tipo_ssp="Especial",
+            ordem=1,
+            tempo=25,
+            fases_jogo=["1ª Construção", "Criação"],
+        )
+        AtividadeSessao.objects.create(
+            sessao=sessao,
+            codigo="ATV2",
+            nome="Treino Finalização",
+            tipologia="Confrontos",
+            tipo_ssp="Competitivo",
+            ordem=2,
+            tempo=15,
+            fases_jogo=["Finalização"],
+        )
+
+        # Chamada geral sem filtro específico de fase
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        dados = response.json()
+        self.assertIn("por_fase_jogo", dados)
+        self.assertTrue(len(dados["por_fase_jogo"]) > 0)
+        
+        mapa_fases = {f["nome"]: f for f in dados["por_fase_jogo"]}
+        self.assertIn("1ª Construção", mapa_fases)
+        self.assertEqual(mapa_fases["1ª Construção"]["minutos"], 25)
+        self.assertEqual(mapa_fases["1ª Construção"]["execucoes"], 1)
+        self.assertEqual(mapa_fases["1ª Construção"]["fase_jogo"], "1ª Construção")
+
+        self.assertIn("Criação", mapa_fases)
+        self.assertEqual(mapa_fases["Criação"]["minutos"], 25)
+
+        self.assertIn("Finalização", mapa_fases)
+        self.assertEqual(mapa_fases["Finalização"]["minutos"], 15)
+
+        # Filtro por fase_jogo="1ª Construção"
+        resp_filtro = self.client.get(f"{self.url}?fase_jogo=1ª Construção")
+        self.assertEqual(resp_filtro.status_code, status.HTTP_200_OK)
+        dados_filtro = resp_filtro.json()
+        self.assertFalse(dados_filtro["estado_vazio"])
+        self.assertEqual(dados_filtro["total_registros"], 1)
+        fases_nomes = [f["nome"] for f in dados_filtro["por_fase_jogo"]]
+        self.assertIn("1ª Construção", fases_nomes)
+
+        # Filtro sem correspondência -> estado vazio padronizado (RN07)
+        resp_vazio = self.client.get(f"{self.url}?fase_jogo=FASE_INEXISTENTE")
+        self.assertEqual(resp_vazio.status_code, status.HTTP_200_OK)
+        self.assertTrue(resp_vazio.json()["estado_vazio"])
+        self.assertEqual(resp_vazio.json()["por_fase_jogo"], [])
 
 
 class SincronizacaoPrincipiosTaticosAtividadeTests(APITestCase):
