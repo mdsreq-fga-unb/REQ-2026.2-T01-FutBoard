@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar.jsx";
 import GraficoRoscaAtividades from "../components/GraficoRoscaAtividades.jsx";
 import GraficoBarrasAtividades from "../components/GraficoBarrasAtividades.jsx";
 import GraficoBarrasHorizontaisAtividades from "../components/GraficoBarrasHorizontaisAtividades.jsx";
+import AlternarUnidadeTempo from "../components/AlternarUnidadeTempo.jsx";
 import api from "../services/api.js";
 
 /**
@@ -55,21 +56,6 @@ const ESTADO_VAZIO_MOMENTOS_JOGO = {
   estado_vazio: true,
   mensagem: "Sem atividades com momento de jogo registrado no período.",
 };
-
-const MESES = [
-  { valor: "1", label: "Janeiro" },
-  { valor: "2", label: "Fevereiro" },
-  { valor: "3", label: "Março" },
-  { valor: "4", label: "Abril" },
-  { valor: "5", label: "Maio" },
-  { valor: "6", label: "Junho" },
-  { valor: "7", label: "Julho" },
-  { valor: "8", label: "Agosto" },
-  { valor: "9", label: "Setembro" },
-  { valor: "10", label: "Outubro" },
-  { valor: "11", label: "Novembro" },
-  { valor: "12", label: "Dezembro" },
-];
 
 /**
  * Calcula os indicadores de treino dinamicamente aplicando as regras de negócio:
@@ -389,7 +375,9 @@ export default function DashboardPage({ onSelectNav }) {
   const [filtroMacro, setFiltroMacro] = useState("");
   const [filtroMeso, setFiltroMeso] = useState("");
   const [filtroMicro, setFiltroMicro] = useState("");
-  const [filtroMes, setFiltroMes] = useState("");
+
+  // Unidade de tempo dos gráficos (US26): "minutos" (absoluto) ou "percentual" (relativo).
+  const [unidadeTempo, setUnidadeTempo] = useState("minutos");
 
   // Carrega opções de ciclos para os filtros
   useEffect(() => {
@@ -457,7 +445,6 @@ export default function DashboardPage({ onSelectNav }) {
     if (filtroMacro) params.macrociclo = filtroMacro;
     if (filtroMeso) params.mesociclo = filtroMeso;
     if (filtroMicro) params.microciclo = filtroMicro;
-    if (filtroMes) params.mes = filtroMes;
 
     try {
       const [respInd, respAtv] = await Promise.all([
@@ -488,7 +475,6 @@ export default function DashboardPage({ onSelectNav }) {
           macrociclo: filtroMacro,
           mesociclo: filtroMeso,
           microciclo: filtroMicro,
-          mes: filtroMes,
         });
         setIndicadores(calculados);
       } catch {
@@ -507,7 +493,6 @@ export default function DashboardPage({ onSelectNav }) {
           macrociclo: filtroMacro,
           mesociclo: filtroMeso,
           microciclo: filtroMicro,
-          mes: filtroMes,
         });
         setDadosAtividades(atvCalculadas);
       } catch {
@@ -537,7 +522,6 @@ export default function DashboardPage({ onSelectNav }) {
           macrociclo: filtroMacro,
           mesociclo: filtroMeso,
           microciclo: filtroMicro,
-          mes: filtroMes,
         },
         listaDaApi.length > 0
           ? listaDaApi
@@ -550,7 +534,7 @@ export default function DashboardPage({ onSelectNav }) {
     } catch {
       setDadosMomentosJogo(ESTADO_VAZIO_MOMENTOS_JOGO);
     }
-  }, [filtroMacro, filtroMeso, filtroMicro, filtroMes]);
+  }, [filtroMacro, filtroMeso, filtroMicro]);
 
   // Atualiza indicadores e gráficos ao mudar os filtros ou ao carregar a tela
   useEffect(() => {
@@ -562,10 +546,9 @@ export default function DashboardPage({ onSelectNav }) {
     setFiltroMacro("");
     setFiltroMeso("");
     setFiltroMicro("");
-    setFiltroMes("");
   };
 
-  const temFiltroAtivo = Boolean(filtroMacro || filtroMeso || filtroMicro || filtroMes);
+  const temFiltroAtivo = Boolean(filtroMacro || filtroMeso || filtroMicro);
 
   // Formatação de números
   const formatarNumero = (num) => {
@@ -574,6 +557,18 @@ export default function DashboardPage({ onSelectNav }) {
       minimumFractionDigits: Number.isInteger(num) ? 0 : 1,
       maximumFractionDigits: 1,
     });
+  };
+
+  // Base do tempo relativo (RN03): tempo líquido do período filtrado
+  const minutosReferencia = Number(indicadores.minutos_totais) || 0;
+  const exibirPercentual = unidadeTempo === "percentual";
+
+  // Converte minutos em % do tempo líquido do período (US26)
+  const formatarTempo = (minutos) => {
+    if (!exibirPercentual) return formatarNumero(minutos);
+    const percentual =
+      minutosReferencia > 0 ? ((Number(minutos) || 0) / minutosReferencia) * 100 : 0;
+    return `${formatarNumero(Math.round(percentual * 10) / 10)}%`;
   };
 
   return (
@@ -714,7 +709,7 @@ export default function DashboardPage({ onSelectNav }) {
                 title="Tempo líquido: atividades com a mesma ordem contam uma única vez"
               >
                 <span className="font-mono text-3xl font-bold tracking-tight text-[#10281E] sm:text-4xl">
-                  {indicadores.minutos_totais}
+                  {formatarTempo(indicadores.minutos_totais)}
                 </span>
                 <span className="mt-3 text-xs font-medium text-[#10281E] sm:text-[13px]">
                   Tempo Total
@@ -724,7 +719,7 @@ export default function DashboardPage({ onSelectNav }) {
               {/* 3. Min/Sessão */}
               <div className="fb-card flex min-h-[120px] flex-col items-center justify-center rounded-2xl border border-[#E4DFD2] bg-white p-4 text-center shadow-2xs transition hover:border-[#0E3A29]/30">
                 <span className="font-mono text-3xl font-bold tracking-tight text-[#10281E] sm:text-4xl">
-                  {formatarNumero(indicadores.minutos_por_sessao)}
+                  {formatarTempo(indicadores.minutos_por_sessao)}
                 </span>
                 <span className="mt-3 text-xs font-medium text-[#10281E] sm:text-[13px]">
                   Min/Sessão
@@ -747,7 +742,7 @@ export default function DashboardPage({ onSelectNav }) {
               {/* 5. Min/Execução */}
               <div className="fb-card flex min-h-[120px] flex-col items-center justify-center rounded-2xl border border-[#E4DFD2] bg-white p-4 text-center shadow-2xs transition hover:border-[#0E3A29]/30">
                 <span className="font-mono text-3xl font-bold tracking-tight text-[#10281E] sm:text-4xl">
-                  {formatarNumero(indicadores.minutos_por_execucao)}
+                  {formatarTempo(indicadores.minutos_por_execucao)}
                 </span>
                 <span className="mt-3 text-xs font-medium text-[#10281E] sm:text-[13px]">
                   Min/Execução
@@ -803,88 +798,77 @@ export default function DashboardPage({ onSelectNav }) {
               )}
             </div>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
-              {/* Macrociclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Macrociclo
-                </label>
-                <select
-                  value={filtroMacro}
-                  onChange={(e) => {
-                    setFiltroMacro(e.target.value);
-                    setFiltroMeso("");
-                    setFiltroMicro("");
-                  }}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Selecionar macrociclo</option>
-                  {macrociclos.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
+            {/* Selects de periodização + alternador Min | % à direita (conforme protótipo da US26) */}
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
+              <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
+                {/* Macrociclo */}
+                <div>
+                  <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                    Macrociclo
+                  </label>
+                  <select
+                    value={filtroMacro}
+                    onChange={(e) => {
+                      setFiltroMacro(e.target.value);
+                      setFiltroMeso("");
+                      setFiltroMicro("");
+                    }}
+                    className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                  >
+                    <option value="">Selecionar macrociclo</option>
+                    {macrociclos.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.nome}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Mesociclo */}
+                <div>
+                  <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                    Mesociclo
+                  </label>
+                  <select
+                    value={filtroMeso}
+                    onChange={(e) => {
+                      setFiltroMeso(e.target.value);
+                      setFiltroMicro("");
+                    }}
+                    className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                  >
+                    <option value="">Selecionar mesociclo</option>
+                    {mesociclosFiltrados.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.nome}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Microciclo */}
+                <div>
+                  <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                    Microciclo
+                  </label>
+                  <select
+                    value={filtroMicro}
+                    onChange={(e) => setFiltroMicro(e.target.value)}
+                    className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                  >
+                    <option value="">Selecionar microciclo</option>
+                    {microciclosFiltrados.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.nome}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
-              {/* Mesociclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Mesociclo
-                </label>
-                <select
-                  value={filtroMeso}
-                  onChange={(e) => {
-                    setFiltroMeso(e.target.value);
-                    setFiltroMicro("");
-                  }}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Selecionar mesociclo</option>
-                  {mesociclosFiltrados.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Microciclo */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Microciclo
-                </label>
-                <select
-                  value={filtroMicro}
-                  onChange={(e) => setFiltroMicro(e.target.value)}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Selecionar microciclo</option>
-                  {microciclosFiltrados.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Mês */}
-              <div>
-                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
-                  Mês
-                </label>
-                <select
-                  value={filtroMes}
-                  onChange={(e) => setFiltroMes(e.target.value)}
-                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
-                >
-                  <option value="">Todos os meses</option>
-                  {MESES.map((mes) => (
-                    <option key={mes.valor} value={mes.valor}>
-                      {mes.label}
-                    </option>
-                  ))}
-                </select>
+              {/* Unidade de tempo dos gráficos (US26) */}
+              <div className="flex justify-end lg:shrink-0">
+                <AlternarUnidadeTempo valor={unidadeTempo} onChange={setUnidadeTempo} />
               </div>
             </div>
           </section>
@@ -896,6 +880,8 @@ export default function DashboardPage({ onSelectNav }) {
               <GraficoRoscaAtividades
                 atividades={dadosAtividades.atividades}
                 minutosTotais={dadosAtividades.minutos_totais_atividades}
+                unidadeTempo={unidadeTempo}
+                minutosReferencia={minutosReferencia}
               />
 
               {/* Gráfico 2: Barras Verticais (Qtd Execuções por Atividade) */}
@@ -911,6 +897,8 @@ export default function DashboardPage({ onSelectNav }) {
                   dadosMomentosJogo.mensagem ||
                   ESTADO_VAZIO_MOMENTOS_JOGO.mensagem
                 }
+                unidadeTempo={unidadeTempo}
+                minutosReferencia={minutosReferencia}
               />
             </div>
           </section>
@@ -940,7 +928,7 @@ export default function DashboardPage({ onSelectNav }) {
                     "Nenhum treino registrado neste período."}
                 </h3>
                 <p className="mt-0.5 text-xs text-[#8A8D80]">
-                  Tente selecionar outro macrociclo, mesociclo, microciclo ou mês para visualizar os indicadores e gráficos.
+                  Tente selecionar outro macrociclo, mesociclo ou microciclo para visualizar os indicadores e gráficos.
                 </p>
               </div>
               {temFiltroAtivo && (

@@ -21,6 +21,8 @@ export default function GraficoBarrasHorizontaisAtividades({
   titulo = "Momento de Jogo no Treino",
   estadoVazio = false,
   mensagemVazio = "Sem atividades com momento de jogo registrado no período.",
+  unidadeTempo = "minutos",
+  minutosReferencia = 0,
 }) {
   const [itemHover, setItemHover] = useState(null);
 
@@ -67,15 +69,28 @@ export default function GraficoBarrasHorizontaisAtividades({
   // Limita até 12 atividades para visualização nítida no gráfico de barras
   const itensExibidos = itensOrdenados.slice(0, 12);
 
-  const maxMinutos = Math.max(
-    5,
-    ...itensExibidos.map((item) => item.minutos || 0)
-  );
-
   const totalMinutos = itensExibidos.reduce(
     (acc, item) => acc + (item.minutos || 0),
     0
   );
+
+  // Base do tempo relativo (US26 / RN03): tempo líquido do período, se informado
+  const exibirPercentual = unidadeTempo === "percentual";
+  const referenciaPercentual = minutosReferencia > 0 ? minutosReferencia : totalMinutos;
+
+  const calcularPercentual = (minutos) =>
+    referenciaPercentual > 0 ? ((minutos || 0) / referenciaPercentual) * 100 : 0;
+
+  // No modo percentual o eixo X passa a ser em %, recalculando a escala
+  const valorExibido = (item) =>
+    exibirPercentual ? calcularPercentual(item.minutos) : item.minutos || 0;
+
+  const maiorValor = Math.max(
+    5,
+    ...itensExibidos.map((item) => Math.ceil(valorExibido(item)))
+  );
+  // Em % o eixo fecha na dezena seguinte (ex.: 58,8% → 60%) para ticks redondos
+  const maxMinutos = exibirPercentual ? Math.ceil(maiorValor / 10) * 10 : maiorValor;
 
   // Dimensões do gráfico SVG (mesma proporção e tamanho de GraficoBarrasAtividades: 460x270 e max-h-[280px])
   const svgWidth = 460;
@@ -94,7 +109,12 @@ export default function GraficoBarrasHorizontaisAtividades({
 
   // Ticks do eixo X (0 até maxMinutos) com linhas de grade tracejadas (#E4DFD2)
   const xTicks = [];
-  const passo = maxMinutos <= 15 ? 5 : Math.ceil(maxMinutos / 5);
+  const passo =
+    maxMinutos <= 15
+      ? 5
+      : exibirPercentual
+        ? Math.ceil(maxMinutos / 50) * 10
+        : Math.ceil(maxMinutos / 5);
   for (let val = 0; val <= maxMinutos; val += passo) {
     xTicks.push(val);
   }
@@ -113,6 +133,19 @@ export default function GraficoBarrasHorizontaisAtividades({
     return `${formatado} min`;
   };
 
+  const formatarPercentual = (valor) => {
+    if (!Number.isFinite(valor) || valor <= 0) return "0%";
+    return `${valor.toLocaleString("pt-BR", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 1,
+    })}%`;
+  };
+
+  const formatarTempo = (minutos) =>
+    exibirPercentual
+      ? formatarPercentual(calcularPercentual(minutos))
+      : formatarMinutos(minutos);
+
   return (
     <div className="fb-card flex h-full flex-col justify-between rounded-2xl border border-[#E4DFD2] bg-white p-5 shadow-2xs">
       {/* Cabeçalho idêntico a GraficoBarrasAtividades e GraficoRoscaAtividades */}
@@ -122,7 +155,9 @@ export default function GraficoBarrasHorizontaisAtividades({
         </span>
         {itensExibidos.length > 0 && (
           <span className="font-mono text-xs font-medium text-[#10281E]">
-            {formatarMinutos(totalMinutos)} totais
+            {exibirPercentual
+              ? `100% = ${formatarMinutos(referenciaPercentual)}`
+              : `${formatarMinutos(totalMinutos)} totais`}
           </span>
         )}
       </div>
@@ -175,7 +210,7 @@ export default function GraficoBarrasHorizontaisAtividades({
                     textAnchor="middle"
                     className="font-mono text-[10px] fill-[#8A8D80]"
                   >
-                    {val}m
+                    {exibirPercentual ? `${val}%` : `${val}m`}
                   </text>
                 </g>
               );
@@ -185,7 +220,7 @@ export default function GraficoBarrasHorizontaisAtividades({
             {itensExibidos.map((item, index) => {
               const barWidth =
                 maxMinutos > 0
-                  ? ((item.minutos || 0) / maxMinutos) * chartWidth
+                  ? (valorExibido(item) / maxMinutos) * chartWidth
                   : 0;
               const ySlot = marginTop + index * rowSlotHeight;
               const yCenter = ySlot + rowSlotHeight / 2;
@@ -201,7 +236,7 @@ export default function GraficoBarrasHorizontaisAtividades({
                   onMouseEnter={() => setItemHover(item)}
                   onMouseLeave={() => setItemHover(null)}
                 >
-                  <title>{`${rotuloExibicao}: ${formatarMinutos(item.minutos)}`}</title>
+                  <title>{`${rotuloExibicao}: ${formatarMinutos(item.minutos)} (${formatarPercentual(calcularPercentual(item.minutos))})`}</title>
 
                   {/* Rótulo da Atividade no Eixo Y (esquerda) */}
                   <text
@@ -231,7 +266,7 @@ export default function GraficoBarrasHorizontaisAtividades({
                     className="transition-colors duration-150"
                   />
 
-                  {/* Tempo em minutos ao lado direito da barra */}
+                  {/* Tempo (minutos ou %) ao lado direito da barra */}
                   <text
                     x={marginLeft + Math.max(4, barWidth) + 8}
                     y={yCenter + 3.5}
@@ -240,7 +275,7 @@ export default function GraficoBarrasHorizontaisAtividades({
                       isHovered ? "fill-[#0E3A29]" : "fill-[#8A8D80]"
                     }`}
                   >
-                    {formatarMinutos(item.minutos)}
+                    {formatarTempo(item.minutos)}
                   </text>
                 </g>
               );
