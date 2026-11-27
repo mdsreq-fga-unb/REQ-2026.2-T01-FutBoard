@@ -57,6 +57,21 @@ const ESTADO_VAZIO_MOMENTOS_JOGO = {
   mensagem: "Sem atividades com momento de jogo registrado no período.",
 };
 
+const MESES = [
+  { valor: "1", label: "Janeiro" },
+  { valor: "2", label: "Fevereiro" },
+  { valor: "3", label: "Março" },
+  { valor: "4", label: "Abril" },
+  { valor: "5", label: "Maio" },
+  { valor: "6", label: "Junho" },
+  { valor: "7", label: "Julho" },
+  { valor: "8", label: "Agosto" },
+  { valor: "9", label: "Setembro" },
+  { valor: "10", label: "Outubro" },
+  { valor: "11", label: "Novembro" },
+  { valor: "12", label: "Dezembro" },
+];
+
 /**
  * Calcula os indicadores de treino dinamicamente aplicando as regras de negócio:
  * - RN03: Simultaneidade e contagem de tempo líquido.
@@ -375,8 +390,10 @@ export default function DashboardPage({ onSelectNav }) {
   const [filtroMacro, setFiltroMacro] = useState("");
   const [filtroMeso, setFiltroMeso] = useState("");
   const [filtroMicro, setFiltroMicro] = useState("");
+  const [filtroMes, setFiltroMes] = useState("");
 
   // Unidade de tempo dos gráficos (US26): "minutos" (absoluto) ou "percentual" (relativo).
+  // É só estado de exibição: trocar não refaz a consulta nem limpa os filtros.
   const [unidadeTempo, setUnidadeTempo] = useState("minutos");
 
   // Carrega opções de ciclos para os filtros
@@ -445,6 +462,7 @@ export default function DashboardPage({ onSelectNav }) {
     if (filtroMacro) params.macrociclo = filtroMacro;
     if (filtroMeso) params.mesociclo = filtroMeso;
     if (filtroMicro) params.microciclo = filtroMicro;
+    if (filtroMes) params.mes = filtroMes;
 
     try {
       const [respInd, respAtv] = await Promise.all([
@@ -475,6 +493,7 @@ export default function DashboardPage({ onSelectNav }) {
           macrociclo: filtroMacro,
           mesociclo: filtroMeso,
           microciclo: filtroMicro,
+          mes: filtroMes,
         });
         setIndicadores(calculados);
       } catch {
@@ -493,6 +512,7 @@ export default function DashboardPage({ onSelectNav }) {
           macrociclo: filtroMacro,
           mesociclo: filtroMeso,
           microciclo: filtroMicro,
+          mes: filtroMes,
         });
         setDadosAtividades(atvCalculadas);
       } catch {
@@ -522,6 +542,7 @@ export default function DashboardPage({ onSelectNav }) {
           macrociclo: filtroMacro,
           mesociclo: filtroMeso,
           microciclo: filtroMicro,
+          mes: filtroMes,
         },
         listaDaApi.length > 0
           ? listaDaApi
@@ -534,7 +555,7 @@ export default function DashboardPage({ onSelectNav }) {
     } catch {
       setDadosMomentosJogo(ESTADO_VAZIO_MOMENTOS_JOGO);
     }
-  }, [filtroMacro, filtroMeso, filtroMicro]);
+  }, [filtroMacro, filtroMeso, filtroMicro, filtroMes]);
 
   // Atualiza indicadores e gráficos ao mudar os filtros ou ao carregar a tela
   useEffect(() => {
@@ -546,9 +567,10 @@ export default function DashboardPage({ onSelectNav }) {
     setFiltroMacro("");
     setFiltroMeso("");
     setFiltroMicro("");
+    setFiltroMes("");
   };
 
-  const temFiltroAtivo = Boolean(filtroMacro || filtroMeso || filtroMicro);
+  const temFiltroAtivo = Boolean(filtroMacro || filtroMeso || filtroMicro || filtroMes);
 
   // Formatação de números
   const formatarNumero = (num) => {
@@ -800,7 +822,7 @@ export default function DashboardPage({ onSelectNav }) {
 
             {/* Selects de periodização + alternador Min | % à direita (conforme protótipo da US26) */}
             <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
-              <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
+              <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
                 {/* Macrociclo */}
                 <div>
                   <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
@@ -860,6 +882,25 @@ export default function DashboardPage({ onSelectNav }) {
                     {microciclosFiltrados.map((m) => (
                       <option key={m.id} value={m.id}>
                         {m.nome}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Mês */}
+                <div>
+                  <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                    Mês
+                  </label>
+                  <select
+                    value={filtroMes}
+                    onChange={(e) => setFiltroMes(e.target.value)}
+                    className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                  >
+                    <option value="">Todos os meses</option>
+                    {MESES.map((mes) => (
+                      <option key={mes.valor} value={mes.valor}>
+                        {mes.label}
                       </option>
                     ))}
                   </select>
@@ -928,7 +969,7 @@ export default function DashboardPage({ onSelectNav }) {
                     "Nenhum treino registrado neste período."}
                 </h3>
                 <p className="mt-0.5 text-xs text-[#8A8D80]">
-                  Tente selecionar outro macrociclo, mesociclo ou microciclo para visualizar os indicadores e gráficos.
+                  Tente selecionar outro macrociclo, mesociclo, microciclo ou mês para visualizar os indicadores e gráficos.
                 </p>
               </div>
               {temFiltroAtivo && (
