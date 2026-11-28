@@ -1,11 +1,13 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api",
+const opcoes = {
+  baseURL: import.meta.env?.VITE_API_BASE_URL || "http://localhost:8000/api",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
-});
+};
 
+const api = axios.create(opcoes);
+export const apiPublica = axios.create(opcoes);
 export default api;
