@@ -2,7 +2,30 @@ import React, { useEffect, useMemo, useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import SessaoCard from "../components/SessaoCard.jsx";
 import SessaoModal from "../components/SessaoModal.jsx";
+import RelatorioSessaoModal from "../components/RelatorioSessaoModal.jsx";
 import api from "../services/api.js";
+import { montarDadosRelatorioSessao } from "../services/relatorioSessaoService.js";
+import { gerarEBaixarPdfSessao } from "../services/geradorPdfSessao.js";
+
+const MACROCICLOS_DEMO_PDF = [
+  {
+    id: 1,
+    codigo: "MC-01",
+    nome: "Temporada 2026",
+    data_inicio: "2026-01-01",
+    data_termino: "2026-12-31",
+  },
+];
+
+const MESOCICLOS_DEMO_PDF = [
+  {
+    id: 1,
+    nome: "Mesociclo 01 - Preparação Física",
+    data_inicio: "2026-10-01",
+    data_termino: "2026-11-30",
+    macrociclo: 1,
+  },
+];
 
 const MICROCICLOS_DEMO_PDF = [
   {
@@ -12,7 +35,12 @@ const MICROCICLOS_DEMO_PDF = [
     data_termino: "2026-10-24",
     mesociclo: 1,
     mesocicloNome: "Mesociclo 01 - Preparação Física",
+    mesocicloDataInicio: "2026-10-01",
+    mesocicloDataTermino: "2026-11-30",
+    macrociclo: 1,
     macrocicloNome: "Temporada 2026",
+    macrocicloDataInicio: "2026-01-01",
+    macrocicloDataTermino: "2026-12-31",
   },
   {
     id: 2,
@@ -21,7 +49,12 @@ const MICROCICLOS_DEMO_PDF = [
     data_termino: "2026-10-31",
     mesociclo: 1,
     mesocicloNome: "Mesociclo 01 - Preparação Física",
+    mesocicloDataInicio: "2026-10-01",
+    mesocicloDataTermino: "2026-11-30",
+    macrociclo: 1,
     macrocicloNome: "Temporada 2026",
+    macrocicloDataInicio: "2026-01-01",
+    macrocicloDataTermino: "2026-12-31",
   },
   {
     id: 3,
@@ -30,7 +63,12 @@ const MICROCICLOS_DEMO_PDF = [
     data_termino: "2026-11-07",
     mesociclo: 1,
     mesocicloNome: "Mesociclo 01 - Preparação Física",
+    mesocicloDataInicio: "2026-10-01",
+    mesocicloDataTermino: "2026-11-30",
+    macrociclo: 1,
     macrocicloNome: "Temporada 2026",
+    macrocicloDataInicio: "2026-01-01",
+    macrocicloDataTermino: "2026-12-31",
   },
 ];
 
@@ -44,6 +82,8 @@ export default function SessoesPage({ onSelectNav }) {
     }
   });
   const [microciclos, setMicrociclos] = useState(MICROCICLOS_DEMO_PDF);
+  const [mesociclos, setMesociclos] = useState(MESOCICLOS_DEMO_PDF);
+  const [macrociclos, setMacrociclos] = useState(MACROCICLOS_DEMO_PDF);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Controle do Modal de Cadastro e Edição
@@ -51,17 +91,47 @@ export default function SessoesPage({ onSelectNav }) {
   const [sessaoEditando, setSessaoEditando] = useState(null);
   const [toastMsg, setToastMsg] = useState("");
 
+  // Controle de Geração e Visualização de Relatório PDF Individual por Sessão (US25)
+  const [gerandoPdfId, setGerandoPdfId] = useState(null);
+  const [relatorioAtivo, setRelatorioAtivo] = useState(null);
+
   // Busca sessões da API caso esteja ativa
   useEffect(() => {
     const carregarSessoesApi = async () => {
       try {
-        const resp = await api.get("/treinos/sessoes/");
-        if (Array.isArray(resp.data) && resp.data.length > 0) {
-          setSessoes(resp.data);
+        const [respSessoes, respAtividades] = await Promise.all([
+          api.get("/treinos/sessoes/"),
+          api.get("/treinos/atividades-sessao/").catch(() => ({ data: [] })),
+        ]);
+        if (Array.isArray(respSessoes.data) && respSessoes.data.length > 0) {
+          const atividadesPorSessao = new Map();
+          if (Array.isArray(respAtividades.data)) {
+            respAtividades.data.forEach((atv) => {
+              const sId = atv.sessao;
+              if (!atividadesPorSessao.has(sId)) {
+                atividadesPorSessao.set(sId, []);
+              }
+              atividadesPorSessao.get(sId).push(atv);
+            });
+          }
+
+          const sessoesFormatadas = respSessoes.data.map((sessao) => ({
+            ...sessao,
+            atividades:
+              atividadesPorSessao.get(sessao.id) || sessao.atividades || [],
+          }));
+
+          setSessoes(sessoesFormatadas);
           try {
-            localStorage.setItem("futboard_sessoes", JSON.stringify(resp.data));
+            localStorage.setItem(
+              "futboard_sessoes",
+              JSON.stringify(sessoesFormatadas),
+            );
           } catch (errLocal) {
-            console.warn("Não foi possível salvar sessões no localStorage:", errLocal);
+            console.warn(
+              "Não foi possível salvar sessões no localStorage:",
+              errLocal,
+            );
           }
         }
       } catch (errApi) {
@@ -80,21 +150,30 @@ export default function SessoesPage({ onSelectNav }) {
           api.get("/ciclos/macrociclos/").catch(() => ({ data: [] })),
         ]);
 
+        if (Array.isArray(respMeso.data) && respMeso.data.length > 0) {
+          setMesociclos(respMeso.data);
+        }
+        if (Array.isArray(respMacro.data) && respMacro.data.length > 0) {
+          setMacrociclos(respMacro.data);
+        }
+
         if (Array.isArray(respMicro.data) && respMicro.data.length > 0) {
           const mesoMap = new Map();
           if (Array.isArray(respMeso.data)) {
-            respMeso.data.forEach((meso) => mesoMap.set(meso.id, meso));
+            respMeso.data.forEach((meso) => mesoMap.set(Number(meso.id), meso));
           }
 
           const macroMap = new Map();
           if (Array.isArray(respMacro.data)) {
-            respMacro.data.forEach((macro) => macroMap.set(macro.id, macro));
+            respMacro.data.forEach((macro) =>
+              macroMap.set(Number(macro.id), macro)
+            );
           }
 
           const formatados = respMicro.data.map((micro) => {
-            const mesoAssociado = mesoMap.get(micro.mesociclo);
+            const mesoAssociado = mesoMap.get(Number(micro.mesociclo));
             const macroAssociado = mesoAssociado
-              ? macroMap.get(mesoAssociado.macrociclo)
+              ? macroMap.get(Number(mesoAssociado.macrociclo))
               : null;
 
             return {
@@ -102,7 +181,22 @@ export default function SessoesPage({ onSelectNav }) {
               dataInicio: micro.data_inicio || micro.dataInicio,
               dataTermino: micro.data_termino || micro.dataTermino,
               mesocicloNome: mesoAssociado?.nome || "",
+              mesocicloDataInicio:
+                mesoAssociado?.data_inicio || mesoAssociado?.dataInicio || null,
+              mesocicloDataTermino:
+                mesoAssociado?.data_termino ||
+                mesoAssociado?.dataTermino ||
+                null,
+              macrociclo: mesoAssociado?.macrociclo ?? null,
               macrocicloNome: macroAssociado?.nome || "",
+              macrocicloDataInicio:
+                macroAssociado?.data_inicio ||
+                macroAssociado?.dataInicio ||
+                null,
+              macrocicloDataTermino:
+                macroAssociado?.data_termino ||
+                macroAssociado?.dataTermino ||
+                null,
             };
           });
 
@@ -145,39 +239,201 @@ export default function SessoesPage({ onSelectNav }) {
     setSessaoEditando(null);
   };
 
-  const salvarSessao = (dados) => {
-    let novasSessoes = [];
-    if (sessaoEditando) {
-      novasSessoes = sessoes.map((item) =>
-        item.id === sessaoEditando.id ? { ...item, ...dados } : item,
+  const salvarSessao = async (dados) => {
+    const editId = sessaoEditando?.id || dados?.id;
+    const isEdit = Boolean(editId);
+
+    const payload = {
+      microciclo: dados.microciclo || dados.microcicloId,
+      nome: dados.nome,
+      data: dados.data,
+    };
+
+    if (isEdit) {
+      let dadosAtualizados = { ...sessaoEditando, ...dados, id: editId };
+      try {
+        const resp = await api.patch(
+          `/treinos/sessoes/${editId}/`,
+          payload,
+        );
+        if (resp?.data) {
+          dadosAtualizados = { ...dadosAtualizados, ...resp.data };
+        }
+      } catch (err) {
+        console.warn("Erro ao atualizar sessão na API:", err);
+      }
+
+      if (Array.isArray(dados.atividades)) {
+        const atividadesAtualizadas = [];
+        for (const atv of dados.atividades) {
+          if (!atv.id || typeof atv.id !== "number" || atv.id > 1000000000) {
+            try {
+              const payloadAtv = {
+                sessao: editId,
+                atividade_biblioteca:
+                  atv.bibliotecaId || atv.atividade_biblioteca || null,
+                codigo: atv.codigo || "",
+                nome: atv.nome,
+                tipologia: atv.tipologia,
+                tipo_ssp: atv.tipo_ssp,
+                orientacao: atv.orientacao || "",
+                ordem: atv.ordem || 1,
+                tempo: atv.tempo || 15,
+                comprimento: atv.comprimento || null,
+                largura: atv.largura || null,
+                numero_jogadores: atv.numero_jogadores || null,
+                momentos_jogo: atv.momentos_jogo || [],
+                fases_jogo: atv.fases_jogo || [],
+                comportamentos: atv.comportamentos || [],
+                atributos_tecnicos: atv.atributos_tecnicos || [],
+              };
+              const respAtv = await api.post(
+                "/treinos/atividades-sessao/",
+                payloadAtv,
+              );
+              if (respAtv?.data) {
+                atividadesAtualizadas.push({ ...atv, ...respAtv.data });
+                continue;
+              }
+            } catch (errAtv) {
+              console.warn("Erro ao persistir atividade da sessão:", errAtv);
+            }
+          }
+          atividadesAtualizadas.push(atv);
+        }
+        dadosAtualizados.atividades = atividadesAtualizadas;
+      }
+
+      const novasSessoes = sessoes.map((item) =>
+        item.id === editId ? { ...item, ...dadosAtualizados } : item,
       );
+      setSessoes(novasSessoes);
+      try {
+        localStorage.setItem("futboard_sessoes", JSON.stringify(novasSessoes));
+      } catch (errLocal) {
+        console.warn("Não foi possível persistir no localStorage:", errLocal);
+      }
       dispararToast("Sessão atualizada com sucesso.");
     } else {
-      const proximoId =
-        sessoes.length > 0 ? Math.max(...sessoes.map((s) => s.id)) + 1 : 1;
-      const codigo = `SES-${proximoId < 10 ? `0${proximoId}` : proximoId}`;
-      novasSessoes = [
-        ...sessoes,
-        {
-          id: proximoId,
+      let novaSessao = null;
+      let novoId = null;
+      try {
+        const resp = await api.post("/treinos/sessoes/", payload);
+        if (resp?.data) {
+          novoId = resp.data.id;
+          novaSessao = {
+            ...dados,
+            ...resp.data,
+            id: novoId,
+            codigo: `SES-${novoId < 10 ? `0${novoId}` : novoId}`,
+          };
+        }
+      } catch (err) {
+        console.warn("Erro ao cadastrar sessão na API:", err);
+      }
+
+      if (!novaSessao) {
+        novoId =
+          sessoes.length > 0 ? Math.max(...sessoes.map((s) => s.id)) + 1 : 1;
+        const codigo = `SES-${novoId < 10 ? `0${novoId}` : novoId}`;
+        novaSessao = {
+          id: novoId,
           codigo,
           ...dados,
-        },
-      ];
+        };
+      }
+
+      if (Array.isArray(dados.atividades) && novoId) {
+        const atividadesAtualizadas = [];
+        for (const atv of dados.atividades) {
+          try {
+            const payloadAtv = {
+              sessao: novoId,
+              atividade_biblioteca:
+                atv.bibliotecaId || atv.atividade_biblioteca || null,
+              codigo: atv.codigo || "",
+              nome: atv.nome,
+              tipologia: atv.tipologia,
+              tipo_ssp: atv.tipo_ssp,
+              orientacao: atv.orientacao || "",
+              ordem: atv.ordem || 1,
+              tempo: atv.tempo || 15,
+              comprimento: atv.comprimento || null,
+              largura: atv.largura || null,
+              numero_jogadores: atv.numero_jogadores || null,
+              momentos_jogo: atv.momentos_jogo || [],
+              fases_jogo: atv.fases_jogo || [],
+              comportamentos: atv.comportamentos || [],
+              atributos_tecnicos: atv.atributos_tecnicos || [],
+            };
+            const respAtv = await api.post(
+              "/treinos/atividades-sessao/",
+              payloadAtv,
+            );
+            if (respAtv?.data) {
+              atividadesAtualizadas.push({ ...atv, ...respAtv.data });
+              continue;
+            }
+          } catch (errAtv) {
+            console.warn("Erro ao persistir atividade da nova sessão:", errAtv);
+          }
+          atividadesAtualizadas.push(atv);
+        }
+        novaSessao.atividades = atividadesAtualizadas;
+      }
+
+      const novasSessoes = [...sessoes, novaSessao];
+      setSessoes(novasSessoes);
+      try {
+        localStorage.setItem("futboard_sessoes", JSON.stringify(novasSessoes));
+      } catch (errLocal) {
+        console.warn("Não foi possível persistir no localStorage:", errLocal);
+      }
       dispararToast("Sessão cadastrada com sucesso.");
     }
 
-    setSessoes(novasSessoes);
-    try {
-      localStorage.setItem("futboard_sessoes", JSON.stringify(novasSessoes));
-    } catch (errLocal) {
-      console.warn("Não foi possível persistir no localStorage:", errLocal);
-    }
-
-    api.post("/treinos/sessoes/", dados).catch(() => {});
-
     setModalOpen(false);
     setSessaoEditando(null);
+  };
+
+  /**
+   * Gera e baixa o relatório PDF referente exclusivamente à sessão selecionada (US25).
+   * Também abre a visualização estruturada do relatório na tela conforme o protótipo.
+   */
+  const handleGerarRelatorioPdf = async (sessaoSelecionada) => {
+    if (!sessaoSelecionada || gerandoPdfId !== null) return;
+
+    try {
+      setGerandoPdfId(sessaoSelecionada.id);
+      const dadosRelatorio = await montarDadosRelatorioSessao(
+        sessaoSelecionada,
+        {
+          microciclos,
+          mesociclos,
+          macrociclos,
+        }
+      );
+
+      gerarEBaixarPdfSessao(dadosRelatorio);
+      setRelatorioAtivo(dadosRelatorio);
+      dispararToast(`Relatório ${dadosRelatorio.nomeArquivo} gerado com sucesso.`);
+    } catch (erro) {
+      console.error("Erro ao gerar relatório PDF da sessão:", erro);
+      dispararToast("Não foi possível gerar o relatório PDF da sessão.");
+    } finally {
+      setGerandoPdfId(null);
+    }
+  };
+
+  const handleDownloadPdfRelatorio = (dadosRelatorio) => {
+    if (!dadosRelatorio) return;
+    try {
+      gerarEBaixarPdfSessao(dadosRelatorio);
+      dispararToast(`Download de ${dadosRelatorio.nomeArquivo} iniciado.`);
+    } catch (erro) {
+      console.error("Erro ao baixar PDF:", erro);
+      dispararToast("Não foi possível baixar o arquivo PDF.");
+    }
   };
 
   return (
@@ -318,6 +574,8 @@ export default function SessoesPage({ onSelectNav }) {
                       microObj?.nome || sessao.microcicloNome || ""
                     }
                     onEditSessao={abrirModalEdicao}
+                    onGerarRelatorioPdf={handleGerarRelatorioPdf}
+                    gerandoPdf={gerandoPdfId === sessao.id}
                   />
                 );
               })}
@@ -360,6 +618,14 @@ export default function SessoesPage({ onSelectNav }) {
         microciclos={microciclos}
         onClose={fecharModal}
         onSave={salvarSessao}
+      />
+
+      {/* Modal de Visualização e Download do Relatório PDF da Sessão (US25) */}
+      <RelatorioSessaoModal
+        isOpen={Boolean(relatorioAtivo)}
+        dadosRelatorio={relatorioAtivo}
+        onClose={() => setRelatorioAtivo(null)}
+        onDownloadPdf={handleDownloadPdfRelatorio}
       />
     </div>
   );

@@ -3,7 +3,40 @@ import Sidebar from "../components/Sidebar.jsx";
 import GraficoRoscaAtividades from "../components/GraficoRoscaAtividades.jsx";
 import GraficoBarrasAtividades from "../components/GraficoBarrasAtividades.jsx";
 import GraficoRoscaEspaco from "../components/GraficoRoscaEspaco.jsx";
+import GraficoBarrasHorizontaisAtividades from "../components/GraficoBarrasHorizontaisAtividades.jsx";
+import GraficoBarrasFasesJogo from "../components/GraficoBarrasFasesJogo.jsx";
 import api from "../services/api.js";
+
+/**
+ * Estrutura de referência / mock temporário para validação do gráfico de barras horizontais.
+ * Representa o contrato esperado de cada item: { id, codigo, nome, minutos, execucoes }.
+ * Pode ser ativado definindo `futboard_usar_mock_momentos = "true"` no localStorage.
+ */
+const MOCK_ATIVIDADES_BARRAS_HORIZONTAIS = [
+  { id: "mock-1", codigo: "ATQ", nome: "Ataque", minutos: 20, execucoes: 1 },
+  { id: "mock-2", codigo: "TRD", nome: "Trans Def", minutos: 8, execucoes: 1 },
+  { id: "mock-3", codigo: "DEF", nome: "Defesa", minutos: 6, execucoes: 1 },
+  { id: "mock-4", codigo: "BP", nome: "Bola Parada", minutos: 5, execucoes: 1 },
+  { id: "mock-5", codigo: "TRO", nome: "Trans Of", minutos: 5, execucoes: 1 },
+];
+
+/**
+ * Estrutura de referência / mock temporário para validação do gráfico de Fases de Jogo (US38 / RF38).
+ * Representa o contrato esperado de cada item: { id, codigo, nome, minutos, execucoes }.
+ * Pode ser ativado definindo `futboard_usar_mock_fases = "true"` no localStorage.
+ */
+const MOCK_FASES_JOGO_BARRAS_HORIZONTAIS = [
+  { id: "mock-fase-1", codigo: "BP", nome: "Bola parada", minutos: 15, execucoes: 1 },
+  { id: "mock-fase-2", codigo: "1C", nome: "1º Construção", minutos: 8, execucoes: 1 },
+  { id: "mock-fase-3", codigo: "2C", nome: "2º Construção", minutos: 6, execucoes: 1 },
+  { id: "mock-fase-4", codigo: "CRI", nome: "Criação", minutos: 5, execucoes: 1 },
+  { id: "mock-fase-5", codigo: "FIN", nome: "Finalização", minutos: 5, execucoes: 1 },
+];
+
+const MAPA_MOMENTOS_EXIBICAO = {
+  "Transição Defensiva": "Trans Def",
+  "Transição Ofensiva": "Trans Of",
+};
 
 const ESTADO_VAZIO_PADRAO = {
   numero_sessoes: 0,
@@ -54,6 +87,22 @@ const OPCOES_DIMENSAO_ESPACO = [
   { valor: "Grande", label: "Espaço Amplo (Grande - > 200 m²)" },
   { valor: "Não Definido", label: "Não Definido (Sem delimitação / PDI)" },
 ];
+
+const ESTADO_VAZIO_MOMENTOS_JOGO = {
+  total_momentos_distintos: 0,
+  minutos_totais_momentos: 0,
+  itens: [],
+  estado_vazio: true,
+  mensagem: "Sem atividades com momento de jogo registrado no período.",
+};
+
+const ESTADO_VAZIO_FASES_JOGO = {
+  total_fases_distintas: 0,
+  minutos_totais_fases: 0,
+  itens: [],
+  estado_vazio: true,
+  mensagem: "Nenhuma fase de jogo registrada no período.",
+};
 
 const MESES = [
   { valor: "1", label: "Janeiro" },
@@ -385,11 +434,284 @@ function calcularInformacoesEspacoLocais(todasSessoes, { microciclo, mes, dimens
   };
 }
 
+/**
+ * Consolida os dados para o gráfico de barras horizontais a partir das atividades
+ * cadastradas nas sessões de treino filtradas.
+ *
+ * Justificativa de agregação:
+ * No domínio do FutBoard (conforme calcularInformacoesAtividadesLocais e o modelo
+ * de treino do backend), quando uma mesma atividade ou momento de jogo aparece
+ * em diferentes sessões do período filtrado, o indicador de volume de treino
+ * acumula (soma) os minutos dedicados em cada ocorrência para refletir a carga
+ * total de tempo trabalhada naquele período.
+ *
+ * Caso não existam informações de momentos de jogo ou atividades registradas no
+ * período filtrado, retorna ESTADO_VAZIO_MOMENTOS_JOGO (conforme RN07).
+ */
+function calcularDadosBarrasHorizontaisLocais(
+  todasSessoes,
+  { microciclo, mes },
+  dadosApi = []
+) {
+  let sessoesFiltradas = Array.isArray(todasSessoes) ? todasSessoes : [];
+
+  if (microciclo) {
+    sessoesFiltradas = sessoesFiltradas.filter(
+      (s) => String(s.microcicloId ?? s.microciclo) === String(microciclo)
+    );
+  }
+
+  if (mes) {
+    sessoesFiltradas = sessoesFiltradas.filter((s) => {
+      if (s.mes && String(s.mes) === String(mes)) return true;
+      if (s.data) {
+        const partes = String(s.data).split("-");
+        if (partes.length >= 2) {
+          const mesNum = parseInt(partes[1], 10);
+          return String(mesNum) === String(mes);
+        }
+      }
+      return false;
+    });
+  }
+
+  const agrupadoPorMomento = {};
+  const agrupadoPorAtividade = {};
+
+  for (const sessao of sessoesFiltradas) {
+    const atividades = Array.isArray(sessao?.atividades) ? sessao.atividades : [];
+
+    for (const atv of atividades) {
+      const tempo = Number(atv?.tempo ?? atv?.minutos ?? 0);
+      if (!Number.isFinite(tempo) || tempo <= 0) continue;
+
+      const momentos = Array.isArray(atv?.momentos_jogo) ? atv.momentos_jogo : [];
+      for (const momentoBruto of momentos) {
+        const textoMomento = String(momentoBruto || "").trim();
+        if (!textoMomento) continue;
+        const nomeMomento = MAPA_MOMENTOS_EXIBICAO[textoMomento] || textoMomento;
+
+        if (!agrupadoPorMomento[nomeMomento]) {
+          agrupadoPorMomento[nomeMomento] = {
+            id: `momento-${nomeMomento.toLowerCase().replace(/\s+/g, "-")}`,
+            codigo: nomeMomento,
+            nome: nomeMomento,
+            minutos: 0,
+            execucoes: 0,
+          };
+        }
+        agrupadoPorMomento[nomeMomento].minutos += tempo;
+        agrupadoPorMomento[nomeMomento].execucoes += 1;
+      }
+
+      const codigo = String(atv?.codigo || "").trim();
+      const nome = String(atv?.nome || atv?.atividade_ssp || "").trim();
+      const chave = codigo || nome || String(atv?.id || "");
+      if (!chave) continue;
+
+      const nomeExibicao =
+        atv?.atividade_ssp ||
+        (atv?.sigla_tipologia && nome ? `${atv.sigla_tipologia} | ${nome}` : nome || codigo);
+
+      if (!agrupadoPorAtividade[chave]) {
+        agrupadoPorAtividade[chave] = {
+          id: `atv-${chave}`,
+          codigo: codigo || chave,
+          nome: nomeExibicao,
+          minutos: 0,
+          execucoes: 0,
+        };
+      }
+      agrupadoPorAtividade[chave].minutos += tempo;
+      agrupadoPorAtividade[chave].execucoes += 1;
+    }
+  }
+
+  let itens = Object.values(agrupadoPorMomento);
+  if (itens.length === 0) {
+    itens = Object.values(agrupadoPorAtividade);
+  }
+
+  if (itens.length === 0 && Array.isArray(dadosApi) && dadosApi.length > 0) {
+    itens = dadosApi
+      .map((item, idx) => ({
+        id: item.id ?? item.codigo ?? `api-atv-${idx}`,
+        codigo: item.codigo || "",
+        nome:
+          item.momento_jogo ||
+          item.atividade_ssp ||
+          item.nome ||
+          item.codigo ||
+          `Atividade ${idx + 1}`,
+        minutos: Number(item.minutos ?? item.tempo ?? 0) || 0,
+        execucoes: Number(item.execucoes) || 1,
+      }))
+      .filter((item) => item.minutos > 0);
+  }
+
+  if (itens.length === 0) {
+    return ESTADO_VAZIO_MOMENTOS_JOGO;
+  }
+
+  const minutosTotais = itens.reduce((acc, item) => acc + (item.minutos || 0), 0);
+
+  return {
+    total_momentos_distintos: itens.length,
+    minutos_totais_momentos: minutosTotais,
+    itens,
+    estado_vazio: false,
+    mensagem: null,
+  };
+}
+
+/**
+ * Consolida os dados para o gráfico de barras horizontais das Fases de Jogo (US38 / RF38)
+ * a partir das Fases de Jogo efetivamente associadas às atividades das sessões de treino.
+ *
+ * Regras aplicadas:
+ * - Considera exclusivamente as Fases de Jogo registradas (`atv.fases_jogo`) nas atividades
+ *   das sessões filtradas ou a lista de fases proveniente do backend (`por_fase_jogo` / `fases_jogo`).
+ * - Atividades que não possuem nenhuma Fase de Jogo associada (`fases_jogo` vazio) NÃO têm
+ *   o seu tempo contabilizado neste gráfico.
+ * - Soma os minutos registrados em cada Fase de Jogo ao longo das diferentes sessões filtradas.
+ * - Quando não houver Fases de Jogo registradas no período, retorna ESTADO_VAZIO_FASES_JOGO
+ *   com a mensagem: "Nenhuma fase de jogo registrada no período."
+ */
+function calcularDadosFasesJogoLocais(
+  todasSessoes,
+  { microciclo, mes },
+  dadosFasesApi = []
+) {
+  let sessoesFiltradas = Array.isArray(todasSessoes) ? todasSessoes : [];
+
+  if (microciclo) {
+    sessoesFiltradas = sessoesFiltradas.filter(
+      (s) => String(s.microcicloId ?? s.microciclo) === String(microciclo)
+    );
+  }
+
+  if (mes) {
+    sessoesFiltradas = sessoesFiltradas.filter((s) => {
+      if (s.mes && String(s.mes) === String(mes)) return true;
+      if (s.data) {
+        const partes = String(s.data).split("-");
+        if (partes.length >= 2) {
+          const mesNum = parseInt(partes[1], 10);
+          return String(mesNum) === String(mes);
+        }
+      }
+      return false;
+    });
+  }
+
+  // 1. Prioriza dados já consolidados por Fase de Jogo vindos do backend (quando disponíveis)
+  if (Array.isArray(dadosFasesApi) && dadosFasesApi.length > 0) {
+    const itensApi = dadosFasesApi
+      .map((item, idx) => {
+        if (!item || typeof item !== "object") return null;
+        const nome = String(
+          item.fase_jogo || item.fase || item.nome || item.codigo || ""
+        ).trim();
+        const minutos = Number(item.minutos ?? item.tempo ?? 0);
+        if (!nome || !Number.isFinite(minutos) || minutos <= 0) return null;
+
+        return {
+          id: item.id ?? item.codigo ?? `api-fase-${idx}`,
+          codigo: item.codigo || nome,
+          nome,
+          minutos,
+          execucoes: Number(item.execucoes) > 0 ? Number(item.execucoes) : 1,
+        };
+      })
+      .filter(Boolean);
+
+    if (itensApi.length > 0) {
+      const minutosTotaisApi = itensApi.reduce(
+        (acc, item) => acc + (item.minutos || 0),
+        0
+      );
+      return {
+        total_fases_distintas: itensApi.length,
+        minutos_totais_fases: minutosTotaisApi,
+        itens: itensApi,
+        estado_vazio: false,
+        mensagem: null,
+      };
+    }
+  }
+
+  // 2. Agrupa somente os tempos efetivamente associados às Fases de Jogo nas sessões
+  const agrupadoPorFase = {};
+
+  for (const sessao of sessoesFiltradas) {
+    const atividades = Array.isArray(sessao?.atividades) ? sessao.atividades : [];
+
+    for (const atv of atividades) {
+      const fases = Array.isArray(atv?.fases_jogo) ? atv.fases_jogo : [];
+      if (fases.length === 0) continue;
+
+      const tempoAtividade = Number(atv?.tempo ?? atv?.minutos ?? 0);
+
+      for (const faseItem of fases) {
+        let nomeFase = "";
+        let minutosFase = tempoAtividade;
+
+        if (faseItem && typeof faseItem === "object") {
+          nomeFase = String(
+            faseItem.nome || faseItem.fase_jogo || faseItem.fase || ""
+          ).trim();
+          if (faseItem.minutos !== undefined || faseItem.tempo !== undefined) {
+            minutosFase = Number(faseItem.minutos ?? faseItem.tempo ?? 0);
+          }
+        } else {
+          nomeFase = String(faseItem || "").trim();
+        }
+
+        if (!nomeFase || !Number.isFinite(minutosFase) || minutosFase <= 0) {
+          continue;
+        }
+
+        const chaveFase = nomeFase.toLowerCase();
+        if (!agrupadoPorFase[chaveFase]) {
+          agrupadoPorFase[chaveFase] = {
+            id: `fase-${chaveFase.replace(/\s+/g, "-")}`,
+            codigo: nomeFase,
+            nome: nomeFase,
+            minutos: 0,
+            execucoes: 0,
+          };
+        }
+        agrupadoPorFase[chaveFase].minutos += minutosFase;
+        agrupadoPorFase[chaveFase].execucoes += 1;
+      }
+    }
+  }
+
+  const itens = Object.values(agrupadoPorFase);
+  if (itens.length === 0) {
+    return ESTADO_VAZIO_FASES_JOGO;
+  }
+
+  const minutosTotais = itens.reduce((acc, item) => acc + (item.minutos || 0), 0);
+
+  return {
+    total_fases_distintas: itens.length,
+    minutos_totais_fases: minutosTotais,
+    itens,
+    estado_vazio: false,
+    mensagem: null,
+  };
+}
+
 export default function DashboardPage({ onSelectNav }) {
   const [indicadores, setIndicadores] = useState(ESTADO_VAZIO_PADRAO);
   const [dadosAtividades, setDadosAtividades] = useState(ESTADO_VAZIO_ATIVIDADES);
   const [dadosEspaco, setDadosEspaco] = useState(ESTADO_VAZIO_ESPACO);
   const [unidadeEspaco, setUnidadeEspaco] = useState("ambos");
+  const [dadosMomentosJogo, setDadosMomentosJogo] = useState(
+    ESTADO_VAZIO_MOMENTOS_JOGO
+  );
+  const [dadosFasesJogo, setDadosFasesJogo] = useState(ESTADO_VAZIO_FASES_JOGO);
   const [carregando, setCarregando] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -477,7 +799,7 @@ export default function DashboardPage({ onSelectNav }) {
     try {
       const [respInd, respAtv, respEsp] = await Promise.all([
         api.get("/treinos/indicadores/", { params }).catch(() => null),
-        api.get("/treinos/informacoes-atividades/", { params }).catch(() => null),
+        api.get("/treinos/atividades-treino/", { params }).catch(() => null),
         api.get("/treinos/espacos/", { params }).catch(() => null),
       ]);
 
@@ -552,6 +874,78 @@ export default function DashboardPage({ onSelectNav }) {
       } catch {
         setDadosEspaco(ESTADO_VAZIO_ESPACO);
       }
+    }
+
+    // [INTEGRAÇÃO FUTURA COM O BACKEND]
+    // Ponto preparado para receber os dados do gráfico de barras horizontais provenientes do banco de dados.
+    // Quando o backend disponibilizar a lista no payload da API, ela é utilizada diretamente;
+    // caso não haja informações para o período filtrado, aplica ESTADO_VAZIO_MOMENTOS_JOGO.
+    try {
+      const salvas = localStorage.getItem("futboard_sessoes");
+      const todasSessoes = salvas ? JSON.parse(salvas) : [];
+      const listaDaApi =
+        dadosAtividadesApi?.por_momento_jogo ||
+        dadosAtividadesApi?.momentos_jogo ||
+        dadosAtividadesApi?.atividades ||
+        [];
+
+      const usarMockTemporario =
+        localStorage.getItem("futboard_usar_mock_momentos") === "true";
+
+      const dadosHorizontaisCalculados = calcularDadosBarrasHorizontaisLocais(
+        todasSessoes,
+        {
+          macrociclo: filtroMacro,
+          mesociclo: filtroMeso,
+          microciclo: filtroMicro,
+          mes: filtroMes,
+        },
+        listaDaApi.length > 0
+          ? listaDaApi
+          : usarMockTemporario
+            ? MOCK_ATIVIDADES_BARRAS_HORIZONTAIS
+            : []
+      );
+
+      setDadosMomentosJogo(dadosHorizontaisCalculados);
+    } catch {
+      setDadosMomentosJogo(ESTADO_VAZIO_MOMENTOS_JOGO);
+    }
+
+    // [INTEGRAÇÃO FUTURA COM O BACKEND - FASES DE JOGO (US38 / RF38)]
+    // Ponto preparado para receber os dados do gráfico de Fases de Jogo provenientes do banco de dados.
+    // Quando o backend disponibilizar a lista consolidada (ex: `por_fase_jogo` ou `fases_jogo`) no payload da API,
+    // ela é utilizada diretamente; enquanto isso, consolida os tempos das Fases de Jogo das sessões locais.
+    // Caso não existam Fases de Jogo registradas no período filtrado, aplica ESTADO_VAZIO_FASES_JOGO.
+    try {
+      const salvas = localStorage.getItem("futboard_sessoes");
+      const todasSessoes = salvas ? JSON.parse(salvas) : [];
+      const listaFasesDaApi =
+        dadosAtividadesApi?.por_fase_jogo ||
+        dadosAtividadesApi?.fases_jogo ||
+        [];
+
+      const usarMockFasesTemporario =
+        localStorage.getItem("futboard_usar_mock_fases") === "true";
+
+      const dadosFasesCalculados = calcularDadosFasesJogoLocais(
+        todasSessoes,
+        {
+          macrociclo: filtroMacro,
+          mesociclo: filtroMeso,
+          microciclo: filtroMicro,
+          mes: filtroMes,
+        },
+        listaFasesDaApi.length > 0
+          ? listaFasesDaApi
+          : usarMockFasesTemporario
+            ? MOCK_FASES_JOGO_BARRAS_HORIZONTAIS
+            : []
+      );
+
+      setDadosFasesJogo(dadosFasesCalculados);
+    } catch {
+      setDadosFasesJogo(ESTADO_VAZIO_FASES_JOGO);
     }
   }, [filtroMacro, filtroMeso, filtroMicro, filtroMes, filtroEspaco]);
 
@@ -934,6 +1328,26 @@ export default function DashboardPage({ onSelectNav }) {
               {/* Gráfico 2: Barras Verticais (Qtd Execuções por Atividade) */}
               <GraficoBarrasAtividades
                 atividades={dadosAtividades.atividades}
+              />
+
+              {/* Gráfico 3: Barras Horizontais (Tempo em Minutos das Atividades / Momento de Jogo no Treino) */}
+              <GraficoBarrasHorizontaisAtividades
+                atividades={dadosMomentosJogo.itens}
+                estadoVazio={dadosMomentosJogo.estado_vazio}
+                mensagemVazio={
+                  dadosMomentosJogo.mensagem ||
+                  ESTADO_VAZIO_MOMENTOS_JOGO.mensagem
+                }
+              />
+
+              {/* Gráfico 4: Barras Horizontais das Fases de Jogo (US38 / RF38) */}
+              <GraficoBarrasFasesJogo
+                fases={dadosFasesJogo.itens}
+                estadoVazio={dadosFasesJogo.estado_vazio}
+                carregando={carregando}
+                mensagemVazio={
+                  dadosFasesJogo.mensagem || ESTADO_VAZIO_FASES_JOGO.mensagem
+                }
               />
             </div>
           </section>
