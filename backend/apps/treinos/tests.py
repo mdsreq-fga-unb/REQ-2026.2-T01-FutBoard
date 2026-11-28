@@ -8,6 +8,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from apps.ciclos.models import Macrociclo, Mesociclo, Microciclo
+from apps.usuarios.test_utils import UsuarioAprovadoMixin
 
 from .models import (
     MENSAGEM_ATIVIDADES_VAZIO,
@@ -28,7 +29,6 @@ from .serializers import (
 )
 
 
-
 class TreinosInfraTests(SimpleTestCase):
     """Valida o registro da aplicação treinos na configuração do Django."""
 
@@ -37,10 +37,11 @@ class TreinosInfraTests(SimpleTestCase):
         self.assertEqual(app_config.name, "apps.treinos")
 
 
-class SessaoApiTests(TestCase):
+class SessaoApiTests(UsuarioAprovadoMixin, TestCase):
     list_url = "/api/treinos/sessoes/"
 
     def setUp(self):
+        super().setUp()
         self.macrociclo = Macrociclo.objects.create(
             nome="Temporada 2026",
             data_inicio="2026-01-01",
@@ -139,7 +140,7 @@ class SessaoApiTests(TestCase):
         self.assertIn("data", response.json())
 
 
-class ComportamentoTaticoAPITest(APITestCase):
+class ComportamentoTaticoAPITest(UsuarioAprovadoMixin, APITestCase):
 
     url = "/api/treinos/comportamentos/"
 
@@ -223,7 +224,7 @@ class ComportamentoTaticoAPITest(APITestCase):
         self.assertEqual(response.status_code, 400)
 
 
-class AtividadeBibliotecaApiTests(TestCase):
+class AtividadeBibliotecaApiTests(UsuarioAprovadoMixin, TestCase):
     """Testes automatizados da US19 (Cadastrar atividades na biblioteca de treinos)."""
 
     list_url = "/api/treinos/biblioteca/"
@@ -553,12 +554,13 @@ class AtividadeBibliotecaApiTests(TestCase):
         self.assertIn("codigo", response.json())
 
 
-class AtividadeSessaoApiTests(APITestCase):
+class AtividadeSessaoApiTests(UsuarioAprovadoMixin, APITestCase):
     """Testes automatizados das US13, US14 e US23 baseados na planilha oficial."""
 
     list_url = "/api/treinos/atividades-sessao/"
 
     def setUp(self):
+        super().setUp()
         self.macrociclo = Macrociclo.objects.create(
             nome="Temporada 2026",
             data_inicio="2026-01-01",
@@ -781,12 +783,13 @@ class AtividadeSessaoApiTests(APITestCase):
         self.assertEqual(self.bib_cf1.dimensao_espaco, "Pequeno")
 
 
-class IndicadoresTreinoApiTests(APITestCase):
+class IndicadoresTreinoApiTests(UsuarioAprovadoMixin, APITestCase):
     """Testes automatizados da US22 / RF22 (Exibir indicador de treino — RN03, RN06 e RN07)."""
 
     url = "/api/treinos/indicadores/"
 
     def setUp(self):
+        super().setUp()
         self.macrociclo = Macrociclo.objects.create(
             nome="Temporada 2026",
             data_inicio="2026-01-01",
@@ -1385,12 +1388,13 @@ class InformacoesAtividadesTreinoUnitTests(SimpleTestCase):
         self.assertEqual(resultado_vazio["por_fase_jogo"], [])
 
 
-class InformacoesAtividadesTreinoApiTests(APITestCase):
+class InformacoesAtividadesTreinoApiTests(UsuarioAprovadoMixin, APITestCase):
     """Testes automatizados da US24 / RF24 (Consultar informação de atividade do treino — RN03 e RN07)."""
 
     url = "/api/treinos/atividades-treino/"
 
     def setUp(self):
+        super().setUp()
         self.macrociclo = Macrociclo.objects.create(
             nome="2026",
             data_inicio="2026-01-01",
@@ -1665,10 +1669,11 @@ class InformacoesAtividadesTreinoApiTests(APITestCase):
         self.assertEqual(resp_vazio.json()["por_fase_jogo"], [])
 
 
-class RelatorioSessaoAPITests(APITestCase):
+class RelatorioSessaoAPITests(UsuarioAprovadoMixin, APITestCase):
     """Testes automatizados da US25 / RF25 (Gerar relatório de treino individual por sessão)."""
 
     def setUp(self):
+        super().setUp()
         self.macrociclo = Macrociclo.objects.create(
             nome="Macrociclo Temporada 2026",
             data_inicio="2026-01-01",
@@ -1919,7 +1924,9 @@ class RelatorioSessaoAPITests(APITestCase):
         """5. Retorno 404 Not Found para sessão inexistente."""
         resp = self.client.get("/api/treinos/sessoes/999999/relatorio/")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
-class SincronizacaoPrincipiosTaticosAtividadeTests(APITestCase):
+
+
+class SincronizacaoPrincipiosTaticosAtividadeTests(UsuarioAprovadoMixin, APITestCase):
     """Testa a sincronização entre princípios táticos das atividades e o catálogo ComportamentoTatico."""
 
     def test_criacao_atividade_biblioteca_reutiliza_existente_e_cadastra_novo_principio(self):
@@ -2144,12 +2151,13 @@ class EspacoTreinoUnitTests(SimpleTestCase):
         self.assertEqual(len(serializer.data["categorias"]), 4)
 
 
-class InformacoesEspacoTreinoApiTests(APITestCase):
+class InformacoesEspacoTreinoApiTests(UsuarioAprovadoMixin, APITestCase):
     """Testes de API da US35 / RF35 validados com as 27 linhas da planilha oficial."""
 
     url = "/api/treinos/espacos/"
 
     def setUp(self):
+        super().setUp()
         self.macrociclo = Macrociclo.objects.create(
             nome="2026",
             data_inicio="2026-01-01",
@@ -2361,5 +2369,3 @@ class InformacoesEspacoTreinoApiTests(APITestCase):
         self.assertTrue(r_vazio.json()["estado_vazio"])
         self.assertEqual(r_vazio.json()["mensagem"], MENSAGEM_ESPACO_VAZIO)
         self.assertEqual(r_vazio.json()["minutos_totais_liquidos"], 0)
-
-

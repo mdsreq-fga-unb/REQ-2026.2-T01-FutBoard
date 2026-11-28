@@ -91,5 +91,8 @@ jobs:
       - name: Executar lint
         run: npm run lint
 
+      - name: Executar testes do frontend
+        run: npm test
+
       - name: Gerar build
         run: npm run build

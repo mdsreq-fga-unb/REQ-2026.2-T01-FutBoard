@@ -441,6 +441,13 @@ export default function Sidebar({
             </p>
           </div>
         </div>
+        <button
+          type="button"
+          onClick={() => handleSelect("sair")}
+          className="mt-3 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-white transition hover:bg-white/10"
+        >
+          Sair
+        </button>
       </div>
     </div>
   );
