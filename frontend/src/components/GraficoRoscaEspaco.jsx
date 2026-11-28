@@ -128,7 +128,7 @@ export default function GraficoRoscaEspaco({
       <div className="mb-4 flex items-center justify-between">
         <div>
           <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#8A8D80]">
-            Espaço do Treino (RN01 / RN02)
+            Espaço do Treino
           </span>
           <h3 className="font-display text-base font-bold text-[#10281E]">
             Tempo por dimensão do espaço
