@@ -1175,13 +1175,13 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- Quando o usuário aciona a opção de exportar relatório na listagem de sessões, o sistema deve gerar e baixar um arquivo PDF com as informações do treino e gráficos da sessão referente.
+- Quando o usuário solicita a geração do relatório para um recorte sem sessões registradas, o sistema deve informar que não há dados para compor o documento em vez de baixar um arquivo em branco.
 
 **Regras de Negócio Associadas**
 
 - **[RN02](#rn02) · Classificação Automática da Dimensão do Espaço:** A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>> 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido
 - **[RN03](#rn03) · Simultaneidade e Contagem de Tempo da Sessão:** Atividades cadastradas com o mesmo número no campo **ordem** dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma **simultânea** (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado **uma única vez** (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.
-- **[RN06](#rn06) · Cálculo da Variabilidade de Treinos:** O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).
 - **[RN07](#rn07) · Tratamento e Estabilidade em Consultas com Resultado Vazio:** Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (`0 sessões`, `0 min`, `0%`) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.
 
 **Requisitos Não Funcionais Associados**
@@ -1223,7 +1223,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- Quando o usuário alterna o seletor de unidade entre minutos e porcentagem, todos os gráfico devem atualizar os rótulos, eixos e valores exibidos para a unidade escolhida.
+- A alternância de unidade deve preservar os demais filtros já aplicados na tela (como ciclo ou período).
 
 **Regras de Negócio Associadas**
 
@@ -1489,7 +1490,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- No formulário de cadastro ou edição de atividade, o usuário deve conseguir selecionar um ou mais atributos técnicos a partir da lista disponível e salvar a atividade normalmente.
+- O usuário também deve conseguir concluir o salvamento da atividade deixando o campo de atributo técnico sem seleção, sem bloqueio do formulário.
 
 **Regras de Negócio Associadas**
 
@@ -1616,7 +1618,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- O usuário deve conseguir visualizar um gráfico com o tempo distribuído por categoria de espaço das atividades realizadas e filtrar essa visualização por periodização.
+- Quando os filtros aplicados não encontrarem atividades com dados no período, a tela deve exibir um estado vazio informativo mantendo os controles de filtro acessíveis.
 
 **Regras de Negócio Associadas**
 
@@ -1664,7 +1667,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- O usuário deve conseguir visualizar um gráfico com o tempo dedicado a cada momento do jogo e aplicar filtros para restringir a consulta por período ou ciclo.
+- Caso existam atividades cadastradas sem momento do jogo associado ou o filtro não retorne correspondências, o gráfico deve ser exibido normalmente ou apresentar o estado vazio sem mensagens de erro técnicas.
 
 **Regras de Negócio Associadas**
 
@@ -1711,7 +1715,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- O usuário deve conseguir visualizar um gráfico com a distribuição do tempo por fase do jogo e filtrar os dados exibidos conforme os ciclos selecionados.
+- Quando não houver registros de fase do jogo para o filtro escolhido, a interface deve exibir um estado vazio orientador preservando os filtros selecionados.
 
 **Regras de Negócio Associadas**
 
@@ -1758,7 +1763,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- O usuário deve conseguir visualizar em gráfico o tempo trabalhado por princípio tático/comportamento e aplicar filtros para detalhar um ciclo ou comportamento específico.
+- Quando nenhuma atividade com comportamento associado corresponder aos filtros, a tela deve exibir um estado vazio informativo mantendo os controles de filtro acessíveis
 
 **Regras de Negócio Associadas**
 
@@ -1805,7 +1811,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- O usuário deve conseguir consultar em gráfico o tempo investido em cada atributo técnico e filtrar os resultados por período ou atributo.
+- Quando não houver atividades com atributo técnico no recorte filtrado, a tela deve exibir o estado vazio informativo mantendo os filtros disponíveis para nova busca.
 
 **Regras de Negócio Associadas**
 
@@ -1852,7 +1859,11 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- *Cenários de aceitação a definir.*
+- O usuário deve conseguir visualizar lado a lado, em gráficos de barras, a comparação do tempo de treino agrupado por **Microciclo**, **Mesociclo**, **Mês** e **Sessão**.
+- Ao selecionar uma opção em qualquer um dos filtros disponíveis (**Tipologia da Atividade**, **Dimensão do Espaço**, **Momento de Jogo**, **Fases de Jogo**, **Comportamento** ou **Princípio tático**), os quatro gráficos comparativos e os indicadores superiores devem ser atualizados para refletir apenas as atividades correspondentes.
+- O usuário deve conseguir combinar dois ou mais filtros simultaneamente, restringindo a comparação aos treinos que atendam a todos os critérios selecionados, bem como limpar filtros para restaurar o conjunto completo.
+- Ao aplicar, alterar ou limpar qualquer filtro, a unidade selecionada no alternador (`Min` ou `%`) deve ser preservada.
+- Quando algum recorte selecionado não possuir treinos ou quando a combinação de filtros não retornar correspondências, a interface deve exibir o estado vazio informativo sem impedir a exibição dos demais recortes e mantendo os filtros acessíveis.
 
 **Regras de Negócio Associadas**
 
