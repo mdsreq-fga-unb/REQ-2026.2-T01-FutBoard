@@ -747,3 +747,233 @@ def calcular_informacoes_atividades_treino(atividades_queryset):
         "estado_vazio": False,
         "mensagem": None,
     }
+
+
+MENSAGEM_COMPORTAMENTO_VAZIO = "Sem atividades com comportamento no período."
+
+
+def _slug_comportamento(chave_normalizada):
+    slug = re.sub(r"[^a-z0-9]+", "-", chave_normalizada).strip("-")
+    return slug or "item"
+
+
+def _montar_item_comportamento(
+    nome,
+    chave_normalizada,
+    catalogo_id,
+    minutos,
+    minutos_brutos,
+    execucoes,
+    registros,
+    atividades_distintas,
+    sessoes_distintas,
+    minutos_totais_comportamentos,
+    minutos_totais_liquidos,
+):
+    return {
+        "id": f"comportamento-{_slug_comportamento(chave_normalizada)}",
+        "catalogo_id": catalogo_id,
+        "codigo": nome,
+        "comportamento": nome,
+        "nome": nome,
+        "rotulo": nome,
+        "minutos": minutos,
+        "minutos_brutos": minutos_brutos,
+        "percentual_tempo": (
+            round((minutos / minutos_totais_comportamentos) * 100, 2)
+            if minutos_totais_comportamentos > 0
+            else 0.0
+        ),
+        "percentual_tempo_liquido": (
+            round((minutos / minutos_totais_liquidos) * 100, 2)
+            if minutos_totais_liquidos > 0
+            else 0.0
+        ),
+        "execucoes": execucoes,
+        "registros": registros,
+        "atividades_distintas": atividades_distintas,
+        "sessoes_distintas": sessoes_distintas,
+    }
+
+
+def _resolver_catalogo_comportamentos(atividades_queryset, catalogo_nomes=None):
+    """Retorna mapa {nome_normalizado: (catalogo_id, nome_canonico)} sem exigir banco em memória."""
+    mapa = {}
+    if catalogo_nomes is not None:
+        if isinstance(catalogo_nomes, dict):
+            for chave, valor in catalogo_nomes.items():
+                if isinstance(valor, tuple):
+                    mapa[normalizar_nome_comportamento(chave)] = valor
+                else:
+                    nome_limpo = " ".join(str(valor or "").split())
+                    if nome_limpo:
+                        mapa[normalizar_nome_comportamento(chave)] = (None, nome_limpo)
+        else:
+            for item in catalogo_nomes:
+                if hasattr(item, "nome"):
+                    nome_limpo = " ".join((item.nome or "").split())
+                    if nome_limpo:
+                        chave = normalizar_nome_comportamento(nome_limpo)
+                        mapa[chave] = (getattr(item, "id", None), nome_limpo)
+                else:
+                    nome_limpo = " ".join(str(item or "").split())
+                    if nome_limpo:
+                        mapa[normalizar_nome_comportamento(nome_limpo)] = (None, nome_limpo)
+        return mapa
+
+    if hasattr(atividades_queryset, "select_related"):
+        for cid, nome, nome_norm in ComportamentoTatico.objects.values_list(
+            "id", "nome", "nome_normalizado"
+        ):
+            chave = nome_norm or normalizar_nome_comportamento(nome)
+            mapa[chave] = (cid, nome)
+    return mapa
+
+
+def calcular_informacoes_comportamentos_treino(
+    atividades_queryset,
+    comportamento_filtro=None,
+    catalogo_nomes=None,
+):
+    """RF39 (US39): Consolida a distribuição por comportamento tático (RN03, RN05 e RN07)."""
+    if hasattr(atividades_queryset, "select_related"):
+        atividades = list(
+            atividades_queryset.select_related(
+                "sessao__microciclo__mesociclo__macrociclo",
+                "atividade_biblioteca",
+            ).order_by("sessao__data", "sessao__sequencia", "ordem", "id")
+        )
+    else:
+        atividades = list(atividades_queryset)
+
+    catalogo_mapa = _resolver_catalogo_comportamentos(
+        atividades_queryset, catalogo_nomes=catalogo_nomes
+    )
+
+    chave_alvo = (
+        normalizar_nome_comportamento(str(comportamento_filtro))
+        if comportamento_filtro not in (None, "")
+        else ""
+    )
+
+    total_registros = len(atividades)
+    total_registros_com_comportamento = 0
+    total_registros_sem_comportamento = 0
+
+    tempos_globais_ordem = {}
+    agrupado = {}
+
+    for atv in atividades:
+        brutos = atv.comportamentos if isinstance(atv.comportamentos, list) else []
+        comportamentos_validos = []
+        chaves_da_atividade = set()
+
+        for item in brutos:
+            texto = " ".join(str(item or "").split())
+            if not texto:
+                continue
+            chave = normalizar_nome_comportamento(texto)
+            if not chave or chave in chaves_da_atividade:
+                continue
+            if chave_alvo and chave != chave_alvo:
+                continue
+            chaves_da_atividade.add(chave)
+            cid, nome_canonico = catalogo_mapa.get(chave, (None, texto))
+            comportamentos_validos.append((chave, cid, nome_canonico))
+
+        if not comportamentos_validos:
+            total_registros_sem_comportamento += 1
+            continue
+
+        total_registros_com_comportamento += 1
+        tempo = atv.tempo
+        chave_ordem = (atv.sessao_id, atv.ordem)
+        if (
+            chave_ordem not in tempos_globais_ordem
+            or tempo > tempos_globais_ordem[chave_ordem]
+        ):
+            tempos_globais_ordem[chave_ordem] = tempo
+
+        chave_atv = identificador_atividade_distinta(atv)
+        for chave, cid, nome_canonico in comportamentos_validos:
+            if chave not in agrupado:
+                agrupado[chave] = {
+                    "catalogo_id": cid,
+                    "nome": nome_canonico,
+                    "tempos_ordem": {},
+                    "minutos_brutos": 0,
+                    "registros": 0,
+                    "chaves_atividades": set(),
+                    "sessoes_ids": set(),
+                }
+            dados_comp = agrupado[chave]
+            dados_comp["minutos_brutos"] += tempo
+            dados_comp["registros"] += 1
+            dados_comp["chaves_atividades"].add(chave_atv)
+            dados_comp["sessoes_ids"].add(atv.sessao_id)
+            if (
+                chave_ordem not in dados_comp["tempos_ordem"]
+                or tempo > dados_comp["tempos_ordem"][chave_ordem]
+            ):
+                dados_comp["tempos_ordem"][chave_ordem] = tempo
+
+    if not agrupado:
+        return {
+            "total_comportamentos_distintos": 0,
+            "total_registros": total_registros,
+            "total_registros_com_comportamento": 0,
+            "total_registros_sem_comportamento": total_registros_sem_comportamento,
+            "total_execucoes_com_comportamento": 0,
+            "minutos_totais_comportamentos": 0,
+            "minutos_totais_liquidos": 0,
+            "comportamentos": [],
+            "por_comportamento": [],
+            "estado_vazio": True,
+            "mensagem": MENSAGEM_COMPORTAMENTO_VAZIO,
+        }
+
+    minutos_totais_liquidos = sum(tempos_globais_ordem.values())
+    total_execucoes_com_comportamento = len(tempos_globais_ordem)
+    minutos_por_chave = {
+        chave: sum(dados["tempos_ordem"].values()) for chave, dados in agrupado.items()
+    }
+    minutos_totais_comportamentos = sum(minutos_por_chave.values())
+
+    itens = [
+        _montar_item_comportamento(
+            nome=dados["nome"],
+            chave_normalizada=chave,
+            catalogo_id=dados["catalogo_id"],
+            minutos=minutos_por_chave[chave],
+            minutos_brutos=dados["minutos_brutos"],
+            execucoes=len(dados["tempos_ordem"]),
+            registros=dados["registros"],
+            atividades_distintas=len(dados["chaves_atividades"]),
+            sessoes_distintas=len(dados["sessoes_ids"]),
+            minutos_totais_comportamentos=minutos_totais_comportamentos,
+            minutos_totais_liquidos=minutos_totais_liquidos,
+        )
+        for chave, dados in agrupado.items()
+    ]
+
+    itens.sort(
+        key=lambda x: (
+            -x["minutos"],
+            -x["execucoes"],
+            normalizar_nome_comportamento(x["nome"]),
+        )
+    )
+
+    return {
+        "total_comportamentos_distintos": len(itens),
+        "total_registros": total_registros,
+        "total_registros_com_comportamento": total_registros_com_comportamento,
+        "total_registros_sem_comportamento": total_registros_sem_comportamento,
+        "total_execucoes_com_comportamento": total_execucoes_com_comportamento,
+        "minutos_totais_comportamentos": minutos_totais_comportamentos,
+        "minutos_totais_liquidos": minutos_totais_liquidos,
+        "comportamentos": itens,
+        "por_comportamento": itens,
+        "estado_vazio": False,
+        "mensagem": None,
+    }
