@@ -2309,13 +2309,13 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>Quando o usuário aciona a opção de exportar relatório na listagem de sessões, o sistema deve gerar e baixar um arquivo PDF com as informações do treino e gráficos da sessão referente.</li>
+<li>Quando o usuário solicita a geração do relatório para um recorte sem sessões registradas, o sistema deve informar que não há dados para compor o documento em vez de baixar um arquivo em branco.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
 <li><strong><a href="#rn02">RN02</a> · Classificação Automática da Dimensão do Espaço:</strong> A dimensão do espaço não é digitada pelo usuário, sendo classificada automaticamente pelo sistema a partir do resultado da cálculo da área por jogador:<br>• <strong>≤ 100 m²:</strong> Espaço Reduzido (Pequeno)<br>• <strong>101 a 200 m²:</strong> Espaço Médio<br>• <strong>&gt; 200 m²:</strong> Espaço Amplo (Grande)<br>• <strong>Sem dimensões delimitadas (ex.: PDI):</strong> Não Definido</li>
 <li><strong><a href="#rn03">RN03</a> · Simultaneidade e Contagem de Tempo da Sessão:</strong> Atividades cadastradas com o mesmo número no campo <strong>ordem</strong> dentro de uma sessão (ex.: duas atividades com Ordem = 1) ocorrem de forma <strong>simultânea</strong> (elenco dividido em subgrupos). No cálculo da duração líquida da sessão, o tempo de atividades simultâneas é contabilizado <strong>uma única vez</strong> (ex.: duas atividades de 20 minutos com mesma ordem somam 20 minutos à sessão, e não 40). No contador de execuções, o par (Sessão + Ordem) conta como 1 execução.</li>
-<li><strong><a href="#rn06">RN06</a> · Cálculo da Variabilidade de Treinos:</strong> O índice percentual de rotatividade de exercícios em um determinado período é calculado por:<br><br><code>Variabilidade (%) = (Atividades Distintas no Período ÷ Total de Execuções no Período) × 100</code><br><br>Faixa de referência metodológica estipulada pelo treinador: entre 50% e 70% (cada atividade repetida em média de 1 a 2 vezes no ciclo).</li>
 <li><strong><a href="#rn07">RN07</a> · Tratamento e Estabilidade em Consultas com Resultado Vazio:</strong> Ao filtrar consultas (indicadores, listas de atividades, dimensões de treino e gráficos comparativos) sem dados no período selecionado, o sistema não deve acusar erros ou disparar exceções de divisão por zero: mantém os filtros ativos, exibe valores neutros (<code>0 sessões</code>, <code>0 min</code>, <code>0%</code>) e apresenta mensagem orientadora ao usuário, conforme o detalhamento da tabela abaixo.</li>
 </ul>
 <p><strong>Requisitos Não Funcionais Associados</strong></p>
@@ -2345,7 +2345,8 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>Quando o usuário alterna o seletor de unidade entre minutos e porcentagem, todos os gráfico devem atualizar os rótulos, eixos e valores exibidos para a unidade escolhida.</li>
+<li>A alternância de unidade deve preservar os demais filtros já aplicados na tela (como ciclo ou período).</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
@@ -2539,7 +2540,8 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>No formulário de cadastro ou edição de atividade, o usuário deve conseguir selecionar um ou mais atributos técnicos a partir da lista disponível e salvar a atividade normalmente.</li>
+<li>O usuário também deve conseguir concluir o salvamento da atividade deixando o campo de atributo técnico sem seleção, sem bloqueio do formulário.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
@@ -2630,7 +2632,8 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>O usuário deve conseguir visualizar um gráfico com o tempo distribuído por categoria de espaço das atividades realizadas e filtrar essa visualização por periodização.</li>
+<li>Quando os filtros aplicados não encontrarem atividades com dados no período, a tela deve exibir um estado vazio informativo mantendo os controles de filtro acessíveis.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
@@ -2666,7 +2669,8 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>O usuário deve conseguir visualizar um gráfico com o tempo dedicado a cada momento do jogo e aplicar filtros para restringir a consulta por período ou ciclo.</li>
+<li>Caso existam atividades cadastradas sem momento do jogo associado ou o filtro não retorne correspondências, o gráfico deve ser exibido normalmente ou apresentar o estado vazio sem mensagens de erro técnicas.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
@@ -2701,7 +2705,8 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>O usuário deve conseguir visualizar um gráfico com a distribuição do tempo por fase do jogo e filtrar os dados exibidos conforme os ciclos selecionados.</li>
+<li>Quando não houver registros de fase do jogo para o filtro escolhido, a interface deve exibir um estado vazio orientador preservando os filtros selecionados.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
@@ -2736,7 +2741,8 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>O usuário deve conseguir visualizar em gráfico o tempo trabalhado por princípio tático/comportamento e aplicar filtros para detalhar um ciclo ou comportamento específico.</li>
+<li>Quando nenhuma atividade com comportamento associado corresponder aos filtros, a tela deve exibir um estado vazio informativo mantendo os controles de filtro acessíveis</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
@@ -2771,7 +2777,8 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>O usuário deve conseguir consultar em gráfico o tempo investido em cada atributo técnico e filtrar os resultados por período ou atributo.</li>
+<li>Quando não houver atividades com atributo técnico no recorte filtrado, a tela deve exibir o estado vazio informativo mantendo os filtros disponíveis para nova busca.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
@@ -2806,7 +2813,11 @@
 </div>
 <p><strong>Critérios de Aceitação</strong></p>
 <ul>
-<li><em>Cenários de aceitação a definir.</em></li>
+<li>O usuário deve conseguir visualizar lado a lado, em gráficos de barras, a comparação do tempo de treino agrupado por <strong>Microciclo</strong>, <strong>Mesociclo</strong>, <strong>Mês</strong> e <strong>Sessão</strong>.</li>
+<li>Ao selecionar uma opção em qualquer um dos filtros disponíveis (<strong>Tipologia da Atividade</strong>, <strong>Dimensão do Espaço</strong>, <strong>Momento de Jogo</strong>, <strong>Fases de Jogo</strong>, <strong>Comportamento</strong> ou <strong>Princípio tático</strong>), os quatro gráficos comparativos e os indicadores superiores devem ser atualizados para refletir apenas as atividades correspondentes.</li>
+<li>O usuário deve conseguir combinar dois ou mais filtros simultaneamente, restringindo a comparação aos treinos que atendam a todos os critérios selecionados, bem como limpar filtros para restaurar o conjunto completo.</li>
+<li>Ao aplicar, alterar ou limpar qualquer filtro, a unidade selecionada no alternador (<code>Min</code> ou <code>%</code>) deve ser preservada.</li>
+<li>Quando algum recorte selecionado não possuir treinos ou quando a combinação de filtros não retornar correspondências, a interface deve exibir o estado vazio informativo sem impedir a exibição dos demais recortes e mantendo os filtros acessíveis.</li>
 </ul>
 <p><strong>Regras de Negócio Associadas</strong></p>
 <ul>
