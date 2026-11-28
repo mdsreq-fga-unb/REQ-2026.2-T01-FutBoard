@@ -1175,8 +1175,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Quando o usuário aciona a opção de exportar relatório na listagem de sessões, o sistema deve gerar e baixar um arquivo PDF com as informações do treino e gráficos da sessão referente.
-- Quando o usuário solicita a geração do relatório para um recorte sem sessões registradas, o sistema deve informar que não há dados para compor o documento em vez de baixar um arquivo em branco.
+- Ao solicitar a geração do relatório em um período com sessões cadastradas, o sistema deve compilar as informações dos treinos e disponibilizar o arquivo em formato PDF para download.
+- Se o período selecionado não possuir nenhuma sessão de treino registrada, o sistema não deve emitir relatório em branco nem disparar erro, apresentando a notificação: `"Não há registros de treinos no período selecionado para compor o relatório."`
 
 **Regras de Negócio Associadas**
 
@@ -1223,8 +1223,9 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- Quando o usuário alterna o seletor de unidade entre minutos e porcentagem, todos os gráfico devem atualizar os rótulos, eixos e valores exibidos para a unidade escolhida.
-- A alternância de unidade deve preservar os demais filtros já aplicados na tela (como ciclo ou período).
+- Ao selecionar a opção de tempo absoluto, o sistema deve atualizar imediatamente os gráficos exibindo a minutagem bruta em minutos (`min`).
+- Ao alternar para a opção de tempo relativo, o sistema deve recalcular as proporções e exibir os valores em porcentagem (`%`) em relação ao tempo total da sessão ou período filtrado.
+- A alternância entre minutos e porcentagem deve preservar os filtros aplicados de periodização (mesociclo, microciclo, mês e sessão) sem recarregar a tela.
 
 **Regras de Negócio Associadas**
 
@@ -1490,8 +1491,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- No formulário de cadastro ou edição de atividade, o usuário deve conseguir selecionar um ou mais atributos técnicos a partir da lista disponível e salvar a atividade normalmente.
-- O usuário também deve conseguir concluir o salvamento da atividade deixando o campo de atributo técnico sem seleção, sem bloqueio do formulário.
+- Não permitir cadastros de atributos técnicos em branco.
+- Permitir o cadastro de mais de um atributo técnico por vez.
 
 **Regras de Negócio Associadas**
 
@@ -1667,8 +1668,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- O usuário deve conseguir visualizar um gráfico com o tempo dedicado a cada momento do jogo e aplicar filtros para restringir a consulta por período ou ciclo.
-- Caso existam atividades cadastradas sem momento do jogo associado ou o filtro não retorne correspondências, o gráfico deve ser exibido normalmente ou apresentar o estado vazio sem mensagens de erro técnicas.
+- Ao aplicar filtros de periodização, o sistema deve consolidar e exibir nos gráficos a distribuição da minutagem nos momentos trabalhados (Ataque, Defesa, Transição Ofensiva, Transição Defensiva e Bola Parada), considerando que uma atividade pode pontuar em mais de um momento.
+- Caso o período filtrado não possua atividades com momento do jogo registrado, o sistema deve renderizar o gráfico com visual neutro (`0 min` e `0%`) e exibir a mensagem: `"Sem atividades com momento do jogo no período."`, preservando os filtros aplicados.
 
 **Regras de Negócio Associadas**
 
@@ -1763,8 +1764,8 @@ Os requisitos funcionais abaixo descrevem as capacidades que o sistema deve ofer
 
 **Critérios de Aceitação**
 
-- O usuário deve conseguir visualizar em gráfico o tempo trabalhado por princípio tático/comportamento e aplicar filtros para detalhar um ciclo ou comportamento específico.
-- Quando nenhuma atividade com comportamento associado corresponder aos filtros, a tela deve exibir um estado vazio informativo mantendo os controles de filtro acessíveis
+- Ao selecionar filtros de ciclo ou período, o sistema deve calcular e exibir nos gráficos a distribuição de minutagem dedicada a cada comportamento tático trabalhado (ex: cobertura, contenção, reação pós-perda, amplitude, quebrar linha, abrir o campo).
+- Se o período consultado não possuir treinos com comportamentos associados, o sistema deve apresentar os gráficos com visual neutro (`0 min` e `0%`) e exibir a mensagem: `"Sem atividades com comportamento no período."`, mantendo os filtros ativos.
 
 **Regras de Negócio Associadas**
 
