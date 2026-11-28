@@ -582,4 +582,39 @@ class InformacoesAtividadesTreinoSerializer(serializers.Serializer):
     mensagem = serializers.CharField(read_only=True, allow_null=True)
 
 
+class InformacaoComportamentoItemSerializer(serializers.Serializer):
+    """Item consolidado por comportamento tático trabalhado no período (US39 / RF39)."""
+
+    id = serializers.CharField(read_only=True)
+    catalogo_id = serializers.IntegerField(read_only=True, allow_null=True)
+    codigo = serializers.CharField(read_only=True)
+    comportamento = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    rotulo = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    minutos_brutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    percentual_tempo_liquido = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    registros = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+    sessoes_distintas = serializers.IntegerField(read_only=True)
+
+
+class InformacoesComportamentosTreinoSerializer(serializers.Serializer):
+    """RF39 (US39): Serializador de saída da consulta de comportamentos do treino."""
+
+    total_comportamentos_distintos = serializers.IntegerField(read_only=True)
+    total_registros = serializers.IntegerField(read_only=True)
+    total_registros_com_comportamento = serializers.IntegerField(read_only=True)
+    total_registros_sem_comportamento = serializers.IntegerField(read_only=True)
+    total_execucoes_com_comportamento = serializers.IntegerField(read_only=True)
+    minutos_totais_comportamentos = serializers.IntegerField(read_only=True)
+    minutos_totais_liquidos = serializers.IntegerField(read_only=True)
+    comportamentos = InformacaoComportamentoItemSerializer(many=True, read_only=True)
+    por_comportamento = InformacaoComportamentoItemSerializer(many=True, read_only=True)
+    estado_vazio = serializers.BooleanField(read_only=True)
+    mensagem = serializers.CharField(read_only=True, allow_null=True)
+
+
 

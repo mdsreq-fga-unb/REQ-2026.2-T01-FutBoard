@@ -16,6 +16,7 @@ from .models import (
     Sessao,
     calcular_indicadores_treino,
     calcular_informacoes_atividades_treino,
+    calcular_informacoes_comportamentos_treino,
     normalizar_nome_comportamento,
 )
 from .serializers import (
@@ -24,6 +25,7 @@ from .serializers import (
     ComportamentoTaticoSerializer,
     IndicadoresTreinoSerializer,
     InformacoesAtividadesTreinoSerializer,
+    InformacoesComportamentosTreinoSerializer,
     SessaoSerializer,
 )
 
@@ -154,6 +156,21 @@ class AtividadeSessaoListCreateView(generics.ListCreateAPIView):
         return filtrar_atividades_sessao_por_parametros(queryset, self.request.query_params)
 
 
+def _resolver_chave_comportamento_filtro(valor):
+    """Resolve filtro de comportamento por nome ou ID do catálogo (retorna chave normalizada)."""
+    texto = " ".join(str(valor or "").split())
+    if not texto:
+        return ""
+    if texto.isdigit():
+        comportamento = ComportamentoTatico.objects.filter(pk=int(texto)).first()
+        if comportamento is None:
+            return None
+        return comportamento.nome_normalizado or normalizar_nome_comportamento(
+            comportamento.nome
+        )
+    return normalizar_nome_comportamento(texto)
+
+
 def filtrar_atividades_sessao_por_parametros(queryset, query_params):
     """US24 (RF24): Filtra atividades de sessão por periodização, mês, tipologia, SSP, orientação, código e busca (RN07)."""
     filtros_id = {
@@ -232,6 +249,24 @@ def filtrar_atividades_sessao_por_parametros(queryset, query_params):
     if orientacao not in (None, ""):
         queryset = queryset.filter(orientacao__iexact=str(orientacao).strip())
 
+    comportamento = (
+        query_params.get("comportamento") or query_params.get("principio_tatico")
+    )
+    if comportamento not in (None, ""):
+        chave_comp = _resolver_chave_comportamento_filtro(comportamento)
+        if not chave_comp:
+            return queryset.none()
+        ids_compativeis = [
+            atv_id
+            for atv_id, lista_comp in queryset.values_list("id", "comportamentos")
+            if isinstance(lista_comp, list)
+            and any(
+                normalizar_nome_comportamento(str(item or "")) == chave_comp
+                for item in lista_comp
+            )
+        ]
+        queryset = queryset.filter(id__in=ids_compativeis)
+
     codigo = query_params.get("codigo")
     if codigo not in (None, ""):
         queryset = queryset.filter(codigo__iexact=str(codigo).strip())
@@ -286,4 +321,30 @@ class InformacoesAtividadesTreinoView(APIView):
         )
         dados = calcular_informacoes_atividades_treino(queryset_filtrado)
         serializer = InformacoesAtividadesTreinoSerializer(dados)
+        return Response(serializer.data)
+
+
+class InformacoesComportamentosTreinoView(APIView):
+    """US39 (RF39): Retorna distribuição de tempo por comportamento tático (RN03, RN05 e RN07)."""
+
+    def get(self, request, *args, **kwargs):
+        queryset = AtividadeSessao.objects.select_related(
+            "sessao__microciclo__mesociclo__macrociclo",
+            "atividade_biblioteca",
+        ).all()
+        queryset_filtrado = filtrar_atividades_sessao_por_parametros(
+            queryset, request.query_params
+        )
+        comp_param = (
+            request.query_params.get("comportamento")
+            or request.query_params.get("principio_tatico")
+        )
+        comp_filtro = None
+        if comp_param not in (None, ""):
+            comp_filtro = _resolver_chave_comportamento_filtro(comp_param)
+        dados = calcular_informacoes_comportamentos_treino(
+            queryset_filtrado,
+            comportamento_filtro=comp_filtro,
+        )
+        serializer = InformacoesComportamentosTreinoSerializer(dados)
         return Response(serializer.data)

@@ -11,6 +11,7 @@ from .views import (
     ComportamentoTaticoListCreateView,
     IndicadoresTreinoView,
     InformacoesAtividadesTreinoView,
+    InformacoesComportamentosTreinoView,
     SessaoDetailView,
     SessaoListCreateView,
 )
@@ -67,5 +68,10 @@ urlpatterns = [
         "atividades-treino/",
         InformacoesAtividadesTreinoView.as_view(),
         name="informacoes-atividades-treino",
+    ),
+    path(
+        "comportamentos-treino/",
+        InformacoesComportamentosTreinoView.as_view(),
+        name="informacoes-comportamentos-treino",
     ),
 ]
