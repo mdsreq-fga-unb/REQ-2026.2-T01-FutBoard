@@ -4,12 +4,13 @@ from django.db import connections
 from django.db.utils import OperationalError
 from django.urls import include, path
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 
 @api_view(["GET"])
+@authentication_classes([])
 @permission_classes([AllowAny])
 def api_root(request):
     """Ponto de entrada informativo da API RESTful do FutBoard."""
@@ -28,6 +29,7 @@ def api_root(request):
 
 
 @api_view(["GET"])
+@authentication_classes([])
 @permission_classes([AllowAny])
 def health_check(request):
     """Verifica a disponibilidade da API e a conectividade com o banco de dados."""

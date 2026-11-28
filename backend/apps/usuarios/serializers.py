@@ -5,8 +5,15 @@ from django.db import IntegrityError, transaction
 from django.db.models import Q
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.serializers import TokenBlacklistSerializer, TokenRefreshSerializer
+from rest_framework_simplejwt.settings import api_settings
+from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import PerfilAcesso
+from .permissions import exigir_acesso
 
 
 class CampoTexto(serializers.CharField):
@@ -123,6 +130,31 @@ class CadastroSerializer(serializers.Serializer):
 class LoginSerializer(serializers.Serializer):
     email = CampoEmailNormalizado(max_length=254)
     senha = CampoTexto(write_only=True, trim_whitespace=False, style={"input_type": "password"})
+
+
+def bloquear_refresh(token):
+    refresh = RefreshToken(token)
+    # Serializa renovação e logout do mesmo refresh antes de conferir a blacklist novamente.
+    try:
+        OutstandingToken.objects.select_for_update().get(jti=refresh[api_settings.JTI_CLAIM])
+    except OutstandingToken.DoesNotExist as erro:
+        raise TokenError("Token de renovação inválido.") from erro
+    return refresh
+
+
+class RenovarTokenSerializer(TokenRefreshSerializer):
+    @transaction.atomic
+    def validate(self, attrs):
+        refresh = bloquear_refresh(attrs["refresh"])
+        exigir_acesso(JWTAuthentication().get_user(refresh))
+        return super().validate(attrs)
+
+
+class LogoutSerializer(TokenBlacklistSerializer):
+    @transaction.atomic
+    def validate(self, attrs):
+        bloquear_refresh(attrs["refresh"])
+        return super().validate(attrs)
 
 
 def dados_usuario(usuario):

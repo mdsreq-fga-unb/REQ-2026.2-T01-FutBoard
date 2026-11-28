@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import PerfilAcesso
 
@@ -16,4 +17,5 @@ class UsuarioAprovadoMixin:
 
     def setUp(self):
         super().setUp()
-        self.client.force_login(self.usuario_aprovado)
+        token = AccessToken.for_user(self.usuario_aprovado)
+        self.client.defaults["HTTP_AUTHORIZATION"] = f"Bearer {token}"

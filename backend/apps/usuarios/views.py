@@ -1,31 +1,27 @@
 """Views da API de usuários do FutBoard."""
 
-from django.contrib.auth import authenticate, login, logout
-from django.http import JsonResponse
-from django.middleware.csrf import get_token
+from django.contrib.auth import authenticate
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.http import require_GET
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenBlacklistView, TokenRefreshView
 
 from .backends import ContaSemAcesso
 from .models import PerfilAcesso
-from .serializers import CadastroSerializer, LoginSerializer, dados_usuario
+from .serializers import (
+    CadastroSerializer,
+    LoginSerializer,
+    LogoutSerializer,
+    RenovarTokenSerializer,
+    dados_usuario,
+)
 from .throttles import LoginThrottle
 
 
-@require_GET
-@never_cache
-def csrf_token(request):
-    """Emite o cookie e o token para o cadastro público."""
-    return JsonResponse({"csrfToken": get_token(request)})
-
-
-@method_decorator(csrf_protect, name="dispatch")
 class CadastroView(APIView):
     """US27: Permite solicitar a criação de uma conta no FutBoard."""
 
@@ -52,7 +48,6 @@ class CadastroView(APIView):
 
 
 @method_decorator(never_cache, name="dispatch")
-@method_decorator(csrf_protect, name="dispatch")
 class LoginView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = []
@@ -73,20 +68,23 @@ class LoginView(APIView):
                 {"erro": "E-mail ou senha inválidos."}, status=status.HTTP_401_UNAUTHORIZED
             )
 
-        login(request, usuario)
+        refresh = RefreshToken.for_user(usuario)
         return Response({
-            "mensagem": "Login realizado com sucesso.", "usuario": dados_usuario(usuario)
+            "mensagem": "Login realizado com sucesso.",
+            "access": str(refresh.access_token),
+            "refresh": str(refresh),
+            "usuario": dados_usuario(usuario),
         })
 
 
 @method_decorator(never_cache, name="dispatch")
-@method_decorator(csrf_protect, name="dispatch")
-class LogoutView(APIView):
-    permission_classes = [AllowAny]
+class RenovarTokenView(TokenRefreshView):
+    serializer_class = RenovarTokenSerializer
 
-    def post(self, request):
-        logout(request)
-        return Response({"mensagem": "Logout realizado com sucesso."})
+
+@method_decorator(never_cache, name="dispatch")
+class LogoutView(TokenBlacklistView):
+    serializer_class = LogoutSerializer
 
 
 @method_decorator(never_cache, name="dispatch")

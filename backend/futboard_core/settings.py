@@ -1,15 +1,26 @@
 """Configurações do projeto Django para o backend do FutBoard."""
+
 import os
+from datetime import timedelta
 from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
+from django.core.management.utils import get_random_secret_key
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    "django-insecure-local-development-only-change-in-production",
-)
-
 DEBUG = os.getenv("DJANGO_DEBUG", "1").lower() in ("1", "true", "yes")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+JWT_SIGNING_KEY = os.getenv("DJANGO_JWT_SIGNING_KEY")
+
+if DEBUG:
+    SECRET_KEY = SECRET_KEY or get_random_secret_key()
+    JWT_SIGNING_KEY = JWT_SIGNING_KEY or get_random_secret_key()
+elif not SECRET_KEY or not JWT_SIGNING_KEY:
+    raise ImproperlyConfigured("Configure DJANGO_SECRET_KEY e DJANGO_JWT_SIGNING_KEY em produção.")
+
+if len(JWT_SIGNING_KEY.encode("utf-8")) < 32 or JWT_SIGNING_KEY == SECRET_KEY:
+    raise ImproperlyConfigured("A chave JWT deve ser independente e ter pelo menos 32 bytes.")
 
 ALLOWED_HOSTS = [
     host.strip()
@@ -30,6 +41,7 @@ INSTALLED_APPS = [
     # Bibliotecas de terceiros (solucao-proposta.md)
     "corsheaders",
     "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
     # Aplicações modulares do domínio do FutBoard
     "apps.ciclos.apps.CiclosConfig",
     "apps.treinos.apps.TreinosConfig",
@@ -39,7 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    "apps.usuarios.middleware.SessaoPorAtividadeMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -114,9 +126,8 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 
+# Sessões continuam sendo usadas pelo Django Admin.
 SESSION_COOKIE_AGE = 10800
-# O middleware renova somente sessões autenticadas após uma resposta bem-sucedida.
-SESSION_SAVE_EVERY_REQUEST = False
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = "Lax"
 SESSION_COOKIE_SECURE = not DEBUG
@@ -124,7 +135,7 @@ CSRF_COOKIE_SECURE = not DEBUG
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "apps.usuarios.permissions.IsAuthenticatedAndApproved",
@@ -138,6 +149,15 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.FormParser",
         "rest_framework.parsers.MultiPartParser",
     ],
+}
+
+SIMPLE_JWT = {
+    "SIGNING_KEY": JWT_SIGNING_KEY,
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(hours=3),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "CHECK_REVOKE_TOKEN": True,
 }
 
 LANGUAGE_CODE = "pt-br"
@@ -157,11 +177,14 @@ CORS_ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
         "CORS_ALLOWED_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173",
+        "http://localhost:5173,http://127.0.0.1:5173" if DEBUG else "",
     ).split(",")
     if origin.strip()
 ]
 
-# O frontend do FutBoard precisa enviar o cookie CSRF nas requisições à API.
-CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS.copy()
+# Origens de formulários Django, como a origem HTTPS do Admin atrás de um proxy.
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
+    if origin.strip()
+]

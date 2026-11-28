@@ -1,4 +1,3 @@
-from django.contrib.auth import SESSION_KEY, logout
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import BasePermission
 
@@ -22,18 +21,15 @@ def motivo_acesso_negado(usuario):
     return None
 
 
+def exigir_acesso(usuario):
+    motivo = motivo_acesso_negado(usuario)
+    if motivo:
+        raise PermissionDenied({"erro": motivo, "codigo": "acesso_revogado"})
+
+
 class IsAuthenticatedAndApproved(BasePermission):
     def has_permission(self, request, view):
         if not request.user.is_authenticated:
-            if SESSION_KEY in request.session:
-                logout(request)
-                raise PermissionDenied({
-                    "erro": "Sua conta não está autorizada.", "codigo": "acesso_revogado"
-                })
             return False
-
-        motivo = motivo_acesso_negado(request.user)
-        if motivo:
-            logout(request)
-            raise PermissionDenied({"erro": motivo, "codigo": "acesso_revogado"})
+        exigir_acesso(request.user)
         return True
