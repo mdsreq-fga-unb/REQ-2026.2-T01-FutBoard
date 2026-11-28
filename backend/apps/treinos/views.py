@@ -17,7 +17,9 @@ from .models import (
     Sessao,
     calcular_indicadores_treino,
     calcular_informacoes_atividades_treino,
+    calcular_informacoes_espaco_treino,
     gerar_dados_relatorio_sessao,
+    normalizar_dimensao_espaco,
     normalizar_nome_comportamento,
 )
 from .serializers import (
@@ -26,6 +28,7 @@ from .serializers import (
     ComportamentoTaticoSerializer,
     IndicadoresTreinoSerializer,
     InformacoesAtividadesTreinoSerializer,
+    InformacoesEspacoTreinoSerializer,
     RelatorioSessaoSerializer,
     SessaoSerializer,
 )
@@ -235,6 +238,13 @@ def filtrar_atividades_sessao_por_parametros(queryset, query_params):
     if orientacao not in (None, ""):
         queryset = queryset.filter(orientacao__iexact=str(orientacao).strip())
 
+    espaco = query_params.get("dimensao_espaco") or query_params.get("espaco")
+    if espaco not in (None, ""):
+        dimensao_norm = normalizar_dimensao_espaco(espaco)
+        if not dimensao_norm:
+            return queryset.none()
+        queryset = queryset.filter(dimensao_espaco=dimensao_norm)
+
     codigo = query_params.get("codigo")
     if codigo not in (None, ""):
         queryset = queryset.filter(codigo__iexact=str(codigo).strip())
@@ -299,6 +309,22 @@ class InformacoesAtividadesTreinoView(APIView):
         )
         dados = calcular_informacoes_atividades_treino(queryset_filtrado)
         serializer = InformacoesAtividadesTreinoSerializer(dados)
+        return Response(serializer.data)
+
+
+class InformacoesEspacoTreinoView(APIView):
+    """US35 (RF35): Retorna distribuição de tempo por dimensão de espaço do treino (RN01, RN02, RN07)."""
+
+    def get(self, request, *args, **kwargs):
+        queryset = AtividadeSessao.objects.select_related(
+            "sessao__microciclo__mesociclo__macrociclo",
+            "atividade_biblioteca",
+        ).all()
+        queryset_filtrado = filtrar_atividades_sessao_por_parametros(
+            queryset, request.query_params
+        )
+        dados = calcular_informacoes_espaco_treino(queryset_filtrado)
+        serializer = InformacoesEspacoTreinoSerializer(dados)
         return Response(serializer.data)
 
 

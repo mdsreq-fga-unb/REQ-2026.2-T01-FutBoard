@@ -11,14 +11,21 @@ from apps.ciclos.models import Macrociclo, Mesociclo, Microciclo
 
 from .models import (
     MENSAGEM_ATIVIDADES_VAZIO,
+    MENSAGEM_ESPACO_VAZIO,
     AtividadeBiblioteca,
     AtividadeSessao,
     ComportamentoTatico,
     Sessao,
+    calcular_area_e_dimensao,
     calcular_informacoes_atividades_treino,
+    calcular_informacoes_espaco_treino,
     identificador_atividade_distinta,
+    normalizar_dimensao_espaco,
 )
-from .serializers import InformacoesAtividadesTreinoSerializer
+from .serializers import (
+    InformacoesAtividadesTreinoSerializer,
+    InformacoesEspacoTreinoSerializer,
+)
 
 
 
@@ -1629,7 +1636,7 @@ class InformacoesAtividadesTreinoApiTests(APITestCase):
         dados = response.json()
         self.assertIn("por_fase_jogo", dados)
         self.assertTrue(len(dados["por_fase_jogo"]) > 0)
-        
+
         mapa_fases = {f["nome"]: f for f in dados["por_fase_jogo"]}
         self.assertIn("1ª Construção", mapa_fases)
         self.assertEqual(mapa_fases["1ª Construção"]["minutos"], 25)
@@ -1998,5 +2005,361 @@ class SincronizacaoPrincipiosTaticosAtividadeTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(ComportamentoTatico.objects.filter(nome="Amplitude").exists())
         self.assertTrue(ComportamentoTatico.objects.filter(nome="Balanço Def").exists())
+
+
+class EspacoTreinoUnitTests(SimpleTestCase):
+    """Testes unitários puros (em memória, sem banco) da US35 / RF35 (Espaço do treino)."""
+
+    def test_us35_unitario_classifica_faixas_area_rn01_rn02(self):
+        """RN01 e RN02: Valida cálculo da área e classificação Pequeno, Médio e Grande."""
+        area_p, dim_p = calcular_area_e_dimensao(24, 25, 6)
+        self.assertAlmostEqual(area_p, 100.0)
+        self.assertEqual(dim_p, "Pequeno")
+
+        area_m, dim_m = calcular_area_e_dimensao(50, 50, 18)
+        self.assertAlmostEqual(area_m, 2500 / 18)
+        self.assertEqual(dim_m, "Médio")
+
+        area_g, dim_g = calcular_area_e_dimensao(52, 60, 12)
+        self.assertAlmostEqual(area_g, 260.0)
+        self.assertEqual(dim_g, "Grande")
+
+    def test_us35_unitario_normaliza_dimensoes_e_sinonimos(self):
+        """Valida unitariamente a normalização de nomes, acentos e sinônimos de espaço."""
+        self.assertEqual(normalizar_dimensao_espaco("Pequeno"), "Pequeno")
+        self.assertEqual(normalizar_dimensao_espaco("reduzido"), "Pequeno")
+        self.assertEqual(normalizar_dimensao_espaco("medio"), "Médio")
+        self.assertEqual(normalizar_dimensao_espaco("amplo"), "Grande")
+        self.assertEqual(normalizar_dimensao_espaco("nao definido"), "Não Definido")
+        self.assertEqual(normalizar_dimensao_espaco("invalido"), "")
+
+    def test_us35_unitario_consolida_espacos_e_simultaneas_pdi_rn03(self):
+        """RN01/RN02/RN03: Consolida minutos líquidos, brutos e área média em memória."""
+        atividades = [
+            # CF1: 24x25/6 = 100 -> Pequeno (29 min)
+            AtividadeSessao(
+                id=1,
+                sessao_id=1,
+                codigo="CF1",
+                nome="G2XG",
+                tipologia="Confrontos",
+                tipo_ssp="Especial",
+                orientacao="Aquisição",
+                ordem=1,
+                tempo=29,
+                comprimento=24,
+                largura=25,
+                numero_jogadores=6,
+            ),
+            # JC1: 50x50/18 = 138.89 -> Médio (20 min)
+            AtividadeSessao(
+                id=2,
+                sessao_id=1,
+                codigo="JC1",
+                nome="RecPosPerd",
+                tipologia="Jogo Condicionante",
+                tipo_ssp="Especial",
+                orientacao="Aquisição",
+                ordem=2,
+                tempo=20,
+                comprimento=50,
+                largura=50,
+                numero_jogadores=18,
+            ),
+            # Duas atividades PDI simultâneas na Sessão 2, Ordem 1 (18 min cada)
+            AtividadeSessao(
+                id=3,
+                sessao_id=2,
+                codigo="DF1",
+                nome="FinCruz/Chap",
+                tipologia="Dinâmica de Finalização",
+                tipo_ssp="Dirigido",
+                orientacao="PDI",
+                ordem=1,
+                tempo=18,
+            ),
+            AtividadeSessao(
+                id=4,
+                sessao_id=2,
+                codigo="DPD1",
+                nome="Circ+CabRebFrontLat",
+                tipologia="Dinâmica ProtDef",
+                tipo_ssp="Dirigido",
+                orientacao="PDI",
+                ordem=1,
+                tempo=18,
+            ),
+        ]
+
+        resultado = calcular_informacoes_espaco_treino(atividades)
+
+        self.assertFalse(resultado["estado_vazio"])
+        self.assertIsNone(resultado["mensagem"])
+        self.assertEqual(resultado["total_dimensoes_utilizadas"], 3)
+        self.assertEqual(resultado["total_registros"], 4)
+        self.assertEqual(resultado["total_execucoes"], 3)
+        # 29 + 20 + 18 (simultâneas contam 1x) = 67 min líquidos | 85 min brutos
+        self.assertEqual(resultado["minutos_totais_liquidos"], 67)
+        self.assertEqual(resultado["minutos_totais_brutos"], 85)
+
+        por_dim = {item["dimensao_espaco"]: item for item in resultado["espacos"]}
+        self.assertEqual(por_dim["Pequeno"]["minutos"], 29)
+        self.assertAlmostEqual(por_dim["Pequeno"]["area_media_por_jogador"], 100.0)
+        self.assertEqual(por_dim["Médio"]["minutos"], 20)
+        self.assertEqual(por_dim["Não Definido"]["minutos"], 18)
+        self.assertEqual(por_dim["Não Definido"]["minutos_brutos"], 36)
+        self.assertEqual(por_dim["Não Definido"]["execucoes"], 1)
+        self.assertEqual(por_dim["Não Definido"]["registros"], 2)
+        self.assertIsNone(por_dim["Não Definido"]["area_media_por_jogador"])
+
+        # Categorias sempre retornam as 4 faixas da RN02 (Grande com 0 min)
+        cats = {c["dimensao_espaco"]: c for c in resultado["categorias"]}
+        self.assertEqual(cats["Grande"]["minutos"], 0)
+        self.assertEqual(cats["Grande"]["percentual_tempo"], 0.0)
+
+    def test_us35_unitario_resultado_vazio_exibe_zeros_e_mensagem_rn07(self):
+        """RN07: Sem dados no período, retorna visual neutro (0 min e 0%) e mensagem."""
+        resultado = calcular_informacoes_espaco_treino([])
+
+        self.assertTrue(resultado["estado_vazio"])
+        self.assertEqual(resultado["mensagem"], MENSAGEM_ESPACO_VAZIO)
+        self.assertEqual(resultado["total_dimensoes_utilizadas"], 0)
+        self.assertEqual(resultado["total_registros"], 0)
+        self.assertEqual(resultado["total_execucoes"], 0)
+        self.assertEqual(resultado["minutos_totais_liquidos"], 0)
+        self.assertEqual(resultado["minutos_totais_brutos"], 0)
+        self.assertEqual(resultado["espacos"], [])
+        self.assertEqual(len(resultado["categorias"]), 4)
+        for cat in resultado["categorias"]:
+            self.assertEqual(cat["minutos"], 0)
+            self.assertEqual(cat["percentual_tempo"], 0.0)
+
+    def test_us35_unitario_serializador_espaco_formata_campos(self):
+        """Valida unitariamente o InformacoesEspacoTreinoSerializer em memória."""
+        dados = calcular_informacoes_espaco_treino([])
+        serializer = InformacoesEspacoTreinoSerializer(dados)
+
+        self.assertTrue(serializer.data["estado_vazio"])
+        self.assertEqual(serializer.data["mensagem"], MENSAGEM_ESPACO_VAZIO)
+        self.assertEqual(len(serializer.data["categorias"]), 4)
+
+
+class InformacoesEspacoTreinoApiTests(APITestCase):
+    """Testes de API da US35 / RF35 validados com as 27 linhas da planilha oficial."""
+
+    url = "/api/treinos/espacos/"
+
+    def setUp(self):
+        self.macrociclo = Macrociclo.objects.create(
+            nome="2026",
+            data_inicio="2026-01-01",
+            data_termino="2026-12-31",
+        )
+        self.me1 = Mesociclo.objects.create(
+            macrociclo=self.macrociclo,
+            nome="ME1",
+            data_inicio="2026-08-01",
+            data_termino="2026-08-15",
+        )
+        self.me2 = Mesociclo.objects.create(
+            macrociclo=self.macrociclo,
+            nome="ME2",
+            data_inicio="2026-08-16",
+            data_termino="2026-08-31",
+        )
+        self.mc1 = Microciclo.objects.create(
+            mesociclo=self.me1,
+            nome="MC1",
+            data_inicio="2026-08-03",
+            data_termino="2026-08-09",
+        )
+        self.mc2 = Microciclo.objects.create(
+            mesociclo=self.me1,
+            nome="MC2",
+            data_inicio="2026-08-10",
+            data_termino="2026-08-15",
+        )
+        self.mc3 = Microciclo.objects.create(
+            mesociclo=self.me2,
+            nome="MC3",
+            data_inicio="2026-08-16",
+            data_termino="2026-08-23",
+        )
+
+    def _popular_espacos_planilha_oficial(self):
+        # Tuplas: (ordem, codigo, tempo, orientacao, comprimento, largura, jogadores)
+        sessoes_planilha = [
+            (
+                "S01",
+                self.mc1,
+                "2026-08-03",
+                [
+                    (1, "CF1", 29, "Aquisição", 24, 25, 6),
+                    (2, "JC1", 20, "Aquisição", 50, 50, 18),
+                ],
+            ),
+            (
+                "S02",
+                self.mc1,
+                "2026-08-04",
+                [
+                    (1, "DP1", 23, "PDI", None, None, None),
+                    (2, "JP1", 23, "Aquisição", 20, 20, 7),
+                    (3, "JC2", 27, "Aquisição", 52, 60, 18),
+                ],
+            ),
+            (
+                "S03",
+                self.mc1,
+                "2026-08-05",
+                [
+                    (1, "RD1", 16, "Aplicação", 12, 12, 2),
+                    (2, "JS1", 22, "Aquisição", 52, 60, 12),
+                    (3, "CD1", 28, "Aplicação", 104, 60, 22),
+                ],
+            ),
+            (
+                "S04",
+                self.mc1,
+                "2026-08-06",
+                [
+                    (1, "DF1", 18, "PDI", None, None, None),
+                    (1, "DPD1", 18, "PDI", None, None, None),
+                    (2, "JBP1", 29, "Aplicação", 104, 60, 22),
+                ],
+            ),
+            (
+                "S05",
+                self.mc1,
+                "2026-08-07",
+                [
+                    (1, "SIT1", 20, "Aquisição", 52, 68, 7),
+                    (2, "JS2", 45, "Aplicação", 52, 68, 14),
+                ],
+            ),
+            (
+                "S08",
+                self.mc2,
+                "2026-08-11",
+                [
+                    (1, "RD1", 14, "Aquisição", 12, 12, 3),
+                    (2, "JP1", 29, "Aquisição", 25, 25, 12),
+                ],
+            ),
+            (
+                "S09",
+                self.mc2,
+                "2026-08-12",
+                [
+                    (1, "DP2", 14, "PDI", None, None, None),
+                    (2, "JS1", 28, "Aplicação", 50, 60, 14),
+                    (3, "CD1", 33, "Aplicação", 100, 60, 22),
+                ],
+            ),
+            (
+                "S10",
+                self.mc2,
+                "2026-08-13",
+                [
+                    (1, "DF1", 21, "PDI", None, None, None),
+                    (1, "DPD1", 21, "PDI", None, None, None),
+                    (2, "SIT1", 24, "Aquisição", 52, 68, 7),
+                ],
+            ),
+            (
+                "S11",
+                self.mc2,
+                "2026-08-14",
+                [
+                    (1, "JBP2", 39, "Aplicação", 60, 60, 22),
+                    (2, "EC1", 16, "Eq Carga", 50, 60, 22),
+                ],
+            ),
+            (
+                "S12",
+                self.mc3,
+                "2026-08-17",
+                [
+                    (1, "DP1", 20, "PDI", None, None, None),
+                    (1, "DPD2", 20, "PDI", None, None, None),
+                    (1, "DF2", 20, "PDI", None, None, None),
+                    (2, "EC1", 20, "Eq Carga", 60, 60, 19),
+                ],
+            ),
+        ]
+
+        for nome_sessao, micro, data_str, itens in sessoes_planilha:
+            sessao = Sessao.objects.create(
+                microciclo=micro, nome=nome_sessao, data=data_str
+            )
+            for ordem, codigo, tempo, orientacao, comp, larg, jog in itens:
+                AtividadeSessao.objects.create(
+                    sessao=sessao,
+                    codigo=codigo,
+                    nome=f"Atividade {codigo}",
+                    tipologia="Confrontos",
+                    tipo_ssp="Especial",
+                    orientacao=orientacao,
+                    ordem=ordem,
+                    tempo=tempo,
+                    comprimento=comp,
+                    largura=larg,
+                    numero_jogadores=jog,
+                )
+
+    def test_us35_consolida_dimensoes_de_espaco_conforme_planilha_oficial(self):
+        self._popular_espacos_planilha_oficial()
+
+        response = self.client.get(f"{self.url}?mes=Ago")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+
+        self.assertFalse(data["estado_vazio"])
+        self.assertIsNone(data["mensagem"])
+        self.assertEqual(data["total_dimensoes_utilizadas"], 4)
+        self.assertEqual(data["total_registros"], 27)
+        self.assertEqual(data["total_execucoes"], 23)
+        self.assertEqual(data["minutos_totais_liquidos"], 558)
+        self.assertEqual(data["minutos_totais_brutos"], 637)
+
+        por_dim = {item["dimensao_espaco"]: item for item in data["espacos"]}
+        self.assertEqual(por_dim["Grande"]["minutos"], 229)
+        self.assertEqual(por_dim["Grande"]["execucoes"], 8)
+        self.assertEqual(por_dim["Grande"]["atividades_distintas"], 5)
+
+        self.assertEqual(por_dim["Médio"]["minutos"], 122)
+        self.assertEqual(por_dim["Médio"]["execucoes"], 5)
+        self.assertEqual(por_dim["Médio"]["atividades_distintas"], 4)
+
+        self.assertEqual(por_dim["Pequeno"]["minutos"], 111)
+        self.assertEqual(por_dim["Pequeno"]["execucoes"], 5)
+        self.assertEqual(por_dim["Pequeno"]["atividades_distintas"], 3)
+
+        self.assertEqual(por_dim["Não Definido"]["minutos"], 96)
+        self.assertEqual(por_dim["Não Definido"]["minutos_brutos"], 175)
+        self.assertEqual(por_dim["Não Definido"]["execucoes"], 5)
+        self.assertEqual(por_dim["Não Definido"]["registros"], 9)
+        self.assertEqual(por_dim["Não Definido"]["atividades_distintas"], 6)
+
+    def test_us35_filtra_por_periodizacao_espaco_e_trata_estado_vazio_rn07(self):
+        self._popular_espacos_planilha_oficial()
+
+        # Filtro por espaço Grande
+        r_grande = self.client.get(f"{self.url}?espaco=Grande")
+        self.assertEqual(r_grande.status_code, status.HTTP_200_OK)
+        self.assertEqual(r_grande.json()["total_dimensoes_utilizadas"], 1)
+        self.assertEqual(r_grande.json()["minutos_totais_liquidos"], 229)
+
+        # Filtro por ME2 (apenas S12: 20 min Não Definido líquido + 20 min Médio = 40 min)
+        r_me2 = self.client.get(f"{self.url}?mesociclo={self.me2.id}")
+        self.assertEqual(r_me2.json()["total_dimensoes_utilizadas"], 2)
+        self.assertEqual(r_me2.json()["minutos_totais_liquidos"], 40)
+
+        # Filtro sem correspondência -> estado vazio neutro (RN07)
+        r_vazio = self.client.get(f"{self.url}?microciclo=99999")
+        self.assertEqual(r_vazio.status_code, status.HTTP_200_OK)
+        self.assertTrue(r_vazio.json()["estado_vazio"])
+        self.assertEqual(r_vazio.json()["mensagem"], MENSAGEM_ESPACO_VAZIO)
+        self.assertEqual(r_vazio.json()["minutos_totais_liquidos"], 0)
 
 
