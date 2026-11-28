@@ -3,6 +3,7 @@
 from datetime import date
 
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -16,6 +17,9 @@ from .models import (
     Sessao,
     calcular_indicadores_treino,
     calcular_informacoes_atividades_treino,
+    calcular_informacoes_espaco_treino,
+    gerar_dados_relatorio_sessao,
+    normalizar_dimensao_espaco,
     normalizar_nome_comportamento,
 )
 from .serializers import (
@@ -24,6 +28,8 @@ from .serializers import (
     ComportamentoTaticoSerializer,
     IndicadoresTreinoSerializer,
     InformacoesAtividadesTreinoSerializer,
+    InformacoesEspacoTreinoSerializer,
+    RelatorioSessaoSerializer,
     SessaoSerializer,
 )
 
@@ -232,9 +238,26 @@ def filtrar_atividades_sessao_por_parametros(queryset, query_params):
     if orientacao not in (None, ""):
         queryset = queryset.filter(orientacao__iexact=str(orientacao).strip())
 
+    espaco = query_params.get("dimensao_espaco") or query_params.get("espaco")
+    if espaco not in (None, ""):
+        dimensao_norm = normalizar_dimensao_espaco(espaco)
+        if not dimensao_norm:
+            return queryset.none()
+        queryset = queryset.filter(dimensao_espaco=dimensao_norm)
+
     codigo = query_params.get("codigo")
     if codigo not in (None, ""):
         queryset = queryset.filter(codigo__iexact=str(codigo).strip())
+
+    momento_jogo = query_params.get("momento_jogo") or query_params.get("momento")
+    if momento_jogo not in (None, ""):
+        termo_momento = str(momento_jogo).strip()
+        queryset = queryset.filter(momentos_jogo__icontains=termo_momento)
+
+    fase_jogo = query_params.get("fase_jogo") or query_params.get("fase")
+    if fase_jogo not in (None, ""):
+        termo_fase = str(fase_jogo).strip()
+        queryset = queryset.filter(fases_jogo__icontains=termo_fase)
 
     busca = query_params.get("busca") or query_params.get("q")
     if busca not in (None, ""):
@@ -286,4 +309,35 @@ class InformacoesAtividadesTreinoView(APIView):
         )
         dados = calcular_informacoes_atividades_treino(queryset_filtrado)
         serializer = InformacoesAtividadesTreinoSerializer(dados)
+        return Response(serializer.data)
+
+
+class InformacoesEspacoTreinoView(APIView):
+    """US35 (RF35): Retorna distribuição de tempo por dimensão de espaço do treino (RN01, RN02, RN07)."""
+
+    def get(self, request, *args, **kwargs):
+        queryset = AtividadeSessao.objects.select_related(
+            "sessao__microciclo__mesociclo__macrociclo",
+            "atividade_biblioteca",
+        ).all()
+        queryset_filtrado = filtrar_atividades_sessao_por_parametros(
+            queryset, request.query_params
+        )
+        dados = calcular_informacoes_espaco_treino(queryset_filtrado)
+        serializer = InformacoesEspacoTreinoSerializer(dados)
+        return Response(serializer.data)
+
+
+class RelatorioSessaoView(APIView):
+    """US25 (RF25): Retorna dados consolidados e gráficos para relatório individual de sessão."""
+
+    def get(self, request, pk, *args, **kwargs):
+        sessao = get_object_or_404(
+            Sessao.objects.select_related("microciclo__mesociclo__macrociclo").prefetch_related(
+                "atividades__atividade_biblioteca"
+            ),
+            pk=pk,
+        )
+        dados = gerar_dados_relatorio_sessao(sessao)
+        serializer = RelatorioSessaoSerializer(dados)
         return Response(serializer.data)

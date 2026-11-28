@@ -137,6 +137,76 @@ Na inicialização, o Docker Compose:
 - **Django Admin:** [http://localhost:8000/admin/](http://localhost:8000/admin/)
 - **PostgreSQL:** `localhost:5432` (usuário e banco padrão: `futboard`)
 
+### Administração de contas (US27 e US28)
+
+No Django Admin, um superusuário pode abrir **Usuários → Perfis de acesso**, filtrar por
+**Situação** e conferir o indicador **Conta ativa**. Selecione os perfis na lista e execute
+uma das ações abaixo.
+
+- **Aprovar contas selecionadas** ativa o usuário e coloca o perfil em `APROVADA`. Também
+  permite reconsiderar uma recusa ou revogação.
+- **Recusar solicitações pendentes selecionadas** muda perfis `PENDENTE` para `RECUSADA`
+  e deixa o usuário inativo.
+- **Revogar acessos aprovados selecionados** muda perfis `APROVADA` para `REVOGADA`
+  e desativa o usuário. A próxima chamada protegida é bloqueada, inclusive com JWT válido.
+
+As ações preservam os registros, ignoram o próprio perfil de quem as executa e atualizam
+situação e atividade da conta juntas. Use essas ações para administrar o acesso.
+
+#### Primeiro administrador no Render
+
+Prepare a conta uma única vez, depois de aplicar as migrações do deploy. Execute
+`createsuperuser` na pasta `backend`. Escolha um nome de usuário, use um e-mail exclusivo
+e informe uma senha forte no prompt interativo. No Django Admin, entre com o nome de
+usuário. A API aceita o e-mail do superusuário ativo mesmo sem perfil de acesso.
+
+Nos planos com acesso a Shell ou SSH, abra o terminal do serviço de backend no Render e
+use as variáveis de ambiente do próprio serviço.
+
+```bash
+python manage.py migrate --check && python manage.py createsuperuser
+```
+
+O serviço web gratuito do Render não oferece Shell nem SSH. Para esse caso, use uma
+máquina de confiança com o código da versão implantada e as dependências do backend
+instaladas. No painel do banco PostgreSQL, autorize temporariamente apenas o IP público
+dessa máquina para conexões externas e obtenha os dados da conexão externa. Execute o
+comando a seguir em Bash, na pasta `backend`, com o ambiente virtual ativo. Ajuste o
+caminho do arquivo de CAs confiáveis ao sistema usado.
+
+```bash
+(
+  unset DJANGO_DB_ENGINE DJANGO_SETTINGS_MODULE
+  export DJANGO_DEBUG=0
+  export DJANGO_SECRET_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"
+  export DJANGO_JWT_SIGNING_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"
+  export POSTGRES_HOST='<host externo do banco>'
+  export POSTGRES_PORT=5432
+  export POSTGRES_DB='<nome do banco>'
+  export POSTGRES_USER='<usuário do banco>'
+  export PGSSLMODE=verify-full
+  export PGSSLROOTCERT=/etc/ssl/certs/ca-certificates.crt
+  read -r -s -p 'Senha do banco no Render: ' POSTGRES_PASSWORD
+  printf '\n'
+  export POSTGRES_PASSWORD
+  python manage.py migrate --check && python manage.py createsuperuser
+)
+```
+
+As chaves desse comando são temporárias e ficam no subprocesso local. A senha do banco
+é informada sem eco no terminal. A senha do administrador é solicitada separadamente
+pelo Django. Remova o IP temporário da lista de acesso do banco depois de criar a conta.
+Se a verificação indicar migrações pendentes, conclua a etapa de migrações do deploy antes
+de tentar novamente.
+
+Acesse `/admin/` pela origem HTTPS do backend. Se a configuração do proxy exigir uma
+origem CSRF confiável, configure `DJANGO_CSRF_TRUSTED_ORIGINS` no backend com
+`https://req-2026-2-t01-futboard.onrender.com`.
+
+[Acesso Shell e SSH no Render](https://render.com/docs/ssh) ·
+[Conexão externa ao Render Postgres](https://render.com/docs/postgresql-creating-connecting#external-connections) ·
+[Comando createsuperuser do Django](https://docs.djangoproject.com/en/5.2/ref/django-admin/#createsuperuser)
+
 ---
 
 ## CI/CD
@@ -148,7 +218,7 @@ O workflow [`ci.yml`](.github/workflows/ci.yml) é executado automaticamente em 
 - executa `manage.py check` e os testes automatizados do backend;
 - verifica lint e formatação Ruff do módulo alterado;
 - instala as dependências do frontend;
-- executa o lint e o build de produção do frontend.
+- executa o lint, os testes e o build de produção do frontend.
 
 Essa pipeline é compartilhada por todas as histórias de usuário. Cada nova história deve incluir seus testes automatizados, que serão executados junto com os testes já existentes pela CI.
 

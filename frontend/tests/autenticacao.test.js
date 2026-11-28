@@ -155,6 +155,22 @@ test("apenas o 403 de perda de autorização encerra o acesso", async () => {
   assert.deepEqual(avisos, ["Acesso revogado."]);
 });
 
+test("conta desativada pelo Admin encerra o acesso sem tentar renovar", async () => {
+  const autenticacao = await importarAutenticacao();
+  const avisos = [];
+  autenticacao.observarFimDaAutenticacao((aviso) => avisos.push(aviso));
+  simularAPI((url) => {
+    if (url === rotas.login) return [200, { ...tokens, usuario }];
+    assert.equal(url, rotas.me);
+    return [401, { code: "user_inactive" }];
+  });
+
+  await autenticacao.entrar({});
+  await assert.rejects(autenticacao.verificarAutenticacao(), { status: 401 });
+  assert.equal(armazenamento.has(chave), false);
+  assert.match(avisos[0], /conta está inativa/i);
+});
+
 test("logout aguarda a rotação em curso e revoga o refresh mais recente", async () => {
   const autenticacao = await importarAutenticacao();
   const refreshIniciado = Promise.withResolvers();

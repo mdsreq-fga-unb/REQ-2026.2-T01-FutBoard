@@ -2,7 +2,41 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import GraficoRoscaAtividades from "../components/GraficoRoscaAtividades.jsx";
 import GraficoBarrasAtividades from "../components/GraficoBarrasAtividades.jsx";
+import GraficoRoscaEspaco from "../components/GraficoRoscaEspaco.jsx";
+import GraficoBarrasHorizontaisAtividades from "../components/GraficoBarrasHorizontaisAtividades.jsx";
+import GraficoBarrasFasesJogo from "../components/GraficoBarrasFasesJogo.jsx";
 import api from "../services/api.js";
+
+/**
+ * Estrutura de referência / mock temporário para validação do gráfico de barras horizontais.
+ * Representa o contrato esperado de cada item: { id, codigo, nome, minutos, execucoes }.
+ * Pode ser ativado definindo `futboard_usar_mock_momentos = "true"` no localStorage.
+ */
+const MOCK_ATIVIDADES_BARRAS_HORIZONTAIS = [
+  { id: "mock-1", codigo: "ATQ", nome: "Ataque", minutos: 20, execucoes: 1 },
+  { id: "mock-2", codigo: "TRD", nome: "Trans Def", minutos: 8, execucoes: 1 },
+  { id: "mock-3", codigo: "DEF", nome: "Defesa", minutos: 6, execucoes: 1 },
+  { id: "mock-4", codigo: "BP", nome: "Bola Parada", minutos: 5, execucoes: 1 },
+  { id: "mock-5", codigo: "TRO", nome: "Trans Of", minutos: 5, execucoes: 1 },
+];
+
+/**
+ * Estrutura de referência / mock temporário para validação do gráfico de Fases de Jogo (US38 / RF38).
+ * Representa o contrato esperado de cada item: { id, codigo, nome, minutos, execucoes }.
+ * Pode ser ativado definindo `futboard_usar_mock_fases = "true"` no localStorage.
+ */
+const MOCK_FASES_JOGO_BARRAS_HORIZONTAIS = [
+  { id: "mock-fase-1", codigo: "BP", nome: "Bola parada", minutos: 15, execucoes: 1 },
+  { id: "mock-fase-2", codigo: "1C", nome: "1º Construção", minutos: 8, execucoes: 1 },
+  { id: "mock-fase-3", codigo: "2C", nome: "2º Construção", minutos: 6, execucoes: 1 },
+  { id: "mock-fase-4", codigo: "CRI", nome: "Criação", minutos: 5, execucoes: 1 },
+  { id: "mock-fase-5", codigo: "FIN", nome: "Finalização", minutos: 5, execucoes: 1 },
+];
+
+const MAPA_MOMENTOS_EXIBICAO = {
+  "Transição Defensiva": "Trans Def",
+  "Transição Ofensiva": "Trans Of",
+};
 
 const ESTADO_VAZIO_PADRAO = {
   numero_sessoes: 0,
@@ -27,6 +61,47 @@ const ESTADO_VAZIO_ATIVIDADES = {
   execucoes: [],
   estado_vazio: true,
   mensagem: "Nenhuma atividade encontrada para os filtros aplicados.",
+};
+
+const ESTADO_VAZIO_ESPACO = {
+  total_dimensoes_utilizadas: 0,
+  total_registros: 0,
+  total_execucoes: 0,
+  minutos_totais_liquidos: 0,
+  minutos_totais_brutos: 0,
+  espacos: [],
+  categorias: [
+    { dimensao_espaco: "Pequeno", nome: "Espaço Reduzido", rotulo: "Pequeno (≤ 100 m²)", faixa_area: "≤ 100 m²", minutos: 0, percentual_tempo: 0, execucoes: 0 },
+    { dimensao_espaco: "Médio", nome: "Espaço Médio", rotulo: "Médio (101 a 200 m²)", faixa_area: "101 a 200 m²", minutos: 0, percentual_tempo: 0, execucoes: 0 },
+    { dimensao_espaco: "Grande", nome: "Espaço Amplo", rotulo: "Grande (> 200 m²)", faixa_area: "> 200 m²", minutos: 0, percentual_tempo: 0, execucoes: 0 },
+    { dimensao_espaco: "Não Definido", nome: "Não Definido", rotulo: "Não definido", faixa_area: "Sem delimitação", minutos: 0, percentual_tempo: 0, execucoes: 0 },
+  ],
+  estado_vazio: true,
+  mensagem: "Nenhum treino registrado neste período com a dimensão de espaço selecionada.",
+};
+
+const OPCOES_DIMENSAO_ESPACO = [
+  { valor: "", label: "Todas as dimensões" },
+  { valor: "Pequeno", label: "Espaço Reduzido (Pequeno - ≤ 100 m²)" },
+  { valor: "Médio", label: "Espaço Médio (101 a 200 m²)" },
+  { valor: "Grande", label: "Espaço Amplo (Grande - > 200 m²)" },
+  { valor: "Não Definido", label: "Não Definido (Sem delimitação / PDI)" },
+];
+
+const ESTADO_VAZIO_MOMENTOS_JOGO = {
+  total_momentos_distintos: 0,
+  minutos_totais_momentos: 0,
+  itens: [],
+  estado_vazio: true,
+  mensagem: "Sem atividades com momento de jogo registrado no período.",
+};
+
+const ESTADO_VAZIO_FASES_JOGO = {
+  total_fases_distintas: 0,
+  minutos_totais_fases: 0,
+  itens: [],
+  estado_vazio: true,
+  mensagem: "Nenhuma fase de jogo registrada no período.",
 };
 
 const MESES = [
@@ -215,13 +290,432 @@ function calcularInformacoesAtividadesLocais(todasSessoes, { microciclo, mes }) 
   };
 }
 
+/**
+ * Classifica a dimensão do espaço a partir do cálculo de área por jogador (RN01 e RN02).
+ */
+function classificarDimensaoEspaco(atv) {
+  const comp = Number(atv.comprimento);
+  const larg = Number(atv.largura);
+  const jog = Number(atv.numero_jogadores);
+  const orientacao = (atv.orientacao || "").trim().toUpperCase();
+  const dimCadastrada = (atv.dimensao_espaco || atv.espaco || "").trim();
+
+  if (comp > 0 && larg > 0 && jog > 0 && orientacao !== "PDI") {
+    const area = (comp * larg) / jog;
+    if (area <= 100) return { dimensao: "Pequeno", area: Number(area.toFixed(1)), faixa: "≤ 100 m²" };
+    if (area <= 200) return { dimensao: "Médio", area: Number(area.toFixed(1)), faixa: "101 a 200 m²" };
+    return { dimensao: "Grande", area: Number(area.toFixed(1)), faixa: "> 200 m²" };
+  }
+
+  if (dimCadastrada) {
+    const limpo = dimCadastrada.toLowerCase();
+    if (limpo.includes("pequeno") || limpo.includes("reduzido")) return { dimensao: "Pequeno", area: null, faixa: "≤ 100 m²" };
+    if (limpo.includes("médio") || limpo.includes("medio")) return { dimensao: "Médio", area: null, faixa: "101 a 200 m²" };
+    if (limpo.includes("grande") || limpo.includes("amplo")) return { dimensao: "Grande", area: null, faixa: "> 200 m²" };
+  }
+
+  return { dimensao: "Não Definido", area: null, faixa: "Sem delimitação" };
+}
+
+/**
+ * Consolida as informações de espaço do treino para o gráfico de rosca (US35 / RF35).
+ * Regras atendidas: RN01 (Área/jog), RN02 (Classificação), RN03 (Simultaneidade e tempo líquido), RN07 (Estabilidade vazia).
+ */
+function calcularInformacoesEspacoLocais(todasSessoes, { microciclo, mes, dimensao_espaco }) {
+  let sessoesFiltradas = todasSessoes;
+
+  if (microciclo) {
+    sessoesFiltradas = sessoesFiltradas.filter(
+      (s) => String(s.microcicloId ?? s.microciclo) === String(microciclo)
+    );
+  }
+
+  if (mes) {
+    sessoesFiltradas = sessoesFiltradas.filter((s) => {
+      if (s.mes && String(s.mes) === String(mes)) return true;
+      if (s.data) {
+        const partes = String(s.data).split("-");
+        if (partes.length >= 2) {
+          const mesNum = parseInt(partes[1], 10);
+          return String(mesNum) === String(mes);
+        }
+      }
+      return false;
+    });
+  }
+
+  if (sessoesFiltradas.length === 0) {
+    return ESTADO_VAZIO_ESPACO;
+  }
+
+  // Mapeamento das 4 categorias canônicas
+  const categoriasBase = {
+    Pequeno: { id: "pequeno", codigo: "P", dimensao_espaco: "Pequeno", nome: "Espaço Reduzido", rotulo: "Pequeno (≤ 100 m²)", faixa_area: "≤ 100 m²", tempos_ordem: {}, minutos_brutos: 0, execucoes: 0, areas: [] },
+    Médio: { id: "medio", codigo: "M", dimensao_espaco: "Médio", nome: "Espaço Médio", rotulo: "Médio (101 a 200 m²)", faixa_area: "101 a 200 m²", tempos_ordem: {}, minutos_brutos: 0, execucoes: 0, areas: [] },
+    Grande: { id: "grande", codigo: "G", dimensao_espaco: "Grande", nome: "Espaço Amplo", rotulo: "Grande (> 200 m²)", faixa_area: "> 200 m²", tempos_ordem: {}, minutos_brutos: 0, execucoes: 0, areas: [] },
+    "Não Definido": { id: "nao_definido", codigo: "ND", dimensao_espaco: "Não Definido", nome: "Não Definido", rotulo: "Não definido", faixa_area: "Sem delimitação", tempos_ordem: {}, minutos_brutos: 0, execucoes: 0, areas: [] },
+  };
+
+  const temposGlobaisOrdem = {};
+  let totalMinutosBrutos = 0;
+  let totalRegistros = 0;
+
+  for (const sessao of sessoesFiltradas) {
+    const atividades = Array.isArray(sessao.atividades) ? sessao.atividades : [];
+    for (const atv of atividades) {
+      const { dimensao, area, faixa } = classificarDimensaoEspaco(atv);
+
+      // Se filtro de dimensão específico estiver selecionado
+      if (dimensao_espaco && dimensao_espaco.toLowerCase() !== dimensao.toLowerCase()) {
+        continue;
+      }
+
+      const ordem = atv.ordem !== undefined && atv.ordem !== null ? atv.ordem : 1;
+      const chaveOrdem = `${sessao.id || sessao.sequencia || 0}-${ordem}`;
+      const tempo = Number(atv.tempo) || 0;
+
+      totalMinutosBrutos += tempo;
+      totalRegistros += 1;
+
+      if (!(chaveOrdem in temposGlobaisOrdem) || tempo > temposGlobaisOrdem[chaveOrdem]) {
+        temposGlobaisOrdem[chaveOrdem] = tempo;
+      }
+
+      const cat = categoriasBase[dimensao] || categoriasBase["Não Definido"];
+      cat.minutos_brutos += tempo;
+      cat.execucoes += 1;
+      if (faixa) cat.faixa_area = faixa;
+      if (area !== null) cat.areas.push(area);
+
+      if (!(chaveOrdem in cat.tempos_ordem) || tempo > cat.tempos_ordem[chaveOrdem]) {
+        cat.tempos_ordem[chaveOrdem] = tempo;
+      }
+    }
+  }
+
+  const minutosTotaisLiquidos = Object.values(temposGlobaisOrdem).reduce((acc, t) => acc + t, 0);
+
+  if (totalRegistros === 0) {
+    return ESTADO_VAZIO_ESPACO;
+  }
+
+  const categoriasCompletas = Object.values(categoriasBase).map((cat) => {
+    const minutosLiquidos = Object.values(cat.tempos_ordem).reduce((acc, t) => acc + t, 0);
+    const perc = minutosTotaisLiquidos > 0 ? Number(((minutosLiquidos / minutosTotaisLiquidos) * 100).toFixed(2)) : 0;
+    const areaMedia = cat.areas.length > 0 ? Number((cat.areas.reduce((a, b) => a + b, 0) / cat.areas.length).toFixed(1)) : null;
+
+    return {
+      id: cat.id,
+      codigo: cat.codigo,
+      dimensao_espaco: cat.dimensao_espaco,
+      nome: cat.nome,
+      rotulo: cat.rotulo,
+      faixa_area: cat.faixa_area,
+      minutos: minutosLiquidos,
+      minutos_brutos: cat.minutos_brutos,
+      percentual_tempo: perc,
+      execucoes: Object.keys(cat.tempos_ordem).length,
+      area_media_por_jogador: areaMedia,
+    };
+  });
+
+  const espacosUtilizados = categoriasCompletas.filter((c) => c.minutos > 0);
+
+  return {
+    total_dimensoes_utilizadas: espacosUtilizados.length,
+    total_registros: totalRegistros,
+    total_execucoes: Object.keys(temposGlobaisOrdem).length,
+    minutos_totais_liquidos: minutosTotaisLiquidos,
+    minutos_totais_brutos: totalMinutosBrutos,
+    espacos: espacosUtilizados,
+    categorias: categoriasCompletas,
+    estado_vazio: false,
+    mensagem: null,
+  };
+}
+
+/**
+ * Consolida os dados para o gráfico de barras horizontais a partir das atividades
+ * cadastradas nas sessões de treino filtradas.
+ *
+ * Justificativa de agregação:
+ * No domínio do FutBoard (conforme calcularInformacoesAtividadesLocais e o modelo
+ * de treino do backend), quando uma mesma atividade ou momento de jogo aparece
+ * em diferentes sessões do período filtrado, o indicador de volume de treino
+ * acumula (soma) os minutos dedicados em cada ocorrência para refletir a carga
+ * total de tempo trabalhada naquele período.
+ *
+ * Caso não existam informações de momentos de jogo ou atividades registradas no
+ * período filtrado, retorna ESTADO_VAZIO_MOMENTOS_JOGO (conforme RN07).
+ */
+function calcularDadosBarrasHorizontaisLocais(
+  todasSessoes,
+  { microciclo, mes },
+  dadosApi = []
+) {
+  let sessoesFiltradas = Array.isArray(todasSessoes) ? todasSessoes : [];
+
+  if (microciclo) {
+    sessoesFiltradas = sessoesFiltradas.filter(
+      (s) => String(s.microcicloId ?? s.microciclo) === String(microciclo)
+    );
+  }
+
+  if (mes) {
+    sessoesFiltradas = sessoesFiltradas.filter((s) => {
+      if (s.mes && String(s.mes) === String(mes)) return true;
+      if (s.data) {
+        const partes = String(s.data).split("-");
+        if (partes.length >= 2) {
+          const mesNum = parseInt(partes[1], 10);
+          return String(mesNum) === String(mes);
+        }
+      }
+      return false;
+    });
+  }
+
+  const agrupadoPorMomento = {};
+  const agrupadoPorAtividade = {};
+
+  for (const sessao of sessoesFiltradas) {
+    const atividades = Array.isArray(sessao?.atividades) ? sessao.atividades : [];
+
+    for (const atv of atividades) {
+      const tempo = Number(atv?.tempo ?? atv?.minutos ?? 0);
+      if (!Number.isFinite(tempo) || tempo <= 0) continue;
+
+      const momentos = Array.isArray(atv?.momentos_jogo) ? atv.momentos_jogo : [];
+      for (const momentoBruto of momentos) {
+        const textoMomento = String(momentoBruto || "").trim();
+        if (!textoMomento) continue;
+        const nomeMomento = MAPA_MOMENTOS_EXIBICAO[textoMomento] || textoMomento;
+
+        if (!agrupadoPorMomento[nomeMomento]) {
+          agrupadoPorMomento[nomeMomento] = {
+            id: `momento-${nomeMomento.toLowerCase().replace(/\s+/g, "-")}`,
+            codigo: nomeMomento,
+            nome: nomeMomento,
+            minutos: 0,
+            execucoes: 0,
+          };
+        }
+        agrupadoPorMomento[nomeMomento].minutos += tempo;
+        agrupadoPorMomento[nomeMomento].execucoes += 1;
+      }
+
+      const codigo = String(atv?.codigo || "").trim();
+      const nome = String(atv?.nome || atv?.atividade_ssp || "").trim();
+      const chave = codigo || nome || String(atv?.id || "");
+      if (!chave) continue;
+
+      const nomeExibicao =
+        atv?.atividade_ssp ||
+        (atv?.sigla_tipologia && nome ? `${atv.sigla_tipologia} | ${nome}` : nome || codigo);
+
+      if (!agrupadoPorAtividade[chave]) {
+        agrupadoPorAtividade[chave] = {
+          id: `atv-${chave}`,
+          codigo: codigo || chave,
+          nome: nomeExibicao,
+          minutos: 0,
+          execucoes: 0,
+        };
+      }
+      agrupadoPorAtividade[chave].minutos += tempo;
+      agrupadoPorAtividade[chave].execucoes += 1;
+    }
+  }
+
+  let itens = Object.values(agrupadoPorMomento);
+  if (itens.length === 0) {
+    itens = Object.values(agrupadoPorAtividade);
+  }
+
+  if (itens.length === 0 && Array.isArray(dadosApi) && dadosApi.length > 0) {
+    itens = dadosApi
+      .map((item, idx) => ({
+        id: item.id ?? item.codigo ?? `api-atv-${idx}`,
+        codigo: item.codigo || "",
+        nome:
+          item.momento_jogo ||
+          item.atividade_ssp ||
+          item.nome ||
+          item.codigo ||
+          `Atividade ${idx + 1}`,
+        minutos: Number(item.minutos ?? item.tempo ?? 0) || 0,
+        execucoes: Number(item.execucoes) || 1,
+      }))
+      .filter((item) => item.minutos > 0);
+  }
+
+  if (itens.length === 0) {
+    return ESTADO_VAZIO_MOMENTOS_JOGO;
+  }
+
+  const minutosTotais = itens.reduce((acc, item) => acc + (item.minutos || 0), 0);
+
+  return {
+    total_momentos_distintos: itens.length,
+    minutos_totais_momentos: minutosTotais,
+    itens,
+    estado_vazio: false,
+    mensagem: null,
+  };
+}
+
+/**
+ * Consolida os dados para o gráfico de barras horizontais das Fases de Jogo (US38 / RF38)
+ * a partir das Fases de Jogo efetivamente associadas às atividades das sessões de treino.
+ *
+ * Regras aplicadas:
+ * - Considera exclusivamente as Fases de Jogo registradas (`atv.fases_jogo`) nas atividades
+ *   das sessões filtradas ou a lista de fases proveniente do backend (`por_fase_jogo` / `fases_jogo`).
+ * - Atividades que não possuem nenhuma Fase de Jogo associada (`fases_jogo` vazio) NÃO têm
+ *   o seu tempo contabilizado neste gráfico.
+ * - Soma os minutos registrados em cada Fase de Jogo ao longo das diferentes sessões filtradas.
+ * - Quando não houver Fases de Jogo registradas no período, retorna ESTADO_VAZIO_FASES_JOGO
+ *   com a mensagem: "Nenhuma fase de jogo registrada no período."
+ */
+function calcularDadosFasesJogoLocais(
+  todasSessoes,
+  { microciclo, mes },
+  dadosFasesApi = []
+) {
+  let sessoesFiltradas = Array.isArray(todasSessoes) ? todasSessoes : [];
+
+  if (microciclo) {
+    sessoesFiltradas = sessoesFiltradas.filter(
+      (s) => String(s.microcicloId ?? s.microciclo) === String(microciclo)
+    );
+  }
+
+  if (mes) {
+    sessoesFiltradas = sessoesFiltradas.filter((s) => {
+      if (s.mes && String(s.mes) === String(mes)) return true;
+      if (s.data) {
+        const partes = String(s.data).split("-");
+        if (partes.length >= 2) {
+          const mesNum = parseInt(partes[1], 10);
+          return String(mesNum) === String(mes);
+        }
+      }
+      return false;
+    });
+  }
+
+  // 1. Prioriza dados já consolidados por Fase de Jogo vindos do backend (quando disponíveis)
+  if (Array.isArray(dadosFasesApi) && dadosFasesApi.length > 0) {
+    const itensApi = dadosFasesApi
+      .map((item, idx) => {
+        if (!item || typeof item !== "object") return null;
+        const nome = String(
+          item.fase_jogo || item.fase || item.nome || item.codigo || ""
+        ).trim();
+        const minutos = Number(item.minutos ?? item.tempo ?? 0);
+        if (!nome || !Number.isFinite(minutos) || minutos <= 0) return null;
+
+        return {
+          id: item.id ?? item.codigo ?? `api-fase-${idx}`,
+          codigo: item.codigo || nome,
+          nome,
+          minutos,
+          execucoes: Number(item.execucoes) > 0 ? Number(item.execucoes) : 1,
+        };
+      })
+      .filter(Boolean);
+
+    if (itensApi.length > 0) {
+      const minutosTotaisApi = itensApi.reduce(
+        (acc, item) => acc + (item.minutos || 0),
+        0
+      );
+      return {
+        total_fases_distintas: itensApi.length,
+        minutos_totais_fases: minutosTotaisApi,
+        itens: itensApi,
+        estado_vazio: false,
+        mensagem: null,
+      };
+    }
+  }
+
+  // 2. Agrupa somente os tempos efetivamente associados às Fases de Jogo nas sessões
+  const agrupadoPorFase = {};
+
+  for (const sessao of sessoesFiltradas) {
+    const atividades = Array.isArray(sessao?.atividades) ? sessao.atividades : [];
+
+    for (const atv of atividades) {
+      const fases = Array.isArray(atv?.fases_jogo) ? atv.fases_jogo : [];
+      if (fases.length === 0) continue;
+
+      const tempoAtividade = Number(atv?.tempo ?? atv?.minutos ?? 0);
+
+      for (const faseItem of fases) {
+        let nomeFase = "";
+        let minutosFase = tempoAtividade;
+
+        if (faseItem && typeof faseItem === "object") {
+          nomeFase = String(
+            faseItem.nome || faseItem.fase_jogo || faseItem.fase || ""
+          ).trim();
+          if (faseItem.minutos !== undefined || faseItem.tempo !== undefined) {
+            minutosFase = Number(faseItem.minutos ?? faseItem.tempo ?? 0);
+          }
+        } else {
+          nomeFase = String(faseItem || "").trim();
+        }
+
+        if (!nomeFase || !Number.isFinite(minutosFase) || minutosFase <= 0) {
+          continue;
+        }
+
+        const chaveFase = nomeFase.toLowerCase();
+        if (!agrupadoPorFase[chaveFase]) {
+          agrupadoPorFase[chaveFase] = {
+            id: `fase-${chaveFase.replace(/\s+/g, "-")}`,
+            codigo: nomeFase,
+            nome: nomeFase,
+            minutos: 0,
+            execucoes: 0,
+          };
+        }
+        agrupadoPorFase[chaveFase].minutos += minutosFase;
+        agrupadoPorFase[chaveFase].execucoes += 1;
+      }
+    }
+  }
+
+  const itens = Object.values(agrupadoPorFase);
+  if (itens.length === 0) {
+    return ESTADO_VAZIO_FASES_JOGO;
+  }
+
+  const minutosTotais = itens.reduce((acc, item) => acc + (item.minutos || 0), 0);
+
+  return {
+    total_fases_distintas: itens.length,
+    minutos_totais_fases: minutosTotais,
+    itens,
+    estado_vazio: false,
+    mensagem: null,
+  };
+}
+
 export default function DashboardPage({ onSelectNav }) {
   const [indicadores, setIndicadores] = useState(ESTADO_VAZIO_PADRAO);
   const [dadosAtividades, setDadosAtividades] = useState(ESTADO_VAZIO_ATIVIDADES);
+  const [dadosEspaco, setDadosEspaco] = useState(ESTADO_VAZIO_ESPACO);
+  const [unidadeEspaco, setUnidadeEspaco] = useState("ambos");
+  const [dadosMomentosJogo, setDadosMomentosJogo] = useState(
+    ESTADO_VAZIO_MOMENTOS_JOGO
+  );
+  const [dadosFasesJogo, setDadosFasesJogo] = useState(ESTADO_VAZIO_FASES_JOGO);
   const [carregando, setCarregando] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Filtros de periodização (US22 / US24)
+  // Filtros de periodização e dimensão (US22 / US24 / US35)
   const [macrociclos, setMacrociclos] = useState([]);
   const [mesociclos, setMesociclos] = useState([]);
   const [microciclos, setMicrociclos] = useState([]);
@@ -230,6 +724,7 @@ export default function DashboardPage({ onSelectNav }) {
   const [filtroMeso, setFiltroMeso] = useState("");
   const [filtroMicro, setFiltroMicro] = useState("");
   const [filtroMes, setFiltroMes] = useState("");
+  const [filtroEspaco, setFiltroEspaco] = useState("");
 
   // Carrega opções de ciclos para os filtros
   useEffect(() => {
@@ -287,22 +782,25 @@ export default function DashboardPage({ onSelectNav }) {
     return microciclos.filter((m) => String(m.mesociclo) === String(filtroMeso));
   }, [microciclos, filtroMeso]);
 
-  // Busca indicadores gerais (US22) e gráficos de atividades (US24)
+  // Busca indicadores gerais (US22), gráficos de atividades (US24) e dimensão do espaço (US35)
   const buscarIndicadores = useCallback(async () => {
     setCarregando(true);
     let dadosIndicadoresApi = null;
     let dadosAtividadesApi = null;
+    let dadosEspacoApi = null;
 
     const params = {};
     if (filtroMacro) params.macrociclo = filtroMacro;
     if (filtroMeso) params.mesociclo = filtroMeso;
     if (filtroMicro) params.microciclo = filtroMicro;
     if (filtroMes) params.mes = filtroMes;
+    if (filtroEspaco) params.dimensao_espaco = filtroEspaco;
 
     try {
-      const [respInd, respAtv] = await Promise.all([
+      const [respInd, respAtv, respEsp] = await Promise.all([
         api.get("/treinos/indicadores/", { params }).catch(() => null),
         api.get("/treinos/atividades-treino/", { params }).catch(() => null),
+        api.get("/treinos/espacos/", { params }).catch(() => null),
       ]);
 
       if (respInd?.data && typeof respInd.data.numero_sessoes === "number") {
@@ -310,6 +808,9 @@ export default function DashboardPage({ onSelectNav }) {
       }
       if (respAtv?.data && Array.isArray(respAtv.data.atividades)) {
         dadosAtividadesApi = respAtv.data;
+      }
+      if (respEsp?.data && (Array.isArray(respEsp.data.categorias) || Array.isArray(respEsp.data.espacos))) {
+        dadosEspacoApi = respEsp.data;
       }
     } catch {
       // Backend offline no ambiente local
@@ -354,7 +855,99 @@ export default function DashboardPage({ onSelectNav }) {
         setDadosAtividades(ESTADO_VAZIO_ATIVIDADES);
       }
     }
-  }, [filtroMacro, filtroMeso, filtroMicro, filtroMes]);
+
+    // Atualiza gráficos de espaço da US35 (API ou cálculo local)
+    if (dadosEspacoApi) {
+      setDadosEspaco(dadosEspacoApi);
+    } else {
+      try {
+        const salvas = localStorage.getItem("futboard_sessoes");
+        const todasSessoes = salvas ? JSON.parse(salvas) : [];
+        const espacoCalculado = calcularInformacoesEspacoLocais(todasSessoes, {
+          macrociclo: filtroMacro,
+          mesociclo: filtroMeso,
+          microciclo: filtroMicro,
+          mes: filtroMes,
+          dimensao_espaco: filtroEspaco,
+        });
+        setDadosEspaco(espacoCalculado);
+      } catch {
+        setDadosEspaco(ESTADO_VAZIO_ESPACO);
+      }
+    }
+
+    // [INTEGRAÇÃO FUTURA COM O BACKEND]
+    // Ponto preparado para receber os dados do gráfico de barras horizontais provenientes do banco de dados.
+    // Quando o backend disponibilizar a lista no payload da API, ela é utilizada diretamente;
+    // caso não haja informações para o período filtrado, aplica ESTADO_VAZIO_MOMENTOS_JOGO.
+    try {
+      const salvas = localStorage.getItem("futboard_sessoes");
+      const todasSessoes = salvas ? JSON.parse(salvas) : [];
+      const listaDaApi =
+        dadosAtividadesApi?.por_momento_jogo ||
+        dadosAtividadesApi?.momentos_jogo ||
+        dadosAtividadesApi?.atividades ||
+        [];
+
+      const usarMockTemporario =
+        localStorage.getItem("futboard_usar_mock_momentos") === "true";
+
+      const dadosHorizontaisCalculados = calcularDadosBarrasHorizontaisLocais(
+        todasSessoes,
+        {
+          macrociclo: filtroMacro,
+          mesociclo: filtroMeso,
+          microciclo: filtroMicro,
+          mes: filtroMes,
+        },
+        listaDaApi.length > 0
+          ? listaDaApi
+          : usarMockTemporario
+            ? MOCK_ATIVIDADES_BARRAS_HORIZONTAIS
+            : []
+      );
+
+      setDadosMomentosJogo(dadosHorizontaisCalculados);
+    } catch {
+      setDadosMomentosJogo(ESTADO_VAZIO_MOMENTOS_JOGO);
+    }
+
+    // [INTEGRAÇÃO FUTURA COM O BACKEND - FASES DE JOGO (US38 / RF38)]
+    // Ponto preparado para receber os dados do gráfico de Fases de Jogo provenientes do banco de dados.
+    // Quando o backend disponibilizar a lista consolidada (ex: `por_fase_jogo` ou `fases_jogo`) no payload da API,
+    // ela é utilizada diretamente; enquanto isso, consolida os tempos das Fases de Jogo das sessões locais.
+    // Caso não existam Fases de Jogo registradas no período filtrado, aplica ESTADO_VAZIO_FASES_JOGO.
+    try {
+      const salvas = localStorage.getItem("futboard_sessoes");
+      const todasSessoes = salvas ? JSON.parse(salvas) : [];
+      const listaFasesDaApi =
+        dadosAtividadesApi?.por_fase_jogo ||
+        dadosAtividadesApi?.fases_jogo ||
+        [];
+
+      const usarMockFasesTemporario =
+        localStorage.getItem("futboard_usar_mock_fases") === "true";
+
+      const dadosFasesCalculados = calcularDadosFasesJogoLocais(
+        todasSessoes,
+        {
+          macrociclo: filtroMacro,
+          mesociclo: filtroMeso,
+          microciclo: filtroMicro,
+          mes: filtroMes,
+        },
+        listaFasesDaApi.length > 0
+          ? listaFasesDaApi
+          : usarMockFasesTemporario
+            ? MOCK_FASES_JOGO_BARRAS_HORIZONTAIS
+            : []
+      );
+
+      setDadosFasesJogo(dadosFasesCalculados);
+    } catch {
+      setDadosFasesJogo(ESTADO_VAZIO_FASES_JOGO);
+    }
+  }, [filtroMacro, filtroMeso, filtroMicro, filtroMes, filtroEspaco]);
 
   // Atualiza indicadores e gráficos ao mudar os filtros ou ao carregar a tela
   useEffect(() => {
@@ -367,9 +960,10 @@ export default function DashboardPage({ onSelectNav }) {
     setFiltroMeso("");
     setFiltroMicro("");
     setFiltroMes("");
+    setFiltroEspaco("");
   };
 
-  const temFiltroAtivo = Boolean(filtroMacro || filtroMeso || filtroMicro || filtroMes);
+  const temFiltroAtivo = Boolean(filtroMacro || filtroMeso || filtroMicro || filtroMes || filtroEspaco);
 
   // Formatação de números
   const formatarNumero = (num) => {
@@ -607,7 +1201,7 @@ export default function DashboardPage({ onSelectNav }) {
               )}
             </div>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
               {/* Macrociclo */}
               <div>
                 <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
@@ -672,6 +1266,24 @@ export default function DashboardPage({ onSelectNav }) {
                 </select>
               </div>
 
+              {/* Dimensão do Espaço (US35 / RF35) */}
+              <div>
+                <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
+                  Dimensão do espaço
+                </label>
+                <select
+                  value={filtroEspaco}
+                  onChange={(e) => setFiltroEspaco(e.target.value)}
+                  className="w-full rounded-xl border border-[#E4DFD2] bg-[#F5F2EA]/40 px-3 py-2 text-xs font-medium text-[#10281E] focus:border-[#0E3A29] focus:outline-none"
+                >
+                  {OPCOES_DIMENSAO_ESPACO.map((opt) => (
+                    <option key={opt.valor} value={opt.valor}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {/* Mês */}
               <div>
                 <label className="block text-[11px] font-medium text-[#8A8D80] mb-1">
@@ -693,6 +1305,17 @@ export default function DashboardPage({ onSelectNav }) {
             </div>
           </section>
 
+          {/* Gráfico de Espaço do Treino (US35 / RF35 - Conforme Protótipo) */}
+          <section aria-label="Gráfico de Espaço do Treino" className="mb-6">
+            <GraficoRoscaEspaco
+              espacos={dadosEspaco.espacos}
+              categorias={dadosEspaco.categorias}
+              minutosTotais={dadosEspaco.minutos_totais_liquidos}
+              unidade={unidadeEspaco}
+              onToggleUnidade={(novaUnidade) => setUnidadeEspaco(novaUnidade)}
+            />
+          </section>
+
           {/* Gráficos de Atividades do Treino (US24 / RF24 - Conforme Protótipo) */}
           <section aria-label="Gráficos de Atividades do Treino" className="mb-6">
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
@@ -706,11 +1329,31 @@ export default function DashboardPage({ onSelectNav }) {
               <GraficoBarrasAtividades
                 atividades={dadosAtividades.atividades}
               />
+
+              {/* Gráfico 3: Barras Horizontais (Tempo em Minutos das Atividades / Momento de Jogo no Treino) */}
+              <GraficoBarrasHorizontaisAtividades
+                atividades={dadosMomentosJogo.itens}
+                estadoVazio={dadosMomentosJogo.estado_vazio}
+                mensagemVazio={
+                  dadosMomentosJogo.mensagem ||
+                  ESTADO_VAZIO_MOMENTOS_JOGO.mensagem
+                }
+              />
+
+              {/* Gráfico 4: Barras Horizontais das Fases de Jogo (US38 / RF38) */}
+              <GraficoBarrasFasesJogo
+                fases={dadosFasesJogo.itens}
+                estadoVazio={dadosFasesJogo.estado_vazio}
+                carregando={carregando}
+                mensagemVazio={
+                  dadosFasesJogo.mensagem || ESTADO_VAZIO_FASES_JOGO.mensagem
+                }
+              />
             </div>
           </section>
 
           {/* Tratamento e Estabilidade em Consultas com Resultado Vazio (RN07) */}
-          {(indicadores.estado_vazio || dadosAtividades.estado_vazio) && (
+          {(indicadores.estado_vazio || dadosAtividades.estado_vazio || (filtroEspaco && dadosEspaco.estado_vazio)) && (
             <section
               aria-label="Aviso de período sem dados"
               className="mt-6 flex flex-col gap-3 rounded-2xl border border-[#E4DFD2] bg-white p-6 shadow-2xs sm:flex-row sm:items-center"
@@ -729,12 +1372,13 @@ export default function DashboardPage({ onSelectNav }) {
               </div>
               <div className="flex-1">
                 <h3 className="font-display text-base font-bold text-[#10281E]">
-                  {dadosAtividades.mensagem ||
+                  {(filtroEspaco && dadosEspaco.mensagem) ||
+                    dadosAtividades.mensagem ||
                     indicadores.mensagem ||
                     "Nenhum treino registrado neste período."}
                 </h3>
                 <p className="mt-0.5 text-xs text-[#8A8D80]">
-                  Tente selecionar outro macrociclo, mesociclo, microciclo ou mês para visualizar os indicadores e gráficos.
+                  Tente selecionar outro macrociclo, mesociclo, microciclo, dimensão de espaço ou mês para visualizar os indicadores e gráficos.
                 </p>
               </div>
               {temFiltroAtivo && (

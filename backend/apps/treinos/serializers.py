@@ -14,6 +14,7 @@ from .models import (
     ComportamentoTatico,
     Sessao,
     normalizar_nome_comportamento,
+    sincronizar_comportamentos_taticos,
 )
 
 
@@ -308,6 +309,20 @@ class AtividadeBibliotecaSerializer(serializers.ModelSerializer):
 
         return attrs
 
+    def create(self, validated_data):
+        if "comportamentos" in validated_data:
+            validated_data["comportamentos"] = sincronizar_comportamentos_taticos(
+                validated_data["comportamentos"]
+            )
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        if "comportamentos" in validated_data:
+            validated_data["comportamentos"] = sincronizar_comportamentos_taticos(
+                validated_data["comportamentos"]
+            )
+        return super().update(instance, validated_data)
+
 
 class AtividadeSessaoSerializer(serializers.ModelSerializer):
     codigo = serializers.CharField(max_length=20, required=False, allow_blank=True)
@@ -488,6 +503,20 @@ class AtividadeSessaoSerializer(serializers.ModelSerializer):
 
         return attrs
 
+    def create(self, validated_data):
+        if "comportamentos" in validated_data:
+            validated_data["comportamentos"] = sincronizar_comportamentos_taticos(
+                validated_data["comportamentos"]
+            )
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        if "comportamentos" in validated_data:
+            validated_data["comportamentos"] = sincronizar_comportamentos_taticos(
+                validated_data["comportamentos"]
+            )
+        return super().update(instance, validated_data)
+
 
 class IndicadoresTreinoSerializer(serializers.Serializer):
     """RF22 (US22): Serializador de saída dos indicadores quantitativos de treino."""
@@ -540,6 +569,32 @@ class InformacaoTipoSspItemSerializer(serializers.Serializer):
     atividades_distintas = serializers.IntegerField(read_only=True)
 
 
+class InformacaoMomentoJogoItemSerializer(serializers.Serializer):
+    """Item consolidado por momento de jogo para gráfico de barras horizontais (US36)."""
+
+    id = serializers.CharField(read_only=True)
+    codigo = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    momento_jogo = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+
+
+class InformacaoFaseJogoItemSerializer(serializers.Serializer):
+    """Item consolidado por fase de jogo para gráfico de barras horizontais (US37)."""
+
+    id = serializers.CharField(read_only=True)
+    codigo = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    fase_jogo = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+
+
 class ExecucaoAtividadeItemSerializer(serializers.Serializer):
     """Item individual de execução de atividade em sessão filtrada (US24 / RF24)."""
 
@@ -565,6 +620,8 @@ class ExecucaoAtividadeItemSerializer(serializers.Serializer):
     orientacao = serializers.CharField(read_only=True)
     tempo = serializers.IntegerField(read_only=True)
     dimensao_espaco = serializers.CharField(read_only=True)
+    momentos_jogo = serializers.ListField(read_only=True, required=False)
+    fases_jogo = serializers.ListField(read_only=True, required=False)
 
 
 class InformacoesAtividadesTreinoSerializer(serializers.Serializer):
@@ -577,9 +634,178 @@ class InformacoesAtividadesTreinoSerializer(serializers.Serializer):
     atividades = InformacaoAtividadeItemSerializer(many=True, read_only=True)
     por_tipologia = InformacaoTipologiaItemSerializer(many=True, read_only=True)
     por_tipo_ssp = InformacaoTipoSspItemSerializer(many=True, read_only=True)
+    por_momento_jogo = InformacaoMomentoJogoItemSerializer(many=True, read_only=True)
+    por_fase_jogo = InformacaoFaseJogoItemSerializer(many=True, read_only=True)
     execucoes = ExecucaoAtividadeItemSerializer(many=True, read_only=True)
     estado_vazio = serializers.BooleanField(read_only=True)
     mensagem = serializers.CharField(read_only=True, allow_null=True)
+
+
+class InformacaoEspacoItemSerializer(serializers.Serializer):
+    """Item consolidado por dimensão de espaço (Pequeno, Médio, Grande, Não Definido) — US35."""
+
+    id = serializers.CharField(read_only=True)
+    codigo = serializers.CharField(read_only=True)
+    dimensao_espaco = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    rotulo = serializers.CharField(read_only=True)
+    faixa_area = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    minutos_brutos = serializers.IntegerField(read_only=True)
+    percentual_tempo = serializers.FloatField(read_only=True)
+    percentual_tempo_bruto = serializers.FloatField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    registros = serializers.IntegerField(read_only=True)
+    atividades_distintas = serializers.IntegerField(read_only=True)
+    area_media_por_jogador = serializers.FloatField(read_only=True, allow_null=True)
+
+
+class InformacoesEspacoTreinoSerializer(serializers.Serializer):
+    """RF35 (US35): Serializador de saída da consulta de espaço do treino em gráficos."""
+
+    total_dimensoes_utilizadas = serializers.IntegerField(read_only=True)
+    total_registros = serializers.IntegerField(read_only=True)
+    total_execucoes = serializers.IntegerField(read_only=True)
+    minutos_totais_liquidos = serializers.IntegerField(read_only=True)
+    minutos_totais_brutos = serializers.IntegerField(read_only=True)
+    espacos = InformacaoEspacoItemSerializer(many=True, read_only=True)
+    categorias = InformacaoEspacoItemSerializer(many=True, read_only=True)
+    estado_vazio = serializers.BooleanField(read_only=True)
+    mensagem = serializers.CharField(read_only=True, allow_null=True)
+
+
+class CicloHierarquiaRelatorioSerializer(serializers.Serializer):
+    """US25 (RF25): Dados de um ciclo na hierarquia da sessão."""
+
+    id = serializers.IntegerField(read_only=True, allow_null=True)
+    codigo = serializers.CharField(read_only=True, allow_blank=True, allow_null=True, required=False)
+    nome = serializers.CharField(read_only=True, allow_blank=True)
+    data_inicio = serializers.DateField(read_only=True, allow_null=True)
+    data_termino = serializers.DateField(read_only=True, allow_null=True)
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret["dataInicio"] = ret.get("data_inicio")
+        ret["dataTermino"] = ret.get("data_termino")
+        return ret
+
+
+class PeriodizacaoRelatorioSessaoSerializer(serializers.Serializer):
+    """US25 (RF25): Hierarquia de periodização Macrociclo -> Mesociclo -> Microciclo."""
+
+    macrociclo = CicloHierarquiaRelatorioSerializer(read_only=True)
+    mesociclo = CicloHierarquiaRelatorioSerializer(read_only=True)
+    microciclo = CicloHierarquiaRelatorioSerializer(read_only=True)
+
+
+class ItemGraficoRelatorioSessaoSerializer(serializers.Serializer):
+    """US25 (RF25): Item individual de um gráfico consolidado da sessão."""
+
+    id = serializers.CharField(read_only=True)
+    codigo = serializers.CharField(read_only=True, allow_blank=True, allow_null=True, required=False)
+    nome = serializers.CharField(read_only=True)
+    minutos = serializers.IntegerField(read_only=True)
+    execucoes = serializers.IntegerField(read_only=True)
+    percentual = serializers.FloatField(read_only=True)
+
+
+class BlocoGraficoRelatorioSessaoSerializer(serializers.Serializer):
+    """US25 (RF25): Bloco completo de gráfico com totais e estado vazio (RN07)."""
+
+    titulo = serializers.CharField(read_only=True)
+    subtitulo = serializers.CharField(read_only=True)
+    unidade = serializers.CharField(read_only=True)
+    total_minutos = serializers.IntegerField(read_only=True)
+    total_execucoes = serializers.IntegerField(read_only=True)
+    itens = ItemGraficoRelatorioSessaoSerializer(many=True, read_only=True)
+    estado_vazio = serializers.BooleanField(read_only=True)
+    mensagem_vazio = serializers.CharField(read_only=True, allow_null=True, allow_blank=True, required=False)
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret["totalMinutos"] = ret.get("total_minutos")
+        ret["totalExecucoes"] = ret.get("total_execucoes")
+        ret["estadoVazio"] = ret.get("estado_vazio")
+        ret["mensagemVazio"] = ret.get("mensagem_vazio")
+        return ret
+
+
+class GraficosRelatorioSessaoSerializer(serializers.Serializer):
+    """US25 (RF25): Agrupador dos 6 gráficos da sessão."""
+
+    atividades = BlocoGraficoRelatorioSessaoSerializer(read_only=True)
+    momentos_jogo = BlocoGraficoRelatorioSessaoSerializer(read_only=True)
+    fases_jogo = BlocoGraficoRelatorioSessaoSerializer(read_only=True)
+    atributos_tecnicos = BlocoGraficoRelatorioSessaoSerializer(read_only=True)
+    espacos_treino = BlocoGraficoRelatorioSessaoSerializer(read_only=True)
+    comportamentos_treino = BlocoGraficoRelatorioSessaoSerializer(read_only=True)
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret["momentosJogo"] = ret.get("momentos_jogo")
+        ret["fasesJogo"] = ret.get("fases_jogo")
+        ret["atributosTecnicos"] = ret.get("atributos_tecnicos")
+        ret["espacosTreino"] = ret.get("espacos_treino")
+        ret["comportamentosTreino"] = ret.get("comportamentos_treino")
+        return ret
+
+
+class AtividadeSessaoRelatorioItemSerializer(serializers.Serializer):
+    """US25 (RF25): Detalhes de uma atividade dentro da sessão no relatório."""
+
+    id = serializers.IntegerField(read_only=True, allow_null=True)
+    sessao = serializers.IntegerField(read_only=True, allow_null=True, required=False)
+    atividade_biblioteca = serializers.IntegerField(read_only=True, allow_null=True, required=False)
+    codigo = serializers.CharField(read_only=True, allow_blank=True, required=False)
+    nome = serializers.CharField(read_only=True, allow_blank=True)
+    atividade_ssp = serializers.CharField(read_only=True, allow_blank=True, required=False)
+    tipologia = serializers.CharField(read_only=True, allow_blank=True)
+    sigla_tipologia = serializers.CharField(read_only=True, allow_blank=True, required=False)
+    tipo_ssp = serializers.CharField(read_only=True, allow_blank=True)
+    orientacao = serializers.CharField(read_only=True, allow_blank=True, required=False)
+    ordem = serializers.IntegerField(read_only=True)
+    tempo = serializers.IntegerField(read_only=True)
+    comprimento = serializers.FloatField(read_only=True, allow_null=True, required=False)
+    largura = serializers.FloatField(read_only=True, allow_null=True, required=False)
+    numero_jogadores = serializers.IntegerField(read_only=True, allow_null=True, required=False)
+    area_por_jogador = serializers.FloatField(read_only=True, allow_null=True, required=False)
+    dimensao_espaco = serializers.CharField(read_only=True, allow_blank=True, required=False)
+    momentos_jogo = serializers.ListField(read_only=True, required=False)
+    fases_jogo = serializers.ListField(read_only=True, required=False)
+    comportamentos = serializers.ListField(read_only=True, required=False)
+    atributos_tecnicos = serializers.ListField(read_only=True, required=False)
+
+
+class SessaoRelatorioItemSerializer(serializers.Serializer):
+    """US25 (RF25): Detalhes consolidados da sessão selecionada."""
+
+    id = serializers.IntegerField(read_only=True, allow_null=True)
+    sequencia = serializers.IntegerField(read_only=True, allow_null=True)
+    codigo = serializers.CharField(read_only=True)
+    nome = serializers.CharField(read_only=True)
+    data = serializers.DateField(read_only=True, allow_null=True)
+    mes = serializers.CharField(read_only=True, allow_blank=True)
+    total_atividades = serializers.IntegerField(read_only=True)
+    numero_execucoes = serializers.IntegerField(read_only=True)
+    tempo_total_bruto = serializers.IntegerField(read_only=True)
+    tempo_liquido = serializers.IntegerField(read_only=True)
+    atividades = AtividadeSessaoRelatorioItemSerializer(many=True, read_only=True)
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret["totalAtividades"] = ret.get("total_atividades")
+        ret["numeroExecucoes"] = ret.get("numero_execucoes")
+        ret["tempoTotalBruto"] = ret.get("tempo_total_bruto")
+        ret["tempoLiquido"] = ret.get("tempo_liquido")
+        return ret
+
+
+class RelatorioSessaoSerializer(serializers.Serializer):
+    """US25 (RF25): Contrato completo de saída do relatório de sessão."""
+
+    sessao = SessaoRelatorioItemSerializer(read_only=True)
+    periodizacao = PeriodizacaoRelatorioSessaoSerializer(read_only=True)
+    graficos = GraficosRelatorioSessaoSerializer(read_only=True)
 
 
 

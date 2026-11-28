@@ -6,6 +6,7 @@ const ROTA_REFRESH = "/usuarios/token/refresh/";
 const ROTA_LOGOUT = "/usuarios/logout/";
 const ROTA_ME = "/usuarios/me/";
 const CHAVE_REFRESH = "futboard.refresh";
+const AVISO_CONTA_INATIVA = "Sua conta está inativa. Consulte o administrador.";
 
 function lerRefresh() {
   try {
@@ -56,11 +57,11 @@ function renovar() {
         if (geracaoInicial === geracao) guardarTokens(data);
       })
       .catch((erro) => {
-        const status = erro.response?.status;
+        const { status, data } = erro.response ?? {};
         if (geracaoInicial === geracao && [400, 401, 403].includes(status)) {
-          const mensagem = status === 403
-            ? obterMensagemErro(erro, "Sua conta não está autorizada.")
-            : "Sua sessão expirou. Entre novamente.";
+          let mensagem = "Sua sessão expirou. Entre novamente.";
+          if (data?.code === "user_inactive") mensagem = AVISO_CONTA_INATIVA;
+          if (status === 403) mensagem = obterMensagemErro(erro, "Sua conta não está autorizada.");
           limparAutenticacao(mensagem);
         }
         throw erro;
@@ -90,6 +91,9 @@ api.interceptors.response.use(undefined, async (erro) => {
   const { status, data } = erro.response ?? {};
   if (status === 403 && data?.codigo === "acesso_revogado") {
     limparAutenticacao(obterMensagemErro(erro, "Sua conta não está autorizada."));
+  }
+  if (status === 401 && data?.code === "user_inactive") {
+    limparAutenticacao(AVISO_CONTA_INATIVA);
   }
 
   if (status !== 401 || !refresh) throw erro;
