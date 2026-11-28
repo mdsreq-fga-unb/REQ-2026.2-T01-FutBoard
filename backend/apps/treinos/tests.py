@@ -11,14 +11,19 @@ from apps.ciclos.models import Macrociclo, Mesociclo, Microciclo
 
 from .models import (
     MENSAGEM_ATIVIDADES_VAZIO,
+    MENSAGEM_COMPORTAMENTO_VAZIO,
     AtividadeBiblioteca,
     AtividadeSessao,
     ComportamentoTatico,
     Sessao,
     calcular_informacoes_atividades_treino,
+    calcular_informacoes_comportamentos_treino,
     identificador_atividade_distinta,
 )
-from .serializers import InformacoesAtividadesTreinoSerializer
+from .serializers import (
+    InformacoesAtividadesTreinoSerializer,
+    InformacoesComportamentosTreinoSerializer,
+)
 
 
 
@@ -1465,4 +1470,526 @@ class InformacoesAtividadesTreinoApiTests(APITestCase):
             r_vazio.json()["mensagem"],
             "Nenhuma atividade encontrada para os filtros aplicados.",
         )
+
+
+class InformacoesComportamentosTreinoUnitTests(SimpleTestCase):
+    """Testes unitários puros (em memória, sem banco de dados) da US39 / RF39."""
+
+    def _criar_atividade_em_memoria(
+        self,
+        *,
+        atv_id,
+        sessao_id,
+        ordem,
+        codigo,
+        nome,
+        tipologia="Jogo Setorial",
+        tipo_ssp="Dirigido",
+        tempo=20,
+        comportamentos=None,
+    ):
+        sessao = Sessao(
+            id=sessao_id,
+            nome=f"S{sessao_id:02d}",
+            data=date(2026, 8, 3),
+        )
+        sessao.sequencia = sessao_id
+        return AtividadeSessao(
+            id=atv_id,
+            sessao=sessao,
+            sessao_id=sessao_id,
+            codigo=codigo,
+            nome=nome,
+            tipologia=tipologia,
+            tipo_ssp=tipo_ssp,
+            ordem=ordem,
+            tempo=tempo,
+            comportamentos=comportamentos or [],
+        )
+
+    def test_lista_vazia_retorna_estado_neutro_sem_divisao_por_zero(self):
+        resultado = calcular_informacoes_comportamentos_treino([], catalogo_nomes={})
+
+        self.assertTrue(resultado["estado_vazio"])
+        self.assertEqual(resultado["mensagem"], MENSAGEM_COMPORTAMENTO_VAZIO)
+        self.assertEqual(resultado["total_comportamentos_distintos"], 0)
+        self.assertEqual(resultado["total_registros"], 0)
+        self.assertEqual(resultado["total_registros_com_comportamento"], 0)
+        self.assertEqual(resultado["total_registros_sem_comportamento"], 0)
+        self.assertEqual(resultado["minutos_totais_comportamentos"], 0)
+        self.assertEqual(resultado["minutos_totais_liquidos"], 0)
+        self.assertEqual(resultado["comportamentos"], [])
+        self.assertEqual(resultado["por_comportamento"], [])
+
+    def test_atividades_sem_comportamento_retornam_estado_vazio_rn05(self):
+        atividades = [
+            self._criar_atividade_em_memoria(
+                atv_id=1,
+                sessao_id=1,
+                ordem=1,
+                codigo="JBP1",
+                nome="Escanteio",
+                tempo=25,
+                comportamentos=[],
+            ),
+            self._criar_atividade_em_memoria(
+                atv_id=2,
+                sessao_id=1,
+                ordem=2,
+                codigo="EC1",
+                nome="Complemento",
+                tempo=15,
+                comportamentos=[],
+            ),
+        ]
+
+        resultado = calcular_informacoes_comportamentos_treino(
+            atividades, catalogo_nomes={}
+        )
+
+        self.assertTrue(resultado["estado_vazio"])
+        self.assertEqual(resultado["total_registros"], 2)
+        self.assertEqual(resultado["total_registros_com_comportamento"], 0)
+        self.assertEqual(resultado["total_registros_sem_comportamento"], 2)
+        self.assertEqual(resultado["minutos_totais_comportamentos"], 0)
+        self.assertEqual(resultado["mensagem"], MENSAGEM_COMPORTAMENTO_VAZIO)
+
+    def test_associacao_multipla_e_consolidacao_sem_duplicar_por_acento_ou_caixa(self):
+        atividades = [
+            self._criar_atividade_em_memoria(
+                atv_id=1,
+                sessao_id=1,
+                ordem=1,
+                codigo="CF1",
+                nome="1v1/2v2",
+                tempo=20,
+                comportamentos=["Contenção", "Cobertura", "contencao"],
+            ),
+            self._criar_atividade_em_memoria(
+                atv_id=2,
+                sessao_id=2,
+                ordem=1,
+                codigo="RD1",
+                nome="4v2",
+                tempo=15,
+                comportamentos=["contencao", "  COBERTURA ", "MantPoss"],
+            ),
+        ]
+        catalogo = {
+            "contencao": (10, "Contenção"),
+            "cobertura": (11, "Cobertura"),
+        }
+
+        resultado = calcular_informacoes_comportamentos_treino(
+            atividades, catalogo_nomes=catalogo
+        )
+
+        self.assertFalse(resultado["estado_vazio"])
+        self.assertIsNone(resultado["mensagem"])
+        self.assertEqual(resultado["total_comportamentos_distintos"], 3)
+        self.assertEqual(resultado["minutos_totais_comportamentos"], 85)
+        self.assertEqual(resultado["minutos_totais_liquidos"], 35)
+
+        por_nome = {item["nome"]: item for item in resultado["comportamentos"]}
+        self.assertEqual(
+            [item["nome"] for item in resultado["comportamentos"]],
+            ["Cobertura", "Contenção", "MantPoss"],
+        )
+        self.assertEqual(por_nome["Contenção"]["catalogo_id"], 10)
+        self.assertEqual(por_nome["Contenção"]["minutos"], 35)
+        self.assertEqual(por_nome["Contenção"]["execucoes"], 2)
+        self.assertEqual(por_nome["Contenção"]["atividades_distintas"], 2)
+        self.assertEqual(por_nome["Contenção"]["sessoes_distintas"], 2)
+        self.assertEqual(por_nome["Contenção"]["percentual_tempo"], 41.18)
+        self.assertEqual(por_nome["Contenção"]["percentual_tempo_liquido"], 100.0)
+        self.assertIsNone(por_nome["MantPoss"]["catalogo_id"])
+        self.assertEqual(por_nome["MantPoss"]["minutos"], 15)
+        self.assertEqual(por_nome["MantPoss"]["percentual_tempo"], 17.65)
+        self.assertEqual(por_nome["MantPoss"]["percentual_tempo_liquido"], 42.86)
+
+    def test_rn03_atividades_simultaneas_evitam_dupla_contagem_no_mesmo_comportamento(self):
+        atividades = [
+            self._criar_atividade_em_memoria(
+                atv_id=1,
+                sessao_id=1,
+                ordem=1,
+                codigo="DF1",
+                nome="Finalizacao Grupo A",
+                tempo=20,
+                comportamentos=["Atacar Espaço", "DefCruz"],
+            ),
+            self._criar_atividade_em_memoria(
+                atv_id=2,
+                sessao_id=1,
+                ordem=1,
+                codigo="DPD1",
+                nome="Defesa Grupo B",
+                tempo=15,
+                comportamentos=["Atacar Espaço", "CoordLinDef"],
+            ),
+        ]
+
+        resultado = calcular_informacoes_comportamentos_treino(
+            atividades, catalogo_nomes={}
+        )
+
+        self.assertEqual(resultado["total_execucoes_com_comportamento"], 1)
+        self.assertEqual(resultado["minutos_totais_liquidos"], 20)
+        self.assertEqual(resultado["minutos_totais_comportamentos"], 55)
+
+        por_nome = {item["nome"]: item for item in resultado["comportamentos"]}
+        self.assertEqual(por_nome["Atacar Espaço"]["minutos"], 20)
+        self.assertEqual(por_nome["Atacar Espaço"]["minutos_brutos"], 35)
+        self.assertEqual(por_nome["Atacar Espaço"]["execucoes"], 1)
+        self.assertEqual(por_nome["Atacar Espaço"]["registros"], 2)
+        self.assertEqual(por_nome["DefCruz"]["minutos"], 20)
+        self.assertEqual(por_nome["CoordLinDef"]["minutos"], 15)
+
+    def test_filtro_explicito_por_comportamento_isola_somente_o_selecionado(self):
+        atividades = [
+            self._criar_atividade_em_memoria(
+                atv_id=1,
+                sessao_id=1,
+                ordem=1,
+                codigo="CF1",
+                nome="1v1/2v2",
+                tempo=29,
+                comportamentos=["Cobertura", "Contenção"],
+            ),
+        ]
+
+        resultado = calcular_informacoes_comportamentos_treino(
+            atividades,
+            comportamento_filtro="contencao",
+            catalogo_nomes={},
+        )
+
+        self.assertFalse(resultado["estado_vazio"])
+        self.assertEqual(resultado["total_comportamentos_distintos"], 1)
+        self.assertEqual(resultado["comportamentos"][0]["nome"], "Contenção")
+        self.assertEqual(resultado["comportamentos"][0]["minutos"], 29)
+        self.assertEqual(resultado["comportamentos"][0]["percentual_tempo"], 100.0)
+
+    def test_serializador_us39_mantem_contrato_completo(self):
+        atividades = [
+            self._criar_atividade_em_memoria(
+                atv_id=1,
+                sessao_id=1,
+                ordem=1,
+                codigo="JC1",
+                nome="RecPosPerd",
+                tempo=20,
+                comportamentos=["RecPosPerd"],
+            ),
+        ]
+        dados = calcular_informacoes_comportamentos_treino(
+            atividades,
+            catalogo_nomes={"recposperd": (7, "RecPosPerd")},
+        )
+
+        payload = InformacoesComportamentosTreinoSerializer(dados).data
+        self.assertEqual(payload["total_comportamentos_distintos"], 1)
+        self.assertEqual(payload["comportamentos"], payload["por_comportamento"])
+        item = payload["comportamentos"][0]
+        self.assertEqual(item["id"], "comportamento-recposperd")
+        self.assertEqual(item["catalogo_id"], 7)
+        self.assertEqual(item["codigo"], "RecPosPerd")
+        self.assertEqual(item["comportamento"], "RecPosPerd")
+        self.assertEqual(item["nome"], "RecPosPerd")
+        self.assertEqual(item["rotulo"], "RecPosPerd")
+        self.assertEqual(item["minutos"], 20)
+        self.assertEqual(item["percentual_tempo"], 100.0)
+
+
+class InformacoesComportamentosTreinoApiTests(APITestCase):
+    """Testes automatizados da US39 / RF39 com dados da planilha oficial (05_Comportamentos)."""
+
+    url = "/api/treinos/comportamentos-treino/"
+
+    def setUp(self):
+        self.macro = Macrociclo.objects.create(
+            nome="2026",
+            data_inicio=date(2026, 8, 1),
+            data_termino=date(2026, 12, 31),
+        )
+        self.me1 = Mesociclo.objects.create(
+            macrociclo=self.macro,
+            nome="ME1",
+            data_inicio=date(2026, 8, 1),
+            data_termino=date(2026, 8, 16),
+        )
+        self.me2 = Mesociclo.objects.create(
+            macrociclo=self.macro,
+            nome="ME2",
+            data_inicio=date(2026, 8, 17),
+            data_termino=date(2026, 8, 31),
+        )
+        self.mc1 = Microciclo.objects.create(
+            mesociclo=self.me1,
+            nome="MC1",
+            data_inicio=date(2026, 8, 1),
+            data_termino=date(2026, 8, 9),
+        )
+        self.mc2 = Microciclo.objects.create(
+            mesociclo=self.me1,
+            nome="MC2",
+            data_inicio=date(2026, 8, 10),
+            data_termino=date(2026, 8, 16),
+        )
+        self.mc3 = Microciclo.objects.create(
+            mesociclo=self.me2,
+            nome="MC3",
+            data_inicio=date(2026, 8, 17),
+            data_termino=date(2026, 8, 23),
+        )
+
+    def _popular_planilha_oficial(self):
+        self.cat_recposperd = ComportamentoTatico.objects.create(nome="RecPosPerd")
+        self.cat_contencao = ComportamentoTatico.objects.create(nome="Contenção")
+
+        self.s01 = Sessao.objects.create(
+            microciclo=self.mc1, nome="S01", data=date(2026, 8, 3)
+        )
+        self.s02 = Sessao.objects.create(
+            microciclo=self.mc1, nome="S02", data=date(2026, 8, 4)
+        )
+        self.s03 = Sessao.objects.create(
+            microciclo=self.mc1, nome="S03", data=date(2026, 8, 5)
+        )
+        self.s04 = Sessao.objects.create(
+            microciclo=self.mc1, nome="S04", data=date(2026, 8, 6)
+        )
+        self.s05 = Sessao.objects.create(
+            microciclo=self.mc1, nome="S05", data=date(2026, 8, 7)
+        )
+        self.s08 = Sessao.objects.create(
+            microciclo=self.mc2, nome="S08", data=date(2026, 8, 11)
+        )
+        self.s09 = Sessao.objects.create(
+            microciclo=self.mc2, nome="S09", data=date(2026, 8, 12)
+        )
+        self.s10 = Sessao.objects.create(
+            microciclo=self.mc2, nome="S10", data=date(2026, 8, 13)
+        )
+        self.s11 = Sessao.objects.create(
+            microciclo=self.mc2, nome="S11", data=date(2026, 8, 14)
+        )
+        self.s12 = Sessao.objects.create(
+            microciclo=self.mc3, nome="S12", data=date(2026, 8, 17)
+        )
+
+        # 27 atividades da planilha oficial (01_Sessoes + 05_Comportamentos)
+        registros = [
+            (self.s01, 1, "CF1", "1v1/2v2", "CF", "Especial", 29, ["Cobertura", "Contenção"]),
+            (self.s01, 2, "JC1", "RecPosPerd", "JC", "Dirigido", 20, ["RecPosPerd"]),
+            (self.s02, 1, "DP1", "DomOrien", "DP", "Especial", 23, []),
+            (self.s02, 2, "JP1", "MantPoss", "JP", "Dirigido", 23, ["MantPoss", "RecPosPerd"]),
+            (self.s02, 3, "JC2", "AtqGol", "JC", "Dirigido", 27, ["RecPosPerd", "Atq o Gol/AO"]),
+            (
+                self.s03,
+                1,
+                "RD1",
+                "4v2",
+                "RD",
+                "Especial",
+                16,
+                ["Cobertura", "Contenção", "MantPoss", "Quebrar Linha"],
+            ),
+            (self.s03, 2, "JS1", "Const", "JS", "Dirigido", 22, ["JogoEntrelinhas"]),
+            (self.s03, 3, "CD1", "2T", "CD", "Competitivo", 28, ["Balanço Def", "Amplitude"]),
+            (self.s04, 1, "DF1", "Zon3", "DF", "Especial", 18, ["Atacar Espaço"]),
+            (self.s04, 1, "DPD1", "Cruz", "DPD", "Especial", 18, ["CoordLinDef", "DefCruz"]),
+            (self.s04, 2, "JBP1", "Escanteio", "JBP", "Competitivo", 29, []),
+            (self.s05, 1, "SIT1", "CAeAR", "SIT", "Dirigido", 20, ["Atq o Gol/CAeAR"]),
+            (self.s05, 2, "JS2", "CriFin", "JS", "Dirigido", 45, ["Atq o Gol/AO", "RecPosPerd"]),
+            (
+                self.s08,
+                1,
+                "RD1",
+                "4v2",
+                "RD",
+                "Especial",
+                14,
+                ["Cobertura", "Contenção", "MantPoss", "Quebrar Linha"],
+            ),
+            (self.s08, 2, "JP1", "MantPoss", "JP", "Dirigido", 29, ["RecPosPerd", "MantPoss"]),
+            (self.s09, 1, "DP2", "Passe", "DP", "Especial", 14, []),
+            (self.s09, 2, "JS1", "Const", "JS", "Dirigido", 28, ["JogoEntrelinhas"]),
+            (
+                self.s09,
+                3,
+                "CD1",
+                "2T",
+                "CD",
+                "Competitivo",
+                33,
+                ["Balanço Def", "Abrir o Campo"],
+            ),
+            (self.s10, 1, "DF1", "Zon3", "DF", "Especial", 21, ["Atacar Espaço"]),
+            (self.s10, 1, "DPD1", "Cruz", "DPD", "Especial", 21, ["CoordLinDef", "DefCruz"]),
+            (self.s10, 2, "SIT1", "CAeAR", "SIT", "Dirigido", 24, ["Atq o Gol/CAeAR"]),
+            (self.s11, 1, "JBP2", "Faltas", "JBP", "Competitivo", 39, []),
+            (self.s11, 2, "EC1", "EqCarga", "JC", "Competitivo", 16, []),
+            (self.s12, 1, "DP1", "DomOrien", "DP", "Especial", 20, []),
+            (self.s12, 1, "DPD2", "Prof", "DPD", "Especial", 20, ["ContrProf", "DefCruz"]),
+            (self.s12, 1, "DF2", "Area", "DF", "Especial", 20, ["Atacar Espaço", "Pisar Área"]),
+            (self.s12, 2, "EC1", "EqCarga", "JC", "Competitivo", 20, []),
+        ]
+
+        for sessao, ordem, codigo, nome, tip, ssp, tempo, comps in registros:
+            AtividadeSessao.objects.create(
+                sessao=sessao,
+                ordem=ordem,
+                codigo=codigo,
+                nome=nome,
+                tipologia=tip,
+                tipo_ssp=ssp,
+                tempo=tempo,
+                comportamentos=comps,
+            )
+
+    def test_us39_estado_vazio_sem_atividades_cadastradas(self):
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        body = response.json()
+        self.assertTrue(body["estado_vazio"])
+        self.assertEqual(body["mensagem"], MENSAGEM_COMPORTAMENTO_VAZIO)
+        self.assertEqual(body["total_comportamentos_distintos"], 0)
+        self.assertEqual(body["minutos_totais_comportamentos"], 0)
+        self.assertEqual(body["comportamentos"], [])
+        self.assertEqual(body["por_comportamento"], [])
+
+    def test_us39_consolidacao_completa_planilha_oficial(self):
+        self._popular_planilha_oficial()
+
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        body = response.json()
+        self.assertFalse(body["estado_vazio"])
+        self.assertIsNone(body["mensagem"])
+        self.assertEqual(body["total_comportamentos_distintos"], 16)
+        self.assertEqual(body["total_registros"], 27)
+        self.assertEqual(body["total_registros_com_comportamento"], 20)
+        self.assertEqual(body["total_registros_sem_comportamento"], 7)
+        self.assertEqual(body["total_execucoes_com_comportamento"], 17)
+        self.assertEqual(body["minutos_totais_comportamentos"], 859)
+        self.assertEqual(body["minutos_totais_liquidos"], 417)
+        self.assertEqual(body["comportamentos"], body["por_comportamento"])
+
+        por_nome = {item["nome"]: item for item in body["comportamentos"]}
+        self.assertEqual(body["comportamentos"][0]["nome"], "RecPosPerd")
+        self.assertEqual(por_nome["RecPosPerd"]["minutos"], 144)
+        self.assertEqual(por_nome["RecPosPerd"]["execucoes"], 5)
+        self.assertEqual(por_nome["RecPosPerd"]["catalogo_id"], self.cat_recposperd.id)
+        self.assertEqual(por_nome["MantPoss"]["minutos"], 82)
+        self.assertEqual(por_nome["MantPoss"]["execucoes"], 4)
+        self.assertEqual(por_nome["Atq o Gol/AO"]["minutos"], 72)
+        self.assertEqual(por_nome["Balanço Def"]["minutos"], 61)
+        self.assertEqual(por_nome["Contenção"]["minutos"], 59)
+        self.assertEqual(por_nome["Contenção"]["execucoes"], 3)
+        self.assertEqual(por_nome["Contenção"]["catalogo_id"], self.cat_contencao.id)
+        self.assertEqual(por_nome["JogoEntrelinhas"]["minutos"], 50)
+        self.assertEqual(por_nome["Pisar Área"]["minutos"], 20)
+
+    def test_us39_filtros_periodizacao_e_sessao_sem_comportamento_rn05(self):
+        self._popular_planilha_oficial()
+
+        # ME2 (S12): 2 atividades simultâneas com comportamento (20 min) + 2 sem comportamento
+        r_me2 = self.client.get(f"{self.url}?mesociclo={self.me2.id}")
+        self.assertEqual(r_me2.status_code, status.HTTP_200_OK)
+        body_me2 = r_me2.json()
+        self.assertFalse(body_me2["estado_vazio"])
+        self.assertEqual(body_me2["total_comportamentos_distintos"], 4)
+        self.assertEqual(body_me2["total_registros"], 4)
+        self.assertEqual(body_me2["total_registros_com_comportamento"], 2)
+        self.assertEqual(body_me2["total_registros_sem_comportamento"], 2)
+        self.assertEqual(body_me2["total_execucoes_com_comportamento"], 1)
+        self.assertEqual(body_me2["minutos_totais_comportamentos"], 80)
+        self.assertEqual(body_me2["minutos_totais_liquidos"], 20)
+
+        # S11: possui 2 atividades (JBP2 e EC1), mas nenhuma com comportamento -> estado vazio
+        r_s11 = self.client.get(f"{self.url}?sessao={self.s11.id}")
+        self.assertEqual(r_s11.status_code, status.HTTP_200_OK)
+        body_s11 = r_s11.json()
+        self.assertTrue(body_s11["estado_vazio"])
+        self.assertEqual(body_s11["total_registros"], 2)
+        self.assertEqual(body_s11["total_registros_com_comportamento"], 0)
+        self.assertEqual(body_s11["total_registros_sem_comportamento"], 2)
+        self.assertEqual(body_s11["minutos_totais_comportamentos"], 0)
+        self.assertEqual(body_s11["mensagem"], MENSAGEM_COMPORTAMENTO_VAZIO)
+
+        # Filtro por data única (S04: DF1 18 + DPD1 18 simultâneas na ordem 1 + JBP1 sem comp.)
+        r_data = self.client.get(
+            f"{self.url}?data_inicio=2026-08-06&data_termino=2026-08-06"
+        )
+        self.assertEqual(r_data.status_code, status.HTTP_200_OK)
+        body_data = r_data.json()
+        self.assertEqual(body_data["total_comportamentos_distintos"], 3)
+        self.assertEqual(body_data["minutos_totais_comportamentos"], 54)
+        self.assertEqual(body_data["minutos_totais_liquidos"], 18)
+        self.assertEqual(body_data["total_execucoes_com_comportamento"], 1)
+
+        # Filtro por mês textual e numérico
+        r_mes = self.client.get(f"{self.url}?mes=agosto")
+        self.assertEqual(r_mes.json()["minutos_totais_comportamentos"], 859)
+
+    def test_us39_filtro_por_comportamento_nome_acento_e_id_catalogo(self):
+        self._popular_planilha_oficial()
+
+        # Filtro por nome sem acento / minúsculas
+        r_nome = self.client.get(f"{self.url}?comportamento=contencao")
+        self.assertEqual(r_nome.status_code, status.HTTP_200_OK)
+        body_nome = r_nome.json()
+        self.assertFalse(body_nome["estado_vazio"])
+        self.assertEqual(body_nome["total_comportamentos_distintos"], 1)
+        self.assertEqual(body_nome["comportamentos"][0]["nome"], "Contenção")
+        self.assertEqual(body_nome["comportamentos"][0]["minutos"], 59)
+        self.assertEqual(body_nome["comportamentos"][0]["execucoes"], 3)
+        self.assertEqual(body_nome["comportamentos"][0]["percentual_tempo"], 100.0)
+
+        # Filtro por ID do catálogo ComportamentoTatico
+        r_id = self.client.get(f"{self.url}?comportamento={self.cat_recposperd.id}")
+        self.assertEqual(r_id.status_code, status.HTTP_200_OK)
+        body_id = r_id.json()
+        self.assertEqual(body_id["total_comportamentos_distintos"], 1)
+        self.assertEqual(body_id["comportamentos"][0]["nome"], "RecPosPerd")
+        self.assertEqual(body_id["comportamentos"][0]["minutos"], 144)
+        self.assertEqual(body_id["comportamentos"][0]["execucoes"], 5)
+
+        # Alias principio_tatico
+        r_alias = self.client.get(f"{self.url}?principio_tatico=pisar area")
+        self.assertEqual(r_alias.status_code, status.HTTP_200_OK)
+        self.assertEqual(r_alias.json()["comportamentos"][0]["nome"], "Pisar Área")
+        self.assertEqual(r_alias.json()["comportamentos"][0]["minutos"], 20)
+
+        # Integração do mesmo filtro na listagem de atividades da sessão e na US24
+        r_sessoes = self.client.get("/api/treinos/atividades-sessao/?comportamento=contencao")
+        self.assertEqual(r_sessoes.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(r_sessoes.json()), 3)
+
+        r_us24 = self.client.get("/api/treinos/atividades-treino/?comportamento=RecPosPerd")
+        self.assertEqual(r_us24.status_code, status.HTTP_200_OK)
+        self.assertEqual(r_us24.json()["total_registros"], 5)
+
+    def test_us39_filtros_invalidos_retornam_estado_vazio_seguro_rn07(self):
+        self._popular_planilha_oficial()
+
+        consultas_invalidas = [
+            f"{self.url}?microciclo=abc",
+            f"{self.url}?mes=13",
+            f"{self.url}?data_inicio=data-invalida",
+            f"{self.url}?comportamento=999999",
+            f"{self.url}?comportamento=ComportamentoInexistente",
+        ]
+        for consulta in consultas_invalidas:
+            response = self.client.get(consulta)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            body = response.json()
+            self.assertTrue(body["estado_vazio"])
+            self.assertEqual(body["minutos_totais_comportamentos"], 0)
+            self.assertEqual(body["comportamentos"], [])
+            self.assertEqual(body["mensagem"], MENSAGEM_COMPORTAMENTO_VAZIO)
+
 
